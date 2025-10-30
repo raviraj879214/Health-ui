@@ -37,10 +37,12 @@ export default function UserInfoCard({ user, sendUpdatedata }: UserMetaCardProps
       phone: user.phone,
       Bio: user.Bio,
     },
+    
   });
 
   const onUpdate = (data: UpdateData) => {
-    sendUpdatedata(data as Record<string, string | undefined>);
+    sendUpdatedata(data as unknown as Record<string, string | undefined>);
+
     closeModal();
   };
 
