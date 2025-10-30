@@ -40,7 +40,8 @@ export default function UserInfoCard({ user, sendUpdatedata }: UserMetaCardProps
   });
 
   const onUpdate = (data: UpdateData) => {
-    sendUpdatedata(data as Record<string, string | undefined>);
+    sendUpdatedata(data as unknown as Record<string, string | undefined>);
+
     closeModal();
   };
 
