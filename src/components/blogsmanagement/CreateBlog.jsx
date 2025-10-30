@@ -23,6 +23,7 @@ export function CreateBlogs() {
 
 
     const onCreate = async (data) => {
+        debugger;
         if (!selectedImage) {
             alert("Please upload an image");
             return;
@@ -43,7 +44,10 @@ export function CreateBlogs() {
             // Send request
             const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/blog/create-blog`, {
                 method: "POST",
-                headers: { Authorization: `Bearer ${token}` },
+                headers: { 
+                    
+                    Authorization: `Bearer ${token}`
+                },
                 body: formData,
             });
 
@@ -68,11 +72,13 @@ export function CreateBlogs() {
                 , 3000);
                 setTagValue("");
 
-            } else {
-                console.error("Failed to create blog");
+            }
+            else
+             {
+                console.log("Failed to create blog");
             }
         } catch (error) {
-            console.error("Error creating blog:", error);
+            console.log("Error creating blog:", error);
         }
     };
   

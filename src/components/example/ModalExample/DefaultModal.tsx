@@ -11,6 +11,7 @@ export default function DefaultModal() {
   const handleSave = () => {
     // Handle save logic here
     console.log("Saving changes...");
+    
     closeModal();
   };
   return (
