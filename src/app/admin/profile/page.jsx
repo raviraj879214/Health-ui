@@ -1,4 +1,4 @@
-"use client"
+
 import PageBreadcrumb from "@/components/common/PageBreadCrumb";
 import {UserMainArea} from "../../../components/user-profile/UserMain";
 

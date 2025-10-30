@@ -6,7 +6,8 @@
     "start:local": "cross-env NODE_ENV=development PORT=3000 next dev",
     "start:staging": "dotenv -e .env.staging -- cross-env NODE_ENV=staging PORT=3001 next build && dotenv -e .env.staging -- cross-env NODE_ENV=staging PORT=3001 next start",
     "start:prod": "dotenv -e .env.production -- cross-env NODE_ENV=production PORT=3000 next build && dotenv -e .env.production -- cross-env NODE_ENV=production PORT=3000 next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build": "next build"
   },
   "dependencies": {
     "@fullcalendar/core": "^6.1.15",
