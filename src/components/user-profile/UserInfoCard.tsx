@@ -37,6 +37,7 @@ export default function UserInfoCard({ user, sendUpdatedata }: UserMetaCardProps
       phone: user.phone,
       Bio: user.Bio,
     },
+    
   });
 
   const onUpdate = (data: UpdateData) => {
