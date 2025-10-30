@@ -14,6 +14,8 @@ export function ManageSeoPage() {
     const [message,setmessage] = useState("");
     const [restriction, setRestriction] = useState(false);
 
+    
+
     const OnPageTrigger =async (data)=>{
 
         setbutton(true);

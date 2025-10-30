@@ -116,10 +116,28 @@ const AppSidebar: React.FC = () => {
   
 const navItems: NavItem[] = [
   
+
+  {
+        icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2"
+        strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+        <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8v-10h-8v10zm0-18v6h8V3h-8z" />
+      </svg>
+    ),
+        name: "Dashboard",
+        path: "/admin",
+    },
+    
   ...(roelaccess === "SuperAdmin"
     ? [
         {
-          icon: <GridIcon />,
+          icon: (
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2"
+              strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4 21v-2a4 4 0 0 1 3-3.87M20 21v-2a4 4 0 0 0-3-3.87" />
+            </svg>
+          ),
           name: "Roles Management",
           subItems: [
             { name: "Roles", path: "/admin/manage-roles", pro: false },
@@ -134,22 +152,45 @@ const navItems: NavItem[] = [
   
 
     {
-        icon: <EnvelopeIcon />,
+        icon: (
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2"
+        strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+        <rect x="3" y="5" width="18" height="14" rx="2" />
+        <path d="M3 7l9 6 9-6" />
+      </svg>
+        ),
         name: "Manage Email Templates",
         path: "/admin/manage-email-templates",
     },
      {
-        icon: <EnvelopeIcon />,
+         icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2"
+        strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+        <path d="M22 12H18L14 20L10 4L6 12H2" />
+      </svg>
+    ),
         name: "Admin Activities",
         path: "/admin/admin-activities",
     },
      {
-        icon: <EnvelopeIcon />,
+       icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2"
+        strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+        <rect x="3" y="4" width="18" height="16" rx="2" />
+        <path d="M8 8h8M8 12h6M8 16h5" />
+      </svg>
+    ),
         name: "Manage Blogs",
         path: "/admin/blogs",
     },
      {
-        icon: <EnvelopeIcon />,
+       icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2"
+        strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="8" />
+        <path d="M21 21l-4.35-4.35" />
+      </svg>
+    ),
         name: "Manage Seo",
         path: "/admin/manage-seo-content",
     },

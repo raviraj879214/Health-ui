@@ -10,7 +10,11 @@ export function ManageEmailTemplates() {
     const [editorContent, setEditorContent] = useState(""); // Local editor state
     const [refresh, setRefresh] = useState(false);
     const [Message,setMessage] = useState("");
+
+    
     const [restriction, setRestriction] = useState(false);
+
+
     const [triggerrestrict,settriggerrestrict] = useState(false);
 
 

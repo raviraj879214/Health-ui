@@ -13,7 +13,7 @@ import {
 } from "../ui/table";
 import { PencilIcon, TrashBinIcon } from "../../icons/index";
 
-export function ListOfBlogs({ trigger , sendData }) {
+export function ListOfBlogs({ trigger , sendData ,onRestriction }) {
   const [users, setUsers] = useState([]);
 
 
@@ -47,6 +47,9 @@ export function ListOfBlogs({ trigger , sendData }) {
              headers: { Authorization: `Bearer ${token}` },
         }
       );
+      if(res.status == 403){
+        onRestriction(true);
+      }
       const data = await res.json();
 
       setUsers(data.data || []);
