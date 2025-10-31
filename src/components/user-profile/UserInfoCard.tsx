@@ -52,7 +52,7 @@ export default function UserInfoCard({ user, sendUpdatedata }: UserMetaCardProps
         <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
           <div>
             <h4 className="text-lg font-semibold text-gray-800 dark:text-white/90 lg:mb-6">
-              Personal Information
+              Personal Information {user.firstname}
             </h4>
 
             <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-7 2xl:gap-x-32">
@@ -119,6 +119,7 @@ export default function UserInfoCard({ user, sendUpdatedata }: UserMetaCardProps
               <div>
                 <Label>First Name</Label>
                 <input
+                  defaultValue={user.firstname}
                   type="text"
                   {...register("firstname", { required: "Please enter first name" })}
                   className="h-11 w-full rounded-lg border px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-none focus:ring-3 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30"
@@ -129,6 +130,7 @@ export default function UserInfoCard({ user, sendUpdatedata }: UserMetaCardProps
               <div>
                 <Label>Last Name</Label>
                 <input
+                  defaultValue={user.lastname}
                   type="text"
                   {...register("lastname", { required: "Please enter last name" })}
                   className="h-11 w-full rounded-lg border px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-none focus:ring-3 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30"
@@ -149,6 +151,7 @@ export default function UserInfoCard({ user, sendUpdatedata }: UserMetaCardProps
               <div>
                 <Label>Phone</Label>
                 <input
+                 defaultValue={user.phone}
                   type="text"
                   {...register("phone", { required: "Please enter phone" })}
                   className="h-11 w-full rounded-lg border px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-none focus:ring-3 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30"
@@ -159,6 +162,7 @@ export default function UserInfoCard({ user, sendUpdatedata }: UserMetaCardProps
               <div className="col-span-2">
                 <Label>Bio</Label>
                 <input
+                 defaultValue={user.Bio}
                   type="text"
                   {...register("Bio", { required: "Please enter bio" })}
                   className="h-11 w-full rounded-lg border px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-none focus:ring-3 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30"

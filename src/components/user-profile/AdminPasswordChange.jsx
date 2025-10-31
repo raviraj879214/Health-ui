@@ -1,6 +1,7 @@
 
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 export function AdminPassword() {
   const { register, handleSubmit, watch, formState: { errors }, reset } = useForm();
@@ -27,7 +28,14 @@ export function AdminPassword() {
     });
     if(res.ok){
         const result = await res.json();
-        setmessage(result.message);
+        // setmessage(result.message);
+
+        toast.success(result.message,{
+          position : "bottom-right",
+          autoClose : 3000
+        });
+
+
           reset(); 
           setTimeout(() => {
             setmessage("");
@@ -41,7 +49,7 @@ export function AdminPassword() {
   const newPassword = watch("newpassword");
 
   return (
-    <div className="p-5 border border-gray-200 rounded-2xl dark:border-gray-800 lg:p-6">
+    <div className="p-5 border border-gray-200 rounded-2xl dark:border-gray-800 lg:p-6 w-1/2">
       <h4 className="text-lg font-semibold text-gray-800 dark:text-white/90 lg:mb-6">
         Change Password
       </h4>
@@ -109,16 +117,18 @@ export function AdminPassword() {
     </div>
 
     {/* Submit Button */}
-    <div>
-      <button
-        type="submit"
-        className="w-full rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
-        disabled = {passwordbuttton}
-      >
-        
-        {!passwordbuttton ? "Update Password" : "...."}
-      </button>
-    </div>
+    <div className="flex justify-end">
+  <button
+    type="submit"
+    className="w-40 rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
+    disabled={passwordbuttton}
+  >
+    {!passwordbuttton ? "Update Password" : "...."}
+  </button>
+</div>
+
+
+
 
   </div>
 </form>

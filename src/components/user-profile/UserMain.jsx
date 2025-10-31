@@ -5,6 +5,7 @@ import UserInfoCard from "./UserInfoCard";
 import UserMetaCard from "./UserMetaCard";
 import {AdminPassword} from "./AdminPasswordChange";
 import ComponentCard from "../common/ComponentCard";
+import { toast } from "react-toastify";
 
 
 
@@ -17,7 +18,9 @@ export function UserMainArea(){
 
     const fetchadminuser =async ()=>{
          const resdsd = await fetch("/api/auth/get-token");
-            const token = await resdsd.json();
+
+         const token = await resdsd.json();
+
         const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/admin-user`,{
             method : "GET",
             headers:{
@@ -67,6 +70,13 @@ export function UserMainArea(){
         {
             settriggerbutton(true);
 
+
+            toast.success("Admin profile updated successfully",{
+                      position : "bottom-right",
+                      autoClose : 3000
+                    });
+
+
             setTimeout(() => {
 
                  settriggerbutton(false);
@@ -82,9 +92,12 @@ export function UserMainArea(){
                 <ComponentCard title="">
 
                     <UserMetaCard user={userdetails} />
+
                     <UserInfoCard user={userdetails} sendUpdatedata={childFormUpdate} />
                     
                     <UserAddressCard user={userdetails} sendUpdatedata={childFormUpdate} />
+
+
                     <AdminPassword></AdminPassword>
 
 
