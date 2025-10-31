@@ -3,6 +3,7 @@ import { useState } from "react";
 import ComponentCard from "../common/ComponentCard";
 import { DropDownSearchesSeo } from "../manageseo/DropDown";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 
 
@@ -11,6 +12,7 @@ export function ManageSeoPage() {
     const { register, reset, formState: { errors }, handleSubmit, setValue } = useForm();
     const [tagValue, setTagValue] = useState("");
     const [button,setbutton] = useState(false);
+    const [buttonprocess,setbuttonprocess] = useState(false);
     const [message,setmessage] = useState("");
     const [restriction, setRestriction] = useState(false);
 
@@ -47,6 +49,7 @@ export function ManageSeoPage() {
 
 
 const onUpdate = async (data) => {
+  setbuttonprocess(true);
   try {
     // Get token
     const resToken = await fetch("/api/auth/get-token");
@@ -80,7 +83,8 @@ const onUpdate = async (data) => {
     const result = await res.json();
 
     if (!res.ok) {
-      setmessage(result.message || "Failed to update SEO page");
+      // setmessage(result.message || "Failed to update SEO page");
+       toast.success(result.message || "Failed to update SEO page", {position: "bottom-right",autoClose: 3000,});
       setTimeout(() => setmessage(""), 3000);
       return;
     }
@@ -90,13 +94,16 @@ const onUpdate = async (data) => {
     reset();
     setbutton(false);
     setmessage(result.message || "SEO updated successfully");
+    toast.success(result.message || "SEO updated successfully", {position: "bottom-right",autoClose: 3000,});
 
     setTimeout(() => setmessage(""), 3000);
   } catch (error) {
     console.error(error);
     setmessage(error.message || "Something went wrong");
+     toast.error(result.message || "Something went wrong", {position: "bottom-right",autoClose: 3000,});
     setTimeout(() => setmessage(""), 3000);
   }
+  setbuttonprocess(false);
 };
 
 
@@ -248,7 +255,7 @@ const onUpdate = async (data) => {
                         type="submit"
                         className="bg-brand-500 hover:bg-brand-600 w-full rounded-lg p-3 text-sm font-medium text-white transition-colors"
                       >
-                        Update
+                        {buttonprocess ? "Updating" : "Update"}
                       </button>
                     </div>) : (<></>)
                   }

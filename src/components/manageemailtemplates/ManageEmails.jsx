@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Editor } from "primereact/editor";
 import { useForm } from "react-hook-form";
 import ComponentCard from "../../components/common/ComponentCard";
+import { toast } from "react-toastify";
 
 export function ManageEmailTemplates() {
     const [roles, setRoles] = useState([]);
@@ -105,7 +106,9 @@ export function ManageEmailTemplates() {
                 setValue("emailbody", "");
                 setSelectedId("");
                 setRefresh(prev => !prev); 
-                setMessage(result.message);
+                // setMessage(result.message);
+
+                 toast.success(result.message, {position: "bottom-right",autoClose: 3000,});
 
                 setTimeout(() => {
                      setMessage("");
@@ -196,19 +199,20 @@ export function ManageEmailTemplates() {
                       
 
 
-                        <div className="grid grid-cols-10 gap-4 mt-5">
-  <div className="col-span-8"></div> {/* spacer */}
-  <div className="col-span-2">
- {selectedId > 0 &&(
-                            <button type="submit" 
-                            className="bg-brand-500 hover:bg-brand-600 rounded-lg p-3 text-white"
-                             disabled={selectedId > 0 ? false : true}
-                            >
-                                save
-                                 </button>
-                                )}
+                       <div className="grid grid-cols-12 mt-5">
+  <div className="col-span-12 flex justify-end">
+    {selectedId > 0 && (
+      <button
+        type="submit"
+        className="bg-brand-500 hover:bg-brand-600 rounded-lg p-3 text-white"
+        disabled={selectedId > 0 ? false : true}
+      >
+        Save
+      </button>
+    )}
   </div>
 </div>
+
 
                     </form>
 

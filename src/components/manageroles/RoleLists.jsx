@@ -13,6 +13,7 @@ import {PencilIcon ,TrashBinIcon} from "../../icons/index";
 
 import Badge from "../ui/badge/Badge";
 import Image from "next/image";
+import { toast } from "react-toastify";
 
 
 
@@ -91,7 +92,14 @@ const onDelete = async (id) => {
     
       sendDelete(true);
 
-      setmessagerolelist(result.message);
+      // setmessagerolelist(result.message);
+
+       toast.success(result.message, {
+                          position: "bottom-right",
+                          autoClose: 3000,
+                        });
+
+
       setTimeout(() => {
         setmessagerolelist("");
       }, 3000);

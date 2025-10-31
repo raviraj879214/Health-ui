@@ -6,6 +6,7 @@ import ComponentCard from "../common/ComponentCard";
 import { ListOfBlogs } from "../blogsmanagement/BlogsList";
 import {DropDownSearches} from "../blogsmanagement/DropDownSearch";
 import {ComboBoxUI} from "../blogsmanagement/newdropdown";
+import { toast } from "react-toastify";
 
 
 export function CreateBlogs() {
@@ -22,11 +23,13 @@ export function CreateBlogs() {
     const { register, reset, formState: { errors }, handleSubmit ,setValue } = useForm();
 
      const [restriction, setRestriction] = useState(false);
+     const [button,setbutton] = useState(false);
 
 
 
     const onCreate = async (data) => {
         debugger;
+        setbutton(true);
         if (!selectedImage) {
             alert("Please upload an image");
             return;
@@ -56,7 +59,8 @@ export function CreateBlogs() {
 
             if (res.ok) {
                 const responseData = await res.json();
-                setMessage(responseData.message);
+                // setMessage(responseData.message);
+                  toast.success(responseData.message, {position: "bottom-right",autoClose: 3000,});
 
                 // Clear form and uploader
                 setSelectedImage(null);
@@ -83,6 +87,7 @@ export function CreateBlogs() {
         } catch (error) {
             console.log("Error creating blog:", error);
         }
+        setbutton(false);
     };
   
 
@@ -109,7 +114,7 @@ export function CreateBlogs() {
 
     
     const onUpdate =async (data)=>{
-       
+       setbutton(true);
          try {
             // Get auth token
             const resToken = await fetch("/api/auth/get-token");
@@ -132,7 +137,8 @@ export function CreateBlogs() {
 
             if (res.ok) {
                 const responseData = await res.json();
-                setMessage(responseData.message);
+                // setMessage(responseData.message);
+                 toast.success(responseData.message, {position: "bottom-right",autoClose: 3000,});
 
                 // Clear form and uploader
                 setSelectedImage(null);
@@ -159,6 +165,7 @@ export function CreateBlogs() {
             console.error("Error creating blog:", error);
         }
 
+        setbutton(false);
     }
 
 
@@ -280,13 +287,18 @@ export function CreateBlogs() {
 
 
                                 <div className="grid grid-cols-10 gap-4 mt-5">
-  <div className="col-span-8"></div> {/* spacer */}
-  <div className="col-span-2">
- <button
-                                        type="submit"
+                                    <div className="col-span-8"></div> {/* spacer */}
+                                    <div className="col-span-2">
+                                    <button
+                                        disabled={button}
+                                         type="submit"
                                         className="bg-brand-500 hover:bg-brand-600 w-full rounded-lg p-3 text-sm font-medium text-white transition-colors"
                                     >
-                                        {blogid === 0 ? "Add" : "Update"}
+                                        {blogid === 0 ? (
+                                            button ? "Adding" : "Add"
+                                        ) : (
+                                            button ? "Updating" : "Update"
+                                        )}
                                     </button>
   </div>
 </div>

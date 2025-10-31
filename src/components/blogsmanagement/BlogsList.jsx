@@ -12,6 +12,7 @@ import {
   TableRow,
 } from "../ui/table";
 import { PencilIcon, TrashBinIcon } from "../../icons/index";
+import { toast } from "react-toastify";
 
 export function ListOfBlogs({ trigger , sendData ,onRestriction }) {
   const [users, setUsers] = useState([]);
@@ -108,7 +109,8 @@ export function ListOfBlogs({ trigger , sendData ,onRestriction }) {
       if (res.ok) {
         const result = await res.json();
        
-        setMessage(result.message);
+        // setMessage(result.message);
+         toast.success(result.message, {position: "bottom-right",autoClose: 3000,});
         setTimeout(() => setMessage(""), 3000);
 
         sendData("","","","","");

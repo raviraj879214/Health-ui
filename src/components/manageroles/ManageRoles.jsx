@@ -6,6 +6,8 @@ import Input from "../form/input/InputField";
 import { useForm } from "react-hook-form";
 import BasicTableOne from "../tables/BasicTableOne";
 import {RolesList} from "../../components/manageroles/RoleLists";
+import { toast, ToastContainer } from "react-toastify";
+
 
 export function ManageRole() {
   const { register, handleSubmit, formState: { errors }, getValues , reset , setValue } = useForm();
@@ -28,7 +30,12 @@ export function ManageRole() {
 
       if(res.ok){
         const result = await res.json();
-        setmessage(result.message);
+        // setmessage(result.message);
+
+         toast.success(result.message, {
+                    position: "bottom-right",
+                    autoClose: 3000,
+                  });
         reset();
         setTimeout(() => {
           setmessage("");
@@ -59,7 +66,12 @@ export function ManageRole() {
 
       if(res.ok){
         const result = await res.json();
-        setmessage(result.message);
+        // setmessage(result.message);
+
+         toast.success(result.message, {
+                    position: "bottom-right",
+                    autoClose: 3000,
+                  });
         reset();
         setroleid(0);
         setTimeout(() => {
@@ -125,9 +137,14 @@ export function ManageRole() {
 
           <div className="w-full px-2.5 flex justify-end">
             <button
+            disabled={rolebutton}
               type="submit"
               className="bg-brand-500 hover:bg-brand-600 rounded-md px-15 py-2 text-xs font-medium text-white transition-colors">
-              {roleid > 0 ? "Update" : "Add"}
+             {roleid > 0 
+              ? (rolebutton ? "Updating" : "Update") 
+              : (rolebutton ? "Adding" : "Add") 
+            }
+
             </button>
           </div>
 

@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import Select from "../form/Select";
 import { ChevronDownIcon } from "@/icons";
 import {UserdList} from "../../components/manageusers/UserLists";
+import { toast } from "react-toastify";
 
 
 
@@ -36,7 +37,10 @@ export function ManageUser() {
         });
         if(res.ok){
             const result =await res.json();
-            setmessage(result.message);
+            // setmessage(result.message);
+
+          
+             toast.success(result.message, {position: "bottom-right",autoClose: 3000,});
 
             
             if(result.status == 409){
