@@ -9,6 +9,7 @@ import {
 } from "../ui/table";
 import { TrashBinIcon, ChevronDownIcon, ChevronUpIcon } from "../../icons/index";
 import {AdminActivity} from "../manageactivity/AdminActivities";
+import { usePermissions } from "@/context/PermissionContext";
 
 export function ManageActivity({ trigger, sendDelete }) {
   const [users, setUsers] = useState([]);
@@ -17,7 +18,9 @@ export function ManageActivity({ trigger, sendDelete }) {
   const [totalPages, setTotalPages] = useState(1);
   const itemsPerPage = 10;
   const [message, setMessage] = useState("");
-     const [restriction, setRestriction] = useState(false);
+  const [restriction, setRestriction] = useState(false);
+
+  const { canRead, canCreate, canUpdate, canDelete , status } = usePermissions("Manage Activies");
 
   // Fetch users
   const fetchUsers = async (page) => {
@@ -35,9 +38,7 @@ export function ManageActivity({ trigger, sendDelete }) {
           },
         }
       );
-      if (res.status === 403) {
-                setRestriction(true);
-            }
+      
       const data = await res.json();
       setUsers(data.users || []);
       setTotalPages(Math.ceil((data.totalCount || 0) / itemsPerPage));
@@ -46,9 +47,14 @@ export function ManageActivity({ trigger, sendDelete }) {
     }
   };
 
+
   useEffect(() => {
-    fetchUsers(currentPage);
-  }, [currentPage, trigger]);
+
+    if(canRead){
+      fetchUsers(currentPage);
+    }
+    setRestriction(status);
+  },[currentPage, trigger, canRead, status]);
 
   const toggleExpandRow = (id) => {
     setExpandedRows((prev) =>

@@ -4,6 +4,7 @@ import { Modal } from "../ui/modal";
 import Button from "../ui/button/Button";
 import Label from "../form/Label";
 import { useForm } from "react-hook-form";
+import { usePermissions } from "@/context/PermissionContext";
 
 interface UserMetaCardProps {
   user: {
@@ -46,6 +47,8 @@ export default function UserInfoCard({ user, sendUpdatedata }: UserMetaCardProps
     closeModal();
   };
 
+   const { canRead, canCreate, canUpdate, canDelete ,status } = usePermissions("Manage Admin User");
+
   return (
     <>
       <div className="p-5 border border-gray-200 rounded-2xl dark:border-gray-800 lg:p-6">
@@ -78,8 +81,8 @@ export default function UserInfoCard({ user, sendUpdatedata }: UserMetaCardProps
               </div>
             </div>
           </div>
-
-          <button
+          {canUpdate &&(
+             <button
             onClick={openModal}
             className="flex w-full lg:w-auto items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-700 shadow-theme-xs hover:bg-gray-50 hover:text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03] dark:hover:text-gray-200"
           >
@@ -100,6 +103,8 @@ export default function UserInfoCard({ user, sendUpdatedata }: UserMetaCardProps
               />
             </svg>
           </button>
+          )}
+         
         </div>
       </div>
 

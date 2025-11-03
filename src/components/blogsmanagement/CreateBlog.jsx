@@ -7,6 +7,8 @@ import { ListOfBlogs } from "../blogsmanagement/BlogsList";
 import {DropDownSearches} from "../blogsmanagement/DropDownSearch";
 import {ComboBoxUI} from "../blogsmanagement/newdropdown";
 import { toast } from "react-toastify";
+import { usePermissions } from "@/context/PermissionContext";
+
 
 
 export function CreateBlogs() {
@@ -24,6 +26,19 @@ export function CreateBlogs() {
 
      const [restriction, setRestriction] = useState(false);
      const [button,setbutton] = useState(false);
+
+    debugger;
+    const { canRead, canCreate, canUpdate, canDelete , status } = usePermissions("Manage Blog");
+
+
+     
+
+
+        useEffect(()=>{
+            setRestriction(status);
+        },[status]);
+    
+
 
 
 
@@ -210,8 +225,10 @@ export function CreateBlogs() {
 
             <div className="grid grid-cols-12 gap-4">
                 <div className="col-span-12 sm:col-span-12 space-y-5 sm:space-y-6">
+                      
                     <ComponentCard title="Manage Blogs" desc="" showReload = {true}>
-                     
+                      
+                      
                         <p className="text-green-500 text-sm">{message}</p>
                            <form onSubmit={handleSubmit(blogid > 0 ? onUpdate : onCreate)}>
 
@@ -289,7 +306,11 @@ export function CreateBlogs() {
                                 <div className="grid grid-cols-10 gap-4 mt-5">
                                     <div className="col-span-8"></div> {/* spacer */}
                                     <div className="col-span-2">
-                                    <button
+
+                                        {canCreate ? (
+
+
+  <button
                                         disabled={button}
                                          type="submit"
                                         className="bg-brand-500 hover:bg-brand-600 w-full rounded-lg p-3 text-sm font-medium text-white transition-colors"
@@ -300,8 +321,11 @@ export function CreateBlogs() {
                                             button ? "Updating" : "Update"
                                         )}
                                     </button>
-  </div>
-</div>
+
+                                        ) :(<></>)}
+                                  
+                    </div>
+                    </div>
 
 
                             </div>
@@ -317,11 +341,25 @@ export function CreateBlogs() {
                 <div className="col-span-12 sm:col-span-12 space-y-5 sm:space-y-6">
                     <ComponentCard title="Manage Blogs" desc="">
                         <p className="text-green-500 text-sm"> </p>
-                        <ListOfBlogs trigger={triggertable} sendData = {handleChildEditData} onRestriction= {(data)=> setRestriction(data)}></ListOfBlogs>
+                                        
+                                         {
+                        canRead ? (
+
+                            <ListOfBlogs trigger={triggertable} sendData = {handleChildEditData} onRestriction= {(data)=> setRestriction(data)}></ListOfBlogs>
+
+                            ) :(
+
+                            <p className="text-red-500 text-center">Area restricted</p>
+
+
+                            )
+                        }
 
                     </ ComponentCard>
                 </div>
             </div>
+
+           
 
 
 

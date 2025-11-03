@@ -1,38 +1,70 @@
 "use client";
-import { Outfit } from 'next/font/google';
-import { SidebarProvider, useSidebar } from "@/context/SidebarContext";
+import { Outfit } from "next/font/google";
+import { SidebarProvider } from "@/context/SidebarContext";
 import AppHeader from "@/layout/AppHeader";
 import AppSidebar from "@/layout/AppSidebar";
 import Backdrop from "@/layout/Backdrop";
-import React from "react";
-import { ThemeProvider } from '@/context/ThemeContext';
-import { AuthAdmin } from "../../components/middleware/AuthAdmin";
+import React, { useEffect, useState } from "react";
+import { ThemeProvider } from "@/context/ThemeContext";
 
-const outfit = Outfit({
-  subsets: ["latin"],
-});
+import { PermissionProvider } from "../../context/PermissionContext";
+import SignInForm from "@/components/auth/SignInForm";
+
+
+const outfit = Outfit({ subsets: ["latin"] });
 
 export default function AdminLayout({ children }) {
+  const [loading, setLoading] = useState(true);
+  const [isAuth, setIsAuth] = useState(false);
+  const [returl, setReturl] = useState("");
 
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const res = await fetch(`/api/auth/get-token`, { cache: "no-store" });
+        const data = await res.json();
 
-  return (<>
+        const currentUrl = window.location.pathname + window.location.search;
+        
+        setReturl(currentUrl);
 
+        if (data?.token) {
+          setIsAuth(true);
+        }
+      } catch {}
+      setLoading(false);
+    };
 
-<ThemeProvider>
-     <AuthAdmin>
-        <SidebarProvider>
-          <InnerLayout>{children}</InnerLayout>
-        </SidebarProvider>
-     </AuthAdmin>
-</ThemeProvider>
+    checkAuth();
+  }, []);
 
- </>);
+  if (loading) {
+    return <p className="p-6 text-center">Checking authentication...</p>;
+  }
+
+  return (
+    <ThemeProvider>
+      <SidebarProvider>
+        {/* ✅ PermissionProvider wraps both SignIn and children */}
+        <PermissionProvider>
+
+          {!isAuth ? (
+            // ✅ Now SignInForm gets access to setPermissions
+            <div className="min-h-screen flex items-center justify-center dark:bg-gray-900">
+              <SignInForm returl={returl} />
+            </div>
+          ) : (
+            <InnerLayout>{children}</InnerLayout>
+          )}
+
+        </PermissionProvider>
+      </SidebarProvider>
+    </ThemeProvider>
+  );
 }
 
-// Separate inner component that can safely use useSidebar
 function InnerLayout({ children }) {
-  
-  const { isExpanded, isHovered, isMobileOpen } = useSidebar();
+  const { isExpanded, isHovered, isMobileOpen } = require("@/context/SidebarContext").useSidebar();
 
   const mainContentMargin = isMobileOpen
     ? "ml-0"
@@ -47,12 +79,8 @@ function InnerLayout({ children }) {
 
       <div className={`flex-1 transition-all duration-300 ease-in-out ${mainContentMargin}`}>
         <AppHeader />
-
         <div className="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">
           {children}
-          
-       
-
         </div>
       </div>
     </div>

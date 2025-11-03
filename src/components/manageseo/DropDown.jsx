@@ -1,4 +1,5 @@
 "use client";
+import { usePermissions } from "@/context/PermissionContext";
 import React, { useState, useEffect, useRef } from "react";
 
 
@@ -10,6 +11,8 @@ export function DropDownSearchesSeo({ value = null, onChange , onData   }) {
   const [query, setQuery] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
+
+  const { canRead, canCreate, canUpdate, canDelete ,status } = usePermissions("Manage Seo");
 
   // Fetch tags from API
   const fetchTags = async () => {
@@ -27,11 +30,7 @@ export function DropDownSearchesSeo({ value = null, onChange , onData   }) {
       );
 
 
-      if(res.status == 403){
-        
-         onData(true); 
-        
-      }
+      
 
       if (res.ok) {
         const result = await res.json();
@@ -48,7 +47,10 @@ export function DropDownSearchesSeo({ value = null, onChange , onData   }) {
   };
 
   useEffect(() => {
-    fetchTags();
+    if(canRead == true){
+      fetchTags();
+    }
+    
   }, []);
 
   // Handle external value changes
@@ -78,7 +80,7 @@ export function DropDownSearchesSeo({ value = null, onChange , onData   }) {
     <div className="mt-6 relative" ref={dropdownRef}>
       <input
         type="text"
-        placeholder="Select a page"
+        placeholder={canRead ? "Select Page" : "Restricted"}
         value={query}
         onChange={(e) => {
           const val = e.target.value;
@@ -91,6 +93,7 @@ export function DropDownSearchesSeo({ value = null, onChange , onData   }) {
             if (onChange) onChange(null);
           }
         }}
+        
         onFocus={() => setIsOpen(true)}
         onBlur={() => setTimeout(() => setIsOpen(false), 150)}
         className="py-2.5 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"

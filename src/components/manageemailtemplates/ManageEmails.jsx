@@ -4,6 +4,8 @@ import { Editor } from "primereact/editor";
 import { useForm } from "react-hook-form";
 import ComponentCard from "../../components/common/ComponentCard";
 import { toast } from "react-toastify";
+import { usePermissions } from "@/context/PermissionContext";
+
 
 export function ManageEmailTemplates() {
     const [roles, setRoles] = useState([]);
@@ -16,6 +18,10 @@ export function ManageEmailTemplates() {
     const [restriction, setRestriction] = useState(false);
 
 
+    
+
+    const { canRead, canCreate, canUpdate, canDelete , status } = usePermissions("Manage Email");
+
     const [triggerrestrict,settriggerrestrict] = useState(false);
 
 
@@ -24,6 +30,9 @@ export function ManageEmailTemplates() {
     });
 
 
+    useEffect(()=>{
+      setRestriction(status);
+    },[status]);
 
     // Fetch email templates
   const fetchEmailData = async () => {
@@ -39,10 +48,7 @@ export function ManageEmailTemplates() {
             }
         });
 
-        if (res.status === 403) {
-            // User is restricted
-           setRestriction(true);
-        }
+       
 
         if (res.ok) {
             const result = await res.json();
@@ -63,8 +69,14 @@ export function ManageEmailTemplates() {
     
 
     useEffect(() => {
+     
+       if(canRead){
+       
         fetchEmailData();
-    }, [refresh]); 
+       }
+      
+        
+    }, [refresh,canRead]); 
 
 
 
@@ -96,9 +108,7 @@ export function ManageEmailTemplates() {
                     body: editorContent
                 })
             });
-            if (res.status === 403) {
-                setRestriction(true);
-            }
+            
 
             if (res.ok) {
                 const result = await res.json();
@@ -171,10 +181,11 @@ export function ManageEmailTemplates() {
                     <form onSubmit={handleSubmit(onUpdate)}>
                         <select
                             value={selectedId}
+                            
                             onChange={handleChange}
                             className="border px-3 py-2 rounded w-full mb-4"
                         >
-                            <option value="">-- Choose a subject --</option>
+                            <option value="">{canRead ? "-- Choose a subject --" : "Restricted"}</option>
                             {roles.map(role => (
                                 <option key={role.id} value={role.id}>{role.name}</option>
                             ))}
@@ -199,19 +210,24 @@ export function ManageEmailTemplates() {
                       
 
 
-                       <div className="grid grid-cols-12 mt-5">
-  <div className="col-span-12 flex justify-end">
-    {selectedId > 0 && (
-      <button
-        type="submit"
-        className="bg-brand-500 hover:bg-brand-600 rounded-lg p-3 text-white"
-        disabled={selectedId > 0 ? false : true}
-      >
-        Save
-      </button>
-    )}
-  </div>
-</div>
+                      
+
+                        {canUpdate &&(
+
+                          <div className="grid grid-cols-12 mt-5">
+                              <div className="col-span-12 flex justify-end">
+                                {selectedId > 0 && (
+                                  <button
+                                    type="submit"
+                                    className="bg-brand-500 hover:bg-brand-600 rounded-lg p-3 text-white"
+                                    disabled={selectedId > 0 ? false : true}
+                                  >
+                                    Save
+                                  </button>
+                                )}
+                              </div>
+                            </div>
+                        )}
 
 
                     </form>

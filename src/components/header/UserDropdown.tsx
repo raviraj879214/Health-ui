@@ -27,7 +27,8 @@ export default function UserDropdown() {
 
   const signout= async ()=>{
       await fetch("/api/auth/logout", { method: "POST" });
-      router.push("/signin"); // redirect after clearing cookie
+      window.location.href = "/admin";
+
   }
 
 

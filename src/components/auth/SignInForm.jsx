@@ -9,6 +9,7 @@ import Label from "@/components/form/Label";
 import Button from "@/components/ui/button/Button";
 import { ChevronLeftIcon, EyeCloseIcon, EyeIcon } from "@/icons";
 import { useRouter } from "next/navigation";
+import { usePermissions } from "@/context/PermissionContext";
 
 export default function SignInForm({ returl }) {
   const [showPassword, setShowPassword] = useState(false);
@@ -28,16 +29,17 @@ export default function SignInForm({ returl }) {
 
 
 
+  const { setPermissions } = usePermissions();
+
+
 
   const handlelogin = async (data) => {
     debugger;
     setLoading(true);
     
-    const env = process.env.NEXT_PUBLIC_ENV;        // "staging"
-    const apiUrl = process.env.NEXT_PUBLIC_NODEJS_URL;  // "https://staging-api.example.com"
+    const env = process.env.NEXT_PUBLIC_ENV;        
+    const apiUrl = process.env.NEXT_PUBLIC_NODEJS_URL;  
 
-    console.log("Environment:", env);
-    console.log("API URL:", apiUrl);
 
 
 
@@ -71,13 +73,29 @@ export default function SignInForm({ returl }) {
            await fetch("/api/auth/set-userid", {method: "POST",headers: { "Content-Type": "application/json" },body: JSON.stringify({ userid: result.user.id })});
            
 
-
-
-
-
            await getToken();
-           if(returl != ""){router.push(returl);}else{
-              router.push('/admin')
+
+           setPermissions(result.permissions);
+           localStorage.setItem("permissions", JSON.stringify(result.permissions));
+
+           const fromStorage = localStorage.getItem("permissions");
+           console.log("fromStorage",fromStorage);
+
+
+
+            debugger;
+           if(returl != "")
+            {
+              
+              // router.push(returl);
+
+              window.location.href = returl;
+
+              
+            }
+           else{
+              // router.push('/admin');
+               window.location.href = "/admin";
            }
   
         }

@@ -13,6 +13,7 @@ import {
 } from "../ui/table";
 import { PencilIcon, TrashBinIcon } from "../../icons/index";
 import { toast } from "react-toastify";
+import { usePermissions } from "@/context/PermissionContext";
 
 export function ListOfBlogs({ trigger , sendData ,onRestriction }) {
   const [users, setUsers] = useState([]);
@@ -24,8 +25,11 @@ export function ListOfBlogs({ trigger , sendData ,onRestriction }) {
   const itemsPerPage = 10;
   const [message, setMessage] = useState("");
   const [expandedRows, setExpandedRows] = useState({});
+   const { canRead, canCreate, canUpdate, canDelete ,status } = usePermissions("Manage Blog");
 
-
+  useEffect(()=>{
+    onRestriction(status);
+  },[status]);
 
   const toggleExpand = (id) => {
     setExpandedRows((prev) => ({
@@ -48,9 +52,6 @@ export function ListOfBlogs({ trigger , sendData ,onRestriction }) {
              headers: { Authorization: `Bearer ${token}` },
         }
       );
-      if(res.status == 403){
-        onRestriction(true);
-      }
       const data = await res.json();
 
       setUsers(data.data || []);
@@ -241,13 +242,32 @@ export function ListOfBlogs({ trigger , sendData ,onRestriction }) {
                       {/* <button onClick={() => edit(user.id, user.firstname)}>
                         <PencilIcon />
                       </button> */}
-                       <button onClick={() => onEdit(user)}>
+                      
+                      {canUpdate ? (
+
+                      <button onClick={() => onEdit(user)}>
+                        <PencilIcon />
+                      </button>)
+                      :
+                      (
+                        <button className="opacity-50 cursor-not-allowed">
                         <PencilIcon />
                       </button>
+                      )
+                      
+                    }
                       /
-                      <button onClick={() => onDelete(user.id)}>
-                        <TrashBinIcon />
-                      </button>
+                     
+                    {canDelete ? (
+                        <button onClick={() => onDelete(user.id)}>
+                          <TrashBinIcon />
+                        </button>
+                      ) : (
+                        <button disabled className="opacity-50 cursor-not-allowed">
+                          <TrashBinIcon />
+                        </button>
+                      )}
+
                     </div>
                   </TableCell>
                 </TableRow>

@@ -1,9 +1,10 @@
 "use client"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ComponentCard from "../common/ComponentCard";
 import { DropDownSearchesSeo } from "../manageseo/DropDown";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import { usePermissions } from "@/context/PermissionContext";
 
 
 
@@ -16,6 +17,13 @@ export function ManageSeoPage() {
     const [message,setmessage] = useState("");
     const [restriction, setRestriction] = useState(false);
 
+    const { canRead, canCreate, canUpdate, canDelete ,status } = usePermissions("Manage Seo");
+
+
+
+    useEffect(()=>{
+        setRestriction(status);
+    },[status]);
     
 
     const OnPageTrigger =async (data)=>{
@@ -108,9 +116,6 @@ const onUpdate = async (data) => {
 
 
 
- const handleChildData = (data) => {
-     setRestriction(true);
-  };
 
 
 
@@ -166,7 +171,7 @@ const onUpdate = async (data) => {
                                     setValue("tagValue", val ? val.code : ""); 
                                     OnPageTrigger(val ? val.code : null);      
                                 }}
-                                onData={handleChildData}/>
+                               />
 
 
 
@@ -248,18 +253,20 @@ const onUpdate = async (data) => {
 
               <div className="grid grid-cols-10 gap-4 mt-5">
                 <div className="col-span-8"></div> {/* spacer */}
-                <div className="col-span-2">
-                  {
-                    button ? (<div className="w-full px-2.5 mt-1">
-                      <button
-                        type="submit"
-                        className="bg-brand-500 hover:bg-brand-600 w-full rounded-lg p-3 text-sm font-medium text-white transition-colors"
-                      >
-                        {buttonprocess ? "Updating" : "Update"}
-                      </button>
-                    </div>) : (<></>)
-                  }
-                </div>
+                {canUpdate == true && (
+                  <div className="col-span-2" >
+                    {
+                      button ? (<div className="w-full px-2.5 mt-1">
+                        <button
+                          type="submit"
+                          className="bg-brand-500 hover:bg-brand-600 w-full rounded-lg p-3 text-sm font-medium text-white transition-colors"
+                        >
+                          {buttonprocess ? "Updating" : "Update"}
+                        </button>
+                      </div>) : (<></>)
+                    }
+                  </div>
+                )}
               </div>
 
 

@@ -5,6 +5,7 @@ import { Modal } from "../ui/modal";
 import Button from "../ui/button/Button";
 import Input from "../form/input/InputField";
 import Label from "../form/Label";
+import { usePermissions } from "@/context/PermissionContext";
 
 interface UserMetaCardProps {
   user: {
@@ -28,6 +29,9 @@ export default function UserMetaCard({ user }: UserMetaCardProps) {
     console.log("Saving changes...");
     closeModal();
   };
+
+  const { canRead, canCreate, canUpdate, canDelete ,status } = usePermissions("Manage Admin User");
+
   return (
     <>
       <div className="p-5 border border-gray-200 rounded-2xl dark:border-gray-800 lg:p-6">

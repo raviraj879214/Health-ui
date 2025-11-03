@@ -6,6 +6,7 @@ import UserMetaCard from "./UserMetaCard";
 import {AdminPassword} from "./AdminPasswordChange";
 import ComponentCard from "../common/ComponentCard";
 import { toast } from "react-toastify";
+import { usePermissions } from "@/context/PermissionContext";
 
 
 
@@ -14,6 +15,11 @@ export function UserMainArea(){
     const [userdetails , setuserdetails] = useState([]);
     const [triggerbutton,settriggerbutton] = useState(false);
     const [modal,stemodal] = useState(false);
+
+
+    const { canRead, canCreate, canUpdate, canDelete ,status } = usePermissions("Manage Admin User");
+
+
 
 
     const fetchadminuser =async ()=>{
@@ -37,9 +43,12 @@ export function UserMainArea(){
 
     useEffect(()=>{
 
-        fetchadminuser();
+        if(canRead){
+             fetchadminuser();
+        }
+       
 
-    },[triggerbutton]);
+    },[triggerbutton,canRead]);
 
 
     const childFormUpdate =async (data)=>{

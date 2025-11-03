@@ -5,6 +5,7 @@ import { Modal } from "../ui/modal";
 import Button from "../ui/button/Button";
 import Label from "../form/Label";
 import { useForm } from "react-hook-form";
+import { usePermissions } from "@/context/PermissionContext";
 
 
 
@@ -37,6 +38,9 @@ export default function UserAddressCard({ user , sendUpdatedata }: UserMetaCardP
 
  const { register, formState: { errors }, handleSubmit } = useForm<UpdateData>();
 
+
+    const { canRead, canCreate, canUpdate, canDelete ,status } = usePermissions("Manage Admin User");
+ 
 
 
 
@@ -97,7 +101,10 @@ export default function UserAddressCard({ user , sendUpdatedata }: UserMetaCardP
             </div>
           </div>
 
-          <button
+          
+          {canUpdate &&(
+
+            <button
             onClick={openModal}
             className="flex w-full items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-700 shadow-theme-xs hover:bg-gray-50 hover:text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03] dark:hover:text-gray-200 lg:inline-flex lg:w-auto"
           >
@@ -118,6 +125,7 @@ export default function UserAddressCard({ user , sendUpdatedata }: UserMetaCardP
             </svg>
             Edit
           </button>
+          )}
         </div>
       </div>
       <Modal isOpen={isOpen} onClose={closeModal} className="max-w-[700px] m-4">

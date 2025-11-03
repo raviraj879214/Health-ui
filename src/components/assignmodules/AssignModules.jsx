@@ -19,7 +19,10 @@ export function AssignModule() {
             <div className="col-span-12 sm:col-span-12 space-y-5 sm:space-y-6">
                 <ComponentCard title="" desc="" showReload = {true}>
                      <RoleDropdown sendRoleID={selectedrolesid}></RoleDropdown> 
+
                      <RoleModuleLists roleid={selectedrole}></RoleModuleLists>
+
+                     
                 </ComponentCard>
             </div>
         </div>
