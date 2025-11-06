@@ -262,17 +262,17 @@ export function MangageSpecailty() {
 
              
               <div className="col-span-12 sm:col-span-6">
-                <Label>Specialty Name</Label>
+                <Label>Treatment Name</Label>
                 <input
                   type="text"
                   className={`h-11 w-full rounded-lg border px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-hidden focus:ring-3 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800
                 ${errors.name ? "border-red-500 focus:ring-red-300" : "border-gray-300 focus:ring-brand-200"}`}
                   defaultValue={getValues("rolename")}
                   {...register("name", {
-                    required: "Please enter Specialty name",
+                    required: "Please enter treatment name",
                   })}
 
-                  placeholder="Enter Specialty Name"
+                  placeholder="Enter treatment Name"
                 />
                 {errors.name && (
                   <p className="text-red-500 text-sm">{errors.name.message}</p>
@@ -281,7 +281,7 @@ export function MangageSpecailty() {
 
               
               <div className="col-span-12 sm:col-span-6">
-                <Label>Specialty Type</Label>
+                <Label>Specialty</Label>
 
                 {/* Dropdown + "+" Button row */}
                 <div className="flex items-center gap-2">
@@ -332,11 +332,11 @@ export function MangageSpecailty() {
                 <div className="flex items-center gap-2 mt-3">
                   <input
                     type="text"
-                    placeholder="Enter Specialty Type"
+                    placeholder="Enter Specialty"
                     className="flex-1 h-11 rounded-lg border px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-hidden focus:ring-3 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
                     onChange={(e) => addSpecilatytypevalue(e)}
                     {...register("specialtytypename", {
-                      required: "Please enter Specialty Type",
+                      required: "Please enter Specialty",
                     })}
                   />
 
@@ -400,7 +400,7 @@ export function MangageSpecailty() {
 
     <div className="grid grid-cols-12 gap-4 mt-5">
       <div className="col-span-12 sm:col-span-12 space-y-5 sm:space-y-6">
-        <ComponentCard title="Manage Specialties" desc="">
+        <ComponentCard title="Manage Treatments" desc="">
           <p className="text-green-500 text-sm"> </p>
 
           <ListOfSpecialties trigger={triggertable} sendData={handleChildEditData}></ListOfSpecialties>

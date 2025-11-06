@@ -15,7 +15,7 @@ export default function Page(){
 
     return(<>
     
-         <PageBreadcrumb pageTitle="Manage Specialties" />
+         <PageBreadcrumb pageTitle="Manage Treatment" />
 
 
         <MangageSpecailty></MangageSpecailty>

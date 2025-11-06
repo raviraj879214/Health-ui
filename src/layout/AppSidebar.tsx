@@ -208,11 +208,22 @@ const navItems: NavItem[] = [
     // },
 
 
-    //  {
-    //     icon: <EnvelopeIcon />,
-    //     name: "Manage Specialties",
-    //     path: "/admin/manage-treatment",
-    // },
+     {
+        icon: <EnvelopeIcon />,
+        name: "Manage Specialty",
+        path: "/admin/manage-specialty",
+    },
+
+
+    
+     {
+        icon: <EnvelopeIcon />,
+        name: "Manage Treatment",
+        path: "/admin/manage-treatment",
+    },
+
+
+
 
     //  {
     //     icon: <EnvelopeIcon />,
@@ -225,8 +236,7 @@ const navItems: NavItem[] = [
 ];
 
   useEffect(()=>{
-    
-
+  
     getroleaccess();
           
   },[]);
