@@ -222,6 +222,11 @@ const navItems: NavItem[] = [
         path: "/admin/manage-treatment",
     },
 
+     {
+        icon: <EnvelopeIcon />,
+        name: "Manage Patients",
+        path: "/admin/manage-patients",
+    },
 
 
 
@@ -469,11 +474,12 @@ const navItems: NavItem[] = [
           {isExpanded || isHovered || isMobileOpen ? (
             <>
               <Image
-                className="dark:hidden"
+                className="dark:hidden "
                 src="/images/logo/logo.svg"
                 alt="Logo"
                 width={150}
                 height={40}
+
               />
               <Image
                 className="hidden dark:block"
@@ -493,7 +499,7 @@ const navItems: NavItem[] = [
           )}
         </Link>
       </div>
-      <div className="flex flex-col overflow-y-auto duration-300 ease-linear no-scrollbar">
+      <div className="flex flex-col overflow-y-auto duration-300 ease-linear no-scrollbar ">
         <nav className="mb-6">
           <div className="flex flex-col gap-4">
             <div>
