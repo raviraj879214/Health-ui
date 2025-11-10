@@ -14,7 +14,7 @@ export default function Pages() {
         </div>
         <nav className="hidden md:flex gap-6 items-center text-sm">
           <a className="hover:underline" href="#features">Features</a>
-          <a className="hover:underline" href="#pricing">Pricing</a>
+          <a className="hover:underline" href="pricing">Pricing</a>
           <a className="hover:underline" href="#testimonials">Testimonials</a>
           <button className="ml-4 inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg shadow">Get Started</button>
         </nav>

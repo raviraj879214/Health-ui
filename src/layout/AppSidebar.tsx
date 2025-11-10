@@ -229,6 +229,27 @@ const navItems: NavItem[] = [
     },
 
 
+    
+
+ 
+        {
+          icon: (
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2"
+              strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4 21v-2a4 4 0 0 1 3-3.87M20 21v-2a4 4 0 0 0-3-3.87" />
+            </svg>
+          ),
+          name: "Clinics Listing",
+          subItems: [
+            { name: "Packages", path: "/admin/featured-clinic-listing", pro: false },
+            { name: "Purchased Packgages", path: "/admin/featured-clinic-listing/purchased-listing-packages", pro: false },
+            // { name: "Test Modules", path: "/admin/test", pro: false },
+          ],
+        },
+      
+    
+
 
     //  {
     //     icon: <EnvelopeIcon />,

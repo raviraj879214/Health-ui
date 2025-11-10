@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import ComponentCard from "../common/ComponentCard";
 import { toast } from "react-toastify";
 import { formatBrazilDate } from "../../lib/formatDate";
@@ -7,6 +7,7 @@ import { formatDate } from "@fullcalendar/core/index.js";
 import { PatientRegister } from "@/lib/enums/PatientRegistration";
 import {BlockPatients} from "../managepatients/Blockpatient";
 import {ManageNotes} from "../managepatients/NotesManagement";
+
 
 
 
@@ -61,7 +62,11 @@ export function Patients({ uuid }) {
 
     return (<>
 
-        <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
+       
+
+
+
+ <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
             <div className="max-w-full overflow-x-auto">
                 <div className="min-w-[900px]">
                     <ComponentCard  title={`Patient Code : ${patientdetails?.patient_code}`} showReload={true}>
@@ -179,6 +184,8 @@ export function Patients({ uuid }) {
                 </div>
             </div>
         </div>
+
+
 
     </>);
 }
