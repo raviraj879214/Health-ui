@@ -1,0 +1,12 @@
+
+
+
+export function FooterFrontend(){
+
+
+    return(<>
+    
+    
+    
+    </>);
+}

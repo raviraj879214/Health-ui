@@ -33,8 +33,7 @@ export const useNotifications = () => {
         if (res.ok) 
         {
           const notifications = await res.json();
-
-            setNotifications(notifications);
+          setNotifications(notifications);
       
         } 
         else

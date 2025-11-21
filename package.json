@@ -29,6 +29,7 @@
     "apexcharts": "^4.3.0",
     "autoprefixer": "^10.4.20",
     "flatpickr": "^4.6.13",
+    "js-cookie": "^3.0.5",
     "next": "15.2.3",
     "primeflex": "^4.0.0",
     "primeicons": "^7.0.0",

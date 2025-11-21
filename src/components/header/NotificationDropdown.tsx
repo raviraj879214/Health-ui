@@ -15,6 +15,7 @@ export default function NotificationDropdown() {
   // Show each notification as a separate toast
   useEffect(() => {
     if (lastNotification && !displayedNotifications.current.has(lastNotification)) {
+      
       toast(lastNotification, {
         position: "bottom-right",
         autoClose: 10000,

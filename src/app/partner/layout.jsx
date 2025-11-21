@@ -1,0 +1,41 @@
+"use client";
+
+import { useState } from "react";
+import { ClinicHeader } from "../../components-clinic/shared/HeaderClinic";
+import { ClinicSidebar } from "../../components-clinic/shared/SidebarClinic";
+import AuthClinic from "../../components-clinic/middleware/AuthClinic";
+
+export default function ClinicLayout({ children }) {
+  const [collapsed] = useState(true);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [active, setActive] = useState("Requests");
+
+  return (
+    
+    <AuthClinic>
+      
+      <div className="flex h-screen w-full bg-[#F5F6FA] overflow-hidden">
+        <ClinicSidebar
+          collapsed={collapsed}
+          mobileOpen={mobileOpen}
+          active={active}
+          setActive={setActive}
+          toggleMobile={setMobileOpen}
+        />
+
+        <div className="flex-1 flex flex-col">
+          <ClinicHeader onToggleSidebar={() => setMobileOpen(!mobileOpen)} />
+
+          <main className="p-6 overflow-y-auto">{children}</main>
+        </div>
+
+        {mobileOpen && (
+          <div
+            className="fixed inset-0 bg-black/50 z-40 sm:hidden"
+            onClick={() => setMobileOpen(false)}
+          ></div>
+        )}
+      </div>
+    </AuthClinic>
+  );
+}

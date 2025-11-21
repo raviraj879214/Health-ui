@@ -1,7 +1,6 @@
-
 "use client";
 
-import { useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   FaRegClipboard,
   FaStar,
@@ -14,14 +13,17 @@ import {
 import { HiOutlineSupport } from "react-icons/hi";
 
 export function ClinicSidebar({ collapsed, mobileOpen, active, setActive, toggleMobile }) {
+  const router = useRouter();
+
+  // Define menu items with route URLs
   const menu = [
-    { name: "Requests", icon: FaRegClipboard },
-    { name: "Reviews", icon: FaStar },
-    { name: "Advertising", icon: FaBullhorn },
-    { name: "Clinic", icon: FaHospital },
-    { name: "Sales analytics", icon: FaChartLine },
-    { name: "User analytics", icon: FaChartBar },
-    { name: "Agency settings", icon: FaCogs },
+    { name: "Requests", icon: FaRegClipboard, url: "/partner/dashboard" },
+    { name: "Reviews", icon: FaStar, url: "/partner/profile" },
+    { name: "Advertising", icon: FaBullhorn, url: "/partner/advertising" },
+    { name: "Clinic", icon: FaHospital, url: "/partner/clinic" },
+    { name: "Sales analytics", icon: FaChartLine, url: "/partner/sales-analytics" },
+    { name: "User analytics", icon: FaChartBar, url: "/partner/user-analytics" },
+    { name: "Agency settings", icon: FaCogs, url: "/partner/agency-settings" },
   ];
 
   return (
@@ -42,7 +44,7 @@ export function ClinicSidebar({ collapsed, mobileOpen, active, setActive, toggle
         `}
       >
         <span className="font-bold text-[18px] leading-none">Bookimed</span>
-        <span className="text-[12px] mt-[4px]">Partner`s Cabinet</span>
+        <span className="text-[12px] mt-[4px]">Partner's Cabinet</span>
       </div>
 
       {/* Menu */}
@@ -56,6 +58,7 @@ export function ClinicSidebar({ collapsed, mobileOpen, active, setActive, toggle
               onClick={() => {
                 setActive(m.name);
                 toggleMobile(false); // Close on mobile
+                router.push(m.url); // Navigate to URL
               }}
               className={`
                 cursor-pointer transition-all hover:bg-gray-100
