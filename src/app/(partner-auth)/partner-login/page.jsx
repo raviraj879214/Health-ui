@@ -1,3 +1,4 @@
+"use client";
 import {PartnerLogin} from "../../../components-clinic/partnerauth/PartnersLogin";
 
 
