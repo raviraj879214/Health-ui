@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Cookies from "js-cookie";
 
@@ -9,8 +9,8 @@ export function PartnerLogin() {
   const [email, setEmail] = useState("admin@clinics.com");
   const [password, setPassword] = useState("Test@123");
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const returnUrl = searchParams.get("returnUrl") || "/partner"; // default fallback
+  // const searchParams = useSearchParams();
+  // const returnUrl = searchParams.get("returnUrl") || "/partner"; // default fallback
 
 
   const onLogin = async (e) => {
@@ -56,7 +56,7 @@ export function PartnerLogin() {
       });
 
 
-      router.push(returnUrl)
+      router.push("/partner")
 
     } catch (error) {
       console.log("Network Error:", error);
