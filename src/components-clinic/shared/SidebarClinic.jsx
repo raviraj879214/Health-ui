@@ -9,6 +9,7 @@ import {
   FaChartLine,
   FaChartBar,
   FaCogs,
+  FaUserCircle
 } from "react-icons/fa";
 import { HiOutlineSupport } from "react-icons/hi";
 
@@ -17,13 +18,15 @@ export function ClinicSidebar({ collapsed, mobileOpen, active, setActive, toggle
 
   // Define menu items with route URLs
   const menu = [
-    { name: "Requests", icon: FaRegClipboard, url: "/partner/dashboard" },
-    { name: "Reviews", icon: FaStar, url: "/partner/profile" },
-    { name: "Advertising", icon: FaBullhorn, url: "/partner/advertising" },
-    { name: "Clinic", icon: FaHospital, url: "/partner/clinic" },
-    { name: "Sales analytics", icon: FaChartLine, url: "/partner/sales-analytics" },
-    { name: "User analytics", icon: FaChartBar, url: "/partner/user-analytics" },
-    { name: "Agency settings", icon: FaCogs, url: "/partner/agency-settings" },
+    // { name: "Requests", icon: FaRegClipboard, url: "/partner/dashboard" },
+    // { name: "Reviews", icon: FaStar, url: "/partner/profile" },
+    // { name: "Advertising", icon: FaBullhorn, url: "/partner/advertising" },
+    // { name: "Clinic", icon: FaHospital, url: "/partner/clinic" },
+    // { name: "Sales analytics", icon: FaChartLine, url: "/partner/sales-analytics" },
+    // { name: "User analytics", icon: FaChartBar, url: "/partner/user-analytics" },
+    // { name: "Agency settings", icon: FaCogs, url: "/partner/agency-settings" },
+    { name: "Dashboard", icon: FaUserCircle, url: "/partner/dashboard" },
+     { name: "Profile", icon: FaUserCircle, url: "/partner/profile" },
   ];
 
   return (
@@ -39,11 +42,11 @@ export function ClinicSidebar({ collapsed, mobileOpen, active, setActive, toggle
       {/* Logo */}
       <div
         className={`
-          bg-[#1ABC9C] text-white px-3 flex flex-col justify-center flex-shrink-0
+          background-theme text-white px-3 flex flex-col justify-center flex-shrink-0
           ${collapsed ? "h-16 items-center text-center" : "h-20"}
         `}
       >
-        <span className="font-bold text-[18px] leading-none">Bookimed</span>
+        <span className="font-bold text-[18px] leading-none">HealthTech</span>
         <span className="text-[12px] mt-[4px]">Partner's Cabinet</span>
       </div>
 

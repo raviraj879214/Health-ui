@@ -4,6 +4,10 @@ import { useState } from "react";
 import { ClinicHeader } from "../../components-clinic/shared/HeaderClinic";
 import { ClinicSidebar } from "../../components-clinic/shared/SidebarClinic";
 import AuthClinic from "../../components-clinic/middleware/AuthClinic";
+import "../partner/partner-global.css";
+import { ToastContainer } from "react-toastify";
+
+
 
 export default function ClinicLayout({ children }) {
   const [collapsed] = useState(true);
@@ -25,7 +29,7 @@ export default function ClinicLayout({ children }) {
 
         <div className="flex-1 flex flex-col">
           <ClinicHeader onToggleSidebar={() => setMobileOpen(!mobileOpen)} />
-
+             <ToastContainer></ToastContainer>
           <main className="p-6 overflow-y-auto">{children}</main>
         </div>
 

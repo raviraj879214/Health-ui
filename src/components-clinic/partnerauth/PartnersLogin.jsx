@@ -42,22 +42,22 @@ export function PartnerLogin() {
       console.log("Login Success:", result);
 
   
-
      Cookies.set("clinic_access", result.access_token, {
         expires: 1,        
         secure: true,      
         sameSite: "strict" 
       });
-
       Cookies.set("clinic_refresh", result.refresh_token, {
         expires: 7,       
         secure: true,
         sameSite: "strict"
       });
 
+      
+
+      
 
       router.push("/partner")
-
     } catch (error) {
       console.log("Network Error:", error);
       alert("Network Error!");

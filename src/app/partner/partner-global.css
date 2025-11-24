@@ -1,0 +1,132 @@
+@import "tailwindcss";
+
+/* -------------------- */
+/* Theme Variables      */
+/* -------------------- */
+:root {
+  --primary: #19af94;
+  --primary-dark: #009F7F;
+  --primary-light: #E1FFEE;
+  --text-color: #2C2C2C;
+  --sidebar-bg: #FFFFFF;
+  --header-bg: var(--primary);
+}
+
+/* -------------------- */
+/* Header Theme         */
+/* -------------------- */
+.background-theme {
+  background-color: var(--header-bg);
+  color: white;
+}
+
+/* -------------------- */
+/* Buttons              */
+/* -------------------- */
+@layer components {
+
+  /* Base Button */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem; /* 8px vertical, 16px horizontal */
+    margin: 0;
+    gap: 0.5rem;
+    font-size: 0.875rem; /* 14px */
+    font-weight: 500;
+    line-height: 1.25rem; /* 20px */
+    text-align: center;
+    border-radius: 0.375rem; /* 6px */
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  /* Primary Button */
+  .btn-primary {
+    background-color: var(--primary);
+    color: white;
+    border: 1px solid transparent;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--primary-dark);
+  }
+
+  .btn-primary:disabled,
+  .btn-primary.disabled {
+    background-color: #bfbfbf;    /* light gray background */
+    color: #666;                  /* faded text */
+    cursor: not-allowed;          /* disable cursor */
+    opacity: 0.7;                 /* slightly transparent */
+    border-color: #bfbfbf;        /* disable border */
+  }
+
+
+  .btn-primary:disabled:hover,
+  .btn-primary.disabled:hover {
+    background-color: #bfbfbf !important;
+  }
+
+
+
+  .btn-primary:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 159, 127, 0.4);
+  }
+
+  .btn-primary:disabled {
+    background-color: #d1d5db; /* gray-300 */
+    color: #9ca3af; /* gray-400 */
+    cursor: not-allowed;
+    border: 1px solid #d1d5db;
+    box-shadow: none;
+  }
+
+  /* Outline Button */
+  .btn-outline {
+    background-color: transparent;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+  }
+
+  .btn-outline:hover {
+    background-color: var(--primary);
+    color: white;
+  }
+
+  /* Danger Button */
+  .btn-danger {
+    background-color: #ef4444; 
+    color: white;
+  }
+
+  .btn-danger:hover {
+    background-color: #dc2626; 
+  }
+
+   input[type="text"] {
+      @apply border rounded-md px-3 py-2 w-full focus:outline-none focus:ring-2;
+      border-color: var(--primary);
+      border-width: 1px; /* default border width */
+    }
+
+    input[type="text"]:disabled {
+      @apply bg-gray-100 text-gray-500 cursor-not-allowed;
+      border-color: #d1d5db; /* light gray border */
+      opacity: 0.8;
+    }
+
+
+    input[type="text"]:focus {
+      border-color: var(--primary);
+      border-width: 2px; 
+      box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.5); 
+      --tw-ring-color: var(--primary); 
+    }
+
+
+  
+
+}
