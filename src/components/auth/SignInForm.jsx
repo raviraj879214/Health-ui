@@ -10,6 +10,8 @@ import Button from "@/components/ui/button/Button";
 import { ChevronLeftIcon, EyeCloseIcon, EyeIcon } from "@/icons";
 import { useRouter } from "next/navigation";
 import { usePermissions } from "@/context/PermissionContext";
+import Image from "next/image";
+
 
 export default function SignInForm({ returl }) {
   const [showPassword, setShowPassword] = useState(false);
@@ -134,16 +136,19 @@ export default function SignInForm({ returl }) {
 
       {/* Sign-in Form */}
       <div className="flex flex-col justify-center flex-1 w-full max-w-md mx-auto">
-        <div className="mb-5 sm:mb-8">
-          <h1 className="mb-2 font-semibold text-gray-800 text-title-sm dark:text-white/90 sm:text-title-md">
-            Sign In  
-          </h1>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
-            Enter your email and password to sign in! {process.env.NEXT_PUBLIC_ENV}
-          </p>
-        </div>
 
-        <div className="relative py-3 sm:py-5">
+          <div className="relative w-100 h-24 sm:h-32 ">
+                <Image
+                  src="/images/logo/logo-new.png"
+                  alt="Logo"
+                  fill
+                  className="object-contain dark:hidden"
+                />
+          </div>
+
+
+
+        <div className="">
           {/* <div className="absolute inset-0 flex items-center">
             <div className="w-full border-t border-gray-200 dark:border-gray-800"></div>
           </div>
