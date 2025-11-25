@@ -41,39 +41,50 @@ export function HeroSectionbanner({name,clinicuuid , location}) {
   return (
     <ComponentCard title="Hospital Images">
       
-      <div className="w-full bg-white border rounded-lg p-4">
-        <div className="grid grid-cols-3 gap-4 h-[420px]">
-          <div
-            className="col-span-2 border flex items-center justify-center relative cursor-pointer hover:border-blue-500"
-            onClick={() => openFilePicker(0)}>
-            {!banners[0] ? <EmptyBlock /> : <Preview img={banners[0].url} remove={() => removeImage(0)} />}
-          </div>
-
-        
-          <div className="grid grid-cols-2 grid-rows-2 gap-4">
-            {[1, 2, 3, 4].map((i) => (
-              <div
-                key={i}
-                className="border flex items-center justify-center relative cursor-pointer hover:border-blue-500"
-                onClick={() => openFilePicker(i)}
-              >
-                {!banners[i] ? <EmptyBlock /> : <Preview img={banners[i].url} remove={() => removeImage(i)} />}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
       
-      <input
-        ref={hiddenInput}
-        type="file"
-        accept="image/*"
-        className="hidden"
-        onChange={onFileChange}
-      />
+    <div className="w-full bg-white border rounded-lg p-4">
+  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 
+                  sm:h-[420px] h-auto">
 
-<ClinicNameUpdates clinicnames={name} clinicuuid={clinicuuid} location={location} ></ClinicNameUpdates>
+    {/* Large Image Block */}
+    <div
+      className="sm:col-span-2 border flex items-center justify-center relative cursor-pointer 
+                 hover:border-blue-500 h-48 sm:h-auto"
+      onClick={() => openFilePicker(0)}
+    >
+      {!banners[0] ? <EmptyBlock /> : <Preview img={banners[0].url} remove={() => removeImage(0)} />}
+    </div>
+
+    {/* Small Images Grid */}
+    <div className="grid grid-cols-2 gap-3 sm:gap-4 sm:grid-rows-2 sm:h-auto">
+      {[1, 2, 3, 4].map((i) => (
+        <div
+          key={i}
+          className="border flex items-center justify-center relative cursor-pointer hover:border-blue-500 
+                     h-32 sm:h-auto"
+          onClick={() => openFilePicker(i)}
+        >
+          {!banners[i] ? <EmptyBlock /> : <Preview img={banners[i].url} remove={() => removeImage(i)} />}
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+<input
+  ref={hiddenInput}
+  type="file"
+  accept="image/*"
+  className="hidden"
+  onChange={onFileChange}
+/>
+
+
+
+
+
+
+    <ClinicNameUpdates clinicnames={name} clinicuuid={clinicuuid} location={location} ></ClinicNameUpdates>
 
 
     
