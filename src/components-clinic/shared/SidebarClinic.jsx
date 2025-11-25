@@ -21,7 +21,7 @@ export function ClinicSidebar({ collapsed, mobileOpen, active, setActive, toggle
     // { name: "Requests", icon: FaRegClipboard, url: "/partner/dashboard" },
     // { name: "Reviews", icon: FaStar, url: "/partner/profile" },
     // { name: "Advertising", icon: FaBullhorn, url: "/partner/advertising" },
-    // { name: "Clinic", icon: FaHospital, url: "/partner/clinic" },
+     { name: "Clinic", icon: FaHospital, url: "/partner/clinic" },
     // { name: "Sales analytics", icon: FaChartLine, url: "/partner/sales-analytics" },
     // { name: "User analytics", icon: FaChartBar, url: "/partner/user-analytics" },
     // { name: "Agency settings", icon: FaCogs, url: "/partner/agency-settings" },

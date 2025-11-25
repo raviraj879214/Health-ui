@@ -10,22 +10,26 @@
   --text-color: #2C2C2C;
   --sidebar-bg: #FFFFFF;
   --header-bg: var(--primary);
+  --border-color: var(--primary-dark);
 }
 
-/* -------------------- */
-/* Header Theme         */
-/* -------------------- */
 .background-theme {
   background-color: var(--header-bg);
   color: white;
 }
 
-/* -------------------- */
-/* Buttons              */
-/* -------------------- */
+.theme-border {
+  border-color: var(--border-color);
+}
+
+
+
+
+
+
+
 @layer components {
 
-  /* Base Button */
   .btn {
     display: inline-flex;
     align-items: center;
