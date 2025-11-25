@@ -498,8 +498,8 @@ const navItems: NavItem[] = [
                 className="dark:hidden "
                 src="/images/logo/logo-new.png"
                 alt="Logo"
-                width={150}
-                height={40}
+                width={200}
+                height={60}
 
               />
               <Image
