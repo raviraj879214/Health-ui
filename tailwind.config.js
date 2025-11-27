@@ -1,0 +1,9 @@
+module.exports = {
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+    "node_modules/preline/dist/*.js"
+  ],
+  plugins: [
+    require('preline/plugin'),
+  ],
+};
