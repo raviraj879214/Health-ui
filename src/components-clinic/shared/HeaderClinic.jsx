@@ -2,7 +2,6 @@
 
 import { FaBars } from "react-icons/fa";
 import { clinicLogout } from "../utils/clinicLogout";
-import NotificationDropdown from "@/components/header/NotificationDropdown";
 
 
 export function ClinicHeader({ onToggleSidebar = () => {} }) {
@@ -12,9 +11,7 @@ export function ClinicHeader({ onToggleSidebar = () => {} }) {
         <FaBars size={20} />
       </button>
       <div className="font-bold text-lg">Clinic Panel</div>
-
       <div className="flex items-center gap-4">
-         
         <button 
           onClick={clinicLogout}
           className="bg-white text-[#1ABC9C] px-3 py-1 rounded-full text-sm font-semibold"

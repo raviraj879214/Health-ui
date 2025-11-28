@@ -8,7 +8,6 @@ export const useNotifications = () => {
   const [notifications, setNotifications] = useState<any[]>([]);
   const [lastNotification, setLastNotification] = useState<any | null>(null);
   const [cookieuserid,setcookieuserid] = useState(0);
-  
 
   useEffect(() => {
 
@@ -18,6 +17,8 @@ export const useNotifications = () => {
       const token = await resToken.json();
 
      
+
+    
 
       try {
         const res = await fetch(
