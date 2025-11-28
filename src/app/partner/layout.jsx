@@ -29,6 +29,7 @@ export default function ClinicLayout({ children }) {
 
         <div className="flex-1 flex flex-col">
           <ClinicHeader onToggleSidebar={() => setMobileOpen(!mobileOpen)} />
+            
              <ToastContainer></ToastContainer>
           <main className="p-6 overflow-y-auto">{children}</main>
         </div>
