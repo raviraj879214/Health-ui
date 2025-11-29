@@ -10,6 +10,7 @@ import { ThemeProvider } from "@/context/ThemeContext";
 import { PermissionProvider } from "../../context/PermissionContext";
 import SignInForm from "@/components/auth/SignInForm";
 import  Providers  from "../admin/provider/providers";
+import { ToastContainer } from "react-toastify";
 
 
 const outfit = Outfit({ subsets: ["latin"] });
@@ -80,6 +81,7 @@ function InnerLayout({ children }) {
 
       <div className={`flex-1 transition-all duration-300 ease-in-out ${mainContentMargin}`}>
         <AppHeader />
+         <ToastContainer></ToastContainer>
         <div className="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">
 
           <Providers>
