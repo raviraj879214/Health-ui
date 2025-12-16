@@ -5,7 +5,7 @@ import { useConfirm } from "@/hooks/useConfirm";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 
-export function SurgeriesCarouselImages({dataReset}) {
+export function SurgeriesCarouselImages({dataReset,clinicuuid}) {
     const [surgeries,setSurgeries] = useState([]);
     const [surgeryid,setSurgeryid] = useState("");
     const { confirm, ConfirmDialog } = useConfirm();
@@ -16,7 +16,12 @@ export function SurgeriesCarouselImages({dataReset}) {
 
 
   useEffect(() => {
-    fetchsurgeries();
+
+    if(clinicuuid){
+      fetchsurgeries();
+    }
+    
+
     const handleResize = () => {
       if (window.innerWidth < 640) setVisibleItems(1);
       else if (window.innerWidth < 1024) setVisibleItems(2);
@@ -25,7 +30,7 @@ export function SurgeriesCarouselImages({dataReset}) {
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [dataReset,surgeryid]);
+  }, [dataReset,surgeryid,clinicuuid]);
 
   const nextSlide = () =>
     setCurrent((prev) => (prev + 1) % surgeries.length);
@@ -36,7 +41,7 @@ export function SurgeriesCarouselImages({dataReset}) {
 
   const fetchsurgeries = async()=>{
         debugger;
-    const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-surgeries/get-surgeries-images`,{
+    const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-surgeries/get-surgeries-images/${clinicuuid}`,{
         method : "Get",
         headers : clinicHeaders()
     });
@@ -52,7 +57,8 @@ export function SurgeriesCarouselImages({dataReset}) {
         return {
             before:`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/surgery/beforeandafter/${item.imageUrl}`,
             after:`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/surgery/beforeandafter/${afterItem.imageUrl}`,
-            surgeryId : item.surgeryId
+            surgeryId : item.surgeryId,
+            id:item.id
 
         };
     }); 
@@ -98,7 +104,7 @@ export function SurgeriesCarouselImages({dataReset}) {
 
 
   const deleteimages=(id)=>{
-
+    
 
     deleteSurgeryimages(id);
   }
@@ -139,7 +145,7 @@ if (surgeries.length === 0) {
                     <div className="absolute top-2 right-2 flex gap-1 z-10">
 
                     
-                    <button onClick={()=> deleteimages(surgery.surgeryId)}  className="text-red-500 hover:text-red-700 bg-white/80 rounded px-1">🗑</button>
+                    <button onClick={()=> deleteimages(surgery.id)}  className="text-red-500 hover:text-red-700 bg-white/80 rounded px-1">🗑</button>
                     </div>
 
 

@@ -1,131 +1,144 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useForm } from "react-hook-form";
 import Cookies from "js-cookie";
+import { toast, ToastContainer } from "react-toastify";
 
 
 export function PartnerLogin() {
-  const [email, setEmail] = useState("admin@clinics.com");
-  const [password, setPassword] = useState("Test@123");
   const router = useRouter();
-  // const searchParams = useSearchParams();
-  // const returnUrl = searchParams.get("returnUrl") || "/partner"; // default fallback
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm();
 
-  const onLogin = async (e) => {
-    debugger;
-    e.preventDefault(); 
-
+  const onLogin = async (data) => {
     try {
-      const payload = { email, password };
-
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/clinic-auth/login`,
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
         }
       );
 
       if (!res.ok) {
         const error = await res.json();
-        console.error("Login failed:", error);
-        alert(error?.message || "Login Failed");
+        toast.error(error?.message || "Login Failed");
         return;
       }
 
       const result = await res.json();
-      console.log("Login Success:", result);
 
-  
-     Cookies.set("clinic_access", result.access_token, {
-        expires: 1,        
-        secure: true,      
-        sameSite: "strict" 
-      });
-      Cookies.set("clinic_refresh", result.refresh_token, {
-        expires: 7,       
+      Cookies.set("clinic_access", result.access_token, {
+        expires: 1,
         secure: true,
-        sameSite: "strict"
+        sameSite: "strict",
       });
 
-      
+      Cookies.set("clinic_refresh", result.refresh_token, {
+        expires: 7,
+        secure: true,
+        sameSite: "strict",
+      });
 
-      
+      toast.success("Login successful!");
 
-      router.push("/partner")
+      setTimeout(() => {
+        router.push("/partner");
+      }, 800);
     } catch (error) {
-      console.log("Network Error:", error);
-      alert("Network Error!");
+      toast.error("Network Error!");
     }
   };
 
   return (
-    <div className="flex min-h-dvh flex-col justify-center px-6 py-12 lg:px-8 bg-gray-900">
-      <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <img
-          alt="Your Company"
-          src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
-          className="mx-auto h-10 w-auto"
-        />
-        <h2 className="mt-10 text-center text-2xl font-bold tracking-tight text-white">
-          Sign in to your account
-        </h2>
-      </div>
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
 
-      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form className="space-y-6" onSubmit={onLogin}>
+      <ToastContainer position="top-center" />
+
+      <div className="w-full max-w-md bg-white shadow-lg rounded-xl p-8">
+
+        <h2 className="text-center text-2xl font-bold text-gray-800 mb-6">
+          Partner Login
+        </h2>
+
+        <form className="space-y-5" onSubmit={handleSubmit(onLogin)}>
           {/* Email */}
           <div>
-            <label className="block text-sm font-medium text-gray-200">
-              Email address
+            <label className="block text-sm font-medium text-gray-700">
+              Email Address
             </label>
-            <div className="mt-2">
-              <input
-                id="email"
-                name="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="block w-full rounded-md bg-white/10 px-3 py-1.5 text-white placeholder:text-gray-500 focus:outline-indigo-500"
-              />
-            </div>
+            <input
+              type="email"
+              className={`mt-1 w-full rounded-lg border px-3 py-2 focus:outline-none 
+                ${
+                  errors.email
+                    ? "border-red-500 focus:ring-red-500"
+                    : "border-gray-300 focus:ring-indigo-500"
+                }`}
+              {...register("email", {
+                required: "Email is required",
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  message: "Enter a valid email",
+                },
+              })}
+            />
+
+            {errors.email && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.email.message}
+              </p>
+            )}
           </div>
 
           {/* Password */}
           <div>
-            <div className="flex items-center justify-between">
-              <label className="block text-sm font-medium text-gray-200">
-                Password
-              </label>
-              <a className="text-sm font-semibold text-indigo-400 hover:text-indigo-300">
-                Forgot password?
-              </a>
-            </div>
-            <div className="mt-2">
-              <input
-                id="password"
-                name="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                className="block w-full rounded-md bg-white/10 px-3 py-1.5 text-white placeholder:text-gray-500 focus:outline-indigo-500"
-              />
-            </div>
+            <label className="block text-sm font-medium text-gray-700">
+              Password
+            </label>
+            <input
+              type="password"
+              className={`mt-1 w-full rounded-lg border px-3 py-2 focus:outline-none 
+                ${
+                  errors.password
+                    ? "border-red-500 focus:ring-red-500"
+                    : "border-gray-300 focus:ring-indigo-500"
+                }`}
+              {...register("password", {
+                required: "Password is required",
+                minLength: {
+                  value: 6,
+                  message: "Password should be at least 6 characters",
+                },
+              })}
+            />
+
+            {errors.password && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.password.message}
+              </p>
+            )}
           </div>
 
-         
+        
+          <p className="flex items-end justify-end">
+              <a href="/partner-forgot-password" className="text-blue-600 hover:underline">
+                Forgot Password?
+              </a>
+          </p>
+
           <button
             type="submit"
-            className="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm font-semibold text-white hover:bg-indigo-400"
+            disabled={isSubmitting}
+            className="w-full bg-green-600 hover:bg-green-400 text-white py-2 rounded-lg text-sm font-semibold disabled:opacity-50"
           >
-            Sign in
+            {isSubmitting ? "Please wait..." : "Sign In"}
           </button>
         </form>
       </div>

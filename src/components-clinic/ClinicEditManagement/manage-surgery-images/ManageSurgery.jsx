@@ -3,7 +3,8 @@ import ComponentCard from "@/components/common/ComponentCard";
 import { SurgeriesCarouselImages } from "../manage-surgery-images/SurgerCarousel";
 import {AddSurgeryImage} from "../manage-surgery-images/AddSurgeryImages";
 import { useState } from "react";
-export function SurgeryImages() {
+
+export function SurgeryImages({clinicuuid}) {
 
 
     const [trigger,setTrigger] = useState("");
@@ -20,9 +21,9 @@ export function SurgeryImages() {
             <ComponentCard title="Before & After Photos">
               
         
-                <AddSurgeryImage sendData={handldata}></AddSurgeryImage>
+                <AddSurgeryImage clinicuuid={clinicuuid} sendData={handldata}></AddSurgeryImage>
 
-                <SurgeriesCarouselImages dataReset={trigger} />
+                <SurgeriesCarouselImages dataReset={trigger} clinicuuid={clinicuuid}/>
 
 
             </ComponentCard>

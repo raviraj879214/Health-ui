@@ -3,8 +3,11 @@ import { useState, useEffect } from "react";
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
+import Select from "react-select";
+import { clinicHeaders } from "@/components-clinic/utils/clinicHeaders";
 
-export function AddSurgeryImage({sendData}) {
+
+export function AddSurgeryImage({sendData,clinicuuid}) {
 
 
   const [open, setOpen] = useState(false);
@@ -15,6 +18,76 @@ export function AddSurgeryImage({sendData}) {
   const [errors, setErrors] = useState({ before: false, after: false });
   const [uploading, setUploading] = useState(false);
   const [clearFiles, setClearFiles] = useState(false);
+  const [degree, setDegree] = useState("");
+
+  const [degreeOptions,setDegreeOptions] = useState([]);
+
+
+  const [doctorsOptions,setDoctorsOptions] = useState([]);
+  const [doctors,setDoctors] = useState("");
+
+
+
+  useEffect(()=>{
+
+          fetchtreatment();
+          fetchClinicDoctors();
+
+  },[]);
+
+
+  const fetchClinicDoctors = async ()=>{
+    debugger;
+    const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-surgeries/get-doctors/c33f92c3-7743-4920-a997-2ab34daf1342`,{
+      method : "Get",
+      headers : clinicHeaders(),
+    });
+
+    if(res.ok){
+       debugger;
+       const result = await res.json();
+
+       console.log("fetchClinicDoctors",result);
+
+        const options = result.data.map(item => ({
+            value: item.uuid,
+            label: 'Dr. ' + item.firstname + ' ' + item.lastname
+          }));
+
+
+        setDoctorsOptions(options);
+
+    }
+  }
+
+
+
+
+
+
+  const fetchtreatment =async()=>{
+   
+      const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-surgeries/get-treatment`,{
+        method : "Get",
+        headers : clinicHeaders(),
+      });
+
+      if(res.ok){
+          const result = await res.json();
+          const options = result.data.map(item => ({
+            value: item.id,
+            label: item.name
+          }));
+          setDegreeOptions(options);
+          console.log("result",result);
+      }
+  }
+
+
+
+
+
+
 
   const handleFileChange = (e, type) => {
     const file = e.target.files?.[0];
@@ -34,6 +107,14 @@ export function AddSurgeryImage({sendData}) {
   };
 
   const handleUpload = async () => {
+
+     if(doctors == ""){
+      return;
+     }
+     if(degree == ""){
+      return ;
+     }
+
     const newErrors = { before: !beforeFile, after: !afterFile };
     setErrors(newErrors);
     if (newErrors.before || newErrors.after) return;
@@ -43,10 +124,15 @@ export function AddSurgeryImage({sendData}) {
 
     // 📌 Reusable upload function
     const uploadImage = async (file, type) => {
+      debugger;
       const formData = new FormData();
       formData.append("image", file);
       formData.append("surgeryid", surgeryId);
       formData.append("type", type);
+      formData.append("clinicUuid",clinicuuid);
+      formData.append("doctorUuid",doctors.value);
+      formData.append("treatmentid",degree.value);
+      
 
       return await fetch(
         `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-surgeries/insert-surgeries-images`,
@@ -97,7 +183,7 @@ export function AddSurgeryImage({sendData}) {
     <>
       <div className="flex justify-end mb-4">
         <button onClick={() => setOpen(true)} className="btn btn-primary font-semibold">
-          + Add Images
+          + Add Images 
         </button>
       </div>
 
@@ -105,10 +191,54 @@ export function AddSurgeryImage({sendData}) {
         <DialogBackdrop className="fixed inset-0 bg-gray-500/75" />
         <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
           <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-            <DialogPanel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl sm:my-8 sm:w-full sm:max-w-lg">
+            <DialogPanel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl sm:my-8 sm:w-full sm:max-w-3xl ">
+
               <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <h3 className="text-base font-semibold text-gray-900 mb-4">Upload Images</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-2 gap-2">
+                     <div className="">
+                            
+                            <label className="block mb-1 font-medium">Choose Treatment</label>
+
+                            <Select
+                              options={degreeOptions}
+                              value={degree}
+                              onChange={(selected) => setDegree(selected)}
+                              placeholder="Search  treatment..."
+                              className="basic-select"
+                              classNamePrefix="select"
+                              isSearchable/>
+
+
+                            {!degree && (
+                              <p className="text-sm text-red-400 mt-1">Please select a degree</p>
+                            )}
+
+                      </div>
+                    
+                    <div className="">
+                            
+                            <label className="block mb-1 font-medium">Choose Doctor</label>
+
+                            <Select
+                              options={doctorsOptions}
+                              value={doctors}
+                              onChange={(selected) => setDoctors(selected)}
+                              placeholder="Search  doctors..."
+                              className="basic-select"
+                              classNamePrefix="select"
+                              isSearchable/>
+
+
+                            {!doctors && (
+                              <p className="text-sm text-red-400 mt-1">Please select a doctor</p>
+                            )}
+                            
+                      </div>
+
+                  </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-3">
                   <ImageUploader
                     label="Before Photo"
                     preview={beforePreview}

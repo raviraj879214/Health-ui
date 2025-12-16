@@ -7,6 +7,8 @@ import { SurgeryImages } from "../ClinicEditManagement/manage-surgery-images/Man
 import { Accreditation } from "../ClinicEditManagement/hospitalaccreditation/HospitalAccreditation";
 import { License } from "../ClinicEditManagement//hospitallicense/HospitalLicense";
 import { ClinicDescription } from "../ClinicEditManagement/clinicdescription/clinicdesc";
+import {MaincategoryBoard} from "../ClinicEditManagement/cliniccategory/MainCategory";
+import {MainPackages} from "../ClinicEditManagement/ManagePackages/MainPackages";
 
 export function MainClinic({ clinicuuid }) {
 
@@ -146,14 +148,22 @@ export function MainClinic({ clinicuuid }) {
 
         {/* Doctor Section */}
         <div ref={doctorRef}>
-          <ListofDoctor ></ListofDoctor>
+          <ListofDoctor clinicuuid={clinicuuid} ></ListofDoctor>
         </div>
 
-        <br></br>
+         <br></br>
+      
+            <MaincategoryBoard clinicuuid={clinicdetail.uuid}></MaincategoryBoard>
 
+         <br></br>
+
+
+            <MainPackages clinicuuid={clinicdetail.uuid}></MainPackages>
+
+        <br></br>
         {/* Surgery Section */}
         <div ref={surgeryRef}>
-          <SurgeryImages></SurgeryImages>
+          <SurgeryImages  clinicuuid={clinicdetail.uuid}></SurgeryImages>
         </div>
 
         <br></br>

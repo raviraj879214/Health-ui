@@ -2,6 +2,9 @@
 import './globals.css';
 import { usePathname } from 'next/navigation';
 import { HeaderFrontend } from "../components-front-end/shared/Header";
+import FooterWrapper from "../components-front-end/shared/footerWrapper";
+import gilroy from "./fonts";
+
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -34,13 +37,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <html lang="en">
-      <body>
-        <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-sky-50 text-slate-800 antialiased">
+      <body className={`${gilroy.variable} antialiased`}>
           <HeaderFrontend></HeaderFrontend>
-          <div className="min-h-screen flex items-center justify-center text-3xl font-semibold">
             {children}
-          </div>
-        </div>
+          <FooterWrapper></FooterWrapper>
       </body>
     </html>
   );

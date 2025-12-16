@@ -1,58 +1,182 @@
 "use client"
 import ComponentCard from "@/components/common/ComponentCard";
+import { DoctorSteps } from "../ManageDoctors/AddDoctor";
+import { useEffect, useState } from "react";
+import { clinicHeaders } from "@/components-clinic/utils/clinicHeaders";
+import { useSearchParams } from "next/navigation";
+import { EyeCloseIcon, EyeIcon, PencilIcon } from "@/icons";
+import {DoctorList} from "../ManageDoctors/DoctorsList";
+
+
+export function ListofDoctor({ clinicuuid }) {
+
+  const [show, setShow] = useState(false);
+  const [doctors, setDoctors] = useState([]);
+  const [doctoruuid,setDoctoruuid] = useState(null);
+  const searchParams = useSearchParams();
+  const [step ,setStep] = useState(1);
+  const [doctorsmodal,setDoctorsModal] = useState(false);
 
 
 
-export function ListofDoctor() {
 
 
 
 
 
 
-    return (<>
 
 
 
-<ComponentCard title="Doctors">
-  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-    <div className="border theme-border rounded overflow-hidden shadow-lg cursor-pointer flex items-center justify-center h-40 sm:h-54">
-      <p className="text-4xl sm:text-5xl font-bold text-[var(--primary-dark)]">+</p>
-    </div>
 
-    <div className="relative border theme-border rounded overflow-hidden shadow-lg cursor-pointer p-4 flex flex-col h-40 sm:h-54">
-      <div className="absolute top-1 right-1 sm:top-2 sm:right-2 flex items-center gap-1 sm:gap-2 text-xs sm:text-lg">
-        <button className="text-gray-500 hover:text-[var(--primary-dark)]">👁</button>
-        <button className="text-gray-500 hover:text-[var(--primary-dark)]">✎</button>
-        <button className="text-red-500 hover:text-red-700">🗑</button>
-        <label className="inline-flex items-center cursor-pointer">
-          <input type="checkbox" className="sr-only peer" />
-          <div className="w-7 h-4 sm:w-9 sm:h-5 bg-gray-300 rounded-full peer-checked:bg-[var(--primary-dark)] relative 
-          after:content-[''] after:absolute after:top-[1px] after:left-[1px] 
-          after:w-3 after:h-3 sm:after:w-4 sm:after:h-4 after:bg-white after:rounded-full after:transition-all 
-          peer-checked:after:translate-x-full"></div>
-        </label>
+  const fetchdoctors = async () => {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/doctors/get-doctors/${clinicuuid}`, {
+      method: "Get",
+      headers: clinicHeaders()
+    });
+    if (res.ok) {
+      const result = await res.json();
+      setDoctors(result.data);
+      
+    }
+  }
+
+
+
+
+
+
+
+
+  useEffect(() => {
+    if (clinicuuid) {
+      fetchdoctors();
+    }
+    debugger;
+
+
+      const doid = searchParams.get("doid");
+      const step = searchParams.get("step");
+    if(doid && step){
+
+      setDoctoruuid(doid);
+      setStep(parseInt(step));
+      setShow(true)
+    }
+
+  }, []);
+
+
+   const assignmodal = ()=>{
+    fetchdoctors();
+   }
+
+
+
+  return (
+
+    <ComponentCard title="Doctors" className=" overflow-auto max-h-[700px]">
+
+       <div className="flex justify-end">
+          <button
+          onClick={()=> setDoctorsModal(true)}
+            type="button"
+            className="btn btn-primary">
+
+            Assign From <b className="text-yellow-200">{process.env.NEXT_PUBLIC_PROJECT_NAME}</b>
+
+          </button>
+      </div>
+      {doctorsmodal &&  <DoctorList sendData={assignmodal} onClose={() => setDoctorsModal(false)}  clinicuuid={clinicuuid}></DoctorList>}
+
+
+
+      {show && <DoctorSteps  onClose={() => setShow(false)}  clinicuuid={clinicuuid} doctoruuid={doctoruuid} stepcount={step} />}
+       
+
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 ">
+
+
+       <div
+                onClick={() => {
+                  setShow(true);
+                  setDoctoruuid(null);
+                }}
+                className="relative flex flex-col items-center justify-center 
+                          border theme-border rounded-2xl bg-white shadow-md 
+                          cursor-pointer p-6
+                          hover:shadow-xl hover:bg-gray-50 transition-all"
+              >
+               
+                <div className="w-16 h-16 flex items-center justify-center 
+                                rounded-full border-2 border-[var(--primary-dark)] 
+                                text-[var(--primary-dark)] text-5xl font-bold">
+                  +
+                </div>
+
+                
+                <p className="mt-3 text-sm text-gray-600 font-medium">
+                  Add New Doctor
+                </p>
+              </div>
+
+
+
+        {doctors.map((item, index) => (
+         <div
+              key={index}              
+              className="relative border theme-border rounded-2xl overflow-hidden shadow-md cursor-pointer p-4 bg-white hover:shadow-xl transition-all">
+              <div className="absolute top-3 right-3 flex gap-2">
+                <button className="background-theme p-2 bg-gray-100 hover:bg-gray-200 rounded-full">
+                  <EyeIcon size={16} />
+                </button>
+                
+                {item.clinicuuid == clinicuuid ? (<>
+                    <button className="background-theme p-2 bg-gray-100 hover:bg-gray-200 rounded-full">
+                  <PencilIcon size={16} 
+                    onClick={() => {
+                    setShow(true);
+                    setDoctoruuid(item.uuid);
+                  }}
+                  />
+                </button>
+                </>) : (
+                  <>
+                    <button disabled={true} className="btn btn-primary background-theme p-2 bg-gray-100 hover:bg-gray-200 rounded-full">
+                        <PencilIcon size={16} />
+                    </button>
+                  </>
+                )}
+
+              </div>
+              <div className="flex flex-col items-center text-center mt-4">
+                <div className="w-20 h-20 rounded-full overflow-hidden border theme-border mb-3">
+                  <img
+                    src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/doctors/profilepicture/${item.image}` || "/default-avatar.png"}
+                    alt="doctor"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <p className="text-xl font-bold text-[var(--primary-dark)]">
+                  {item.firstname} {item.lastname}
+                </p>
+                <p className="text-sm text-gray-500 font-medium">
+                  {item.degree || "Specialist"}
+                </p>
+                   <div className="line-clamp-2"dangerouslySetInnerHTML={{ __html: item.briefDescription }}/>
+              </div>
+            </div>
+        ))}
       </div>
 
-      <div className="flex items-center gap-3 mt-6 sm:mt-8">
-        <img className="w-10 h-10 sm:w-12 sm:h-12 rounded-full" src="https://nationaldoctorsday.org/wp-content/uploads/2025/02/2025-national-doctors-day-about.jpg"/>
-        <div>
-          <p className="text-sm sm:text-lg font-semibold">Dr. John Doe</p>
-          <p className="text-xs sm:text-sm text-white-600 background-theme rounded-2xl text-center font-semibold px-2">Cardiologist</p>
-        </div>
-      </div>
 
-      <p className="text-xs sm:text-sm text-gray-700 my-1 sm:my-2">
-        Specialized in heart treatments and preventive cardiology.
-      </p>
 
-      <div className="mt-auto pt-1 sm:pt-2 text-xs sm:text-sm text-gray-600">
-        <p>Experience: 10 Years</p>
-        <p>London, UK</p>
-      </div>
-    </div>
-  </div>
-</ComponentCard>
 
-    </>);
+
+
+
+
+    </ComponentCard>
+  );
 }

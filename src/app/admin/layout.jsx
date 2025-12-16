@@ -11,7 +11,7 @@ import { PermissionProvider } from "../../context/PermissionContext";
 import SignInForm from "@/components/auth/SignInForm";
 import  Providers  from "../admin/provider/providers";
 import { ToastContainer } from "react-toastify";
-
+import "../admin/admin-global.css";
 
 const outfit = Outfit({ subsets: ["latin"] });
 

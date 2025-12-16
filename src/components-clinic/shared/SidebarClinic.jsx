@@ -9,7 +9,10 @@ import {
   FaChartLine,
   FaChartBar,
   FaCogs,
-  FaUserCircle
+  FaUserCircle,
+  FaWolfPackBattalion,
+  FaFlask,
+  FaRocket
 } from "react-icons/fa";
 import { HiOutlineSupport } from "react-icons/hi";
 
@@ -25,8 +28,10 @@ export function ClinicSidebar({ collapsed, mobileOpen, active, setActive, toggle
     // { name: "Sales analytics", icon: FaChartLine, url: "/partner/sales-analytics" },
     // { name: "User analytics", icon: FaChartBar, url: "/partner/user-analytics" },
     // { name: "Agency settings", icon: FaCogs, url: "/partner/agency-settings" },
-    { name: "Dashboard", icon: FaUserCircle, url: "/partner/dashboard" },
+     { name: "Dashboard", icon: FaUserCircle, url: "/partner/dashboard" },
+     { name: "Boost Package", icon: FaRocket, url: "/partner/boost-package" },
      { name: "Profile", icon: FaUserCircle, url: "/partner/profile" },
+
   ];
 
   return (
