@@ -33,7 +33,7 @@
     "flatpickr": "^4.6.13",
     "js-cookie": "^3.0.5",
     "lucide-react": "^0.555.0",
-    "next": "15.2.3",
+    "next": "^15.5.7",
     "preline": "^3.2.3",
     "primeflex": "^4.0.0",
     "primeicons": "^7.0.0",
