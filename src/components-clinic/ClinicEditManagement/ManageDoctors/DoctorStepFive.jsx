@@ -115,7 +115,7 @@ const onCancel =()=>{
         <DialogPanel className="bg-white rounded-lg shadow-xl w-full max-w-3xl p-6">
 
          <DialogTitle className="flex justify-between items-center text-lg font-semibold mb-4">
-            <span>Doctor Description {doctoruuid}</span>
+            <span>Doctor Description </span>
             <span className="text-green-400 ">5/5</span>
           </DialogTitle>
           

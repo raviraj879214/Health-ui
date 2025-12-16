@@ -158,7 +158,7 @@ const [test, setTest] = useState(["Heart", "Skin", "Neuro", "Skin", "Neuro", "Sk
       <div className="fixed inset-0 z-10 w-screen overflow-y-auto flex items-center justify-center p-4">
         <DialogPanel className="bg-white rounded-lg shadow-xl w-full max-w-3xl p-6">
           <DialogTitle className="flex justify-between items-center text-lg font-semibold mb-4">
-            <span>Choose Specialization {doctoruuid}</span>
+            <span>Choose Specialization </span>
             <span className="text-green-400 ">2/4</span>
           </DialogTitle>
 

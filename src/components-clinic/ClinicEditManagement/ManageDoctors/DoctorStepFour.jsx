@@ -157,7 +157,7 @@ export function DoctorFour({ onClose, nextStep, prevStep ,clinicuuid , doctoruui
         <DialogPanel className="bg-white rounded-lg shadow-xl w-full max-w-3xl p-6">
 
          <DialogTitle className="flex justify-between items-center text-lg font-semibold mb-4">
-            <span>Choose Treatment {doctoruuid}</span>
+            <span>Choose Treatment </span>
             <span className="text-green-400 ">4/4</span>
           </DialogTitle>
           
