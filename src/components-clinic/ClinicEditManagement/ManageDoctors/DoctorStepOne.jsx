@@ -384,8 +384,7 @@ export function DoctorOne({ onClose, nextStep, clinicuuid, doctoruuid }) {
                       classNamePrefix="select"
                       onChange={(selected) => field.onChange(selected)}
                     />
-                  )}
-                />
+                  )}/>
                 {errors.languages && (
                   <p className="text-sm text-red-400">{errors.languages.message}</p>
                 )}
