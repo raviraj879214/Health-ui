@@ -4,7 +4,7 @@ import ComponentCard from "@/components/common/ComponentCard";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import TextArea from "@/components/form/input/TextArea";
-import {BannerSlider} from "../manageclinics/components/BannerSlider";
+import {BannerSlider} from "./components/bannerSlider";
 import {DoctorList} from "../manageclinics/components/doctorList";
 import { adminHeaders } from "../utils/adminHeader";
 import {SurgeryImages} from "../manageclinics/components/surgeryImages";
