@@ -1,0 +1,94 @@
+"use client";
+
+import { clinicHeaders } from "@/components-clinic/utils/clinicHeaders";
+import { useEffect, useState } from "react";
+
+export function StripeBoardSuccess({ id }) {
+  const [isVerified, setIsVerified] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (id) {
+      checkOnboard();
+    }
+  }, [id]);
+
+  const checkOnboard = async () => {
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-stripe-connect/update-stripe-connect-onboard-account`,
+        {
+          method: "POST",
+          headers: await clinicHeaders(),
+          body: JSON.stringify({ id }),
+        }
+      );
+
+      if (!res.ok) {
+        setIsVerified(false);
+        return;
+      }
+
+      const result = await res.json();
+      setIsVerified(result.status !== 404);
+    } catch (error) {
+      console.error("Stripe onboard check failed:", error);
+      setIsVerified(false);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="h-screen flex items-center justify-center">
+        <p className="text-gray-600">Checking account status...</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="bg-gray-100 h-screen flex items-center justify-center">
+      <div className="bg-white p-6 md:mx-auto rounded-xl shadow-md max-w-md w-full">
+        <svg
+          viewBox="0 0 24 24"
+          className={`w-16 h-16 mx-auto my-6 ${
+            isVerified ? "text-green-600" : "text-red-600"
+          }`}
+        >
+          <path
+            fill="currentColor"
+            d="M12,0A12,12,0,1,0,24,12A12.014,12.014,0,0,0,12,0Zm6.927,8.2-6.845,9.289a1.011,1.011,0,0,1-1.43.188L5.764,13.769a1,1,0,1,1,1.25-1.562l4.076,3.261,6.227-8.451A1,1,0,1,1,18.927,8.2Z"
+          />
+        </svg>
+
+        <div className="text-center">
+          <h3 className="md:text-2xl text-base font-semibold text-gray-900">
+            {isVerified ? "Onboarding Successful" : "Something Went Wrong"}
+          </h3>
+
+          <p className="text-gray-600 my-2">
+            {isVerified
+              ? "Your account has been successfully onboarded."
+              : "We couldn’t verify your Stripe onboarding."}
+          </p>
+
+          <p className="text-gray-600">
+            {isVerified
+              ? "You can now log in and start using the platform."
+              : "Please try again or contact support."}
+          </p>
+
+          <div className="py-10">
+            <a
+              href="/"
+              className="px-12 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3 rounded-lg"
+            >
+              Go Back to Login
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

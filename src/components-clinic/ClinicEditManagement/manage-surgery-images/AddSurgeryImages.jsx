@@ -31,14 +31,19 @@ export function AddSurgeryImage({sendData,clinicuuid}) {
   useEffect(()=>{
 
           fetchtreatment();
-          fetchClinicDoctors();
+          if(clinicuuid){
+            fetchClinicDoctors();
+          }
+          
 
-  },[]);
+  },[clinicuuid]);
 
 
   const fetchClinicDoctors = async ()=>{
+
     debugger;
-    const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-surgeries/get-doctors/c33f92c3-7743-4920-a997-2ab34daf1342`,{
+    //sdfdfddddddd
+    const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-surgeries/get-doctors/${clinicuuid}`,{
       method : "Get",
       headers : clinicHeaders(),
     });

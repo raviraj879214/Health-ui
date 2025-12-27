@@ -5,6 +5,7 @@ import {StepOne} from "../partnerregisters/steps/stepOne";
 import {StepTwo} from "../partnerregisters/steps/stepTwo";
 import {StepThree} from "../partnerregisters/steps/stepThree";
 import {StepFour} from "../partnerregisters/steps/stepFour";
+import {StepFive} from "../partnerregisters/steps/stepFive";
 
 
 export function MainPage() {
@@ -19,6 +20,7 @@ export function MainPage() {
         {step === 2 && <StepTwo></StepTwo>}
         {step === 3 && <StepThree></StepThree>}
         {step === 4 && <StepFour></StepFour>}
+        {step === 5 && <StepFive></StepFive>}
         
     </>);
 }

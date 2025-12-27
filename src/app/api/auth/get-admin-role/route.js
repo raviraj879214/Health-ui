@@ -1,16 +1,8 @@
 import { cookies } from "next/headers";
 
 export async function GET() {
-  
+  const cookieStore = await cookies(); // ✅ await cookies()
+  const adminrole = cookieStore.get("adminrole")?.value ?? null;
 
-  const adminrole =await cookies().get("adminrole")?.value || null;
-
-
-  return new Response(JSON.stringify({ adminrole }), {
-    status: 200,
-    headers: { "Content-Type": "application/json" },
-  });
+  return Response.json({ adminrole });
 }
-
-
-

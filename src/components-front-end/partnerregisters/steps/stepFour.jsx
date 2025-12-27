@@ -27,7 +27,8 @@ export function StepFour() {
 
   useEffect(() => {
     fetchCountries();
-  }, []);
+  }, [uuid]);
+
 
   useEffect(() => {
     if (uuid && countries.length) {
@@ -50,6 +51,7 @@ export function StepFour() {
 
 
   const fetchCountries = async () => {
+    debugger;
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/partner-register/get-country-state`

@@ -164,7 +164,7 @@ export function ListofDoctor({ clinicuuid }) {
                 <p className="text-sm text-gray-500 font-medium">
                   {item.degree || "Specialist"}
                 </p>
-                   <div className="line-clamp-2"dangerouslySetInnerHTML={{ __html: item.briefDescription }}/>
+                   <div className="line-clamp-2" dangerouslySetInnerHTML={{ __html: item.briefDescription }}/>
               </div>
             </div>
         ))}

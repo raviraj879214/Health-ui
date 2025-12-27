@@ -61,21 +61,21 @@ export  function StepOne() {
                     bodyClassName: "text-white",
             });
 
-            return ;
+             return ;
             }
 
+             dispatch(setEmail(result.data.email));
+                dispatch(setuuid(result.data.uuid));
             if(result.data.isOtpVerify){
-                dispatch(setEmail(result.data.email));
-            dispatch(setuuid(result.data.uuid));
                 dispatch(nextStep());
                 return;
             }
+           
 
 
 
             setOtpModal(!result.data.isOtpVerify);
             dispatch(setOtp(result.otp));
-          
             setCount(30);
             toast.success("OTP sent!", {
                     className: "bg-blue-600 text-white font-bold",
@@ -113,6 +113,7 @@ const [otpDigits, setOtpDigits] = useState(["", "", "", ""]);
 
 
   const onOtpPaste = (e) => {
+    debugger;
     e.preventDefault();
     const pastedValue = e.clipboardData
       .getData("text")
@@ -240,7 +241,7 @@ const [otpDigits, setOtpDigits] = useState(["", "", "", ""]);
                {otpmodal &&(
                     <div className="rounded-2xl border border-gray-200 bg-slate-50 p-6">
                   <h4 className="text-lg font-semibold text-gray-900 mb-1">
-                    Email Verification {otp}
+                    Email Verification
                   </h4>
                   <p className="text-sm text-gray-600 mb-5">
                     Enter the 4-digit verification code sent to your phone.

@@ -9,6 +9,7 @@ import { License } from "../ClinicEditManagement//hospitallicense/HospitalLicens
 import { ClinicDescription } from "../ClinicEditManagement/clinicdescription/clinicdesc";
 import {MaincategoryBoard} from "../ClinicEditManagement/cliniccategory/MainCategory";
 import {MainPackages} from "../ClinicEditManagement/ManagePackages/MainPackages";
+import {StripeClinic} from "../ClinicEditManagement/stripeforclinic/stripeClinic";
 
 export function MainClinic({ clinicuuid }) {
 
@@ -36,6 +37,7 @@ export function MainClinic({ clinicuuid }) {
   const accreditationRef = useRef(null);
   const licenseRef = useRef(null);
   const descriptionRef = useRef(null);
+  const stripeRef = useRef(null);
 
   const scrollToSection = (ref) => {
     ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -161,9 +163,9 @@ export function MainClinic({ clinicuuid }) {
             <MainPackages clinicuuid={clinicdetail.uuid}></MainPackages>
 
         <br></br>
-        {/* Surgery Section */}
+        
         <div ref={surgeryRef}>
-          <SurgeryImages  clinicuuid={clinicdetail.uuid}></SurgeryImages>
+            <SurgeryImages  clinicuuid={clinicdetail.uuid}></SurgeryImages>
         </div>
 
         <br></br>
@@ -182,10 +184,18 @@ export function MainClinic({ clinicuuid }) {
 
         <br></br>
 
-        {/* Description */}
+        
         <div ref={descriptionRef}>
           <ClinicDescription clinicuuid={clinicdetail.uuid}></ClinicDescription>
         </div>
+
+        <div ref={stripeRef}>
+          
+            <StripeClinic clinicuuid={clinicdetail.uuid} ></StripeClinic>
+        </div>
+
+
+
 
       </div>
     </div>

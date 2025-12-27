@@ -117,7 +117,7 @@ const AppSidebar: React.FC = () => {
 const navItems: NavItem[] = [
   
 
-  {
+   {
         icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2"
         strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
@@ -194,104 +194,55 @@ const navItems: NavItem[] = [
         name: "Manage Seo",
         path: "/admin/manage-seo-content",
     },
+
+    {
+          icon: (
+            <svg
+                className="w-5 h-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <rect x="3" y="7" width="18" height="14" rx="2" />
+                <path d="M9 7V4h6v3" />
+                <path d="M12 10v6" />
+                <path d="M9 13h6" />
+                <rect x="7" y="11" width="2" height="2" />
+                <rect x="15" y="11" width="2" height="2" />
+              </svg>
+          ),
+          name: "Clinic Management",
+          subItems: [
+            { name: "Manage Clinic", path: "/admin/manage-clinics", pro: false },
+            { name: "Manage Packages", path: "/admin/manage-packages", pro: false },
+          ],
+        },
     {
        icon: (
-<svg
-  className="w-5 h-5"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  strokeWidth="2"
-  strokeLinecap="round"
-  strokeLinejoin="round"
->
-  <rect x="3" y="7" width="18" height="14" rx="2" />
-  <path d="M9 7V4h6v3" />
-  <path d="M12 10v6" />
-  <path d="M9 13h6" />
-  <rect x="7" y="11" width="2" height="2" />
-  <rect x="15" y="11" width="2" height="2" />
-</svg>
-
-
-      ),
-        name: "Manage Clinics",
-        path: "/admin/manage-clinics",
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2"
+        strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="8" />
+        <path d="M21 21l-4.35-4.35" />
+      </svg>),
+        name: "Patient Queries",
+        path: "/admin/patient-queries",
+    },
+    {
+       icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2"
+        strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="8" />
+        <path d="M21 21l-4.35-4.35" />
+      </svg>),
+        name: "Manage Payouts",
+        path: "/admin/manage-payout",
     },
     
     
-    
-
-
-
-
-
-
-
-
-
-    // {
-    //    icon: (
-    //   <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2"
-    //     strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-    //     <circle cx="11" cy="11" r="8" />
-    //     <path d="M21 21l-4.35-4.35" />
-    //   </svg>
-    // ),
-    //     name: "Manage Chat",
-    //     path: "/admin/manage-chat",
-    // },
-
-
-    //  {
-    //     icon: <EnvelopeIcon />,
-    //     name: "Manage Specialty",
-    //     path: "/admin/manage-specialty",
-    // },
-
-
-    
-    //  {
-    //     icon: <EnvelopeIcon />,
-    //     name: "Manage Treatment",
-    //     path: "/admin/manage-treatment",
-    // },
-    // //25-11-2025
-    //  {
-    //     icon: <EnvelopeIcon />,
-    //     name: "Manage Patients",
-    //     path: "/admin/manage-patients",
-    // },
-
-
-    
-
- //25-11-2025
-        // {
-        //   icon: (
-        //     <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2"
-        //       strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-        //       <circle cx="12" cy="8" r="4" />
-        //       <path d="M4 21v-2a4 4 0 0 1 3-3.87M20 21v-2a4 4 0 0 0-3-3.87" />
-        //     </svg>
-        //   ),
-        //   name: "Clinics Listing",
-        //   subItems: [
-        //     { name: "Packages", path: "/admin/featured-clinic-listing", pro: false },
-        //     { name: "Purchased Packgages", path: "/admin/featured-clinic-listing/purchased-listing-packages", pro: false },
-        //     // { name: "Test Modules", path: "/admin/test", pro: false },
-        //   ],
-        // },
-      
-    
-
-
-    //  {
-    //     icon: <EnvelopeIcon />,
-    //     name: "Manage Category",
-    //     path: "/admin/manage-category",
-    // },
-    
+  
     
 
 ];

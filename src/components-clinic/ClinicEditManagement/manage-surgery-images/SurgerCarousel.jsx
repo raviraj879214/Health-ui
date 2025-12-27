@@ -160,7 +160,7 @@ if (surgeries.length === 0) {
                     </div>
                     </div>
 
-                    {/* After Image */}
+                  
                     <div className="relative w-1/2 h-[180px] overflow-hidden rounded">
                     <img
                         src={surgery.after}

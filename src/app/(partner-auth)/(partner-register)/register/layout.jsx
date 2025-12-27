@@ -5,12 +5,11 @@ import ReduxProvider from "../../../../components-front-end/redux/partnerregiste
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body>
+   <>
+   
         <ToastContainer   position="bottom-right" />
 
         <ReduxProvider>{children}</ReduxProvider>
-      </body>
-    </html>
+     </>
   );
 }

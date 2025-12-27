@@ -21,7 +21,7 @@ export function SurgeryImages({clinicuuid}) {
             <ComponentCard title="Before & After Photos">
               
         
-                <AddSurgeryImage clinicuuid={clinicuuid} sendData={handldata}></AddSurgeryImage>
+                <AddSurgeryImage  sendData={handldata} clinicuuid={clinicuuid}></AddSurgeryImage>
 
                 <SurgeriesCarouselImages dataReset={trigger} clinicuuid={clinicuuid}/>
 

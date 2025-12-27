@@ -39,6 +39,7 @@ const password = watch("password");
             setValue("firstname",result.data.firstname);
             setValue("lastname",result.data.lastname);
             setValue("phoneno",result.data.phone);
+            setValue("email",email);
         }
     }
 

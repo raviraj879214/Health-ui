@@ -3,7 +3,8 @@ import { cookies } from "next/headers";
 export async function GET() {
   
 
-  const lastname = cookies().get("adminlastname")?.value || null;
+   const cookieStore = await cookies(); 
+  const lastname =await cookieStore.get("adminlastname")?.value || null;
 
 
   return new Response(JSON.stringify({ lastname }), {

@@ -4,7 +4,8 @@ import { cookies } from "next/headers";
 export async function GET() {
   
 
-  const userid = cookies().get("adminuserid")?.value || null;
+   const cookieStore = await cookies(); 
+  const userid =await cookieStore.get("adminuserid")?.value || null;
 
 
   return new Response(JSON.stringify({ userid }), {
