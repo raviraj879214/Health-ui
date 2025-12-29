@@ -6,10 +6,14 @@ export default function ProductCard({ data }){
     return (
         <div className="card a-hover-secondary">
             <div className="relative overflow-hidden rounded-thm pb-[70%] mb-4.5">
-                <Link href="/clinics/sdfsd">
-                    <Image
-                        src={data.image}
-                        alt={data.title}
+                <Link href="/clinics">
+                    <img
+                        src={
+                                data.clinicbanner
+                                ? `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/clinic/banner/${data.clinicbanner}`
+                                : "/default-banner.jpg" 
+                            }
+                        alt={data.clinicbanner}
                         width={370}
                         height={254}
                         className="absolute top-0 left-0 w-full h-full object-cover"
@@ -25,7 +29,7 @@ export default function ProductCard({ data }){
                             </svg>
                         </span>
                         <span className="inline-block">
-                            Rio de Janeiro, <strong>Brazil</strong>
+                           {data.address} {data.state}, <strong>{data.country} </strong>
                         </span>
                     </div>
                     <span className="rating inline-flex items-center">

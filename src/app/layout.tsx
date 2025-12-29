@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation';
 import { HeaderFrontend } from "../components-front-end/shared/Header";
 import FooterWrapper from "../components-front-end/shared/footerWrapper";
 import gilroy from "./fonts";
+import ReduxProvider from '@/components-front-end/redux/partnerregister/provider';
 
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -39,7 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className={`${gilroy.variable} antialiased`}>
           <HeaderFrontend></HeaderFrontend>
-            {children}
+           <ReduxProvider>{children}</ReduxProvider>
           <FooterWrapper></FooterWrapper>
       </body>
     </html>

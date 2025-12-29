@@ -21,10 +21,10 @@ export function MainPayout(){
 
 
     return(<>
-      <ComponentCard>
+
 
         <StripeMainAccountDetails rel={reload} />
-        <ClinicpackageDetails onPayment={onStripetransfer} />
+        <ClinicpackageDetails   onPayment={onStripetransfer} />
 
 
 
@@ -32,7 +32,7 @@ export function MainPayout(){
 
 
 
-    </ComponentCard>
+
 
 
     

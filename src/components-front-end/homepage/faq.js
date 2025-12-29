@@ -79,13 +79,15 @@ export function AccordionItem({ id, title, children, isOpen, onToggle }) {
         >
           <span className="font-bold">{title}</span>
 
-            <Image
-                src={isOpen ? minusIcon : plusIcon}
-                alt="toggle question"
-                width={24}
-                height={24}
-                className="flex-[0_0_auto] ms-3"
-            />
+          {/* {(isOpen ? minusIcon : plusIcon) && (
+  <Image
+    src={isOpen ? minusIcon : plusIcon}
+    alt="toggle question"
+    width={24}
+    height={24}
+  />
+)} */}
+
         </button>
       </h3>
 

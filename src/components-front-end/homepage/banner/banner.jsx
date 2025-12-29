@@ -1,7 +1,67 @@
+"use client"
+import { addSpecialization } from "@/components-front-end/redux/cliniclisting/store/clinicListing";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+
+
 
 export  function Banner(){
+
+    const [specialization,setSpecialization] = useState([]);
+      const dispatch = useDispatch();
+      const router = useRouter();
+
+    
+
+
+
+    useEffect(()=>{
+        fetchSpecilaizations();
+
+    },[]);
+
+
+    const fetchSpecilaizations = async ()=>{
+        const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/homepage-banner/get-specialization`,{
+            method : "Get",
+            headers :{
+                "content-type":"application/json"
+            }
+        });
+        if(res.ok){
+            const result = await res.json();
+            setSpecialization(result.data);
+        }
+    }
+
+
+
+    const onClickSpecialization=(name,id)=>{
+            debugger;
+        dispatch(
+          addSpecialization({
+            id: id,
+            name: name,
+          })
+        );
+
+            router.push('/clinics');
+
+    }
+
+    debugger;
+
+
+
+
+
+
+
+
     return (
         <div className="bg-section-gray md:py-18 py-14">
             <div className="container">
@@ -20,49 +80,20 @@ export  function Banner(){
                 </div>
                 <div className="mt-5 max-w-[600px] mx-auto">
                     <ul className="m-0 p-0 list-none flex flex-wrap justify-center leading-6 [&_li:not(:last-child)]:after:content-[','] [&_li:not(:last-child)]:after:me-1 [&_a]:underline [&_a]:underline-offset-2 [&_a]:transition-colors [&_a]:hover:text-secondary md:text-[1rem] text-sm">
-                        <li>
-                            <Link href="#">Anesthesiology</Link>
-                        </li>
-                        <li>
-                            <Link href="#">Cardiology</Link>
-                        </li>
-                        <li>
-                            <Link href="#">Dermatology</Link>
-                        </li>
-                        <li>
-                            <Link href="#">Endocrinology</Link>
-                        </li>
-                        <li>
-                            <Link href="#">Gastroenterology</Link>
-                        </li>
-                        <li>
-                            <Link href="#">Gynecology</Link>
-                        </li>
-                        <li>
-                            <Link href="#">Neurology</Link>
-                        </li>
-                        <li>
-                            <Link href="#">Orthopedics</Link>
-                        </li>
-                        <li>
-                            <Link href="#">Pathology</Link>
-                        </li>
-                        <li>
-                            <Link href="#">Pediatrics</Link>
-                        </li>
-                        <li>
-                            <Link href="#">Psychiatry</Link>
-                        </li>
-                        <li>
-                            <Link href="#">Radiology</Link>
-                        </li>
-                        <li>
-                            <Link href="#">Surgery</Link>
-                        </li>
-                        <li>
-                            <Link href="#">Urology</Link>
-                        </li>
+                        {specialization.map((item, index) => (
+                            <li key={item.id || index}>
+                                <button
+                                    type="button"
+                                    onClick={() => onClickSpecialization(item.name,item.id)}
+                                    className="cursor-pointer text-black-600 hover:underline underline"
+                                >
+                                    {item.name}
+                                </button>
+                            </li>
+
+                        ))}
                     </ul>
+                  
                    
                 </div>
             </div>

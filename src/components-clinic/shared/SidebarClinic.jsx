@@ -30,6 +30,7 @@ export function ClinicSidebar({ collapsed, mobileOpen, active, setActive, toggle
     // { name: "Agency settings", icon: FaCogs, url: "/partner/agency-settings" },
      { name: "Dashboard", icon: FaUserCircle, url: "/partner/dashboard" },
      { name: "Boost Package", icon: FaRocket, url: "/partner/boost-package" },
+     { name: "Clinic Boost Package", icon: FaRocket, url: "/partner/clinic-boost-package" },
      { name: "Profile", icon: FaUserCircle, url: "/partner/profile" },
 
   ];
@@ -56,7 +57,7 @@ export function ClinicSidebar({ collapsed, mobileOpen, active, setActive, toggle
       </div>
 
       {/* Menu */}
-      <ul className="mt-2 text-[15px] text-[#2C2C2C] overflow-y-auto flex-1 scrollbar-thin scrollbar-thumb-gray-300">
+      <ul className="mt-2 text-[15px] text-[#2C2C2C] overflow-y-auto flex-1 scrollbar-thin scrollbar-thumb-gray-300 p-0">
         {menu.map((m) => {
           const Icon = m.icon;
           const isActive = active === m.name;

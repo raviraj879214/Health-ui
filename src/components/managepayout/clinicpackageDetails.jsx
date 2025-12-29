@@ -253,7 +253,7 @@ export function ClinicpackageDetails({onPayment}){
              
               {patientqueryArray.length !==0 ? (
                    <div className="mt-5 space-y-6">
-                <div className="border theme-border rounded-xl bg-white p-5 shadow-sm">
+                <div className="">
                   <h3 className="text-lg font-semibold text-gray-800 mb-4">
                     Patient Queries
                   </h3>
@@ -276,7 +276,7 @@ export function ClinicpackageDetails({onPayment}){
                           </button>
 
                           {openIndex === item.id && (
-                            <div className="p-4 border-t">
+                            <div className="border-t">
                               <div
                                 key={item.id}
                                 className="border rounded-lg p-4 mb-6 bg-gray-50"
@@ -396,10 +396,7 @@ export function ClinicpackageDetails({onPayment}){
 
 
 
-
-                                      </div>
-
-                                      <h4 className="text-md font-semibold text-gray-700 mb-3 mt-5">
+                                               <h4 className="text-md font-semibold text-gray-700 mb-3 mt-5">
                                         Payment Details
                                       </h4>
                                       <table className="w-full text-sm border">
@@ -442,6 +439,9 @@ export function ClinicpackageDetails({onPayment}){
                                           ))}
                                         </tbody>
                                       </table>
+                                      </div>
+
+                                     
 
                                       <div className="border theme-border rounded-2xl bg-white p-6 mt-5 shadow-sm">
                                         <h3 className="text-lg font-semibold text-gray-800 mb-4">
@@ -588,13 +588,13 @@ export function ClinicpackageDetails({onPayment}){
 
                                             <form
                                               onSubmit={handleSubmit(payClinic)}
-                                              className="bg-white border border-gray-200 rounded-2xl shadow-lg p-6 space-y-4"
+                                              className="bg-white p-6 space-y-4"
                                             >
                                               <h3 className="text-lg font-semibold text-gray-900">
                                                 Release Funds
                                               </h3>
 
-                                              {/* Amount */}
+                                            
                                               <div>
                                                 <label className="block text-sm font-medium text-gray-600 mb-1">
                                                   Amount
@@ -671,11 +671,7 @@ export function ClinicpackageDetails({onPayment}){
 
 
 
-
-
-                                      </div>
-
-                                      <h3 className="text-lg font-semibold text-gray-800 mb-4 mt-5">
+                                         <h3 className="text-lg font-semibold text-gray-800 mb-4 mt-5">
                                         Transfer History
                                       </h3>
                                       <table className="w-full text-sm border mt-5">
@@ -714,6 +710,10 @@ export function ClinicpackageDetails({onPayment}){
                                           ))}
                                         </tbody>
                                       </table>
+
+                                      </div>
+
+                                     
 
 
                                     </div>

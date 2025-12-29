@@ -9,7 +9,7 @@ export default function RootLayout({ children }) {
    
         <ToastContainer   position="bottom-right" />
 
-        <ReduxProvider>{children}</ReduxProvider>
+       {children}
      </>
   );
 }

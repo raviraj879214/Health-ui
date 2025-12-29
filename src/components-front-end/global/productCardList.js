@@ -8,13 +8,17 @@ export default function ProductCardList({ data }){
             <div className="md:w-3/10 w-5/10">
                 <div className="relative pb-[70%] me-5 w-full h-full">
                     <Link href="/clinics/sdfsd">
-                        <Image
-                            src={data.image}
-                            alt={data.title}
-                            width={370}
-                            height={254}
-                            className="absolute top-0 left-0 w-full h-full object-cover"
-                        />
+                        <img
+                        src={
+                                data.clinicbanner
+                                ? `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/clinic/banner/${data.clinicbanner}`
+                                : "/default-banner.jpg" 
+                            }
+                        alt={data.clinicbanner}
+                        width={370}
+                        height={254}
+                        className="absolute top-0 left-0 w-full h-full object-cover"
+                    />
                     </Link>
                 </div>
             </div>
@@ -27,7 +31,7 @@ export default function ProductCardList({ data }){
                             </svg>
                         </span>
                         <span className="inline-block">
-                            Rio de Janeiro, <strong>Brazil</strong>
+                           {data.address} {data.state}, <strong>{data.country} </strong>
                         </span>
                     </div>
                     <span className="rating inline-flex items-center">
