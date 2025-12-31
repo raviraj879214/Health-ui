@@ -14,6 +14,7 @@ export  function Banner(){
     const [specialization,setSpecialization] = useState([]);
       const dispatch = useDispatch();
       const router = useRouter();
+      const [loadpage,setLoadPage] = useState(false);
 
     
 
@@ -26,7 +27,8 @@ export  function Banner(){
 
 
     const fetchSpecilaizations = async ()=>{
-        const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/homepage-banner/get-specialization`,{
+        setLoadPage(true);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/homepage-banner/get-specialization?limit=20`,{
             method : "Get",
             headers :{
                 "content-type":"application/json"
@@ -36,6 +38,7 @@ export  function Banner(){
             const result = await res.json();
             setSpecialization(result.data);
         }
+        setLoadPage(false);
     }
 
 
@@ -62,8 +65,40 @@ export  function Banner(){
 
 
 
-    return (
-        <div className="bg-section-gray md:py-18 py-14">
+    return (<>
+
+       
+
+        {loadpage ?(<div role="status" className="space-y-2.5 animate-pulse max-w-lg mx-auto">
+            <h1 className="h1 text-center mb-5"><div className="h-2.5 bg-loader rounded-full "></div></h1>
+                <div className="hero-search max-w-[650px] mx-auto">
+                    <form>
+                        <div className="relative">
+                            
+                            <div className="h-2.5 bg-loader rounded-full border border-primary rounded-full md:py-5.5 md:ps-7.5 md:pe-18 py-4 ps-6 pe-15 w-full"></div>
+                           
+                        </div>
+                    </form>
+                </div>
+                        <div className="flex items-center w-full justify-center">
+                            <div className="h-2.5 bg-loader rounded-full w-32"></div>
+                            <div className="h-2.5 ms-2 bg-loader rounded-full w-24"></div>
+                            <div className="h-2.5 ms-2 bg-loader rounded-full w-full"></div>
+                        </div>
+                        <div className="flex items-center w-full max-w-[480px] justify-center mx-auto">
+                            <div className="h-2.5 bg-loader rounded-full w-full"></div>
+                                    <div className="h-2.5 ms-2 bg-loader rounded-full w-full"></div>
+                            <div className="h-2.5 ms-2 bg-loader rounded-full w-24"></div>
+                        </div>
+                        <div className="flex items-center w-full max-w-[400px justify-center] mx-auto">
+                            <div className="h-2.5 bg-loader rounded-full w-full"></div>
+                            <div className="h-2.5 ms-2 bg-loader rounded-full w-80"></div>
+                            <div className="h-2.5 ms-2 bg-loader rounded-full w-full"></div>
+                        </div>
+                        <span className="sr-only">Loading...</span>
+    </div>
+):(
+ <div className="bg-section-gray md:py-18 py-14">
             <div className="container">
                 <h1 className="h1 text-center mb-5">We Take Care of You While Travelling</h1>
                 <div className="hero-search max-w-[650px] mx-auto">
@@ -98,5 +133,16 @@ export  function Banner(){
                 </div>
             </div>
         </div>
+
+)}
+    
+    </>
+        
+
+
+
+        
+
+
     )
 }

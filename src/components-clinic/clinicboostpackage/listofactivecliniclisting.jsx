@@ -32,6 +32,21 @@ export function Listofactivecliniclisting() {
     }
   };
 
+
+    const getBadgeText = (pkg) => {
+  switch (true) {
+    case pkg.placement == 2:
+      return "Main Listing";
+    case pkg.placement === 1:
+      return "Top Rated";
+    case pkg.placement === 0:
+      return "POPULAR";
+    default:
+      return null;
+  }
+};
+
+
   return (
     <>
       <div className="border theme-border rounded-xl p-4 bg-white shadow-sm mt-6">
@@ -45,6 +60,7 @@ export function Listofactivecliniclisting() {
                 <th className="p-3 border theme-border">Boost Duration</th>
                 <th className="p-3 border theme-border">Clinic Name</th>
                 <th className="p-3 border theme-border">Price</th>
+                <th className="p-3 border theme-border">Package Type</th>
                 <th className="p-3 border theme-border">Status</th>
                 <th className="p-3 border theme-border">Start At</th>
                 <th className="p-3 border theme-border">End At</th>
@@ -83,8 +99,11 @@ export function Listofactivecliniclisting() {
                       
                       {brazilianCurrency(item.boostPackage?.price)}
                     </td>
+                    <td className="p-3 border theme-border ">
+                           <span className="px-2 py-1 text-xs rounded bg-green-100 text-green-700">{getBadgeText(item.boostPackage)}</span>
+                    </td>
 
-                    <td className="p-3 border theme-border">
+                    <td className="p-3 border theme-border ">
                       {item.isActive ? (
                         <span className="px-2 py-1 text-xs rounded bg-green-100 text-green-700">
                           Active

@@ -22,7 +22,7 @@ export function BannerSkeleton(){
                             <div className="h-2.5 ms-2 bg-loader rounded-full w-full"></div>
                         </div>
                         <span className="sr-only">Loading...</span>
-                    </div>
+    </div>
     
     
     </>);

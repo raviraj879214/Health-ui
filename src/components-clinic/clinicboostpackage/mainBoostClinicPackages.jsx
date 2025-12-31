@@ -71,7 +71,7 @@ export function MainBoostClinicPackages(){
              if (res.ok) {
                  const result = await res.json();
                  console.log("result",result);
-                 setBoostPackages(result.data);
+                 setBoostPackages(result.data.filter(x=>x.type === 1));
              }
          }
 
@@ -144,6 +144,22 @@ export function MainBoostClinicPackages(){
   };
 
   
+  const getBadgeText = (pkg) => {
+  switch (true) {
+    case pkg.placement == 2:
+      return "Main Listing";
+    case pkg.placement === 1:
+      return "Top Rated";
+    case pkg.placement === 0:
+      return "POPULAR";
+    default:
+      return null;
+  }
+};
+
+
+  
+
 
 
 
@@ -153,30 +169,42 @@ export function MainBoostClinicPackages(){
 
      <ComponentCard title="List of Packages">
 
-             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                                {boostpackages.map(pkg => (
-                                    <div 
-                                    key={pkg.id} 
-                                    className="border theme-border p-4 rounded-lg flex flex-col justify-between"
-                                    >
-                                    <div>
-                                        <p className="font-semibold">{pkg.name}</p>
-                                        <p className="text-gray-600">{brazilianCurrency(pkg.price)}</p>
-                                        <p className="text-gray-500 text-sm">{pkg.durationDays} days</p>
-                                    </div>
-            
-                                    <button 
-                                      onClick={()=> {
-                           
-                            openPayModal(pkg)
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+  {boostpackages.map(pkg => (
+    <div
+      key={pkg.id}
+      className="relative border theme-border p-4 rounded-lg flex flex-col justify-between"
+    >
+      
+      
+       {getBadgeText(pkg) && (
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 background-theme text-white px-3 py-1 rounded-full text-xs font-semibold">
+            {getBadgeText(pkg)}
+        </div>
+       )}
 
-                         }}
-                                    className="btn btn-primary mt-3 py-1 px-3 text-sm rounded-md w-full">
-                                       Buy Now
-                                    </button>
-                                    </div>
-                                ))}
-                        </div>
+
+      <div>
+        <p className="font-semibold">{pkg.name}</p>
+        <p className="text-gray-600">{brazilianCurrency(pkg.price)}</p>
+        <p className="text-gray-500 text-sm">
+          {pkg.durationDays} days
+        </p>
+        <p>
+            {pkg.description}
+        </p>
+      </div>
+
+      <button
+        onClick={() => openPayModal(pkg)}
+        className="btn btn-primary mt-3 py-1 px-3 text-sm rounded-md w-full"
+      >
+        Buy Now
+      </button>
+    </div>
+  ))}
+</div>
+
 
 
                          <Dialog open={open} onClose={setOpen} className="relative z-10">

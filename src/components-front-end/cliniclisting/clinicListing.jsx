@@ -8,6 +8,7 @@ import ProductCardList from "../../components-front-end/global/productCardList";
 import { useDispatch, useSelector } from "react-redux";
 import { setSkipRedux } from "../redux/cliniclisting/store/clinicListing";
 import ProductCardLoader from "../global/skeleton/productCardLoader";
+import {ProductCardLoaderHorizontal} from "../global/skeleton/ProductCardLoaderHorizontal";
 
 
 export function ClinicListing(){
@@ -21,6 +22,7 @@ export function ClinicListing(){
     const skip = useSelector((state) => state.clinicListing?.skipRedux || 0);
     const dispatch = useDispatch();
     const [clinicloading,setClinicLoading] = useState(false);
+    const [sortby,setSortby] = useState("0");
 
     // const [skip, setSkip] = useState(0);
 
@@ -52,8 +54,9 @@ export function ClinicListing(){
         debugger;
 
        
-          dispatch(setSkipRedux(0));
+         dispatch(setSkipRedux(0));
          fetchClinics();
+         setSortby("");
 
         
     },[selectedSpecializations,selectedSpecialty,selectedTreatment]);
@@ -99,9 +102,11 @@ export function ClinicListing(){
                     clinicbanner: bannerImageObj
                         ? bannerImageObj.Images
                         : item.imageUrl || null,
-                        address : item.address,
-                        state : item.city.name,
-                        country : item.country.name
+                        address : item.name,
+                        state : item.city?.name,
+                        country : item.country?.name,
+                        googlerating : item.ratingSummary?.averageRating,
+                        packagestartprice : item.packages.length ? Math.min(...item.packages.map(p => p.actualprice)) : 0
                 };
 
                  
@@ -137,35 +142,53 @@ export function ClinicListing(){
 
 
     useEffect(() => {
-    
-   
       fetchClinics();
-    
+      setSortby("");
   }, [skip]);
 
 
   const handleLoadMore = () => {
-    
     dispatch(
-
       setSkipRedux(skip + limit)
-
     );
-  
-
-
-
-    
   };
   const handleResetSkip = () => {
     debugger;
     dispatch(setSkipRedux(0));
-
-
   };
 
 
 
+    useEffect(()=>{
+
+      onSortClick();
+
+    },[sortby]);
+
+
+    const onSortClick = async () => {
+      setClinicLoading(true);
+      if (!clinics || !clinics.length) return;
+
+      let result = clinics.filter(clinic => clinic.name);
+
+      if (sortby === "name_asc") {
+        result.sort((a, b) => a.name.localeCompare(b.name));
+      } else if (sortby === "name_desc") {
+        result.sort((a, b) => b.name.localeCompare(a.name)); 
+      } else if (sortby === "ratings_asc") {
+        result.sort((a, b) => (a.googlerating || 0) - (b.googlerating || 0)); 
+      } else if (sortby === "ratings_desc") {
+        result.sort((a, b) => (b.googlerating || 0) - (a.googlerating || 0)); 
+      }
+
+      setClinic(result);
+      setClinicLoading(false);
+    };
+
+
+
+  
 
 
 
@@ -189,7 +212,7 @@ export function ClinicListing(){
             
               <div className="flex items-center justify-between gap-5 mb-7.5">
                 <div className="leading-none"><strong>{clinics.length}</strong> Results of <strong>{total}</strong></div>
-
+               
                 <div className="flex gap-5">
                   <div className="flex gap-2.5 grid-list-view-toggle">
                     <button type="button" className={`btn w-[40px] h-[40px] p-2.5 ${view === "grid" ? "btn-secondary" : ""}`} onClick={() => setView("grid")}>
@@ -204,10 +227,15 @@ export function ClinicListing(){
                     </button>
                   </div>
                   <div className="sort-by md:block hidden">
-                    <select name="sort_by" id="filter-sort" className="appearance-none btn inline-flex items-center justify-start gap-5 py-2 px-4 h-full font-medium w-40 text-start bg-[url('/images/arrow-down.svg')] bg-size-[14px] bg-no-repeat bg-position-[calc(100%_-_10px)_center]" defaultValue="">
-                      <option value="" disabled>Sort By</option>
-                      <option value="ratings">Ratings</option>
-                      <option value="ratings">Name</option>
+                    <select
+                     value={sortby}
+                     onChange={(e)=> setSortby(e.target.value)}
+                     name="sort_by" id="filter-sort" className=" w-[100%] appearance-aut btn inline-flex items-center justify-start gap-5 py-2 px-4 h-full font-medium w-40 text-start  bg-size-[14px] bg-no-repeat bg-position-[calc(100%_-_10px)_center]" defaultValue="">
+                      <option value="0"  selected>Sort By</option>
+                      <option value="ratings_desc">Ratings High - Low</option>
+                      <option value="ratings_asc">Ratings Low - High</option>
+                      <option value="name_asc">Name A - Z</option>
+                      <option value="name_desc">Name Z - A</option>
                     </select>
                   </div>
                   
@@ -222,9 +250,10 @@ export function ClinicListing(){
                   <div className={`${view === "grid" ? "grid xl:grid-cols-3 md:grid-cols-2 gap-7.5" : "flex flex-col md:gap-7.5 gap-5"}`}>
                   {clinics.map((clinic) =>
                     view === "grid" ? (
-                      <ProductCardLoader></ProductCardLoader>
+                     <ProductCardLoader key={clinic.uuid}></ProductCardLoader>
                     ) : (
-                     <><ProductCardLoader></ProductCardLoader></>
+                    
+                      <ProductCardLoaderHorizontal key={clinic.uuid}></ProductCardLoaderHorizontal>
                     )
                   )}
               </div>

@@ -3,7 +3,7 @@ import {Banner} from "../components-front-end/homepage/banner/banner";
 import TopRated from "../components-front-end/homepage/toprated/topRated";
 import Treatments from "../components-front-end/homepage/treatment/treatMent";
 
-import PopularClinics from "../components-front-end/homepage/popularClinics";
+import PopularClinics from "../components-front-end/homepage/PopularClinic/popularClinics";
 import HowItWorks from "../components-front-end/homepage/howItWorks";
 import PromoteCard from "../components-front-end/homepage/promoteCard";
 import PromoteCardLoader from "../components-front-end/global/skeleton/promoteCardLoader";
@@ -82,7 +82,8 @@ export default function Pages() {
       <HowItWorks />
       
       <PromoteCard data={promoteCardone}/>
-      {/* <PromoteCardLoader /> */}
+     
+     
       <HomeStats />
       <Packages />
       <Testimonials />

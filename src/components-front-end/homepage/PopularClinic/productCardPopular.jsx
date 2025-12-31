@@ -1,32 +1,14 @@
 "use client"
 import Link from "next/link";
 import Image from "next/image";
-import { brazilianCurrency } from "@/lib/brazilianCurrency";
-import { useRouter } from "next/navigation";
 
 
-export default function ProductCardList({ data }){
-
-    const router = useRouter();
-
-
-
-    const onClickClinic = async(name,id)=>{
-        alert(name);
-        alert(id);
-    }
-
-
-
-
-
-
+export  function ProductCardPopular({ data }){
     return (
-        <div className="card overflow-hidden rounded-thm border border-border flex" >
-            <div className="md:w-3/10 w-5/10">
-                <div className="relative pb-[70%] me-5 w-full h-full">
-                    <Link href={`/clinics/${data.uuid}`}>
-                        <img
+        <div className="card a-hover-secondary">
+            <div className="relative overflow-hidden rounded-thm pb-[70%] mb-4.5">
+                <Link href="/clinics">
+                    <img
                         src={
                                 data.clinicbanner
                                 ? `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/clinic/banner/${data.clinicbanner}`
@@ -37,30 +19,25 @@ export default function ProductCardList({ data }){
                         height={254}
                         className="absolute top-0 left-0 w-full h-full object-cover"
                     />
-                    </Link>
-                </div>
+                </Link>
             </div>
-            <div className="content md:p-5 p-4 flex-auto">
-                <div className="flex md:flex-nowrap flex-wrap justify-between items-center md:gap-5 gap-2 mb-4 leading-none">
+            <div className="content">
+                <div className="flex justify-between items-center gap-5 mb-4 leading-none">
                     <div className="flex items-center">
-                        <span className="inline-block md:me-2.5 me-1.5 text-primary">
+                        {/* <span className="inline-block me-2.5 text-primary">
                             <svg width="13" height="16" viewBox="0 0 13 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M12.2713 3.37353C11.7875 2.45362 11.0718 1.66577 10.1898 1.0824C9.30793 0.499029 8.28815 0.138849 7.22423 0.0349686C6.7427 -0.0116562 6.25754 -0.0116562 5.77601 0.0349686C4.71214 0.139014 3.69242 0.499259 2.81054 1.08261C1.92865 1.66597 1.21286 2.45373 0.728929 3.37353C0.120013 4.54722 -0.115248 5.86846 0.0527738 7.17087C0.220795 8.47327 0.784586 9.6986 1.67314 10.6925L6.00759 15.7758C6.06745 15.8459 6.14265 15.9024 6.2278 15.9411C6.31296 15.9799 6.40595 16 6.50012 16C6.59428 16 6.68728 15.9799 6.77243 15.9411C6.85759 15.9024 6.93279 15.8459 6.99264 15.7758L11.3265 10.6925C12.2151 9.69866 12.779 8.47337 12.9472 7.17096C13.1153 5.86855 12.8801 4.54727 12.2713 3.37353ZM6.50012 8.61493C5.99539 8.61493 5.502 8.47055 5.08234 8.20007C4.66268 7.92958 4.33559 7.54513 4.14244 7.09533C3.94929 6.64553 3.89876 6.15058 3.99722 5.67307C4.09569 5.19557 4.33874 4.75695 4.69563 4.41269C5.05252 4.06842 5.50723 3.83398 6.00226 3.739C6.49729 3.64401 7.01039 3.69276 7.4767 3.87908C7.943 4.06539 8.34156 4.3809 8.62197 4.78571C8.90238 5.19052 9.05205 5.66645 9.05205 6.15331C9.0512 6.80592 8.78207 7.43157 8.30367 7.89304C7.82527 8.3545 7.17667 8.61411 6.50012 8.61493Z" fill="currentcolor"/>
                             </svg>
-                        </span>
+                        </span> */}
                         <span className="inline-block">
-                           {data.address} {data.state}, <strong>{data.country} </strong>
+                           <b>{data.name}</b>
                         </span>
                     </div>
-                    <span className="rating inline-flex items-center">
+                    {/* <span className="rating inline-flex items-center">
                         <svg width="15" height="14" className="me-1" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.9583 5.66827C15.9071 5.51316 15.8104 5.37621 15.6802 5.2745C15.5501 5.17278 15.3922 5.1108 15.2262 5.09627L10.6082 4.68603L8.78208 0.504711C8.64739 0.198289 8.34076 0 8.00006 0C7.65937 0 7.35271 0.19832 7.21808 0.505475L5.39197 4.68606L0.773199 5.09627C0.60745 5.11112 0.449802 5.17324 0.3198 5.27492C0.189798 5.3766 0.0931609 5.51337 0.0418688 5.66827C-0.0634775 5.98524 0.0338061 6.33287 0.290531 6.55201L3.78124 9.54683L2.7519 13.9825C2.67659 14.3086 2.80597 14.6458 3.0826 14.8414C3.23126 14.9465 3.40523 15 3.58064 15C3.7319 15 3.8819 14.9601 4.01659 14.8813L8.00006 12.5522L11.9821 14.8813C12.2735 15.0528 12.6408 15.0371 12.9168 14.8414C13.0519 14.7457 13.1553 14.6133 13.2141 14.4606C13.2729 14.3079 13.2845 14.1416 13.2475 13.9825L12.2182 9.54683L15.7089 6.55262C15.8344 6.44533 15.925 6.30432 15.9694 6.14709C16.0137 5.98987 16.0098 5.82337 15.9583 5.66827Z" fill="#FFC107"/></svg><span>{data.googlerating}</span>
-                    </span>
+                    </span> */}
                 </div>
-                <h4 className="h4 mb-2">{data.name}</h4> 
-                <div className="md:mb-6 mb-3">
-                    <p className="mb-0">Started From: <span className="text-tertairy font-bold">{brazilianCurrency(data.packagestartprice)}</span></p>
-                </div>
-                <Link  href={`/clinics/${data.uuid}`} className="btn btn-secondary md:px-6 md:py-3 px-3 py-1.5 md:text-[1em] text-[0.8em]">View Detail</Link>
+                <h4 className="h4"><Link href="/clinics/sdfsd">{data.title}</Link></h4>
             </div>
         </div>
     )

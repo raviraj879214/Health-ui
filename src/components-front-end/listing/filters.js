@@ -25,7 +25,7 @@ export default function Filters(){
 
 
     const fetchSpecilaizations = async ()=>{
-        const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/homepage-banner/get-specialization`,{
+        const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/homepage-banner/get-specialization?limit=0`,{
             method : "Get",
             headers :{
                 "content-type":"application/json"
@@ -52,7 +52,7 @@ export default function Filters(){
 
 
      const fetchTreatment = async ()=>{
-        const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/homepage-banner/get-treatment`,{
+        const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/homepage-banner/get-treatment?isFeatured=false`,{
             method : "Get",
             headers :{
                 "content-type":"application/json"

@@ -67,7 +67,7 @@ export function MainPackage() {
 
         if (res.ok) {
             const result = await res.json();
-            setBoostPackages(result.data);
+            setBoostPackages(result.data.filter(x=>x.type === 0));
         }
     }
 
