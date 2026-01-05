@@ -14,6 +14,9 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { brazilianCurrency } from "@/lib/brazilianCurrency";
 import {formatBrazilDate} from "../../../lib/formatDate";
+import {GetFreeQuote} from "./getFreeQuote";
+import { useRouter } from "next/navigation";
+import {createSlug} from "../../global/slug/urlconversion";
 
 
 
@@ -60,6 +63,10 @@ export function ClinicDetail({id}){
 
   const [reviews,setReviews] = useState([]);
   const[accreditation,setAccreditation] = useState([]);
+
+  const[freequoteisopen,setFreeQuoteIsOpen] = useState(false);
+
+  const router = useRouter();
 
 
   useEffect(()=>{
@@ -505,7 +512,10 @@ const groupSurgeryImages = (images = []) => {
                     <div className="sticky top-2.5">
                       <div className="bg-primary rounded-thm lg:p-7.5 p-5 pb-6 text-center text-white md:mt-0 mt-5">
                         <h4 className="h2 mb-4">Get A Free<br/>Quote</h4>
-                        <Link href="#" className="btn btn-secondary w-full mb-3 py-4">Get A Free Quote</Link>
+                        <button onClick={()=>{
+                            setFreeQuoteIsOpen(true);
+                            router.push(`/order-create/${clinicdetails.uuid}/${createSlug(clinicdetails.name)}`)
+                        }} className="btn btn-secondary w-full mb-3 py-4">Get A Free Quote</button>
                         <p className="mb-0">Or Contact Via <Link href="#" className="underline">WhatsApp</Link> or <Link href="#" className="underline">Telegram</Link></p>
                       </div>
     
@@ -520,8 +530,12 @@ const groupSurgeryImages = (images = []) => {
           
          
           <SwiperInit />
+
+         
         </>
 
+
+        {freequoteisopen && (<GetFreeQuote onClose={(e)=> setFreeQuoteIsOpen(e)} packages={packages} id={id} />) }
 
     
     </>);

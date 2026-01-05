@@ -481,8 +481,5 @@ export function ClinciDetailsSkeleton(){
               </div>
             </div>
           </div>
-
-
-
     </>);
 }

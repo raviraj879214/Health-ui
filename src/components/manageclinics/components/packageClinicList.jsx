@@ -66,7 +66,7 @@ export function PackageClinicList({ id }) {
                
                 {packages.map((item)=>(
 
-                     <div className="relative bg-neutral-primary-soft max-w-xs w-full p-6 border border-default rounded-base shadow-xs">
+                     <div key={item.id} className="relative bg-neutral-primary-soft max-w-xs w-full p-6 border border-default rounded-base shadow-xs">
                         <div className="absolute top-4 right-4 cursor-pointer text-body hover:text-heading">
                         </div>
                         <div className="mb-6">

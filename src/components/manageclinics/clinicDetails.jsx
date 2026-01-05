@@ -14,95 +14,44 @@ import Label from "../form/Label";
 import {ClinicSubSpecialty} from "../manageclinics/components/clinicSubSpecialty";
 import {ClinicTreatment} from "../manageclinics/components/clinicTreatment";
 import {PackageClinicList} from "../manageclinics/components/packageClinicList";
+import {StripeDetails} from "./components/stripeDetails";
+import {ClinicStatus} from "./components/clinicStatus";
+import {ClinicStatusDisplay} from "./components/clinicStatusDisplay";
+import { ToastContainer } from "react-toastify";
+import {ClinicHeroSection} from "./components/clinicHeroSection";
+
 
 export function ClinicDetails({id}){
 
+
+    const [change,setChange] = useState(0);
+
    
 
+     const handleTrigger = (value) => {
+        setChange(value);
+    };
 
-
-      
 
 
     return(<>
     
       <ComponentCard title="Clinic Details">
-          <div className="grid grid-cols-6 grid-rows-2 gap-2">
-              <div className=" p-2 row-span-2 col-start-6">
-                  <p className="p-2 border border-green-500 rounded text-center bg-green-100 text-green-800 font-medium">
-                      Approved
-                  </p>
-              </div>
+        <ToastContainer></ToastContainer>
+          <div className="grid grid-cols-1  gap-2">
+             <ClinicStatusDisplay trigger={change} id={id} />
           </div>
+
 
             <div className="grid grid-cols-2 gap-2">
                 
                 <BannerSlider id={id}></BannerSlider>
-                <div className="p-1 flex justify-center">
-                    <div className="max-w-md w-full border border-gray-200 rounded-xl shadow-sm bg-white p-6">
-                        <h3 className="text-xl font-semibold text-gray-800 mb-4">
-                            Aalpha Info Server Pvt Ltd
-                        </h3>
 
-                        <div className="space-y-3 text-sm text-gray-600">
-                            <p className="flex">
-                                <span className="font-medium w-24">Address:</span>
-                                <span>
-                                    No. 197, 2nd Floor, 5th Main, 6th Cross, Gandhinagar,
-                                    Bangalore - 560009, Karnataka, India
-                                </span>
-                            </p>
-
-                            <p className="flex">
-                                <span className="font-medium w-24">Phone:</span>
-                                <span>+91-836-4262222</span>
-                            </p>
-
-                            <p className="flex">
-                                <span className="font-medium w-24">Email:</span>
-                                <span>email@gmail.com</span>
-                            </p>
-
-                            <p className="flex">
-                                <span className="font-medium w-24">Registered:</span>
-                                <span>04-12-2025</span>
-                            </p>
-                        </div>
+                <ClinicHeroSection id={id} />
+                
 
 
-                        <div className="flex items-center gap-3 mt-3 text-body">
 
-                        
-                        <a href="tel:+919876543210" className="hover:text-heading">
-                          <img width={"30px"} src="http://localhost:3000/images/brand/phone.svg" alt="WhatsApp" />
-                        </a>
-
-                    
-                        <a
-                          href="https://wa.me/919876543210"
-                          target="_blank"
-                          className="hover:text-heading"
-                        >
-                        <img width={"30px"} src="http://localhost:3000/images/brand/whatsapp.svg" alt="WhatsApp" />
-
-
-                        </a>
-
-                    
-                        <a
-                          href="https://t.me/clinic_support"
-                          target="_blank"
-                          className="hover:text-heading"
-                        >
-                          <img width={"30px"} src="http://localhost:3000/images/brand/telegram.svg" alt="WhatsApp" />
-                        </a>
-
-                      
-                      
-
-                      </div>
-                    </div>
-                </div>
             </div>
 
             <div className="grid grid-col-1">
@@ -329,88 +278,15 @@ export function ClinicDetails({id}){
                <ClinicDescription id={id}></ClinicDescription>
             </div>
 
+
             <div className="grid grid-cols-1 gap-4 ">
-                <div className="flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70">
-                    <div className="flex justify-between items-center border-b border-gray-200 rounded-t-xl py-3 px-4 md:px-5 dark:border-neutral-700">
-                        <h3 className="text-lg font-bold text-gray-800 dark:text-white">
-                           Make Action
-                        </h3>
-                    </div>
-                    <div className="p-4 md:p-5">
-                        <div className="h-80 overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
-                            <Tabs>
-                                   
-                                    <TabList className="flex border-b border-gray-300 mb-4">
-                                        <Tab className="px-6 py-3 cursor-pointer text-gray-600 hover:text-gray-800 focus:outline-none selected:text-blue-600 selected:border-b-2 selected:border-blue-600 font-medium">
-                                        Block
-                                        </Tab>
-                                        <Tab className="px-6 py-3 cursor-pointer text-gray-600 hover:text-gray-800 focus:outline-none selected:text-blue-600 selected:border-b-2 selected:border-blue-600 font-medium">
-                                        Reject
-                                        </Tab>
-                                        <Tab className="px-6 py-3 cursor-pointer text-gray-600 hover:text-gray-800 focus:outline-none selected:text-blue-600 selected:border-b-2 selected:border-blue-600 font-medium">
-                                        Un-Reject/Block
-                                        </Tab>
-                                        <Tab className="px-6 py-3 cursor-pointer text-gray-600 hover:text-gray-800 focus:outline-none selected:text-blue-600 selected:border-b-2 selected:border-blue-600 font-medium">
-                                        Want to send message
-                                        </Tab>
-                                    </TabList>
+               <StripeDetails id={id}></StripeDetails>
+            </div>
 
 
-                                    <TabPanel>
-                                        <div className="text-gray-700 space-y-2">
-                                        <h2 className="text-md font-semibold mb-2">Write Reason for Block</h2>
-                                        <textarea
-                                            className="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-200 focus:border-blue-500 resize-none h-32"
-                                            placeholder="Type your reason here..."
-                                        ></textarea>
-                                        <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition">
-                                            Block
-                                        </button>
-                                        </div>
-                                    </TabPanel>
 
-
-                                    <TabPanel>
-                                    <div className="text-gray-700 space-y-2">
-                                        <h2 className="text-md font-semibold mb-2">Write Reason for Rejection</h2>
-                                        <textarea
-                                            className="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-200 focus:border-blue-500 resize-none h-32"
-                                            placeholder="Type your reason here..."
-                                        ></textarea>
-                                        <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition">
-                                            Reject
-                                        </button>
-                                        </div>
-                                    </TabPanel>
-                                        <TabPanel>
-                                    <div className="text-gray-700 space-y-2">
-                                        <h2 className="text-md font-semibold mb-2">Write Reason for Un-Reject/Block</h2>
-                                        <textarea
-                                            className="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-200 focus:border-blue-500 resize-none h-32"
-                                            placeholder="Type your reason here..."
-                                        ></textarea>
-                                        <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition">
-                                            Un-Reject/Block
-                                        </button>
-                                        </div>
-                                    </TabPanel>
-                                    <TabPanel>
-                                    <div className="text-gray-700 space-y-2">
-                                        <h2 className="text-md font-semibold mb-2">Write message to send</h2>
-                                        <textarea
-                                            className="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-200 focus:border-blue-500 resize-none h-32"
-                                            placeholder="Type your reason here..."
-                                        ></textarea>
-                                        <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition">
-                                            Send
-                                        </button>
-                                        </div>
-                                    </TabPanel>
-                            </Tabs>
-
-                        </div>
-                    </div>
-                </div>
+            <div className="grid grid-cols-1 gap-4 ">
+                <ClinicStatus onTrigger={handleTrigger} id={id} />
             </div>
 
 

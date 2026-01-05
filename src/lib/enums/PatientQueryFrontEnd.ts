@@ -1,0 +1,14 @@
+
+
+
+
+
+export enum PatientQueryQuestion{
+    SELECTTREATMENT = 0,
+    WAHTMATTERMOST = 1,
+    MEDICALREPORT = 2,
+    PROCEDURETIME = 3,
+    NAMEPATIENT = 4,
+    PATIENTEMAIL = 5,
+    PATIENTPHONENUMBER = 6
+}
