@@ -83,11 +83,16 @@ export function ManagePatientQueries() {
           <Table>
             <TableHeader className="border-b">
               <TableRow>
+                <TableCell isHeader className="px-5 py-3">Requested No.</TableCell>
                 <TableCell isHeader className="px-5 py-3">Patient</TableCell>
                 <TableCell isHeader className="px-5 py-3">Contact</TableCell>
-                 <TableCell isHeader className="px-5 py-3">Package Details</TableCell>
-                <TableCell isHeader className="px-5 py-3">Subject</TableCell>
-                <TableCell isHeader className="px-5 py-3">Message</TableCell>
+                <TableCell isHeader className="px-5 py-3">Medical Reports Value</TableCell>
+                <TableCell isHeader className="px-5 py-3">Treatment</TableCell>
+                <TableCell isHeader className="px-5 py-3">Waht Matter Most</TableCell>
+                <TableCell isHeader className="px-5 py-3">Procedure Time</TableCell>
+
+              
+                
                 <TableCell isHeader className="px-5 py-3 text-center">Status</TableCell>
                 <TableCell isHeader className="px-5 py-3 text-right">Created</TableCell>
                 <TableCell isHeader className="px-5 py-3 text-center w-20">
@@ -100,6 +105,10 @@ export function ManagePatientQueries() {
               {queries.map((q) => (
                 <TableRow key={q.id}>
                   {/* Patient */}
+
+                  <TableCell className="px-5 py-4 font-medium">
+                    {q.querycode}
+                  </TableCell>
                   <TableCell className="px-5 py-4 font-medium">
                     {q.patientName}
                   </TableCell>
@@ -107,30 +116,34 @@ export function ManagePatientQueries() {
                   
 
                  
-                  <TableCell className="px-5 py-4 text-sm text-gray-600">
-                    <div>{q.phoneNumber}</div>
-                    <div className="text-xs">{q.email}</div>
+                <TableCell className="px-5 py-4 text-sm text-gray-600">
+                    {q.phoneNumber || q.email ? (
+                      <>
+                        {q.phoneNumber && <div>{q.phoneNumber}</div>}
+                        {q.email && <div className="text-xs">{q.email}</div>}
+                      </>
+                    ) : (
+                      <div className="text-red-500 text-sm">Not Verified</div>
+                    )}
                   </TableCell>
 
-                <TableCell className="px-5 py-4">
-                        <p className="font-semibold text-gray-900">{q.package.title}</p>
-                        <p className="inline-block bg-green-100 text-green-800 px-2 py-1 rounded-full mt-1 text-sm">
-                            {brazilianCurrency(q.package.discountedprice)}
-                        </p>
-                        <p className="text-gray-500 mt-1">{q.clinic.name}</p>
-                </TableCell>
 
-
-                  <TableCell className="px-5 py-4">
-                    {q.subject || "—"}
+                   <TableCell className="px-5 py-4 text-sm text-gray-600">
+                    <div>{q.medicalReportsValue || "--"}</div>
                   </TableCell>
 
-                
-                  <TableCell className="px-5 py-4 max-w-sm">
-                    <p className="line-clamp-2 text-gray-500">
-                      {q.message}
-                    </p>
+                   <TableCell className="px-5 py-4 text-sm text-gray-600">
+                    <div>{q.treatmentName || "--"}</div>
                   </TableCell>
+                   <TableCell className="px-5 py-4 text-sm text-gray-600">
+                    <div>{q.whatMatterMostName || "--"}</div>
+                  </TableCell>
+                   <TableCell className="px-5 py-4 text-sm text-gray-600">
+                    <div>{q.procedureTimeValue || "--"}</div>
+                  </TableCell>
+
+             
+                 
 
                 
                   <TableCell className="px-5 py-4 text-center">

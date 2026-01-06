@@ -35,7 +35,8 @@ export  function StepOne() {
     register,
     handleSubmit,
     formState: { errors },
-    setValue
+    setValue,
+    setError
   } = useForm();
 
 
@@ -49,12 +50,15 @@ export  function StepOne() {
             },
             body : JSON.stringify({
                 "email" : data.email
-
             })
         });
         if(res.ok){
+          debugger;
             const result = await res.json();
-
+            if(result.status == 404){
+                setError("email", {type: "manual",message: "Email already exists"});
+            }
+            
             if(result.status == 404){
                     toast.success(result.message, {
                     className: "bg-blue-600 text-white font-bold",

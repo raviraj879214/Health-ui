@@ -118,7 +118,7 @@ export function PackageStepSix({ clinicuuid, packageid }) {
         <DialogPanel className="bg-white rounded-lg shadow-xl w-full max-w-3xl p-6">
           <DialogTitle className="flex justify-between items-center text-lg font-semibold mb-4">
             <span>Package Other Information</span>
-            <span className="text-green-400">Step 6/5</span>
+            <span className="text-green-400">Step 6/7</span>
           </DialogTitle>
 
           {loading && <div>Loading...</div>}

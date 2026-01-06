@@ -157,6 +157,7 @@ export function PatientEmail() {
 
         <p className="text-sm text-blue-700 mb-6">
           We will use this email to send you details about your request
+          If email verification fails, you can try contacting one of our coordinators directly by skipping this step.
         </p>
 
         <div className="flex justify-center w-full">

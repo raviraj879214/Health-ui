@@ -513,9 +513,11 @@ const groupSurgeryImages = (images = []) => {
                       <div className="bg-primary rounded-thm lg:p-7.5 p-5 pb-6 text-center text-white md:mt-0 mt-5">
                         <h4 className="h2 mb-4">Get A Free<br/>Quote</h4>
                         <button onClick={()=>{
-                            setFreeQuoteIsOpen(true);
-                            router.push(`/order-create/${clinicdetails.uuid}/${createSlug(clinicdetails.name)}`)
-                        }} className="btn btn-secondary w-full mb-3 py-4">Get A Free Quote</button>
+                            // setFreeQuoteIsOpen(true);
+                             router.push(`/order-create/${clinicdetails.uuid}/${createSlug(clinicdetails.name)}`)
+                            
+                            }}
+                             className="btn btn-secondary w-full mb-3 py-4">Get A Free Quote</button>
                         <p className="mb-0">Or Contact Via <Link href="#" className="underline">WhatsApp</Link> or <Link href="#" className="underline">Telegram</Link></p>
                       </div>
     

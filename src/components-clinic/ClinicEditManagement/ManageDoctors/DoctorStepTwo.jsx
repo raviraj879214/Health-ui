@@ -116,7 +116,7 @@ const [test, setTest] = useState(["Heart", "Skin", "Neuro", "Skin", "Neuro", "Sk
     );
 
     if (specializationExists) {
-      alert("Specialization already exists!");
+      alert("Speciality already exists!");
         setOhertext("");
       return ;
     }
@@ -158,7 +158,7 @@ const [test, setTest] = useState(["Heart", "Skin", "Neuro", "Skin", "Neuro", "Sk
       <div className="fixed inset-0 z-10 w-screen overflow-y-auto flex items-center justify-center p-4">
         <DialogPanel className="bg-white rounded-lg shadow-xl w-full max-w-3xl p-6">
           <DialogTitle className="flex justify-between items-center text-lg font-semibold mb-4">
-            <span>Choose Specialization </span>
+            <span>Choose Speciality </span>
             <span className="text-green-400 ">2/4</span>
           </DialogTitle>
 

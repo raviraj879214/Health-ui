@@ -13,6 +13,7 @@ import { clinicHeaders } from "@/components-clinic/utils/clinicHeaders";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { Dropdown } from "@/components/ui/dropdown/Dropdown";
+import { type } from "os";
 
 
 export function DoctorOne({ onClose, nextStep, clinicuuid, doctoruuid }) {
@@ -23,7 +24,8 @@ export function DoctorOne({ onClose, nextStep, clinicuuid, doctoruuid }) {
     setValue,
     control,
     watch,
-    reset
+    reset,
+    setError
   } = useForm({
     defaultValues: {
       languages: [],
@@ -118,6 +120,17 @@ export function DoctorOne({ onClose, nextStep, clinicuuid, doctoruuid }) {
 
     if (res.ok) {
       const result = await res.json();
+
+      if(result.status == 401){
+        setError("crm", {
+          type: "manual",
+          message: "Crm Already exist"
+        });
+      }
+
+      
+
+
       setdoctoruuids(result.data.uuid);
       window.location.href = `?doid=${result.data.uuid}&step=2`;
     }

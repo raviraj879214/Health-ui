@@ -114,9 +114,9 @@ export function MainPackages({ clinicuuid }) {
             <div className="absolute top-3 right-3 flex gap-2">
                 
 
-                <button onClick={() => setEnabled(!enabled)} className={`relative inline-flex h-6 w-11 items-center rounded-full transition ${enabled ? "bg-green-700" : "bg-gray-300"}`}>
+                {/* <button onClick={() => setEnabled(!enabled)} className={`relative inline-flex h-6 w-11 items-center rounded-full transition ${enabled ? "bg-green-700" : "bg-gray-300"}`}>
                     <span className={`inline-block h-5 w-5 transform rounded-full bg-white transition ${ enabled ? "translate-x-5" : "translate-x-1"}`}/>
-                </button>
+                </button> */}
 
 
               <button className="background-theme p-2 bg-gray-100 hover:bg-gray-200 rounded-full">

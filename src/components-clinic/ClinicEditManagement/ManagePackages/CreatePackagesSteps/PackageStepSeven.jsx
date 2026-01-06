@@ -3,6 +3,9 @@ import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from "@headlessui/re
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
+
+
+
 export function PackageStepSeven({ clinicuuid, packageid }) {
     const [open, setOpen] = useState(true);
     const [doctors, setDoctors] = useState([]);
@@ -115,6 +118,14 @@ export function PackageStepSeven({ clinicuuid, packageid }) {
     };
 
 
+
+const goToStepOne = () => {
+  
+  window.location.href = window.location.pathname;
+};
+
+
+
     return (
         <Dialog open={open} onClose={() => setOpen(false)} className="relative z-10">
             <DialogBackdrop className="fixed inset-0 bg-gray-500/75" />
@@ -122,7 +133,7 @@ export function PackageStepSeven({ clinicuuid, packageid }) {
                 <DialogPanel className="bg-white rounded-lg shadow-xl w-full max-w-3xl p-6">
                     <DialogTitle className="flex justify-between items-center text-lg font-semibold mb-4">
                         <span>Choose Doctor</span>
-                        <span className="text-green-400">2/5</span>
+                        <span className="text-green-400">7/7</span>
                     </DialogTitle>
 
                     <div className="border theme-border rounded h-[500px] p-4 overflow-auto">
@@ -251,7 +262,7 @@ export function PackageStepSeven({ clinicuuid, packageid }) {
                         <button type="button" onClick={onCancel} className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-4 py-2 text-gray-700 shadow-sm border hover:bg-gray-100 sm:mt-0 sm:w-auto">
                             Cancel
                         </button>
-                        <button type="submit" className="btn btn-primary" disabled={!selectedDoctor}>
+                        <button onClick={()=> goToStepOne()} type="submit" className="btn btn-primary" disabled={!selectedDoctor}>
                             Next
                         </button>
                     </div>

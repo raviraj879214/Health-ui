@@ -22,6 +22,7 @@ export function StripeBoardSuccess({ id }) {
           headers: await clinicHeaders(),
           body: JSON.stringify({ id }),
         }
+        
       );
 
       if (!res.ok) {

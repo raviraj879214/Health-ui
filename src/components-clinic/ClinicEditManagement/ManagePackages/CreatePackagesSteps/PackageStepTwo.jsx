@@ -204,8 +204,8 @@ export function PackageStepTwo({clinicuuid,packageid}){
                             <DialogPanel className="bg-white rounded-lg shadow-xl w-full max-w-3xl p-6">
         
                                 <DialogTitle className="flex justify-between items-center text-lg font-semibold mb-4">
-                                    <span>Choose Specialization </span>
-                                    <span className="text-green-400 "></span>
+                                    <span>Choose Specialty </span>
+                                    <span className="text-green-400 ">2/7</span>
                                 </DialogTitle>
         
         

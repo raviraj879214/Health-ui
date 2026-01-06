@@ -16,8 +16,10 @@ export function ManageUser() {
     const { register, getValues, setValue, formState: { errors }, reset, handleSubmit } = useForm();
     const [message,setmessage] = useState("");
     const [userbutton,setuserbutton] = useState("");
+    const [roleid,setRoleid] = useState(0);
 
     const onCreate =async (data) => {
+        
         setuserbutton(true);
         debugger;
         const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/users`,{
@@ -31,7 +33,10 @@ export function ManageUser() {
                 roleId :  data.roleid,
                 firstname : data.firstname,
                 lastname : data.lastname,
-                Bio : data.bio
+                Bio : data.bio,
+                whatsappNumber: data.whatsappnumber,
+                telegramNumber: data.telegramusername,
+                messengerID: data.messengerid
 
             })
         });
@@ -211,12 +216,13 @@ export function ManageUser() {
                             </div>
 
                             <div>
-                                <Label>Role</Label>
+                                <Label>Role </Label>
                                 <div className="relative">
                                     <select
                                         {...register("roleid", { required: "Please select role" })}
                                         className={`w-full rounded-md border px-3 py-2 appearance-none focus:outline-none
                                         ${errors.roleid ? "border-red-500 focus:ring-red-300" : "border-gray-300 focus:ring-brand-200"}`}
+                                        onChange={(e)=> setRoleid(e.target.options[e.target.selectedIndex].text)}
                                     >
                                         <option value="">Select an option</option>
                                         {options.map((opt) => (
@@ -256,6 +262,62 @@ export function ManageUser() {
                                     <p className="text-red-500 text-sm">{errors.bio.message}</p>
                                 )}
                             </div>
+                            {roleid == "Cordinator" && (
+                                 
+                                 <>
+                                  <div>
+                                <Label>Whats App Number</Label>
+                                <input
+                                    type="text"
+                                    className={`h-11 w-full rounded-lg border px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-hidden focus:ring-3 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800
+                                    ${errors.whatsappnumber ? "border-red-500 focus:ring-red-300" : "border-gray-300 focus:ring-brand-200"}`}
+                                    defaultValue={getValues("whatsappnumber")}
+                                    {...register("whatsappnumber", {
+                                        required: "Please enter whats app number"
+                                       
+                                    })}
+                                    placeholder="Enter bio"
+                                />
+                                {errors.whatsappnumber && (
+                                    <p className="text-red-500 text-sm">{errors.whatsappnumber.message}</p>
+                                )}
+                            </div> <div>
+                                <Label>Telegram User ID</Label>
+                                <input
+                                    type="text"
+                                    className={`h-11 w-full rounded-lg border px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-hidden focus:ring-3 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800
+                                    ${errors.telegramusername ? "border-red-500 focus:ring-red-300" : "border-gray-300 focus:ring-brand-200"}`}
+                                    defaultValue={getValues("telegramusername")}
+                                    {...register("telegramusername", {
+                                        required: "Please enter telegram username"
+                                       
+                                    })}
+                                    placeholder="Enter telegram username"
+                                />
+                                {errors.telegramusername && (
+                                    <p className="text-red-500 text-sm">{errors.telegramusername.message}</p>
+                                )}
+                            </div>
+                             <div>
+                                <Label>Messenger ID</Label>
+                                <input
+                                    type="text"
+                                    className={`h-11 w-full rounded-lg border px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-hidden focus:ring-3 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800
+                                    ${errors.messengerid ? "border-red-500 focus:ring-red-300" : "border-gray-300 focus:ring-brand-200"}`}
+                                    defaultValue={getValues("messengerid")}
+                                    {...register("messengerid", {
+                                        required: "Please enter messenger id"
+                                       
+                                    })}
+                                    placeholder="Enter messenger username"
+                                />
+                                {errors.messengerid && (
+                                    <p className="text-red-500 text-sm">{errors.messengerid.message}</p>
+                                )}
+                            </div>
+                                 </>
+                            )}
+                           
 
 
 
@@ -271,9 +333,9 @@ export function ManageUser() {
                         </div>
 
                                                     <div className="grid grid-cols-10 gap-4 mt-5">
-  <div className="col-span-8"></div> {/* spacer */}
-  <div className="col-span-2">
-  <button
+                                                        <div className="col-span-8"></div> {/* spacer */}
+                                                        <div className="col-span-2">
+                                                    <button
                                     type="submit"
                                     className="bg-brand-500 hover:bg-brand-600 w-full rounded-lg p-3 text-sm font-medium text-white transition-colors">
                                     Create User

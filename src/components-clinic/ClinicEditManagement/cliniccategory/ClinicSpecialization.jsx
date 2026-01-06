@@ -106,7 +106,7 @@ export function ClinicSpecializations({clinicuuid}){
         );
     
         if (specializationExists) {
-          alert("Specialization already exists!");
+          alert("Speciality already exists!");
             setOhertext("");
           return ;
         }
@@ -144,14 +144,14 @@ export function ClinicSpecializations({clinicuuid}){
         <button
             onClick={()=> setOpen(true)}
          className="btn btn-primary flex items-center gap-2">
-            <FaEdit /> Edit Specialization
+            <FaEdit /> Edit Speciality
         </button>
     </div>
 
 
     
         {specializationselected.length === 0 ? (
-                <p className="text-center">No specializations </p>
+                <p className="text-center">No specialities </p>
             ) :(
                 <div className="border border-gray-300 rounded-lg p-3 w-auto max-h-[180px] overflow-auto flex flex-wrap">
                         {specializationselected.map((item) => (
@@ -175,7 +175,7 @@ export function ClinicSpecializations({clinicuuid}){
                     <DialogPanel className="bg-white rounded-lg shadow-xl w-full max-w-3xl p-6">
 
                         <DialogTitle className="flex justify-between items-center text-lg font-semibold mb-4">
-                            <span>Choose Specialization </span>
+                            <span>Choose Speciality </span>
                             <span className="text-green-400 "></span>
                         </DialogTitle>
 

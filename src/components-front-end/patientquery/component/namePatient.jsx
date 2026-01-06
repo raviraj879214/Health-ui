@@ -12,7 +12,11 @@ export function NamePatient() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+
    const patientName = useSelector((state) => state.patientquery.patientName);
+
+   
    const dispatch =useDispatch();
 
   const onEnter = async (data) => {

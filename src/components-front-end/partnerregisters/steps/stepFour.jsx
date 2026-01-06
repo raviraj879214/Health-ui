@@ -40,8 +40,9 @@ export function StepFour() {
   useEffect(() => {
     if (selectedCountryId) {
       const country = countries.find(
-        (c) => c.id === Number(selectedCountryId)
+        (c) => c.id === (selectedCountryId)
       );
+      console.log("country?.cities",selectedCountryId);
       setStates(country?.cities || []);
       setValue("state", "");
     } else {
@@ -62,6 +63,8 @@ export function StepFour() {
       console.error("Failed to load countries", err);
     }
   };
+
+
 
   const fetchClinicDetails = async () => {
     try {

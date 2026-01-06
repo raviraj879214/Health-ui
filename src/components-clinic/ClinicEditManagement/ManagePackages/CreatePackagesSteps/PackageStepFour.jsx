@@ -207,7 +207,7 @@ export function PackageStepFour({clinicuuid,packageid}){
 
                         <DialogTitle className="flex justify-between items-center text-lg font-semibold mb-4">
                             <span>Choose Treatment </span>
-                            <span className="text-green-400 "></span>
+                            <span className="text-green-400 ">4/7</span>
                         </DialogTitle>
 
 

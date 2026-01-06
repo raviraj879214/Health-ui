@@ -174,7 +174,7 @@ export function PackageStepFive({clinicuuid,packageid}){
                <DialogPanel className="bg-white rounded-lg shadow-xl w-full max-w-3xl p-6">
                 <DialogTitle className="flex justify-between items-center text-lg font-semibold mb-4">
                    <span>Choose Procedure </span>
-                   <span className="text-green-400 ">2/5</span>
+                   <span className="text-green-400 ">5/7</span>
                  </DialogTitle>
 
                   <div className="border theme-border rounded-lg p-3 w-auto flex flex-wrap max-h-[180px] overflow-auto ">

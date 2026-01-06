@@ -204,7 +204,7 @@ export  function HeaderFrontend() {
                 <MenuItems className="absolute right-0 z-50 mt-2 md:w-full w-40 origin-top-right bg-white shadow-[0_0_30px_0_rgba(45,45,45,0.15)] rounded-thm focus:outline-none [&_a]:hover:text-secondary">
                   <div className="py-1 max-h-38 overflow-auto">
                     <MenuItem>
-                        <Link href="#" className="block px-4 py-1.5 font-medium text-sm text-gray-700">
+                        <Link href="/partner-login" className="block px-4 py-1.5 font-medium text-sm text-gray-700">
                           For Clinics
                         </Link>
                     </MenuItem>
