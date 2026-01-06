@@ -44,11 +44,11 @@ export function ClinicList() {
         <div className="grid grid-cols-12">
             <div className="col-span-6">
                 <ComponentCard>
-                    <div className="flex justify-end">
+                    {/* <div className="flex justify-end">
                         <button className="btn btn-primary rounded-3xl px-6 py-2">
                             + Add Clinic
                         </button>
-                    </div>
+                    </div> */}
 
                     <ul>
                         {cliniclist.map((data) => (

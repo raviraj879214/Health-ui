@@ -82,7 +82,7 @@ export default function TopRated(){
   });
 
 
-  // ✅ Merge for Load More
+
   setClinic((prev) => {
     
 
@@ -115,10 +115,12 @@ export default function TopRated(){
     return (
         
         <>
-        <div className="md:my-18 my-16">
+        {clinics.length > 0 &&(
+          
+           <div className="md:my-18 my-16">
             <div className="container">
               
-                <h2 className="h2 text-center mb-7">Top Rated Clinics</h2>
+                <h2 className="h2 text-center mb-7">Top Rated Clinics </h2>
 
                 
                 <div className="grid md:grid-cols-3 grid-cols-1 gap-7.5">
@@ -141,6 +143,8 @@ export default function TopRated(){
                 </div>
             </div>
         </div>
+        )}
+       
         </>
     )
 }

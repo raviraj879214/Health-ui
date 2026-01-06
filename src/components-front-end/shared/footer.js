@@ -91,8 +91,8 @@ const Footer = forwardRef(function Footer(props, ref) {
                 <div className="m-0 flex-auto w-[50%] flex flex-col items-start">
                   <h4 className="font-bold">For Clinics</h4>
                   <div className="m-0 inline-flex flex-col text-center gap-2.5">
-                    <Link href="#" className="btn btn-primary w-full">Become A Partner</Link>
-                    <Link href="#" className="btn btn-secondary w-full">Login</Link>
+                    <Link href="/register" className="btn btn-primary w-full">Become A Partner</Link>
+                    <Link href="/partner-login" className="btn btn-secondary w-full">Login</Link>
                   </div>
                 </div>
               </div>

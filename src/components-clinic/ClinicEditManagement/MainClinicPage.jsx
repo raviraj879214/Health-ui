@@ -137,9 +137,11 @@ export function MainClinic({ clinicuuid }) {
       <div className="col-span-12 md:col-span-10">
         <br></br>
         <div ref={bannerRef}>
+          
              <HeroSectionbanner
 
         className="mt-1"
+          clinicdetail={clinicdetail}
           name={clinicdetail.name}
           clinicuuid={clinicdetail.uuid}
           location={`${clinicdetail.country}, ${clinicdetail.state} ${clinicdetail.city}`} />

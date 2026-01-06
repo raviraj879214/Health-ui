@@ -110,8 +110,9 @@ export default function PopularClinics(){
 
 
 
-    return (
-        <div className="md:my-18 my-16">
+    return (<>
+      {clinics.length>0 &&(
+  <div className="md:my-18 my-16">
             <div className="container">
                 <h2 className="h2 text-center mb-7">Popular Clinics</h2>
                 <div className="swiper-offet-wrap">
@@ -143,5 +144,9 @@ export default function PopularClinics(){
             </div>
             <SwiperInit />
         </div>
+      )}
+    
+    </>
+      
     )
 }

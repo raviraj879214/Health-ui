@@ -59,8 +59,11 @@ export default function Treatments(){
 
 
 
-    return (
-        <div className="md:my-18 my-16">
+    return (<>
+
+       
+
+                {treatments.length > 0 &&( <div className="md:my-18 my-16">
             <div className="container">
                 <h2 className="h2 text-center mb-7">Search By Treatments</h2>
                 <div className="swiper swiper-treatments a-hover-secondary">
@@ -77,6 +80,6 @@ export default function Treatments(){
                
             </div>
             <SwiperInit />
-        </div>
-    )
+        </div>)}
+   </> )
 }
