@@ -1,6 +1,6 @@
 import PageBreadcrumb from "@/components/common/PageBreadCrumb";
 import {MainBoostClinicPackages} from "../../../components-clinic/clinicboostpackage/mainBoostClinicPackages";
-import {ListingSuccess} from "../../../components-clinic/clinicboostpackage/ListingSuccess";
+import {ListingSuccess} from "../../../components-clinic/clinicboostpackage/listingSuccess";
 
 
 export default function Page({searchParams}){
