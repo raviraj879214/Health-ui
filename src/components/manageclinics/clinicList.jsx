@@ -112,7 +112,7 @@ export function ClinicListAdmin(){
 
                             
                             <a href="tel:+919876543210" className="hover:text-heading">
-                            <img width={"30px"} src="http://localhost:3000/images/brand/phone.svg" alt="WhatsApp" />
+                            <img width={"30px"} src={`${process.env.NEXT_PUBLIC_URL}/images/brand/phone.svg`} alt="WhatsApp" />
                             </a>
 
                         
@@ -120,7 +120,11 @@ export function ClinicListAdmin(){
                             href="https://wa.me/919876543210"
                             target="_blank"
                             className="hover:text-heading">
-                                <img width={"30px"} src="http://localhost:3000/images/brand/whatsapp.svg" alt="WhatsApp" />
+                                <img width={"30px"}
+                                 
+                                 src={`${process.env.NEXT_PUBLIC_URL}/images/brand/whatsapp.svg`}
+                                 
+                                 alt="WhatsApp" />
                             </a>
 
                         
@@ -128,7 +132,11 @@ export function ClinicListAdmin(){
                             href="https://t.me/clinic_support"
                             target="_blank"
                             className="hover:text-heading">
-                            <img width={"30px"} src="http://localhost:3000/images/brand/telegram.svg" alt="WhatsApp" />
+                            <img width={"30px"} 
+                            
+                             src={`${process.env.NEXT_PUBLIC_URL}/images/brand/telegram.svg`}
+                            
+                            alt="WhatsApp" />
                             </a>
 
                         
