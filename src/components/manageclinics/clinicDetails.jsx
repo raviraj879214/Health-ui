@@ -19,6 +19,7 @@ import {ClinicStatus} from "./components/clinicStatus";
 import {ClinicStatusDisplay} from "./components/clinicStatusDisplay";
 import { ToastContainer } from "react-toastify";
 import {ClinicHeroSection} from "./components/clinicHeroSection";
+import {Accreditation} from "./components/accreditation";
 
 
 export function ClinicDetails({id}){
@@ -48,9 +49,6 @@ export function ClinicDetails({id}){
                 <BannerSlider id={id}></BannerSlider>
 
                 <ClinicHeroSection id={id} />
-                
-
-
 
             </div>
 
@@ -84,169 +82,8 @@ export function ClinicDetails({id}){
 
             <div className="grid grid-col-1">
 
-                <div className="flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70">
-                    <div className="flex justify-between items-center border-b border-gray-200 rounded-t-xl py-3 px-4 md:px-5 dark:border-neutral-700">
-                        <h3 className="text-lg font-bold text-gray-800 dark:text-white">
-                            Hospital Accreditation & Certification
-                        </h3>
-                        <div className="flex items-center gap-x-1">
-
-                        </div>
-                    </div>
-                    <div className="p-4 md:p-5 overflow-y-auto max-h-80">
-
-                        <ul className=" divide-y divide-default">
-                            <li className="pb-3 sm:pb-4">
-                                <div className="flex items-center space-x-4 rtl:space-x-reverse">
-                                    <div className="shrink-0">
-                                        <img
-                                            className="w-8 h-8 rounded-full"
-                                            src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-9.jpg"
-                                            alt="Neil image"
-                                        />
-                                    </div>
-                                    <div className="flex-1 min-w-0">
-                                        <p className="text-sm font-medium text-heading truncate">art of a recognized hospital network; listed among NABH‑accredited providers.</p>
-                                        
-                                    </div>
-                                    <div className="inline-flex items-center text-base font-semibold text-heading">
-
-                                    </div>
-                                </div>
-                            </li>
-                            <li className="pb-3 sm:pb-4">
-                                <div className="flex items-center space-x-4 rtl:space-x-reverse">
-                                    <div className="shrink-0">
-                                        <img
-                                            className="w-8 h-8 rounded-full"
-                                            src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-9.jpg"
-                                            alt="Neil image"
-                                        />
-                                    </div>
-                                    <div className="flex-1 min-w-0">
-                                        <p className="text-sm font-medium text-heading truncate">art of a recognized hospital network; listed among NABH‑accredited providers.</p>
-                                        
-                                    </div>
-                                    <div className="inline-flex items-center text-base font-semibold text-heading">
-
-                                    </div>
-                                </div>
-                            </li>
-                            <li className="pb-3 sm:pb-4">
-                                <div className="flex items-center space-x-4 rtl:space-x-reverse">
-                                    <div className="shrink-0">
-                                        <img
-                                            className="w-8 h-8 rounded-full"
-                                            src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-9.jpg"
-                                            alt="Neil image"
-                                        />
-                                    </div>
-                                    <div className="flex-1 min-w-0">
-                                        <p className="text-sm font-medium text-heading truncate">art of a recognized hospital network; listed among NABH‑accredited providers.</p>
-                                        
-                                    </div>
-                                    <div className="inline-flex items-center text-base font-semibold text-heading">
-
-                                    </div>
-                                </div>
-                            </li>
-                            <li className="pb-3 sm:pb-4">
-                                <div className="flex items-center space-x-4 rtl:space-x-reverse">
-                                    <div className="shrink-0">
-                                        <img
-                                            className="w-8 h-8 rounded-full"
-                                            src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-9.jpg"
-                                            alt="Neil image"
-                                        />
-                                    </div>
-                                    <div className="flex-1 min-w-0">
-                                        <p className="text-sm font-medium text-heading truncate">art of a recognized hospital network; listed among NABH‑accredited providers.</p>
-                                        
-                                    </div>
-                                    <div className="inline-flex items-center text-base font-semibold text-heading">
-
-                                    </div>
-                                </div>
-                            </li>
-                            <li className="pb-3 sm:pb-4">
-                                <div className="flex items-center space-x-4 rtl:space-x-reverse">
-                                    <div className="shrink-0">
-                                        <img
-                                            className="w-8 h-8 rounded-full"
-                                            src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-9.jpg"
-                                            alt="Neil image"
-                                        />
-                                    </div>
-                                    <div className="flex-1 min-w-0">
-                                        <p className="text-sm font-medium text-heading truncate">art of a recognized hospital network; listed among NABH‑accredited providers.</p>
-                                        
-                                    </div>
-                                    <div className="inline-flex items-center text-base font-semibold text-heading">
-
-                                    </div>
-                                </div>
-                            </li>
-                            <li className="pb-3 sm:pb-4">
-                                <div className="flex items-center space-x-4 rtl:space-x-reverse">
-                                    <div className="shrink-0">
-                                        <img
-                                            className="w-8 h-8 rounded-full"
-                                            src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-9.jpg"
-                                            alt="Neil image"
-                                        />
-                                    </div>
-                                    <div className="flex-1 min-w-0">
-                                        <p className="text-sm font-medium text-heading truncate">art of a recognized hospital network; listed among NABH‑accredited providers.</p>
-                                        
-                                    </div>
-                                    <div className="inline-flex items-center text-base font-semibold text-heading">
-
-                                    </div>
-                                </div>
-                            </li>
-                            <li className="pb-3 sm:pb-4">
-                                <div className="flex items-center space-x-4 rtl:space-x-reverse">
-                                    <div className="shrink-0">
-                                        <img
-                                            className="w-8 h-8 rounded-full"
-                                            src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-9.jpg"
-                                            alt="Neil image"
-                                        />
-                                    </div>
-                                    <div className="flex-1 min-w-0">
-                                        <p className="text-sm font-medium text-heading truncate">art of a recognized hospital network; listed among NABH‑accredited providers.</p>
-                                        
-                                    </div>
-                                    <div className="inline-flex items-center text-base font-semibold text-heading">
-
-                                    </div>
-                                </div>
-                            </li>
-                            <li className="pb-3 sm:pb-4">
-                                <div className="flex items-center space-x-4 rtl:space-x-reverse">
-                                    <div className="shrink-0">
-                                        <img
-                                            className="w-8 h-8 rounded-full"
-                                            src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-9.jpg"
-                                            alt="Neil image"
-                                        />
-                                    </div>
-                                    <div className="flex-1 min-w-0">
-                                        <p className="text-sm font-medium text-heading truncate">art of a recognized hospital network; listed among NABH‑accredited providers.</p>
-                                        
-                                    </div>
-                                    <div className="inline-flex items-center text-base font-semibold text-heading">
-
-                                    </div>
-                                </div>
-                            </li>
-
-                           
-                        </ul>
-
-
-                    </div>
-                </div>
+                <Accreditation id={id} />
+               
 
 
             </div>

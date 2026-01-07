@@ -121,7 +121,9 @@ export function ClinicNameUpdates({ clinicuuid, location }) {
           <Preview label="Country" value={clinic.country.name} />
           <Preview label="City/State" value={clinic.city.name} />
           <Preview label="Address" value={clinic.address} />
-           <Preview label="Phone" value={clinic.phone} />
+          <Preview label="Phone" value={clinic.phone} />
+          <Preview label="WhatsApp Number" value={clinic.whatsappNumber} />
+          <Preview label="Telegram ID" value={clinic.telegramNumber} />
           <Preview label="Email" value={clinic.email} />
           <Preview label="Website" value={clinic.websiteurl} />
         </div>
@@ -152,6 +154,8 @@ export function ClinicNameUpdates({ clinicuuid, location }) {
 
                 <Section title="Contact Details">
                   <Input label="Phone" register={register("phone")} />
+                  <Input label="WhatsApp Number" register={register("whatsappNumber")} />
+                  <Input label="Telegram ID" register={register("telegramNumber")} />
                   <Input label="Email" type="email" register={register("email")} />
                   <Input label="Website" register={register("websiteurl")} />
                 </Section>

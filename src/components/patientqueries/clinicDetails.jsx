@@ -78,54 +78,57 @@ export function ClinicDetails({ querydetails , onData }) {
       {changename ? (
         <>
         
-<div className=" relative bg-white border border-gray-200 rounded-xl shadow-md p-4 flex items-center justify-between mb-5">
+          <div className=" relative bg-white border border-gray-200 rounded-xl shadow-md p-4 flex items-center justify-between mb-5">
 
-  <select
-    onChange={(e)=> setSelectedClinic(e.target.value)}
-    className="flex-1 px-3 py-2 text-gray-700 bg-transparent border-none focus:outline-none focus:ring-0"
-    defaultValue=""
-  >
-    <option value="" disabled>
-      Select Clinic
-    </option>
+            <select
+              onChange={(e)=> setSelectedClinic(e.target.value)}
+              className="flex-1 px-3 py-2 text-gray-700 bg-transparent border-none focus:outline-none focus:ring-0"
+              defaultValue=""
+            >
+              <option value="" disabled>
+                Select Clinic
+              </option>
 
-    {cliniclist.map((item)=>(
-       <option key={item.uuid} value={item.uuid}>{item.name}</option>
-    ))}
-  </select>
+              {cliniclist.map((item)=>(
+                <option key={item.uuid} value={item.uuid}>{item.name}</option>
+              ))}
+            </select>
 
-  <button
-    type="button"
-    className="ml-3 text-gray-400 hover:text-gray-600 focus:outline-none"
-    onClick={() => {
-      setChangeName(false);
-      setSelectedClinic("");
-    }}>
+            <button
+              type="button"
+              className="ml-3 text-gray-400 hover:text-gray-600 focus:outline-none"
+              onClick={() => {
+                setChangeName(false);
+                setSelectedClinic("");
+              }}>
 
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      strokeWidth={2}
-      stroke="currentColor"
-      className="w-5 h-5"
-    >
-      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-    </svg>
-  </button>
-</div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={2}
+                stroke="currentColor"
+                className="w-5 h-5"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
 
 
         </>
       ) :(
         <>
+
          <p className="text-lg font-semibold text-gray-800 mb-2">
              {querydetails.clinic?.name}
          </p>
         </>
       )}
 
-      <p className="text-gray-600 mb-1">
+
+        {querydetails.clinic ? (<>
+           <p className="text-gray-600 mb-1">
         <span className="font-semibold">Address:</span>{" "}
         {querydetails.clinic?.address}, {querydetails.clinic?.state}
       </p>
@@ -158,6 +161,14 @@ export function ClinicDetails({ querydetails , onData }) {
           Visit website 
         </a>
       </p>
+        
+        </>):(<>
+        <div className="mt-4 rounded-lg border border-dashed border-gray-300 p-4 text-sm text-gray-500 bg-gray-50">
+          Clinic has not been assigned to this query yet.
+        </div>
+        </>)}
+
+     
 
 
     

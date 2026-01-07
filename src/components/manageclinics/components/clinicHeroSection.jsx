@@ -67,6 +67,13 @@ export function ClinicHeroSection({ id }) {
               {formatBrazilDate(accountDetails.createdAt)}
             </span>
           </p>
+           <p className="flex">
+            <span className="font-medium w-24">Website Url:</span>
+            <span>
+              <a className="text-blue-400 underline" target="_blank" href={`${accountDetails.websiteurl}`}>Visit Website</a>
+            </span>
+          </p>
+
         </div>
 
         <div className="flex items-center gap-3 mt-4">
@@ -76,20 +83,22 @@ export function ClinicHeroSection({ id }) {
             </a>
           )}
 
-          {accountDetails.phone && (
+          {accountDetails.whatsappNumber && (
             <a
-              href={`https://wa.me/${accountDetails.phone.replace(/\D/g, "")}`}
+              href={`https://wa.me/${accountDetails.whatsappNumber.replace(/\D/g, "")}`}
               target="_blank"
             >
               <img width="30" src="/images/brand/whatsapp.svg" alt="WhatsApp" />
             </a>
           )}
 
-          {accountDetails.websiteurl && (
-            <a href={accountDetails.websiteurl} target="_blank">
+          {accountDetails.telegramNumber && (
+            <a href={`https://t.me/${accountDetails.telegramNumber}`} target="_blank">
               <img width="30" src="/images/brand/telegram.svg" alt="Website" />
             </a>
           )}
+
+          
         </div>
       </div>
     </div>

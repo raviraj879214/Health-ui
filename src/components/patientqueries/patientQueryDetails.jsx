@@ -326,7 +326,10 @@ export function PatientQueryDetails({ id }) {
                 <></>
         ) :(
             <>
-                 <button
+                
+
+                   {(querydetails.package !== null && querydetails.commission > 0) ? (
+                       <button
         type="submit"
         className="h-12 px-10 bg-gradient-to-r from-indigo-500 to-purple-500
                    hover:from-indigo-600 hover:to-purple-600
@@ -335,7 +338,11 @@ export function PatientQueryDetails({ id }) {
                    focus:outline-none focus:ring-2 focus:ring-indigo-400"
       >
         Submit
-      </button>
+                 </button>
+        ):(
+          <p className="p-5 border border-red-500 rounded-2xl text-red-400">Please select treatment package to submit final deal price</p>
+        )}
+
             
             </>
         )}
@@ -463,7 +470,10 @@ export function PatientQueryDetails({ id }) {
       </div>
 
       {/* Generate Button */}
-      <button
+
+      
+        {(querydetails.package !== null && querydetails.commission > 0) ? (
+           <button
         onClick={generatelink}
         disabled={generatebutton}
         className="mt-4 h-12 px-6 bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white font-semibold rounded-lg shadow-md transition-all duration-200 flex items-center justify-center"
@@ -484,6 +494,12 @@ export function PatientQueryDetails({ id }) {
           "Generate Link"
         )}
       </button>
+        ):(
+          <p className="p-5 border border-red-500 rounded-2xl text-red-400">Please select treatment package to generate payment link</p>
+        )}
+
+
+     
 
     </div>
   </div>

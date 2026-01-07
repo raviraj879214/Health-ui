@@ -217,7 +217,7 @@ const navItems: NavItem[] = [
           name: "Clinic Management",
           subItems: [
             { name: "Manage Clinic", path: "/admin/manage-clinics", pro: false },
-            { name: "Manage Packages", path: "/admin/manage-packages", pro: false },
+            // { name: "Manage Packages", path: "/admin/manage-packages", pro: false },
           ],
         },
     {

@@ -131,7 +131,7 @@ export function ClinicStatus({ id ,onTrigger }) {
       <div className="p-5">
         <Tabs>
           <TabList className="flex border-b mb-4">
-            {["Approve", "Block", "Reject", "Un-Reject/Block", "Send Message To Clinic"].map(
+            {["Approve", "Block", "Reject", "Un-Reject/Un-Block", "Send Message To Clinic"].map(
               (tab, i) => (
                 <Tab
                   key={i}

@@ -111,13 +111,14 @@ export function ClinicListAdmin(){
                         <div className="flex items-center gap-3 mt-1 text-body">
 
                             
-                            <a href="tel:+919876543210" className="hover:text-heading">
-                            <img width={"30px"} src={`${process.env.NEXT_PUBLIC_URL}/images/brand/phone.svg`} alt="WhatsApp" />
+                            <a href={`tel:${item.phone}`} className="hover:text-heading">
+                                     <img width={"30px"} src={`${process.env.NEXT_PUBLIC_URL}/images/brand/phone.svg`} alt="WhatsApp" />
                             </a>
 
                         
                             <a
-                            href="https://wa.me/919876543210"
+                            
+                            href={`https://wa.me/${item.whatsappNumber}`}
                             target="_blank"
                             className="hover:text-heading">
                                 <img width={"30px"}
@@ -129,7 +130,7 @@ export function ClinicListAdmin(){
 
                         
                             <a
-                            href="https://t.me/clinic_support"
+                            href={`https://t.me/${item.telegramNumber}`}
                             target="_blank"
                             className="hover:text-heading">
                             <img width={"30px"} 

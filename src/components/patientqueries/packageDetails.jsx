@@ -68,7 +68,7 @@ export function PackageDetails({ querydetails , id , onData }) {
           <ToastContainer></ToastContainer>
             <div className="flex items-center justify-between mb-4">
                 <h6 className="font-bold text-gray-900">
-                    Package Details 
+                  Treatment Package  
                 </h6>
             </div>
 
@@ -125,7 +125,8 @@ export function PackageDetails({ querydetails , id , onData }) {
           </>
         )}
 
-            <p className="text-gray-600 mb-2">
+        {querydetails.package ?(<>
+             <p className="text-gray-600 mb-2">
                 <span className="font-semibold">Actual Price:</span>{" "}
                 {brazilianCurrency(querydetails.package?.actualprice)}
             </p>
@@ -134,6 +135,16 @@ export function PackageDetails({ querydetails , id , onData }) {
                 <span className="font-semibold">Discounted Price:</span>{" "}
                 {brazilianCurrency(querydetails.package?.discountedprice)}
             </p>
+        </>):(<>
+           <div className="mt-4 rounded-lg border border-dashed border-gray-300 p-4 text-sm text-gray-500 bg-gray-50">
+          Package has not been assigned to this query yet.
+        </div>
+        </>)}
+
+
+
+
+           
             
 
             {selectedpackageid !== "" ?(<>

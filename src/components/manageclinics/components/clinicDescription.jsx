@@ -46,47 +46,74 @@ export function ClinicDescription({id}){
                             Hospital Description
                         </h3>
                     </div>
-                    <div className="p-4 md:p-5">
-                        <div className="flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70">
-                            <div className="h-80 overflow-y-auto p-4 md:p-5 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
-                                <h3 className="text-lg font-bold text-gray-800 dark:text-white">
-                                    Brief Description
-                                </h3>
-                               <div className="mt-2 text-gray-500 dark:text-neutral-400 h-[400px] overflow-auto">
-                                <div
-                                    className="prose prose-sm max-w-none 
-                                            prose-ul:list-disc prose-ul:pl-5 
-                                            prose-ol:list-decimal prose-ol:pl-5"
-                                    dangerouslySetInnerHTML={{
-                                    __html: descriptions?.briefDescription,
-                                    }}
-                                />
-                                </div>
+                   <div className="p-4 md:p-5">
+  {/* Brief Description */}
+  <div className="flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl dark:bg-neutral-900 dark:border-neutral-700">
+    <div className="p-4 md:p-5">
+      <h3 className="text-lg font-bold text-gray-800 dark:text-white">
+        Brief Description
+      </h3>
 
-                            </div>
-                            
-                        </div>
-                        <div className="mt-5 flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70">
-                            <div className="h-80 overflow-y-auto p-4 md:p-5 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
-                                <h3 className="text-lg font-bold text-gray-800 dark:text-white">
-                                    Full Description
-                                </h3>
-                               
+      {descriptions?.briefDescription ? (
+        <div className="mt-2 text-gray-500 dark:text-neutral-400 max-h-[400px] overflow-auto
+          [&::-webkit-scrollbar]:w-2
+          [&::-webkit-scrollbar-thumb]:rounded-full
+          [&::-webkit-scrollbar-track]:bg-gray-100
+          [&::-webkit-scrollbar-thumb]:bg-gray-300
+          dark:[&::-webkit-scrollbar-track]:bg-neutral-700
+          dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500
+        ">
+          <div
+            className="prose prose-sm max-w-none 
+              prose-ul:list-disc prose-ul:pl-5 
+              prose-ol:list-decimal prose-ol:pl-5"
+            dangerouslySetInnerHTML={{
+              __html: descriptions.briefDescription,
+            }}
+          />
+        </div>
+      ) : (
+        <p className="mt-2 text-sm italic text-gray-400 dark:text-neutral-500">
+          No brief description available.
+        </p>
+      )}
+    </div>
+  </div>
 
-                                <div className="mt-2 text-gray-500 dark:text-neutral-400 h-[400px] overflow-auto">
-                                <div
-                                    className="prose prose-sm max-w-none 
-                                            prose-ul:list-disc prose-ul:pl-5 
-                                            prose-ol:list-decimal prose-ol:pl-5"
-                                    dangerouslySetInnerHTML={{
-                                    __html: descriptions?.fullDescription,
-                                    }}
-                                />
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </div>
+  {/* Full Description */}
+  <div className="mt-5 flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl dark:bg-neutral-900 dark:border-neutral-700">
+    <div className="p-4 md:p-5">
+      <h3 className="text-lg font-bold text-gray-800 dark:text-white">
+        Full Description
+      </h3>
+
+      {descriptions?.fullDescription ? (
+        <div className="mt-2 text-gray-500 dark:text-neutral-400 max-h-[400px] overflow-auto
+          [&::-webkit-scrollbar]:w-2
+          [&::-webkit-scrollbar-thumb]:rounded-full
+          [&::-webkit-scrollbar-track]:bg-gray-100
+          [&::-webkit-scrollbar-thumb]:bg-gray-300
+          dark:[&::-webkit-scrollbar-track]:bg-neutral-700
+          dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500
+        ">
+          <div
+            className="prose prose-sm max-w-none 
+              prose-ul:list-disc prose-ul:pl-5 
+              prose-ol:list-decimal prose-ol:pl-5"
+            dangerouslySetInnerHTML={{
+              __html: descriptions.fullDescription,
+            }}
+          />
+        </div>
+      ) : (
+        <p className="mt-2 text-sm italic text-gray-400 dark:text-neutral-500">
+          No full description available.
+        </p>
+      )}
+    </div>
+  </div>
+</div>
+
                 </div>
 
 

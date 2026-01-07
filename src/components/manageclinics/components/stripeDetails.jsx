@@ -60,7 +60,7 @@ export function StripeDetails({ id }) {
   if (loading) {
     return (
       <div className="p-6 bg-white border rounded-xl shadow-sm">
-        <p className="text-gray-500">Loading Stripe details...</p>
+        <p className="text-gray-500">No stripe details found</p>
       </div>
     );
   }
