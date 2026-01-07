@@ -254,7 +254,7 @@ const [otpDigits, setOtpDigits] = useState(["", "", "", ""]);
                   </p>
 
 
-                 {process.env.NODE_ENV === "development" && (
+                 {process.env.NEXT_PUBLIC_ENV === "development" && (
                     <div className="mb-5 p-5 mt-3 rounded-md border border-yellow-300 bg-yellow-50 px-4 py-2 text-sm text-yellow-800">
                       <strong>Test Mode:</strong> Use OTP <span className="font-semibold">0000</span>
                     </div>
