@@ -142,7 +142,6 @@ export function PatientQueryDetails({ id }) {
 
 
 
-   const comission = parseInt(querydetails.commission);
 
     return (<>
 
@@ -328,7 +327,7 @@ export function PatientQueryDetails({ id }) {
             <>
                 
 
-                   {(querydetails.package !== null && comission > 0) ? (
+                   {(querydetails.package !== null) ? (
                        <button
         type="submit"
         className="h-12 px-10 bg-gradient-to-r from-indigo-500 to-purple-500
@@ -472,7 +471,7 @@ export function PatientQueryDetails({ id }) {
       {/* Generate Button */}
 
       
-        {(querydetails.package !== null && comission > 0) ? (
+        {(querydetails.package !== null) ? (
            <button
         onClick={generatelink}
         disabled={generatebutton}
