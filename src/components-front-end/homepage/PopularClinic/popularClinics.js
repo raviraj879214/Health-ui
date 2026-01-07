@@ -140,7 +140,7 @@ export default function PopularClinics(){
                 
             </div>
             <div className="text-center mt-7">
-                <Link href="#" className="btn btn-secondary-outline">View All Clinics</Link>
+                <Link href="/clinics" className="btn btn-secondary-outline">View All Clinics</Link>
             </div>
             <SwiperInit />
         </div>

@@ -171,7 +171,14 @@ const groupSurgeryImages = (images = []) => {
 
     return(<>
      <>
-          <Breadcrumb items={breadcrumbItems} />
+        <Breadcrumb
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Clinics", href: "/clinics" },
+            { label: clinicdetails.name, href: null },
+          ]}
+        />
+
           <div className="product-detail-section mb-18">
             <div className="container">
               <div className="flex -mx-3.5 flex-wrap">

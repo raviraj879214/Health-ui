@@ -7,7 +7,7 @@ export  function ProductCardPopular({ data }){
     return (
         <div className="card a-hover-secondary">
             <div className="relative overflow-hidden rounded-thm pb-[70%] mb-4.5">
-                <Link href="/clinics">
+              <Link href={`/clinics/${data.uuid}`}>
                     <img
                         src={
                                 data.clinicbanner
