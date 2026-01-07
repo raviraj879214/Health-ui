@@ -140,7 +140,7 @@ const onUpdate = async (data) => {
                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
                                   <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                                    Clinic Email Address
+                                 Email Address
                                 </label>
                                 <input
                                     disabled={true}

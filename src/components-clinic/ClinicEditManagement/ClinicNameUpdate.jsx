@@ -116,8 +116,12 @@ export function ClinicNameUpdates({ clinicuuid, location }) {
         </div>
 
         <div className="grid grid-cols-2 gap-6 mt-6 text-sm">
+          
+         
+          <Preview label="Country" value={clinic.country.name} />
+          <Preview label="City/State" value={clinic.city.name} />
           <Preview label="Address" value={clinic.address} />
-          <Preview label="Phone" value={clinic.phone} />
+           <Preview label="Phone" value={clinic.phone} />
           <Preview label="Email" value={clinic.email} />
           <Preview label="Website" value={clinic.websiteurl} />
         </div>

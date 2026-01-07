@@ -107,7 +107,7 @@ export default function Packages(){
     return (
         <div className="md:my-18 my-16">
             <div className="container">
-                <h2 className="h2 text-center md:mb-7 mb-5">Treatment Packages</h2>
+                <h2 className="h2 text-center md:mb-7 mb-5">Treatment Packages </h2>
                 <div className="swiper swiper-packages md:py-7! py-4!">
                     <div className="swiper-wrapper">
                         {treatmentPackages.map((card) => (

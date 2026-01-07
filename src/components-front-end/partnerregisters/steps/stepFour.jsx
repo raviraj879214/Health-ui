@@ -73,9 +73,12 @@ export function StepFour() {
       );
 
       if (res.ok) {
+         debugger;
+        
         const result = await res.json();
-        setValue("country", result.data.country);
-        setValue("state", result.data.city);
+         console.log("result",result);
+        setValue("country", result.data.countryId);
+        setValue("state", result.data.cityId);
       }
     } catch (err) {
       console.error("Failed to load clinic details", err);
@@ -84,6 +87,7 @@ export function StepFour() {
 
  
   const onCreate = async (data) => {
+    debugger;
     setLoading(true);
 
     try {

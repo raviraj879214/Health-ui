@@ -193,11 +193,11 @@ const [otpDigits, setOtpDigits] = useState(["", "", "", ""]);
               
               <div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                  Verify Your Clinic Email
+                  Verify Your  Email
                 </h3>
                 <p className="text-gray-600 leading-relaxed">
-                  Please provide your official clinic email address. We’ll use this
-                  to verify ownership and share important partnership updates.
+                  Please provide your official  email address
+                  
                 </p>
 
                 <ul className="mt-6 space-y-3 text-sm text-gray-600">
@@ -254,6 +254,11 @@ const [otpDigits, setOtpDigits] = useState(["", "", "", ""]);
                   </p>
 
 
+                 {process.env.NODE_ENV === "development" && (
+                    <div className="mb-5 p-5 mt-3 rounded-md border border-yellow-300 bg-yellow-50 px-4 py-2 text-sm text-yellow-800">
+                      <strong>Test Mode:</strong> Use OTP <span className="font-semibold">0000</span>
+                    </div>
+                  )}
 
                   <div
       className="flex justify-between gap-3 max-w-xs"

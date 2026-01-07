@@ -18,6 +18,7 @@ export default function PackageCard({ data }){
                         <li key={index}>{feature}</li>
                     ))}
                 </ul>
+                
             </div>
             <Link href="#" className="btn btn-secondary w-full mt-auto">Book Your Appointment</Link>
         </div>

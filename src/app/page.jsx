@@ -71,24 +71,24 @@ export default function Pages() {
 
 
   return (
-   <>
-   <Banner></Banner>
-   <TopRated></TopRated>
-   <Treatments></Treatments>
+    <>
+      <Banner></Banner>
+      <TopRated></TopRated>
+      <Treatments></Treatments>
 
 
 
       <PopularClinics />
       <HowItWorks />
-      
-      <PromoteCard data={promoteCardone}/>
-     
-     
-      <HomeStats />
-      <Packages />
-      <Testimonials />
 
-      <FAQ items={faqItems} defaultOpen={1}/>
+      <PromoteCard data={promoteCardone} />
+
+
+      <HomeStats />
+      {/* <Packages />
+      <Testimonials /> */}
+
+      <FAQ items={faqItems} defaultOpen={1} />
 
       <PromoteCard reverse={true} data={promoteCardTwo} />
 
@@ -101,7 +101,7 @@ export default function Pages() {
 
 
 
-   
-   </>
+
+    </>
   );
 }

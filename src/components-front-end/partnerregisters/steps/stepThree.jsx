@@ -43,18 +43,21 @@ export function StepThree(){
         });
 
         if(res.ok){
+            debugger;
             const result = await res.json();
 
 
             setValue("clinicname",result.data.name);
             setValue("websiteurl",result.data.websiteurl);
+             setValue("clinicemail",result.data.email);
+
         }
      }
 
 
 
      const onCreate =async (data)=>{
-
+        debugger;
         debugger;
         const  res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/partner-register/insert-clinic-details`,{
             method : "Post",
@@ -64,7 +67,8 @@ export function StepThree(){
             body: JSON.stringify({
                 "name" :data.clinicname,
                 "websiteurl": data.websiteurl,
-                "uuid" : uuid
+                "uuid" : uuid,
+                "clinicemail" : data.clinicemail
             })
         });
          const result= await res.json();
@@ -130,55 +134,76 @@ export function StepThree(){
         
                                 <div className="relative">
                                     
-                            <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-2">
-                                  <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
-                                    Clinic Name
-                                </label>
-                                <input
-                                    type="text"
-                                    placeholder="Clinic name"
-                                    className="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900
-                                     placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    {...register("clinicname", {
-                                        required: "Please enter your clinic name",
-                                    })} />
+                                    <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-2">
+                                        <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                            Clinic Name
+                                        </label>
+                                        <input
+                                            type="text"
+                                            placeholder="Clinic name"
+                                            className="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900
+                                            placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            {...register("clinicname", {
+                                                required: "Please enter your clinic name",
+                                            })} />
 
-                                {errors.clinicname && (
-                                    <p className="mt-2 text-sm text-red-500">
-                                        {errors.clinicname.message}
-                                    </p>
-                                )}
+                                        {errors.clinicname && (
+                                            <p className="mt-2 text-sm text-red-500">
+                                                {errors.clinicname.message}
+                                            </p>
+                                        )}
 
 
-                                </div>
+                                        </div>
+                                        <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                            Clinic Email
+                                        </label>
+                                        <input
+                                            type="text"
+                                            placeholder="Clinic email"
+                                            className="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900
+                                            placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            {...register("clinicemail", {
+                                                required: "Please enter your clinic email",
+                                            })} />
 
-                                    <div className="mt-1">
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                                      Website
-                                    </label>
-                                   <input
-                                        type="text"
-                                        placeholder="Website URL"
-                                        className="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900
-                                                    placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        {...register("websiteurl", {
-                                            required: "Please enter your clinic URL",
-                                            pattern: {
-                                            value: /^https:\/\/.+/,
-                                            message: "URL must start with https://",
-                                            },
-                                        })}
-                                        />
+                                        {errors.clinicemail && (
+                                            <p className="mt-2 text-sm text-red-500">
+                                                {errors.clinicemail.message}
+                                            </p>
+                                        )}
 
-                                    {errors.websiteurl && (
-                                        <p className="mt-2 text-sm text-red-500">
-                                            {errors.websiteurl.message}
-                                        </p>
-                                    )}
 
-                                </div>
-                             </div>
+                                        </div>
+
+                                        <div className="mt-1">
+                                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                                            Website
+                                            </label>
+                                        <input
+                                                type="text"
+                                                placeholder="Website URL"
+                                                className="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900
+                                                            placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                                {...register("websiteurl", {
+                                                    required: "Please enter your clinic URL",
+                                                    pattern: {
+                                                    value: /^https:\/\/.+/,
+                                                    message: "URL must start with https://",
+                                                    },
+                                                })}
+                                                />
+
+                                            {errors.websiteurl && (
+                                                <p className="mt-2 text-sm text-red-500">
+                                                    {errors.websiteurl.message}
+                                                </p>
+                                            )}
+
+                                        </div>
+                                    </div>
                                   
         
                                  

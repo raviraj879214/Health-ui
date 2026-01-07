@@ -1,4 +1,13 @@
+"use client"
+import { clearstep } from "@/components-front-end/redux/partnerregister/registerSlice";
+import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+
 export function StepFive() {
+
+  const router = useRouter();
+  const dispatch = useDispatch();
+
   return (
     <section className="relative py-24 bg-gradient-to-br from-slate-50 via-white to-slate-100">
       <div className="container max-w-4xl mx-auto px-4">
@@ -42,7 +51,7 @@ export function StepFive() {
               </li>
               <li className="flex items-center gap-2">
                 <span className="h-2 w-2 rounded-full bg-green-600" />
-                Dashboard access will be enabled after approval
+                Dashboard access will be enabled 
               </li>
             </ul>
           </div>
@@ -50,11 +59,19 @@ export function StepFive() {
           {/* Actions */}
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
             <button
+               onClick={()=> {
+              router.push('/partner-login');
+              dispatch(clearstep());
+            }}
               className="px-8 py-3 rounded-xl text-white font-semibold bg-[var(--primary)] hover:opacity-90 transition"
             >
-              Go to Dashboard
+              Go to Login
             </button>
             <button
+            onClick={()=> {
+              router.push('/');
+              dispatch(clearstep());
+            }}
               className="px-8 py-3 rounded-xl font-semibold text-gray-700 border border-gray-300 hover:bg-gray-50 transition"
             >
               Back to Home

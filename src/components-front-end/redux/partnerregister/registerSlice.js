@@ -29,8 +29,11 @@ const registerSlice = createSlice({
     setuuid : (state, action) => {
       state.uuid = action.payload;
     },
+    clearstep :(state,action)=>{
+      state.step = 1;
+    }
   },
 });
 
-export const { nextStep, prevStep, setStep , setOtp ,setEmail ,setuuid } = registerSlice.actions;
+export const { nextStep, prevStep, setStep , setOtp ,setEmail ,setuuid ,clearstep } = registerSlice.actions;
 export default registerSlice.reducer;
