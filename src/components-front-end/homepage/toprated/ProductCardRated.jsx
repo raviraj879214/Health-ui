@@ -20,6 +20,9 @@ export  function ProductCardRated({ data }){
                         width={370}
                         height={254}
                         className="absolute top-0 left-0 w-full h-full object-cover"
+                        onError={(e) => {
+                            e.currentTarget.src = "/images/fallback.png";
+                        }}
                     />
                 </Link>
             </div>
