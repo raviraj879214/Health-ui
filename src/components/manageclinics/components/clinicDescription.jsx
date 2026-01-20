@@ -47,7 +47,7 @@ export function ClinicDescription({id}){
                         </h3>
                     </div>
                    <div className="p-4 md:p-5">
-  {/* Brief Description */}
+
   <div className="flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl dark:bg-neutral-900 dark:border-neutral-700">
     <div className="p-4 md:p-5">
       <h3 className="text-lg font-bold text-gray-800 dark:text-white">
@@ -80,7 +80,7 @@ export function ClinicDescription({id}){
     </div>
   </div>
 
-  {/* Full Description */}
+
   <div className="mt-5 flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl dark:bg-neutral-900 dark:border-neutral-700">
     <div className="p-4 md:p-5">
       <h3 className="text-lg font-bold text-gray-800 dark:text-white">

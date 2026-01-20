@@ -24,6 +24,9 @@ export function StepFour() {
 
   const selectedCountryId = watch("country");
 
+  const [addressviacep,setAddressViaCep] = useState({});
+
+
 
   useEffect(() => {
     fetchCountries();
@@ -77,9 +80,16 @@ export function StepFour() {
         
         const result = await res.json();
          console.log("result",result);
-        setValue("country", result.data.countryId);
-        setValue("state", result.data.cityId);
+
+         setValue("cep",result.data.cep);
+         setValue("street",result.data.street);
+         setValue("complement",result.data.complement);
+         setValue("neighborhood",result.data.neighborhood);
+         setValue("city",result.data.citycep);
+         setValue("state",result.data.state);
+
       }
+
     } catch (err) {
       console.error("Failed to load clinic details", err);
     }
@@ -96,23 +106,58 @@ export function StepFour() {
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            country: data.country,
-            city: data.state,
-            uuid,
-          }),
+            body: JSON.stringify({
+             
+                street: data.street,
+                complement: data.complement,
+                neighborhood: data.neighborhood,
+                city: data.city,
+                state: data.state,
+                cep: data.cep,
+                uuid: uuid,
+            })
         }
       );
 
       if (res.ok) {
-        dispatch(nextStep());
+       const result = await res.json();
+       console.log("result",result);
+       dispatch(nextStep());
       }
     } catch (err) {
-      console.error("Submit failed", err);
+      console.log("Submit failed", err.message);
     } finally {
       setLoading(false);
     }
   };
+
+
+
+  const accessAddresViaCep = async(cep)=>{
+    debugger;
+    const res = await fetch(`${process.env.NEXT_PUBLIC_VIACEP_URL}/${cep}/json/`,{
+      method : "Get"
+    });
+
+    if(res.ok){
+      const result = await res.json();
+
+      setAddressViaCep(result);
+
+      setValue("street",result.logradouro);
+      setValue("complement",result.complemento);
+      setValue("neighborhood",result.bairro);
+      setValue("city",result.localidade);
+      setValue("state",result.estado);
+
+    }
+  }
+
+
+
+
+
+
 
 
   return (
@@ -134,7 +179,7 @@ export function StepFour() {
             <div className="grid grid-cols-1 md:grid-cols-[1.2fr_2fr] gap-8">
               <div>
                 <h4 className="text-lg font-semibold mb-2">
-                  Clinic Location
+                  Clinic Address
                 </h4>
                 <p className="text-sm text-gray-600">
                   This helps improve your clinic listing.
@@ -142,57 +187,123 @@ export function StepFour() {
               </div>
 
               <div className="space-y-4">
-               
+                {/* CEP */}
                 <div>
-                  <label className="block text-sm font-medium mb-2">
-                    Country
-                  </label>
-                  <select
-                    {...register("country", {
-                      required: "Country is required",
+                  <label className="block text-sm font-medium text-gray-700">CEP</label>
+                  <input
+                    type="text"
+                    className="mt-1 w-full rounded-xl border border-gray-300 px-4 py-3"
+                    {...register("cep", {
+                      required: "CEP is required",
+                      pattern: {
+                        value: /^[0-9]{8}$/,
+                        message: "CEP must be exactly 8 digits",
+                      },
                     })}
-                    className="w-full rounded-xl border px-4 py-3"
-                  >
-                    <option value="">Select Country</option>
-                    {countries.map((item) => (
-                      <option key={item.id} value={item.id}>
-                        {item.name}
-                      </option>
-                    ))}
-                  </select>
-                  {errors.country && (
-                    <p className="text-red-500 text-sm mt-1">
-                      {errors.country.message}
+                    onChange={(e) => accessAddresViaCep(e.target.value)}
+                  />
+                  {errors.cep && (
+                    <p className="text-sm text-red-500 mt-1">{errors.cep.message}</p>
+                  )}
+                </div>
+
+                {/* Street */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Street</label>
+                  <input
+                    type="text"
+                    className="mt-1 w-full rounded-xl border border-gray-300 px-4 py-3"
+                    {...register("street", {
+                      required: "Street is required",
+                      minLength: {
+                        value: 3,
+                        message: "Street must be at least 3 characters",
+                      },
+                    })}
+                  />
+                  {errors.street && (
+                    <p className="text-sm text-red-500 mt-1">{errors.street.message}</p>
+                  )}
+                </div>
+
+                {/* Complement */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Complement</label>
+                  <input
+                    type="text"
+                    className="mt-1 w-full rounded-xl border border-gray-300 px-4 py-3"
+                    {...register("complement", {
+                      maxLength: {
+                        value: 50,
+                        message: "Complement must be under 50 characters",
+                      },
+                    })}
+                  />
+                  {errors.complement && (
+                    <p className="text-sm text-red-500 mt-1">
+                      {errors.complement.message}
                     </p>
                   )}
                 </div>
 
-               
+                {/* Neighborhood */}
                 <div>
-                  <label className="block text-sm font-medium mb-2">
-                    State / City
+                  <label className="block text-sm font-medium text-gray-700">
+                    Neighborhood
                   </label>
-                  <select
-                    {...register("state", {
-                      required: "State is required",
-                    })}
-                    disabled={!states.length}
-                    className="w-full rounded-xl border px-4 py-3"
-                  >
-                    <option value="">Select State</option>
-                    {states.map((item) => (
-                      <option key={item.id} value={item.id}>
-                        {item.name}
-                      </option>
-                    ))}
-                  </select>
-                  {errors.state && (
-                    <p className="text-red-500 text-sm mt-1">
-                      {errors.state.message}
+                  <input
+                    type="text"
+                    className="mt-1 w-full rounded-xl border border-gray-300 px-4 py-3"
+                    {...register("neighborhood", {
+                      required: "Neighborhood is required",
+                     })}
+                  />
+                  {errors.neighborhood && (
+                    <p className="text-sm text-red-500 mt-1">
+                      {errors.neighborhood.message}
                     </p>
                   )}
                 </div>
+
+                {/* City + State */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">City</label>
+                    <input
+                      type="text"
+                      className="mt-1 w-full rounded-xl border border-gray-300 px-4 py-3"
+                      {...register("city", {
+                        required: "City is required",
+                      })}
+                    />
+                    {errors.city && (
+                      <p className="text-sm text-red-500 mt-1">{errors.city.message}</p>
+                    )}
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">State</label>
+                    <input
+                      type="text"
+                      className="mt-1 w-full rounded-xl border border-gray-300 px-4 py-3"
+                      {...register("state", {
+                        required: "State is required",
+                        minLength: {
+                          value: 2,
+                          message: "State must be 2 characters",
+                        }
+                      
+                      })}
+                    />
+                    {errors.state && (
+                      <p className="text-sm text-red-500 mt-1">{errors.state.message}</p>
+                    )}
+                  </div>
+                </div>
               </div>
+
+
+
             </div>
 
             <div className="my-10 border-t"></div>

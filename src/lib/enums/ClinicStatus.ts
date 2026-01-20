@@ -1,3 +1,5 @@
+
+
 export enum ClinicStatus{
     PENDING = '0',
     ACTIVE = '1',

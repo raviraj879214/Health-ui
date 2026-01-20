@@ -6,6 +6,7 @@ import { clinicHeaders } from "@/components-clinic/utils/clinicHeaders";
 import { useSearchParams } from "next/navigation";
 import { EyeCloseIcon, EyeIcon, PencilIcon } from "@/icons";
 import {DoctorList} from "../ManageDoctors/DoctorsList";
+import { DoctorVerifyStatus } from "@/lib/enums/doctorVerifyStatus";
 
 
 export function ListofDoctor({ clinicuuid }) {
@@ -123,51 +124,90 @@ export function ListofDoctor({ clinicuuid }) {
 
 
 
-        {doctors.map((item, index) => (
-         <div
-              key={index}              
-              className="relative border theme-border rounded-2xl overflow-hidden shadow-md cursor-pointer p-4 bg-white hover:shadow-xl transition-all">
-              <div className="absolute top-3 right-3 flex gap-2">
-                <button className="background-theme p-2 bg-gray-100 hover:bg-gray-200 rounded-full">
-                  <EyeIcon size={16} />
-                </button>
-                
-                {item.clinicuuid == clinicuuid ? (<>
-                    <button className="background-theme p-2 bg-gray-100 hover:bg-gray-200 rounded-full">
-                  <PencilIcon size={16} 
-                    onClick={() => {
-                    setShow(true);
-                    setDoctoruuid(item.uuid);
-                  }}
-                  />
-                </button>
-                </>) : (
-                  <>
-                    <button disabled={true} className="btn btn-primary background-theme p-2 bg-gray-100 hover:bg-gray-200 rounded-full">
-                        <PencilIcon size={16} />
-                    </button>
-                  </>
-                )}
+     {doctors.map((item, index) => (
+  <div
+    key={index}
+    className="relative border theme-border rounded-2xl overflow-hidden shadow-md cursor-pointer p-4 bg-white hover:shadow-xl transition-all duration-300">
 
-              </div>
-              <div className="flex flex-col items-center text-center mt-4">
-                <div className="w-20 h-20 rounded-full overflow-hidden border theme-border mb-3">
-                  <img
-                    src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/doctors/profilepicture/${item.image}` || "/default-avatar.png"}
-                    alt="doctor"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <p className="text-xl font-bold text-[var(--primary-dark)]">
-                  {item.firstname} {item.lastname}
-                </p>
-                <p className="text-sm text-gray-500 font-medium">
-                  {item.degree || "Specialist"}
-                </p>
-                   <div className="line-clamp-2" dangerouslySetInnerHTML={{ __html: item.briefDescription }}/>
-              </div>
-            </div>
-        ))}
+      
+    <div className="absolute top-3 right-3 flex gap-2 items-center">
+      
+     
+
+      {item.clinicuuid === clinicuuid ? (
+        <button
+          className="p-2 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors"
+          onClick={() => {
+            setShow(true);
+            setDoctoruuid(item.uuid);
+          }}
+        >
+          <PencilIcon size={16} />
+        </button>
+      ) : (
+        <button
+          disabled
+          className="p-2 bg-gray-100 rounded-full opacity-50 cursor-not-allowed"
+        >
+          <PencilIcon size={16} />
+        </button>
+      )}
+
+    </div>
+
+    {/* Doctor Info */}
+    <div className="flex flex-col items-center text-center mt-4">
+      {/* Profile Picture */}
+      <div className="w-20 h-20 rounded-full overflow-hidden border theme-border mb-3">
+        <img
+          src={
+            item.image
+              ? `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/doctors/profilepicture/${item.image}`
+              : "/default-avatar.png"
+          }
+          alt={`${item.firstname} ${item.lastname}`}
+          className="w-full h-full object-cover"
+        />
+      </div>
+
+      {/* Name */}
+      <p className="text-xl font-bold text-[var(--primary-dark)]">
+        {item.firstname} {item.lastname}
+      </p>
+
+      {/* Degree */}
+      <p className="text-sm text-gray-500 font-medium">
+        {item.degree || "Specialist"}
+      </p>
+
+      {/* Description */}
+      <div
+        className="line-clamp-2 text-gray-600 mt-2 text-sm"
+        dangerouslySetInnerHTML={{ __html: item.briefDescription }}
+      />
+    </div>
+
+        {item.DoctorVerify === DoctorVerifyStatus.VERIFIED && (
+             <span className="flex items-center bg-gradient-to-r from-green-400 to-teal-500 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md">
+                <svg
+                  className="w-4 h-4 mr-1"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M9 16.2l-3.5-3.5L4 14.2l5 5 12-12-1.5-1.5z" />
+                </svg>
+                Verified |  {process.env.NEXT_PUBLIC_PROJECT_NAME}
+            </span>
+        )}
+
+        
+    
+
+
+
+  </div>
+))}
+
       </div>
 
 

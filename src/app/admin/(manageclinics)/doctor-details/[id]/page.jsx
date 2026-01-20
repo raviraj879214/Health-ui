@@ -13,6 +13,9 @@ export default async function Page({params}) {
     
 
       <DoctorDetails id={id} />    
+
+
+      
     </>);
 }
 

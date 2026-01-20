@@ -12,9 +12,7 @@ export default async function Listing({params}) {
   return (
     <>
      
-      
-
-
+    
 
       <Suspense fallback={<ClinciDetailsSkeleton />}>
         

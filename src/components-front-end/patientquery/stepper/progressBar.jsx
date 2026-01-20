@@ -5,7 +5,7 @@ export function Progressbar({step}){
     const  totalStep = 10;
 
 
-    const percentage = ((step/10) * 100);
+    const percentage = ((step/7) * 100);
 
     return(<>
 

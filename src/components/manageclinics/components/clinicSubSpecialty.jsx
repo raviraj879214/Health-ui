@@ -18,6 +18,7 @@ export function ClinicSubSpecialty({ id }) {
 
     const [specialty,setSpecialty] = useState([]);
     const [searchtext,setSearchText] = useState("");
+     const[button,setButton] = useState(false);
 
     useEffect(() => {
         fetchClinicSpecialty();
@@ -59,16 +60,16 @@ export function ClinicSubSpecialty({ id }) {
     }
 
 
-    const acceptRequested = async(id)=>{
-        
+    const acceptRequested = async(ids)=>{
+       
          const result = await confirm("Are you sure you want to approve this item?");
              if (!result) {
                 console.log("User not confirmed!");
             return false;
         }
 
-
-        const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-clinic/accept-clinic-sub-specialty/${id}`,{
+ setButton(true);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-clinic/accept-clinic-sub-specialty/${ids}/${id}`,{
             method : "Get",
             headers : await adminHeaders(),
         });
@@ -80,6 +81,8 @@ export function ClinicSubSpecialty({ id }) {
             toast.success("Specialty approved successfully", {position: "bottom-right",autoClose: 3000,});
 
         }
+
+        setButton(false);
     }
 
 
@@ -113,16 +116,16 @@ export function ClinicSubSpecialty({ id }) {
 
 
 
-     const rejectRequested = async(id)=>{
-        
+     const rejectRequested = async(ids)=>{
+   
          const result = await confirm("Are you sure you want to delete this item?");
              if (!result) {
                 console.log("User not confirmed!");
             return false;
         }
+ setButton(true);
 
-
-        const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-clinic/reject-clinic-sub-specialty/${id}`,{
+        const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-clinic/reject-clinic-sub-specialty/${ids}/${id}`,{
             method : "Get",
             headers : await adminHeaders(),
         });
@@ -133,13 +136,13 @@ export function ClinicSubSpecialty({ id }) {
             toast.success("Specialty deleted successfully", {position: "bottom-right",autoClose: 3000,});
 
         }
-
+setButton(false);
     }
 
 
     const assignSpecialty=async(assignid)=>{
        
-        
+        setButton(true);
         const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-clinic/assign-clinic-sub-specialty`,{
             method : "Post",
             headers: await adminHeaders(),
@@ -155,12 +158,13 @@ export function ClinicSubSpecialty({ id }) {
             fetchSpecialty();
              setSearchText("");
         }
+        setButton(false);
     }
 
 
 
     const unassignSpecialty = async(unassignid)=>{
-    
+    setButton(true);
 
          const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-clinic/unassign-clinic-sub-specialty`,{
             method : "Post",
@@ -177,7 +181,7 @@ export function ClinicSubSpecialty({ id }) {
             fetchSpecialty();
             setSearchText("");
         }
-
+setButton(false);
     }
 
 
@@ -214,7 +218,7 @@ export function ClinicSubSpecialty({ id }) {
                                 onClick={() => setOpen(!open)}
                                 className="btn btn-primary"
                             >
-                               Assign
+                               {button ?(<>...</>):(<>Assign</>)}
                                
                             </button>
 
@@ -243,14 +247,15 @@ export function ClinicSubSpecialty({ id }) {
                                                 <button
                                                     onClick={()=> unassignSpecialty(item.id)}
                                                     className="text-xs font-medium text-red-600 bg-red-100 px-3 py-1 rounded hover:bg-red-200">
-                                                    Unassign
+                                                    
+                                                    {button ?(<>...</>):(<>UnAssign</>)}
 
                                                 </button>
                                             ) : (
                                                 <button
                                                     onClick={()=> assignSpecialty(item.id)}
                                                     className="text-xs font-medium text-brand bg-brand-soft px-3 py-1 rounded hover:bg-brand-medium">
-                                                    Assign
+                                                    {button ?(<>...</>):(<>Assign</>)}
 
                                                  </button>
                                             )}
@@ -336,7 +341,8 @@ export function ClinicSubSpecialty({ id }) {
                                                     bg-green-50 text-green-700 border border-green-200
                                                     hover:bg-green-100 transition"
                                         >
-                                            Accept
+                                            
+                                            {button ?(<>...</>):(<>Accept</>)}
                                         </button>
 
                                         <button
@@ -346,7 +352,8 @@ export function ClinicSubSpecialty({ id }) {
                                                     bg-red-50 text-red-700 border border-red-200
                                                     hover:bg-red-100 transition">
 
-                                            Reject
+                                            
+                                            {button ?(<>...</>):(<>Reject</>)}
                                         </button>
                                         </div>
                                     </li>

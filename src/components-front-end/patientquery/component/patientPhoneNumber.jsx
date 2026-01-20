@@ -1,4 +1,7 @@
-import { useState } from "react";
+import { addphoneNumber, addphoneNumberVerified, addphoneOtp, addStep, customStep } from "@/components-front-end/redux/patinetquery/patientQueryRedux";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
 
 
@@ -7,16 +10,124 @@ import { ToastContainer } from "react-toastify";
 export function PatientPhoneNumber(){
 
 
+  const [otpmodal,setOtpModal] = useState(false);
+  const [resendbutton,setResendButton] = useState(false);
+  const {register,setValue,getValues,handleSubmit,formState:{errors}} = useForm();
+  const  dispatch = useDispatch();
+  const phoneOtp = useSelector((state) => state.patientquery.phoneOtp);
+  const phoneNumberVerified = useSelector((state) => state.patientquery.phoneNumberVerified);
+  const phoneNumber = useSelector((state) => state.patientquery.phoneNumber);
+
+
+
+  const [phone, setPhone] = useState("");
+  const [otp, setOtp] = useState(["", "", "", "", "", ""]);
+
   
+    const [seconds, setSeconds] = useState(60);
+    const [isActive, setIsActive] = useState(false);
+    const timer = 60;
+
+
+     useEffect(() => {
+    let interval = null;
+
+    if (isActive && seconds > 0) {
+      interval = setInterval(() => {
+        setSeconds((prev) => prev - 1);
+      }, 1000);
+    } else if (seconds === 0) {
+      clearInterval(interval);
+      setIsActive(false);
+      
+    }
+
+    return () => clearInterval(interval);
+  }, [isActive, seconds]);
 
 
 
+  const handlePhoneChange = (e) => {
+    const value = e.target.value.replace(/\D/g, "");
+    setPhone(value);
+  };
 
 
+  const handleOtpChange = (value, index) => {
+    if (!/^\d?$/.test(value)) return;
+    const newOtp = [...otp];
+    newOtp[index] = value;
+    setOtp(newOtp);
+    const enteredOtp = newOtp.join("");
+    debugger;
+    if(enteredOtp == phoneOtp){
+      dispatch(addphoneNumber(getValues("phonenumber")));
+      dispatch(addphoneNumberVerified("1"));
+      dispatch(addStep());
+      
+    }
+
+    if (value && index < 5) {
+      document.getElementById(`otp-${index + 1}`).focus();
+    }
+  };
 
 
+  const handleOtpPaste = (e) => {
+    e.preventDefault();
+    const pasted = e.clipboardData.getData("text").replace(/\D/g, "").slice(0, 6);
+    const newOtp = pasted.split("");
+    const enteredOtp = newOtp.join("");
+    debugger;
+    if(enteredOtp == phoneOtp){
+      dispatch(addphoneNumber(getValues("phonenumber")));
+      dispatch(addphoneNumberVerified("1"));
+      dispatch(addStep());
 
 
+    }
+    
+    setOtp((prev) =>
+      prev.map((_, i) => newOtp[i] || "")
+    );
+  };
+
+
+  const onCreate = async (data) => {
+    debugger;
+    const phonenumber = "+91" + data.phonenumber;
+    const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/patient-query/send-otp-phone`, {
+      method: "Post",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({
+        "phone": phonenumber,
+      })
+    });
+    if (res.ok) {
+      const result = await res.json();
+      if(result.success === true){
+        setOtpModal(true);
+        setSeconds(timer);
+        setIsActive(true);
+        dispatch(addphoneOtp(result.otp));
+      }else{
+        setOtpModal(true);
+        setSeconds(timer);
+        setIsActive(true);
+        dispatch(addphoneOtp("000000"));
+      }
+    }
+    else{
+    
+    }
+  }
+
+
+  const changenumber=async()=>{
+     setOtpModal(false);
+  }
 
 
 
@@ -25,12 +136,13 @@ export function PatientPhoneNumber(){
 
 
     return(<>
-
       <ToastContainer />
-
-      <div className="bg-gray-50 flex flex-col items-center py-10 px-4">
+       
+      {phoneNumberVerified === "0" ?(<>
+        
+        <div className="bg-gray-50 flex flex-col items-center py-10 px-4">
         <h2 className="text-2xl sm:text-3xl font-semibold text-center text-gray-800 mb-2 max-w-3xl">
-          What is your Phone Number ?
+          What is your Phone Number ? 
         </h2>
 
         <p className="text-sm text-blue-700 mb-6">
@@ -44,28 +156,198 @@ export function PatientPhoneNumber(){
           <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2">
             <div className="p-6 flex items-center justify-center text-gray-400" />
 
-            <form
+            <form onSubmit={handleSubmit(onCreate)} className="flex flex-col gap-5">
 
-              className="p-6 flex flex-col gap-3"
-            >
+              <div className="flex flex-col gap-1">
+                <div className="flex">
+                  <span
+                    className="
+                      inline-flex
+                      items-center
+                      px-3
+                      rounded-l-md
+                      border
+                      border-r-0
+                      border-gray-300
+                      bg-gray-100
+                      text-sm
+                      text-gray-600
+                    "
+                  >
+                    +1
+                  </span>
 
-              <p>Coming Soon</p>
+                  <input
+                   disabled={otpmodal}
+                    type="text"
+                    placeholder="Enter phone number"
 
+                    maxLength={10}
+                    inputMode="numeric"
 
+                    className={`
+        w-full
+        rounded-r-md
+        border
+        px-4
+        py-2.5
+        text-sm
+        outline-none
+        transition
+        ${errors.phonenumber
+                        ? "border-red-500 focus:ring-red-200 focus:border-red-500"
+                        : "border-gray-300 focus:border-blue-500 focus:ring-blue-100"}
+      `}
+                    {...register("phonenumber", {
+                      required: "Phone number is required",
+                      pattern: {
+                        value: /^\d{10}$/,
+                        message: "Enter a valid 10-digit US phone number",
+                      },
+                    })}
+                  />
+                </div>
 
-
-              <div className="pt-3">
-                <button
-                  type="submit"
-                  className="btn btn-primary">
-
-                  Verify
-                </button>
+                {/* Error Message */}
+                {errors.phonenumber && (
+                  <p className="text-sm text-red-600">
+                    {errors.phonenumber.message}
+                  </p>
+                )}
               </div>
+
+
+
+
+             {otpmodal && (
+  <div className="flex flex-col gap-3">
+  
+    <div className="flex justify-between gap-2">
+      {otp.map((digit, index) => (
+        <input
+          key={index}
+          id={`otp-${index}`}
+          type="text"
+          value={digit}
+          maxLength={1}
+          onChange={(e) => handleOtpChange(e.target.value, index)}
+          onPaste={handleOtpPaste}
+          className="
+            w-full
+            h-12
+            text-center
+            text-base
+            font-medium
+            rounded-md
+            border
+            border-gray-300
+            focus:border-blue-500
+            focus:ring-2
+            focus:ring-blue-100
+            outline-none
+            transition
+          "
+        />
+      ))}
+    </div>
+
+    
+    <div className="flex justify-between items-center text-sm">
+      <button
+        type="button"
+        disabled={seconds ===0 ? false : true}
+        onClick={()=>{
+          onCreate({phonenumber: getValues("phonenumber")})
+        }}
+        className="
+          text-blue-600
+          hover:text-blue-700
+          font-medium
+          transition">
+
+        {seconds > 0 ? `Resend code in` : <></>}   {seconds > 0 ? `${seconds}s` : <></>}
+        {seconds === 0 ? `Resend` : <></>}
+      </button>
+
+      <button
+       onClick={()=> changenumber()}
+        type="button"
+        className="
+          text-gray-500
+          hover:text-gray-700
+          transition">
+
+        Change Number
+      </button>
+    </div>
+  </div>
+)}
+
+
+             
+              {!otpmodal &&(<>
+                 <button
+                type="submit"
+                className="
+                w-full
+                rounded-md
+                bg-blue-600
+                py-2.5
+                text-sm
+                font-semibold
+                text-white
+                hover:bg-blue-700
+                focus:outline-none
+                focus:ring-2
+                focus:ring-blue-300
+                transition
+                mt-2
+                "
+              >
+                Verify
+              </button>
+              
+              </>)}
             </form>
+
+
           </div>
         </div>
       </div>
+
+      
+      </>):(<>
+      
+           <div class="flex flex-col items-center justify-center bg-white p-6 rounded-xl shadow-sm border border-gray-200 mx-auto mt-5">
+  
+
+  <div class="flex items-center justify-center w-16 h-16 rounded-full bg-green-100 mb-4">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+    </svg>
+  </div>
+
+
+  <h3 class="text-lg font-semibold text-gray-800">
+    Phone Number Verified
+  </h3>
+
+
+  <p class="text-sm text-gray-500 text-center mt-1 mb-5">
+    Your Phone Number  has been successfully verified.
+  </p>
+
+
+  <button
+    type="button"
+    className="btn btn-primary"
+    onClick={()=> dispatch(addStep())}>
+      
+    Next
+  </button>
+
+</div>
+      </>)}
 
 
     </>);

@@ -49,7 +49,7 @@ export default function ProductCardList({ data }){
                             </svg>
                         </span>
                         <span className="inline-block">
-                           {data.address} {data.state}, <strong>{data.country} </strong>
+                           {data.address} 
                         </span>
                     </div>
                     <span className="rating inline-flex items-center">

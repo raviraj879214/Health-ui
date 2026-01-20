@@ -211,7 +211,7 @@ export function DoctorOne({ onClose, nextStep, clinicuuid, doctoruuid }) {
         <DialogPanel className="bg-white rounded-lg shadow-xl w-full max-w-3xl p-6">
           <DialogTitle className="flex justify-between items-center text-lg font-semibold mb-4">
             <span>Add Doctor  </span>
-            <span className="text-green-400">1/4</span>
+            <span className="text-green-400">1/7</span>
           </DialogTitle>
 
           <div className="w-full bg-neutral-quaternary rounded-full h-2 ">

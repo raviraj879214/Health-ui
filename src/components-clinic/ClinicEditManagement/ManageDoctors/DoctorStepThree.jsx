@@ -1,8 +1,10 @@
 "use client"
 import { clinicHeaders } from "@/components-clinic/utils/clinicHeaders";
 import Label from "@/components/form/Label";
+import { ButtonSpinner } from "@/reusable/buttonSpinner";
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from "@headlessui/react";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 export function DoctorThree({ onClose, nextStep, prevStep ,clinicuuid , doctoruuid}) {
 
@@ -15,6 +17,7 @@ export function DoctorThree({ onClose, nextStep, prevStep ,clinicuuid , doctoruu
   const [cantfind,setCantfine]= useState(false);
   const [othertext,setOhertext] = useState("");
   const [selectedspecialty,setSelectedspecialty] = useState([]);
+    const[otherbutton,setOtherButton] = useState(false);
 
 
 
@@ -61,6 +64,7 @@ export function DoctorThree({ onClose, nextStep, prevStep ,clinicuuid , doctoruu
 
     const onCreateOther = async (doctoruuid) =>{
       debugger;
+      setOtherButton(true);
         const specializationExists = specialty.some(
             item => item.name.trim().toLowerCase() === othertext.trim().toLowerCase()
           );
@@ -78,7 +82,8 @@ export function DoctorThree({ onClose, nextStep, prevStep ,clinicuuid , doctoruu
             headers : clinicHeaders(),
             body :JSON.stringify({
               doctorUuid: doctoruuid,
-              othertext : othertext
+              othertext : othertext,
+              clinicuuid:clinicuuid
             })
           });
       
@@ -87,9 +92,17 @@ export function DoctorThree({ onClose, nextStep, prevStep ,clinicuuid , doctoruu
       
             setOhertext("");
             fetchSelectedSpeciality();
+            toast.success(
+                "Sent for approval. We will update you within 24 hours.",
+                {
+                  position: "bottom-right",
+                  autoClose: 3000,
+                }
+              );
+
           }
 
-
+          setOtherButton(false);
     }
 
 
@@ -158,33 +171,81 @@ export function DoctorThree({ onClose, nextStep, prevStep ,clinicuuid , doctoruu
 
          <DialogTitle className="flex justify-between items-center text-lg font-semibold mb-4">
             <span>Choose Sub-Specialty </span>
-            <span className="text-green-400 ">3/4</span>
+            <span className="text-green-400 ">3/7</span>
           </DialogTitle>
           
-          <div className="border theme-border rounded-lg p-3 w-auto flex flex-wrap max-h-[180px] overflow-auto ">
-          {selectedspecialty.length == 0 ? "No records selected" : ""}
-          
-          {selectedspecialty.map((item, index) => (
+<div className="border theme-border rounded-lg p-3 w-auto max-h-[180px] overflow-auto">
+
+  {/* Empty State */}
+  {selectedspecialty.length === 0 && (
+    <p className="text-gray-500 text-sm">No records selected</p>
+  )}
+
+  {/* Approved Specialties */}
+  {selectedspecialty.some(item => item.specialty) && (
+    <>
+      <h4 className="text-sm font-semibold text-gray-700 mb-2">
+        Selected Specialties
+      </h4>
+
+      <div className="flex flex-wrap">
+        {selectedspecialty
+          .filter(item => item.specialty)
+          .map((item, index) => (
             <div
-              key={index}
-              className="flex items-center gap-2 bg-gray-100 px-3 py-1 rounded-full m-1 mt-1 background-theme"
+              key={`spec-${index}`}
+              className="flex items-center gap-2 bg-gray-100 px-3 py-1 rounded-full m-1 background-theme"
             >
-              <span className="text-white-700 text-sm font-semibold">
-                {item.specialty?.name || item.suggestedCategory?.name || "test close icon"}
+              <span className="text-sm font-semibold text-white">
+                {item.specialty.name}
               </span>
 
               <button
                 onClick={() => handleRemove(item.id)}
-                className="text-red-700 hover:text-red-500 transition">
-
+                className="text-red-700 hover:text-red-500 transition"
+              >
                 ✕
-
               </button>
             </div>
           ))}
+      </div>
+    </>
+  )}
 
 
-        </div>
+  {selectedspecialty.some(item => item.suggestedCategory) && (
+    <>
+      <h4 className="text-sm font-semibold text-gray-700 mt-4 mb-2">
+         (Pending Approval)
+      </h4>
+
+      <div className="flex flex-wrap">
+        {selectedspecialty
+          .filter(item => item.suggestedCategory)
+          .map((item, index) => (
+            <div
+              key={`suggested-${index}`}
+              className="flex items-center gap-2 bg-yellow-100 px-3 py-1 rounded-full m-1"
+            >
+              <span className="text-sm font-semibold text-yellow-900">
+                {item.suggestedCategory.name}
+              </span>
+
+              {/* <button
+                onClick={() => handleRemove(item.id)}
+                className="text-red-700 hover:text-red-500 transition"
+              >
+                ✕
+              </button> */}
+            </div>
+          ))}
+      </div>
+    </>
+  )}
+
+</div>
+
+
 
        <div className="border theme-border rounded-lg p-3 w-100% flex flex-wrap mt-2 max-h-[400px] overflow-auto">
             <div className="flex items-center justify-between mb-2 w-full">
@@ -221,7 +282,13 @@ export function DoctorThree({ onClose, nextStep, prevStep ,clinicuuid , doctoruu
                         }}
                         className="text-green-600 hover:text-green-500 transition p-1 rounded-md hover:bg-green-50"
                       >
-                        ✔
+                         {otherbutton ? (<>
+                                                                         <ButtonSpinner></ButtonSpinner>
+                                                                       </>):(
+                                                                         <>
+                                                                            ✔
+                                                                         </>
+                                                                       )}
                       </button>
                     ) : (
                       <button

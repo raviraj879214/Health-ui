@@ -4,24 +4,28 @@ import { useState, useEffect } from "react";
 
 import PriceRange from "./PriceRange";
 import { useDispatch, useSelector } from "react-redux";
-import { addSpecialization, addSpecialty, addTreatment, removeSpecialization, removeSpecialty, removeTreatment } from "../redux/cliniclisting/store/clinicListing";
+import { addPlaces, addSpecialization, addSpecialty, addTreatment, removePlaces, removeSpecialization, removeSpecialty, removeTreatment } from "../redux/cliniclisting/store/clinicListing";
 
-export default function Filters(){
+
+export default function Filters({minPrice,maxPrice}){
     
    
     const [filter, setFilter] = useState(null);
     const [specialization,setSpecialization] = useState([]);
     const [specialty,setSpecialty] = useState([]);
     const [treatment,setTreatment] = useState([]);
+    const [place,setPlace] = useState([]);
+
+
+
+
     const dispatch = useDispatch();
 
 
     const selectedSpecializations = useSelector((state) => state.clinicListing?.specializationRedux || []);
     const selectedSpecialty = useSelector((state) => state.clinicListing?.specialtyRedux || []);
     const selectedTreatment = useSelector((state) => state.clinicListing?.treatmentRedux || []);
-
-
-
+    const selectedPlaces = useSelector((state) => state.clinicListing?.placeRedux || []);
 
 
     const fetchSpecilaizations = async ()=>{
@@ -64,6 +68,24 @@ export default function Filters(){
         }
     }
 
+
+     const fetchPlaces = async ()=>{
+        const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/homepage-banner/get-places`,{
+            method : "Get",
+            headers :{
+                "content-type":"application/json"
+            }
+        });
+        if(res.ok){
+            const result = await res.json();
+            setPlace(result.data);
+        }
+    }
+
+
+
+
+
    
 
 
@@ -90,6 +112,7 @@ export default function Filters(){
         fetchSpecilaizations();
         fetchSpecialty();
         fetchTreatment();
+        fetchPlaces();
         const handler = (e) => {
             setHideButton(e.detail.visible);
         };
@@ -199,6 +222,8 @@ export default function Filters(){
                      
                     </div>
                 </div>
+
+
                 <div className="border border-border rounded-thm p-5 mb-5 last:mb-0 leading-[1.2]">
                     <h5 className="text-[1.4rem] font-bold mb-5 leading-none">Treatment</h5>
                     <div className="max-h-[200px] overflow-auto">
@@ -234,12 +259,59 @@ export default function Filters(){
                             })}
                     </div>
                 </div>
-                <PriceRange
-                    min={0}
-                    max={1000}
-                    defaultMin={299}
-                    defaultMax={599}
-                /> 
+
+
+                <div className="border border-border rounded-thm p-5 mb-5 last:mb-0 leading-[1.2]">
+                    <h5 className="text-[1.4rem] font-bold mb-5 leading-none">By Place</h5>
+                    <div className="max-h-[200px] overflow-auto">
+                            {place.map((item) => {
+                                
+
+                                const isSelected = selectedPlaces.some(x => x.id === item.citycep);
+
+                                const handleChange = () => {
+                                    if (isSelected) {
+                                        dispatch(removePlaces(item.citycep));
+                                    } else {
+                                        dispatch(addPlaces({ id: item.citycep, name: item.citycep }));
+                                    }
+                                };
+
+                                return (
+                                    <label
+                                        key={item.citycep}
+                                        htmlFor={`category-${item.citycep}`}
+                                        className="flex items-start mb-3 last:mb-0 cursor-pointer"
+                                    >
+                                        <input
+                                            type="checkbox"
+                                            name={`category[${item.citycep}]`}
+                                            id={`category-${item.citycep}`}
+                                            className="filter-checkbox"
+                                            checked={isSelected}
+                                            onChange={handleChange}
+                                        />
+                                        <span className="ml-2">{item.citycep} </span>
+                                    </label>
+                                );
+                            })}
+
+                        
+                    </div>
+                </div>
+
+
+                           
+                {/* <PriceRange
+                    min={minPrice}
+                    max={maxPrice}
+                    defaultMin={0}
+                    defaultMax={0}
+                />  */}
+
+
+
+
             </div>
             <div className="sm-bottom_head_bar md:hidden! flex">
                 <button type="button" className="close_btn" onClick={() => setFilter(null)}>Close</button>

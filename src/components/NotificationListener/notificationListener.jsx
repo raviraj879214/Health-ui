@@ -6,15 +6,17 @@ import { formatBrazilDate } from "../../lib/formatDate";
 
 let socket;
 
-export default function NotificationUI() {
+export default function NotificationUI({id}) {
+  
   const [notifications, setNotifications] = useState([]);
   const [open, setOpen] = useState(false);
 
 
   const fetchnotifications = async()=>{
-    const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/webhook/get-notify`,{
+    const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/webhook/get-notify/${id}`,{
       method : "Get"
     });
+
     if(res.ok){
       debugger;
       const result =await res.json();
@@ -55,12 +57,13 @@ export default function NotificationUI() {
     return () => {
       socket.disconnect();
     };
-  }, []);
+    
+  }, [id]);
 
 
 
 
-  const unreadCount = notifications.filter((n) => !n.isRead).length;
+  const unreadCount = notifications.filter((n) => !n.isRead && n.globaluserid === id).length;
 
 
   return (
@@ -78,7 +81,8 @@ export default function NotificationUI() {
             {unreadCount}
           </span>
         )}
-      </button>
+    
+      </button> 
 
       {/* 📬 Dropdown */}
       {open && (
@@ -86,17 +90,17 @@ export default function NotificationUI() {
           {/* Header */}
           <div className="flex items-center justify-between border-b px-4 py-3">
             <span className="font-semibold text-gray-800">Notifications</span>
-            <span className="text-xs text-gray-500">{notifications.length}</span>
+            <span className="text-xs text-gray-500">{notifications.filter(x=>x.globaluserid === id).length}</span>
           </div>
 
           {/* Body */}
           <div className="max-h-[360px] overflow-y-auto">
-            {notifications.length === 0 ? (
+            {notifications.filter(x=>x.globaluserid === id).length === 0 ? (
               <div className="px-4 py-6 text-center text-sm text-gray-500">
                 No notifications yet
               </div>
             ) : (
-              notifications.map((n) => (
+              notifications.filter(x=>x.globaluserid === id).map((n) => (
                 <div
                   key={n.id}
                   className="group cursor-pointer border-b px-4 py-3 transition hover:bg-gray-50"
@@ -111,7 +115,7 @@ export default function NotificationUI() {
 
                     <div className="flex-1">
                       <p className="text-sm font-semibold text-gray-900">{n.type}</p>
-                      <p className="mt-1 text-sm text-gray-600 line-clamp-2">
+                      <p className="mt-1 text-sm text-gray-600">
                         {n.message}
                       </p>
                       <p className="mt-2 text-xs text-gray-400">

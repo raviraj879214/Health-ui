@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  addEmailVerified,
   addPatientEmail,
   addPatientEmailOtp,
   addStep,
@@ -22,10 +23,13 @@ export function PatientEmail() {
 
   const dispatch = useDispatch();
 
+
+
   const patientEmail = useSelector(
     (state) => state.patientquery.patientEmail
   );
   const emailotp = useSelector((state) => state.patientquery.emailotp);
+  const emailverified = useSelector((state) => state.patientquery.emailverified);
 
   const [loading, setLoading] = useState(false);
 
@@ -33,7 +37,7 @@ export function PatientEmail() {
 
   const emailValue = watch("emailaddress");
 
-  /* ---------------- Submit Email & Send OTP ---------------- */
+
 
   const onEnter = async (data) => {
     if (!data.emailaddress) return;
@@ -63,10 +67,12 @@ export function PatientEmail() {
         autoClose: 3000,
       });
 
-      // Clear OTP boxes on resend
+     
       inputsRef.current.forEach((input) => {
         if (input) input.value = "";
       });
+
+
     } catch (err) {
       toast.error("Failed to send OTP. Try again.");
     } finally {
@@ -74,7 +80,7 @@ export function PatientEmail() {
     }
   };
 
-  /* ---------------- Restore Email After Refresh ---------------- */
+
 
   useEffect(() => {
     if (patientEmail) {
@@ -82,7 +88,7 @@ export function PatientEmail() {
     }
   }, [patientEmail, setValue]);
 
-  /* ---------------- OTP Input Logic ---------------- */
+
 
   const handleChange = (e, index) => {
     const value = e.target.value.replace(/\D/g, "");
@@ -118,14 +124,17 @@ export function PatientEmail() {
     verifyOtp();
   };
 
-  /* ---------------- OTP Verification ---------------- */
+
 
   const verifyOtp = () => {
+    debugger;
     const otp = inputsRef.current.map((i) => i?.value || "").join("");
 
     if (otp.length === 6 && otp === emailotp) {
       dispatch(addPatientEmailOtp("0"));
       dispatch(addStep());
+      dispatch(addEmailVerified("1"));
+     
 
       inputsRef.current.forEach((input) => {
         if (input) input.value = "";
@@ -133,7 +142,7 @@ export function PatientEmail() {
     }
   };
 
-  /* ---------------- Reset OTP if Email Changes ---------------- */
+
 
   useEffect(() => {
     if (emailotp !== "0") {
@@ -144,13 +153,16 @@ export function PatientEmail() {
     }
   }, [emailValue]);
 
-  /* ---------------- UI ---------------- */
+
 
   return (
     <>
       <ToastContainer />
 
-      <div className="bg-gray-50 flex flex-col items-center py-10 px-4">
+      
+
+          {emailverified === "0" ? (<>
+            <div className="bg-gray-50 flex flex-col items-center py-10 px-4">
         <h2 className="text-2xl sm:text-3xl font-semibold text-center text-gray-800 mb-2 max-w-3xl">
           What is your e-mail address?
         </h2>
@@ -226,6 +238,42 @@ export function PatientEmail() {
           </div>
         </div>
       </div>
+          </>) :(<>
+          <div class="flex flex-col items-center justify-center bg-white p-6 rounded-xl shadow-sm border border-gray-200 mx-auto mt-5">
+  
+
+  <div class="flex items-center justify-center w-16 h-16 rounded-full bg-green-100 mb-4">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+    </svg>
+  </div>
+
+
+  <h3 class="text-lg font-semibold text-gray-800">
+    Email Verified
+  </h3>
+
+
+  <p class="text-sm text-gray-500 text-center mt-1 mb-5">
+    Your email address has been successfully verified.
+  </p>
+
+
+  <button
+    type="button"
+    className="btn btn-primary"
+    onClick={()=> dispatch(addStep())}
+  >
+    Next
+  </button>
+
+</div>
+
+
+          </>)}
+
+
+
     </>
   );
 }

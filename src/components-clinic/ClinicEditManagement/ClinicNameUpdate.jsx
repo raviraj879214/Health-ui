@@ -23,9 +23,12 @@ export function ClinicNameUpdates({ clinicuuid, location }) {
     formState: { errors }
   } = useForm();
 
-  /* ================= FETCH CLINIC DETAILS ================= */
+
   useEffect(() => {
-    fetchClinicDetails();
+    
+    if(clinicuuid){
+        fetchClinicDetails();
+    }
   }, [clinicuuid]);
 
   const fetchClinicDetails = async () => {
@@ -43,7 +46,7 @@ export function ClinicNameUpdates({ clinicuuid, location }) {
     }
   };
 
-  /* ================= PREFILL FORM ================= */
+
   useEffect(() => {
     if (open && clinic) {
       Object.entries(clinic).forEach(([key, value]) => {
@@ -54,7 +57,6 @@ export function ClinicNameUpdates({ clinicuuid, location }) {
     }
   }, [open, clinic, setValue]);
 
-  /* ================= UPDATE ================= */
   const onSubmit = async (data) => {
     setLoading(true);
 
@@ -75,7 +77,7 @@ export function ClinicNameUpdates({ clinicuuid, location }) {
     if (res.ok) {
       const result = await res.json();
 
-      // Update preview immediately
+
       setClinic(prev => ({ ...prev, ...data }));
 
       toast.success(result.message, {
@@ -85,25 +87,59 @@ export function ClinicNameUpdates({ clinicuuid, location }) {
       setTimeout(() => {
         window.location.href = '';
       }, 1000);
-      
-
+    
       setOpen(false);
     } else {
       toast.error("Failed to update clinic");
     }
-
     setLoading(false);
   };
+
+
+
+
+  const accessAddresViaCep = async(cep)=>{
+    debugger;
+
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_VIACEP_URL}/${cep}/json/`,{
+      method : "Get"
+    });
+
+    if(res.ok){
+      const result = await res.json();
+
+
+
+      setValue("street",result.logradouro);
+      setValue("complement",result.complemento);
+      setValue("neighborhood",result.bairro);
+      setValue("citycep",result.localidade);
+      setValue("state",result.estado);
+
+    }
+  }
+
+
+
+
+
 
   if (!clinic) return null;
 
   return (
     <>
-      {/* ================= PREVIEW CARD ================= */}
+
       <div className="bg-white border rounded-xl p-6 shadow-sm max-w-4xl">
         <div className="flex justify-between items-start">
           <div>
-            <h2 className="text-2xl font-semibold">{clinic.name}</h2>
+           <h2 className="text-2xl font-semibold text-gray-800">
+              {clinic.name || "No Information"}{" "}
+              <span className="text-sm font-medium text-gray-500">
+                (CNPJ: {clinic.cnpj || "No Information"})
+              </span>
+            </h2>
+
            
           </div>
 
@@ -116,16 +152,29 @@ export function ClinicNameUpdates({ clinicuuid, location }) {
         </div>
 
         <div className="grid grid-cols-2 gap-6 mt-6 text-sm">
-          
-         
-          <Preview label="Country" value={clinic.country.name} />
-          <Preview label="City/State" value={clinic.city.name} />
-          <Preview label="Address" value={clinic.address} />
-          <Preview label="Phone" value={clinic.phone} />
+
+          {/* <Preview label="Phone" value={clinic.phone} />
           <Preview label="WhatsApp Number" value={clinic.whatsappNumber} />
           <Preview label="Telegram ID" value={clinic.telegramNumber} />
-          <Preview label="Email" value={clinic.email} />
+          <Preview label="Email" value={clinic.email} /> */}
           <Preview label="Website" value={clinic.websiteurl} />
+
+
+
+
+
+          <br></br>
+          
+          <h2 className="text-2xl font-semibold">Clinic Address</h2>
+          <br></br>
+          <Preview label="Cep" value={clinic.cep} />
+          <Preview label="Street" value={clinic.street} />
+          <Preview label="Complement" value={clinic.complement} />
+          <Preview label="Neighborhood" value={clinic.neighborhood} />
+          <Preview label="City" value={clinic.citycep} />
+          <Preview label="State" value={clinic.state} />
+
+
         </div>
       </div>
 
@@ -136,7 +185,7 @@ export function ClinicNameUpdates({ clinicuuid, location }) {
         <div className="fixed inset-0 z-10 flex items-center justify-center p-4 overflow-y-auto">
           <DialogPanel className="bg-white rounded-xl shadow-xl w-full max-w-3xl">
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="p-6 space-y-6">
+              <div className="p-6 space-y-6 overflow-scroll h-150">
                 <DialogTitle className="text-xl font-semibold">
                   Edit Clinic Details
                 </DialogTitle>
@@ -149,16 +198,29 @@ export function ClinicNameUpdates({ clinicuuid, location }) {
                     })}
                     error={errors.name}
                   />
-                  <Input label="Address" register={register("address")} />
+                 
                 </Section>
 
                 <Section title="Contact Details">
-                  <Input label="Phone" register={register("phone")} />
-                  <Input label="WhatsApp Number" register={register("whatsappNumber")} />
+                  {/* <Input label="Phone" register={register("phone")} /> */}
+                  {/* <Input label="WhatsApp Number" register={register("whatsappNumber")} />
                   <Input label="Telegram ID" register={register("telegramNumber")} />
-                  <Input label="Email" type="email" register={register("email")} />
+                  <Input label="Email" type="email" register={register("email")} /> */}
                   <Input label="Website" register={register("websiteurl")} />
                 </Section>
+
+
+                <Section title="Clinc Address">
+                  <Input label="Cep" register={register("cep")} onChange={(e) => accessAddresViaCep(e.target.value)}  />
+                  <Input label="Street" register={register("street")} />
+                  <Input label="Complement" register={register("complement")} />
+                  <Input label="Neighborhood"  register={register("neighborhood")} />
+                  <Input label="City" register={register("citycep")} />
+                  <Input label="State" register={register("state")} />
+                </Section>
+
+
+
               </div>
 
               <div className="bg-gray-50 px-6 py-4 flex justify-end gap-3 rounded-b-xl">
@@ -197,19 +259,24 @@ function Section({ title, children }) {
   );
 }
 
-function Input({ label, register, type = "text", error }) {
+function Input({ label, register, type = "text", error, onChange }) {
   return (
     <div>
       <label className="block text-sm font-medium mb-1">{label}</label>
       <input
         type={type}
         {...register}
+        onChange={(e) => {
+          register?.onChange?.(e); // make sure react-hook-form still works
+          if (onChange) onChange(e); // custom onChange
+        }}
         className="w-full border p-2 rounded"
       />
       {error && <p className="text-red-500 text-xs mt-1">{error.message}</p>}
     </div>
   );
 }
+
 
 function Preview({ label, value }) {
   return (

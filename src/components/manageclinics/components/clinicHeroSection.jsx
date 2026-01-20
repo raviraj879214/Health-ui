@@ -34,7 +34,8 @@ export function ClinicHeroSection({ id }) {
 
   return (
     <div className="p-1 flex justify-center">
-      <div className="max-w-md w-full border border-gray-200 rounded-xl shadow-sm bg-white p-6">
+      
+      <div className=" w-full border border-gray-200 rounded-xl shadow-sm bg-white p-6">
         
         <h3 className="text-xl font-semibold text-gray-800 mb-4">
           {accountDetails.name}
@@ -42,64 +43,65 @@ export function ClinicHeroSection({ id }) {
 
         <div className="space-y-3 text-sm text-gray-600">
           <p className="flex">
-            <span className="font-medium w-24">Address:</span>
+            <span className="font-medium">Address: </span>
             <span>
-              {accountDetails.address},{" "}
-              {accountDetails.city?.name},{" "}
-              {accountDetails.state},{" "}
-              {accountDetails.country?.name}
+              <b>#
+              {accountDetails.cep},{" "}
+              {accountDetails.street},{" "}
+              {accountDetails.complement},{" "}
+              {accountDetails.neighborhood}
+              {accountDetails.city}
+              {accountDetails.state}
+              </b>
             </span>
           </p>
 
-          <p className="flex">
-            <span className="font-medium w-24">Phone:</span>
-            <span>{accountDetails.phone}</span>
-          </p>
-
-          <p className="flex">
-            <span className="font-medium w-24">Email:</span>
-            <span>{accountDetails.email}</span>
-          </p>
-
-          <p className="flex">
-            <span className="font-medium w-24">Registered:</span>
-            <span>
-              {formatBrazilDate(accountDetails.createdAt)}
-            </span>
-          </p>
-           <p className="flex">
-            <span className="font-medium w-24">Website Url:</span>
-            <span>
-              <a className="text-blue-400 underline" target="_blank" href={`${accountDetails.websiteurl}`}>Visit Website</a>
-            </span>
-          </p>
 
         </div>
+        
+         Clinic Managed By : <br></br>
+         {/* {JSON.stringify({accountDetails})} */}
 
-        <div className="flex items-center gap-3 mt-4">
-          {accountDetails.phone && (
-            <a href={`tel:${accountDetails.phone}`}>
-              <img width="30" src="/images/brand/phone.svg" alt="Phone" />
-            </a>
-          )}
-
-          {accountDetails.whatsappNumber && (
-            <a
-              href={`https://wa.me/${accountDetails.whatsappNumber.replace(/\D/g, "")}`}
-              target="_blank"
-            >
-              <img width="30" src="/images/brand/whatsapp.svg" alt="WhatsApp" />
-            </a>
-          )}
-
-          {accountDetails.telegramNumber && (
-            <a href={`https://t.me/${accountDetails.telegramNumber}`} target="_blank">
-              <img width="30" src="/images/brand/telegram.svg" alt="Website" />
-            </a>
-          )}
+          Name : {accountDetails.clinicUser?.firstname} {accountDetails.clinicUser?.lastname}<br></br>
+          Email : {accountDetails.clinicUser.email}
 
           
-        </div>
+          <div className="flex items-center gap-4 mt-4 pt-3 border-t">
+        <a href={`tel:${accountDetails?.clinicUser?.phone}`} title="Call" className="hover:opacity-80">
+          <img width="26" src={`${process.env.NEXT_PUBLIC_URL}/images/brand/phone.svg`} alt="Call" />
+        </a>
+
+          {accountDetails?.clinicUser?.whatsappNumber && (
+          <a
+            href={`https://wa.me/${accountDetails?.clinicUser?.whatsappNumber}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            title="WhatsApp"
+            className="hover:opacity-80"
+          >
+            <img width="26" src={`${process.env.NEXT_PUBLIC_URL}/images/brand/whatsapp.svg`} alt="WhatsApp" />
+          </a>
+        )}
+
+         {accountDetails?.clinicUser?.telegramNumber && (
+          <a
+            href={`https://t.me/${accountDetails?.clinicUser?.telegramNumber}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Telegram"
+            className="hover:opacity-80"
+          >
+            <img width="26" src={`${process.env.NEXT_PUBLIC_URL}/images/brand/telegram.svg`} alt="Telegram" />
+          </a>
+        )}
+
+        
+
+       
+        
+      </div>
+         
+
       </div>
     </div>
   );

@@ -1,4 +1,6 @@
 "use client"
+import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast, ToastContainer } from "react-toastify";
@@ -58,6 +60,15 @@ export function PartnerForgot(){
 
       <div className="w-full max-w-md bg-white shadow-lg rounded-xl p-8">
 
+ <Link href={"/"} className="text-center">
+           <Image
+              src="/images/logo.png"
+              alt="Nairobi"
+              width={340}
+              height={40}
+              className=" mt-10 mb-10"
+            />
+        </Link>
         <h2 className="text-center text-2xl font-bold text-gray-800 mb-6">
           Partner Forgot Password
         </h2>

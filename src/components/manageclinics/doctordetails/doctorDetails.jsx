@@ -7,10 +7,20 @@ import HoverZoomImage from "@/reusable/hoverZoomImage";
 import { formatBrazilDate } from "../../../lib/formatDate";
 import { DoctorSurgeryImages } from "../doctordetails/doctorSurgeryImages";
 import {DoctorClinics} from "../doctordetails/doctorClinics";
+import {DoctorSpecialty} from "../doctordetails/doctorSpecialty";
+import {DoctorSubSpecialty} from "../doctordetails/doctorSubSpecialty";
+import {DoctorTreatment} from "../doctordetails/doctorTreatment";
+import { Button } from "@headlessui/react";
+import { DoctorVerifyStatus } from "@/lib/enums/doctorVerifyStatus";
+import { DoctorMakeStatus } from "../doctordetails/doctorMakeStatus";
 
 export function DoctorDetails({ id }) {
   const [doctorDetails, setDoctorDetails] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [registeredclinic,setRegisteredClinic] = useState({});
+
+
+
 
   useEffect(() => {
     if (id) {
@@ -58,6 +68,23 @@ export function DoctorDetails({ id }) {
       </div>
     );
   }
+
+  const test =(data)=>{
+    console.log("registerd clinic",data);
+    setRegisteredClinic(data);
+  }
+
+
+  const updateDoctorStatus =(data)=>{
+    console.log("updated status",data);
+
+        setDoctorDetails((prev) => ({
+        ...prev,
+        ...data
+      }));
+  }
+    
+  
 
   return (
     <section className="py-8 bg-white md:py-16 dark:bg-gray-900 antialiased">
@@ -113,9 +140,11 @@ export function DoctorDetails({ id }) {
                   {formatBrazilDate(doctorDetails.dob)}
                 </span>
               </div>
+              
             </div>
 
 
+           
             <div>
               <p className="font-medium text-gray-600 dark:text-gray-400 mb-1">
                 Languages Spoken
@@ -133,21 +162,88 @@ export function DoctorDetails({ id }) {
                   : <span className="text-sm text-gray-500">N/A</span>}
               </div>
             </div>
+             <div>
+              <p className="font-medium text-gray-600 dark:text-gray-400 mb-1">
+                Doctor Profile Status 
+              </p>
+
+              <div className="flex flex-wrap gap-2">
+                <span className="px-3 py-1 text-xs font-medium rounded-full bg-indigo-100 text-indigo-700 dark:bg-indigo-900 dark:text-indigo-300">
+
+                      {DoctorVerifyStatus.PENDING == doctorDetails.DoctorVerify &&(<>Review</>)}
+                      {DoctorVerifyStatus.VERIFIED == doctorDetails.DoctorVerify &&(<>Verified</>)}
+                      {DoctorVerifyStatus.INACTIVE == doctorDetails.DoctorVerify &&(<>InActive</>)}
+
+                </span>
+              </div>
+            </div>
+           
+           
           </div>
+
+
+          <div className="mt-5 relative rounded-xl border border-gray-200 bg-white p-5 shadow-sm hover:shadow-md transition-shadow">
+            <div className="absolute -top-3 left-4 bg-blue-600 text-white text-xs px-3 py-1 rounded-full tracking-wide">
+              Clinic
+            </div>
+
+            <p className="mt-3 text-xs uppercase tracking-wider text-gray-500">
+              Registered By Clinic
+            </p>
+
+            <div className="mt-3 flex items-center gap-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-100 text-blue-600 font-semibold">
+                {registeredclinic?.name?.charAt(0)}
+              </div>
+
+
+              <div className="flex flex-col">
+                <p className="text-sm font-semibold text-gray-900">
+                  {registeredclinic?.name}
+                </p>
+
+                <p className="text-xs text-gray-500">
+                  Registered on {formatBrazilDate(registeredclinic?.createdAt)}
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+
+           
+
+           <DoctorMakeStatus DoctorStatus={doctorDetails.DoctorVerify} doctoruuid={doctorDetails.uuid} reason={doctorDetails.Reason} onUpdateStatus={updateDoctorStatus} />
+
+          
+
+            
+
+
+        
         </div>
 
 
 
         <div className="mt-5">
+          <DoctorSpecialty id={id} />
+        </div>
 
-           <DoctorClinics id={id}></DoctorClinics>
+        <div className="mt-5">
+          <DoctorSubSpecialty id={id} />
+        </div>
+
+        <div className="mt-5">
+          <DoctorTreatment id={id} />
+        </div>
+
+        <div className="mt-5">
+           <DoctorClinics  id={id} clinicuuid={doctorDetails.clinicuuid} onData={test}></DoctorClinics>
         </div>
         
 
-     
-
         <div className="mt-5">
-
           <DoctorSurgeryImages id={id}></DoctorSurgeryImages>
         </div>
 

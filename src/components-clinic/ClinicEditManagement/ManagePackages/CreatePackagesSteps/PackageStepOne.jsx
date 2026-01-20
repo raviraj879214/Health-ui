@@ -101,7 +101,7 @@ export function PackageStepOne({clinicuuid,packageid}){
                 <form onSubmit={handleSubmit(onCreateUpdate)}>
                 <DialogTitle className="flex justify-between items-center text-lg font-semibold mb-4">
                    <span>Basic Package Details</span>
-                   <span className="text-green-400 ">1/7</span>
+                   <span className="text-green-400 ">1/8</span>
                  </DialogTitle>
 
                 <div className="border theme-border rounded h-[500px] overflow-auto p-4">

@@ -38,8 +38,14 @@ const initialState = {
   patientName: getLS("patientName", ""),
   patientEmail: getLS("patientEmail", ""),
   emailotp: getLS("emailotp", "0"),
-
+  emailverified :getLS("emailverified","0"),
+  medicalCordinatorID: getLS("medicalCordinatorID", "0"),
+  phoneOtp: getLS("phoneOtp", "0"),
+  phoneNumber: getLS("phoneNumber", "0"),
+  phoneNumberVerified:getLS("phoneNumberVerified","0"),
   refresh: getLS("refresh", "false"),
+  termsCondition: getLS("termsCondition", "0"),
+
 };
 
 /* ---------- Slice ---------- */
@@ -52,17 +58,18 @@ const patientQuerySlice = createSlice({
       state.step += 1;
       localStorage.setItem("patientStep", state.step);
     },
-
+    customStep: (state,action) => {
+      state.step = action.payload;
+      localStorage.setItem("patientStep", state.step);
+    },
     prevStep: (state) => {
       if (state.step > 0) state.step -= 1;
       localStorage.setItem("patientStep", state.step);
     },
-
     setStep: (state, action) => {
       state.step = action.payload;
       localStorage.setItem("patientStep", state.step);
     },
-
     clearStep: (state) => {
       state.step = 0;
       localStorage.setItem("patientStep", "0");
@@ -124,13 +131,40 @@ const patientQuerySlice = createSlice({
       state.emailotp = String(action.payload);
       localStorage.setItem("emailotp", String(action.payload));
     },
+    addEmailVerified :(state,action) =>{
+       state.emailverified = String(action.payload);
+      localStorage.setItem("emailverified", String(action.payload));
+    },
+    addphoneNumberVerified :(state ,action)=>{
+      
+      state.phoneNumberVerified = String(action.payload);
+      localStorage.setItem("phoneNumberVerified", String(action.payload));
+    },
+    addmedicalCordinatorID: (state, action) => {
+      state.medicalCordinatorID = String(action.payload);
+      localStorage.setItem("medicalCordinatorID", String(action.payload));
+    },
+    addphoneOtp: (state, action) => {
+      state.phoneOtp = String(action.payload);
+      localStorage.setItem("phoneOtp", String(action.payload));
+    },
+    addphoneNumber: (state, action) => {
+      
+      state.phoneNumber = String(action.payload);
+      localStorage.setItem("phoneNumber", String(action.payload));
+    },
+    addTermsCondition: (state, action) => {
+      
+      state.termsCondition = String(action.payload);
+      localStorage.setItem("termsCondition", String(action.payload));
+    },
 
     clearPrevious: (state) => {
       state.refresh = "false";
       localStorage.setItem("refresh", "false");
     },
 
-    /* ---------- ONE FUNCTION TO CLEAR EVERYTHING ---------- */
+  
     clearAllPatientQuery: (state) => {
       state.step = 0;
       state.treatmentid = "";
@@ -144,7 +178,13 @@ const patientQuerySlice = createSlice({
       state.patientName = "";
       state.patientEmail = "";
       state.emailotp = "0";
+      state.phoneOtp = "0";
+      state.phoneNumber = "0";
       state.refresh = "false";
+      state.emailverified = "0";
+      state.phoneNumberVerified = "0";
+      state.termsCondition = "0";
+
 
       localStorage.removeItem("patientStep");
       localStorage.removeItem("treatmentid");
@@ -158,7 +198,13 @@ const patientQuerySlice = createSlice({
       localStorage.removeItem("patientName");
       localStorage.removeItem("patientEmail");
       localStorage.removeItem("emailotp");
+      localStorage.removeItem("phoneOtp");
+      localStorage.removeItem("phoneNumber");
       localStorage.removeItem("refresh");
+      localStorage.removeItem("emailverified");
+      localStorage.removeItem("phoneNumberVerified");
+      localStorage.removeItem("termsCondition");
+
     },
   },
 });
@@ -180,6 +226,13 @@ export const {
   addPatientEmailOtp,
   clearPrevious,
   clearAllPatientQuery,
+  addmedicalCordinatorID,
+  addphoneOtp,
+  addphoneNumber,
+  addEmailVerified,
+  addphoneNumberVerified,
+  customStep,
+  addTermsCondition
 } = patientQuerySlice.actions;
 
 export default patientQuerySlice.reducer;

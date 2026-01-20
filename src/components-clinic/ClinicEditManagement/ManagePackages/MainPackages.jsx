@@ -8,12 +8,15 @@ import {PackageStepFour} from "../ManagePackages/CreatePackagesSteps/PackageStep
 import {PackageStepFive} from "../ManagePackages/CreatePackagesSteps/PackageStepFive";
 import {PackageStepSix} from "../ManagePackages/CreatePackagesSteps/PackageStepSix";
 import {PackageStepSeven} from "../ManagePackages/CreatePackagesSteps/PackageStepSeven";
+import {PackageStepEight} from "../ManagePackages/CreatePackagesSteps/packageStepEight";
 
 import { EyeIcon, PencilIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { clinicHeaders } from "@/components-clinic/utils/clinicHeaders";
 import { brazilianCurrency } from "@/lib/brazilianCurrency";
+import { PackageVerifyStatus } from "@/lib/enums/packageVerifyStatus";
+import { PackageVisibiltyStatus } from "@/lib/enums/packageVisibiltyStatus";
 
 export function MainPackages({ clinicuuid }) {
   const [step, setStep] = useState(0);
@@ -52,6 +55,21 @@ export function MainPackages({ clinicuuid }) {
       fetchPackageDetails();
     }
   }, [searchParams, clinicuuid]);
+
+
+   const onUpdateVisibilty = async(pkgid,status)=>{
+    const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-package-doctor/update-visibilty`,{
+      method :"Post",
+      headers : await clinicHeaders(),
+      body : JSON.stringify({
+        "packageid" : pkgid,
+        "status" : status
+      })
+    });
+    if(res.ok){
+         fetchPackageDetails();
+    }
+   }
 
 
 
@@ -98,6 +116,7 @@ export function MainPackages({ clinicuuid }) {
       {step === 5 && <PackageStepFive clinicuuid={clinicuuid} packageid={packageid} />}
       {step === 6 && <PackageStepSix clinicuuid={clinicuuid} packageid={packageid} />}
       {step === 7 && <PackageStepSeven clinicuuid={clinicuuid} packageid={packageid} />}
+      {step === 8 && <PackageStepEight clinicuuid={clinicuuid} packageid={packageid} />}
      
 
 
@@ -112,16 +131,22 @@ export function MainPackages({ clinicuuid }) {
             className="relative border theme-border rounded-2xl overflow-hidden shadow-md cursor-pointer p-5 bg-white hover:shadow-xl transition-all">
            
             <div className="absolute top-3 right-3 flex gap-2">
-                
-
-                {/* <button onClick={() => setEnabled(!enabled)} className={`relative inline-flex h-6 w-11 items-center rounded-full transition ${enabled ? "bg-green-700" : "bg-gray-300"}`}>
-                    <span className={`inline-block h-5 w-5 transform rounded-full bg-white transition ${ enabled ? "translate-x-5" : "translate-x-1"}`}/>
-                </button> */}
 
 
-              <button className="background-theme p-2 bg-gray-100 hover:bg-gray-200 rounded-full">
-                <EyeIcon size={16} />
+              <button
+               disabled={item.status === PackageVerifyStatus.VERIFIED ? false : true}
+                   onClick={() =>
+                   {
+                      onUpdateVisibilty(item.id,item.Visibilty === 0 ? 1 : 0)
+
+                   }
+                    
+                    } className={`relative inline-flex h-6 w-11 items-center rounded-full transition ${item.Visibilty === PackageVisibiltyStatus.SHOW ? "bg-green-700" : "bg-gray-300"}`}>
+                  <span className={`inline-block h-5 w-5 transform rounded-full bg-white transition ${item.Visibilty === PackageVisibiltyStatus.SHOW ?  "translate-x-5" : "translate-x-1"}`} />
               </button>
+
+              
+              
 
               <button
                 onClick={() => EditPackageDetails(item.id)}
@@ -129,6 +154,8 @@ export function MainPackages({ clinicuuid }) {
               >
                 <PencilIcon size={16} />
               </button>
+
+
             </div>
 
     
@@ -157,8 +184,7 @@ export function MainPackages({ clinicuuid }) {
                   {brazilianCurrency(item.actualprice || 0)}
                 </p>
               </div>
-             
-
+            
              <div className="flex flex-col items-start gap-2 mt-5">
                   {item.packagesDoctor.length > 0 ? (
                     item.packagesDoctor.map((pd) => (
@@ -181,9 +207,23 @@ export function MainPackages({ clinicuuid }) {
                   )}
               </div>
 
+              
+
 
 
             </div>
+            {item.status === PackageVerifyStatus.VERIFIED && (
+              <span className="mt-3 flex items-center bg-gradient-to-r from-green-400 to-teal-500 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md">
+                <svg
+                  className="w-4 h-4 mr-1"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M9 16.2l-3.5-3.5L4 14.2l5 5 12-12-1.5-1.5z" />
+                </svg>
+                Approved |  {process.env.NEXT_PUBLIC_PROJECT_NAME}
+              </span>
+            )}
           </div>
         ))}
       </div>

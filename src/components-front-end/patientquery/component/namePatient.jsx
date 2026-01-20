@@ -1,6 +1,6 @@
 "use client";
 
-import { addPatientName, addStep } from "@/components-front-end/redux/patinetquery/patientQueryRedux";
+import { addmedicalCordinatorID, addPatientName, addStep } from "@/components-front-end/redux/patinetquery/patientQueryRedux";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,6 +21,7 @@ export function NamePatient() {
 
   const onEnter = async (data) => {
 
+  
     dispatch(addPatientName(data.name));
     dispatch(addStep());
   };

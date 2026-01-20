@@ -3,9 +3,18 @@
 import { FaBars } from "react-icons/fa";
 import { clinicLogout } from "../utils/clinicLogout";
 import NotificationUI from "@/components/NotificationListener/notificationListener";
-
+import Cookies from "js-cookie";
 
 export function ClinicHeader({ onToggleSidebar = () => {} }) {
+
+
+
+  const clinic_id = Cookies.get("clinic_id");
+
+
+
+
+
   return (
     <header className="h-14 background-theme text-white flex items-center justify-between px-6 shadow w-full p-8">
       <button className="sm:hidden" onClick={onToggleSidebar}>
@@ -14,7 +23,8 @@ export function ClinicHeader({ onToggleSidebar = () => {} }) {
       <div className="font-bold text-lg">Clinic Panel</div>
      
       <div className="flex items-center gap-4">
-         <NotificationUI></NotificationUI>
+  
+         <NotificationUI id={clinic_id}></NotificationUI>
         <button 
           onClick={clinicLogout}
           className="bg-white text-[#1ABC9C] px-3 py-1 rounded-full text-sm font-semibold"

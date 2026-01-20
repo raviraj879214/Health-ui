@@ -129,8 +129,15 @@ export function ClinicDetails({ querydetails , onData }) {
 
         {querydetails.clinic ? (<>
            <p className="text-gray-600 mb-1">
-        <span className="font-semibold">Address:</span>{" "}
-        {querydetails.clinic?.address}, {querydetails.clinic?.state}
+        <span className="font-semibold">Address:# </span>{" "}
+        
+
+         <b>{querydetails.clinic?.cep},{" "}
+              {querydetails.clinic?.street},{" "}
+              {querydetails.clinic?.complement},{" "}
+              {querydetails.clinic?.neighborhood}
+              {querydetails.clinic?.city}
+              {querydetails.clinic?.state}</b>
       </p>
 
       <p className="text-gray-600 mb-1">

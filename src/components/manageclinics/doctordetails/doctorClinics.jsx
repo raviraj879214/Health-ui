@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 
 
-export function DoctorClinics({id}){
+export function DoctorClinics({id,clinicuuid ,onData }){
 
 
     const [clinics,setClinics] = useState([]);
@@ -26,9 +26,14 @@ export function DoctorClinics({id}){
         if(res.ok){
             const result = await res.json();
             setClinics(result.data);
+            console.log("result.data",result.data);
             setClinicBannerImage(result.ClinicImages);
 
-
+            const selected = result?.data?.find((x) => x.clinicUuid === clinicuuid);
+            if (selected?.clinic && onData) {
+              onData(selected.clinic);
+            }
+            
         }
 
     }
@@ -112,6 +117,8 @@ export function DoctorClinics({id}){
                   </b>
                 </p>
               )}
+
+              
             </a>
           );
         })}

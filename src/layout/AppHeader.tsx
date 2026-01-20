@@ -11,8 +11,47 @@ import NotificationListener from "../components/NotificationListener/notificatio
 
 const AppHeader: React.FC = () => {
   const [isApplicationMenuOpen, setApplicationMenuOpen] = useState(false);
+  const [rolename,setRoleName] = useState("");
+  const [adminuserid,setAdminUserID] = useState("");
+
 
   const { isMobileOpen, toggleSidebar, toggleMobileSidebar } = useSidebar();
+
+
+
+    useEffect(()=>{
+      fetchRole();
+    },[]);
+
+    const fetchRole =async()=>{
+      const res = await fetch(`/api/auth/get-admin-role`,{
+        method : "Get"
+      });
+
+      if(res.ok){
+        const result = await res.json();
+        setRoleName(result.adminrole);
+      }
+
+      const resuserid = await fetch(`/api/auth/get-userid`,{
+        method : "Get"
+      });
+      if(resuserid.ok){
+        const result = await resuserid.json();
+        setAdminUserID(result.userid);
+      }
+
+    }
+
+    
+
+
+
+
+
+
+
+
 
   const handleToggle = () => {
     if (window.innerWidth >= 1024) {
@@ -171,14 +210,21 @@ const AppHeader: React.FC = () => {
         >
 
 
+         
 
-            <NotificationListener></NotificationListener>
+
+
+        
           <div className="flex items-center gap-2 2xsm:gap-3">
+
+            <div className="border border-gray-400 p-3 rounded-2xl bg-gray-300 text-black">
+                {rolename}
+            </div>
            
-            <ThemeToggleButton />
-           
+             
+              <NotificationListener id={adminuserid}></NotificationListener>
+            {/* <ThemeToggleButton /> */}
           </div>
-      
           <UserDropdown /> 
     
         </div>

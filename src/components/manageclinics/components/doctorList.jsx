@@ -20,7 +20,7 @@ export function DoctorList({id}){
     
   const fetchClinic = async()=>{
     debugger;
-     const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-clinic/get-clinic-listing`,{
+     const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-clinic/get-clinic-listing?clinicuuid=${id}`,{
             method : "GET",
             headers : await adminHeaders()
         });

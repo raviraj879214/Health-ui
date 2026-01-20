@@ -116,7 +116,7 @@ const onCancel =()=>{
 
          <DialogTitle className="flex justify-between items-center text-lg font-semibold mb-4">
             <span>Doctor Description </span>
-            <span className="text-green-400 ">5/5</span>
+            <span className="text-green-400 ">5/7</span>
           </DialogTitle>
           
          
@@ -194,7 +194,7 @@ const onCancel =()=>{
 
             <button 
               onClick={()=>{
-                window.location.href = window.location.pathname;
+                window.location.href = `?doid=${doctoruuid}&step=6`;
               }}
             className="btn btn-primary">Next</button>
 

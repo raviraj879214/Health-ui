@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import next from "next";
+import LocationPicker from "../../../googlemapscomponents/locationPicker";
 
 
 
@@ -56,16 +57,19 @@ export  function StepOne() {
         if(res.ok){
           debugger;
             const result = await res.json();
+            
             if(result.status == 404){
                 setError("email", {type: "manual",message: "Email already exists"});
+                setButton(false);
             }
             
             if(result.status == 404){
                     toast.success(result.message, {
-                    className: "bg-blue-600 text-white font-bold",
-                    bodyClassName: "text-white",
-            });
+                            className: "bg-blue-600 text-white font-bold",
+                            bodyClassName: "text-white",
+                    });
 
+              setButton(false);
              return ;
             }
 
@@ -149,7 +153,7 @@ const [otpDigits, setOtpDigits] = useState(["", "", "", ""]);
             "content-type" : "application/json"
         },
         body : JSON.stringify({
-            "isOtpVerify" : true,
+            // "isOtpVerify" : true,
             "uuid" : uuid
 
         })
@@ -184,7 +188,7 @@ const [otpDigits, setOtpDigits] = useState(["", "", "", ""]);
         
           <div className="absolute -top-4 left-1/2 -translate-x-1/2">
             <span className="px-6 py-1.5 rounded-full text-sm font-semibold text-white bg-gradient-to-r bg-[var(--primary)] shadow-md">
-              Step {step} of 4
+              Step {step} of 6
             </span>
           </div>
 
@@ -220,11 +224,11 @@ const [otpDigits, setOtpDigits] = useState(["", "", "", ""]);
                 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Clinic Email Address
-                  </label>
+                   Email Address
+                  </label>  
                   <input
                     type="email"
-                    placeholder="clinic@company.com"
+                    placeholder="emal@company.com"
                     className="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900
                       placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     {...register("email", {
@@ -294,6 +298,7 @@ const [otpDigits, setOtpDigits] = useState(["", "", "", ""]);
                 </div>
                )}
                 
+               
                 
               </div>
             </div>

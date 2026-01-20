@@ -1,8 +1,10 @@
 "use client"
 import { clinicHeaders } from "@/components-clinic/utils/clinicHeaders";
 import Label from "@/components/form/Label";
+import { ButtonSpinner } from "@/reusable/buttonSpinner";
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from "@headlessui/react";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 export function DoctorFour({ onClose, nextStep, prevStep ,clinicuuid , doctoruuid}) {
 
@@ -15,6 +17,7 @@ export function DoctorFour({ onClose, nextStep, prevStep ,clinicuuid , doctoruui
   const [cantfind,setCantfine]= useState(false);
   const [othertext,setOhertext] = useState("");
   const [selectedspecialty,setSelectedspecialty] = useState([]);
+  const[otherbutton,setOtherButton] = useState(false);
 
 
 
@@ -61,6 +64,7 @@ export function DoctorFour({ onClose, nextStep, prevStep ,clinicuuid , doctoruui
 
     const onCreateOther = async (doctoruuid) =>{
       debugger;
+      setOtherButton(true);
         const specializationExists = specialty.some(
             item => item.name.trim().toLowerCase() === othertext.trim().toLowerCase()
           );
@@ -78,7 +82,8 @@ export function DoctorFour({ onClose, nextStep, prevStep ,clinicuuid , doctoruui
             headers : clinicHeaders(),
             body :JSON.stringify({
               doctorUuid: doctoruuid,
-              othertext : othertext
+              othertext : othertext,
+              clinicuuid:clinicuuid
             })
           });
       
@@ -87,8 +92,16 @@ export function DoctorFour({ onClose, nextStep, prevStep ,clinicuuid , doctoruui
       
             setOhertext("");
             fetchSelectedSpeciality();
-          }
+           toast.success(
+  "Sent for approval. We will update you within 24 hours.",
+  {
+    position: "bottom-right",
+    autoClose: 3000,
+  }
+);
 
+          }
+           setOtherButton(false);
 
     }
 
@@ -158,33 +171,76 @@ export function DoctorFour({ onClose, nextStep, prevStep ,clinicuuid , doctoruui
 
          <DialogTitle className="flex justify-between items-center text-lg font-semibold mb-4">
             <span>Choose Treatment </span>
-            <span className="text-green-400 ">4/4</span>
+            <span className="text-green-400 ">4/7</span>
           </DialogTitle>
           
-          <div className="border theme-border rounded-lg p-3 w-auto flex flex-wrap max-h-[180px] overflow-auto ">
-          {selectedspecialty.length == 0 ? "No records selected" : ""}
-          
-          {selectedspecialty.map((item, index) => (
-            <div
-              key={index}
-              className="flex items-center gap-2 bg-gray-100 px-3 py-1 rounded-full m-1 mt-1 background-theme"
-            >
-              <span className="text-white-700 text-sm font-semibold">
-                {item.treatment?.name || item.suggestedCategory?.name || "test close icon"}
-              </span>
-
-              <button
-                onClick={() => handleRemove(item.id)}
-                className="text-red-700 hover:text-red-500 transition">
-
-                ✕
-
-              </button>
-            </div>
-          ))}
+          <div className="border theme-border rounded-lg p-3 w-auto flex flex-wrap max-h-[180px] overflow-auto">
 
 
-        </div>
+            {selectedspecialty.length === 0 && (
+              <span className="text-gray-500 text-sm">No records selected</span>
+            )}
+
+
+            {selectedspecialty.some(item => item.treatment) && (
+              <>
+                <p className="w-full text-sm font-semibold text-gray-700 mb-1">
+                  Treatments
+                </p>
+
+                {selectedspecialty
+                  .filter(item => item.treatment)
+                  .map((item, index) => (
+                    <div
+                      key={`treatment-${index}`}
+                      className="flex items-center gap-2 bg-gray-100 px-3 py-1 rounded-full m-1 mt-1 background-theme"
+                    >
+                      <span className="text-white-700 text-sm font-semibold">
+                        {item.treatment.name}
+                      </span>
+
+                      <button
+                        onClick={() => handleRemove(item.id)}
+                        className="text-red-700 hover:text-red-500 transition"
+                      >
+                        ✕
+                      </button>
+                    </div>
+                  ))}
+              </>
+            )}
+
+
+            {selectedspecialty.some(item => item.suggestedCategory) && (
+              <>
+                <p className="w-full text-sm font-semibold text-gray-700 mt-3 mb-1">
+                  (Pending Approval)
+                </p>
+
+                {selectedspecialty
+                  .filter(item => item.suggestedCategory)
+                  .map((item, index) => (
+                    <div
+                      key={`suggested-${index}`}
+                      className="flex items-center gap-2 bg-yellow-100 px-3 py-1 rounded-full m-1"
+                    >
+                      <span className="text-sm font-semibold text-yellow-900">
+                        {item.suggestedCategory.name}
+                      </span>
+
+                      {/* <button
+                        onClick={() => handleRemove(item.id)}
+                        className="text-red-700 hover:text-red-500 transition"
+                      >
+                        ✕
+                      </button> */}
+                    </div>
+                  ))}
+              </>
+            )}
+
+          </div>
+
 
        <div className="border theme-border rounded-lg p-3 w-100% flex flex-wrap mt-2 max-h-[400px] overflow-auto">
             <div className="flex items-center justify-between mb-2 w-full">
@@ -221,7 +277,13 @@ export function DoctorFour({ onClose, nextStep, prevStep ,clinicuuid , doctoruui
                         }}
                         className="text-green-600 hover:text-green-500 transition p-1 rounded-md hover:bg-green-50"
                       >
-                        ✔
+                        {otherbutton ? (<>
+                                                 <ButtonSpinner></ButtonSpinner>
+                                               </>):(
+                                                 <>
+                                                    ✔
+                                                 </>
+                                               )}
                       </button>
                     ) : (
                       <button

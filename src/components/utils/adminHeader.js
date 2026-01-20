@@ -10,6 +10,7 @@ export const adminHeaders = async () => {
   return {
     "Content-Type": "application/json",
     Authorization: `Bearer ${token.token}`,
+    
   };
   
 };

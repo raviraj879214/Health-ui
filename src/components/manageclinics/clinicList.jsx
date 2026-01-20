@@ -6,6 +6,8 @@ import ComponentCard from "@/components/common/ComponentCard";
 import { useEffect, useState } from "react";
 import {adminHeaders} from "../utils/adminHeader";
 import { usePermissions } from "@/context/PermissionContext";
+import { formatBrazilDate } from "@/lib/formatDate";
+import { ClinicStatus } from "@/lib/enums/ClinicStatus";
 
 
 
@@ -89,105 +91,141 @@ export function ClinicListAdmin(){
                 <p className="text-red-500">Restricted</p>
             )}
            
-
+            
             <div>
              <ul className="divide-y divide-default">
             {clinic.map((item)=>(
-               <li key={item.id}  className="py-4">
+              <li key={item.id} className="py-4 border-b last:border-b-0">
+  <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 items-start">
+
+    
+    <div className="flex items-start gap-3">
+      <div>
+        <p className="text-sm font-semibold text-heading truncate">
+          {item.name}
+           <span
+          className={`ml-4 px-3 py-1 rounded-full text-sm font-semibold inline-block
+            ${
+              item.status === ClinicStatus.PENDING
+                ? "bg-yellow-100 text-yellow-700"
+                : item.status === ClinicStatus.ACTIVE
+                ? "bg-green-100 text-green-700"
+                : item.status === ClinicStatus.BLOCKED
+                ? "bg-red-100 text-red-700"
+                : "bg-gray-100 text-gray-600"
+            }`}
+        >
+          {item.status === ClinicStatus.PENDING && "Pending"}
+          {item.status === ClinicStatus.ACTIVE && "Active"}
+          {item.status === ClinicStatus.BLOCKED && "Deactivated"}
+        </span>
+        </p>
+        <p className="text-xs text-body mt-1">
+          Registered on : {formatBrazilDate(item.createdAt)}
+        </p>
+
+          
+        
+      </div>
+    </div>
 
 
-                    <div className="flex items-center justify-between">
-                        
-                    <div className="flex items-center space-x-4 w-1/8">
-                        <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-heading truncate">
-                            {item.name}
-                        </p>
+    <div className="bg-white border rounded-lg p-4 shadow-sm">
+      <h3 className="text-xs font-semibold text-gray-700 uppercase tracking-wide border-b pb-2 mb-3">
+        Clinic Managed By
+      </h3>
+               
+      <div className="space-y-2 text-sm text-gray-800">
+        <div className="flex justify-between gap-3">
+          <span className="text-gray-500">Name</span>
+          <span className="font-medium text-right">{item?.clinicUser?.firstname} {item?.clinicUser?.lastname}</span>
+        </div>
 
-                        <p className="text-xs text-body truncate">
-                            # {item.address} {item.city.name} {item.country.name}
-                        </p>
+        <div className="flex justify-between gap-3">
+          <span className="text-gray-500">Phone</span>
+          <span className="font-medium">{item?.clinicUser?.phone}</span>
+        </div>
 
-                        <div className="flex items-center gap-3 mt-1 text-body">
+        <div className="flex justify-between gap-3">
+          <span className="text-gray-500">Email</span>
+          <span className="font-medium break-all text-right">
+            {item?.clinicUser?.email}
+          </span>
+        </div>
+      </div>
 
-                            
-                            <a href={`tel:${item.phone}`} className="hover:text-heading">
-                                     <img width={"30px"} src={`${process.env.NEXT_PUBLIC_URL}/images/brand/phone.svg`} alt="WhatsApp" />
-                            </a>
+      {/* Contact Actions */}
+      <div className="flex items-center gap-4 mt-4 pt-3 border-t">
 
-                        
-                            <a
-                            
-                            href={`https://wa.me/${item.whatsappNumber}`}
-                            target="_blank"
-                            className="hover:text-heading">
-                                <img width={"30px"}
-                                 
-                                 src={`${process.env.NEXT_PUBLIC_URL}/images/brand/whatsapp.svg`}
-                                 
-                                 alt="WhatsApp" />
-                            </a>
-
-                        
-                            <a
-                            href={`https://t.me/${item.telegramNumber}`}
-                            target="_blank"
-                            className="hover:text-heading">
-                            <img width={"30px"} 
-                            
-                             src={`${process.env.NEXT_PUBLIC_URL}/images/brand/telegram.svg`}
-                            
-                            alt="WhatsApp" />
-                            </a>
-
-                        
-                        
-
-                        </div>
-                        </div>
-
-                    </div>
+        <a  href={`tel:${item?.clinicUser?.phone}`} title="Call" className="hover:opacity-80">
+          <img width="26" src={`${process.env.NEXT_PUBLIC_URL}/images/brand/phone.svg`} alt="Call" />
+        </a>
 
 
-                    <div className="flex -space-x-4 rtl:space-x-reverse">
-                            {item.clinicDoctors && item.clinicDoctors.length > 0 ? (
-                                item.clinicDoctors.map((itemdoctor) => (
-                                <img
-                                    key={itemdoctor.doctor.id} // make sure each doctor has a unique id
-                                    className="w-10 h-10 border-2 border-buffer rounded-full"
-                                    src={
-                                    itemdoctor.doctor.image
-                                        ? `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/doctors/profilepicture/${itemdoctor.doctor.image}`
-                                        : '/images/default-doctor.png' // fallback image
-                                    }
-                                    alt={itemdoctor.doctor.name || 'Doctor'}
-                                />
-                                ))
-                            ) : (
-                                <p className="text-sm text-gray-500">No doctors available</p>
-                            )}
-                        </div>
+        {item.whatsappNumber && (
+          <a
+            href={`https://wa.me/${item?.clinicUser?.whatsappNumber}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            title="WhatsApp"
+            className="hover:opacity-80"
+          >
+            <img width="26" src={`${process.env.NEXT_PUBLIC_URL}/images/brand/whatsapp.svg`} alt="WhatsApp" />
+          </a>
+        )}
 
+        {item.telegramNumber && (
+          <a
+            href={`https://t.me/${item?.clinicUser?.telegramNumber}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Telegram"
+            className="hover:opacity-80"
+          >
+            <img width="26" src={`${process.env.NEXT_PUBLIC_URL}/images/brand/telegram.svg`} alt="Telegram" />
+          </a>
+        )}
 
+        
+      </div>
+    </div>
 
-                        
-                    <div className="flex items-center gap-2">
-                    <button
+    {/* Doctors */}
+    <div>
+      <p className="text-xs text-gray-500 mb-2">Doctors</p>
+      <div className="flex -space-x-3">
+        {item.clinicDoctors?.length > 0 ? (
+          item.clinicDoctors.map((itemdoctor) => (
+            <img
+              key={itemdoctor.doctor.id}
+              className="w-10 h-10 border-2 border-white rounded-full object-cover"
+              src={
+                itemdoctor.doctor.image
+                  ? `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/doctors/profilepicture/${itemdoctor.doctor.image}`
+                  : '/images/default-doctor.png'
+              }
+              alt={itemdoctor.doctor.name || 'Doctor'}
+            />
+          ))
+        ) : (
+          <span className="text-sm text-gray-400">No doctors</span>
+        )}
+      </div>
+    </div>
 
-                    onClick={()=>{
-                            router.push(`/admin/clinic-details/${item.uuid}`);
-                    }}
-                    
-                    
-                    className="text-xs font-semibold text-heading bg-neutral-secondary-medium hover:bg-neutral-tertiary-medium px-3 py-1.5 rounded-base">
-                        View
-                    </button>
+    {/* Actions */}
+    <div className="flex justify-end">
+      <button
+        onClick={() => router.push(`/admin/clinic-details/${item.uuid}`)}
+        className="text-xs font-semibold text-heading bg-neutral-secondary-medium hover:bg-neutral-tertiary-medium px-4 py-2 rounded-base"
+      >
+        View Details
+      </button>
+    </div>
 
-                           
-                    
-                    </div>
-                    </div>
-              </li>
+  </div>
+</li>
+
             ))}
             <li className="flex flex-col items-end">
                     

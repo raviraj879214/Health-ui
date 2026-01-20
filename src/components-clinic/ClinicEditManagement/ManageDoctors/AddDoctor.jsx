@@ -5,6 +5,8 @@ import {DoctorTwo} from "../ManageDoctors/DoctorStepTwo";
 import {DoctorThree} from "../ManageDoctors/DoctorStepThree";
 import {DoctorFour} from "../ManageDoctors/DoctorStepFour";
 import {DoctorFive} from "../ManageDoctors/DoctorStepFive";
+import {DoctorSix} from "../ManageDoctors/doctorSix";
+import {DoctorSeven} from "../ManageDoctors/doctorSeven";
 
 
 export function DoctorSteps({ onClose , clinicuuid , doctoruuid , stepcount}) {
@@ -26,6 +28,8 @@ export function DoctorSteps({ onClose , clinicuuid , doctoruuid , stepcount}) {
       {step === 3 && <DoctorThree onClose={onClose} nextStep={nextStep} prevStep={prevStep}  clinicuuid={clinicuuid} doctoruuid={doctoruuid}/>}
       {step === 4 && <DoctorFour onClose={onClose} prevStep={prevStep}  clinicuuid={clinicuuid} doctoruuid={doctoruuid}/> }
       {step === 5 && <DoctorFive onClose={onClose} prevStep={prevStep}  clinicuuid={clinicuuid} doctoruuid={doctoruuid}/> }
+      {step === 6 && <DoctorSix onClose={onClose} prevStep={prevStep}  clinicuuid={clinicuuid} doctoruuid={doctoruuid}/> }
+      {step === 7 && <DoctorSeven onClose={onClose} prevStep={prevStep}  clinicuuid={clinicuuid} doctoruuid={doctoruuid}/> }
       
     </>
   );

@@ -142,6 +142,7 @@ export function PatientQueryDetails({ id }) {
 
 
 
+   
 
     return (<>
 
@@ -161,11 +162,14 @@ export function PatientQueryDetails({ id }) {
 
         <ComponentCard className="p-6 space-y-6">
 
+
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-6">
+
            <div>
             <Label>Patient Requested No</Label>
             <div className="text-gray-700"><b>{querydetails?.querycode}</b></div>
           </div>
+
           <div>
             <Label>Name</Label>
             <div className="text-gray-700">{querydetails?.patientName}</div>
@@ -178,7 +182,7 @@ export function PatientQueryDetails({ id }) {
 
           <div>
             <Label>Phone Number</Label>
-            <div className="text-gray-700">{querydetails?.phoneNumber || "Not verified"}</div>
+            <div className="text-gray-700">{querydetails?.phoneNumber === "0" ? "Not verified" : querydetails?.phoneNumber}</div>
           </div>
 
           <div>
@@ -192,6 +196,7 @@ export function PatientQueryDetails({ id }) {
               {querydetails.medicalReportsValue || "--"}
             </p>
           </div>
+
 
           <div>
             <p className="text-xs text-gray-500 mb-1">Treatment</p>
@@ -214,17 +219,10 @@ export function PatientQueryDetails({ id }) {
             </p>
           </div>
 
-
-
-
-
-
         </div>
+      </ComponentCard>
 
-        </ComponentCard>
-
-      
-
+    
 <ComponentCard>
    
 
@@ -327,7 +325,7 @@ export function PatientQueryDetails({ id }) {
             <>
                 
 
-                   {(querydetails.package !== null) ? (
+                   {(querydetails.package !== null && querydetails.commission > 0) ? (
                        <button
         type="submit"
         className="h-12 px-10 bg-gradient-to-r from-indigo-500 to-purple-500
@@ -471,7 +469,7 @@ export function PatientQueryDetails({ id }) {
       {/* Generate Button */}
 
       
-        {(querydetails.package !== null) ? (
+        {(querydetails.package !== null && querydetails.commission > 0) ? (
            <button
         onClick={generatelink}
         disabled={generatebutton}

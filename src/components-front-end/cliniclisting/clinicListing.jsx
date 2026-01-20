@@ -15,11 +15,16 @@ export function ClinicListing(){
 
 
     const [view, setView] = useState("grid"); // <-- default grid
-
+    const [maxprice,setMaxprice]  = useState(0);
+    const [minprice,setMinprice]  = useState(0);
+   
     const selectedSpecializations = useSelector((state) => state.clinicListing?.specializationRedux || []);
     const selectedSpecialty = useSelector((state) => state.clinicListing?.specialtyRedux || []);
     const selectedTreatment = useSelector((state) => state.clinicListing?.treatmentRedux || []);
+    const selectedPlaces = useSelector((state) => state.clinicListing?.placeRedux || []);
     const skip = useSelector((state) => state.clinicListing?.skipRedux || 0);
+
+
     const dispatch = useDispatch();
     const [clinicloading,setClinicLoading] = useState(false);
     const [sortby,setSortby] = useState("0");
@@ -52,14 +57,11 @@ export function ClinicListing(){
 
     useEffect(()=>{
         debugger;
-
-       
          dispatch(setSkipRedux(0));
          fetchClinics();
          setSortby("");
 
-        
-    },[selectedSpecializations,selectedSpecialty,selectedTreatment]);
+    },[selectedSpecializations,selectedSpecialty,selectedTreatment,selectedPlaces]);
 
 
 
@@ -68,10 +70,12 @@ export function ClinicListing(){
     const fetchClinics = async()=>{
        debugger;
        setClinicLoading(true);
+
         let payload ={
             specialization:selectedSpecializations,
             specialty: selectedSpecialty,
             treatment : selectedTreatment,
+            places : selectedPlaces,
             limit : limit,
             skip : skip
         }
@@ -80,15 +84,15 @@ export function ClinicListing(){
             method : "Post",
             headers :{
               "Content-Type": "application/json"
-
-
             },
             body : JSON.stringify(payload)
         });
         if (res.ok) {
             debugger;
             const result = await res.json();
-           
+            setMaxprice(result.maxPrice);
+            setMinprice(result.minPrice);
+
 
             const clinicList = result.data.map((item) => {
 
@@ -102,7 +106,7 @@ export function ClinicListing(){
                     clinicbanner: bannerImageObj
                         ? bannerImageObj.Images
                         : item.imageUrl || null,
-                        address : item.name,
+                        address : `${item.street} ,${item.complement} ${item.neighborhood} ${item.citycep}-${item.state},${item.cep}`,
                         state : item.city?.name,
                         country : item.country?.name,
                         googlerating : item.ratingSummary?.averageRating,
@@ -204,14 +208,14 @@ export function ClinicListing(){
         <div className="container">
           <div className="flex gap-x-7.5 md:flex-nowrap flex-wrap">
             <div className="flex-auto lg:w-3/12 md:w-4/12 w-full">
-              <Filters />
+              <Filters minPrice ={minprice} maxPrice={maxprice} />
             </div>
             <div className="flex-auto lg:w-9/12 md:w-8/12 w-full">
               
              
             
               <div className="flex items-center justify-between gap-5 mb-7.5">
-                <div className="leading-none"><strong>{clinics.length}</strong> Results of <strong>{total}</strong></div>
+                <div className="leading-none"><strong>{clinics.length}</strong> Results of <strong>{total}  </strong></div>
                
                 <div className="flex gap-5">
                   <div className="flex gap-2.5 grid-list-view-toggle">

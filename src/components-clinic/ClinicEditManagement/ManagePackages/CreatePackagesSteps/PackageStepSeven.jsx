@@ -19,9 +19,10 @@ export function PackageStepSeven({ clinicuuid, packageid }) {
 
 
         const fetchDoctors = async () => {
+
             try {
                 const res = await fetch(
-                    `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/doctors/get-doctors/${clinicuuid}`,
+                    `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-package-doctor/get-doctors/${clinicuuid}`,
                     { headers: clinicHeaders() }
                 );
                 if (res.ok) {
@@ -32,8 +33,11 @@ export function PackageStepSeven({ clinicuuid, packageid }) {
                 console.error("Error fetching doctors:", err);
             }
         };
-        fetchDoctors();
+        if(clinicuuid){
+             fetchDoctors();
 
+        }
+       
         if(packageid){
             fetchSelectedDoctor();
         }
@@ -63,11 +67,8 @@ export function PackageStepSeven({ clinicuuid, packageid }) {
         }
     }
 
-
-
     const selectDoctor =async (data)=>{
         debugger;
-
         const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-package-doctor/selected-doctor`,{
             method : "Post",
             headers : clinicHeaders(),
@@ -79,13 +80,8 @@ export function PackageStepSeven({ clinicuuid, packageid }) {
 
         if(res.ok){
 
-
         }
     }
-
-
-
-
 
 
     
@@ -99,17 +95,6 @@ export function PackageStepSeven({ clinicuuid, packageid }) {
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
-
-
-
-
-
-
-
-
-
-
-
     const onCancel = () => {
         const params = new URLSearchParams(Array.from(searchParams.entries()));
         params.set("pckid", packageid);
@@ -117,12 +102,20 @@ export function PackageStepSeven({ clinicuuid, packageid }) {
         router.push(`?${params.toString()}`);
     };
 
+    const goToStepOne = () => {
+
+        const params = new URLSearchParams(Array.from(searchParams.entries()));
+        params.set("pckid", packageid);
+        params.set("steppackage", "8");
+        router.push(`?${params.toString()}`);
+    };
 
 
-const goToStepOne = () => {
-  
-  window.location.href = window.location.pathname;
-};
+   
+
+
+
+
 
 
 
@@ -133,7 +126,7 @@ const goToStepOne = () => {
                 <DialogPanel className="bg-white rounded-lg shadow-xl w-full max-w-3xl p-6">
                     <DialogTitle className="flex justify-between items-center text-lg font-semibold mb-4">
                         <span>Choose Doctor</span>
-                        <span className="text-green-400">7/7</span>
+                        <span className="text-green-400">7/8</span>
                     </DialogTitle>
 
                     <div className="border theme-border rounded h-[500px] p-4 overflow-auto">
@@ -215,29 +208,7 @@ const goToStepOne = () => {
                                                 <div className="line-clamp-2" dangerouslySetInnerHTML={{ __html: selectedDoctor.briefDescription }} />
                                             </p>
                                             <div>
-                                                <button
-                                                    type="button"
-                                                    className="inline-flex items-center text-gray-700 bg-gray-200 border border-gray-300 hover:bg-gray-300 hover:text-gray-900 focus:ring-4 focus:ring-gray-300 shadow font-medium text-sm px-4 py-2.5 rounded"
-                                                >
-                                                    View Doctor
-                                                    <svg
-                                                        className="w-4 h-4 ml-1"
-                                                        aria-hidden="true"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        width="24"
-                                                        height="24"
-                                                        fill="none"
-                                                        viewBox="0 0 24 24"
-                                                    >
-                                                        <path
-                                                            stroke="currentColor"
-                                                            strokeLinecap="round"
-                                                            strokeLinejoin="round"
-                                                            strokeWidth="2"
-                                                            d="M19 12H5m14 0-4 4m4-4-4-4"
-                                                        />
-                                                    </svg>
-                                                </button>
+                                                
                                             </div>
                                         </div>
                                     </a>

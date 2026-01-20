@@ -82,7 +82,7 @@ export function ClinicProfile() {
    
 
         <ComponentCard className="w-full md:w-1/2 h-min" title="Update Profile" desc="" showReload={true}>
-            <form className="grid grid-cols-1 gap-4" onSubmit={handleSubmit(onUpdate)}>
+            <form className="grid grid-cols-2 gap-4" onSubmit={handleSubmit(onUpdate)}>
 
 
                 <div className="flex flex-col">
@@ -134,6 +134,7 @@ export function ClinicProfile() {
                     type="text"
                     placeholder="Enter phone number"
                     className=""
+                    disabled={true}
                     maxLength={10}
                     {...register("phonenumber", {
                     required: "Please enter phone number",
@@ -145,7 +146,35 @@ export function ClinicProfile() {
                 />
                 {errors.phonenumber && (<p className="text-red-500 text-sm mt-1">{errors.phonenumber.message}</p>)}
                 </div>
+                <div className="flex flex-col">
+                <label className="mb-1 font-medium text-gray-700">Whatsapp (optional)</label>
+                <input
+                    type="text"
+                   
+                    placeholder="Enter WhatsApp"
+                    className=""
+                    {...register("whatsappnumber")}
+                />
+               
+                </div>
 
+
+                <div className="flex flex-col">
+                <label className="mb-1 font-medium text-gray-700">Telegram (optional)</label>
+                <input
+                    type="text"
+                    placeholder="Enter Telegram"
+                    className=""
+                    
+                    maxLength={10}
+                    {...register("telegramnumber")}
+                />
+              
+                </div>
+
+                <div className="flex flex-col">
+                    
+                </div>
 
                 <div className="flex justify-end mt-2">
                 <button 

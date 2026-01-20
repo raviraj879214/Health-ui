@@ -1,6 +1,7 @@
 
 "use client"
 import { clinicHeaders } from "@/components-clinic/utils/clinicHeaders";
+import { ButtonSpinner } from "@/reusable/buttonSpinner";
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from "@headlessui/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -18,6 +19,7 @@ export function PackageStepThree({clinicuuid,packageid}){
     
     const searchParams = useSearchParams();
     const router = useRouter();
+      const [otherbutton,setOtherButton] = useState(false);
     
 
 
@@ -70,7 +72,8 @@ export function PackageStepThree({clinicuuid,packageid}){
       headers : clinicHeaders(),
       body: JSON.stringify({
         specialtyId: data,
-        packageId : packageid
+        packageId : packageid,
+        clinicuuid:clinicuuid
       })
     });
     if(res.ok){
@@ -98,7 +101,7 @@ export function PackageStepThree({clinicuuid,packageid}){
 
 
       const onCreateOther = async (clinicuuid)=>{
-    
+        setOtherButton(true);
     
         const specializationExists = specialization.some(
           item => item.name.trim().toLowerCase() === othertext.trim().toLowerCase()
@@ -117,7 +120,8 @@ export function PackageStepThree({clinicuuid,packageid}){
           headers : clinicHeaders(),
           body :JSON.stringify({
             packageId: packageid,
-            othertext : othertext
+            othertext : othertext,
+            clinicuuid:clinicuuid
           })
         });
     
@@ -127,7 +131,7 @@ export function PackageStepThree({clinicuuid,packageid}){
           setOhertext("");
           fetchSelectedClinicSpecialization();
         }
-    
+    setOtherButton(false);
     
       }
 
@@ -199,31 +203,82 @@ export function PackageStepThree({clinicuuid,packageid}){
 
                         <DialogTitle className="flex justify-between items-center text-lg font-semibold mb-4">
                             <span>Choose Sub-Speciality </span>
-                            <span className="text-green-400 ">3/7</span>
+                            <span className="text-green-400 ">3/8</span>
                         </DialogTitle>
 
 
-                             <div className="border theme-border rounded-lg p-3 w-auto flex flex-wrap max-h-[180px] overflow-auto ">
-                                {specializationselected.length == 0 ? "No records selected" : ""}
-                                
-                                {specializationselected.map((item, index) => (
-                                    <div
-                                    key={index}
-                                    className="flex items-center gap-2 bg-gray-100 px-3 py-1 rounded-full m-1 mt-1 background-theme"
-                                    >
-                                    <span className="text-white-700 text-sm font-semibold">
-                                        {item.specialty?.name || item.suggestedCategory?.name || "test close icon"}
-                                    </span>
+                           <div className="border theme-border rounded-lg p-3 w-auto max-h-[180px] overflow-auto flex flex-col gap-3">
 
-                                    <button
-                                         onClick={() => onunChecked(item.id,clinicuuid)}
-                                        className="text-red-700 hover:text-red-500 transition">
-                                        ✕
-                                    </button>
+  {/* Empty State */}
+  {specializationselected.length === 0 && (
+    <p className="text-center text-gray-500">No records selected</p>
+  )}
 
-                                    </div>
-                                ))}
-                            </div>
+  {/* Specialties */}
+  {specializationselected.some(item => item.specialty) && (
+    <div>
+     
+      <h4 className="text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
+       
+       Selected Specialties
+      </h4>
+      <div className="flex flex-wrap">
+        {specializationselected
+          .filter(item => item.specialty)
+          .map((item, index) => (
+            <div
+              key={`specialty-${index}`}
+              className="flex items-center gap-2 bg-gray-100 px-3 py-1 rounded-full m-1"
+            >
+              <span className="text-gray-800 text-sm font-semibold">
+                {item.specialty.name}
+              </span>
+
+              <button
+                onClick={() => onunChecked(item.id, clinicuuid)}
+                className="text-red-700 hover:text-red-500 transition"
+              >
+                ✕
+              </button>
+            </div>
+          ))}
+      </div>
+    </div>
+  )}
+
+  {/* Suggested Categories */}
+  {specializationselected.some(item => item.suggestedCategory) && (
+    <div>
+      <h4 className="text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
+       
+        Pending Approval
+      </h4>
+      <div className="flex flex-wrap">
+        {specializationselected
+          .filter(item => item.suggestedCategory)
+          .map((item, index) => (
+            <div
+              key={`suggested-${index}`}
+              className="flex items-center gap-2 bg-yellow-100 px-3 py-1 rounded-full m-1 border border-yellow-300"
+            >
+              <span className="text-yellow-900 text-sm font-semibold">
+                {item.suggestedCategory.name}
+              </span>
+
+              {/* <button
+                onClick={() => onunChecked(item.id, clinicuuid)}
+                className="text-red-700 hover:text-red-500 transition"
+              >
+                ✕
+              </button> */}
+            </div>
+          ))}
+      </div>
+    </div>
+  )}
+
+</div>
+
 
 
                                   <div className="border theme-border rounded-lg p-3 w-100% flex flex-wrap mt-2 max-h-[400px] overflow-auto">
@@ -261,7 +316,11 @@ export function PackageStepThree({clinicuuid,packageid}){
                         }}
                         className="text-green-600 hover:text-green-500 transition p-1 rounded-md hover:bg-green-50"
                       >
-                        ✔
+                        {otherbutton ? (<>
+                          <ButtonSpinner></ButtonSpinner>
+                        </>) : (
+                          <> ✔</>
+                        )}
                       </button>
                     ) : (
                       <button

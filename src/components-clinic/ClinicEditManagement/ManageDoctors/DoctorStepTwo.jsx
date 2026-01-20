@@ -1,9 +1,11 @@
 "use client"
 import { clinicHeaders } from "@/components-clinic/utils/clinicHeaders";
 import Label from "@/components/form/Label";
+import { ButtonSpinner } from "@/reusable/buttonSpinner";
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from "@headlessui/react";
 import { CheckIcon } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 export function DoctorTwo({ onClose, nextStep, prevStep ,clinicuuid , doctoruuid }) {
 
@@ -17,6 +19,7 @@ const [test, setTest] = useState(["Heart", "Skin", "Neuro", "Skin", "Neuro", "Sk
   const [selectedspecilization,setSpecilaization] = useState([]);
   const [cantfind,setCantfine]= useState(false);
   const [othertext,setOhertext] = useState("");
+  const[otherbutton,setOtherButton] = useState(false);
 
 
  
@@ -110,7 +113,7 @@ const [test, setTest] = useState(["Heart", "Skin", "Neuro", "Skin", "Neuro", "Sk
 
   const onCreateOther = async (doctoruuid)=>{
 
-
+    setOtherButton(true);
     const specializationExists = specialization.some(
       item => item.name.trim().toLowerCase() === othertext.trim().toLowerCase()
     );
@@ -128,7 +131,8 @@ const [test, setTest] = useState(["Heart", "Skin", "Neuro", "Skin", "Neuro", "Sk
       headers : clinicHeaders(),
       body :JSON.stringify({
         doctorUuid: doctoruuid,
-        othertext : othertext
+        othertext : othertext,
+        clinicuuid: clinicuuid
       })
     });
 
@@ -137,8 +141,16 @@ const [test, setTest] = useState(["Heart", "Skin", "Neuro", "Skin", "Neuro", "Sk
 
       setOhertext("");
       fetchSelectedSpecializations();
-    }
+      toast.success(
+  "Sent for approval. We will update you within 24 hours.",
+  {
+    position: "bottom-right",
+    autoClose: 3000,
+  }
+);
 
+    }
+setOtherButton(false);
 
   }
 
@@ -159,34 +171,80 @@ const [test, setTest] = useState(["Heart", "Skin", "Neuro", "Skin", "Neuro", "Sk
         <DialogPanel className="bg-white rounded-lg shadow-xl w-full max-w-3xl p-6">
           <DialogTitle className="flex justify-between items-center text-lg font-semibold mb-4">
             <span>Choose Speciality </span>
-            <span className="text-green-400 ">2/4</span>
+            <span className="text-green-400 ">2/7</span>
           </DialogTitle>
 
          
-         <div className="border theme-border rounded-lg p-3 w-auto flex flex-wrap max-h-[180px] overflow-auto ">
-          {selectedspecilization.length == 0 ? "No records selected" : ""}
-          
-          {selectedspecilization.map((item, index) => (
+        <div className="border theme-border rounded-lg p-3 w-auto max-h-[180px] overflow-auto">
+
+  {/* Empty State */}
+  {selectedspecilization.length === 0 && (
+    <p className="text-gray-500 text-sm">No records selected</p>
+  )}
+
+  {/* Specializations */}
+  {selectedspecilization.some(item => item.specialization) && (
+    <>
+      <h4 className="text-sm font-semibold text-gray-700 mb-2">
+        Selected Specializations
+      </h4>
+
+      <div className="flex flex-wrap">
+        {selectedspecilization
+          .filter(item => item.specialization)
+          .map((item, index) => (
             <div
-              key={index}
-              className="flex items-center gap-2 bg-gray-100 px-3 py-1 rounded-full m-1 mt-1 background-theme"
+              key={`spec-${index}`}
+              className="flex items-center gap-2 bg-gray-100 px-3 py-1 rounded-full m-1 background-theme"
             >
-              <span className="text-white-700 text-sm font-semibold">
-                {item.specialization?.name || item.suggestedCategory?.name || "test close icon"}
+              <span className="text-sm font-semibold text-white">
+                {item.specialization?.name}
               </span>
 
               <button
                 onClick={() => handleRemove(item.id)}
-                className="text-red-700 hover:text-red-500 transition">
-
+                className="text-red-700 hover:text-red-500 transition"
+              >
                 ✕
-
               </button>
             </div>
           ))}
+      </div>
+    </>
+  )}
 
+  {/* Suggested Categories */}
+  {selectedspecilization.some(item => item.suggestedCategory) && (
+    <>
+      <h4 className="text-sm font-semibold text-gray-700 mt-4 mb-2">
+         (Pending Approval)
+      </h4>
 
-        </div>
+      <div className="flex flex-wrap">
+        {selectedspecilization
+          .filter(item => item.suggestedCategory)
+          .map((item, index) => (
+            <div
+              key={`suggested-${index}`}
+              className="flex items-center gap-2 bg-yellow-100 px-3 py-1 rounded-full m-1"
+            >
+              <span className="text-sm font-semibold text-yellow-900">
+                {item.suggestedCategory?.name}
+              </span>
+
+              {/* <button
+                onClick={() => handleRemove(item.id)}
+                className="text-red-700 hover:text-red-500 transition"
+              >
+                ✕
+              </button> */}
+            </div>
+          ))}
+      </div>
+    </>
+  )}
+</div>
+
 
         <div className="border theme-border rounded-lg p-3 w-100% flex flex-wrap mt-2 max-h-[400px] overflow-auto">
             <div className="flex items-center justify-between mb-2 w-full">
@@ -223,7 +281,13 @@ const [test, setTest] = useState(["Heart", "Skin", "Neuro", "Skin", "Neuro", "Sk
                         }}
                         className="text-green-600 hover:text-green-500 transition p-1 rounded-md hover:bg-green-50"
                       >
-                        ✔
+                      {otherbutton ? (<>
+                                                 <ButtonSpinner></ButtonSpinner>
+                                               </>):(
+                                                 <>
+                                                    ✔
+                                                 </>
+                                               )}
                       </button>
                     ) : (
                       <button

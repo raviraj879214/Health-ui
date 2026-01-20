@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Dropdown } from "../ui/dropdown/Dropdown";
 import { DropdownItem } from "../ui/dropdown/DropdownItem";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function UserDropdown() {
   const [isOpen, setIsOpen] = useState(false);
@@ -67,12 +68,14 @@ export default function UserDropdown() {
         className="flex items-center text-gray-700 dark:text-gray-400 dropdown-toggle"
       >
         <span className="mr-3 overflow-hidden rounded-full h-11 w-11">
-          {/* <Image
-            width={44}
-            height={44}
-            src="/images/user/owner.jpg"
-            alt="User"
-          /> */}
+<div className="w-12 h-12 rounded-xl bg-gray-300 flex items-center justify-center text-gray-800 font-semibold">
+  A
+</div>
+
+
+
+
+
         </span>
 
         <span className="block mr-1 font-medium text-theme-sm">{firstname}</span>

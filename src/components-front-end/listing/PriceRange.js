@@ -6,8 +6,8 @@ export default function PriceRange({
   min = 0,
   max = 1000,
   step = 1,
-  defaultMin = 200,
-  defaultMax = 800,
+  defaultMin = 0,
+  defaultMax = 0,
 }) {
   const [minValue, setMinValue] = useState(defaultMin);
   const [maxValue, setMaxValue] = useState(defaultMax);
@@ -28,7 +28,7 @@ export default function PriceRange({
 
   return (
     <div className="border border-border rounded-thm p-5 mb-5 last:mb-0">
-        <h5 className="text-2xl font-bold mb-5">By Place</h5>
+        <h5 className="text-2xl font-bold mb-5">By Price</h5>
         <p className="mb-2.5">
             ${minValue} – ${maxValue}
         </p>

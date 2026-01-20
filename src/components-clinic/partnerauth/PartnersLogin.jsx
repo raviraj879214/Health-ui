@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import Cookies from "js-cookie";
 import { toast, ToastContainer } from "react-toastify";
+import Image from "next/image";
+import Link from "next/link";
 
 
 export function PartnerLogin() {
@@ -40,12 +42,26 @@ export function PartnerLogin() {
         sameSite: "strict",
       });
 
+       Cookies.set("clinic_id", result.user.uuid, {
+        expires: 1,
+        secure: true,
+        sameSite: "strict",
+      });
+
       Cookies.set("clinic_refresh", result.refresh_token, {
         expires: 7,
         secure: true,
         sameSite: "strict",
       });
+     
+      Cookies.set("clinic_user_uuid", result.user.uuid, {
+        expires: 7,
+        secure: true,
+        sameSite: "strict",
+      });
 
+      console.log(result);
+      debugger;
       toast.success("Login successful!");
 
       setTimeout(() => {
@@ -62,7 +78,15 @@ export function PartnerLogin() {
       <ToastContainer position="top-center" />
 
       <div className="w-full max-w-md bg-white shadow-lg rounded-xl p-8">
-
+        <Link href={"/"} className="text-center">
+           <Image
+              src="/images/logo.png"
+              alt="Nairobi"
+              width={340}
+              height={40}
+              className=" mt-10 mb-10"
+            />
+        </Link>
         <h2 className="text-center text-2xl font-bold text-gray-800 mb-6">
           Partner Login
         </h2>
