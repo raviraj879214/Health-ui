@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import ProductCardLoader from "../../global/skeleton/productCardLoader";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {ProductCardRated} from "./ProductCardRated";
 
 
@@ -125,16 +125,15 @@ export default function TopRated(){
                 
                 <div className="grid md:grid-cols-3 grid-cols-1 gap-7.5">
                     {clinics.map((clinic) => (
-                        <>
-                          {clinicloading ?(
-                             <ProductCardLoader></ProductCardLoader>
-                          ):(
-                             <ProductCardRated 
-                            key={clinic.uuid}
-                            data={clinic}/>
-                          )}
-                        </>
-                    ))}
+  <React.Fragment key={clinic.uuid}>
+    {clinicloading ? (
+      <ProductCardLoader />
+    ) : (
+      <ProductCardRated data={clinic} />
+    )}
+  </React.Fragment>
+))}
+
                 </div>
                 
 

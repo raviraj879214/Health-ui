@@ -1,4 +1,5 @@
-import React from "react";
+export const dynamic = "force-static";
+import React, { Suspense } from "react";
 import {Banner} from "../components-front-end/homepage/banner/banner";
 import TopRated from "../components-front-end/homepage/toprated/topRated";
 import Treatments from "../components-front-end/homepage/treatment/treatMent";
@@ -13,6 +14,9 @@ import Testimonials from "../components-front-end/homepage/testimonials";
 import FAQ from "../components-front-end/homepage/faq";
 import FreeQuote from "../components-front-end/homepage/freeQuote";
 import FreeQuoteLoader from "../components-front-end/global/skeleton/freeQuoteLoader";
+import {BannerLoader} from "../components-front-end/homepage/loader/bannerLoader";
+
+
 
 
 
@@ -70,31 +74,41 @@ export default function Pages() {
   };
 
 
+
+
   return (
     <>
-      <Banner></Banner>
-      <TopRated></TopRated>
-      <Treatments></Treatments>
+
+      <Suspense fallback={<>
+        <BannerLoader />
 
 
 
-      <PopularClinics />
-      <HowItWorks />
+      </>}>
+        
+        <Banner></Banner>
+        <TopRated></TopRated>
+        <Treatments></Treatments>
 
-      <PromoteCard data={promoteCardone} />
+        <PopularClinics />
+        <HowItWorks />
+
+        <PromoteCard data={promoteCardone} />
+
+        <HomeStats />
+        {/* <Packages /><Testimonials /> */}
+
+        <FAQ items={faqItems} defaultOpen={1} />
+
+        <PromoteCard reverse={true} data={promoteCardTwo} />
 
 
-      <HomeStats />
-      {/* <Packages />
-      <Testimonials /> */}
+        <FreeQuote />
+      </Suspense>
 
-      <FAQ items={faqItems} defaultOpen={1} />
 
-      <PromoteCard reverse={true} data={promoteCardTwo} />
 
-      {/* <PromoteCardLoader reverse={true}/> */}
-
-      <FreeQuote />
+     
 
 
 
