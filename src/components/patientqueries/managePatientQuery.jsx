@@ -15,6 +15,7 @@ import { adminHeaders } from "../utils/adminHeader";
 import { formatBrazilDate } from "@/lib/formatDate";
 import { brazilianCurrency } from "@/lib/brazilianCurrency";
 import {PatientQueryDetails} from "../patientqueries/patientQueryDetails";
+import { PatientQueryStatus } from "@/lib/enums/PatientQueryStatus";
 
 export function ManagePatientQueries() {
   const [queries, setQueries] = useState([]);
@@ -68,17 +69,20 @@ export function ManagePatientQueries() {
 
 
   const statusLabel = (status) => {
+
     switch (status) {
-      case 0:
+      case PatientQueryStatus.PENDING:
         return <span className="text-yellow-600">Pending</span>;
-      case 1:
-        return <span className="text-blue-600">In Progress</span>;
-      case 2:
+      case PatientQueryStatus.ASSIGNED:
+        return <span className="text-blue-600">Assigned</span>;
+      case PatientQueryStatus.COMPLETED:
         return <span className="text-green-600">Closed</span>;
       default:
         return "—";
     }
   };
+
+  
 
 
 

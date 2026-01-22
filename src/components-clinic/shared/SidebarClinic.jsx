@@ -12,7 +12,8 @@ import {
   FaUserCircle,
   FaWolfPackBattalion,
   FaFlask,
-  FaRocket
+  FaRocket,
+  FaRegSquare
 } from "react-icons/fa";
 import { HiOutlineSupport } from "react-icons/hi";
 
@@ -25,6 +26,7 @@ export function ClinicSidebar({ collapsed, mobileOpen, active, setActive, toggle
     // { name: "Reviews", icon: FaStar, url: "/partner/profile" },
     // { name: "Advertising", icon: FaBullhorn, url: "/partner/advertising" },
      { name: "Clinic", icon: FaHospital, url: "/partner/clinic" },
+     { name: "Requests", icon: FaRegSquare, url: "/partner/requests" },
     // { name: "Sales analytics", icon: FaChartLine, url: "/partner/sales-analytics" },
     // { name: "User analytics", icon: FaChartBar, url: "/partner/user-analytics" },
     // { name: "Agency settings", icon: FaCogs, url: "/partner/agency-settings" },

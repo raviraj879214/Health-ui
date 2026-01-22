@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { adminHeaders } from "../utils/adminHeader";
 import { toast, ToastContainer } from "react-toastify";
 import { formatBrazilDate } from "@/lib/formatDate";
+import { PatientQueryStatus } from "@/lib/enums/PatientQueryStatus";
 
 
 
@@ -192,11 +193,15 @@ export function DoctorDetails({querydetails ,id ,onData}){
     </button>
       </>
     ):(<>
-       <button
+      
+
+    {querydetails.status === PatientQueryStatus.PENDING &&(<>
+                <button
      onClick={()=> setChangeName(true)}
      className="border border-black px-4 py-2 rounded-2xl hover:bg-gray-100 transition w-full">
           Edit
     </button>
+            </>)}
     </>)}
   
 

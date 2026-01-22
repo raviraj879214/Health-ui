@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { adminHeaders } from "../utils/adminHeader";
 import { toast, ToastContainer } from "react-toastify";
+import { PatientQueryStatus } from "@/lib/enums/PatientQueryStatus";
 
 
 
@@ -182,18 +183,22 @@ export function ClinicDetails({ querydetails , onData }) {
     {selectedclinic !== "" ? (
         <>
           <button
-      onClick={()=> updateClinic()}
-     className="border border-black px-4 py-2 rounded-2xl hover:bg-gray-100 transition w-full">
-          Save Changes
-    </button>
+            onClick={()=> updateClinic()}
+          className="border border-black px-4 py-2 rounded-2xl hover:bg-gray-100 transition w-full">
+                Save Changes
+          </button>
         </>
     ):(
       <>
-      <button
-     onClick={()=> setChangeName(true)}
-     className="border border-black px-4 py-2 rounded-2xl hover:bg-gray-100 transition w-full">
-          Edit
-    </button>
+          
+
+        {querydetails.status === PatientQueryStatus.PENDING &&(<>
+            <button
+        onClick={()=> setChangeName(true)}
+        className="border border-black px-4 py-2 rounded-2xl hover:bg-gray-100 transition w-full">
+              Edit
+        </button>
+        </>)}
       </>
     )}
 

@@ -10,6 +10,9 @@ import { Clipboard, Check } from "lucide-react"; // npm i lucide-react
 import {ClinicDetails} from "./clinicDetails";
 import {DoctorDetails} from "./doctorDetails";
 import {PackageDetails} from "./packageDetails";
+import { PatientQueryStatus } from "@/lib/enums/PatientQueryStatus";
+import { toast } from "react-toastify";
+import { ButtonSpinner } from "@/reusable/buttonSpinner";
 
 
 
@@ -25,6 +28,7 @@ export function PatientQueryDetails({ id }) {
     const [generatebutton,setGenerateButton] = useState(false);
     const [generatedamount,setGeneratedAmount] = useState(0);
     const [notes,setNotes] = useState("");
+    const [buttonsendclinic,setButtonSendClinic] = useState(false);
 
 
     useEffect(() => {
@@ -142,6 +146,35 @@ export function PatientQueryDetails({ id }) {
 
 
 
+      const sendClinic = async()=>{
+        setButtonSendClinic(true);
+          const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/patient-queries/assign-to-clinic-query`,{
+            method : "Put",
+            headers : await adminHeaders(),
+            body: JSON.stringify({
+              "patientqueryid" : id,
+              "status" :  PatientQueryStatus.ASSIGNED
+            })
+          });
+          if(res.ok){
+
+            const result = await res.json();
+
+            setQueryDetails((prev) => ({
+                ...prev,
+               status :  result.data.status, 
+            }));
+
+
+            toast.success("The query has been sent to the clinic. Please wait; the clinic will contact you shortly.",{
+              position : "bottom-right",
+              autoClose : 3000
+            });
+          }
+
+          setButtonSendClinic(false);
+      }
+
    
 
     return (<>
@@ -149,14 +182,51 @@ export function PatientQueryDetails({ id }) {
       
 
          <ComponentCard>
-          
+
+
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-4 items-start">
+
+          {PatientQueryStatus.PENDING === querydetails.status && (<>
+            <p className="text-sm font-medium text-gray-700">
+              On clicking “Send to Clinic”, the patient’s query details will be sent to the selected clinic.
+              Please ensure that all required information has been collected from the patient before proceeding.
+              Once the query is sent, you will not be able to reselect or change the clinic, doctor, or package.
+            </p>
+            <button
+              onClick={() => sendClinic()}
+              disabled={buttonsendclinic}
+              className="btn btn-primary md:justify-self-end cursor-pointer">
+              {buttonsendclinic ? (<>
+                <ButtonSpinner></ButtonSpinner>
+              </>) : (<> Send To Clinic</>)}
+            </button>
+          </>)}
+          <div>
+            {querydetails.status === PatientQueryStatus.ASSIGNED && (
+              <span className="px-3 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800 ">
+                Assigned
+              </span>
+            )}
+            {querydetails.status === PatientQueryStatus.CLOSED && (
+              <span className="px-3 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+                Closed
+              </span>
+            )}
+          </div>
+
+
+
+        </div>
+
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <ClinicDetails querydetails={querydetails} onData={()=> fetchPackageQueryDetails()} />
               <DoctorDetails querydetails={querydetails}  id={querydetails.clinic?.uuid} onData={()=> fetchPackageQueryDetails()}/>
               <PackageDetails querydetails={querydetails}  id={querydetails.clinic?.uuid} onData={()=> fetchPackageQueryDetails()} />
             </div>
-        </ComponentCard>
 
+
+        </ComponentCard>
        
 
 
@@ -266,7 +336,7 @@ export function PatientQueryDetails({ id }) {
                   border border-green-400 bg-green-50
                   text-lg font-semibold text-green-700
                   dark:bg-green-900/20 dark:border-green-600 dark:text-green-300">
-    ₹ {querydetails.finalPrice}
+     {brazilianCurrency(querydetails.finalPrice)}
   </div>
 ) : (
   /* Editable Input */
@@ -279,7 +349,7 @@ export function PatientQueryDetails({ id }) {
         shadow-sm dark:border-gray-700 dark:bg-gray-800
         focus-within:ring-2`}
     >
-      <span className="mr-2 text-gray-500 dark:text-gray-400">₹</span>
+      <span className="mr-2 text-gray-500 dark:text-gray-400">R$</span>
 
       <input
         type="number"
@@ -325,10 +395,11 @@ export function PatientQueryDetails({ id }) {
             <>
                 
              
-                   {(querydetails.package !== null && querydetails.clinic.commission > 0) ? (
+                   {querydetails.package !== null && querydetails.clinic && Number(querydetails.clinic.commission) > 0 ? (
+
                        <button
-        type="submit"
-        className="h-12 px-10 bg-gradient-to-r from-indigo-500 to-purple-500
+                    type="submit"
+                    className="h-12 px-10 bg-gradient-to-r from-indigo-500 to-purple-500
                    hover:from-indigo-600 hover:to-purple-600
                    text-white font-semibold rounded-lg shadow-lg
                    transition-all duration-200
@@ -469,7 +540,7 @@ export function PatientQueryDetails({ id }) {
       {/* Generate Button */}
        
       
-        {(querydetails.package !== null && querydetails.clinic.commission > 0) ? (
+        {querydetails.package !== null && querydetails.clinic && Number(querydetails.clinic.commission) > 0 ? (
            <button
         onClick={generatelink}
         disabled={generatebutton}
