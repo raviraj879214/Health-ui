@@ -2,6 +2,7 @@ import { adminHeaders } from "@/components/utils/adminHeader";
 import { useEffect, useState } from "react";
 import { FaEye } from "react-icons/fa";
 import HoverZoomImage from "../../../reusable/hoverZoomImage";
+import { DoctorVerifyStatus } from "@/lib/enums/doctorVerifyStatus";
 
 
 
@@ -66,12 +67,31 @@ export function DoctorList({id}){
                             <div
                             key={item.uuid}
                             className="relative bg-neutral-primary-soft max-w-xs w-full p-6 border border-default rounded-base shadow-xs">
+                                    
+<div className="absolute top-4 right-4 flex items-center gap-3">
 
-                             <div
-                              onClick={()=> window.location.href=`/admin/doctor-details/${item.uuid}`}
-                              className="absolute top-4 right-4 cursor-pointer text-body hover:text-heading">
-                                <FaEye />
-                            </div>
+
+    <div
+    onClick={() =>
+      window.open(
+        `/admin/doctor-details/${item.uuid}`,
+        "_blank",
+        "noopener,noreferrer"
+      )
+    }
+    className="cursor-pointer text-body hover:text-heading"
+  >
+    <FaEye />
+  </div>
+  <span className="px-3 py-1 text-xs font-medium rounded-full bg-indigo-100 text-indigo-700 dark:bg-indigo-900 dark:text-indigo-300">
+    {DoctorVerifyStatus.PENDING === item.DoctorVerify && "Review"}
+    {DoctorVerifyStatus.VERIFIED === item.DoctorVerify && "Verified"}
+    {DoctorVerifyStatus.INACTIVE === item.DoctorVerify && "Inactive"}
+  </span>
+
+
+
+</div>
 
                             <div className="flex flex-col items-center">
                                 {/* <img

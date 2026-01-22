@@ -85,7 +85,7 @@ export function StepSix(){
     
             <div className="relative bg-white/90 backdrop-blur rounded-2xl shadow-xl border p-8 md:p-10">
               <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-[var(--primary)] text-white px-5 py-1 rounded-full text-sm font-medium shadow">
-                Step {step} of 5
+                Step {step} of 6
               </div>
     
             <div className="grid grid-cols-1 md:grid-cols-1 gap-8 mt-8">

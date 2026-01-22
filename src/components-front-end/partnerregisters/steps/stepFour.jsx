@@ -172,7 +172,7 @@ export function StepFour() {
 
         <div className="relative bg-white rounded-2xl shadow-xl border p-8">
           <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-[var(--primary)] text-white px-5 py-1 rounded-full text-sm">
-            Step {step} of 4
+            Step {step} of 6
           </div>
 
           <form onSubmit={handleSubmit(onCreate)}>

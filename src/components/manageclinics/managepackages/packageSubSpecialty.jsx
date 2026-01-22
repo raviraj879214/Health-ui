@@ -8,7 +8,7 @@ import { useConfirm } from "../../../hooks/useConfirm";
 
 
 
-export function ClinicSpecialty({ id }) {
+export function PackageSubSpecialty({ id }) {
 
 
     const [specialties, setSpecialties] = useState([]);
@@ -18,12 +18,7 @@ export function ClinicSpecialty({ id }) {
 
     const [specialty,setSpecialty] = useState([]);
     const [searchtext,setSearchText] = useState("");
-    const[button,setButton] = useState(false);
-
-
-
-
-
+     const[button,setButton] = useState(false);
 
     useEffect(() => {
         fetchClinicSpecialty();
@@ -34,12 +29,13 @@ export function ClinicSpecialty({ id }) {
 
 
     const fetchSpecialty=async()=>{
-        const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-clinic/get-specialty/${id}`,{
+      
+        const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-packages/get-sub-specialty/${id}`,{
             method : "Get",
             headers:await adminHeaders()
         });
         if(res.ok){
-             
+          
             const result = await res.json();
 
            setSpecialty([...result.data].sort((a, b) => a.name.localeCompare(b.name)));
@@ -49,12 +45,14 @@ export function ClinicSpecialty({ id }) {
 
 
     const fetchClinicSpecialty = async () => {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-clinic/get-clinic-specialty/${id}`, {
+        debugger;
+        const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-packages/get-package-sub-specialty/${id}`, {
             method: "Get",
             headers: await adminHeaders()
         });
 
         if (res.ok) {
+           
             const result = await res.json();
             setSpecialties(result.data);
             
@@ -71,7 +69,7 @@ export function ClinicSpecialty({ id }) {
         }
 
  setButton(true);
-        const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-clinic/accept-clinic-specialty/${ids}/${id}`,{
+        const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-packages/accept-package-sub-specialty/${ids}/${id}`,{
             method : "Get",
             headers : await adminHeaders(),
         });
@@ -83,6 +81,7 @@ export function ClinicSpecialty({ id }) {
             toast.success("Specialty approved successfully", {position: "bottom-right",autoClose: 3000,});
 
         }
+
         setButton(false);
     }
 
@@ -96,7 +95,7 @@ export function ClinicSpecialty({ id }) {
 
 
         const searchText = () => {
-             
+           
 
 
             const value = searchtext.toLowerCase();
@@ -118,15 +117,15 @@ export function ClinicSpecialty({ id }) {
 
 
      const rejectRequested = async(ids)=>{
-       
+   
          const result = await confirm("Are you sure you want to delete this item?");
              if (!result) {
                 console.log("User not confirmed!");
             return false;
         }
-
  setButton(true);
-        const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-clinic/reject-clinic-specialty/${ids}/${id}`,{
+
+        const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-packages/reject-package-sub-specialty/${ids}/${id}`,{
             method : "Get",
             headers : await adminHeaders(),
         });
@@ -137,20 +136,19 @@ export function ClinicSpecialty({ id }) {
             toast.success("Specialty deleted successfully", {position: "bottom-right",autoClose: 3000,});
 
         }
-
-        setButton(false);
+setButton(false);
     }
 
 
     const assignSpecialty=async(assignid)=>{
        
         setButton(true);
-        const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-clinic/assign-clinic-specialty`,{
+        const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-packages/assign-package-sub-specialty`,{
             method : "Post",
             headers: await adminHeaders(),
             body: JSON.stringify({
                 "assignid" : assignid,
-                "clinicuuid" : id
+                "packageid" : id
             })
         });
 
@@ -168,12 +166,12 @@ export function ClinicSpecialty({ id }) {
     const unassignSpecialty = async(unassignid)=>{
     setButton(true);
 
-         const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-clinic/unassign-clinic-specialty`,{
+         const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-packages/unassign-package-sub-specialty`,{
             method : "Post",
             headers: await adminHeaders(),
             body: JSON.stringify({
                 "unassignid" : unassignid,
-                "clinicuuid" : id
+                "packageid" : id
             })
         });
 
@@ -198,7 +196,7 @@ setButton(false);
         <div className="flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70">
             <div className="flex justify-between items-center border-b border-gray-200 rounded-t-xl py-3 px-4 md:px-5 dark:border-neutral-700">
                 <h3 className="text-lg font-bold text-gray-800 dark:text-white">
-                    Specialty
+                  Sub  Specialty
                 </h3>
                 <div className="flex items-center gap-x-1">
 
@@ -211,7 +209,7 @@ setButton(false);
                 <div className="border theme-border rounded-2xl bg-white dark:bg-neutral-900 shadow-sm w-full">
                     <div className="flex items-center justify-between px-5 py-3 border-b theme-border">
                         <Label className="text-sm font-semibold text-heading">
-                            Selected ({specialties.filter(item => item.specialization?.name).length})
+                            Selected ({specialties.filter(item => item.specialty?.name).length})
                         </Label>
                         <div className="relative inline-block">
                             
@@ -220,7 +218,6 @@ setButton(false);
                                 onClick={() => setOpen(!open)}
                                 className="btn btn-primary"
                             >
-                               
                                {button ?(<>...</>):(<>Assign</>)}
                                
                             </button>
@@ -245,8 +242,8 @@ setButton(false);
                                     {specialty.map((item)=>(
                                       <li key={item.id} className="flex items-center justify-between p-2 border border-neutral-100 rounded-base transition-colors hover:bg-brand-soft">
                                             <span>{item.name}</span>
-
-                                            {item.clinics?.some(clinic => clinic.clinicUuid === id) ? (
+                                           
+                                            {item.packageSpecialty?.some(clinic => clinic.packageid === id) ? (
                                                 <button
                                                     onClick={()=> unassignSpecialty(item.id)}
                                                     className="text-xs font-medium text-red-600 bg-red-100 px-3 py-1 rounded hover:bg-red-200">
@@ -276,14 +273,14 @@ setButton(false);
 
                     <div className="p-5 min-h-[120px] text-sm text-body border border-neutral-200 rounded-2xl bg-white">
 
-                            {specialties.filter(item => item.specialization?.name).length === 0 ? (
+                            {specialties.filter(item => item.specialty?.name).length === 0 ? (
                                 <p className="text-sm text-neutral-500 text-center flex items-center justify-center h-[80px]">
-                                No items selected
+                                     No items selected
                                 </p>
                                 ) : (
                                 <div className="flex flex-wrap gap-2">
                                 {specialties.map((item, index) =>
-                                    item.specialization?.name ? (
+                                    item.specialty?.name ? (
                                         <span
                                         key={index}
                                         className="inline-flex items-center bg-brand-softer border border-brand-subtle
@@ -291,7 +288,7 @@ setButton(false);
                                                     px-3 py-1 rounded-full
                                                     hover:bg-brand-soft transition"
                                         >
-                                        {item.specialization.name}
+                                        {item.specialty.name}
                                         </span>
 
 
@@ -353,8 +350,8 @@ setButton(false);
                                             type="button"
                                             className="px-2.5 py-1 text-xs font-medium rounded-full
                                                     bg-red-50 text-red-700 border border-red-200
-                                                    hover:bg-red-100 transition"
-                                        >
+                                                    hover:bg-red-100 transition">
+
                                             
                                             {button ?(<>...</>):(<>Reject</>)}
                                         </button>

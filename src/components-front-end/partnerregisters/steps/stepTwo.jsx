@@ -321,7 +321,7 @@ const handleKeyDown = (e, index) => {
 
 
                     <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-[var(--primary)] text-white px-5 py-1 rounded-full text-sm font-medium shadow">
-                        Step {step} of 2
+                        Step {step} of 6
                     </div>
 
                     <form  onSubmit={handleSubmit(onUpdate)}>

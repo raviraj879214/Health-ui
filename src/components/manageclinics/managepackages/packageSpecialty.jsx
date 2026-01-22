@@ -8,7 +8,7 @@ import { useConfirm } from "../../../hooks/useConfirm";
 
 
 
-export function ClinicSpecialty({ id }) {
+export function PackageSpecialty({ id }) {
 
 
     const [specialties, setSpecialties] = useState([]);
@@ -34,7 +34,7 @@ export function ClinicSpecialty({ id }) {
 
 
     const fetchSpecialty=async()=>{
-        const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-clinic/get-specialty/${id}`,{
+        const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-packages/get-specialty/${id}`,{
             method : "Get",
             headers:await adminHeaders()
         });
@@ -49,7 +49,7 @@ export function ClinicSpecialty({ id }) {
 
 
     const fetchClinicSpecialty = async () => {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-clinic/get-clinic-specialty/${id}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-packages/get-package-specialty/${id}`, {
             method: "Get",
             headers: await adminHeaders()
         });
@@ -70,8 +70,8 @@ export function ClinicSpecialty({ id }) {
             return false;
         }
 
- setButton(true);
-        const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-clinic/accept-clinic-specialty/${ids}/${id}`,{
+        setButton(true);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-packages/accept-package-specialty/${ids}/${id}`,{
             method : "Get",
             headers : await adminHeaders(),
         });
@@ -126,7 +126,7 @@ export function ClinicSpecialty({ id }) {
         }
 
  setButton(true);
-        const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-clinic/reject-clinic-specialty/${ids}/${id}`,{
+        const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-packages/reject-package-specialty/${ids}/${id}`,{
             method : "Get",
             headers : await adminHeaders(),
         });
@@ -143,14 +143,14 @@ export function ClinicSpecialty({ id }) {
 
 
     const assignSpecialty=async(assignid)=>{
-       
+        
         setButton(true);
-        const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-clinic/assign-clinic-specialty`,{
+        const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-packages/assign-package-specialty`,{
             method : "Post",
             headers: await adminHeaders(),
             body: JSON.stringify({
                 "assignid" : assignid,
-                "clinicuuid" : id
+                "packageid" : id
             })
         });
 
@@ -168,12 +168,12 @@ export function ClinicSpecialty({ id }) {
     const unassignSpecialty = async(unassignid)=>{
     setButton(true);
 
-         const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-clinic/unassign-clinic-specialty`,{
+         const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-packages/unassign-package-specialty`,{
             method : "Post",
             headers: await adminHeaders(),
             body: JSON.stringify({
                 "unassignid" : unassignid,
-                "clinicuuid" : id
+                "packageid" : id
             })
         });
 
@@ -246,7 +246,7 @@ setButton(false);
                                       <li key={item.id} className="flex items-center justify-between p-2 border border-neutral-100 rounded-base transition-colors hover:bg-brand-soft">
                                             <span>{item.name}</span>
 
-                                            {item.clinics?.some(clinic => clinic.clinicUuid === id) ? (
+                                            {item.packagesSpecialization?.some(clinic => clinic.packageId === id) ? (
                                                 <button
                                                     onClick={()=> unassignSpecialty(item.id)}
                                                     className="text-xs font-medium text-red-600 bg-red-100 px-3 py-1 rounded hover:bg-red-200">

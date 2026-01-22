@@ -66,62 +66,55 @@ export function SurgeryImages({id}){
           </h3>
           <div className="flex items-center gap-x-1"></div>
         </div>
+
         <div className="p-4 md:p-5">
-          {/* Scrollable grid */}
-          <div className="max-h-[400px] overflow-y-auto">
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 overflow-hidden">
-
-
-              
-
-
-
+  {/* Scrollable container */}
+  <div className="max-h-[400px] overflow-y-auto">
+    {surgeryimage?.length > 0 ? (
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        {surgeryimage.map((surgery, index) => (
+          <div
+            key={surgery.id ?? index}
+            className="grid grid-cols-2 gap-3 bg-white p-3 rounded-xl shadow-sm border"
+          >
+            {/* BEFORE */}
+            <div className="relative h-[180px] overflow-hidden rounded-lg group">
+              <HoverZoomImage
+                src={surgery.before}
+                alt="Before Surgery"
+                size={200}
+                borderRadius="10px"
+                className="shadow-lg"
+              />
+              <span className="absolute top-2 left-2 bg-blue-600/90 text-white px-2 py-1 text-xs font-medium rounded-md">
+                Before
+              </span>
             </div>
-              {surgeryimage.length > 0 ? (<>
-                  {surgeryimage.map((surgery, idx) => (
-                <div
-                  key={idx}
-                  className="grid grid-cols-2 gap-3 bg-white p-3 rounded-xl shadow-sm border"
-                >
-                  {/* BEFORE */}
-                  <div className="relative h-[180px] overflow-hidden rounded-lg group">
 
-
-                    <HoverZoomImage
-                      src={surgery.before}
-                      alt="Before Surgery"
-                      size={200}
-                      borderRadius="10px"
-                      className="shadow-lg" />
-
-
-                    <span className="absolute top-2 left-2 bg-blue-600/90 text-white px-2 py-1 text-xs font-medium rounded-md">
-                      Before
-                    </span>
-                  </div>
-
-                  {/* AFTER */}
-                  <div className="relative h-[180px] overflow-hidden rounded-lg group">
-                    <HoverZoomImage
-                      src={surgery.after}
-                      alt="Before Surgery"
-                      size={200}
-                      borderRadius="10px"
-                      className="shadow-lg" />
-                    <span className="absolute top-2 left-2 bg-green-600/90 text-white px-2 py-1 text-xs font-medium rounded-md">
-                      After
-                    </span>
-                  </div>
-                </div>
-              ))}
-              </>):(
-                <>
-                  <p>No surgery images available</p>
-                </>
-              )}
-
+            {/* AFTER */}
+            <div className="relative h-[180px] overflow-hidden rounded-lg group">
+              <HoverZoomImage
+                src={surgery.after}
+                alt="After Surgery"
+                size={200}
+                borderRadius="10px"
+                className="shadow-lg"
+              />
+              <span className="absolute top-2 left-2 bg-green-600/90 text-white px-2 py-1 text-xs font-medium rounded-md">
+                After
+              </span>
+            </div>
           </div>
-        </div>
+        ))}
+      </div>
+    ) : (
+      <p className="text-center text-gray-500 py-4">
+        No surgery images available
+      </p>
+    )}
+  </div>
+</div>
+
       </div>
 
     

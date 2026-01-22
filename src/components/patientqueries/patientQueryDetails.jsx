@@ -314,7 +314,7 @@ export function PatientQueryDetails({ id }) {
 
     {/* Helper Text */}
     <p className="mt-4 text-sm text-gray-500 dark:text-gray-400">
-      Enter the final agreed amount to generate a secure Stripe payment link.
+      Enter the final agreed amount to generate a secure Stripe payment link. 
     </p>
 
     {/* Actions */}
@@ -324,8 +324,8 @@ export function PatientQueryDetails({ id }) {
         ) :(
             <>
                 
-
-                   {(querydetails.package !== null && querydetails.commission > 0) ? (
+             
+                   {(querydetails.package !== null && querydetails.clinic.commission > 0) ? (
                        <button
         type="submit"
         className="h-12 px-10 bg-gradient-to-r from-indigo-500 to-purple-500
@@ -467,9 +467,9 @@ export function PatientQueryDetails({ id }) {
       </div>
 
       {/* Generate Button */}
-
+       
       
-        {(querydetails.package !== null && querydetails.commission > 0) ? (
+        {(querydetails.package !== null && querydetails.clinic.commission > 0) ? (
            <button
         onClick={generatelink}
         disabled={generatebutton}

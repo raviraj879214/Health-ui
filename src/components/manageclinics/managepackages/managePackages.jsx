@@ -13,6 +13,7 @@ import { adminHeaders } from "@/components/utils/adminHeader";
 import Link from "next/link";
 import { brazilianCurrency } from "@/lib/brazilianCurrency";
 import { formatBrazilDate } from "@/lib/formatDate";
+import { PackageVerifyStatus } from "@/lib/enums/packageVerifyStatus";
 
 export function ManagePackages({ trigger, sendDelete }) {
   const [packages, setPackages] = useState([]);
@@ -132,6 +133,9 @@ export function ManagePackages({ trigger, sendDelete }) {
         Discount Price
       </TableCell>
       <TableCell isHeader className="px-5 py-3 text-right">
+        Package Status
+      </TableCell>
+      <TableCell isHeader className="px-5 py-3 text-right">
         Package Created
       </TableCell>
 
@@ -175,6 +179,24 @@ export function ManagePackages({ trigger, sendDelete }) {
         {/* Discount Price */}
         <TableCell className="px-5 py-4 text-right font-semibold text-green-600">
           {brazilianCurrency(pkg.discountedprice)}
+        </TableCell>
+        <TableCell className="px-5 py-4 text-right font-semibold text-green-600">
+          <span
+            className={`px-3 py-1 rounded-full text-xs font-semibold
+              ${pkg.status === PackageVerifyStatus.VERIFIED
+                          ? "bg-green-100 text-green-700"
+                          : pkg.status === PackageVerifyStatus.PENDING
+                            ? "bg-yellow-100 text-yellow-700"
+                            : "bg-gray-100 text-gray-600"
+                        }`}
+             >
+            {pkg.status === PackageVerifyStatus.VERIFIED
+              ? "Active"
+              : pkg.status === PackageVerifyStatus.PENDING
+                ? "Pending"
+                : "Unknown"}
+          </span>
+
         </TableCell>
 
         <TableCell className="px-5 py-4 text-right font-semibold ">

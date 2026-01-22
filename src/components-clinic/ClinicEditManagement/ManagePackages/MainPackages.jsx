@@ -146,14 +146,34 @@ export function MainPackages({ clinicuuid }) {
               </button>
 
               
+            
               
-
-              <button
+              {item.status === PackageVerifyStatus.PENDING && (<>
+               <button
                 onClick={() => EditPackageDetails(item.id)}
-                className="background-theme p-2 bg-gray-100 hover:bg-gray-200 rounded-full"
-              >
+                className="background-theme p-2 bg-gray-100 hover:bg-gray-200 rounded-full">
                 <PencilIcon size={16} />
               </button>
+              
+              </>)}
+
+
+              <span
+                          className={`px-2 py-1 rounded-full text-xs font-semibold
+                            ${item.status === PackageVerifyStatus.VERIFIED
+                                        ? "bg-green-100 text-green-700"
+                                        : item.status === PackageVerifyStatus.PENDING
+                                          ? "bg-yellow-100 text-yellow-700"
+                                          : "bg-gray-100 text-gray-600"
+                                      }`}
+                           >
+                          {item.status === PackageVerifyStatus.VERIFIED
+                            ? "Active"
+                            : item.status === PackageVerifyStatus.PENDING
+                              ? "Pending"
+                              : "Unknown"}
+                        </span>
+              
 
 
             </div>
@@ -221,7 +241,7 @@ export function MainPackages({ clinicuuid }) {
                 >
                   <path d="M9 16.2l-3.5-3.5L4 14.2l5 5 12-12-1.5-1.5z" />
                 </svg>
-                Approved |  {process.env.NEXT_PUBLIC_PROJECT_NAME}
+                Verified |  {process.env.NEXT_PUBLIC_PROJECT_NAME}
               </span>
             )}
           </div>

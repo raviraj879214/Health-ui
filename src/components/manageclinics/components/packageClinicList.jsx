@@ -2,6 +2,7 @@
 import { clinicHeaders } from "@/components-clinic/utils/clinicHeaders";
 import { adminHeaders } from "@/components/utils/adminHeader";
 import { brazilianCurrency } from "@/lib/brazilianCurrency";
+import { PackageVerifyStatus } from "@/lib/enums/packageVerifyStatus";
 import HoverZoomImage from "@/reusable/hoverZoomImage";
 import { useEffect, useState } from "react";
 import { FaEye } from "react-icons/fa";
@@ -67,20 +68,53 @@ export function PackageClinicList({ id }) {
                 {packages.map((item)=>(
 
                      <div key={item.id} className="relative bg-neutral-primary-soft max-w-xs w-full p-6 border border-default rounded-base shadow-xs">
-                        <div className="absolute top-4 right-4 cursor-pointer text-body hover:text-heading">
-                        </div>
+                        <div className="absolute top-4 right-4 flex items-center gap-3">
+  {/* View icon */}
+  <div
+    onClick={() =>
+      window.open(
+        `/admin/manage-packages/${item.id}`,
+        "_blank",
+        "noopener,noreferrer"
+      )
+    }
+    className="cursor-pointer text-body hover:text-heading"
+  >
+    <FaEye />
+  </div>
+
+  {/* Status badge */}
+  <span
+    className={`px-3 py-1 rounded-full text-xs font-semibold
+      ${
+        item.status === PackageVerifyStatus.VERIFIED
+          ? "bg-green-100 text-green-700"
+          : item.status === PackageVerifyStatus.PENDING
+          ? "bg-yellow-100 text-yellow-700"
+          : "bg-gray-100 text-gray-600"
+      }`}
+  >
+    {item.status === PackageVerifyStatus.VERIFIED
+      ? "Active"
+      : item.status === PackageVerifyStatus.PENDING
+      ? "Pending"
+      : "Unknown"}
+  </span>
+</div>
+
                         <div className="mb-6">
                             <h4 className="text-lg font-bold text-heading mb-1">
                             {item.title}
                             </h4>
 
                             <p className="text-xl font-semibold text-green-600 mb-2">
-                             {brazilianCurrency(item.discountedprice)}
+                             {brazilianCurrency(item.discountedprice)} <p className="text-sm text-black line-through">{brazilianCurrency(item.actualprice)} </p>
+                             
                             </p>
 
-                          <p className="text-sm text-gray-500 font-medium line-clamp-2">
+                          {/* <p className="text-sm text-gray-500 font-medium line-clamp-2">
                             {item.briefdescription || "No description"}
-                          </p>
+                          </p> */}
 
                         </div>
                         
