@@ -149,7 +149,7 @@ export function ClinicListAdmin(){
         <div className="flex justify-between gap-3">
           <span className="text-gray-500">Email</span>
           <span className="font-medium break-all text-right">
-            {item?.clinicUser?.email}
+            {item?.clinicUser?.email} 
           </span>
         </div>
       </div>
@@ -162,7 +162,7 @@ export function ClinicListAdmin(){
         </a>
 
 
-        {item.whatsappNumber && (
+        {item?.clinicUser?.whatsappNumber && (
           <a
             href={`https://wa.me/${item?.clinicUser?.whatsappNumber}`}
             target="_blank"
@@ -174,7 +174,7 @@ export function ClinicListAdmin(){
           </a>
         )}
 
-        {item.telegramNumber && (
+        {item?.clinicUser?.telegramNumber && (
           <a
             href={`https://t.me/${item?.clinicUser?.telegramNumber}`}
             target="_blank"

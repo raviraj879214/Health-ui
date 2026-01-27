@@ -28,6 +28,9 @@ export function ClinicProfile() {
             setValue("phonenumber", result.data.phone);
             setValue("firstname", result.data.firstname);
             setValue("lastname", result.data.lastname);
+            setValue("whatsappnumber", result.data.whatsappNumber);
+            setValue("telegramnumber", result.data.telegramNumber);
+
         }
     };
 
@@ -46,7 +49,10 @@ export function ClinicProfile() {
              let payload ={
             firstname : data.firstname ,
             lastname : data.lastname ,
-            phone : data.phonenumber
+            phone : data.phonenumber,
+            telegramnumber: data.telegramnumber,
+            whatsappnumber:data.whatsappnumber
+
          };
          const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/clinic-auth/update-profile`,{
             method : "Post",

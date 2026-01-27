@@ -185,7 +185,7 @@ export  function HeaderFrontend() {
 
           {/* Example HeadlessUI Dropdown */}
           <div className="md:flex hidden gap-4">
-            <Link href="#" className="btn btn-primary md:px-4 px-3 py-3 focus:outline-none">
+            <Link href="/order-create/demo-id/demo-clinic" className="btn btn-primary md:px-4 px-3 py-3 focus:outline-none">
               Get a Free Quote
             </Link>
             <Menu as="div" className="relative inline-block">
