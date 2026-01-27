@@ -14,7 +14,7 @@ export function MedicalReport(){
 
     const OnSelect = async(id,name)=>{
 
-        dispatch(addStep());
+        // dispatch(addStep());
         dispatch(addMedicalreports({name : name , id : id}));
     }
 

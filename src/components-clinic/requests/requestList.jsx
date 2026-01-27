@@ -11,8 +11,11 @@ import {
 import { EyeIcon } from "lucide-react";
 import { formatBrazilDate } from "@/lib/formatDate";
 import { brazilianCurrency } from "../../lib/brazilianCurrency";
-import { PatientQueryStatus } from "@/lib/enums/PatientQueryStatus";
+import { PatientQueryStatus } from "../../lib/enums/patientQueryStatus";
 import { clinicHeaders } from "../utils/clinicHeaders";
+import { useRouter } from "next/navigation";
+
+
 
 export function RequestList() {
   const [queries, setQueries] = useState([]);
@@ -21,6 +24,8 @@ export function RequestList() {
   const [queryid,setQueryid] = useState("");
 
   const [rolename,setRoleName] = useState("");
+
+  const router = useRouter();
 
 
   const itemsPerPage = 10;
@@ -84,7 +89,7 @@ export function RequestList() {
 
 
   const onView= async(data)=>{
-    setQueryid(data);
+    router.push(`/partner/requests/${data}`);
   }
 
 

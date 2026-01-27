@@ -1,4 +1,5 @@
 import { addStep, addWhatMatterMost } from "@/components-front-end/redux/patinetquery/patientQueryRedux";
+import { PatientQueryQuestion } from "@/lib/enums/PatientQueryFrontEnd";
 import { useDispatch, useSelector } from "react-redux";
 
 
@@ -9,10 +10,11 @@ export function WhatMatterMost(){
     const dispatch = useDispatch();
     const whattmattermostid =useSelector((state) => state.patientquery.whattmattermostid);;
     const whattmattermostname = useSelector((state) => state.patientquery.whattmattermostname);
+     const step = useSelector((state) => state.patientquery.step);
 
 
     const OnSelect = async(id,name)=>{
-        dispatch(addStep());
+        // dispatch(addStep());
         dispatch(addWhatMatterMost({name : name , id : id}));
     }
 
@@ -149,7 +151,12 @@ export function WhatMatterMost(){
                     </li>
                 </ul>
   </div>
+  
 </div>
+
+
+
+
 
 
 

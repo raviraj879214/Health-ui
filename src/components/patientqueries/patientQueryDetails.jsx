@@ -10,9 +10,10 @@ import { Clipboard, Check } from "lucide-react"; // npm i lucide-react
 import {ClinicDetails} from "./clinicDetails";
 import {DoctorDetails} from "./doctorDetails";
 import {PackageDetails} from "./packageDetails";
-import { PatientQueryStatus } from "@/lib/enums/PatientQueryStatus";
+import { PatientQueryStatus } from "../../lib/enums/patientQueryStatus";
 import { toast } from "react-toastify";
 import { ButtonSpinner } from "@/reusable/buttonSpinner";
+import {OtherInformation} from "./otherInformation";
 
 
 
@@ -292,7 +293,10 @@ export function PatientQueryDetails({ id }) {
         </div>
       </ComponentCard>
 
-    
+            <ComponentCard className="mt-2">
+                <OtherInformation id={id}/>
+          </ComponentCard>
+
 <ComponentCard>
    
 
@@ -714,6 +718,7 @@ export function PatientQueryDetails({ id }) {
         </div>
 
 </ComponentCard>
+
 
 
 

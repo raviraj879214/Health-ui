@@ -4,6 +4,7 @@ import ComponentCard from "@/components/common/ComponentCard";
 import { useState } from "react";
 import {StripeMainAccountDetails} from "./stripeMainAccountDetails";
 import {ClinicpackageDetails} from "./clinicpackageDetails";
+import {PayoutModal} from "./newmodalpayout/payoutModal";
 
 
 export function MainPayout(){
@@ -13,28 +14,24 @@ export function MainPayout(){
 
 
 
-    const onStripetransfer=(data)=>{
+    const onStripetransfer=()=>{
        
-        setReload(data);
+        const rand = Math.random();
+        setReload(rand);
+
     }
 
 
 
     return(<>
-
+    
 
         <StripeMainAccountDetails rel={reload} />
-        <ClinicpackageDetails   onPayment={onStripetransfer} />
 
 
 
-       
+        <PayoutModal OnTriggerStripeBalance={onStripetransfer}/>
 
 
-
-
-
-
-    
     </>);
 }

@@ -332,6 +332,17 @@ const handleKeyDown = (e, index) => {
 
 
 
+const formatCNPJ = (value) => {
+  return value
+    .replace(/\D/g, "") // remove non-digits
+    .replace(/^(\d{2})(\d)/, "$1.$2")
+    .replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3")
+    .replace(/\.(\d{3})(\d)/, ".$1/$2")
+    .replace(/(\d{4})(\d)/, "$1-$2")
+    .slice(0, 18);
+};
+
+
 
     return(<>
         
@@ -436,6 +447,9 @@ const handleKeyDown = (e, index) => {
                                                     value: /^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/,
                                                     message: "CNPJ must be in the format XX.XXX.XXX/YYYY-ZZ",
                                                 },
+                                                onChange: (e) => {
+                                                    e.target.value = formatCNPJ(e.target.value);
+                                                    },
                                             })} />
 
 
@@ -458,10 +472,7 @@ const handleKeyDown = (e, index) => {
                                                             placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                             {...register("websiteurl", {
                                                 required: "Please enter your clinic URL",
-                                                pattern: {
-                                                    value: /^https:\/\/.+/,
-                                                    message: "URL must start with https://",
-                                                },
+                                               
                                             })}
                                         />
 

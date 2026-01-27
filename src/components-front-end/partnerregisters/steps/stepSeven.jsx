@@ -19,7 +19,7 @@ export function StepSeven(){
       setTimeout(() => {  
          dispatch(clearAll());
          router.push('/partner-login');
-      }, 3000);
+      }, 15000);
 
       toast.success("Partner Registration successfull",{
         position : "bottom-right",

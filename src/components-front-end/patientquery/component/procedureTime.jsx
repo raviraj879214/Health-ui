@@ -14,7 +14,7 @@ export function ProcedureTime(){
 
 
     const OnSelect = async(id,name)=>{
-        dispatch(addStep());
+        // dispatch(addStep());
         dispatch(addProcedureTime({name : name , id : id}));
     }
 

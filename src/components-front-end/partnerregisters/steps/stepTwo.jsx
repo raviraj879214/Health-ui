@@ -333,11 +333,10 @@ const handleKeyDown = (e, index) => {
 
                         <div>
                             <h4 className="text-lg font-semibold text-gray-900 mb-2">
-                                Basic Details
+                                Please provide the following details
                             </h4>
                             <p className="text-sm text-gray-600 leading-relaxed">
-                                Enter your official business email address. We’ll use this email
-                                to verify your account and send important partnership updates.
+                               
                             </p>
                         </div>
 
@@ -345,7 +344,7 @@ const handleKeyDown = (e, index) => {
 
                         <div className="relative">
                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
-                                  <div>
+                                  <div className="hidden">
                                 <label className="block text-sm font-medium text-gray-700 mb-2">
                                  Email Address
                                 </label>

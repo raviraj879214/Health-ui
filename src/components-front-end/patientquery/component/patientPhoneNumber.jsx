@@ -12,7 +12,7 @@ export function PatientPhoneNumber(){
 
   const [otpmodal,setOtpModal] = useState(false);
   const [resendbutton,setResendButton] = useState(false);
-  const {register,setValue,getValues,handleSubmit,formState:{errors}} = useForm();
+  const {register,setValue,getValues,handleSubmit,formState:{errors},setError} = useForm();
   const  dispatch = useDispatch();
   const phoneOtp = useSelector((state) => state.patientquery.phoneOtp);
   const phoneNumberVerified = useSelector((state) => state.patientquery.phoneNumberVerified);
@@ -23,10 +23,27 @@ export function PatientPhoneNumber(){
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
 
+
   
     const [seconds, setSeconds] = useState(60);
     const [isActive, setIsActive] = useState(false);
     const timer = 60;
+
+
+  
+    const popularCountries = [
+      { country: "India", code: "+91", length: 10 },
+      { country: "United States", code: "+1", length: 10 },
+      { country: "United Kingdom", code: "+44", length: 10 },
+      { country: "Germany", code: "+49", length: 11 },
+      { country: "France", code: "+33", length: 9 },
+      { country: "Italy", code: "+39", length: 10 },
+      { country: "Spain", code: "+34", length: 9 },
+      { country: "Australia", code: "+61", length: 9 }
+    ];
+
+      const [selectedCountry, setSelectedCountry] = useState(popularCountries[0]); // Default India
+
 
 
      useEffect(() => {
@@ -95,7 +112,22 @@ export function PatientPhoneNumber(){
 
   const onCreate = async (data) => {
     debugger;
-    const phonenumber = "+91" + data.phonenumber;
+
+    console.log("selectedCountry", data.phonenumber.length);
+
+    if(data.phonenumber.length !== selectedCountry.length){
+        setError("phonenumber", {
+              type: "manual",
+              message: `Phone number must be ${selectedCountry.length} digits for ${selectedCountry.country}`
+        });
+
+      return false;
+    }
+
+
+
+
+    const phonenumber = selectedCountry.code + data.phonenumber;
     const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/patient-query/send-otp-phone`, {
       method: "Post",
       headers: {
@@ -160,22 +192,30 @@ export function PatientPhoneNumber(){
 
               <div className="flex flex-col gap-1">
                 <div className="flex">
-                  <span
-                    className="
-                      inline-flex
-                      items-center
-                      px-3
-                      rounded-l-md
-                      border
-                      border-r-0
-                      border-gray-300
-                      bg-gray-100
-                      text-sm
-                      text-gray-600
-                    "
-                  >
-                    +1
-                  </span>
+                    <select
+                      value={selectedCountry.code}
+                      onChange={(e) => {
+                        const country = popularCountries.find(c => c.code === e.target.value);
+                        setSelectedCountry(country);
+                      }}
+                      className="
+      px-3
+      rounded-l-md
+      border
+      border-r-0
+      border-gray-300
+      bg-gray-100
+      text-sm
+      text-gray-700
+      focus:outline-none
+    "
+                    >
+                      {popularCountries.map((c) => (
+                        <option key={c.code} value={c.code}>
+                          ({c.code})
+                        </option>
+                      ))}
+                    </select>
 
                   <input
                    disabled={otpmodal}
@@ -186,24 +226,21 @@ export function PatientPhoneNumber(){
                     inputMode="numeric"
 
                     className={`
-        w-full
-        rounded-r-md
-        border
-        px-4
-        py-2.5
-        text-sm
-        outline-none
-        transition
-        ${errors.phonenumber
-                        ? "border-red-500 focus:ring-red-200 focus:border-red-500"
-                        : "border-gray-300 focus:border-blue-500 focus:ring-blue-100"}
-      `}
+                        w-full
+                        rounded-r-md
+                        border
+                        px-4
+                        py-2.5
+                        text-sm
+                        outline-none
+                        transition
+                        ${errors.phonenumber
+                                        ? "border-red-500 focus:ring-red-200 focus:border-red-500"
+                                        : "border-gray-300 focus:border-blue-500 focus:ring-blue-100"}
+                    `}
+
                     {...register("phonenumber", {
                       required: "Phone number is required",
-                      pattern: {
-                        value: /^\d{10}$/,
-                        message: "Enter a valid 10-digit US phone number",
-                      },
                     })}
                   />
                 </div>
