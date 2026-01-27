@@ -15,7 +15,7 @@ import { adminHeaders } from "../utils/adminHeader";
 import { formatBrazilDate } from "@/lib/formatDate";
 import { brazilianCurrency } from "@/lib/brazilianCurrency";
 import {PatientQueryDetails} from "../patientqueries/patientQueryDetails";
-import { PatientQueryStatus } from "@/lib/enums/PatientQueryStatus";
+import { PatientQueryStatus } from "../../lib/enums/patientQueryStatus";
 
 export function ManagePatientQueries() {
   const [queries, setQueries] = useState([]);

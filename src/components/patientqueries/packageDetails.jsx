@@ -2,7 +2,7 @@ import { brazilianCurrency } from "@/lib/brazilianCurrency";
 import { useEffect, useState } from "react";
 import { adminHeaders } from "../utils/adminHeader";
 import { toast, ToastContainer } from "react-toastify";
-import { PatientQueryStatus } from "@/lib/enums/PatientQueryStatus";
+import { PatientQueryStatus } from "../../lib/enums/patientQueryStatus";
 
 
 
