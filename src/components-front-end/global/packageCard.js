@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { brazilianCurrency } from "@/lib/brazilianCurrency";
 
 
 export default function PackageCard({ data }){
@@ -11,13 +12,18 @@ export default function PackageCard({ data }){
                 </div>
             )}
             <h3 className="text-[1.4rem] text-center mb-2 font-bold w-full">{data.title}</h3>
-            <p className="h1 text-center mb-5 text-primary w-full">{data.price}</p>
+            <p className="h1 text-center mb-5 text-primary w-full">{brazilianCurrency(data.discountedprice)}</p>
             <div className="description mb-4 w-full">
-                <ul className="[&_li:not(:last-child)]:mb-1.5">
+                {/* <ul className="[&_li:not(:last-child)]:mb-1.5">
                     {data.features.map((feature, index) => (
                         <li key={index}>{feature}</li>
                     ))}
-                </ul>
+                </ul> */}
+
+                                        <div
+                        dangerouslySetInnerHTML={{ __html: data.homepagefeatures }}
+                        />
+
                 
             </div>
             <Link href="#" className="btn btn-secondary w-full mt-auto">Book Your Appointment</Link>

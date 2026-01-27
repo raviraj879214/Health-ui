@@ -70,6 +70,7 @@ export default function Filters({minPrice,maxPrice}){
 
 
      const fetchPlaces = async ()=>{
+        debugger;
         const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/homepage-banner/get-places`,{
             method : "Get",
             headers :{
@@ -78,7 +79,10 @@ export default function Filters({minPrice,maxPrice}){
         });
         if(res.ok){
             const result = await res.json();
-            setPlace(result.data);
+            console.log("fetchPlaces",result.data);
+            const distinctPlaces = Array.from(new Map(result.data.map(item => [item.citycep, item])).values());
+
+            setPlace(distinctPlaces);
         }
     }
 

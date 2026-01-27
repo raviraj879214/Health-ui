@@ -1,10 +1,12 @@
+"use client"
+import { useEffect, useState } from "react";
 import PackageCard from "../../components-front-end/global/packageCard";
 import PackageCardLoader from "../../components-front-end/global/skeleton/packageCardLoader";
 
 
 export default function Packages(){
 
-    const treatmentPackages = [
+    const treatmentPackagesdf = [
         {
             id: 1,
             title: "Urology Package",
@@ -21,91 +23,35 @@ export default function Packages(){
             buttonText: "Book Your Appointment",
             popular: false, // to highlight second card
         },
-        {
-            id: 2,
-            title: "Supreme Health Check-up",
-            price: "$299,00",
-            features: [
-                "CBC, PS, ESR",
-                "Creatinine",
-                "PSA Level",
-                "Urine R&M",
-                "USG Kub with PVR",
-                "Uroflowmetry",
-                "Consultation (Urology)",
-            ],
-            buttonText: "Book Your Appointment",
-            popular: true, // Most Popular badge
-        },
-        {
-            id: 3,
-            title: "Cardio Package",
-            price: "$499,00",
-            features: [
-                "CBC, PS, ESR",
-                "Creatinine",
-                "PSA Level",
-                "Urine R&M",
-                "USG Kub with PVR",
-                "Uroflowmetry",
-                "Consultation (Urology)",
-            ],
-            buttonText: "Book Your Appointment",
-            popular: false,
-        },
-        {
-            id: 4,
-            title: "Urology Package",
-            price: "$199,00",
-            features: [
-                "CBC, PS, ESR",
-                "Creatinine",
-                "PSA Level",
-                "Urine R&M",
-                "USG Kub with PVR",
-                "Uroflowmetry",
-                "Consultation (Urology)",
-            ],
-            buttonText: "Book Your Appointment",
-            popular: false, // to highlight second card
-        },
-        {
-            id: 5,
-            title: "Supreme Health Check-up",
-            price: "$299,00",
-            features: [
-                "CBC, PS, ESR",
-                "Creatinine",
-                "PSA Level",
-                "Urine R&M",
-                "USG Kub with PVR",
-                "Uroflowmetry",
-                "Consultation (Urology)",
-            ],
-            buttonText: "Book Your Appointment",
-            popular: true, // Most Popular badge
-        },
-        {
-            id: 6,
-            title: "Cardio Package",
-            price: "$499,00",
-            features: [
-                "CBC, PS, ESR",
-                "Creatinine",
-                "PSA Level",
-                "Urine R&M",
-                "USG Kub with PVR",
-                "Uroflowmetry",
-                "Consultation (Urology)",
-            ],
-            buttonText: "Book Your Appointment",
-            popular: false,
-        },
-    ];
+    ];  
 
 
-    return (
-        <div className="md:my-18 my-16">
+    const [treatmentPackages,settreatmentPackages] = useState([]);
+
+    useEffect(() => {
+            fetchPackages();
+    }, []);
+
+    const fetchPackages = async ()=>{
+        const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/homepage-banner/get-home-page-packages`,{
+            method : "Get",
+            headers : {
+                "content-type" : "application/json"
+            }
+        });
+        if(res.ok){
+            const result = await res.json();
+            settreatmentPackages(result);
+        }
+    }
+
+    
+
+    return (<>
+
+    
+        {treatmentPackages.length > 0 &&(<>
+             <div className="md:my-18 my-16">
             <div className="container">
                 <h2 className="h2 text-center md:mb-7 mb-5">Treatment Packages </h2>
                 <div className="swiper swiper-packages md:py-7! py-4!">
@@ -123,5 +69,7 @@ export default function Packages(){
                 
             </div>
         </div>
-    )
+            </>)}
+       
+    </>)
 }

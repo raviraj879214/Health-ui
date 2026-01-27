@@ -1,6 +1,7 @@
 import { clinicHeaders } from "@/components-clinic/utils/clinicHeaders";
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from "@headlessui/react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { Editor } from "primereact/editor";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -14,6 +15,7 @@ export function PackageStepOne({clinicuuid,packageid}){
     const {register,handleSubmit,formState:{errors} , setValue,getValues ,reset} = useForm();
     const searchParams = useSearchParams();
     const router = useRouter();
+     const [textbrief, setTextbrief] = useState('');
 
 
     useEffect(()=>{
@@ -43,6 +45,8 @@ export function PackageStepOne({clinicuuid,packageid}){
             setValue("briefdescription",result.data.briefdescription);
             setValue("actualprice",result.data.actualprice);
             setValue("discountedprice",result.data.discountedprice);
+            setValue("displayfeatures",result.data.homepagefeatures);
+            setTextbrief(result.data.homepagefeatures);
 
         }
     }
@@ -60,7 +64,8 @@ export function PackageStepOne({clinicuuid,packageid}){
             actualPrice : data.actualprice,
             discountedPrice : data.discountedprice,
             clinicId : clinicuuid,
-            id : packageid
+            id : packageid,
+            homepagefeatures : data.displayfeatures
         }
         const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-package-one/insert-package-details`,{
             method : "Post",
@@ -128,7 +133,7 @@ export function PackageStepOne({clinicuuid,packageid}){
                         <textarea 
                             className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"
                             placeholder="Enter package description"
-                            rows="10"
+                            rows="4"
                             {...register("briefdescription",{required: "Please enter brief description"})}
                         ></textarea>
 
@@ -136,6 +141,28 @@ export function PackageStepOne({clinicuuid,packageid}){
                             <p className="text-sm text-red-500 m-1">{errors.briefdescription.message}</p>
                         )}
                         </div>
+                        
+                        <div>
+                            <label className="text-gray-700 font-medium mb-1 block">Features Displayed on the Home Page</label>
+
+                            <Editor
+
+                                value={textbrief}
+
+                                onTextChange={(e) => { 
+                                         setTextbrief(e.htmlValue),
+                                      setValue("displayfeatures",e.htmlValue)
+                                }
+                                } style={{ height: '100%' }}
+
+                                {...register("displayfeatures", { required: "Please enter a features" })} />
+
+                                {errors.displayfeatures && (
+                                    <p className="text-sm text-red-600">{errors.displayfeatures.message}</p>
+                                )}
+
+                        </div>
+
 
                         <div className="grid grid-cols-2 gap-4">
                         <div>

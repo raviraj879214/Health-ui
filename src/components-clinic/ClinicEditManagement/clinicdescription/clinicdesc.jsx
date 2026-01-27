@@ -155,7 +155,9 @@ export function ClinicDescription({clinicuuid}) {
 
                                                             } style={{ height: '100%' }} 
                                                                  {...register("briefdescription", { required: "Please enter a brief description" })}
-                                                                />
+                                                             />
+
+                                                             
                                                                  {errors.briefdescription &&(
                                                                 <p className="text-sm text-red-600">{errors.briefdescription.message}</p>
                                                             )}

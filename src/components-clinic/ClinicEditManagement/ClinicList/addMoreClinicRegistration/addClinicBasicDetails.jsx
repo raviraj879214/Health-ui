@@ -142,6 +142,17 @@ export function AddClinicBasicDetails({ uuid, modalpopup ,onFade , onSuccess }) 
 
 
 
+       const formatCNPJ = (value) => {
+  return value
+    .replace(/\D/g, "") // remove non-digits
+    .replace(/^(\d{2})(\d)/, "$1.$2")
+    .replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3")
+    .replace(/\.(\d{3})(\d)/, ".$1/$2")
+    .replace(/(\d{4})(\d)/, "$1-$2")
+    .slice(0, 18); // max length XX.XXX.XXX/YYYY-ZZ
+};
+
+
 
 
 
@@ -236,18 +247,25 @@ export function AddClinicBasicDetails({ uuid, modalpopup ,onFade , onSuccess }) 
                                         <label className="block text-sm font-medium text-gray-700 mb-2">
                                             CNPJ (Cadastro Nacional de Pessoa Jurídica)
                                         </label>
+
                                         <input
-                                            type="text"
-                                            placeholder="XX.XXX.XXX/YYYY-ZZ"
-                                            className="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900
-                                                            placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                            {...register("cnpj", {
-                                                required: "Please enter your CNPJ",
-                                                pattern: {
-                                                    value: /^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/,
-                                                    message: "CNPJ must be in the format XX.XXX.XXX/YYYY-ZZ",
-                                                },
-                                            })} />
+                                              type="text"
+                                              placeholder="XX.XXX.XXX/YYYY-ZZ"
+                                              maxLength={18}
+                                              className="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900
+                                            placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                              {...register("cnpj", {
+                                                  required: "Please enter your CNPJ",
+                                                  pattern: {
+                                                      value: /^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/,
+                                                      message: "CNPJ must be in the format XX.XXX.XXX/YYYY-ZZ",
+                                                  },
+                                                  onChange: (e) => {
+                                                      e.target.value = formatCNPJ(e.target.value);
+                                                  },
+                                              })}
+                                          />
+
 
 
                                         {errors.cnpj && (

@@ -407,10 +407,18 @@ export function DoctorOne({ onClose, nextStep, clinicuuid, doctoruuid }) {
               <div className="col-span-12 lg:col-span-6">
                 <Label>Video URL</Label>
                 <input
-                  type="text"
-                  className="w-full border p-2 rounded"
-                  {...register("videourl", { required: "Please enter video url" })}
-                />
+                    type="text"
+                    className="w-full border p-2 rounded"
+                    {...register("videourl", {
+                      required: "Please enter video URL ",
+                      pattern: {
+                        value:
+                          /^(https?:\/\/)?(www\.)?(youtube\.com\/(watch\?v=|shorts\/)|youtu\.be\/)[A-Za-z0-9_-]{11}.*$/,
+                        message: "Enter a valid YouTube video URL https://www.youtube.com/watch?v=xxxxxxxxx",
+                      },
+                    })}
+                  />
+
                 {errors.videourl && (
                   <p className="text-sm text-red-400">{errors.videourl.message}</p>
                 )}

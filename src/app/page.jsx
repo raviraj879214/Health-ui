@@ -96,7 +96,10 @@ export default function Pages() {
         <PromoteCard data={promoteCardone} />
 
         <HomeStats />
-        {/* <Packages /><Testimonials /> */}
+        <Packages />
+        
+        
+        {/* <Testimonials /> */}
 
         <FAQ items={faqItems} defaultOpen={1} />
 

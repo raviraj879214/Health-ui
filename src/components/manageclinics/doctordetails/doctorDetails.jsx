@@ -84,6 +84,26 @@ export function DoctorDetails({ id }) {
       }));
   }
     
+
+  const getYouTubeVideoId = (url) => {
+  try {
+    const parsedUrl = new URL(url);
+
+    // Standard YouTube link
+    const v = parsedUrl.searchParams.get("v");
+    if (v) return v;
+
+    // Shortened youtu.be link
+    if (parsedUrl.hostname === "youtu.be") {
+      return parsedUrl.pathname.slice(1);
+    }
+
+    return null;
+  } catch (err) {
+    return null;
+  }
+};
+
   
 
   return (
@@ -252,7 +272,7 @@ export function DoctorDetails({ id }) {
         <div className="mt-5 flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70">
           <div className="flex justify-between items-center border-b border-gray-200 rounded-t-xl py-3 px-4 md:px-5 dark:border-neutral-700">
             <h3 className="text-lg font-bold text-gray-800 dark:text-white">
-              Doctor Video
+              Doctor Video 
             </h3>
             <div className="flex items-center gap-x-1"></div>
           </div>
@@ -261,7 +281,7 @@ export function DoctorDetails({ id }) {
             <div className="max-h-[400px] overflow-y-auto">
               <div className="grid grid-cols-1 md:grid-cols-1 gap-4 overflow-hidden">
                 <iframe
-                  src={`https://www.youtube.com/embed/${doctorDetails.image}?autoplay=1&mute=1`}
+                  src={`https://www.youtube.com/embed/${getYouTubeVideoId(doctorDetails.videurl)}?autoplay=1&mute=1`}
                   className="w-full h-[50vh]"
                   frameBorder="0"
                   allow="autoplay; encrypted-media"
