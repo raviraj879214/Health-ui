@@ -27,7 +27,8 @@ export default function LoginPage() {
       Cookies.set("clinic_access", data.access_token, { expires: 1, sameSite: "strict" });
       Cookies.set("clinic_refresh", data.refresh_token, { expires: 7, sameSite: "strict" });
 
-      router.replace("/partner/dashboard");
+      router.push("/partner/clinic");
+
     } catch (err) {
       console.error(err);
       alert("Login failed");

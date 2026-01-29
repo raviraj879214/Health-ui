@@ -71,7 +71,7 @@ export function GoogleReviews({uuid,placesidparam}) {
             const result= await res.json();
             fetchGooglePlaces(result.data.placesid);
 
-            toast.success("Update company for google review  successfully",{
+            toast.success("Update company for google review  successfully, the reviews will update after 24 hours in fornt end listing",{
                 position : "bottom-right",
                 autoClose : 3000
             });
