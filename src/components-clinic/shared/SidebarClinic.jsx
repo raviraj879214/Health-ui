@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import {
   FaRegClipboard,
   FaStar,
@@ -19,22 +19,15 @@ import { HiOutlineSupport } from "react-icons/hi";
 
 export function ClinicSidebar({ collapsed, mobileOpen, active, setActive, toggleMobile }) {
   const router = useRouter();
+  const pathname = usePathname(); // ✅ current URL
 
-  // Define menu items with route URLs
   const menu = [
-    // { name: "Requests", icon: FaRegClipboard, url: "/partner/dashboard" },
-    // { name: "Reviews", icon: FaStar, url: "/partner/profile" },
-    // { name: "Advertising", icon: FaBullhorn, url: "/partner/advertising" },
-     { name: "Clinic", icon: FaHospital, url: "/partner/clinic" },
-     { name: "Requests", icon: FaRegSquare, url: "/partner/requests" },
-    // { name: "Sales analytics", icon: FaChartLine, url: "/partner/sales-analytics" },
-    // { name: "User analytics", icon: FaChartBar, url: "/partner/user-analytics" },
-    // { name: "Agency settings", icon: FaCogs, url: "/partner/agency-settings" },
-     { name: "Dashboard", icon: FaUserCircle, url: "/partner/dashboard" },
-     { name: "Boost Package", icon: FaRocket, url: "/partner/boost-package" },
-     { name: "Clinic Boost Package", icon: FaRocket, url: "/partner/clinic-boost-package" },
-     { name: "Profile", icon: FaUserCircle, url: "/partner/profile" },
-
+    { name: "Clinic", icon: FaHospital, url: "/partner/clinic" },
+    { name: "Requests", icon: FaRegSquare, url: "/partner/requests" },
+    { name: "Dashboard", icon: FaUserCircle, url: "/partner/dashboard" },
+    { name: "Boost Package", icon: FaRocket, url: "/partner/boost-package" },
+    { name: "Clinic Boost Package", icon: FaRocket, url: "/partner/clinic-boost-package" },
+    { name: "Profile", icon: FaUserCircle, url: "/partner/profile" },
   ];
 
   return (
@@ -62,14 +55,16 @@ export function ClinicSidebar({ collapsed, mobileOpen, active, setActive, toggle
       <ul className="mt-2 text-[15px] text-[#2C2C2C] overflow-y-auto flex-1 scrollbar-thin scrollbar-thumb-gray-300 p-0">
         {menu.map((m) => {
           const Icon = m.icon;
-          const isActive = active === m.name;
+
+          // ✅ Active based on URL
+          const isActive = pathname.startsWith(m.url);
+
           return (
             <li
               key={m.name}
               onClick={() => {
-                setActive(m.name);
-                toggleMobile(false); // Close on mobile
-                router.push(m.url); // Navigate to URL
+                toggleMobile(false);
+                router.push(m.url);
               }}
               className={`
                 cursor-pointer transition-all hover:bg-gray-100
