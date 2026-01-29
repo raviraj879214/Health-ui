@@ -65,8 +65,8 @@ export function PartnerLogin() {
       toast.success("Login successful!");
 
       setTimeout(() => {
-        router.push("/partner");
-      }, 800);
+        router.push("/partner/clinic");
+      }, 500);
     } catch (error) {
       toast.error("Network Error!");
     }
