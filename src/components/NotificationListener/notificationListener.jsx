@@ -72,6 +72,7 @@ export default function NotificationUI({id}) {
 
 
   const markAsRead = async(id)=>{
+  
    setNotificationLoader(true);
     const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/webhook/mark-as-read`,{
       method : "Post",
@@ -79,7 +80,7 @@ export default function NotificationUI({id}) {
         "content-type" : "application/json"
       },
       body: JSON.stringify({
-        id: id
+        "id": String(id)
       })
     });
     if(res.ok){
@@ -143,7 +144,8 @@ export default function NotificationUI({id}) {
             <p className="text-sm font-semibold text-gray-900">{n.type}</p>
             <p className="mt-1 text-sm text-gray-600">{n.message}</p>
             <p className="mt-2 text-xs text-gray-400">
-              {formatBrazilDate(n.createdAt)}
+              {formatBrazilDate(n.createdAt,true)} <br></br>
+              {formatBrazilDate(n.createdAt,false)}
             </p>
           </div>
         </div>

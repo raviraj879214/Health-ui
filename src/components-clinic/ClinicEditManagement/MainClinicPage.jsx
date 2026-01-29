@@ -11,10 +11,15 @@ import {MaincategoryBoard} from "../ClinicEditManagement/cliniccategory/MainCate
 import {MainPackages} from "../ClinicEditManagement/ManagePackages/MainPackages";
 import {StripeClinic} from "../ClinicEditManagement/stripeforclinic/stripeClinic";
 import {GoogleMap} from "./ManageDoctors/googleMap";
+import { ClinicStatus } from "@/lib/enums/ClinicStatus";
+import { toast } from "react-toastify";
+import { ButtonSpinner } from "@/reusable/buttonSpinner";
+import {GoogleReviews} from "./googlereviews/googleReviews";
 
 export function MainClinic({ clinicuuid }) {
 
   const [clinicdetail, setClinicDetail] = useState([]);
+  const [pingbutton,setPingButton] = useState(false);
 
   const fetchclinicdetails = async () => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-clinic/get-clinics-details/${clinicuuid}`, {
@@ -32,6 +37,37 @@ export function MainClinic({ clinicuuid }) {
   }, [clinicuuid]);
 
 
+
+
+
+  const pingAdmin =async ()=>{
+    setPingButton(true);
+    const clinicmessage = `Hi Admin, ${clinicdetail.name} has requested activation. The clinic has completed all required details. Please review and activate the clinic.`;
+    const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-clinic/ping-admin`,{
+      method : "Post",
+      headers : await clinicHeaders(),
+      body : JSON.stringify({
+        "clinicmessage" : clinicmessage
+      })
+    });
+    if(res.ok){
+      const result= await res.json();
+
+      toast.success("Request has been sent to admin",{
+        position : "bottom-right",
+        autoClose : 3000
+      });
+
+      setPingButton(false);
+
+    }
+
+
+
+
+  }
+
+
    const bannerRef = useRef(null);
   const doctorRef = useRef(null);
   const surgeryRef = useRef(null);
@@ -45,8 +81,26 @@ export function MainClinic({ clinicuuid }) {
   };
 
   return (<>
+  {clinicdetail.status !== ClinicStatus.PENDING &&(<>
+             <div className=" rounded-2xl border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-white/[0.03] flex items-center justify-between">
+
+          <p className="text-sm text-gray-700 dark:text-gray-300">
+            After completing the clinic details, please ping the admin to activate the clinic. Once approved, it will be listed on the frontend.
+          </p>
+
+          <button
+           disabled={pingbutton}
+           onClick={()=> pingAdmin()}
+            className="btn btn-primary">
+              {pingbutton ? (<><ButtonSpinner></ButtonSpinner></>):(<>Ping Admin</>)}
+            
+          </button>
+
+        </div>
+        </>)}
 
     <div className="grid grid-cols-12 gap-4">
+      
 
       <div className="col-span-12 md:col-span-2">
 
@@ -112,6 +166,10 @@ export function MainClinic({ clinicuuid }) {
       </div>
 
       <div className="col-span-12 md:col-span-12">
+
+       
+        
+
         <br></br>
         <div ref={bannerRef}>
           
@@ -177,10 +235,16 @@ export function MainClinic({ clinicuuid }) {
             <StripeClinic clinicuuid={clinicdetail.uuid} ></StripeClinic>
         </div>
 
+          <div>
+              <GoogleReviews uuid={clinicdetail.uuid} placesidparam={clinicdetail.placesid}/>
+          </div>
 
         <div>
-                <GoogleMap uuid={clinicdetail.uuid} lat={clinicdetail.latitude} long={clinicdetail.longitude}/>
+            <GoogleMap uuid={clinicdetail.uuid} lat={clinicdetail.latitude} long={clinicdetail.longitude}/>
         </div>
+
+        
+
 
 
 

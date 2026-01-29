@@ -21,6 +21,7 @@ import { ToastContainer } from "react-toastify";
 import {ClinicHeroSection} from "./components/clinicHeroSection";
 import {Accreditation} from "./components/accreditation";
 import {GoogleLocation} from "./components/googleLocation";
+import {GoogleReviewDetails} from "./components/googleReviewDetails";
 
 
 export function ClinicDetails({id}){
@@ -121,6 +122,10 @@ export function ClinicDetails({id}){
 
             <div className="grid grid-cols-1 gap-4 ">
                <StripeDetails id={id}></StripeDetails>
+            </div>
+
+            <div className="grid grid-cols-1 gap-4 ">
+                <GoogleReviewDetails id={id} />
             </div>
 
              <div className="grid grid-cols-1 gap-4 ">
