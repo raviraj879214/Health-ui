@@ -27,10 +27,11 @@ export function GoogleReviews({uuid,placesidparam}) {
             setPlacesID("");
             return ;
         }
+
     try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-clinic-request/get-clinic-places-id/${input}`,{
             method : "Get",
-            headers : await clinicHeaders(),
+            headers :  clinicHeaders(),
         }); 
         if (!res.ok) {
         console.log("Failed to fetch places:", res.statusText);
@@ -60,7 +61,7 @@ export function GoogleReviews({uuid,placesidparam}) {
 
         const  res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-clinic-request/update-google-company`,{
             method : "Post",
-            headers : await clinicHeaders(),
+            headers :  clinicHeaders(),
             body: JSON.stringify({
                 placesid: placesid.place_id,
                 uuid :uuid
@@ -83,7 +84,7 @@ export function GoogleReviews({uuid,placesidparam}) {
     const fetchGooglePlaces = async(id)=>{
         const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-clinic-request/get-google-places-details/${id}`,{
             method : "Get",
-            headers : await clinicHeaders()
+            headers :  clinicHeaders()
         });
         if(res.ok){
             const result= await res.json();
