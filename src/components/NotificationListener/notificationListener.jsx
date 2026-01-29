@@ -39,7 +39,7 @@ export default function NotificationUI({id}) {
     fetchnotifications();
 
 
-    socket = io("http://localhost:8000");
+    socket = io(`${process.env.NEXT_PUBLIC_NODEJS_URL}`);
 
     socket.on("connect", () => {
       console.log("Connected to notification socket");
