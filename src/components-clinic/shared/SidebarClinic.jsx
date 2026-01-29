@@ -2,31 +2,24 @@
 
 import { useRouter, usePathname } from "next/navigation";
 import {
-  FaRegClipboard,
-  FaStar,
-  FaBullhorn,
   FaHospital,
   FaChartLine,
-  FaChartBar,
-  FaCogs,
-  FaUserCircle,
-  FaWolfPackBattalion,
-  FaFlask,
   FaRocket,
+  FaUserCircle,
   FaRegSquare
 } from "react-icons/fa";
 import { HiOutlineSupport } from "react-icons/hi";
 
 export function ClinicSidebar({ collapsed, mobileOpen, active, setActive, toggleMobile }) {
   const router = useRouter();
-  const pathname = usePathname(); // ✅ current URL
+  const pathname = usePathname(); // current URL
 
   const menu = [
     { name: "Clinic", icon: FaHospital, url: "/partner/clinic" },
     { name: "Requests", icon: FaRegSquare, url: "/partner/requests" },
     { name: "Dashboard", icon: FaUserCircle, url: "/partner/dashboard" },
     { name: "Boost Package", icon: FaRocket, url: "/partner/boost-package" },
-    { name: "Clinic Boost Package", icon: FaRocket, url: "/partner/clinic-boost-package" },
+    { name: "Clinic Boost Package", icon: FaChartLine, url: "/partner/clinic-boost-package" },
     { name: "Profile", icon: FaUserCircle, url: "/partner/profile" },
   ];
 
@@ -56,8 +49,9 @@ export function ClinicSidebar({ collapsed, mobileOpen, active, setActive, toggle
         {menu.map((m) => {
           const Icon = m.icon;
 
-          // ✅ Active based on URL
-          const isActive = pathname.startsWith(m.url);
+          // ✅ Strict active match (no prefix collision)
+          const isActive =
+            pathname === m.url || pathname.startsWith(m.url + "/");
 
           return (
             <li
