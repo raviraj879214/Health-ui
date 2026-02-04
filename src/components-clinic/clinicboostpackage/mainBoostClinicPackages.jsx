@@ -95,7 +95,7 @@ export function MainBoostClinicPackages(){
     const handleClick = async (selectedpackages) => {
 
     if (!degree) {
-       alert("Please select clinic package");
+       alert("Please select which clinic you want to boost");
        return ;
     }
 

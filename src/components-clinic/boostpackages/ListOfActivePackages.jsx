@@ -43,7 +43,8 @@ export function Listofactivepackages() {
               <tr className="bg-gray-100 text-left text-sm">
                 <th className="p-3 border theme-border">Boost Name</th>
                 <th className="p-3 border theme-border">Boost Duration</th>
-                <th className="p-3 border theme-border">Clinic Package</th>
+                <th className="p-3 border theme-border">Clinic</th>
+                <th className="p-3 border theme-border">Treatment Package</th>
                 <th className="p-3 border theme-border">Price</th>
                 <th className="p-3 border theme-border">Status</th>
                 <th className="p-3 border theme-border">Start At</th>
@@ -68,11 +69,13 @@ export function Listofactivepackages() {
                       <p className="background-theme p-2 rounded-2xl w-fit">
                            {item.boostPackage?.name || "--"}
                       </p>
-                     
                     </td>
 
                     <td className="p-3 border theme-border">
                       {item.boostPackage?.durationDays + " Days" || "0 Days"}
+                    </td>
+                    <td className="p-3 border theme-border">
+                      {item.Clinic?.name || "--"}
                     </td>
 
                     <td className="p-3 border theme-border">

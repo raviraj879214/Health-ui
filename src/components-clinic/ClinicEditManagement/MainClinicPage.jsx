@@ -81,23 +81,7 @@ export function MainClinic({ clinicuuid }) {
   };
 
   return (<>
-  {clinicdetail.status !== ClinicStatus.PENDING &&(<>
-             <div className=" rounded-2xl border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-white/[0.03] flex items-center justify-between">
 
-          <p className="text-sm text-gray-700 dark:text-gray-300">
-            After completing the clinic details, please ping the admin to activate the clinic. Once approved, it will be listed on the frontend.
-          </p>
-
-          <button
-           disabled={pingbutton}
-           onClick={()=> pingAdmin()}
-            className="btn btn-primary">
-              {pingbutton ? (<><ButtonSpinner></ButtonSpinner></>):(<>Ping Admin</>)}
-            
-          </button>
-
-        </div>
-        </>)}
 
     <div className="grid grid-cols-12 gap-4">
       
@@ -251,5 +235,22 @@ export function MainClinic({ clinicuuid }) {
 
       </div>
     </div>
+      {clinicdetail.status !== ClinicStatus.PENDING &&(<>
+             <div className=" rounded-2xl border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-white/[0.03] flex items-center justify-between">
+
+          <p className="text-sm text-gray-700 dark:text-gray-300">
+            After completing the clinic details, please click Finish Registration to activate the clinic. Once approved, it will be listed on the frontend.
+          </p>
+
+          <button
+           disabled={pingbutton}
+           onClick={()=> pingAdmin()}
+            className="btn btn-primary">
+              {pingbutton ? (<><ButtonSpinner></ButtonSpinner></>):(<>Finish Registration</>)}
+            
+          </button>
+
+        </div>
+        </>)}
   </>);
 }

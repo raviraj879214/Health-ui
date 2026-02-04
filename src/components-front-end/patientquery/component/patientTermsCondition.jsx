@@ -48,7 +48,9 @@ export function PatientTermsCondition({clinicid}){
                 />
 
 
-                <p className="mb-4 flex items-center gap-2">
+               
+              </div>
+               <p className="mb-4 flex items-center gap-2 ml-2">
                   <input
                     type="checkbox"
                     id="terms"
@@ -66,7 +68,6 @@ export function PatientTermsCondition({clinicid}){
                   </label>
                 </p>
 
-              </div>
             </div>
           
     

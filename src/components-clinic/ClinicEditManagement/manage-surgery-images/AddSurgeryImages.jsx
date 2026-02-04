@@ -27,12 +27,19 @@ export function AddSurgeryImage({sendData,clinicuuid}) {
   const [doctors,setDoctors] = useState("");
 
 
+  const [packageOptions,setPackageOptions] = useState([]);
+  const [packages,setPackages] = useState("");
+
+
+
+
 
   useEffect(()=>{
 
           fetchtreatment();
           if(clinicuuid){
             fetchClinicDoctors();
+            fetchClinicPackages();
           }
           
 
@@ -40,32 +47,41 @@ export function AddSurgeryImage({sendData,clinicuuid}) {
 
 
   const fetchClinicDoctors = async ()=>{
-
     debugger;
-    //sdfdfddddddd
     const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-surgeries/get-doctors/${clinicuuid}`,{
       method : "Get",
       headers : clinicHeaders(),
     });
-
     if(res.ok){
        debugger;
        const result = await res.json();
-
        console.log("fetchClinicDoctors",result);
-
         const options = result.data.map(item => ({
             value: item.uuid,
             label: 'Dr. ' + item.firstname + ' ' + item.lastname
           }));
-
-
         setDoctorsOptions(options);
-
     }
   }
 
 
+  const fetchClinicPackages = async()=>{
+
+     const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-surgeries/get-packages/${clinicuuid}`,{
+      method : "Get",
+      headers : clinicHeaders(),
+    });
+    if(res.ok){
+       debugger;
+       const result = await res.json();
+       
+        const options = result.data.map(item => ({
+            value: item.id,
+            label: item.title
+          }));
+        setPackageOptions(options);
+    }
+  }
 
 
 
@@ -137,6 +153,7 @@ export function AddSurgeryImage({sendData,clinicuuid}) {
       formData.append("clinicUuid",clinicuuid);
       formData.append("doctorUuid",doctors.value);
       formData.append("treatmentid",degree.value);
+      formData.append("packageid",packages.value);
       
 
       return await fetch(
@@ -234,12 +251,33 @@ export function AddSurgeryImage({sendData,clinicuuid}) {
                               classNamePrefix="select"
                               isSearchable/>
 
-
                             {!doctors && (
                               <p className="text-sm text-red-400 mt-1">Please select a doctor</p>
                             )}
                             
                       </div>
+
+                    <div className="">
+                            
+                            <label className="block mb-1 font-medium">Choose Package</label>
+
+                            <Select
+                              options={packageOptions}
+                              value={packages}
+                              onChange={(selected) => setPackages(selected)}
+                              placeholder="Search  packages..."
+                              className="basic-select"
+                              classNamePrefix="select"
+                              isSearchable/>
+
+                            {!packages && (
+                              <p className="text-sm text-red-400 mt-1">Please select a package</p>
+                            )}
+                            
+                      </div>
+
+
+
 
                   </div>
 

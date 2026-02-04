@@ -78,6 +78,8 @@ export function StripeBoardSuccess({ id }) {
             {isVerified
               ? "You can now log in and start using the platform."
               : "Please try again or contact support."}
+              <br></br><br></br>
+             <p className="text-green-500">Some times This account still needs a bit more verification. Head to the Clinic Dashboard to resolve the remaining requirements.</p>
           </p>
 
           <div className="py-10">

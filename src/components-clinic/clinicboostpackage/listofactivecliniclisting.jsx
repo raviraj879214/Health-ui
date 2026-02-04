@@ -50,7 +50,7 @@ export function Listofactivecliniclisting() {
   return (
     <>
       <div className="border theme-border rounded-xl p-4 bg-white shadow-sm mt-6">
-        <h2 className="text-lg font-semibold mb-4">List of Current Packages</h2>
+        <h2 className="text-lg font-semibold mb-4">List of boosted packages</h2>
 
         <div className="overflow-x-auto">
           <table className="min-w-full border-collapse">

@@ -51,14 +51,23 @@ export function SurgeriesCarouselImages({dataReset,clinicuuid}) {
         const beforephotos = result.data.filter(x=>x.imageType == "before");
         const afterphotos = result.data.filter(x=>x.imageType == "after");
         
-         const surgeriesArray = beforephotos.map(item => {
+        
+    const surgeriesArray = beforephotos.map(item => {
          const afterItem = afterphotos.find(x => x.surgeryId === item.surgeryId);
+         const treatmentname = result.treatment.find(x=>x.id ===  item.treatmentid);
+         const doctrdetails = result.doctors.find(x=>x.uuid === item.doctorUuid);
+         const packages = result.packages.find(x=>x.id === item.packageid);
+        console.log("packages",packages.title);
 
         return {
             before:`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/surgery/beforeandafter/${item.imageUrl}`,
             after:`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/surgery/beforeandafter/${afterItem.imageUrl}`,
             surgeryId : item.surgeryId,
-            id:item.id
+            id:item.id,
+            treatmentname:treatmentname.name,
+            doctorname : doctrdetails.firstname + ` ` +  doctrdetails.lastname,
+            doctorimage : doctrdetails.image,
+            packageName: packages.title
 
         };
     }); 
@@ -124,75 +133,101 @@ if (surgeries.length === 0) {
 
   return (
     <div className="relative w-full overflow-hidden p-4 bg-gray-50 dark:bg-neutral-800 rounded-xl">
-      <ConfirmDialog></ConfirmDialog>
+  <ConfirmDialog />
 
-      
-
+  <div
+    className="flex transition-transform duration-500"
+    style={{
+      transform: `translateX(-${(current * 100) / visibleItems}%)`,
+    }}
+  >
+    {surgeries.map((surgery, idx) => (
       <div
-        className="flex transition-transform duration-500"
-        style={{
-          transform: `translateX(-${(current * 100) / visibleItems}%)`,
-        }}>
+        key={idx}
+        className={`flex-shrink-0 w-[calc(100%/${visibleItems})] border border-gray-300 dark:border-neutral-600 rounded-lg p-2 relative flex flex-col`}
+      >
+        {/* Delete Button */}
+        <div className="absolute top-2 right-2 flex gap-1 z-10">
+          <button
+            onClick={() => deleteimages(surgery.id)}
+            className="text-red-500 hover:text-red-700 bg-white/80 rounded px-1"
+          >
+            🗑
+          </button>
+        </div>
 
+        {/* IMAGE ROW (UNCHANGED DESIGN) */}
+        <div className="flex gap-2">
+          <div className="relative w-1/2 h-[180px] overflow-hidden rounded">
+            <img
+              src={surgery.before}
+              alt="Before"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute top-1 left-1 bg-blue-600 text-white px-2 py-0.5 text-xs rounded">
+              Before
+            </div>
+          </div>
 
-        {surgeries.map((surgery, idx) => (
+          <div className="relative w-1/2 h-[180px] overflow-hidden rounded">
+            <img
+              src={surgery.after}
+              alt="After"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute top-1 left-1 bg-green-600 text-white px-2 py-0.5 text-xs rounded">
+              After
+            </div>
+          </div>
+        </div>
+
+        {/* NEW INFO SECTION */}
+        <div className="mt-3 pt-3 border-t border-gray-200 dark:border-neutral-700 flex flex-col gap-2">
           
-                <div
-                    key={idx}
-                    className={`flex-shrink-0 w-[calc(100%/${visibleItems})] gap-2 flex border border-gray-300 dark:border-neutral-600 rounded-lg p-2 relative`}
-                >
-                  
-                    <div className="absolute top-2 right-2 flex gap-1 z-10">
+          {/* Surgery Name */}
+          <div className="text-sm font-semibold text-gray-800 dark:text-white">
+            {surgery.treatmentname || "Hair Transplant Surgery"}
+          </div>
 
-                    
-                    <button onClick={()=> deleteimages(surgery.id)}  className="text-red-500 hover:text-red-700 bg-white/80 rounded px-1">🗑</button>
-                    </div>
+         
+          <div className="flex items-center gap-2">
+            <img
+              src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/doctors/profilepicture/${surgery.doctorimage}`}
+              alt={surgery.doctorName || "Doctor"}
+              className="w-8 h-8 rounded-full object-cover border"
+              onError={(e) => {
+                e.currentTarget.onerror = null; 
+                e.currentTarget.src = "/images/user.png"; 
+              }}/>
+            <span className="text-sm text-gray-700 dark:text-gray-300">
+              Dr. {surgery.doctorname || "Rajesh Sharma"}
+            </span>
+          </div>
 
-
-                    <div className="relative w-1/2 h-[180px] overflow-hidden rounded">
-                    <img
-                        src={surgery.before}
-                        alt="Before"
-                        className="w-full h-full object-cover"
-                    />
-                    <div className="absolute top-1 left-1 bg-blue-600 text-white px-2 py-0.5 text-xs rounded">
-                        Before 
-                    </div>
-                    </div>
-
-                  
-                    <div className="relative w-1/2 h-[180px] overflow-hidden rounded">
-                    <img
-                        src={surgery.after}
-                        alt="After"
-                        className="w-full h-full object-cover"
-                    />
-                    <div className="absolute top-1 left-1 bg-green-600 text-white px-2 py-0.5 text-xs rounded">
-                        After
-                    </div>
-                    </div>
-                </div>
-        ))}
-
-
-
-
+          
+          <div className="text-xs text-gray-500 dark:text-gray-400">
+            Package: {surgery.packageName || "Premium Care Package"}
+          </div>
+        </div>
       </div>
+    ))}
+  </div>
 
-      
-      <button
-        onClick={prevSlide}
-        className="absolute top-1/2 left-2 -translate-y-1/2 bg-white/70 dark:bg-black/40 p-2 rounded-full shadow-md hover:bg-white dark:hover:bg-black"
-      >
-        ◀
-      </button>
-      <button
-        onClick={nextSlide}
-        className="absolute top-1/2 right-2 -translate-y-1/2 bg-white/70 dark:bg-black/40 p-2 rounded-full shadow-md hover:bg-white dark:hover:bg-black"
-      >
-        ▶
-      </button>
-    </div>
+  {/* Navigation Buttons */}
+  <button
+    onClick={prevSlide}
+    className="absolute top-1/2 left-2 -translate-y-1/2 bg-white/70 dark:bg-black/40 p-2 rounded-full shadow-md hover:bg-white dark:hover:bg-black"
+  >
+    ◀
+  </button>
+  <button
+    onClick={nextSlide}
+    className="absolute top-1/2 right-2 -translate-y-1/2 bg-white/70 dark:bg-black/40 p-2 rounded-full shadow-md hover:bg-white dark:hover:bg-black"
+  >
+    ▶
+  </button>
+</div>
+
 
 
   );

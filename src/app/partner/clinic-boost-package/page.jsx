@@ -11,7 +11,7 @@ export default function Page({searchParams}){
     
     return(<>
 
-         <PageBreadcrumb pageTitle="Clinic Boost Package" />
+         <PageBreadcrumb pageTitle="Clinic Boost" />
     
         
 

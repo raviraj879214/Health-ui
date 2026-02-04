@@ -97,7 +97,10 @@ export function StepSix(){
                 />
 
 
-                <p className="mb-4 flex items-center gap-2">
+               
+
+              </div>
+               <p className="mb-4 flex items-center gap-2 ml-2">
                   <input
                     type="checkbox"
                     id="terms"
@@ -113,8 +116,6 @@ export function StepSix(){
                     I accept the Terms and Conditions
                   </label>
                 </p>
-
-              </div>
             </div>
 
               <div className="mt-12 flex items-center justify-between border-t pt-8">

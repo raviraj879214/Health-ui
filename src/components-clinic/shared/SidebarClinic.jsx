@@ -19,7 +19,7 @@ export function ClinicSidebar({ collapsed, mobileOpen, active, setActive, toggle
     { name: "Requests", icon: FaRegSquare, url: "/partner/requests" },
     { name: "Dashboard", icon: FaUserCircle, url: "/partner/dashboard" },
     { name: "Boost Package", icon: FaRocket, url: "/partner/boost-package" },
-    { name: "Clinic Boost Package", icon: FaChartLine, url: "/partner/clinic-boost-package" },
+    { name: "Clinic Boost", icon: FaChartLine, url: "/partner/clinic-boost-package" },
     { name: "Profile", icon: FaUserCircle, url: "/partner/profile" },
   ];
 

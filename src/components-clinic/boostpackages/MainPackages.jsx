@@ -7,6 +7,7 @@ import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from "@headlessui/re
 import Select from "react-dropdown-select";
 import {Listofactivepackages} from "../boostpackages/ListOfActivePackages";
 import {brazilianCurrency} from "../../lib/brazilianCurrency";
+import { PackageVerifyStatus } from "@/lib/enums/packageVerifyStatus";
 
 
 export function MainPackage() {
@@ -17,13 +18,20 @@ export function MainPackage() {
 
     const [degree,setDegree]= useState("");
     const [degreeOptions,setdegreeOptions]= useState([]);
+
+    const [clinics,setClinics] = useState("");
+    const [clinicsOptions,setClinicOptions] = useState([]);
+
+
     const [button,setButton] = useState(false);
     const [clinicuserid,setClinicUserid] = useState("");
+
+
+    const [clinicpackage,setClinicPackage] = useState([]);
 
     useEffect(() => {
         fetchBoostPackages();
         fetchClinicPackages();
-        
     }, []);
 
 
@@ -38,15 +46,16 @@ export function MainPackage() {
                 const result = await res.json();
 
                 setClinicUserid(result.clinicuserid);
+                
+                
 
-
-
-               const packagearray = result.data.map((item) => ({
-                    label: item.title,
-                    value: item.id
+                setClinicPackage(result.data);
+                const clinicarray =result.clinics.map((item)=>({
+                    label: item.name,
+                    value: item.uuid
                 }));
+                setClinicOptions(clinicarray);
 
-                setdegreeOptions(packagearray);
             }
 
     }
@@ -88,10 +97,15 @@ export function MainPackage() {
 
 const handleClick = async (selectedpackages) => {
 
-    if (!degree) {
-       alert("Please select clinic package");
+    if(!clinics){
+        alert("Please select clinic");
        return ;
     }
+    if (!degree) {
+       alert("Please select treatment package");
+       return ;
+    }
+    
 
 
         setButton(false);
@@ -138,6 +152,21 @@ const handleClick = async (selectedpackages) => {
   };
 
 
+
+
+    const onChangeClinic = async (dataid) => {
+        
+       const packagearray = clinicpackage
+        .filter(x => x.clinicId === dataid && x.status == PackageVerifyStatus.VERIFIED)
+        .map(item => ({
+            label: item.title,
+            value: item.id
+        }));
+        
+        setDegree("");
+        setdegreeOptions([]);
+        setdegreeOptions(packagearray);
+    }
 
 
 
@@ -224,30 +253,51 @@ const handleClick = async (selectedpackages) => {
 
                                     <hr className="theme-border" />
 
-                                  
+                                  <div className="grid grid-cols-2 gap-3">
                                     <div>
-                                    <label className="block mb-2 flex align-items-start  font-medium text-gray-700">
-                                        Choose Clinic Package
-                                    </label>
+                                         <label className="block mb-2 flex align-items-start  font-medium text-gray-700">
+                                            Choose Clinic
+                                        </label>
+                                         <div className="bg-white p-2 rounded-lg border theme-border shadow-sm">
 
-                                    <div className="bg-white p-2 rounded-lg border theme-border shadow-sm">
+                                            <Select
+                                                options={clinicsOptions}
+                                                value={clinics}
+                                                onChange={(selected) => {
+                                                    console.log("selected",selected[0].value);
+                                                    setClinics(selected);
+                                                    onChangeClinic(selected[0].value);
+                                                }}
+                                                placeholder="Search clinic..."
+                                                className="basic-select w-fit"
+                                                classNamePrefix="select"
+                                                
+                                            />
+                                        </div>
 
-                                        <Select
-                                        options={degreeOptions}
-                                        
-                                        value={degree}
-                                        onChange={(selected) => {
-                                            setDegree(selected)
-                                            
-                                        }}
-                                        placeholder="Search clinic package..."
-                                        className="basic-select"
-                                        classNamePrefix="select"
-                                        isSearchable
-                                        
-                                        />
                                     </div>
+                                    <div>
+                                        <label className="block mb-2 flex align-items-start  font-medium text-gray-700">
+                                            Treatment Package
+                                        </label>
+                                        <div className="bg-white p-2 rounded-lg border theme-border shadow-sm">
+
+                                            <Select
+                                                options={degreeOptions}
+                                                value={degree}
+                                                onChange={(selected) => {
+                                                    setDegree(selected)
+                                                }}
+                                                placeholder="Search treatment package..."
+                                                className="basic-select w-fit"
+                                                classNamePrefix="select"
+                                                
+                                            />
+                                        </div>
                                     </div>
+                                  </div>
+                                   
+                                   
 
                                 </div>
 

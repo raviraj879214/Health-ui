@@ -9,6 +9,11 @@
     "lint": "next lint",
     "build": "next build"
   },
+  "scripts-not-using": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start -p 3000"
+  },
   "dependencies": {
     "@chatscope/chat-ui-kit-react": "^2.1.1",
     "@chatscope/chat-ui-kit-styles": "^1.4.0",

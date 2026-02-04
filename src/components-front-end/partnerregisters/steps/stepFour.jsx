@@ -56,7 +56,7 @@ export function StepFour() {
       setValue("ddd", result.ddd || "");
       setValue("siafi", result.siafi || "");
       setValue("number", result.addressnumber || "");
-      setValue("complement", result.complemento || "");
+      // setValue("complement", result.complemento || "");
     } catch (err) {
       console.error("ViaCEP failed", err);
     }
@@ -261,7 +261,7 @@ export function StepFour() {
                 </div>
 
                 {/* Additional ViaCEP fields */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 hidden">
                   {["unidade","estado","regiao","ibge","gia","ddd","siafi"].map((field) => (
                     <div key={field}>
                       <label className="block text-sm font-medium text-gray-700">

@@ -39,7 +39,8 @@ export function PatientPhoneNumber(){
       { country: "France", code: "+33", length: 9 },
       { country: "Italy", code: "+39", length: 10 },
       { country: "Spain", code: "+34", length: 9 },
-      { country: "Australia", code: "+61", length: 9 }
+      { country: "Australia", code: "+61", length: 9 },
+      { country: "Brazil", code: "+55", length: 10 },
     ];
 
       const [selectedCountry, setSelectedCountry] = useState(popularCountries[0]); // Default India
@@ -199,16 +200,16 @@ export function PatientPhoneNumber(){
                         setSelectedCountry(country);
                       }}
                       className="
-      px-3
-      rounded-l-md
-      border
-      border-r-0
-      border-gray-300
-      bg-gray-100
-      text-sm
-      text-gray-700
-      focus:outline-none
-    "
+                        px-3
+                        rounded-l-md
+                        border
+                        border-r-0
+                        border-gray-300
+                        bg-gray-100
+                        text-sm
+                        text-gray-700
+                        focus:outline-none
+                      "
                     >
                       {popularCountries.map((c) => (
                         <option key={c.code} value={c.code}>

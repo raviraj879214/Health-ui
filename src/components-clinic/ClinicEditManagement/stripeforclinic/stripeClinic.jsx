@@ -23,9 +23,9 @@ export function StripeClinic({clinicuuid}){
         }
         if(stripeaccountid){
             debugger;
-            fetchAccountStatus();
+           fetchAccountStatus();
         }
-        
+         
 
     },[clinicuuid,stripeaccountid]);
 
@@ -42,6 +42,7 @@ export function StripeClinic({clinicuuid}){
         if (res.ok) {
         const result = await res.json();
             setClinicDetail(result.data);
+            setStripeaccountid(result.data.stripeaccountid);
             console.log("result.data",result.data);
         }
     }
@@ -76,6 +77,8 @@ export function StripeClinic({clinicuuid}){
 
 
         const fetchAccountStatus = async()=>{
+         
+          debugger;
             const res =  await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/payments/status`,{
                 method : "Post",
                 headers :await clinicHeaders(),
@@ -86,13 +89,44 @@ export function StripeClinic({clinicuuid}){
 
             if(res.ok){
               const result = await res.json();
-
+              setAccountStatus(result);
+              console.log("resultresultresult",result);
               setAccountStatus(result);
 
             }
 
         }
 
+
+
+  const account = accountstatus?.account;
+
+  const needsAction =
+    !account?.charges_enabled ||
+    !account?.payouts_enabled ||
+    (account?.requirements?.currently_due?.length ?? 0) > 0 ||
+    (account?.requirements?.past_due?.length ?? 0) > 0;
+
+  const missingFields = [
+    ...(account?.requirements?.currently_due || []),
+    ...(account?.requirements?.past_due || []),
+  ];
+
+
+  const handleResolveStripe = async () => {
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/payments/create-account-link`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ stripeAccountId: clinicdetails.stripeaccountid , clinicuuid : clinicuuid }),
+      });
+
+      const data = await res.json();
+      if (data.url) window.open(data.url, "_blank", "noopener,noreferrer");;
+      } catch (err) {
+        console.error("Stripe onboarding redirect failed", err);
+      }
+  };
 
 
 
@@ -246,113 +280,93 @@ export function StripeClinic({clinicuuid}){
                 </div>
               </div>
 
-
             </div>
           </>
         )}
 
 
-        {clinicdetails.isStripeVerify === "ACTIVE" && (
-          <div className="grid grid-cols-1 gap-6">
-            <div className="p-6 bg-white rounded-xl shadow-md">
-              <h2 className="text-2xl font-bold mb-4">
-                Clinic Stripe Account Details
-              </h2>
+       
+        
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                <div>
-                  <strong>Account ID:</strong>{" "}
-                  {clinicdetails.stripeaccountid || "-"}
-                </div>
+        {clinicdetails.isStripeVerify !== null &&(<>
+           <div className="grid grid-cols-1 gap-6">
+  <div className="p-6 bg-white rounded-xl shadow-md">
+    <h2 className="text-2xl font-bold mb-4">
+      Clinic Stripe Account Details
+    </h2>
 
-                <div>
-                  <strong>Email:</strong>{" "}
-                  {clinicdetails.email || "-"}
-                </div>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+      <div>
+        <strong>Account ID:</strong> {clinicdetails.stripeaccountid || "-"}
+      </div>
 
-                <div>
-                  <strong>Charges Enabled:</strong>{" "}
-                  <span className={accountstatus?.account?.charges_enabled ? "text-green-600" : "text-red-600"}>
-                    {accountstatus?.account?.charges_enabled ? "Yes" : "No"}
-                  </span>
-                </div>
+      <div>
+        <strong>Email:</strong> {clinicdetails.email || "-"}
+      </div>
 
-                <div>
-                  <strong>Payouts Enabled:</strong>{" "}
-                  <span className={accountstatus?.account?.payouts_enabled ? "text-green-600" : "text-red-600"}>
-                    {accountstatus?.account?.payouts_enabled ? "Yes" : "No"}
-                  </span>
-                </div>
+      <div>
+        <strong>Charges Enabled:</strong>{" "}
+        <span className={account?.charges_enabled ? "text-green-600" : "text-red-600"}>
+          {account?.charges_enabled ? "Yes" : "No"}
+        </span>
+      </div>
 
-                <div>
-                  <strong>Account Type:</strong> Express
-                </div>
+      <div>
+        <strong>Payouts Enabled:</strong>{" "}
+        <span className={account?.payouts_enabled ? "text-green-600" : "text-red-600"}>
+          {account?.payouts_enabled ? "Yes" : "No"}
+        </span>
+      </div>
 
-                <div>
-                  <strong>Status:</strong>{" "}
-                  <span className="text-green-600 font-medium">
-                    Active
-                  </span>
-                </div>
-              </div>
+      <div>
+        <strong>Account Type:</strong> Express
+      </div>
 
-              <p className="text-sm text-gray-500">
-                This clinic is fully onboarded and can receive payments.
-              </p>
-            </div>
-          </div>
-        )}
+      <div>
+        <strong>Status:</strong>{" "}
+        <span className={needsAction ? "text-yellow-600 font-medium" : "text-green-600 font-medium"}>
+          {needsAction ? "Action Required" : "Active"}
+        </span>
+      </div>
+    </div>
+
+    {/* 🔔 Show missing verification details */}
+    {needsAction && (
+      <div className="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+        <p className="text-sm text-yellow-800 mb-2 font-medium">
+          Stripe needs more information to activate this account:
+        </p>
+
+        <ul className="list-disc list-inside text-sm text-yellow-900 mb-3">
+          {missingFields.map((field, index) => (
+            <li key={index}>{field.replaceAll("_", " ").toUpperCase()}</li>
+          ))}
+        </ul>
+
+        <button
+          onClick={handleResolveStripe}
+          className="px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg font-medium shadow"
+        >
+          Resolve Now
+        </button>
+      </div>
+    )}
+
+    {!needsAction && (
+      <p className="text-sm text-gray-500">
+        This clinic is fully onboarded and can receive payments.
+      </p>
+    )}
+  </div>
+        </div>
+        
+        </>)}
+
+        
 
 
 
-        {clinicdetails.isStripeVerify === "RESTRICTED" && (
-          <div className="grid grid-cols-1 gap-6">
-            <div className="p-6 bg-white rounded-xl shadow-md">
-              <h2 className="text-2xl font-bold mb-4 text-red-600">
-                Stripe Account Restricted
-              </h2>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                <div>
-                  <strong>Account ID:</strong>{" "}
-                  {clinicdetails.stripeaccountid || "-"}
-                </div>
-
-                <div>
-                  <strong>Email:</strong>{" "}
-                  {clinicdetails.email || "-"}
-                </div>
-
-                <div>
-                  <strong>Charges Enabled:</strong>{" "}
-                  <span className={accountstatus?.account?.charges_enabled ? "text-green-600" : "text-red-600"}>
-                    {accountstatus?.account?.charges_enabled ? "Yes" : "No"}
-                  </span>
-                </div>
-
-                <div>
-                  <strong>Payouts Enabled:</strong>{" "}
-                  <span className={accountstatus?.account?.payouts_enabled ? "text-green-600" : "text-red-600"}>
-                    {accountstatus?.account?.payouts_enabled ? "Yes" : "No"}
-                  </span>
-                </div>
-
-                <div>
-                  <strong>Status:</strong>{" "}
-                  <span className="text-red-600 font-medium">
-                    Restricted
-                  </span>
-                </div>
-              </div>
-
-              <p className="text-sm text-gray-600">
-                This Stripe account has missing or pending requirements.
-                Please complete onboarding in Stripe Dashboard.
-              </p>
-            </div>
-          </div>
-        )}
-
+        
 
 
 

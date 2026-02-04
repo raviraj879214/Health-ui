@@ -9,6 +9,7 @@ export  function StepFive() {
   const router = useRouter();
   const step = useSelector((state) => state.register.step);
   const dispatch = useDispatch();
+  const [cliniclocation,setClinicLocation] = useState("");
 
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
@@ -30,9 +31,16 @@ export  function StepFive() {
            });
            if(res.ok){
                debugger;
-               const result = await res.json();
+                 const result = await res.json();
                 setLatitude(result.data.latitude);
                 setLongitude(result.data.longitude);
+
+                // setClinicLocation(
+                //     `${result.data.street}, ${result.data.address_number}${result.data.complement ? ' - ' + result.data.complement : ''}, ` +
+                //     `${result.data.neighborhood}, ${result.data.citycep}, ${result.data.state} - ${result.data.cep}`
+                //   );
+
+
            }
         }
 
@@ -75,7 +83,7 @@ export  function StepFive() {
       <div className="container max-w-6xl mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-900 mb-3">
-            Become a Partner
+            Become a Partner {cliniclocation}
           </h2>
           <p className="text-gray-600 max-w-xl mx-auto">
             Join our partner network and grow your business with us.
@@ -104,8 +112,10 @@ export  function StepFive() {
 
             <div className="w-full h-96 md:h-auto">
               <LocationPicker
+
                 lat={latitude} 
                 lng={longitude}  
+                locationtext={cliniclocation}
                 onSelect={(lat, lng) => {
                   setLatitude(Number(lat));
                   setLongitude(Number(lng));

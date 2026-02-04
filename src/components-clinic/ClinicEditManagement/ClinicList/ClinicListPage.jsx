@@ -79,9 +79,7 @@ export function ClinicList() {
                 <ComponentCard>
                     <div className="flex justify-end">
                         
-
-                        {isactiveone ? (<>
-                            <button
+                        <button
                             onClick={()=>{
                                 
                                 SetIsOpen(true);
@@ -90,14 +88,6 @@ export function ClinicList() {
                             className="btn btn-primary rounded-3xl px-6 py-2">
                             + Add Clinic 
                             </button>
-                        
-                        </>):(<>
-                            <button
-                                    disabled={false}
-                                    className="btn btn-primary rounded-3xl px-6 py-2">
-                                        + Add Clinic (Wait until at least one clinic is active.)
-                            </button>
-                        </>)}
                     </div>
 
                     <ul>

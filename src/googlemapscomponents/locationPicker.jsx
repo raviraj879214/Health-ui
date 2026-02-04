@@ -15,6 +15,7 @@ export default function LocationPicker({
   lng,
   onSelect,
   isTextBox = true,
+  locationtext
 }) {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY,

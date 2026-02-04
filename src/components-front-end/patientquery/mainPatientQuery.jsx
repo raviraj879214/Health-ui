@@ -213,7 +213,7 @@ export function MainPatinetQuery({ id, name }) {
 
           
 
-                {(PatientQueryQuestion.PATIENTNONVERIFIEDSUCCESSPAGE !== step && PatientQueryQuestion.PATIENTVERIFIEDSUCCESSPAGE !== step) &&(
+                {(PatientQueryQuestion.SELECTTREATMENT !== step && PatientQueryQuestion.PATIENTNONVERIFIEDSUCCESSPAGE !== step && PatientQueryQuestion.PATIENTVERIFIEDSUCCESSPAGE !== step) &&(
                     <button
                         className="btn btn-secondary rounded-4xl bg-gray-300 text-gray-800 px-6 py-2"
                         onClick={() => dispatch(prevStep())} // replace with your back action

@@ -89,7 +89,7 @@ export default function Pages() {
         <Banner></Banner>
         <TopRated></TopRated>
         <Treatments></Treatments>
-
+       
         <PopularClinics />
         <HowItWorks />
 
