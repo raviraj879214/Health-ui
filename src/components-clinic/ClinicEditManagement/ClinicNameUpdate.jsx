@@ -152,13 +152,16 @@ export function ClinicNameUpdates({ clinicuuid }) {
           <Preview label="Neighborhood" value={clinic.neighborhood} />
           <Preview label="City" value={clinic.citycep} />
           <Preview label="State" value={clinic.state} />
-          <Preview label="Unidade" value={clinic.unidade} />
+          <div className="hidden">
+                <Preview label="Unidade" value={clinic.unidade} />
           <Preview label="Estado" value={clinic.estado} />
           <Preview label="Região" value={clinic.regiao} />
           <Preview label="IBGE" value={clinic.ibge} />
           <Preview label="GIA" value={clinic.gia} />
           <Preview label="DDD" value={clinic.ddd} />
           <Preview label="SIAFI" value={clinic.siafi} />
+          </div>
+        
         </div>
       </div>
 
@@ -192,13 +195,16 @@ export function ClinicNameUpdates({ clinicuuid }) {
                   <Input label="Neighborhood" register={register("neighborhood")} />
                   <Input label="City" register={register("citycep")} />
                   <Input label="State" register={register("state")} />
-                  <Input label="Unidade" register={register("unidade")} />
+                  <div className="hidden">
+                       <Input label="Unidade" register={register("unidade")} />
                   <Input label="Estado (Full Name)" register={register("estado")} />
                   <Input label="Região" register={register("regiao")} />
                   <Input label="IBGE" register={register("ibge")} />
                   <Input label="GIA" register={register("gia")} />
                   <Input label="DDD" register={register("ddd")} />
-                  <Input label="SIAFI" register={register("siafi")} />
+                  <Input label="SIAFI" register={register("siafi")} />  
+                  </div>
+                 
                 </Section>
               </div>
 
