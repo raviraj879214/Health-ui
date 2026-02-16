@@ -222,21 +222,41 @@ const navItems: NavItem[] = [
         },
     {
        icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2"
-        strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-        <circle cx="11" cy="11" r="8" />
-        <path d="M21 21l-4.35-4.35" />
-      </svg>),
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none"
+     xmlns="http://www.w3.org/2000/svg">
+
+
+  <path d="M30 10H42V20H36L30 26V10Z"
+        stroke="currentColor" stroke-width="2"
+        stroke-linejoin="round"/>
+  <rect x="34" y="13" width="4" height="2" fill="currentColor"/>
+  <rect x="35" y="12" width="2" height="4" fill="currentColor"/>
+
+
+  <circle cx="12" cy="16" r="3" stroke="currentColor" stroke-width="2"/>
+  <path d="M12 19V28M12 28L7 36M12 28L17 36"
+        stroke="currentColor" stroke-width="2"
+        stroke-linecap="round"/>
+</svg>
+
+
+      
+      ),
         name: "Patient Queries",
         path: "/admin/patient-queries",
     },
     {
-       icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2"
-        strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-        <circle cx="11" cy="11" r="8" />
-        <path d="M21 21l-4.35-4.35" />
-      </svg>),
+       icon: 
+       (
+       <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+     xmlns="http://www.w3.org/2000/svg">
+  <circle cx="10" cy="12" r="6" stroke="currentColor" stroke-width="2"/>
+  <path d="M18 8V4M18 4L15 7M18 4L21 7"
+        stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+      ),
         name: "Manage Payouts",
         path: "/admin/manage-payout",
     },

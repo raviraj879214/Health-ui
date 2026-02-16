@@ -14,6 +14,7 @@ import { PatientQueryStatus } from "../../lib/enums/patientQueryStatus";
 import { toast } from "react-toastify";
 import { ButtonSpinner } from "@/reusable/buttonSpinner";
 import {OtherInformation} from "./otherInformation";
+import { useRouter } from "next/navigation";
 
 
 
@@ -30,6 +31,8 @@ export function PatientQueryDetails({ id }) {
     const [generatedamount,setGeneratedAmount] = useState(0);
     const [notes,setNotes] = useState("");
     const [buttonsendclinic,setButtonSendClinic] = useState(false);
+
+    const router = useRouter();
 
 
     useEffect(() => {
@@ -180,12 +183,23 @@ export function PatientQueryDetails({ id }) {
 
     return (<>
 
-      
+      <div className="p-3 flex justify-end">
+        <button
+          onClick={() => window.location.href = '/admin/patient-queries'}
+          className="btn btn-primary  cursor-pointer"
+        >
+          <span className="text-lg">← </span>
+          <span className="font-medium">Back</span>
+        </button>
+      </div>
+
 
          <ComponentCard>
+       
 
 
         <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-4 items-start">
+
 
           {PatientQueryStatus.PENDING === querydetails.status && (<>
             <p className="text-sm font-medium text-gray-700">

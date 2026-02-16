@@ -166,13 +166,13 @@ export function ClinicProfile() {
 
 
                 <div className="flex flex-col">
-                <label className="mb-1 font-medium text-gray-700">Telegram (optional)</label>
+                <label className="mb-1 font-medium text-gray-700">Telegram User ID or Number (optional)</label>
                 <input
                     type="text"
                     placeholder="Enter Telegram"
                     className=""
                     
-                    maxLength={10}
+                   
                     {...register("telegramnumber")}
                 />
               

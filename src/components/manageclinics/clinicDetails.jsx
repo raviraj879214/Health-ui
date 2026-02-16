@@ -38,7 +38,15 @@ export function ClinicDetails({id}){
 
 
     return(<>
-    
+     <div className="p-3 flex justify-end">
+        <button
+          onClick={() => window.location.href = '/admin/manage-clinics'}
+          className="btn btn-primary  cursor-pointer"
+        >
+          <span className="text-lg">← </span>
+          <span className="font-medium">Back</span>
+        </button>
+      </div>
       <ComponentCard title="Clinic Details">
         <ToastContainer></ToastContainer>
           <div className="grid grid-cols-1  gap-2">

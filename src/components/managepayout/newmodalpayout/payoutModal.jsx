@@ -38,6 +38,8 @@ export function PayoutModal({OnTriggerStripeBalance}) {
     if(res.ok){
         const result= await res.json();
         setSampleData(result.data);
+        console.log("result.data.RequestFunds",result.data);
+        
     }
   }
 
@@ -51,26 +53,32 @@ export function PayoutModal({OnTriggerStripeBalance}) {
    const [doctor,setDoctor] = useState({});
    const [packages,setPackage] = useState({});
    const [patientqueryinformation,setPatientQueryInformation] = useState({});
+   const [requestedfunds,setRequestedFunds] = useState([]);
 
 
 
 
   const fetchTrransaction = async (patientqueryid,commission)=>{
-   
+
     debugger;
     const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-payout/patient-query-transaction/${patientqueryid}`,{
         method : "Get",
         headers : await adminHeaders()
     });
     if(res.ok){
-       const result = await res.json();
+            const result = await res.json();
+
             const totalamount = (result.data.reduce((sum, x) => sum + x.amount, 0)/100);
+
             const clinicspaid = (result.transfer.reduce((sum, x) => sum + x.amount, 0)/100);
+
             const clinicstobepaid = ((totalamount * commission)/100);
             setTotalReceived((totalamount));
             setClinicsToBePaid(totalamount - clinicstobepaid - clinicspaid);
             setTransferTransaction(result.transfer);
             setClinicsPaid(clinicspaid); 
+            setRequestedFunds(result.RequestFunds);
+            
 
 
 
@@ -175,43 +183,87 @@ export function PayoutModal({OnTriggerStripeBalance}) {
 };
 
 
+
+const markasPaid= async(id)=>{
+    
+    const res =await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-payout/mark-as-paid`,{
+        method : "Post",
+         headers : await adminHeaders(),
+         body: JSON.stringify({
+            id : id
+         })
+    });
+    if(res.ok){
+        const result = await res.json();
+        console.log("result dat a",result);
+         setRequestedFunds(prev => {
+  const exists = prev.some(item => item.id === result.data.id);
+
+  if (exists) {
+    return prev.map(item =>
+      item.id === result.data.id ? result.data : item
+    );
+  } else {
+    return [...prev, result.data];
+  }
+});
+
+
+    }
+}
+
+
+
+
   return (
     <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 mb-5">
       <h2 className="text-2xl font-bold mb-6">Payout Details</h2>
 
       {sampleData.map((item) => (
+
         <ComponentCard
           key={item.id}
-          className="mb-4 transition-all hover:shadow-lg overflow-hidden">
+          className="mb-4 transition-all hover:shadow-lg ">
           
-          <div
-            className="flex justify-between items-center cursor-pointer"
-            onClick={() => {
-                toggleAccordion(item.id);
-                fetchTrransaction(item.id,item.clinic.commission);
-            }}>
+         
 
-            <h3 className="text-lg font-semibold"># {item.querycode}     
+              <div
+                  className={`flex justify-between items-center 
+                     ${item.status !== PatientQueryStatus.PENDING
+                          ? "cursor-pointer"
+                          : "cursor-not-allowed opacity-50"}`}
 
-              
-                {statusLabel(item.status)}
+                  onClick={() => {
+                      if (item.status !== PatientQueryStatus.PENDING) {
+                          toggleAccordion(item.id);
+                          fetchTrransaction(item.id, item.clinic?.commission);
+                      }
+                  }}>
+                  <h3 className="text-lg font-semibold">
+                      # {item.querycode}
+                      {statusLabel(item.status)}
+                  </h3>
 
-            </h3>
-            <span className="text-gray-400 text-xl">
-              {openItem === item.id ? "−" : "+"}
-            </span>
-          </div>
+                  <span className="text-gray-400 text-xl">
+                      {openItem === item.id ? "−" : "+"}
+                  </span>
+              </div>
+
 
          
           <div
-            ref={(el) => (bodyRefs.current[item.id] = el)}
-            className={`overflow-hidden transition-[max-height] duration-300 ease-in-out`}
-            style={{
-              maxHeight:
-                openItem === item.id
-                  ? `${bodyRefs.current[item.id]?.scrollHeight}px`
-                  : "0px",
-            }}>
+  ref={(el) => (bodyRefs.current[item.id] = el)}
+  className={`overflow-hidden transition-all duration-300 ease-in-out`}
+  style={{
+    maxHeight: openItem === item.id
+      ? bodyRefs.current[item.id]
+        ? bodyRefs.current[item.id].scrollHeight + "px"
+        : "1000px"
+      : "0px",
+    opacity: openItem === item.id ? 1 : 0,
+  }}
+>
+
 
             <div className="mt-3 text-gray-700 text-sm border-t pt-3">
 
@@ -229,7 +281,7 @@ export function PayoutModal({OnTriggerStripeBalance}) {
                           <div className="rounded-xl border border-purple-200 bg-purple-50 p-4">
                               <p className="text-sm text-purple-700">Platform Commission Interest</p>
                               <p className="text-2xl font-semibold text-purple-900">
-                                  {item.clinic.commission || ""}  %
+                                  {item.clinic?.commission || ""}  %
                               </p>
                           </div>
 
@@ -243,7 +295,7 @@ export function PayoutModal({OnTriggerStripeBalance}) {
 
                         
                           <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-4">
-                              <p className="text-sm text-emerald-700">Clinic Paid</p>
+                              <p className="text-sm text-emerald-700">Funds Transfered</p>
                               <p className="text-2xl font-semibold text-emerald-900">
                                  
                                  {brazilianCurrency(clinicspaid)}
@@ -257,40 +309,40 @@ export function PayoutModal({OnTriggerStripeBalance}) {
                           <div className=" gap-4">
 
                               <div className="grid grid-cols-3 gap-4 mb-5">
-                                  <div class="flex items-center gap-2.5">
+                                  <div className="flex items-center gap-2.5">
 
                                       {/* {JSON.stringify({doctor})}
                                     {JSON.stringify({packages})} */}
 
-                                      <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-200 rounded-full">
-                                          <span class="font-medium text-body"><div>{clinic?.name?.charAt(0)}</div></span>
+                                      <div className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-200 rounded-full">
+                                          <span className="font-medium text-body"><div>{clinic?.name?.charAt(0)}</div></span>
                                       </div>
 
-                                      <div class="font-medium text-heading">
-                                          <div>{clinic.name}</div>
-                                          <div class="text-sm font-normal text-body">CNPJ : {clinic.cnpj}</div>
+                                      <div className="font-medium text-heading">
+                                          <div>{clinic?.name}</div>
+                                          <div className="text-sm font-normal text-body">CNPJ : {clinic?.cnpj}</div>
                                       </div>
                                   </div>
 
 
-                                  <div class="flex items-center gap-2.5">
-                                      <img class="w-10 h-10 rounded-full" src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/doctors/profilepicture/${doctor.image}`} alt="" />
-                                      <div class="font-medium text-heading">
+                                  <div className="flex items-center gap-2.5">
+                                      <img className="w-10 h-10 rounded-full" src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/doctors/profilepicture/${doctor.image}`} alt="" />
+                                      <div className="font-medium text-heading">
                                           <div>Dr. {doctor.firstname} {doctor.lastname}</div>
-                                          <div class="text-sm font-normal text-body">{doctor.degree}</div>
+                                          <div className="text-sm font-normal text-body">{doctor.degree}</div>
                                       </div>
                                   </div>
 
 
-                                  <div class="flex items-center gap-2.5">
+                                  <div className="flex items-center gap-2.5">
 
-                                      <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-200 rounded-full">
-                                          <span class="font-medium text-body">PKG</span>
+                                      <div className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-200 rounded-full">
+                                          <span className="font-medium text-body">PKG</span>
                                       </div>
 
-                                      <div class="font-medium text-heading">
+                                      <div className="font-medium text-heading">
                                           <div>{packages.title}</div>
-                                          <div class="text-sm font-normal text-body">{brazilianCurrency(packages.discountedprice)}</div>
+                                          <div className="text-sm font-normal text-body">{brazilianCurrency(packages.discountedprice)}</div>
                                       </div>
                                   </div>
                               </div>
@@ -360,73 +412,75 @@ export function PayoutModal({OnTriggerStripeBalance}) {
  
                       </ComponentCard>
 
-                     <div className={`grid grid-cols-1 lg:grid-cols-2 gap-6 mt-5 ${item.status === PatientQueryStatus.ASSIGNED ? "" : "hidden"}`}>
+                     <div className={`grid grid-cols-1 lg:grid-cols-1 gap-6 mt-5 ${item.status === PatientQueryStatus.ASSIGNED ? "" : "hidden"}`}>
 
-                          <div className=" bg-white border border-gray-200 rounded-2xl shadow-sm p-5 h-fit">
-                              <h2 className="text-lg font-semibold text-gray-800 mb-4">Release Funds</h2>
+                        <div className=" bg-white border border-gray-200 rounded-2xl shadow-sm p-5 h-fit">
+                            <h2 className="text-lg font-semibold text-gray-800 mb-4">Release Funds</h2>
 
-                              <div className="space-y-4">
+                            <div className="space-y-4">
 
-                                  <div>
-                                      <label className="block text-sm font-medium text-gray-600 mb-1">
-                                          Amount to Release
-                                      </label>
-                                      <input
-                                          value={amount}
-                                          type="number"
-                                          min={1}
-                                          placeholder="Enter amount"
-                                          className="w-full rounded-xl border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-                                          onChange={(e) => {
-                                              setAmount(e.target.value)
-                                          }} />
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-600 mb-1">
+                                        Amount to Release
+                                    </label>
+                                    <input
+                                        value={amount}
+                                        type="number"
+                                        min={1}
+                                        placeholder="Enter amount"
+                                        className="w-full rounded-xl border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                                        onChange={(e) => {
+                                            setAmount(e.target.value)
+                                        }} />
 
-                                  </div>
+                                </div>
 
-                                  <div className="hidden">
-                                      <label className="block text-sm font-medium text-gray-600 mb-1">
-                                          Note (Optional)
-                                      </label>
-                                      <input
-                                          type="text"
-                                          placeholder="Add a note for this payout"
-                                          className="w-full rounded-xl border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-                                          onChange={(e) => {
-                                              setNote(e.target.value)
-                                          }}
-                                      />
-                                  </div>
-
-
-
-                                  {releasebutton ? <ButtonSpinner></ButtonSpinner> : (<>
-
-
-                                      
-
-                                      {clinicstobepaid > 0 ? (<>
-                                          <button
-                                              disabled={releasebutton}
-                                              onClick={() => releaseFunds(item.clinic.stripeaccountid || "", item.id,item.clinic?.commission)}
-                                              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-xl transition shadow-sm">
-                                              Release Funds
-                                          </button>
-                                      </>) : (<>
-
-                                      </>)}
-                                  </>)}
+                                <div className="hidden">
+                                    <label className="block text-sm font-medium text-gray-600 mb-1">
+                                        Note (Optional)
+                                    </label>
+                                    <input
+                                        type="text"
+                                        placeholder="Add a note for this payout"
+                                        className="w-full rounded-xl border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                                        onChange={(e) => {
+                                            setNote(e.target.value)
+                                        }}
+                                    />
+                                </div>
 
 
 
+                                {releasebutton ? <ButtonSpinner></ButtonSpinner> : (<>
 
 
-                              </div>
-                          </div>
+                                    
 
-                          <div className=" bg-white border border-gray-200 rounded-2xl shadow-sm p-5">
+                                    {clinicstobepaid > 0 ? (<>
+                                        <button
+                                            disabled={releasebutton}
+                                            onClick={() => releaseFunds(item.clinic.stripeaccountid || "", item.id,item.clinic?.commission)}
+                                            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-xl transition shadow-sm">
+                                            Release Funds
+                                        </button>
+                                    </>) : (<>
+
+                                    </>)}
+                                </>)}
+
+
+
+
+
+                            </div>
+                        </div>
+
+                        <div className=" bg-white border border-gray-200 rounded-2xl shadow-sm p-5">
                               <h2 className="text-lg font-semibold text-gray-800 mb-4">Transfered Transactions</h2>
 
-                              <div className="bg-white shadow-xl rounded-2xl p-4 border border-gray-100 h-[200px] overflow-auto">
+                             
+                              {transfertransaction.length > 0 ?(<>
+                                 <div className="bg-white shadow-xl rounded-2xl p-4 border border-gray-100 h-[200px] overflow-auto">
                                   <table className="min-w-full divide-y divide-gray-200 text-sm">
                                       <thead className="bg-gray-50 sticky top-0">
                                           <tr>
@@ -463,9 +517,122 @@ export function PayoutModal({OnTriggerStripeBalance}) {
                                       </tbody>
                                   </table>
                               </div>
+                              </>):(<>
+                            <p>No transaction</p>
+                              </>)}
                           </div>
-      
 
+                          <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-5">
+                              <h2 className="text-lg font-semibold text-gray-800 mb-4">
+                                  Requested Funds ({requestedfunds.length})
+                              </h2>
+                              
+                              {requestedfunds.length > 0 ?(<>
+                                <div className=" overflow-auto max-h-[auto]">
+                                  <div className="flex items-start gap-16 min-w-max relative py-10">
+                                      <div className="absolute top-16 left-0 w-full h-0.5 bg-gray-300"></div>
+                                      {requestedfunds.map((item) => (
+                                        
+                                          <div className="relative flex flex-col items-center min-w-[220px]">
+
+                                              <div className="text-sm font-semibold mb-2">{formatBrazilDate(item.createdAt)}</div>
+
+
+                                              {item.collected === 1 && (<>
+                                                  <div className="z-10 flex items-center justify-center w-10 h-10 bg-green-500 text-white rounded-full shadow-md">
+                                                      <svg
+                                                          xmlns="http://www.w3.org/2000/svg"
+                                                          className="w-5 h-5"
+                                                          viewBox="0 0 20 20"
+                                                          fill="currentColor"
+                                                      >
+                                                          <path
+                                                              fillRule="evenodd"
+                                                              d="M16.707 5.293a1 1 0 010 1.414l-7.414 7.414a1 1 0 01-1.414 0L3.293 9.536a1 1 0 111.414-1.414l3.172 3.172 6.707-6.707a1 1 0 011.414 0z"
+                                                              clipRule="evenodd"
+                                                          />
+                                                      </svg>
+                                                  </div>
+                                              </>)}
+
+
+                                              {item.collected === 0 && (<>
+                                                  <div className="z-10 flex items-center justify-center w-10 h-10 bg-yellow-500 text-white rounded-full shadow-md">
+                                                      <svg
+                                                          xmlns="http://www.w3.org/2000/svg"
+                                                          className="w-5 h-5"
+                                                          viewBox="0 0 24 24"
+                                                          fill="currentColor"
+                                                      >
+                                                          <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 11h4v-2h-3V7h-2v6z" />
+                                                      </svg>
+                                                  </div>
+                                              </>)}
+
+
+                                              <div className="mt-4 bg-white shadow-lg rounded-2xl p-4 border w-[260px]">
+
+                                                  <div className="space-y-3 text-sm text-gray-700">
+
+                                                      {/* Requested Amount */}
+                                                      <div className="bg-gray-50 border rounded-lg p-3 space-y-3">
+  
+                                                          <div>
+                                                              <p className="text-xs text-gray-500 mb-1">Requested Amount</p>
+                                                              <p className="font-semibold text-base text-blue-600">
+                                                                  {brazilianCurrency(item.amount)}
+                                                              </p>
+                                                          </div>
+
+                                                                {item.collected === 1 ? (
+                                                                    <div className="inline-flex items-center gap-2 bg-green-100 text-green-700 text-xs font-semibold px-3 py-1 rounded-full">
+                                                                    <svg
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                        className="w-4 h-4"
+                                                                        viewBox="0 0 20 20"
+                                                                        fill="currentColor"
+                                                                    >
+                                                                        <path
+                                                                        fillRule="evenodd"
+                                                                        d="M16.707 5.293a1 1 0 010 1.414l-7.414 7.414a1 1 0 01-1.414 0L3.293 9.536a1 1 0 111.414-1.414l3.172 3.172 6.707-6.707a1 1 0 011.414 0z"
+                                                                        clipRule="evenodd"
+                                                                        />
+                                                                    </svg>
+                                                                    Paid
+                                                                    </div>
+                                                                ) : (
+                                                                    <button
+                                                                    onClick={()=> markasPaid(item.id)}
+                                                                    className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2 rounded-lg transition">
+                                                                    Mark as Paid
+                                                                    </button>
+                                                                )}
+
+                                                                </div>
+
+
+                                                      {/* Note */}
+                                                      <div className="bg-gray-50 border rounded-lg p-3">
+                                                          <p className="text-xs text-gray-500 mb-1">Note</p>
+                                                          <p className="break-words text-sm text-gray-700">
+                                                              {item.message}
+                                                          </p>
+                                                      </div>
+
+                                                  </div>
+
+                                              </div>
+
+                                          </div>
+                                      ))}
+                                     
+                                  </div>
+                              </div>
+                              </>):(<>
+
+                                 <p>No Funds Requested</p>
+                              </>)}
+                          </div>
 
 
                     </div>
@@ -476,6 +643,8 @@ export function PayoutModal({OnTriggerStripeBalance}) {
 
           </div>
         </ComponentCard>
+
+
       ))}
     </div>
   );
