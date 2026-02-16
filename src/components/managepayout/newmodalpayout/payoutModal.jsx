@@ -341,8 +341,8 @@ const markasPaid= async(id)=>{
                                       </div>
 
                                       <div className="font-medium text-heading">
-                                          <div>{packages.title}</div>
-                                          <div className="text-sm font-normal text-body">{brazilianCurrency(packages.discountedprice)}</div>
+                                          <div>{packages?.title}</div>
+                                          <div className="text-sm font-normal text-body">{brazilianCurrency(packages?.discountedprice)}</div>
                                       </div>
                                   </div>
                               </div>
@@ -379,7 +379,7 @@ const markasPaid= async(id)=>{
                                   <div>
                                       <p className="text-xs text-gray-500 mb-1">Medical Reports</p>
                                       <p className="text-sm text-gray-800 font-medium">
-                                          {patientqueryinformation.medicalReportsValue || "--"}
+                                          {patientqueryinformation?.medicalReportsValue || "--"}
                                       </p>
                                   </div>
 
@@ -387,21 +387,21 @@ const markasPaid= async(id)=>{
                                   <div>
                                       <p className="text-xs text-gray-500 mb-1">Treatment</p>
                                       <p className="text-sm text-gray-800 font-medium">
-                                          {patientqueryinformation.treatmentName || "--"}
+                                          {patientqueryinformation?.treatmentName || "--"}
                                       </p>
                                   </div>
 
                                   <div>
                                       <p className="text-xs text-gray-500 mb-1">What Matters Most</p>
                                       <p className="text-sm text-gray-800 font-medium">
-                                          {patientqueryinformation.whatMatterMostName || "--"}
+                                          {patientqueryinformation?.whatMatterMostName || "--"}
                                       </p>
                                   </div>
 
                                   <div>
                                       <p className="text-xs text-gray-500 mb-1">Procedure Time</p>
                                       <p className="text-sm text-gray-800 font-medium">
-                                          {patientqueryinformation.procedureTimeValue || "--"}
+                                          {patientqueryinformation?.procedureTimeValue || "--"}
                                       </p>
                                   </div>
 
