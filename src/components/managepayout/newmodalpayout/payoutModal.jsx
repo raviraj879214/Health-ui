@@ -328,8 +328,8 @@ const markasPaid= async(id)=>{
                                   <div className="flex items-center gap-2.5">
                                       <img className="w-10 h-10 rounded-full" src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/doctors/profilepicture/${doctor?.image}`} alt="" />
                                       <div className="font-medium text-heading">
-                                          <div>Dr. {doctor.firstname} {doctor.lastname}</div>
-                                          <div className="text-sm font-normal text-body">{doctor.degree}</div>
+                                          <div>Dr. {doctor?.firstname} {doctor?.lastname}</div>
+                                          <div className="text-sm font-normal text-body">{doctor?.degree}</div>
                                       </div>
                                   </div>
 
