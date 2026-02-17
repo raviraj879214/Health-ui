@@ -110,7 +110,7 @@ export function DoctorList({id}){
 
 
                                      <h5 className="mb-0.5 text-sm font-semibold tracking-tight text-heading">
-                                CPF : {item.cpf} 
+                                CRM : {item.crm} 
                                 </h5>
                                 <h5 className="mb-0.5 text-xl font-semibold tracking-tight text-heading">
                                 {item.firstname} {item.lastname}

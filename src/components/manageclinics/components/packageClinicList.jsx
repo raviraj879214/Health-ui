@@ -138,7 +138,7 @@ export function PackageClinicList({ id }) {
                                 </p>
 
                                 <p className="text-sm text-body">
-                                    CPF: {item.packagesDoctor[0].doctors?.cpf}
+                                    CRM: {item.packagesDoctor[0].doctors?.crm}
                                 </p>
                                 </div>
                             </div>
