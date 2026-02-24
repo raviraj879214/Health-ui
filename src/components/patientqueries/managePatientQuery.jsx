@@ -16,6 +16,7 @@ import { formatBrazilDate } from "@/lib/formatDate";
 import { brazilianCurrency } from "@/lib/brazilianCurrency";
 import {PatientQueryDetails} from "../patientqueries/patientQueryDetails";
 import { PatientQueryStatus } from "../../lib/enums/patientQueryStatus";
+import { toast } from "react-toastify";
 
 export function ManagePatientQueries() {
   const [queries, setQueries] = useState([]);
@@ -125,7 +126,16 @@ export function ManagePatientQueries() {
       body : JSON.stringify(payload)
     });
     if(res.ok){
-      const result = await res.json();
+       const result = await res.json();
+        fetchQueries();
+
+
+       toast.success("Cordinator changed and sent notification successfully",{
+        position : "bottom-right",
+        autoClose : 3000
+       });
+
+
     }
   }
 
