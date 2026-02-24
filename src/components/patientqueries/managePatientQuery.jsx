@@ -98,7 +98,7 @@ export function ManagePatientQueries() {
       case PatientQueryStatus.PENDING:
         return <span className="text-yellow-600">Pending</span>;
       case PatientQueryStatus.ASSIGNED:
-        return <span className="text-blue-600">Assigned</span>;
+        return <span className="text-blue-600">Clinic Assigned</span>;
       case PatientQueryStatus.COMPLETED:
         return <span className="text-green-600">Closed</span>;
       default:
@@ -209,77 +209,77 @@ export function ManagePatientQueries() {
 </div>
 
 
-                      {q.clinicId === null ? (
+                      {(q.clinicId === null || q.cordinatorid === 1) ? (
                         <div className="w-72 mt-4 p-4 bg-white border border-gray-200 rounded-xl shadow-sm">
 
-  <label className="block mb-2 text-sm font-semibold text-gray-700">
-    Change Coordinator
-  </label>
+                          <label className="block mb-2 text-sm font-semibold text-gray-700">
+                            Change Coordinator
+                          </label>
 
-  <select
-    className="w-full px-4 py-2 border border-gray-300 rounded-lg 
+                          <select
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg 
                focus:outline-none focus:ring-2 focus:ring-blue-500 
                focus:border-blue-500 bg-white"
-    value={selectedCoordinator[q.id] || ""}
-    onChange={(e) => {
-      const newValue = e.target.value;
+                            value={selectedCoordinator[q.id] || ""}
+                            onChange={(e) => {
+                              const newValue = e.target.value;
 
-      if (!window.confirm("Are you sure you want to change the coordinator?")) {
-        return;
-      }
+                              if (!window.confirm("Are you sure you want to change the coordinator?")) {
+                                return;
+                              }
 
-      setSelectedCoordinator((prev) => ({
-        ...prev,
-        [q.id]: newValue,
-      }));
+                              setSelectedCoordinator((prev) => ({
+                                ...prev,
+                                [q.id]: newValue,
+                              }));
 
-      onChangeofCordianator(newValue, q.id);
-    }}
-  >
-    <option value="">Change Coordinator</option>
+                              onChangeofCordianator(newValue, q.id);
+                            }}
+                          >
+                            <option value="">Change Coordinator</option>
 
-    {cordinators.map((item) => (
-      <option key={item.id} value={item.id}>
-        {item.firstname} {item.lastname} ({item.email})
-      </option>
-    ))}
-  </select>
+                            {cordinators.map((item) => (
+                              <option key={item.id} value={item.id}>
+                                {item.firstname} {item.lastname} ({item.email})
+                              </option>
+                            ))}
+                          </select>
 
-  {/* CSS Only Expand / Collapse */}
-  <div className="mt-4 text-xs text-gray-500">
+                          {/* CSS Only Expand / Collapse */}
+                          <div className="mt-4 text-xs text-gray-500">
 
-    <input type="checkbox" id={`toggle-${q.id}`} className="peer hidden" />
+                            <input type="checkbox" id={`toggle-${q.id}`} className="peer hidden" />
 
-    <p className="line-clamp-3 peer-checked:line-clamp-none transition-all duration-300">
-      This query was submitted through the home page without selecting a specific clinic.
-      Until a clinic is assigned, the admin can change the assigned coordinator.
-      However, if the coordinator is changed in the middle of an ongoing conversation,
-      the previous communication between the patient and the coordinator cannot be recovered,
-      as these interactions happen offline.
-      Therefore, please confirm whether coordinator reassignment should be allowed
-      once the conversation has started.
-    </p>
+                            <p className="line-clamp-3 peer-checked:line-clamp-none transition-all duration-300">
+                              This query was submitted through the home page without selecting a specific clinic.
+                              Until a clinic is assigned, the admin can change the assigned coordinator.
+                              However, if the coordinator is changed in the middle of an ongoing conversation,
+                              the previous communication between the patient and the coordinator cannot be recovered,
+                              as these interactions happen offline.
+                              Therefore, please confirm whether coordinator reassignment should be allowed
+                              once the conversation has started.
+                            </p>
 
-    <label
-      htmlFor={`toggle-${q.id}`}
-      className="mt-2 inline-block text-blue-600 cursor-pointer font-medium peer-checked:hidden"
-    >
-      See more
-    </label>
+                            <label
+                              htmlFor={`toggle-${q.id}`}
+                              className="mt-2 inline-block text-blue-600 cursor-pointer font-medium peer-checked:hidden"
+                            >
+                              See more
+                            </label>
 
-    <label
-      htmlFor={`toggle-${q.id}`}
-      className="mt-2 hidden text-blue-600 cursor-pointer font-medium peer-checked:inline-block"
-    >
-      See less
-    </label>
+                            <label
+                              htmlFor={`toggle-${q.id}`}
+                              className="mt-2 hidden text-blue-600 cursor-pointer font-medium peer-checked:inline-block"
+                            >
+                              See less
+                            </label>
 
-  </div>
-</div>
+                          </div>
+                        </div>
 
-                      ):(<></>)} 
-                     
-                        
+                      ) : (<></>)}
+
+
 
                     </>)}
 

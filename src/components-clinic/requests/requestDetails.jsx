@@ -107,24 +107,29 @@ export function RequestDetails({id}){
                     </p>
                 </div>
 
-                <div>
-                  <p className="text-xs text-gray-500 mb-1">Doctor</p>
-                    <div class="flex items-center gap-2.5">
-                        <img className="w-10 h-10 rounded-full" src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/doctors/profilepicture/${querydetails.doctor?.image}`} alt="" />
-                        <div className="font-medium text-heading">
-                            <div> Dr. {querydetails.doctor?.firstname} {querydetails.doctor?.lastname}</div>
-                            <div className="text-sm font-normal text-body">{querydetails.doctor?.degree}</div>
+                
+                {querydetails.doctor && (<>
+                    <div>
+                        <p className="text-xs text-gray-500 mb-1">Doctor</p>
+                        <div class="flex items-center gap-2.5">
+                            <img className="w-10 h-10 rounded-full" src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/doctors/profilepicture/${querydetails.doctor?.image}`} alt="" />
+                            <div className="font-medium text-heading">
+                                <div> Dr. {querydetails.doctor?.firstname} {querydetails.doctor?.lastname}</div>
+                                <div className="text-sm font-normal text-body">{querydetails.doctor?.degree}</div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </>)}
 
-
-                <div>
-                    <p className="text-xs text-gray-500 mb-1">Package Title</p>
-                    <p className="text-sm text-gray-800 font-medium">
-                        {querydetails.package?.title || "--"}
-                    </p>
-                </div>
+                {querydetails.package && (<>
+                    <div>
+                        <p className="text-xs text-gray-500 mb-1">Package Title</p>
+                        <p className="text-sm text-gray-800 font-medium">
+                            {querydetails.package?.title || "--"}
+                        </p>
+                    </div>
+                </>)}
+                
 
 
 
@@ -180,83 +185,81 @@ export function RequestDetails({id}){
 
                 <div>
                     <Label>Total Package Price</Label>
-                    {querydetails?.finalPrice?.trim() && (
+                   
                         <div className="h-12 flex items-center justify-end px-4 rounded-lg
                                         border border-green-400 bg-green-50
                                         text-lg font-semibold text-green-700
                                         dark:bg-green-900/20 dark:border-green-600 dark:text-green-300">
-                            {brazilianCurrency(querydetails.finalPrice)}
+                            {brazilianCurrency(querydetails.finalPrice || 0)}
                         </div>
-                        )}
+                       
                 </div>
                 
                
                 <div>
                     <Label>Platform Fee</Label>
 
-                    {querydetails?.finalPrice?.trim() && (
+                    
                         <div className="h-12 flex items-center justify-between px-4 rounded-lg
                                     border border-green-400 bg-green-50
                                     text-lg font-semibold text-green-700
                                     dark:bg-green-900/20 dark:border-green-600 dark:text-green-300">
-                            <span>{querydetails.clinic.commission}% <span className="text-sm text-gray-500 relative -top-1">of {brazilianCurrency(querydetails.finalPrice)}</span></span>
-                            <span>{brazilianCurrency((querydetails.clinic.commission * querydetails.finalPrice)/100)}</span>
+                            <span>{querydetails.clinic?.commission}% <span className="text-sm text-gray-500 relative -top-1">of {brazilianCurrency(querydetails?.finalPrice)}</span></span>
+                            <span>{brazilianCurrency((querydetails?.clinic?.commission * querydetails?.finalPrice)/100 || 0)}</span>
                         </div>
-                    )}
+                   
                 </div>
 
 
                 <div>
                     <Label>Maximum Clinic Amount</Label>
-                    {querydetails?.finalPrice?.trim() && (
+                   
                         <div className="h-12 flex items-center justify-end px-4 rounded-lg
                                         border border-green-400 bg-green-50
                                         text-lg font-semibold text-green-700
                                         dark:bg-green-900/20 dark:border-green-600 dark:text-green-300">
-                            {brazilianCurrency((querydetails.finalPrice) - ((querydetails.clinic.commission * querydetails.finalPrice)/100))}
+                            {brazilianCurrency((querydetails?.finalPrice) - ((querydetails?.clinic?.commission * querydetails?.finalPrice)/100) || 0)}
                         </div>
-                        )}
+                        
                 </div>
+
                 <div>
                     <Label>Total Fund Requested</Label>
-                    {querydetails?.finalPrice?.trim() && (
+                   
                         <div className="h-12 flex items-center justify-end px-4 rounded-lg
                                         border border-green-400 bg-green-50
                                         text-lg font-semibold text-green-700
                                         dark:bg-green-900/20 dark:border-green-600 dark:text-green-300">
-                            {brazilianCurrency(totalfundrequested)}
+                            {brazilianCurrency(totalfundrequested || 0)}
                         </div>
-                        )}
+                        
                 </div>
+
                 <div>
                     <Label>Remaining Amount</Label>
-                    {querydetails?.finalPrice?.trim() && (
+                    
                         <div className="h-12 flex items-center justify-end px-4 rounded-lg
                                         border border-green-400 bg-green-50
                                         text-lg font-semibold text-green-700
                                         dark:bg-green-900/20 dark:border-green-600 dark:text-green-300">
 
 
-                             {brazilianCurrency(remainingAmount)}
+                             {brazilianCurrency(remainingAmount || 0)}
                         </div>
-                    )}
+                    
                 </div>
+
                 <div>
                     <Label>Total Funds Received</Label>
-                    {querydetails?.finalPrice?.trim() && (
+                   
                         <div className="h-12 flex items-center justify-end px-4 rounded-lg
                                         border border-green-400 bg-green-50
                                         text-lg font-semibold text-green-700
                                         dark:bg-green-900/20 dark:border-green-600 dark:text-green-300">
-                            {brazilianCurrency(totalfundreceived)}
+                            {brazilianCurrency(totalfundreceived || 0)}
                         </div>
-                        )}
+                        
                 </div>
-
-
-
-
-
             </div>
 
 

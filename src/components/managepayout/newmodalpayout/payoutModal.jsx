@@ -335,26 +335,34 @@ const markasPaid= async(id)=>{
                                   </div>
 
 
-                                  <div className="flex items-center gap-2.5">
-                                      <img className="w-10 h-10 rounded-full" src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/doctors/profilepicture/${doctor?.image}`} alt="" />
-                                      <div className="font-medium text-heading">
-                                          <div>Dr. {doctor?.firstname} {doctor?.lastname}</div>
-                                          <div className="text-sm font-normal text-body">{doctor?.degree}</div>
+                                  
+                                  {doctor && (<>
+                                            <div className="flex items-center gap-2.5">
+                                            <img className="w-10 h-10 rounded-full" src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/doctors/profilepicture/${doctor?.image}`} alt="" />
+                                            <div className="font-medium text-heading">
+                                                <div>Dr. {doctor?.firstname} {doctor?.lastname}</div>
+                                                <div className="text-sm font-normal text-body">{doctor?.degree}</div>
+                                            </div>
+                                        </div>
+                                  </>)}
+
+                                  {packages && (<>
+                                      <div className="flex items-center gap-2.5">
+
+                                          <div className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-200 rounded-full">
+                                              <span className="font-medium text-body">PKG</span>
+                                          </div>
+
+                                          <div className="font-medium text-heading">
+                                              <div>{packages?.title}</div>
+                                              <div className="text-sm font-normal text-body">{brazilianCurrency(packages?.discountedprice)}</div>
+                                          </div>
                                       </div>
-                                  </div>
+                                  </>)}
+                                
 
 
-                                  <div className="flex items-center gap-2.5">
 
-                                      <div className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-200 rounded-full">
-                                          <span className="font-medium text-body">PKG</span>
-                                      </div>
-
-                                      <div className="font-medium text-heading">
-                                          <div>{packages?.title}</div>
-                                          <div className="text-sm font-normal text-body">{brazilianCurrency(packages?.discountedprice)}</div>
-                                      </div>
-                                  </div>
                               </div>
                               <hr></hr>
 

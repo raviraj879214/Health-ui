@@ -201,11 +201,14 @@ export function PatientQueryDetails({ id }) {
         <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-4 items-start">
 
 
-          {PatientQueryStatus.PENDING === querydetails.status && (<>
+          {(PatientQueryStatus.PENDING === querydetails.status && querydetails.clinicId !== null) &&    (<>
+
             <p className="text-sm font-medium text-gray-700">
               On clicking “Send to Clinic”, the patient’s query details will be sent to the selected clinic.
               Please ensure that all required information has been collected from the patient before proceeding.
               Once the query is sent, you will not be able to reselect or change the clinic, doctor, or package.
+              
+              
             </p>
             <button
               onClick={() => sendClinic()}
@@ -214,12 +217,18 @@ export function PatientQueryDetails({ id }) {
               {buttonsendclinic ? (<>
                 <ButtonSpinner></ButtonSpinner>
               </>) : (<> Send To Clinic</>)}
+              
             </button>
+
           </>)}
+
+
+
+
           <div>
             {querydetails.status === PatientQueryStatus.ASSIGNED && (
               <span className="px-3 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800 ">
-                Assigned
+               Clinic Assigned
               </span>
             )}
             {querydetails.status === PatientQueryStatus.CLOSED && (
@@ -413,7 +422,7 @@ export function PatientQueryDetails({ id }) {
             <>
                 
              
-                   {querydetails.package !== null && querydetails.clinic && Number(querydetails.clinic.commission) > 0 ? (
+                   {querydetails.clinic && Number(querydetails.clinic.commission) > 0 ? (
 
                        <button
                     type="submit"
@@ -426,7 +435,7 @@ export function PatientQueryDetails({ id }) {
         Submit
                  </button>
         ):(
-          <p className="p-5 border border-red-500 rounded-2xl text-red-400">Please select treatment package to submit final deal price</p>
+          <p className="p-5 border border-red-500 rounded-2xl text-red-400">Please select clinic or commission to submit final deal price</p>
         )}
 
             
@@ -558,7 +567,7 @@ export function PatientQueryDetails({ id }) {
       {/* Generate Button */}
        
       
-        {querydetails.package !== null && querydetails.clinic && Number(querydetails.clinic.commission) > 0 ? (
+        {querydetails.clinic && Number(querydetails.clinic.commission) > 0 ? (
            <button
         onClick={generatelink}
         disabled={generatebutton}
@@ -581,7 +590,7 @@ export function PatientQueryDetails({ id }) {
         )}
       </button>
         ):(
-          <p className="p-5 border border-red-500 rounded-2xl text-red-400">Please select treatment package to generate payment link</p>
+          <p className="p-5 border border-red-500 rounded-2xl text-red-400">Please select clinic or commission to generate payment link</p>
         )}
 
 
