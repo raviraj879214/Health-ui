@@ -130,6 +130,68 @@ export function RequestDetails({id}){
                     </div>
                 </>)}
                 
+                <div className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm w-full max-w-md">
+
+                    {/* Title */}
+                    <p className="text-xs text-gray-500 uppercase tracking-wide mb-2">
+                        Coordinator
+                    </p>
+
+                    {/* Coordinator Info */}
+                    <div className="flex items-center justify-between">
+                        <div>
+                            <p className="text-sm font-semibold text-gray-800">
+                                {querydetails?.User?.firstname} {querydetails?.User?.lastname}
+                            </p>
+                            <p className="text-xs text-gray-500">
+                                {querydetails?.User?.email}
+                            </p>
+                        </div>
+
+                        {/* Avatar Circle */}
+                        <div className="w-10 h-10 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 font-semibold">
+                            {querydetails?.User?.firstname?.charAt(0)}
+                        </div>
+                    </div>
+
+                   
+                    <div className="border-t border-gray-100 my-3"></div>
+
+                  
+                    <div className="flex items-center gap-4">
+
+                        <a href={`tel:${querydetails?.User?.phone}`} title="Call" className="hover:opacity-80">
+                            <img width="26" src={`${process.env.NEXT_PUBLIC_URL}/images/brand/phone.svg`} alt="Call" />
+                        </a>
+
+
+                        {querydetails?.User?.whatsappNumber && (
+                            <a
+                                href={`https://wa.me/${querydetails?.User?.whatsappNumber}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                title="WhatsApp"
+                                className="hover:opacity-80"
+                            >
+                                <img width="26" src={`${process.env.NEXT_PUBLIC_URL}/images/brand/whatsapp.svg`} alt="WhatsApp" />
+                            </a>
+                        )}
+
+                        {querydetails?.User?.telegramNumber && (
+                            <a
+                                href={`https://t.me/${querydetails?.User?.telegramNumber}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                title="Telegram"
+                                className="hover:opacity-80"
+                            >
+                                <img width="26" src={`${process.env.NEXT_PUBLIC_URL}/images/brand/telegram.svg`} alt="Telegram" />
+                            </a>
+                        )}
+
+
+                    </div>
+                </div>
 
 
 
