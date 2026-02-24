@@ -496,7 +496,7 @@ export function DoctorOne({ onClose, nextStep, clinicuuid, doctoruuid }) {
 
             <div className="flex justify-end gap-2 mt-4">
               <button type="button" onClick={onCancel} className="btn btn-secondary">
-                Cancel
+                Back
               </button>
 
               <button

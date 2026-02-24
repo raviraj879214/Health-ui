@@ -18,6 +18,7 @@ export function PatientVerifiedSuccessPage({clinicid,querycode}){
 
 
   const fetchCoordinatorDetails = useCallback(async () => {
+    debugger;
     if (!clinicid) return;
 
     try {

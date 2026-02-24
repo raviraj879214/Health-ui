@@ -40,7 +40,7 @@ export function PatientPhoneNumber(){
       { country: "Italy", code: "+39", length: 10 },
       { country: "Spain", code: "+34", length: 9 },
       { country: "Australia", code: "+61", length: 9 },
-      { country: "Brazil", code: "+55", length: 10 },
+      { country: "Brazil", code: "+55", length: 11 },
     ];
 
       const [selectedCountry, setSelectedCountry] = useState(popularCountries[0]); // Default India
@@ -223,7 +223,7 @@ export function PatientPhoneNumber(){
                     type="text"
                     placeholder="Enter phone number"
 
-                    maxLength={10}
+                    maxLength={selectedCountry.length}
                     inputMode="numeric"
 
                     className={`
@@ -243,6 +243,8 @@ export function PatientPhoneNumber(){
                     {...register("phonenumber", {
                       required: "Phone number is required",
                     })}
+
+                    
                   />
                 </div>
 

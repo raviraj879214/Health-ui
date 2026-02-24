@@ -92,7 +92,7 @@ export function PackageStepEight({clinicuuid, packageid }){
                  <button
                     onClick={()=> onCancel()}
                     className="btn btn-third">
-                    Cancel
+                    Back
                 </button>
 
                 <button

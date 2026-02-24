@@ -178,13 +178,13 @@ export function ListofDoctor({ clinicuuid }) {
       {/* Degree */}
       <p className="text-sm text-gray-500 font-medium">
         {item.degree || "Specialist"}
+        {item.DoctorVerify}
       </p>
 
-      {/* Description */}
+      
       <div
         className="line-clamp-2 text-gray-600 mt-2 text-sm"
-        dangerouslySetInnerHTML={{ __html: item.briefDescription }}
-      />
+        dangerouslySetInnerHTML={{ __html: item.briefDescription }}/>
     </div>
 
         {item.DoctorVerify === DoctorVerifyStatus.VERIFIED && (
@@ -199,6 +199,26 @@ export function ListofDoctor({ clinicuuid }) {
                 Verified |  {process.env.NEXT_PUBLIC_PROJECT_NAME}
             </span>
         )}
+
+         {item.DoctorVerify === DoctorVerifyStatus.PENDING && (
+             <span className="flex items-center bg-gradient-to-r from-green-400 to-teal-500 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md">
+                <svg
+                  className="w-4 h-4 mr-1"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 11h-4V7h2v4h2v2z" />
+                </svg>
+
+
+                Pending |  {process.env.NEXT_PUBLIC_PROJECT_NAME}
+            </span>
+        )}
+
+
+
+
+
 
         
     

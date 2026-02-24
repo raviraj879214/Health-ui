@@ -141,6 +141,7 @@ const patientQuerySlice = createSlice({
       localStorage.setItem("phoneNumberVerified", String(action.payload));
     },
     addmedicalCordinatorID: (state, action) => {
+      alert(action.payload);
       state.medicalCordinatorID = String(action.payload);
       localStorage.setItem("medicalCordinatorID", String(action.payload));
     },
@@ -184,6 +185,7 @@ const patientQuerySlice = createSlice({
       state.emailverified = "0";
       state.phoneNumberVerified = "0";
       state.termsCondition = "0";
+      state.medicalCordinatorID = "0";
 
 
       localStorage.removeItem("patientStep");
@@ -204,6 +206,7 @@ const patientQuerySlice = createSlice({
       localStorage.removeItem("emailverified");
       localStorage.removeItem("phoneNumberVerified");
       localStorage.removeItem("termsCondition");
+      localStorage.removeItem("medicalCordinatorID");
 
     },
   },

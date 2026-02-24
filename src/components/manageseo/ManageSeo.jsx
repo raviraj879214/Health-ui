@@ -164,6 +164,7 @@ const onUpdate = async (data) => {
                     <form onSubmit={handleSubmit(onUpdate)}> 
                         <div className="col-span-12 md:col-span-4">
                             <input {...register("tagValue", { required: "Please select tag" })} type="hidden" value={tagValue ? tagValue.name : ""} />
+                            
                             <DropDownSearchesSeo
                                 value={tagValue} 
                                 onChange={(val) => {

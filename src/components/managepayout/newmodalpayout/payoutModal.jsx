@@ -55,6 +55,8 @@ export function PayoutModal({OnTriggerStripeBalance}) {
    const [patientqueryinformation,setPatientQueryInformation] = useState({});
    const [requestedfunds,setRequestedFunds] = useState([]);
 
+   const [finalprice,setFinalPrice] = useState(0);
+
 
 
 
@@ -78,6 +80,7 @@ export function PayoutModal({OnTriggerStripeBalance}) {
             setTransferTransaction(result.transfer);
             setClinicsPaid(clinicspaid); 
             setRequestedFunds(result.RequestFunds);
+            setFinalPrice(result.data.finalPrice)
             
 
 
@@ -270,6 +273,13 @@ const markasPaid= async(id)=>{
                       <div className="grid grid-cols-4 gap-4">
                         
                           <div className="rounded-xl border border-indigo-200 bg-indigo-50 p-4">
+                              <p className="text-sm text-indigo-700">Final Deal Price</p>
+                              <p className="text-2xl font-semibold text-indigo-900">
+                                  {brazilianCurrency(item.finalPrice)}
+                                  
+                              </p>
+                          </div>
+                          <div className="rounded-xl border border-indigo-200 bg-indigo-50 p-4">
                               <p className="text-sm text-indigo-700">Total Received</p>
                               <p className="text-2xl font-semibold text-indigo-900">
                                   {brazilianCurrency(totalreceived)}
@@ -421,17 +431,38 @@ const markasPaid= async(id)=>{
 
                                 <div>
                                     <label className="block text-sm font-medium text-gray-600 mb-1">
-                                        Amount to Release
+                                         
+                                        {Number(clinicstobepaid) === 0 ? (
+                                            <p className="text-green-600 font-medium">
+                                                The total amount  <span className="text-purple-600">{brazilianCurrency(clinicspaid)}</span> has been transferred to clinic
+                                            </p>
+                                            ) : (
+                                            <p className="text-blue-600 font-medium">
+                                                You can release up to {brazilianCurrency(Number(clinicstobepaid))}
+                                            </p>
+                                            )}
+
                                     </label>
-                                    <input
+                                    {clinicstobepaid > 0 &&(<>
+                                         <input
                                         value={amount}
                                         type="number"
                                         min={1}
+                                       
                                         placeholder="Enter amount"
                                         className="w-full rounded-xl border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
                                         onChange={(e) => {
-                                            setAmount(e.target.value)
-                                        }} />
+                                            debugger;
+                                            if(parseInt(clinicstobepaid) >= parseInt(e.target.value || 0)){
+                                                setAmount(e.target.value);
+                                            }
+                                            else{
+                                                alert(`make payout enter amount within ${brazilianCurrency(clinicstobepaid)}`)
+                                            }
+                                        }} 
+                                        />
+                                    </>)}
+                                   
 
                                 </div>
 

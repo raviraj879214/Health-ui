@@ -189,20 +189,30 @@ export function PackageStepSix({ clinicuuid, packageid }) {
           {!loading && !error && (
             <div className="border theme-border rounded h-[500px] overflow-auto p-4">
               {definitions.map((field) => (
-                <div key={field.id} className="mb-4">
+                <div key={field.id} className="mb-15">
                   <label className="block text-sm font-bold mb-2">
                     {field.label}
+                    
                   </label>
 
                   {field.fieldType === "text" && (
                     <>
                       <Editor
                         className="h-[200px]"
-                        value={fieldValues[field.id] || ""}
+                        value={
+                          fieldValues[field.id] ??
+                          (field.predefinedvalue
+                            ? field.predefinedvalue.replace(/\n/g, "<br/>")
+                            : "")
+                        }
                         onTextChange={(e) =>
                           handleChange(field, e.htmlValue)
                         }
-                      />
+                        
+                        />
+
+
+
                       {errors[field.id] && (
                         <p className="text-red-500 text-sm mt-1">
                           {errors[field.id]}
@@ -274,7 +284,7 @@ export function PackageStepSix({ clinicuuid, packageid }) {
               onClick={onCancel}
               className="rounded-md border px-4 py-2 hover:bg-gray-100"
             >
-              Cancel
+              Back
             </button>
 
             <button

@@ -10,7 +10,10 @@ import { brazilianCurrency } from "@/lib/brazilianCurrency";
 
 
 
-export function RaiseFunds({patientqueryid}){
+export function RaiseFunds({patientqueryid, requestedFund ,totalFundsReceived ,totalF,remainF,clinicmaxAmount}){
+
+
+
 
     const {register,setValue,getValues,handleSubmit,formState:{errors},reset} = useForm();
     const [raisebutton,setRaiseButton] = useState(false);
@@ -22,6 +25,8 @@ export function RaiseFunds({patientqueryid}){
     useEffect(()=>{
         if(patientqueryid){
             fetchRequestFunds();
+            
+
         }
     },[patientqueryid]);
 
@@ -35,6 +40,12 @@ export function RaiseFunds({patientqueryid}){
             const result = await res.json();
             setRequestedFunds(Array.isArray(result.requestedfunds) ? result.requestedfunds : []);
             setRequestTransfer(Array.isArray(result.transfer) ? result.transfer : []);
+            const totalRequested = result.requestedfunds.reduce((sum, item) => sum + Number(item.amount || 0),0);
+            requestedFund(totalRequested);
+
+
+             const totalFundRequested = result.transfer.reduce((sum, item) => sum + Number((item.amount/100) || 0),0);
+            totalFundsReceived(totalFundRequested);
 
         }
     }
@@ -84,7 +95,7 @@ export function RaiseFunds({patientqueryid}){
 
                 <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm flex flex-col h-[480px]">
                     <h2 className="text-lg font-semibold text-gray-800 mb-6">
-                        Raise Fund Request
+                        Raise Fund Request 
                     </h2>
                     <form onSubmit={handleSubmit(raiseFunds)}>
                         <div className="flex flex-col gap-4 flex-1">
@@ -99,13 +110,13 @@ export function RaiseFunds({patientqueryid}){
                                     className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
                                     {...register("amount", {
                                         required: "Please enter amount",
-                                        valueAsNumber: true, // ensures value is treated as number
+                                        valueAsNumber: true,
                                         min: {
                                             value: 1,
                                             message: "Amount must be a positive number"
                                         },
-                                        validate: (value) =>
-                                            value > 0 || "Amount must be greater than zero"
+                                        validate: (value) => value > 0 || "Amount must be greater than zero",
+                                        validate: (value) => value < remainF || `You can request upto amount ${brazilianCurrency(remainF)}`
                                     })}
                                 />
                                 {errors.amount && (
@@ -127,16 +138,16 @@ export function RaiseFunds({patientqueryid}){
                         </div>
 
                         <button
-                        disabled={raisebutton}
-                        
-                        type="submit" className="btn btn-primary">
-                            
+                            disabled={raisebutton}
+                            type="submit" className="btn btn-primary">
+
                             {raisebutton ? (<>
                                 <ButtonSpinner></ButtonSpinner>
-                             </>):(<>
+                            </>) : (<>
                                 Request Funds
-                             </>)}
+                            </>)}
                         </button>
+
 
 
 

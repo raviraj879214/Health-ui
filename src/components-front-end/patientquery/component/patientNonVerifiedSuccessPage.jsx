@@ -22,6 +22,7 @@ export function PatientNonVerifiedSuccessPage({ clinicid, querycode }) {
 
 
   const fetchCoordinatorDetails = useCallback(async () => {
+    debugger;
     if (!clinicid) return;
 
     try {
@@ -32,7 +33,7 @@ export function PatientNonVerifiedSuccessPage({ clinicid, querycode }) {
 
       if (res.ok) {
         const result = await res.json();
-        setCoordinatorDetails(result.data.cordinator);
+        setCoordinatorDetails(result.data.cordinator || result.data);
       }
     } catch (error) {
       console.error("Failed to fetch coordinator details", error);

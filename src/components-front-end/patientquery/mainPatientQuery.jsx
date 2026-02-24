@@ -1,6 +1,6 @@
 "use client"
 import { useDispatch, useSelector } from "react-redux";
-import { addStep, addTreatmentID, clearAll, clearAllPatientQuery, clearPrevious, clearStep, clearTreatmentID, customStep, prevStep, setStep } from "../redux/patinetquery/patientQueryRedux";
+import { addmedicalCordinatorID, addStep, addTreatmentID, clearAll, clearAllPatientQuery, clearPrevious, clearStep, clearTreatmentID, customStep, prevStep, setStep } from "../redux/patinetquery/patientQueryRedux";
 import { SelectTreatment } from "./component/selectTreatment";
 import { SelectedTreatment } from "./component/selectedTreatment";
 import { PatientQueryQuestion } from "@/lib/enums/PatientQueryFrontEnd";
@@ -84,47 +84,50 @@ export function MainPatinetQuery({ id, name }) {
        setContinues(false);
     }
 
+    
 
-      const skippphonenumber = async()=>{
-      debugger;
-       
-       setLoading(true);
+  const skippphonenumber = async () => {
 
-       let payload = {
-          patientName: patientName,
-          email:  patientEmail,
-          phoneNumber: phoneNumber ,
-          message: "",
-          treatmentName: treatmentName,
-          whatMatterMostName:whattmattermostname,
-          medicalReportsValue:medicalReportstValue,
-          procedureTimeValue: procedureTimevalue,
-          clinicId:id,
-          cordinatorid: String(medicalcordinatorIDdd)
-      };
-      
+    debugger;
+   
+
+    setLoading(true);
+
+    let payload = {
+      patientName: patientName,
+      email: patientEmail,
+      phoneNumber: phoneNumber,
+      message: "",
+      treatmentName: treatmentName,
+      whatMatterMostName: whattmattermostname,
+      medicalReportsValue: medicalReportstValue,
+      procedureTimeValue: procedureTimevalue,
+      clinicId: id,
+      cordinatorid: String(id == "demo-id" ? 1 : medicalcordinatorIDdd)
+    };
 
 
-      const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/clinic-listing/raise-post-query`,{
-        method : "Post",
-        headers:{
-            "content-type" : "application/json"
-        },
-        body:JSON.stringify(payload)
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/clinic-listing/raise-post-query`, {
+      method: "Post",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify(payload)
     });
 
-    if(res.ok){
-        const result =await res.json();
-        setQuerycode(result.data.querycode);
+    if (res.ok) {
+      const result = await res.json();
+      setQuerycode(result.data.querycode);
 
 
 
-        // dispatch(addStep());
-        dispatch(customStep(stepsfinalize));
+      // dispatch(addStep());
+      dispatch(customStep(stepsfinalize));
     }
-          
-        setLoading(false);
-    }
+
+    setLoading(false);
+  }
 
 
 

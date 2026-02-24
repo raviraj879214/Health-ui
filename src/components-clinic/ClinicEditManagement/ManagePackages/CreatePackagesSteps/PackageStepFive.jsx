@@ -370,7 +370,7 @@ export function PackageStepFive({clinicuuid,packageid}){
                                         onClick={() => onCancel()}
                                         className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-4 py-2 text-gray-700 shadow-sm border hover:bg-gray-100 sm:mt-0 sm:w-auto"
                                     >
-                                        Cancel
+                                        Back
                                     </button>
 
                                    

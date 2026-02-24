@@ -5,12 +5,16 @@ import { clinicHeaders } from "../utils/clinicHeaders";
 import Label from "@/components/form/Label";
 import { formatBrazilDate } from "@/lib/formatDate";
 import{RaiseFunds} from "./raiseFunds";
+import { brazilianCurrency } from "@/lib/brazilianCurrency";
 
 
 
 export function RequestDetails({id}){
 
     const [querydetails,setQueryDetails] = useState({});
+    const [totalfundrequested,setTotalFundRequested] = useState(0);
+    const [totalfundreceived,setTotalFundReceived] = useState(0);
+
 
 
     useEffect(() => {
@@ -33,6 +37,18 @@ export function RequestDetails({id}){
         }
     }
 
+
+    const RequestedFunds=(data)=>{
+        setTotalFundRequested(data);
+    }
+
+
+    const TotalReceivedFunds=(data)=>{
+        
+        setTotalFundReceived(data);
+    }
+
+    const remainingAmount = parseInt((((querydetails.finalPrice) - ((querydetails.clinic?.commission * querydetails.finalPrice)/100)) - totalfundreceived));
 
     return(<>
 
@@ -150,8 +166,117 @@ export function RequestDetails({id}){
             )}
         </ComponentCard>
 
-            <RaiseFunds patientqueryid={id} />
+        <ComponentCard className="mt-4 p-5 bg-white rounded-xl shadow-md border theme-border">
 
+            <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
+                    Query Payment Details
+                </h3>
+                <span className="text-sm text-gray-500 italic"></span>
+            </div>
+
+
+            <div className="grid grid-cols-1 sm:grid-cols-4 gap-6">
+
+                <div>
+                    <Label>Total Package Price</Label>
+                    {querydetails?.finalPrice?.trim() && (
+                        <div className="h-12 flex items-center justify-end px-4 rounded-lg
+                                        border border-green-400 bg-green-50
+                                        text-lg font-semibold text-green-700
+                                        dark:bg-green-900/20 dark:border-green-600 dark:text-green-300">
+                            {brazilianCurrency(querydetails.finalPrice)}
+                        </div>
+                        )}
+                </div>
+                
+               
+                <div>
+                    <Label>Platform Fee</Label>
+
+                    {querydetails?.finalPrice?.trim() && (
+                        <div className="h-12 flex items-center justify-between px-4 rounded-lg
+                                    border border-green-400 bg-green-50
+                                    text-lg font-semibold text-green-700
+                                    dark:bg-green-900/20 dark:border-green-600 dark:text-green-300">
+                            <span>{querydetails.clinic.commission}% <span className="text-sm text-gray-500 relative -top-1">of {brazilianCurrency(querydetails.finalPrice)}</span></span>
+                            <span>{brazilianCurrency((querydetails.clinic.commission * querydetails.finalPrice)/100)}</span>
+                        </div>
+                    )}
+                </div>
+
+
+                <div>
+                    <Label>Maximum Clinic Amount</Label>
+                    {querydetails?.finalPrice?.trim() && (
+                        <div className="h-12 flex items-center justify-end px-4 rounded-lg
+                                        border border-green-400 bg-green-50
+                                        text-lg font-semibold text-green-700
+                                        dark:bg-green-900/20 dark:border-green-600 dark:text-green-300">
+                            {brazilianCurrency((querydetails.finalPrice) - ((querydetails.clinic.commission * querydetails.finalPrice)/100))}
+                        </div>
+                        )}
+                </div>
+                <div>
+                    <Label>Total Fund Requested</Label>
+                    {querydetails?.finalPrice?.trim() && (
+                        <div className="h-12 flex items-center justify-end px-4 rounded-lg
+                                        border border-green-400 bg-green-50
+                                        text-lg font-semibold text-green-700
+                                        dark:bg-green-900/20 dark:border-green-600 dark:text-green-300">
+                            {brazilianCurrency(totalfundrequested)}
+                        </div>
+                        )}
+                </div>
+                <div>
+                    <Label>Remaining Amount</Label>
+                    {querydetails?.finalPrice?.trim() && (
+                        <div className="h-12 flex items-center justify-end px-4 rounded-lg
+                                        border border-green-400 bg-green-50
+                                        text-lg font-semibold text-green-700
+                                        dark:bg-green-900/20 dark:border-green-600 dark:text-green-300">
+
+
+                             {brazilianCurrency(remainingAmount)}
+                        </div>
+                    )}
+                </div>
+                <div>
+                    <Label>Total Funds Received</Label>
+                    {querydetails?.finalPrice?.trim() && (
+                        <div className="h-12 flex items-center justify-end px-4 rounded-lg
+                                        border border-green-400 bg-green-50
+                                        text-lg font-semibold text-green-700
+                                        dark:bg-green-900/20 dark:border-green-600 dark:text-green-300">
+                            {brazilianCurrency(totalfundreceived)}
+                        </div>
+                        )}
+                </div>
+
+
+
+
+
+            </div>
+
+
+
+        </ComponentCard>
+
+
+
+           
+
+            {remainingAmount > 0 ? (
+                <RaiseFunds
+                    patientqueryid={id}
+                    requestedFund={RequestedFunds}
+                    totalFundsReceived={TotalReceivedFunds}
+                    totalF={totalfundreceived}
+                    remainF={remainingAmount}
+                    clinicmaxAmount={(querydetails.finalPrice) - ((querydetails.clinic.commission * querydetails.finalPrice)/100)}
+                />
+            ) : null}
 
 
 
