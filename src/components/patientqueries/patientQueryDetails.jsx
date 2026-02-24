@@ -94,7 +94,7 @@ export function PatientQueryDetails({ id }) {
               amount: generatedamount,
               stripeAccountId : querydetails.clinic.stripeaccountid,
               patientId : "1",
-              packageprice:querydetails.package?.discountedprice || 0,
+              packageprice:querydetails?.package?.discountedprice || "0",
               finalprice:querydetails.finalPrice || 0,
               generatedlink:"test",
               generatedamount:generatedamount,
@@ -567,7 +567,7 @@ export function PatientQueryDetails({ id }) {
       {/* Generate Button */}
        
       
-        {querydetails.clinic && Number(querydetails.clinic.commission) > 0 ? (
+        {(querydetails.clinic && Number(querydetails.clinic.commission) > 0 && parseInt(querydetails.finalPrice) > 0) ? (
            <button
         onClick={generatelink}
         disabled={generatebutton}
@@ -590,7 +590,7 @@ export function PatientQueryDetails({ id }) {
         )}
       </button>
         ):(
-          <p className="p-5 border border-red-500 rounded-2xl text-red-400">Please select clinic or commission to generate payment link</p>
+          <p className="p-5 border border-red-500 rounded-2xl text-red-400">Please fill clinic and final deal price to generate payment link</p>
         )}
 
 
