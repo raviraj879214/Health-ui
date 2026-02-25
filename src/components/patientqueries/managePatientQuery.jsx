@@ -29,6 +29,9 @@ export function ManagePatientQueries() {
   const [cordinators,setCordinators] = useState([]);
  const [selectedCoordinator, setSelectedCoordinator] = useState({});
 
+ const [open, setOpen] = useState(false);
+ const [openId, setOpenId] = useState(null);
+
 
 
 
@@ -95,15 +98,72 @@ export function ManagePatientQueries() {
   const statusLabel = (status) => {
 
     switch (status) {
-      case PatientQueryStatus.PENDING:
-        return <span className="text-yellow-600">Pending</span>;
-      case PatientQueryStatus.ASSIGNED:
-        return <span className="text-blue-600">Clinic Assigned</span>;
-      case PatientQueryStatus.COMPLETED:
-        return <span className="text-green-600">Closed</span>;
-      default:
-        return "—";
-    }
+  case PatientQueryStatus.PENDING:
+    return (
+      <span className="inline-flex items-center gap-1 text-yellow-600 font-medium">
+        {/* Clock Icon */}
+        <svg
+          className="w-4 h-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          strokeWidth="2"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+        Awaiting Dispatch
+      </span>
+    );
+
+  case PatientQueryStatus.ASSIGNED:
+    return (
+      <span className="inline-flex items-center gap-1 text-blue-600 font-medium">
+        {/* Send / Arrow Icon */}
+        <svg
+          className="w-4 h-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          strokeWidth="2"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M5 12h14M12 5l7 7-7 7"
+          />
+        </svg>
+        Forwarded to Clinic
+      </span>
+    );
+
+  case PatientQueryStatus.COMPLETED:
+    return (
+      <span className="inline-flex items-center gap-1 text-green-600 font-medium">
+        {/* Check Circle Icon */}
+        <svg
+          className="w-4 h-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          strokeWidth="2"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+        Successfully Closed
+      </span>
+    );
+
+  default:
+    return "—";
+}
   };
 
   const onView= async(data)=>{
@@ -168,7 +228,7 @@ export function ManagePatientQueries() {
           
           {/* <TableCell isHeader className="px-5 py-3">Medical Reports Value</TableCell> */}
           <TableCell isHeader className="px-5 py-3">Treatment</TableCell>
-          <TableCell isHeader className="px-5 py-3">What Matter Most</TableCell>
+          <TableCell isHeader className="px-5 py-3">Assigned Status</TableCell>
           <TableCell isHeader className="px-5 py-3">Procedure Time</TableCell>
           <TableCell isHeader className="px-5 py-3 text-center">Status</TableCell>
           <TableCell isHeader className="px-5 py-3 text-right">Created</TableCell>
@@ -182,102 +242,131 @@ export function ManagePatientQueries() {
 
                 <TableRow key={q.id}>
                   <TableCell className="px-5 py-4 font-medium">
-                    {q.querycode}
+                    
 
                     {rolename === "SuperAdmin" && (<>
 
-                      
-                    
-                    <div className="mt-3 p-4 bg-gray-50 border border-gray-200 rounded-lg shadow-sm w-fit flex items-start gap-3">
-  
-  <div className="bg-blue-100 text-blue-600 p-2 rounded-full">
-    👤
-  </div>
-
-  <div>
-    <div className="text-sm font-semibold text-gray-700">
-      Coordinator
-    </div>
-    <div className="text-sm text-gray-900">
-      {q?.User?.firstname} {q?.User?.lastname}
-    </div>
-    <div className="text-xs text-gray-500">
-      {q?.User?.email}
-    </div>
-  </div>
-
-</div>
 
 
-                      {(q.clinicId === null || q.cordinatorid === 1) ? (
-                        <div className="w-72 mt-4 p-4 bg-white border border-gray-200 rounded-xl shadow-sm">
+                      <div key={q.id} className="mt-3 p-4 bg-gray-50 border rounded-xl">
+                          <p className="m-3 cursor-pointer" onClick={() => onView(q.id)}><b>{q.querycode}</b></p>
+                        <div className="flex items-start gap-3">
 
-                          <label className="block mb-2 text-sm font-semibold text-gray-700">
-                            Change Coordinator
-                          </label>
+                          <div className="flex items-center gap-4 p-4 bg-white border border-gray-200 rounded-xl shadow-sm w-fit">
 
-                          <select
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg 
-               focus:outline-none focus:ring-2 focus:ring-blue-500 
-               focus:border-blue-500 bg-white"
-                            value={selectedCoordinator[q.id] || ""}
-                            onChange={(e) => {
-                              const newValue = e.target.value;
+                            {/* Avatar */}
+                            <div className="w-12 h-12 flex items-center justify-center 
+                                bg-blue-100 text-blue-600 
+                                rounded-full text-lg font-semibold">
+                              {q?.User?.firstname?.charAt(0)}
+                            </div>
 
-                              if (!window.confirm("Are you sure you want to change the coordinator?")) {
-                                return;
-                              }
+                            {/* Details */}
+                            <div>
+                              <div className="text-sm text-gray-500">Coordinator</div>
 
-                              setSelectedCoordinator((prev) => ({
-                                ...prev,
-                                [q.id]: newValue,
-                              }));
+                              <div className="text-base font-semibold text-gray-800">
+                                {q?.User?.firstname} {q?.User?.lastname}
+                              </div>
 
-                              onChangeofCordianator(newValue, q.id);
-                            }}
-                          >
-                            <option value="">Change Coordinator</option>
-
-                            {cordinators.map((item) => (
-                              <option key={item.id} value={item.id}>
-                                {item.firstname} {item.lastname} ({item.email})
-                              </option>
-                            ))}
-                          </select>
-
-                          {/* CSS Only Expand / Collapse */}
-                          <div className="mt-4 text-xs text-gray-500">
-
-                            <input type="checkbox" id={`toggle-${q.id}`} className="peer hidden" />
-
-                            <p className="line-clamp-3 peer-checked:line-clamp-none transition-all duration-300">
-                              This query was submitted through the home page without selecting a specific clinic.
-                              Until a clinic is assigned, the admin can change the assigned coordinator.
-                              However, if the coordinator is changed in the middle of an ongoing conversation,
-                              the previous communication between the patient and the coordinator cannot be recovered,
-                              as these interactions happen offline.
-                              Therefore, please confirm whether coordinator reassignment should be allowed
-                              once the conversation has started.
-                            </p>
-
-                            <label
-                              htmlFor={`toggle-${q.id}`}
-                              className="mt-2 inline-block text-blue-600 cursor-pointer font-medium peer-checked:hidden"
-                            >
-                              See more
-                            </label>
-
-                            <label
-                              htmlFor={`toggle-${q.id}`}
-                              className="mt-2 hidden text-blue-600 cursor-pointer font-medium peer-checked:inline-block"
-                            >
-                              See less
-                            </label>
+                              <div className="text-sm text-gray-500">
+                                {q?.User?.email}
+                              </div>
+                            </div>
 
                           </div>
+
+
+                          {(q.clinicId === null || q.cordinatorid === 1) && (<>
+                            <button
+                              onClick={() =>
+                                setOpenId(openId === q.id ? null : q.id)
+                              }
+                              className="ml-auto text-sm text-blue-600"
+                            >
+                              {openId === q.id ? "Cancel" : "Change Coordinator"}
+                            </button>
+                          </>)}
                         </div>
 
-                      ) : (<></>)}
+
+                        {openId === q.id && (
+                          <div className="mt-3 border-t pt-3 text-sm">
+                            {(q.clinicId === null || q.cordinatorid === 1) ? (
+                              <div className="w-72 mt-4 p-4 bg-white border border-gray-200 rounded-xl shadow-sm">
+
+                                <label className="block mb-2 text-sm font-semibold text-gray-700">
+                                  Change Coordinator
+                                </label>
+
+                                <select
+                                  className="w-full px-4 py-2 border border-gray-300 rounded-lg 
+                                    focus:outline-none focus:ring-2 focus:ring-blue-500 
+                                    focus:border-blue-500 bg-white"
+                                  value={selectedCoordinator[q.id] || ""}
+                                  onChange={(e) => {
+                                    const newValue = e.target.value;
+
+                                    if (!window.confirm("Are you sure you want to change the coordinator?")) {
+                                      return;
+                                    }
+
+                                    setSelectedCoordinator((prev) => ({
+                                      ...prev,
+                                      [q.id]: newValue,
+                                    }));
+
+                                    onChangeofCordianator(newValue, q.id);
+                                  }}
+                                >
+                                  <option value="">Change Coordinator</option>
+
+                                  {cordinators.map((item) => (
+                                    <option key={item.id} value={item.id}>
+                                      {item.firstname} {item.lastname} ({item.email})
+                                    </option>
+                                  ))}
+                                </select>
+
+                                {/* CSS Only Expand / Collapse */}
+                                <div className="mt-4 text-xs text-gray-500">
+
+                                  <input type="checkbox" id={`toggle-${q.id}`} className="peer hidden" />
+
+                                  <p className="line-clamp-3 peer-checked:line-clamp-none transition-all duration-300">
+                                    This query was submitted through the home page without selecting a specific clinic.
+                                    Until a clinic is assigned, the admin can change the assigned coordinator.
+                                    However, if the coordinator is changed in the middle of an ongoing conversation,
+                                    the previous communication between the patient and the coordinator cannot be recovered,
+                                    as these interactions happen offline.
+                                    Therefore, please confirm whether coordinator reassignment should be allowed
+                                    once the conversation has started.
+                                  </p>
+
+                                  <label
+                                    htmlFor={`toggle-${q.id}`}
+                                    className="mt-2 inline-block text-blue-600 cursor-pointer font-medium peer-checked:hidden"
+                                  >
+                                    See more
+                                  </label>
+
+                                  <label
+                                    htmlFor={`toggle-${q.id}`}
+                                    className="mt-2 hidden text-blue-600 cursor-pointer font-medium peer-checked:inline-block"
+                                  >
+                                    See less
+                                  </label>
+
+                                </div>
+                              </div>
+
+                            ) : (<></>)}
+                          </div>
+                        )}
+
+                      </div>
+
+
 
 
 
@@ -316,9 +405,17 @@ export function ManagePatientQueries() {
               <div>{q.treatmentName || "--"}</div>
             </TableCell>
 
-            <TableCell className="px-5 py-4 text-sm text-gray-600">
-              <div>{q.whatMatterMostName || "--"}</div>
-            </TableCell>
+                  <TableCell className="px-5 py-4 text-sm">
+                    {q.clinic?.name ? (
+                      <div className="font-semibold text-green-600">
+                        {q.clinic.name}
+                      </div>
+                    ) : (
+                      <div className="font-semibold text-blue-600">
+                       Open Inquiry
+                      </div>
+                    )}
+                  </TableCell>
 
             <TableCell className="px-5 py-4 text-sm text-gray-600">
               <div>{q.procedureTimeValue || "--"}</div>

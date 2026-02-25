@@ -227,14 +227,44 @@ export function PatientQueryDetails({ id }) {
 
           <div>
             {querydetails.status === PatientQueryStatus.ASSIGNED && (
-              <span className="px-3 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800 ">
-               Clinic Assigned
+              <span className="px-3 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-blue-600 inline-flex">
+                
+        {/* Send / Arrow Icon */}
+        <svg
+          className="w-4 h-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          strokeWidth="2"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M5 12h14M12 5l7 7-7 7"
+          />
+        </svg>
+        Forwarded to Clinic
+     
               </span>
             )}
             {querydetails.status === PatientQueryStatus.CLOSED && (
-              <span className="px-3 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
-                Closed
-              </span>
+              <span className="inline-flex items-center gap-1 text-green-600 font-medium">
+        {/* Check Circle Icon */}
+        <svg
+          className="w-4 h-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          strokeWidth="2"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+        Successfully Closed
+      </span>
             )}
           </div>
 

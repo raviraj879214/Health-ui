@@ -1,154 +1,161 @@
 "use client";
-import { ApexOptions } from "apexcharts";
-import dynamic from "next/dynamic";
-import { MoreDotIcon } from "@/icons";
-import { DropdownItem } from "../ui/dropdown/DropdownItem";
-import { useState } from "react";
-import { Dropdown } from "../ui/dropdown/Dropdown";
 
-// Dynamically import the ReactApexChart component
-const ReactApexChart = dynamic(() => import("react-apexcharts"), {
-  ssr: false,
-});
+import { useState, useMemo, useEffect } from "react";
+import dynamic from "next/dynamic";
+import { adminHeaders } from "../utils/adminHeader";
+import { usePermissions } from "@/context/PermissionContext";
+
+const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 export default function MonthlySalesChart() {
-  const options: ApexOptions = {
-    colors: ["#465fff"],
+
+const { canRead, canCreate, canUpdate, canDelete, status } = usePermissions("Admin Dashboard");
+
+  const currentYear = new Date().getFullYear();
+
+  const [year, setYear] = useState(currentYear);
+  const [dashboardData, setDashboardData] = useState({
+    patientquery: [],
+    clinic: [],
+     stripeaccount: [],
+     stripebalance: [],
+  });
+
+  const [loading,setLoading] = useState(false);
+
+  const years = useMemo(() => {
+    return Array.from({ length: 5 }, (_, i) => currentYear + i);
+  }, [currentYear]);
+
+  useEffect(() => {
+    fetchAdminData();
+  }, []);
+
+  const fetchAdminData = async () => {
+    setLoading(true);
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/admin-dashboard/admin-dashboard-data`,
+      {
+        method: "GET",
+        headers: await adminHeaders()
+      }
+    );
+
+    if (res.ok) {
+      const result = await res.json();
+      setDashboardData(result);
+    }
+    setLoading(false);
+  };
+
+  // ✅ Helper to group by month
+  const getMonthlyCounts = (dataArray) => {
+    const months = Array(12).fill(0);
+
+    dataArray.forEach((item) => {
+      const date = new Date(item.createdAt);
+      if (date.getFullYear() === year) {
+        const monthIndex = date.getMonth();
+        months[monthIndex] += 1;
+      }
+    });
+
+    return months;
+  };
+
+  const patientMonthlyData = getMonthlyCounts(dashboardData.patientquery || []);
+  const clinicMonthlyData = getMonthlyCounts(dashboardData.clinic || []);
+
+  const chartSeries = [
+    {
+      name: "Patient Query",
+      data: patientMonthlyData
+    },
+    {
+      name: "Clinics",
+      data: clinicMonthlyData
+    }
+  ];
+
+  const chartOptions = {
     chart: {
-      fontFamily: "Outfit, sans-serif",
-      type: "bar",
-      height: 180,
-      toolbar: {
-        show: false,
-      },
-    },
-    plotOptions: {
-      bar: {
-        horizontal: false,
-        columnWidth: "39%",
-        borderRadius: 5,
-        borderRadiusApplication: "end",
-      },
-    },
-    dataLabels: {
-      enabled: false,
+      height: 350,
+      type: "line",
+      toolbar: { show: false }
     },
     stroke: {
-      show: true,
-      width: 4,
-      colors: ["transparent"],
+      curve: "smooth",
+      width: 3
+    },
+    dataLabels: { enabled: false },
+    grid: {
+      borderColor: "#f1f1f1"
     },
     xaxis: {
       categories: [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec",
-      ],
-      axisBorder: {
-        show: false,
-      },
-      axisTicks: {
-        show: false,
-      },
+        "Jan","Feb","Mar","Apr","May","Jun",
+        "Jul","Aug","Sep","Oct","Nov","Dec"
+      ]
     },
+    yaxis: [
+      {
+        title: { text: "Patient Queries" }
+      },
+      {
+        opposite: true,
+        title: { text: "Clinics" }
+      }
+    ],
     legend: {
-      show: true,
-      position: "top",
-      horizontalAlign: "left",
-      fontFamily: "Outfit",
+      position: "top"
     },
-    yaxis: {
-      title: {
-        text: undefined,
-      },
-    },
-    grid: {
-      yaxis: {
-        lines: {
-          show: true,
-        },
-      },
-    },
-    fill: {
-      opacity: 1,
-    },
-
-    tooltip: {
-      x: {
-        show: false,
-      },
-      y: {
-        formatter: (val: number) => `${val}`,
-      },
-    },
+    markers: {
+      size: 4
+    }
   };
-  const series = [
-    {
-      name: "Sales",
-      data: [168, 385, 201, 298, 187, 195, 291, 110, 215, 390, 280, 112],
-    },
-  ];
-  const [isOpen, setIsOpen] = useState(false);
 
-  function toggleDropdown() {
-    setIsOpen(!isOpen);
-  }
 
-  function closeDropdown() {
-    setIsOpen(false);
+  if(!canRead){
+    return(<>
+      Permission restricted
+    </>);
   }
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white px-5 pt-5 dark:border-gray-800 dark:bg-white/[0.03] sm:px-6 sm:pt-6">
-      <div className="flex items-center justify-between">
-        <h3 className="text-lg font-semibold text-gray-800 dark:text-white/90">
-          Monthly Sales
-        </h3>
-
-        <div className="relative inline-block">
-          <button onClick={toggleDropdown} className="dropdown-toggle">
-            <MoreDotIcon className="text-gray-400 hover:text-gray-700 dark:hover:text-gray-300" />
-          </button>
-          <Dropdown
-            isOpen={isOpen}
-            onClose={closeDropdown}
-            className="w-40 p-2"
-          >
-            <DropdownItem
-              onItemClick={closeDropdown}
-              className="flex w-full font-normal text-left text-gray-500 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
-            >
-              View More
-            </DropdownItem>
-            <DropdownItem
-              onItemClick={closeDropdown}
-              className="flex w-full font-normal text-left text-gray-500 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
-            >
-              Delete
-            </DropdownItem>
-          </Dropdown>
+    <div className="w-full bg-white border rounded-lg shadow-sm p-6">
+      <div className="flex justify-between mb-6 items-center">
+        <div>
+          <h5 className="text-gray-500 text-sm"></h5>
+          <p className="text-2xl font-semibold">{year} Analytics</p>
         </div>
+
+        <select
+          value={year}
+          onChange={(e) => setYear(Number(e.target.value))}
+          className="text-sm border rounded-md px-3 py-2"
+        >
+          {years.map((yr) => (
+            <option key={yr} value={yr}>
+              {yr}
+            </option>
+          ))}
+        </select>
       </div>
 
-      <div className="max-w-full overflow-x-auto custom-scrollbar">
-        <div className="-ml-5 min-w-[650px] xl:min-w-full pl-2">
-          <ReactApexChart
-            options={options}
-            series={series}
-            type="bar"
-            height={180}
-          />
-        </div>
-      </div>
+     
+      {loading ? (<>
+         <div className="flex justify-center items-center">
+            <div className="w-6 h-6 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+            <span className="ml-3 text-gray-500">Loading data...</span>
+          </div>
+      </>):(<>
+         <Chart
+        options={chartOptions}
+        series={chartSeries}
+        type="line"
+        height={350}
+      />
+      </>)}
     </div>
   );
 }

@@ -10,7 +10,7 @@ export const PermissionProvider = ({ children }) => {
   useEffect(() => {
     try {
       const fromStorage = localStorage.getItem("permissions");
-      console.log("fromStorage",fromStorage);
+    
       if (fromStorage) {
         setPermissions(JSON.parse(fromStorage));
       }
