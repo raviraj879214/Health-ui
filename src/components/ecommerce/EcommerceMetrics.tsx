@@ -33,8 +33,8 @@ export const EcommerceMetrics = () => {
       const result = await res.json();
       setSampleData(result);
     } catch (err) {
-      console.error(err);
-      setError("Something went wrong while loading dashboard.");
+     
+     
     } finally {
       setLoading(false);
     }
