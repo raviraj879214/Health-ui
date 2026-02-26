@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import {ClinicCommssion} from "./clinicCommission";
 import { FaPen } from "react-icons/fa";
 import { clinicHeaders } from "@/components-clinic/utils/clinicHeaders";
+import { AssignCordinator } from "../assignCordinators";
 
 export function ClinicHeroSection({ id }) {
   const [accountDetails, setAccountDetails] = useState(null);
@@ -103,46 +104,56 @@ const onSubmitcommssion =async ()=>{
 
         
 
-         <div className="flex items-center gap-2 text-sm font-medium mt-3">
-                    <span className="text-gray-600">Clinic Commission:</span>
-        
-                   
-
-                    {commissionmodal === true ? (<>
-                          
-                        <div className="flex items-center gap-3">
-                            <input
-                             onChange={(e)=> setCommission(e.target.value)}
-                              type="text"
-                              placeholder="Enter commission %"
-                              className="w-32 px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"/>
-
-                            <button
-                             disabled={commission > 0 ?  false : true}
-                             onClick={()=> onSubmitcommssion()}
-                              type="button"
-                              className="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition"
-                              aria-label="Save commission"
-                            >
-                              Save
-                            </button>
-                        </div>
-
-                    </>):(<>
-                    
-                    <span className="text-green-500 font-semibold">{accountDetails.commission || 0} %</span>
+        <div className="flex items-center gap-2 text-sm font-medium mt-3">
+          <span className="text-gray-600">Clinic Commission:</span>
 
 
-                    <button
-                       onClick={()=> steCommissionModal(true) }
-                        type="button"
-                        className="text-indigo-500 hover:text-indigo-700 transition"
-                        aria-label="Edit commission"
-                    >
-                        <FaPen className="w-4 h-3" />
-                    </button>
-                    </>)}
-                </div>
+
+
+          {commissionmodal === true ? (<>
+
+            <div className="flex items-center gap-3">
+              <input
+                onChange={(e) => setCommission(e.target.value)}
+                type="text"
+                placeholder="Enter commission %"
+                className="w-32 px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
+
+              <button
+                disabled={commission > 0 ? false : true}
+                onClick={() => onSubmitcommssion()}
+                type="button"
+                className="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition"
+                aria-label="Save commission"
+              >
+                Save
+              </button>
+            </div>
+
+          </>) : (<>
+
+            <span className="text-green-500 font-semibold">{accountDetails.commission || 0} %</span>
+
+
+            <button
+              onClick={() => steCommissionModal(true)}
+              type="button"
+              className="text-indigo-500 hover:text-indigo-700 transition"
+              aria-label="Edit commission"
+            >
+              <FaPen className="w-4 h-3" />
+            </button>
+          </>)}
+
+
+           
+
+        </div>
+
+         <div className="mt-6">
+         
+          <AssignCordinator clinicid={accountDetails.uuid} cordinator={accountDetails.cordinator} ></AssignCordinator>
+         </div>
 
 
 

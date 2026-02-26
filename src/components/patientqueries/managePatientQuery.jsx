@@ -282,13 +282,13 @@ export function ManagePatientQueries() {
                 <TableRow key={q.id}>
                   <TableCell className="px-5 py-4 font-medium">
                     
-
+                <p className="m-3 cursor-pointer" onClick={() => onView(q.id)}><b>{q.querycode}</b></p>
                     {rolename === "SuperAdmin" && (<>
 
 
 
                       <div key={q.id} className="mt-3 p-4 bg-gray-50 border rounded-xl">
-                          <p className="m-3 cursor-pointer" onClick={() => onView(q.id)}><b>{q.querycode}</b></p>
+                          
                         <div className="flex items-start gap-3">
 
                           <div className="flex items-center gap-4 p-4 bg-white border border-gray-200 rounded-xl shadow-sm w-fit">

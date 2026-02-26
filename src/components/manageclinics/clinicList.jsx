@@ -8,6 +8,7 @@ import {adminHeaders} from "../utils/adminHeader";
 import { usePermissions } from "@/context/PermissionContext";
 import { formatBrazilDate } from "@/lib/formatDate";
 import { ClinicStatus } from "@/lib/enums/ClinicStatus";
+import {AssignCordinator} from "./assignCordinators";
 
 
 
@@ -96,135 +97,145 @@ export function ClinicListAdmin(){
              <ul className="divide-y divide-default">
             {clinic.map((item)=>(
               <li key={item.id} className="py-4 border-b last:border-b-0">
-  <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 items-start">
+                <div className="grid grid-cols- lg:grid-cols-5 gap-6 items-start">
 
+
+                  <div className="flex items-start gap-3 w-full min-w-0">
+  <div className="w-full min-w-0">
     
-    <div className="flex items-start gap-3">
-      <div>
-        <p className="text-sm font-semibold text-heading truncate">
-          {item.name}
-           <span
-          className={`ml-4 px-3 py-1 rounded-full text-sm font-semibold inline-block
-            ${
-              item.status === ClinicStatus.PENDING
-                ? "bg-yellow-100 text-yellow-700"
-                : item.status === ClinicStatus.ACTIVE
-                ? "bg-green-100 text-green-700"
-                : item.status === ClinicStatus.BLOCKED
+    <p className="text-sm font-semibold text-heading flex flex-wrap items-center gap-2">
+      
+      <span className="break-words">
+        {item.name}
+      </span>
+
+      <span
+        className={`px-3 py-1 rounded-full text-xs sm:text-sm font-semibold whitespace-nowrap
+        ${item.status === ClinicStatus.PENDING
+            ? "bg-yellow-100 text-yellow-700"
+            : item.status === ClinicStatus.ACTIVE
+              ? "bg-green-100 text-green-700"
+              : item.status === ClinicStatus.BLOCKED
                 ? "bg-red-100 text-red-700"
                 : "bg-gray-100 text-gray-600"
-            }`}
-        >
-          {item.status === ClinicStatus.PENDING && "Pending"}
-          {item.status === ClinicStatus.ACTIVE && "Active"}
-          {item.status === ClinicStatus.BLOCKED && "Deactivated"}
-        </span>
-        </p>
-        <p className="text-xs text-body mt-1">
-          Registered on : {formatBrazilDate(item.createdAt)}
-        </p>
-
-          
-        
-      </div>
-    </div>
-
-
-    <div className="bg-white border rounded-lg p-4 shadow-sm">
-      <h3 className="text-xs font-semibold text-gray-700 uppercase tracking-wide border-b pb-2 mb-3">
-        Clinic Managed By
-      </h3>
-               
-      <div className="space-y-2 text-sm text-gray-800">
-        <div className="flex justify-between gap-3">
-          <span className="text-gray-500">Name</span>
-          <span className="font-medium text-right">{item?.clinicUser?.firstname} {item?.clinicUser?.lastname}</span>
-        </div>
-
-        <div className="flex justify-between gap-3">
-          <span className="text-gray-500">Phone</span>
-          <span className="font-medium">{item?.clinicUser?.phone}</span>
-        </div>
-
-        <div className="flex justify-between gap-3">
-          <span className="text-gray-500">Email</span>
-          <span className="font-medium break-all text-right">
-            {item?.clinicUser?.email} 
-          </span>
-        </div>
-      </div>
-
-      {/* Contact Actions */}
-      <div className="flex items-center gap-4 mt-4 pt-3 border-t">
-
-        <a  href={`tel:${item?.clinicUser?.phone}`} title="Call" className="hover:opacity-80">
-          <img width="26" src={`${process.env.NEXT_PUBLIC_URL}/images/brand/phone.svg`} alt="Call" />
-        </a>
-
-
-        {item?.clinicUser?.whatsappNumber && (
-          <a
-            href={`https://wa.me/${item?.clinicUser?.whatsappNumber}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            title="WhatsApp"
-            className="hover:opacity-80"
-          >
-            <img width="26" src={`${process.env.NEXT_PUBLIC_URL}/images/brand/whatsapp.svg`} alt="WhatsApp" />
-          </a>
-        )}
-
-        {item?.clinicUser?.telegramNumber && (
-          <a
-            href={`https://t.me/${item?.clinicUser?.telegramNumber}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            title="Telegram"
-            className="hover:opacity-80"
-          >
-            <img width="26" src={`${process.env.NEXT_PUBLIC_URL}/images/brand/telegram.svg`} alt="Telegram" />
-          </a>
-        )}
-
-        
-      </div>
-    </div>
-
-    {/* Doctors */}
-    <div>
-      <p className="text-xs text-gray-500 mb-2">Doctors</p>
-      <div className="flex -space-x-3">
-        {item.clinicDoctors?.length > 0 ? (
-          item.clinicDoctors.map((itemdoctor) => (
-            <img
-              key={itemdoctor.doctor.id}
-              className="w-10 h-10 border-2 border-white rounded-full object-cover"
-              src={
-                itemdoctor.doctor.image
-                  ? `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/doctors/profilepicture/${itemdoctor.doctor.image}`
-                  : '/images/default-doctor.png'
-              }
-              alt={itemdoctor.doctor.name || 'Doctor'}
-            />
-          ))
-        ) : (
-          <span className="text-sm text-gray-400">No doctors</span>
-        )}
-      </div>
-    </div>
-
-    {/* Actions */}
-    <div className="flex justify-end">
-      <button
-        onClick={() => router.push(`/admin/clinic-details/${item.uuid}`)}
-        className="text-xs font-semibold text-heading bg-neutral-secondary-medium hover:bg-neutral-tertiary-medium px-4 py-2 rounded-base"
+          }`}
       >
-        View Details
-      </button>
+        {item.status === ClinicStatus.PENDING && "Pending"}
+        {item.status === ClinicStatus.ACTIVE && "Active"}
+        {item.status === ClinicStatus.BLOCKED && "Deactivated"}
+      </span>
+
+    </p>
+
+    <p className="text-xs text-body mt-1 break-words">
+      Registered on : {formatBrazilDate(item.createdAt)}
+    </p>
+
+  </div>
+</div>
+
+                  <div className="bg-white border rounded-lg p-4 shadow-sm w-full overflow-hidden">
+  <h3 className="text-xs font-semibold text-gray-700 uppercase tracking-wide border-b pb-2 mb-3">
+    Clinic Managed By
+  </h3>
+
+  <div className="space-y-2 text-sm text-gray-800">
+    
+    <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-3">
+      <span className="text-gray-500">Name</span>
+      <span className="font-medium break-words sm:text-right">
+        {item?.clinicUser?.firstname} {item?.clinicUser?.lastname}
+      </span>
+    </div>
+
+    <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-3">
+      <span className="text-gray-500">Phone</span>
+      <span className="font-medium break-all">
+        {item?.clinicUser?.phone}
+      </span>
+    </div>
+
+    <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-3">
+      <span className="text-gray-500">Email</span>
+      <span className="font-medium break-all sm:text-right">
+        {item?.clinicUser?.email}
+      </span>
     </div>
 
   </div>
-</li>
+
+  <div className="flex flex-wrap items-center gap-4 mt-4 pt-3 border-t">
+    
+    <a href={`tel:${item?.clinicUser?.phone}`} title="Call" className="hover:opacity-80">
+      <img width="26" className="max-w-full" src={`${process.env.NEXT_PUBLIC_URL}/images/brand/phone.svg`} alt="Call" />
+    </a>
+
+    {item?.clinicUser?.whatsappNumber && (
+      <a
+        href={`https://wa.me/${item?.clinicUser?.whatsappNumber}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        title="WhatsApp"
+        className="hover:opacity-80"
+      >
+        <img width="26" className="max-w-full" src={`${process.env.NEXT_PUBLIC_URL}/images/brand/whatsapp.svg`} alt="WhatsApp" />
+      </a>
+    )}
+
+    {item?.clinicUser?.telegramNumber && (
+      <a
+        href={`https://t.me/${item?.clinicUser?.telegramNumber}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        title="Telegram"
+        className="hover:opacity-80"
+      >
+        <img width="26" className="max-w-full" src={`${process.env.NEXT_PUBLIC_URL}/images/brand/telegram.svg`} alt="Telegram" />
+      </a>
+    )}
+
+  </div>
+                  </div>
+
+
+                  <div>
+                    <p className="text-xs text-gray-500 mb-2">Doctors</p>
+                    <div className="flex -space-x-3">
+                      {item.clinicDoctors?.length > 0 ? (
+                        item.clinicDoctors.map((itemdoctor) => (
+                          <img
+                            key={itemdoctor.doctor.id}
+                            className="w-10 h-10 border-2 border-white rounded-full object-cover"
+                            src={
+                              itemdoctor.doctor.image
+                                ? `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/doctors/profilepicture/${itemdoctor.doctor.image}`
+                                : '/images/default-doctor.png'
+                            }
+                            alt={itemdoctor.doctor.name || 'Doctor'}
+                          />
+                        ))
+                      ) : (
+                        <span className="text-sm text-gray-400">No doctors</span>
+                      )}
+                    </div>
+                  </div>
+
+                  <div>
+                    <AssignCordinator clinicid={item.uuid} cordinator={item.cordinator} />
+                  </div>
+
+
+                  <div className="flex justify-end">
+                    <button
+                      onClick={() => router.push(`/admin/clinic-details/${item.uuid}`)}
+                      className="text-xs font-semibold text-heading bg-neutral-secondary-medium hover:bg-neutral-tertiary-medium px-4 py-2 rounded-base"
+                    >
+                      View Details
+                    </button>
+                  </div>
+
+                </div>
+              </li>
 
             ))}
             <li className="flex flex-col items-end">
