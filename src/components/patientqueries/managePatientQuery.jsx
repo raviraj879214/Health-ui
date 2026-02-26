@@ -96,75 +96,114 @@ export function ManagePatientQueries() {
 
 
   const statusLabel = (status) => {
+  const base =
+    "inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold rounded-full border";
 
-    switch (status) {
-  case PatientQueryStatus.PENDING:
-    return (
-      <span className="inline-flex items-center gap-1 text-yellow-600 font-medium">
-        {/* Clock Icon */}
-        <svg
-          className="w-4 h-4"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          strokeWidth="2"
+  switch (status) {
+    case PatientQueryStatus.PENDING:
+      return (
+        <span
+          className={`${base} 
+          bg-yellow-50 text-yellow-700 border-yellow-200
+          dark:bg-yellow-900/30 dark:text-yellow-300 dark:border-yellow-700`}
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-          />
-        </svg>
-        Awaiting Dispatch
-      </span>
-    );
+          <svg
+            className="w-3.5 h-3.5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            strokeWidth="2"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          Awaiting Dispatch
+        </span>
+      );
 
-  case PatientQueryStatus.ASSIGNED:
-    return (
-      <span className="inline-flex items-center gap-1 text-blue-600 font-medium">
-        {/* Send / Arrow Icon */}
-        <svg
-          className="w-4 h-4"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          strokeWidth="2"
+    case PatientQueryStatus.ASSIGNED:
+      return (
+        <span
+          className={`${base} 
+          bg-blue-50 text-blue-700 border-blue-200
+          dark:bg-blue-900/30 dark:text-blue-300 dark:border-blue-700`}
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M5 12h14M12 5l7 7-7 7"
-          />
-        </svg>
-        Forwarded to Clinic
-      </span>
-    );
+          <svg
+            className="w-3.5 h-3.5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            strokeWidth="2"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M5 12h14M12 5l7 7-7 7"
+            />
+          </svg>
+          Forwarded to Clinic
+        </span>
+      );
 
-  case PatientQueryStatus.COMPLETED:
-    return (
-      <span className="inline-flex items-center gap-1 text-green-600 font-medium">
-        {/* Check Circle Icon */}
-        <svg
-          className="w-4 h-4"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          strokeWidth="2"
+    case PatientQueryStatus.CLOSEDBYCLINIC:
+      return (
+        <span
+          className={`${base} 
+          bg-green-50 text-green-700 border-green-200
+          dark:bg-green-900/30 dark:text-green-300 dark:border-green-700`}
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-          />
-        </svg>
-        Successfully Closed
-      </span>
-    );
+          <svg
+            className="w-3.5 h-3.5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            strokeWidth="2"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          Closed by Clinic
+        </span>
+      );
 
-  default:
-    return "—";
-}
-  };
+    case PatientQueryStatus.CLOSEDBYCORDINATOR:
+      return (
+        <span
+          className={`${base} 
+          bg-emerald-50 text-emerald-700 border-emerald-200
+          dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-700`}
+        >
+          <svg
+            className="w-3.5 h-3.5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            strokeWidth="2"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          Closed by Coordinator
+        </span>
+      );
+
+    default:
+      return (
+        <span className={`${base} bg-gray-50 text-gray-600 border-gray-200`}>
+          —
+        </span>
+      );
+  }
+};
 
   const onView= async(data)=>{
     setQueryid(data);

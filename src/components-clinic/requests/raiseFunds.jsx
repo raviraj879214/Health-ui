@@ -161,7 +161,10 @@ export function RaiseFunds({patientqueryid, requestedFund ,totalFundsReceived ,t
                     </h2>
                               
                     <>
-                        <div className="h-fit overflow-auto">
+                       
+                        {requestedfunds.length > 0 ? (
+                             <div className="h-fit overflow-auto">
+
 
                             {requestedfunds.map((item, index) => {
                                 const isLast = index === requestedfunds.length - 1;
@@ -198,10 +201,13 @@ export function RaiseFunds({patientqueryid, requestedFund ,totalFundsReceived ,t
                                 );
                             })}
 
-                            
-
-
+                        
                         </div>
+
+                        ):((
+                            <p className="text-red-700">No requested funds</p>
+
+                        ))}
                     </>
 
 
@@ -214,7 +220,10 @@ export function RaiseFunds({patientqueryid, requestedFund ,totalFundsReceived ,t
                     </h2>
                            
 
-                            <>
+                           
+
+                    {requesttranfer.length > 0 ? (
+                         <>
                         <div className="h-fit overflow-auto">
 
                             {requesttranfer.map((item, index) => {
@@ -257,7 +266,12 @@ export function RaiseFunds({patientqueryid, requestedFund ,totalFundsReceived ,t
 
 
                         </div>
+
                     </>
+                    ):(
+                         <p className="text-red-700">No received funds</p>
+
+                    )}
 
                 </div>
 

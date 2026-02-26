@@ -6,6 +6,8 @@ import Label from "@/components/form/Label";
 import { formatBrazilDate } from "@/lib/formatDate";
 import{RaiseFunds} from "./raiseFunds";
 import { brazilianCurrency } from "@/lib/brazilianCurrency";
+import {QueryStatus} from "./queryStatus";
+import { PatientQueryStatus } from "@/lib/enums/patientQueryStatus";
 
 
 
@@ -15,7 +17,7 @@ export function RequestDetails({id}){
     const [totalfundrequested,setTotalFundRequested] = useState(0);
     const [totalfundreceived,setTotalFundReceived] = useState(0);
 
-
+    
 
     useEffect(() => {
         if(id){
@@ -50,14 +52,55 @@ export function RequestDetails({id}){
 
     const remainingAmount = parseInt((((querydetails.finalPrice) - ((querydetails.clinic?.commission * querydetails.finalPrice)/100)) - totalfundreceived));
 
+
+    const getStatusBadge = (status) => {
+        switch (status) {
+            case PatientQueryStatus.PENDING:
+                return (
+                    <span className="px-3 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-700 border border-yellow-200">
+                        Awaiting Dispatch
+                    </span>
+                );
+
+            case PatientQueryStatus.ASSIGNED:
+                return (
+                    <span className="px-3 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-700 border border-blue-200">
+                        Forwarded to Clinic
+                    </span>
+                );
+
+            case PatientQueryStatus.CLOSEDBYCLINIC:
+                return (
+                    <span className="px-3 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-700 border border-green-200">
+                         Closed By Clinic
+                    </span>
+                );
+
+            case PatientQueryStatus.CLOSEDBYCORDINATOR:
+                return (
+                    <span className="px-3 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-700 border border-red-200">
+                        Closed by Coordinator
+                    </span>
+                );
+
+            default:
+                return (
+                    <span className="px-3 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-600 border border-gray-200">
+                        —
+                    </span>
+                );
+        }
+    };
+    
     return(<>
 
         <ComponentCard className="border theme-border">
-
+            
 
             <div className="grid grid-cols-1 sm:grid-cols-4 gap-6">
-
+                      
                 <div>
+                    
                     <Label>Patient Requested No</Label>
                     <div className="text-gray-700"><b>{querydetails?.querycode}</b></div>
                 </div>
@@ -100,11 +143,17 @@ export function RequestDetails({id}){
                         {querydetails.procedureTimeValue || "--"}
                     </p>
                 </div>
+
                 <div>
                     <p className="text-xs text-gray-500 mb-1">Clinic</p>
                     <p className="text-sm text-gray-800 font-medium">
                         {querydetails.clinic?.name || "--"}
                     </p>
+                </div>
+                <div>
+                    <p className="text-xs text-gray-500 mb-1">Query Status</p>
+                    {getStatusBadge(querydetails.status)} 
+                
                 </div>
 
                 
@@ -274,7 +323,7 @@ export function RequestDetails({id}){
 
 
                 <div>
-                    <Label>Maximum Clinic Amount</Label>
+                        <Label>Maximum Clinic Amount</Label>
                    
                         <div className="h-12 flex items-center justify-end px-4 rounded-lg
                                         border border-green-400 bg-green-50
@@ -344,13 +393,11 @@ export function RequestDetails({id}){
             ) : null}
 
 
+            <QueryStatus querydetails={querydetails} onData={(updatedData) => setQueryDetails(prev => ({...prev,...updatedData}))}  />
 
 
+    
 
 
-       
-
-
-        
     </>);
 }

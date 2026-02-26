@@ -76,9 +76,11 @@ export function RequestList() {
       case PatientQueryStatus.PENDING:
         return <span className="text-yellow-600">Pending</span>;
       case PatientQueryStatus.ASSIGNED:
-        return <span className="text-blue-600">Assigned</span>;
-      case PatientQueryStatus.COMPLETED:
-        return <span className="text-green-600">Closed</span>;
+        return <span className="text-blue-600">Forwarded To Clinic</span>;
+      case PatientQueryStatus.CLOSEDBYCLINIC:
+        return <span className="text-green-600">Closed By Clinic</span>;
+      case PatientQueryStatus.CLOSEDBYCORDINATOR:
+        return <span className="text-green-600">Closed By Coordinator</span>;
       default:
         return "—";
     }
