@@ -8,6 +8,7 @@ import{RaiseFunds} from "./raiseFunds";
 import { brazilianCurrency } from "@/lib/brazilianCurrency";
 import {QueryStatus} from "./queryStatus";
 import { PatientQueryStatus } from "@/lib/enums/patientQueryStatus";
+import {FinalPriceModule} from "./finalPriceModule";
 
 
 
@@ -282,6 +283,23 @@ export function RequestDetails({id}){
             )}
         </ComponentCard>
 
+
+
+         <FinalPriceModule patientqueryfinalprice={querydetails.PatientQueryFinalPrice}
+         
+          onData={(updatedata) =>
+  setQueryDetails((prev) => ({
+    ...prev,
+    PatientQueryFinalPrice: prev.PatientQueryFinalPrice.map((item) =>
+      item.id === updatedata.id
+        ? { ...item, ...updatedata }   // 🔥 update this row
+        : item                         // keep others same
+    )
+  }))
+}
+        
+        />
+       
         <ComponentCard className="mt-4 p-5 bg-white rounded-xl shadow-md border theme-border">
 
             <div className="flex items-center justify-between mb-4">

@@ -15,6 +15,8 @@ import { toast } from "react-toastify";
 import { ButtonSpinner } from "@/reusable/buttonSpinner";
 import {OtherInformation} from "./otherInformation";
 import { useRouter } from "next/navigation";
+import { Table, TableHeader } from "../ui/table";
+import { PackageQueryFinalPriceStatus } from "@/lib/enums/patientQueryFinalPriceStatus";
 
 
 
@@ -23,6 +25,7 @@ import { useRouter } from "next/navigation";
 export function PatientQueryDetails({ id }) {
 
     const [querydetails,setQueryDetails] = useState({});
+    const [queryfinalPriceDetails,setqueryfinalDetails] = useState([]);
     const {register,handleSubmit,formState:{errors},setValue,getValues , setError , clearErrors} = useForm();
     const [copied, setCopied] = useState(false);
 
@@ -48,6 +51,11 @@ export function PatientQueryDetails({ id }) {
         if (res.ok) {
             const result = await res.json();
             setQueryDetails(result.data);
+           setqueryfinalDetails(
+              result.data.PatientQueryFinalPrice
+                ?.slice() // prevent mutation
+                ?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+            );
         }
     }
 
@@ -515,6 +523,77 @@ export function PatientQueryDetails({ id }) {
       Enter the final agreed amount to generate a secure Stripe payment link. 
     </p>
 
+            <table className="w-full text-sm text-left text-body border border-default rounded-lg overflow-hidden">
+              <thead className="bg-neutral-secondary-soft border-b border-default">
+                <tr>
+                  <th className="px-6 py-3 font-medium">Final Price</th>
+                  <th className="px-6 py-3 font-medium"> Clinic</th>
+                  <th className="px-6 py-3 font-medium">Reason from Clinic</th>
+                  <th className="px-6 py-3 font-medium">Created Date</th>
+                  <th className="px-6 py-3 font-medium">Status</th>
+                </tr>
+              </thead>
+
+              <tbody>
+
+
+
+                {queryfinalPriceDetails?.map((item) => (
+
+                  <tr key={item.id} className="border-b border-default">
+                    <td className="px-6 py-4"><b>{brazilianCurrency(item.finalPrice)}</b></td>
+                   <td className="px-6 py-4">
+  <div className="flex items-center gap-3">
+    
+    {/* Avatar */}
+    <div className="w-9 h-9 flex items-center justify-center rounded-full 
+                    bg-blue-100 text-blue-700 font-semibold text-sm">
+      {item.Clinic?.name?.charAt(0)?.toUpperCase() || "C"}
+    </div>
+
+    {/* Clinic Name */}
+    <span className="font-medium text-gray-800">
+      {item.Clinic?.name || "--"}
+    </span>
+
+  </div>
+</td>
+                    <td className="px-6 py-4">{item.reason || "--"}</td>
+                    <td className="px-6 py-4">{formatBrazilDate(item.createdAt)}</td>
+                    <td className="px-6 py-4">
+
+
+                      {item.status === PackageQueryFinalPriceStatus.PENDING && (<>
+                        <span className="px-3 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-green-700">
+                          Sent Request
+                        </span>
+                      </>)}
+
+                      {item.status === PackageQueryFinalPriceStatus.REJECT && (<>
+                        <span className="px-3 py-1 text-xs font-semibold rounded-full bg-red-100 text-green-700">
+                          Rejected
+                        </span>
+                      </>)}
+
+                      {item.status === PackageQueryFinalPriceStatus.ACCEPT && (<>
+                        <span className="px-3 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-700">
+                          Accepted
+                        </span>
+                      </>)}
+
+
+                    </td>
+                  </tr>
+
+                ))}
+
+
+
+              </tbody>
+            </table>
+
+
+
     {/* Actions */}
     <div className="mt-8 flex justify-end">
         {querydetails?.finalPrice?.trim() ?(
@@ -548,22 +627,11 @@ export function PatientQueryDetails({ id }) {
     </div>
 
   </form>
+  
 </div>
 
 
 <div className="relative w-full p-6 bg-white dark:bg-gray-900 rounded-2xl shadow-lg">
-
-   
-
-    {/* {querydetails?.packages && (
-       <div className="absolute inset-0 z-20 bg-white/20 dark:bg-gray-900/20 rounded-2xl flex items-center justify-center" style={{ backdropFilter: "blur(2px)" }}>
-          <div className="px-4 py-3 bg-yellow-50/90 border border-yellow-300 text-yellow-800 rounded-lg text-sm font-medium shadow">
-           Accessible after package confirmation.
-          </div>
-        </div>
-    )} */}
-
-
  
     <div>
 
@@ -698,7 +766,7 @@ export function PatientQueryDetails({ id }) {
      
 
     </div>
-  </div>
+</div>
 
 
 
