@@ -27,7 +27,7 @@ export function QueryStatus({querydetails , onData}) {
             headers : await clinicHeaders(),
             body : JSON.stringify({
                 queryid: querydetails.id ,
-                status: PatientQueryStatus.CLOSEDBYCLINIC,
+                status: PatientQueryStatus.REJECT,
                 reason : data.message,
             })
         });
@@ -41,7 +41,6 @@ export function QueryStatus({querydetails , onData}) {
             onData(result.data);
 
         }
-
          setButton(false);
     }
 

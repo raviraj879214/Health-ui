@@ -67,24 +67,103 @@ export function RequestList() {
     }
   }
 
+const statusLabel = (status) => {
+
+  const baseStyle =
+    "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold";
+
+  switch (status) {
+
+    // 🟡 Pending
+    case PatientQueryStatus.PENDING:
+      return (
+        <span className={`${baseStyle} bg-yellow-100 text-yellow-700`}>
+          <svg
+            className="w-3.5 h-3.5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            strokeWidth="2"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          Pending
+        </span>
+      );
+
+    // 🔵 Forwarded
+    case PatientQueryStatus.ASSIGNED:
+      return (
+        <span className={`${baseStyle} bg-blue-100 text-blue-700`}>
+          <svg
+            className="w-3.5 h-3.5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            strokeWidth="2"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M17 8l4 4m0 0l-4 4m4-4H3"
+            />
+          </svg>
+          Forwarded
+        </span>
+      );
+
+    // 🟢 Accepted
+    case PatientQueryStatus.ACCEPT:
+      return (
+        <span className={`${baseStyle} bg-green-100 text-green-700`}>
+          <svg
+            className="w-3.5 h-3.5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            strokeWidth="2"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M5 13l4 4L19 7"
+            />
+          </svg>
+          Accepted
+        </span>
+      );
+
+    // 🔴 Rejected
+    case PatientQueryStatus.REJECT:
+      return (
+        <span className={`${baseStyle} bg-red-100 text-red-700`}>
+          <svg
+            className="w-3.5 h-3.5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            strokeWidth="2"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+          Rejected
+        </span>
+      );
+
+    default:
+      return <span className="text-gray-400 text-sm">—</span>;
+  }
+};
 
 
-
-  const statusLabel = (status) => {
-
-    switch (status) {
-      case PatientQueryStatus.PENDING:
-        return <span className="text-yellow-600">Pending</span>;
-      case PatientQueryStatus.ASSIGNED:
-        return <span className="text-blue-600">Forwarded To Clinic</span>;
-      case PatientQueryStatus.CLOSEDBYCLINIC:
-        return <span className="text-green-600">Closed By Clinic</span>;
-      case PatientQueryStatus.CLOSEDBYCORDINATOR:
-        return <span className="text-green-600">Closed By Coordinator</span>;
-      default:
-        return "—";
-    }
-  };
 
   
 

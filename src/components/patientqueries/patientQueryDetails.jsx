@@ -188,115 +188,91 @@ export function PatientQueryDetails({ id }) {
       }
 
 
-        const statusLabel = (status) => {
-        const base =
-          "inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold rounded-full border";
-      
-        switch (status) {
-          case PatientQueryStatus.PENDING:
-            return (
-              <span
-                className={`${base} 
-                bg-yellow-50 text-yellow-700 border-yellow-200
-                dark:bg-yellow-900/30 dark:text-yellow-300 dark:border-yellow-700`}
-              >
-                <svg
-                  className="w-3.5 h-3.5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  strokeWidth="2"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-                Awaiting Dispatch
-              </span>
-            );
-      
-          case PatientQueryStatus.ASSIGNED:
-            return (
-              <span
-                className={`${base} 
-                bg-blue-50 text-blue-700 border-blue-200
-                dark:bg-blue-900/30 dark:text-blue-300 dark:border-blue-700`}
-              >
-                <svg
-                  className="w-3.5 h-3.5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  strokeWidth="2"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M5 12h14M12 5l7 7-7 7"
-                  />
-                </svg>
-                Forwarded to Clinic
-              </span>
-            );
-      
-          case PatientQueryStatus.CLOSEDBYCLINIC:
-            return (
-              <span
-                className={`${base} 
-                bg-green-50 text-green-700 border-green-200
-                dark:bg-green-900/30 dark:text-green-300 dark:border-green-700`}
-              >
-                <svg
-                  className="w-3.5 h-3.5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  strokeWidth="2"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-                Closed by Clinic
-              </span>
-            );
-      
-          case PatientQueryStatus.CLOSEDBYCORDINATOR:
-            return (
-              <span
-                className={`${base} 
-                bg-emerald-50 text-emerald-700 border-emerald-200
-                dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-700`}
-              >
-                <svg
-                  className="w-3.5 h-3.5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  strokeWidth="2"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-                Closed by Coordinator
-              </span>
-            );
-      
-          default:
-            return (
-              <span className={`${base} bg-gray-50 text-gray-600 border-gray-200`}>
-                —
-              </span>
-            );
-        }
-      };
+       const statusLabel = (status) => {
+  const base =
+    "inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold rounded-full border";
+
+  const statusConfig = {
+    [PatientQueryStatus.PENDING]: {
+      label: "Awaiting Dispatch",
+      style:
+        "bg-yellow-50 text-yellow-700 border-yellow-200 dark:bg-yellow-900/30 dark:text-yellow-300 dark:border-yellow-700",
+      icon: (
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+        />
+      ),
+    },
+
+    [PatientQueryStatus.ASSIGNED]: {
+      label: "Forwarded to Clinic",
+      style:
+        "bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-900/30 dark:text-blue-300 dark:border-blue-700",
+      icon: (
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M5 12h14M12 5l7 7-7 7"
+        />
+      ),
+    },
+
+    [PatientQueryStatus.ACCEPT]: {
+      label: "Accepted",
+      style:
+        "bg-green-50 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-300 dark:border-green-700",
+      icon: (
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+        />
+      ),
+    },
+
+    [PatientQueryStatus.REJECT]: {
+      label: "Rejected",
+      style:
+        "bg-red-50 text-red-700 border-red-200 dark:bg-red-900/30 dark:text-red-300 dark:border-red-700",
+      icon: (
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M6 18L18 6M6 6l12 12"
+        />
+      ),
+    },
+  };
+
+  const current = statusConfig[status];
+
+  if (!current) {
+    return (
+      <span className={`${base} bg-gray-50 text-gray-600 border-gray-200`}>
+        —
+      </span>
+    );
+  }
+
+  return (
+    <span className={`${base} ${current.style}`}>
+      <svg
+        className="w-3.5 h-3.5"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        strokeWidth="2"
+      >
+        {current.icon}
+      </svg>
+      {current.label}
+    </span>
+  );
+};
+
+
    
 
     return (<>
@@ -319,7 +295,7 @@ export function PatientQueryDetails({ id }) {
         <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-4 items-start">
 
 
-          {(PatientQueryStatus.PENDING === querydetails.status && querydetails.clinicId !== null) &&    (<>
+          {((PatientQueryStatus.PENDING === querydetails.status || PatientQueryStatus.REJECT === querydetails.status) && querydetails.clinicId !== null) &&    (<>
 
             <p className="text-sm font-medium text-gray-700">
               On clicking “Send to Clinic”, the patient’s query details will be sent to the selected clinic.
@@ -537,27 +513,27 @@ export function PatientQueryDetails({ id }) {
               <tbody>
 
 
-
-                {queryfinalPriceDetails?.map((item) => (
+                    {queryfinalPriceDetails.length  > 0 ? (<>
+                          {queryfinalPriceDetails?.map((item) => (
 
                   <tr key={item.id} className="border-b border-default">
                     <td className="px-6 py-4"><b>{brazilianCurrency(item.finalPrice)}</b></td>
-                   <td className="px-6 py-4">
-  <div className="flex items-center gap-3">
-    
-    {/* Avatar */}
-    <div className="w-9 h-9 flex items-center justify-center rounded-full 
+                    <td className="px-6 py-4">
+                      <div className="flex items-center gap-3">
+
+                        {/* Avatar */}
+                        <div className="w-9 h-9 flex items-center justify-center rounded-full 
                     bg-blue-100 text-blue-700 font-semibold text-sm">
-      {item.Clinic?.name?.charAt(0)?.toUpperCase() || "C"}
-    </div>
+                          {item.Clinic?.name?.charAt(0)?.toUpperCase() || "C"}
+                        </div>
 
-    {/* Clinic Name */}
-    <span className="font-medium text-gray-800">
-      {item.Clinic?.name || "--"}
-    </span>
+                        {/* Clinic Name */}
+                        <span className="font-medium text-gray-800">
+                          {item.Clinic?.name || "--"}
+                        </span>
 
-  </div>
-</td>
+                      </div>
+                    </td>
                     <td className="px-6 py-4">{item.reason || "--"}</td>
                     <td className="px-6 py-4">{formatBrazilDate(item.createdAt)}</td>
                     <td className="px-6 py-4">
@@ -565,7 +541,7 @@ export function PatientQueryDetails({ id }) {
 
                       {item.status === PackageQueryFinalPriceStatus.PENDING && (<>
                         <span className="px-3 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-green-700">
-                          Sent Request
+                          Suggested Price
                         </span>
                       </>)}
 
@@ -586,9 +562,9 @@ export function PatientQueryDetails({ id }) {
                   </tr>
 
                 ))}
-
-
-
+                    </>):(<>
+                      <p className="text-red-600 m-3">No suggested price found</p>
+                    </>)}
               </tbody>
             </table>
 

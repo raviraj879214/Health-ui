@@ -95,115 +95,90 @@ export function ManagePatientQueries() {
 
 
 
-  const statusLabel = (status) => {
+const statusLabel = (status) => {
   const base =
     "inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold rounded-full border";
 
-  switch (status) {
-    case PatientQueryStatus.PENDING:
-      return (
-        <span
-          className={`${base} 
-          bg-yellow-50 text-yellow-700 border-yellow-200
-          dark:bg-yellow-900/30 dark:text-yellow-300 dark:border-yellow-700`}
-        >
-          <svg
-            className="w-3.5 h-3.5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            strokeWidth="2"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-          Awaiting Dispatch
-        </span>
-      );
+  const statusConfig = {
+    [PatientQueryStatus.PENDING]: {
+      label: "Awaiting Dispatch",
+      style:
+        "bg-yellow-50 text-yellow-700 border-yellow-200 dark:bg-yellow-900/30 dark:text-yellow-300 dark:border-yellow-700",
+      icon: (
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+        />
+      ),
+    },
 
-    case PatientQueryStatus.ASSIGNED:
-      return (
-        <span
-          className={`${base} 
-          bg-blue-50 text-blue-700 border-blue-200
-          dark:bg-blue-900/30 dark:text-blue-300 dark:border-blue-700`}
-        >
-          <svg
-            className="w-3.5 h-3.5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            strokeWidth="2"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M5 12h14M12 5l7 7-7 7"
-            />
-          </svg>
-          Forwarded to Clinic
-        </span>
-      );
+    [PatientQueryStatus.ASSIGNED]: {
+      label: "Forwarded to Clinic",
+      style:
+        "bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-900/30 dark:text-blue-300 dark:border-blue-700",
+      icon: (
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M5 12h14M12 5l7 7-7 7"
+        />
+      ),
+    },
 
-    case PatientQueryStatus.CLOSEDBYCLINIC:
-      return (
-        <span
-          className={`${base} 
-          bg-green-50 text-green-700 border-green-200
-          dark:bg-green-900/30 dark:text-green-300 dark:border-green-700`}
-        >
-          <svg
-            className="w-3.5 h-3.5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            strokeWidth="2"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-          Closed by Clinic
-        </span>
-      );
+    [PatientQueryStatus.ACCEPT]: {
+      label: "Accepted",
+      style:
+        "bg-green-50 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-300 dark:border-green-700",
+      icon: (
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+        />
+      ),
+    },
 
-    case PatientQueryStatus.CLOSEDBYCORDINATOR:
-      return (
-        <span
-          className={`${base} 
-          bg-emerald-50 text-emerald-700 border-emerald-200
-          dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-700`}
-        >
-          <svg
-            className="w-3.5 h-3.5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            strokeWidth="2"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-          Closed by Coordinator
-        </span>
-      );
+    [PatientQueryStatus.REJECT]: {
+      label: "Rejected",
+      style:
+        "bg-red-50 text-red-700 border-red-200 dark:bg-red-900/30 dark:text-red-300 dark:border-red-700",
+      icon: (
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M6 18L18 6M6 6l12 12"
+        />
+      ),
+    },
+  };
 
-    default:
-      return (
-        <span className={`${base} bg-gray-50 text-gray-600 border-gray-200`}>
-          —
-        </span>
-      );
+  const current = statusConfig[status];
+
+  if (!current) {
+    return (
+      <span className={`${base} bg-gray-50 text-gray-600 border-gray-200`}>
+        —
+      </span>
+    );
   }
+
+  return (
+    <span className={`${base} ${current.style}`}>
+      <svg
+        className="w-3.5 h-3.5"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        strokeWidth="2"
+      >
+        {current.icon}
+      </svg>
+      {current.label}
+    </span>
+  );
 };
+
 
   const onView= async(data)=>{
     setQueryid(data);

@@ -9,6 +9,8 @@ import { brazilianCurrency } from "@/lib/brazilianCurrency";
 import {QueryStatus} from "./queryStatus";
 import { PatientQueryStatus } from "@/lib/enums/patientQueryStatus";
 import {FinalPriceModule} from "./finalPriceModule";
+import { toast } from "react-toastify";
+import { ButtonSpinner } from "@/reusable/buttonSpinner";
 
 
 
@@ -17,6 +19,7 @@ export function RequestDetails({id}){
     const [querydetails,setQueryDetails] = useState({});
     const [totalfundrequested,setTotalFundRequested] = useState(0);
     const [totalfundreceived,setTotalFundReceived] = useState(0);
+    const [button,setButton] = useState(false);
 
     
 
@@ -55,48 +58,217 @@ export function RequestDetails({id}){
 
 
     const getStatusBadge = (status) => {
-        switch (status) {
-            case PatientQueryStatus.PENDING:
-                return (
-                    <span className="px-3 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-700 border border-yellow-200">
-                        Awaiting Dispatch
-                    </span>
-                );
+      const baseStyle =
+    "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold";
 
-            case PatientQueryStatus.ASSIGNED:
-                return (
-                    <span className="px-3 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-700 border border-blue-200">
-                        Forwarded to Clinic
-                    </span>
-                );
+  switch (status) {
 
-            case PatientQueryStatus.CLOSEDBYCLINIC:
-                return (
-                    <span className="px-3 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-700 border border-green-200">
-                         Closed By Clinic
-                    </span>
-                );
+    // 🟡 Pending
+    case PatientQueryStatus.PENDING:
+      return (
+        <span className={`${baseStyle} bg-yellow-100 text-yellow-700`}>
+          <svg
+            className="w-3.5 h-3.5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            strokeWidth="2"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          Pending
+        </span>
+      );
 
-            case PatientQueryStatus.CLOSEDBYCORDINATOR:
-                return (
-                    <span className="px-3 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-700 border border-red-200">
-                        Closed by Coordinator
-                    </span>
-                );
+    // 🔵 Forwarded
+    case PatientQueryStatus.ASSIGNED:
+      return (
+        <span className={`${baseStyle} bg-blue-100 text-blue-700`}>
+          <svg
+            className="w-3.5 h-3.5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            strokeWidth="2"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M17 8l4 4m0 0l-4 4m4-4H3"
+            />
+          </svg>
+          Forwarded
+        </span>
+      );
 
-            default:
-                return (
-                    <span className="px-3 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-600 border border-gray-200">
-                        —
-                    </span>
-                );
-        }
+    // 🟢 Accepted
+    case PatientQueryStatus.ACCEPT:
+      return (
+        <span className={`${baseStyle} bg-green-100 text-green-700`}>
+          <svg
+            className="w-3.5 h-3.5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            strokeWidth="2"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M5 13l4 4L19 7"
+            />
+          </svg>
+          Accepted
+        </span>
+      );
+
+    // 🔴 Rejected
+    case PatientQueryStatus.REJECT:
+      return (
+        <span className={`${baseStyle} bg-red-100 text-red-700`}>
+          <svg
+            className="w-3.5 h-3.5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            strokeWidth="2"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+          Rejected
+        </span>
+      );
+
+    default:
+      return <span className="text-gray-400 text-sm">—</span>;
+  }
     };
+
+
+  
+
+    const acceptRequest = async()=>{
+
+
+
+          setButton(true);
+        
+                const res= await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-clinic-request/update-patient-query-status`,{
+                    method : "Put",
+                    headers : await clinicHeaders(),
+                    body : JSON.stringify({
+                        queryid: querydetails.id,
+                        status: PatientQueryStatus.ACCEPT,
+                        reason : '',
+                    })
+                });
+                if(res.ok){
+                    const result= await res.json();
+        
+                     toast.success("The patient query accepted successfully",{
+                        position : "bottom-right",
+                        autoClose : 3000
+                     });
+                    setQueryDetails(prev => ({...prev,...result.data}));
+        
+                }
+                 setButton(false);
+    }
+
+
+    const rejectRequest = async()=>{
+
+
+
+        setButton(true);
+        
+                const res= await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-clinic-request/update-patient-query-status`,{
+                    method : "Put",
+                    headers : await clinicHeaders(),
+                    body : JSON.stringify({
+                        queryid: querydetails.id,
+                        status: PatientQueryStatus.REJECT,
+                        reason : '',
+                    })
+                });
+                if(res.ok){
+                    const result= await res.json();
+        
+                     toast.success("The patient query rejected successfully",{
+                        position : "bottom-right",
+                        autoClose : 3000
+                     });
+
+                     setQueryDetails(prev => ({...prev,...result.data}));
+                    
+        
+                }
+                 setButton(false);
+
+    }
+
+    
+
     
     return(<>
 
+
+
         <ComponentCard className="border theme-border">
             
+
+            {PatientQueryStatus.ASSIGNED === querydetails.status &&(<>
+                <div class="grid grid-cols-1 sm:grid-cols-1 gap-6">
+                <div class=" bg-white shadow-lg rounded-2xl p-6 w-full ">
+                    <div class="flex items-center justify-between gap-6">
+
+                        <div>
+                            <h2 class="text-lg font-semibold text-gray-800 mb-1">
+                             Request Received
+                            </h2>
+                            <p class="text-gray-600 text-sm">
+                                The <b>{process.env.NEXT_PUBLIC_PROJECT_NAME}</b> has sent a new request.
+                                Please review the details below and choose to accept or reject it.
+                                Before giving final acceptance, ensure that the final deal price has been agreed upon. Once the price is confirmed, you may proceed with the final acceptance.                                
+                            </p>
+                        </div>
+
+
+                        <div class="flex gap-3 shrink-0">
+                            <button 
+                             onClick={()=> acceptRequest()}
+                            disabled={button}
+                            class="bg-green-500 hover:bg-green-600 text-white font-medium px-5 py-2 rounded-xl transition">
+                               
+                                {button ? (<><ButtonSpinner></ButtonSpinner></>):(<>
+                                     Accept
+                                </>)}
+
+                            </button>
+                            <button
+                            onClick={()=> rejectRequest()}
+                            disabled={button}
+                            class="bg-red-500 hover:bg-red-600 text-white font-medium px-5 py-2 rounded-xl transition">
+                                
+                                 {button ? (<><ButtonSpinner></ButtonSpinner></>):(<>
+                                     Reject
+                                </>)}
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            </>)}
+
 
             <div className="grid grid-cols-1 sm:grid-cols-4 gap-6">
                       
@@ -411,7 +583,7 @@ export function RequestDetails({id}){
             ) : null}
 
 
-            <QueryStatus querydetails={querydetails} onData={(updatedData) => setQueryDetails(prev => ({...prev,...updatedData}))}  />
+            {/* <QueryStatus querydetails={querydetails} onData={(updatedData) => setQueryDetails(prev => ({...prev,...updatedData}))}  /> */}
 
 
     
