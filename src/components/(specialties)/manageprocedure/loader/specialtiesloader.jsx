@@ -8,6 +8,8 @@ export function SpecialtiesLoader(){
 
    <div className="grid grid-cols-12 gap-6">
   <div className="col-span-12 md:col-span-12">
+
+    
     <div className="w-full bg-white shadow-md rounded-2xl p-4 space-y-4 animate-pulse">
       
       <div className="h-48 bg-gray-300 rounded-xl"></div>
