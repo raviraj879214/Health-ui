@@ -5,6 +5,7 @@ import { brazilianCurrency } from "@/lib/brazilianCurrency";
 import { PatientQueryStatus } from "@/lib/enums/patientQueryStatus";
 import { formatBrazilDate } from "@/lib/formatDate";
 import { ButtonSpinner } from "@/reusable/buttonSpinner";
+import PatientQueryStatusBadge from "@/reusable/StatusBadge";
 import { useState, useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -219,12 +220,13 @@ const markasPaid= async(id)=>{
 
 
   return (
+
     <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 mb-5">
       <h2 className="text-2xl font-bold mb-6">Payout Details</h2>
 
-      {sampleData.map((item) => (
+      {sampleData.map((item) => (<>
 
-        <ComponentCard
+          <ComponentCard
           key={item.id}
           className="mb-4 transition-all hover:shadow-lg ">
           
@@ -244,7 +246,7 @@ const markasPaid= async(id)=>{
                   }}>
                   <h3 className="text-lg font-semibold">
                       # {item.querycode}
-                      {statusLabel(item.status)}
+                      <PatientQueryStatusBadge className="ml-3"  status={item.status} />
                   </h3>
 
                   <span className="text-gray-400 text-xl">
@@ -254,21 +256,19 @@ const markasPaid= async(id)=>{
 
 
          
-          <div
-  ref={(el) => (bodyRefs.current[item.id] = el)}
-  className={`overflow-hidden transition-all duration-300 ease-in-out`}
-  style={{
-    maxHeight: openItem === item.id
-      ? bodyRefs.current[item.id]
-        ? bodyRefs.current[item.id].scrollHeight + "px"
-        : "1000px"
-      : "0px",
-    opacity: openItem === item.id ? 1 : 0,
-  }}
->
+                 <div
+                        ref={(el) => (bodyRefs.current[item.id] = el)}
+                        className={`overflow-auto transition-all duration-300 ease-in-out`}
+                        style={{
+                            maxHeight: openItem === item.id
+                            ? bodyRefs.current[item.id]
+                                ? bodyRefs.current[item.id].scrollHeight + "px"
+                                : "2000px"
+                            : "0px",
+                            opacity: openItem === item.id ? 1 : 0,}}>
 
 
-            <div className="mt-3 text-gray-700 text-sm border-t pt-3">
+                <div className="mt-3 text-gray-700 text-sm border-t pt-3">
 
                       <div className="grid grid-cols-4 gap-4">
                         
@@ -315,7 +315,6 @@ const markasPaid= async(id)=>{
                       </div>
                       
                       <ComponentCard className="mt-3">
-
                           <div className=" gap-4">
 
                               <div className="grid grid-cols-3 gap-4 mb-5">
@@ -425,14 +424,11 @@ const markasPaid= async(id)=>{
 
                               </div>
                           </div>
-
-                          
- 
                       </ComponentCard>
 
-                     <div className={`grid grid-cols-1 lg:grid-cols-1 gap-6 mt-5 ${item.status === PatientQueryStatus.ASSIGNED ? "" : "hidden"}`}>
+                     <div className={`grid grid-cols-2 lg:grid-cols-2 gap-6 mt-5 ${item.status !== PatientQueryStatus.PENDING ? "" : "hidden"}`}>
 
-                        <div className=" bg-white border border-gray-200 rounded-2xl shadow-sm p-5 h-fit">
+                        <div className=" bg-white border border-gray-200 rounded-2xl shadow-sm p-5 ">
                             <h2 className="text-lg font-semibold text-gray-800 mb-4">Release Funds</h2>
 
                             <div className="space-y-4">
@@ -514,12 +510,12 @@ const markasPaid= async(id)=>{
                             </div>
                         </div>
 
-                        <div className=" bg-white border border-gray-200 rounded-2xl shadow-sm p-5">
+                    <div className=" bg-white border border-gray-200 rounded-2xl shadow-sm p-5">
                               <h2 className="text-lg font-semibold text-gray-800 mb-4">Transfered Transactions</h2>
 
                              
                               {transfertransaction.length > 0 ?(<>
-                                 <div className="bg-white shadow-xl rounded-2xl p-4 border border-gray-100 h-[200px] overflow-auto">
+                                 <div className="bg-white shadow-xl rounded-2xl p-4 border border-gray-100  overflow-auto">
                                   <table className="min-w-full divide-y divide-gray-200 text-sm">
                                       <thead className="bg-gray-50 sticky top-0">
                                           <tr>
@@ -559,9 +555,14 @@ const markasPaid= async(id)=>{
                               </>):(<>
                             <p>No transaction</p>
                               </>)}
-                          </div>
+                    </div>
+                          
 
-                          <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-5">
+                        
+
+                    </div>
+                    
+                    <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-5 mt-4">
                               <h2 className="text-lg font-semibold text-gray-800 mb-4">
                                   Requested Funds ({requestedfunds.length})
                               </h2>
@@ -671,9 +672,6 @@ const markasPaid= async(id)=>{
 
                                  <p>No Funds Requested</p>
                               </>)}
-                          </div>
-
-
                     </div>
 
             </div>
@@ -681,11 +679,13 @@ const markasPaid= async(id)=>{
 
 
           </div>
-        </ComponentCard>
+         </ComponentCard>
 
 
-      ))}
+    </>  ))}
     </div>
+
+
   );
 }
 

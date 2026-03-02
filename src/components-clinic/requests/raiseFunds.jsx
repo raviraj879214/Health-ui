@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import {ButtonSpinner} from "../../reusable/buttonSpinner";
 import { formatBrazilDate } from "@/lib/formatDate";
 import { brazilianCurrency } from "@/lib/brazilianCurrency";
+import { CheckIcon, CrossIcon } from "lucide-react";
 
 
 
@@ -202,8 +203,45 @@ export function RaiseFunds({patientqueryid, requestedFund ,totalFundsReceived ,t
                                                 {formatBrazilDate(item.createdAt)}
                                             </p>
 
-                                            <h3 className="font-semibold text-gray-800 dark:text-white">
-                                                Fund request {brazilianCurrency(item.amount)}
+                                            <h3 className="flex items-center justify-between font-semibold text-gray-800 dark:text-white">
+
+                                                {/* Left Side */}
+                                                <span className="flex items-center gap-2">
+                                                    <span className="text-sm text-gray-500 dark:text-gray-400">
+                                                        Fund Request:
+                                                    </span>
+                                                    <span className="text-base font-bold">
+                                                        {brazilianCurrency(item.amount)}
+                                                    </span>
+                                                </span>
+
+                                                {/* Right Side Status */}
+                                                <span
+                                                    className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium
+                                                    ${item.collected === 0
+                                                            ? "bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400"
+                                                            : "bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400"
+                                                        }`}
+                                                >
+                                                    {item.collected === 0 ? (
+                                                        <>
+                                                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                                            </svg>
+
+                                                            Not Collected
+                                                        </>
+                                                    ) : (
+                                                        <>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                                                </svg>
+
+                                                            Collected
+                                                        </>
+                                                    )}
+                                                </span>
+
                                             </h3>
 
                                             <p className="mt-1 text-sm text-gray-600 dark:text-neutral-400">
