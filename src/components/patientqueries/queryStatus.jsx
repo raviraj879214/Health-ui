@@ -213,7 +213,7 @@ export function QueryStatus({status,remarks="",paymentstatus,paymentremark}){
         const getPaymentStyle = (status) => {
           alert(status);
     switch (Number(status)) {
-      case patientQueryPaymentStatus.UNPAID:
+      case patientQueryPaymentStatus.UN_PAID:
         return "bg-red-50 text-red-700 border-red-200";
 
       case patientQueryPaymentStatus.PARTIALLY_PAID:
@@ -229,7 +229,7 @@ export function QueryStatus({status,remarks="",paymentstatus,paymentremark}){
 
         const getPaymentLabel = (status) => {
           switch (Number(status)) {
-            case patientQueryPaymentStatus.UNPAID:
+            case patientQueryPaymentStatus.UN_PAID:
               return "Unpaid";
 
             case patientQueryPaymentStatus.PARTIALLY_PAID:
@@ -292,15 +292,15 @@ export function QueryStatus({status,remarks="",paymentstatus,paymentremark}){
 
        <span
          className={`inline-flex items-center gap-1.5 px-4 py-1.5 text-xs font-semibold rounded-full border
-    ${Number(paymentstatus) === patientQueryPaymentStatus.UNPAID
-             ? "bg-red-50 text-red-700 border-red-200"
-             : Number(paymentstatus) === patientQueryPaymentStatus.PARTIALLY_PAID
-               ? "bg-yellow-50 text-yellow-700 border-yellow-200"
-               : Number(paymentstatus) === patientQueryPaymentStatus.FULLY_PAID
-                 ? "bg-green-50 text-green-700 border-green-200"
-                 : "bg-gray-50 text-gray-700 border-gray-200"
-           }`}
-       >
+          ${Number(paymentstatus) === patientQueryPaymentStatus.UN_PAID
+                  ? "bg-red-50 text-red-700 border-red-200"
+                  : Number(paymentstatus) === patientQueryPaymentStatus.PARTIALLY_PAID
+                    ? "bg-yellow-50 text-yellow-700 border-yellow-200"
+                    : Number(paymentstatus) === patientQueryPaymentStatus.FULLY_PAID
+                      ? "bg-green-50 text-green-700 border-green-200"
+                      : "bg-gray-50 text-gray-700 border-gray-200"
+                }`}
+          >
 
          {Number(paymentstatus) === patientQueryPaymentStatus.FULLY_PAID && (
            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
@@ -308,7 +308,7 @@ export function QueryStatus({status,remarks="",paymentstatus,paymentremark}){
            </svg>
          )}
 
-         {Number(paymentstatus) === patientQueryPaymentStatus.UNPAID && (
+         {Number(paymentstatus) === patientQueryPaymentStatus.UN_PAID && (
            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
            </svg>
@@ -322,7 +322,7 @@ export function QueryStatus({status,remarks="",paymentstatus,paymentremark}){
 
 
          {{
-           [patientQueryPaymentStatus.UNPAID]: "Unpaid",
+           [patientQueryPaymentStatus.UN_PAID]: "Unpaid",
            [patientQueryPaymentStatus.PARTIALLY_PAID]: "Partially Paid",
            [patientQueryPaymentStatus.FULLY_PAID]: "Fully Paid",
          }[Number(paymentstatus)]}
