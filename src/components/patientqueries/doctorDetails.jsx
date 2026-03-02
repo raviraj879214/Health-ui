@@ -195,7 +195,7 @@ export function DoctorDetails({querydetails ,id ,onData}){
     ):(<>
       
 
-    {querydetails.status === PatientQueryStatus.PENDING &&(<>
+    {(querydetails.status === PatientQueryStatus.PENDING || querydetails.status === PatientQueryStatus.REJECT) &&(<>
                 <button
      onClick={()=> setChangeName(true)}
      className="border border-black px-4 py-2 rounded-2xl hover:bg-gray-100 transition w-full">

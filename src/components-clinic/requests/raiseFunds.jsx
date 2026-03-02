@@ -10,7 +10,7 @@ import { brazilianCurrency } from "@/lib/brazilianCurrency";
 
 
 
-export function RaiseFunds({patientqueryid, requestedFund ,totalFundsReceived ,totalF,remainF,clinicmaxAmount}){
+export function RaiseFunds({patientqueryid, requestedFund ,totalFundsReceived ,totalF,remainF,clinicmaxAmount ,totalfundrequested}){
 
 
 
@@ -41,6 +41,7 @@ export function RaiseFunds({patientqueryid, requestedFund ,totalFundsReceived ,t
             setRequestedFunds(Array.isArray(result.requestedfunds) ? result.requestedfunds : []);
             setRequestTransfer(Array.isArray(result.transfer) ? result.transfer : []);
             const totalRequested = result.requestedfunds.reduce((sum, item) => sum + Number(item.amount || 0),0);
+           
             requestedFund(totalRequested);
 
 
@@ -68,6 +69,7 @@ export function RaiseFunds({patientqueryid, requestedFund ,totalFundsReceived ,t
            
 
             setRequestedFunds(prev => [result.data, ...prev]);
+            fetchRequestFunds();
            
 
 
@@ -95,7 +97,7 @@ export function RaiseFunds({patientqueryid, requestedFund ,totalFundsReceived ,t
 
                 <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm flex flex-col h-[480px]">
                     <h2 className="text-lg font-semibold text-gray-800 mb-6">
-                        Raise Fund Request 
+                        Raise Fund Request {remainF} {totalfundrequested}
                     </h2>
                     <form onSubmit={handleSubmit(raiseFunds)}>
                         <div className="flex flex-col gap-4 flex-1">
@@ -116,7 +118,18 @@ export function RaiseFunds({patientqueryid, requestedFund ,totalFundsReceived ,t
                                             message: "Amount must be a positive number"
                                         },
                                         validate: (value) => value > 0 || "Amount must be greater than zero",
-                                        validate: (value) => value < remainF || `You can request upto amount ${brazilianCurrency(remainF)}`
+                                        validate: (value) => {
+                                            const availableAmount = remainF - totalfundrequested;
+
+                                            if (availableAmount <= 0) {
+                                                return "Already requested almost all amount, go throught in the (Requested Funds Timeline)";
+                                            }
+
+                                            return (
+                                                value <= availableAmount ||
+                                                `You can request upto amount ${brazilianCurrency(availableAmount)}`
+                                            );
+                                            }
                                     })}
                                 />
                                 {errors.amount && (

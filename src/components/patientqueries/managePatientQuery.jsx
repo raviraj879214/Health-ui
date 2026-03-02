@@ -17,6 +17,7 @@ import { brazilianCurrency } from "@/lib/brazilianCurrency";
 import {PatientQueryDetails} from "../patientqueries/patientQueryDetails";
 import { PatientQueryStatus } from "../../lib/enums/patientQueryStatus";
 import { toast } from "react-toastify";
+import PatientQueryStatusBadge from "@/reusable/StatusBadge";
 
 export function ManagePatientQueries() {
   const [queries, setQueries] = useState([]);
@@ -93,91 +94,6 @@ export function ManagePatientQueries() {
   }
 
 
-
-
-const statusLabel = (status) => {
-  const base =
-    "inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold rounded-full border";
-
-  const statusConfig = {
-    [PatientQueryStatus.PENDING]: {
-      label: "Awaiting Dispatch",
-      style:
-        "bg-yellow-50 text-yellow-700 border-yellow-200 dark:bg-yellow-900/30 dark:text-yellow-300 dark:border-yellow-700",
-      icon: (
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-        />
-      ),
-    },
-
-    [PatientQueryStatus.ASSIGNED]: {
-      label: "Forwarded to Clinic",
-      style:
-        "bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-900/30 dark:text-blue-300 dark:border-blue-700",
-      icon: (
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M5 12h14M12 5l7 7-7 7"
-        />
-      ),
-    },
-
-    [PatientQueryStatus.ACCEPT]: {
-      label: "Accepted",
-      style:
-        "bg-green-50 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-300 dark:border-green-700",
-      icon: (
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-        />
-      ),
-    },
-
-    [PatientQueryStatus.REJECT]: {
-      label: "Rejected",
-      style:
-        "bg-red-50 text-red-700 border-red-200 dark:bg-red-900/30 dark:text-red-300 dark:border-red-700",
-      icon: (
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M6 18L18 6M6 6l12 12"
-        />
-      ),
-    },
-  };
-
-  const current = statusConfig[status];
-
-  if (!current) {
-    return (
-      <span className={`${base} bg-gray-50 text-gray-600 border-gray-200`}>
-        —
-      </span>
-    );
-  }
-
-  return (
-    <span className={`${base} ${current.style}`}>
-      <svg
-        className="w-3.5 h-3.5"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        strokeWidth="2"
-      >
-        {current.icon}
-      </svg>
-      {current.label}
-    </span>
-  );
-};
 
 
   const onView= async(data)=>{
@@ -435,7 +351,9 @@ const statusLabel = (status) => {
               <div>{q.procedureTimeValue || "--"}</div>
             </TableCell>
 
-            <TableCell className="px-5 py-4 text-center">{statusLabel(q.status)}</TableCell>
+            <TableCell className="px-5 py-4 text-center">
+               <PatientQueryStatusBadge status={q.status} />
+            </TableCell>
 
             <TableCell className="px-5 py-4 text-right text-sm">{formatBrazilDate(q.createdAt)}</TableCell>
 

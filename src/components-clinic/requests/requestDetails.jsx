@@ -11,7 +11,7 @@ import { PatientQueryStatus } from "@/lib/enums/patientQueryStatus";
 import {FinalPriceModule} from "./finalPriceModule";
 import { toast } from "react-toastify";
 import { ButtonSpinner } from "@/reusable/buttonSpinner";
-
+import  PatientQueryStatusBadge  from "../../reusable/StatusBadge";
 
 
 export function RequestDetails({id}){
@@ -45,112 +45,19 @@ export function RequestDetails({id}){
 
 
     const RequestedFunds=(data)=>{
+     
         setTotalFundRequested(data);
     }
 
 
     const TotalReceivedFunds=(data)=>{
-        
+       
         setTotalFundReceived(data);
     }
 
     const remainingAmount = parseInt((((querydetails.finalPrice) - ((querydetails.clinic?.commission * querydetails.finalPrice)/100)) - totalfundreceived));
 
 
-    const getStatusBadge = (status) => {
-      const baseStyle =
-    "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold";
-
-  switch (status) {
-
-    // 🟡 Pending
-    case PatientQueryStatus.PENDING:
-      return (
-        <span className={`${baseStyle} bg-yellow-100 text-yellow-700`}>
-          <svg
-            className="w-3.5 h-3.5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            strokeWidth="2"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-          Pending
-        </span>
-      );
-
-    // 🔵 Forwarded
-    case PatientQueryStatus.ASSIGNED:
-      return (
-        <span className={`${baseStyle} bg-blue-100 text-blue-700`}>
-          <svg
-            className="w-3.5 h-3.5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            strokeWidth="2"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M17 8l4 4m0 0l-4 4m4-4H3"
-            />
-          </svg>
-          Forwarded
-        </span>
-      );
-
-    // 🟢 Accepted
-    case PatientQueryStatus.ACCEPT:
-      return (
-        <span className={`${baseStyle} bg-green-100 text-green-700`}>
-          <svg
-            className="w-3.5 h-3.5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            strokeWidth="2"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M5 13l4 4L19 7"
-            />
-          </svg>
-          Accepted
-        </span>
-      );
-
-    // 🔴 Rejected
-    case PatientQueryStatus.REJECT:
-      return (
-        <span className={`${baseStyle} bg-red-100 text-red-700`}>
-          <svg
-            className="w-3.5 h-3.5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            strokeWidth="2"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-          Rejected
-        </span>
-      );
-
-    default:
-      return <span className="text-gray-400 text-sm">—</span>;
-  }
-    };
 
 
   
@@ -253,7 +160,7 @@ export function RequestDetails({id}){
                                 </>)}
 
                             </button>
-                            <button
+                            {/* <button
                             onClick={()=> rejectRequest()}
                             disabled={button}
                             class="bg-red-500 hover:bg-red-600 text-white font-medium px-5 py-2 rounded-xl transition">
@@ -261,7 +168,7 @@ export function RequestDetails({id}){
                                  {button ? (<><ButtonSpinner></ButtonSpinner></>):(<>
                                      Reject
                                 </>)}
-                            </button>
+                            </button> */}
                         </div>
 
                     </div>
@@ -325,7 +232,8 @@ export function RequestDetails({id}){
                 </div>
                 <div>
                     <p className="text-xs text-gray-500 mb-1">Query Status</p>
-                    {getStatusBadge(querydetails.status)} 
+                    
+                    <PatientQueryStatusBadge status={querydetails.status} />
                 
                 </div>
 
@@ -459,18 +367,16 @@ export function RequestDetails({id}){
 
          <FinalPriceModule patientqueryfinalprice={querydetails.PatientQueryFinalPrice}
          
-          onData={(updatedata) =>
-  setQueryDetails((prev) => ({
-    ...prev,
-    PatientQueryFinalPrice: prev.PatientQueryFinalPrice.map((item) =>
-      item.id === updatedata.id
-        ? { ...item, ...updatedata }   // 🔥 update this row
-        : item                         // keep others same
-    )
-  }))
-}
-        
-        />
+                    onData={(updatedata) =>
+            setQueryDetails((prev) => ({
+                ...prev,
+                PatientQueryFinalPrice: prev.PatientQueryFinalPrice.map((item) =>
+                item.id === updatedata.id
+                    ? { ...item, ...updatedata }  
+                    : item                         
+                )
+            }))
+            }/>
        
         <ComponentCard className="mt-4 p-5 bg-white rounded-xl shadow-md border theme-border">
 
@@ -570,8 +476,9 @@ export function RequestDetails({id}){
 
 
            
-
+                    
             {remainingAmount > 0 ? (
+               
                 <RaiseFunds
                     patientqueryid={id}
                     requestedFund={RequestedFunds}
@@ -579,11 +486,13 @@ export function RequestDetails({id}){
                     totalF={totalfundreceived}
                     remainF={remainingAmount}
                     clinicmaxAmount={(querydetails.finalPrice) - ((querydetails.clinic.commission * querydetails.finalPrice)/100)}
+                    totalfundrequested={totalfundrequested}
+
                 />
             ) : null}
 
 
-            {/* <QueryStatus querydetails={querydetails} onData={(updatedData) => setQueryDetails(prev => ({...prev,...updatedData}))}  /> */}
+            <QueryStatus querydetails={querydetails} onData={(updatedData) => setQueryDetails(prev => ({...prev,...updatedData}))}  />
 
 
     

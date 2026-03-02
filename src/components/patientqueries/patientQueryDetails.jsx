@@ -17,6 +17,7 @@ import {OtherInformation} from "./otherInformation";
 import { useRouter } from "next/navigation";
 import { Table, TableHeader } from "../ui/table";
 import { PackageQueryFinalPriceStatus } from "@/lib/enums/patientQueryFinalPriceStatus";
+import {QueryStatus} from "./queryStatus";
 
 
 
@@ -187,90 +188,37 @@ export function PatientQueryDetails({ id }) {
           setButtonSendClinic(false);
       }
 
+     const deleteGeneratedAmount = async (id) =>{
+        
+          const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/patient-queries/delete-payment-details`,{
+            method : "Post",
+            headers : await adminHeaders(),
+            body: JSON.stringify({
+              id : id
+            })
+          });
 
-       const statusLabel = (status) => {
-  const base =
-    "inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold rounded-full border";
+          if(res.ok){
+            const result = await res.json();
 
-  const statusConfig = {
-    [PatientQueryStatus.PENDING]: {
-      label: "Awaiting Dispatch",
-      style:
-        "bg-yellow-50 text-yellow-700 border-yellow-200 dark:bg-yellow-900/30 dark:text-yellow-300 dark:border-yellow-700",
-      icon: (
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-        />
-      ),
-    },
+             toast.success("Deleted Successfully",{
+              position : "bottom-right",
+              autoClose : 3000
+             })
+            setQueryDetails(prev => ({
+                ...prev,
+                paymentDetails: prev.paymentDetails.filter(
+                  item => item.id !== id
+                )
+            }));
 
-    [PatientQueryStatus.ASSIGNED]: {
-      label: "Forwarded to Clinic",
-      style:
-        "bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-900/30 dark:text-blue-300 dark:border-blue-700",
-      icon: (
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M5 12h14M12 5l7 7-7 7"
-        />
-      ),
-    },
 
-    [PatientQueryStatus.ACCEPT]: {
-      label: "Accepted",
-      style:
-        "bg-green-50 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-300 dark:border-green-700",
-      icon: (
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-        />
-      ),
-    },
+          }
+      }
 
-    [PatientQueryStatus.REJECT]: {
-      label: "Rejected",
-      style:
-        "bg-red-50 text-red-700 border-red-200 dark:bg-red-900/30 dark:text-red-300 dark:border-red-700",
-      icon: (
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M6 18L18 6M6 6l12 12"
-        />
-      ),
-    },
-  };
 
-  const current = statusConfig[status];
 
-  if (!current) {
-    return (
-      <span className={`${base} bg-gray-50 text-gray-600 border-gray-200`}>
-        —
-      </span>
-    );
-  }
 
-  return (
-    <span className={`${base} ${current.style}`}>
-      <svg
-        className="w-3.5 h-3.5"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        strokeWidth="2"
-      >
-        {current.icon}
-      </svg>
-      {current.label}
-    </span>
-  );
-};
 
 
    
@@ -318,9 +266,9 @@ export function PatientQueryDetails({ id }) {
 
 
 
-
           <div>
-                {statusLabel(querydetails.status)}
+
+                <QueryStatus  status={querydetails.status} remarks={querydetails.reason}  paymentstatus={querydetails.PaymentStatus} paymentremark={querydetails.paymentreason} / >
           </div>
 
 
@@ -792,6 +740,11 @@ export function PatientQueryDetails({ id }) {
                   <th scope="col" className="px-6 py-3 font-medium">
                     Status
                   </th>
+                  <th scope="col" className="px-6 py-3 font-medium">
+                    Action
+                  </th>
+
+
                 </tr>
               </thead>
               <tbody>
@@ -861,8 +814,38 @@ export function PatientQueryDetails({ id }) {
                      
                     </td>
 
+                    <td className="px-6 py-4">
+                      <button
+                        onClick={()=>
+                            deleteGeneratedAmount(item.id)
+                        }
+                        disabled={item.status === 1}
+                        className={`p-1 rounded-md transition 
+                          ${item.status === 1
+                                                ? "text-gray-400 cursor-not-allowed opacity-50"
+                                                : "text-red-600 hover:text-red-800 hover:bg-red-50"}
+                        `}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="w-5 h-5"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
+                          />
+                        </svg>
+                      </button>
+                    </td>
+
                   </tr>
                 ))}
+
                 <tr>
                   <td className="px-6 py-4"></td>
                   <td className="px-6 py-4"></td>
@@ -874,6 +857,7 @@ export function PatientQueryDetails({ id }) {
                   <td className="px-6 py-4">Total {brazilianCurrency(totalPlatformFee)}</td>
                   <td className="px-6 py-4">Total {brazilianCurrency(totalVendorFee)}</td>
                   <td className="px-6 py-4"></td>
+                  <td></td>
                   
                 </tr>
 

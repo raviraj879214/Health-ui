@@ -14,6 +14,7 @@ import { brazilianCurrency } from "../../lib/brazilianCurrency";
 import { PatientQueryStatus } from "../../lib/enums/patientQueryStatus";
 import { clinicHeaders } from "../utils/clinicHeaders";
 import { useRouter } from "next/navigation";
+import  PatientQueryStatusBadge  from "../../reusable/StatusBadge";
 
 
 
@@ -243,7 +244,7 @@ const statusLabel = (status) => {
 
       
         <TableCell className="px-5 py-4 text-center">
-          {statusLabel(q.status)}
+          <PatientQueryStatusBadge status={q.status} />
         </TableCell>
 
         
