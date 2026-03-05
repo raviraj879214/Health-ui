@@ -19,6 +19,8 @@ export function PartnerLogin() {
     alert("Cookie Set!");
   };
 
+  
+
   const getTestCookie = () => {
     const value = Cookies.get("test_cookie");
     setCookieValue(value || "No cookie found");
