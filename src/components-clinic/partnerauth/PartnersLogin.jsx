@@ -39,25 +39,25 @@ export function PartnerLogin() {
       Cookies.set("clinic_access", result.access_token, {
         expires: 1,
         secure: true,
-        sameSite: "strict",
+        sameSite: "lax",
       });
 
        Cookies.set("clinic_id", result.user.uuid, {
         expires: 1,
         secure: true,
-        sameSite: "strict",
+        sameSite: "lax",
       });
 
       Cookies.set("clinic_refresh", result.refresh_token, {
         expires: 7,
         secure: true,
-        sameSite: "strict",
+        sameSite: "lax",
       });
      
       Cookies.set("clinic_user_uuid", result.user.uuid, {
         expires: 7,
         secure: true,
-        sameSite: "strict",
+        sameSite: "lax",
       });
 
       console.log(result);
@@ -67,6 +67,7 @@ export function PartnerLogin() {
       setTimeout(() => {
         router.push("/partner/clinic");
       }, 500);
+
     } catch (error) {
       toast.error("Network Error!");
     }
