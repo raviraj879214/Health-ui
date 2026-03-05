@@ -15,8 +15,12 @@ export default function AuthClinic({ children }) {
     const checkAuth = async () => {
         debugger;
         console.log("test");
+
+
       const accessToken = Cookies.get("clinic_access");
       const refreshToken = Cookies.get("clinic_refresh");
+       console.log("accessToken",accessToken);
+       console.log("refreshToken",refreshToken);
 
      
       if (pathname === "/partner-login") {
