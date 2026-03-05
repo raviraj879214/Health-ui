@@ -11,6 +11,21 @@ import Link from "next/link";
 export function PartnerLogin() {
   const router = useRouter();
 
+  const [cookieValue, setCookieValue] = useState("");
+
+  const setTestCookie = () => {
+    Cookies.set("test_cookie", "HelloRaviraj", { expires: 1 });
+    alert("Cookie Set!");
+  };
+
+  const getTestCookie = () => {
+    const value = Cookies.get("test_cookie");
+    setCookieValue(value || "No cookie found");
+  };
+
+
+
+
   const {
     register,
     handleSubmit,
@@ -92,6 +107,16 @@ export function PartnerLogin() {
         <h2 className="text-center text-2xl font-bold text-gray-800 mb-6">
           Partner Login
         </h2>
+
+        <h2>Cookie Test</h2>
+
+      <button onClick={setTestCookie}>Set Cookie</button>
+
+      <button onClick={getTestCookie} style={{ marginLeft: "10px" }}>
+        Get Cookie
+      </button>
+
+      <p>Cookie Value: {cookieValue}</p>
 
         <form className="space-y-5" onSubmit={handleSubmit(onLogin)}>
           {/* Email */}

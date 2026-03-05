@@ -79,12 +79,7 @@ export default function Pages() {
   return (
     <>
 
-      <Suspense fallback={<>
-        <BannerLoader />
-
-
-
-      </>}>
+      <Suspense fallback={<><BannerLoader /></>}>
         
         <Banner></Banner>
         <TopRated></TopRated>
