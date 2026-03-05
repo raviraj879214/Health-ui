@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import { toast, ToastContainer } from "react-toastify";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 
 export function PartnerLogin() {
@@ -53,25 +54,25 @@ export function PartnerLogin() {
 
       Cookies.set("clinic_access", result.access_token, {
         expires: 1,
-        secure: true,
+       
         sameSite: "lax",
       });
 
        Cookies.set("clinic_id", result.user.uuid, {
         expires: 1,
-        secure: true,
+        
         sameSite: "lax",
       });
 
       Cookies.set("clinic_refresh", result.refresh_token, {
         expires: 7,
-        secure: true,
+        
         sameSite: "lax",
       });
      
       Cookies.set("clinic_user_uuid", result.user.uuid, {
         expires: 7,
-        secure: true,
+       
         sameSite: "lax",
       });
 
