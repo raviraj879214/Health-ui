@@ -91,5 +91,6 @@ export default function AuthClinic({ children }) {
     return <div className="text-center text-white p-8">Checking authentication...</div>;
   }
 
+  
   return <>{children}</>;
 }

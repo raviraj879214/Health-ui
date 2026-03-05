@@ -65,7 +65,8 @@ export function PartnerLogin() {
       toast.success("Login successful!");
 
       setTimeout(() => {
-        router.push("/partner/clinic");
+        // router.push("/partner/clinic");
+        window.location.href = "/partner/clinic";
       }, 500);
 
     } catch (error) {
