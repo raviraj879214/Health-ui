@@ -160,7 +160,7 @@ export function RequestDetails({id}){
                                 </>)}
 
                             </button>
-                            {/* <button
+                            <button
                             onClick={()=> rejectRequest()}
                             disabled={button}
                             class="bg-red-500 hover:bg-red-600 text-white font-medium px-5 py-2 rounded-xl transition">
@@ -168,7 +168,7 @@ export function RequestDetails({id}){
                                  {button ? (<><ButtonSpinner></ButtonSpinner></>):(<>
                                      Reject
                                 </>)}
-                            </button> */}
+                            </button>
                         </div>
 
                     </div>
