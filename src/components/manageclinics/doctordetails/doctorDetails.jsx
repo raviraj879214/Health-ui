@@ -116,7 +116,7 @@ export function DoctorDetails({ id }) {
           {/* Image Section */}
           <div className="shrink-0 max-w-md lg:max-w-lg mx-auto">
             <HoverZoomImage
-              src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/doctors/profilepicture/${doctorDetails.image}`}
+              src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=doctors/profilepicture/${doctorDetails.image}`}
               alt="Doctor Profile Picture"
               size={300}
               className="w-full h-full"

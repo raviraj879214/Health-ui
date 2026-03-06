@@ -22,11 +22,12 @@ export function HeroSectionbanner({ name, clinicuuid, location ,clinicdetail }) 
       const data = await res.json();
 
       const sorted = [null, null, null, null, null];
+      
       data.data.forEach((item) => {
         const index = parseInt(item.sort, 10) - 1;
         sorted[index] = {
           id: item.id,
-          url: `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/clinic/banner/${item.Images}`,
+          url: `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=clinic/banner/${item.Images}`,
         };
       });
 
@@ -77,7 +78,7 @@ export function HeroSectionbanner({ name, clinicuuid, location ,clinicdetail }) 
       const newBanners = [...banners];
       newBanners[index] = {
         id: data.data.id || banners[index]?.id,
-        url: `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/clinic/banner/${data.data.Images}`,
+        url: `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=clinic/banner/${data.data.Images}`,
       };
       setBanners(newBanners);
     } catch (err) {

@@ -86,11 +86,20 @@ export function DoctorOne({ onClose, nextStep, clinicuuid, doctoruuid }) {
 
 
   const onCreateUpdate = async (data) => {
-    debugger;
+    
 
     console.log("Form Data:", data, { avatar });
+
     const formdata = new FormData();
-    formdata.append("image", files);
+
+    debugger;
+
+
+      if (files) {
+        formdata.append("image", files);
+      }
+      
+
     formdata.append("firstname", data.firstname);
     formdata.append("lastname", data.lastname);
     formdata.append("email", data.email);
@@ -183,9 +192,8 @@ export function DoctorOne({ onClose, nextStep, clinicuuid, doctoruuid }) {
 
 
       if (result.data.image) {
-
-
-        setAvatar(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/doctors/profilepicture/${result.data.image}`);
+        debugger;
+        setAvatar(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=doctors/profilepicture/${result.data.image}`);
         setValue("avatar", result.data.image); // optional, can store file name
       }
 

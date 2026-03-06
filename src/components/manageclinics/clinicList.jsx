@@ -208,7 +208,7 @@ export function ClinicListAdmin(){
                             className="w-10 h-10 border-2 border-white rounded-full object-cover"
                             src={
                               itemdoctor.doctor.image
-                                ? `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/doctors/profilepicture/${itemdoctor.doctor.image}`
+                                ? `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=doctors/profilepicture/${itemdoctor.doctor.image}`
                                 : '/images/default-doctor.png'
                             }
                             alt={itemdoctor.doctor.name || 'Doctor'}

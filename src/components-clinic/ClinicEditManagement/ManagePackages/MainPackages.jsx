@@ -210,7 +210,7 @@ export function MainPackages({ clinicuuid }) {
                     item.packagesDoctor.map((pd) => (
                       <div key={pd.id} className="flex items-center gap-3 justify-start">
                         <img
-                          src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/doctors/profilepicture/${pd.doctors.image}`}
+                          src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=doctors/profilepicture/${pd.doctors.image}`}
                           alt="Doctor Avatar"
                           className="h-10 w-10 rounded-full object-cover"
                         />

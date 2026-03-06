@@ -162,7 +162,7 @@ export function ListofDoctor({ clinicuuid }) {
         <img
           src={
             item.image
-              ? `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/doctors/profilepicture/${item.image}`
+              ? `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=doctors/profilepicture/${item.image}`
               : "/default-avatar.png"
           }
           alt={`${item.firstname} ${item.lastname}`}

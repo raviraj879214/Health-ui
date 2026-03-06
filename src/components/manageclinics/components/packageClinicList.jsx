@@ -121,7 +121,7 @@ export function PackageClinicList({ id }) {
                         {item.packagesDoctor?.length > 0 ? (
                             <div className="flex items-center gap-4 border-t pt-4">
                                 <HoverZoomImage
-                                src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/doctors/profilepicture/${item.packagesDoctor[0].doctors?.image}`}
+                                src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=doctors/profilepicture/${item.packagesDoctor[0].doctors?.image}`}
                                 alt="Doctor Profile"
                                 size={60}
                                 borderRadius="50%"

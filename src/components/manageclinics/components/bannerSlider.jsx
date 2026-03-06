@@ -42,7 +42,7 @@ export function BannerSlider({ id }) {
          
         const result = await res.json();
         
-        const images = result.data.map((item) =>`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/clinic/banner/${item.Images}`);
+        const images = result.data.map((item) =>`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=clinic/banner/${item.Images}`);
 
 
         setSlides(images);

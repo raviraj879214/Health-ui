@@ -84,7 +84,7 @@ export function DoctorClinics({id,clinicuuid ,onData }){
              <div className="w-full h-48 relative overflow-hidden rounded-lg mb-3 flex items-center justify-center">
   {bannerImage ? (
     <HoverZoomImage
-      src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/clinic/banner/${bannerImage}`}
+      src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=clinic/banner/${bannerImage}`}
       alt={`Clinic Banner for ${item?.clinic?.name}`}
       size={200}
       borderRadius="0px"

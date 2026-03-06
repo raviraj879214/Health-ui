@@ -96,13 +96,13 @@ export function DoctorList({id}){
                             <div className="flex flex-col items-center">
                                 {/* <img
                                 className="w-24 h-24 mb-6 rounded-full object-cover"
-                               src = {`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/doctors/profilepicture/${item.image}`}
+                               src = {`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=doctors/profilepicture/${item.image}`}
                                 alt={`${item.firstname} ${item.lastname}`}
                                 /> */}
 
 
                                 <HoverZoomImage
-                                    src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/doctors/profilepicture/${item.image}`}
+                                    src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=doctors/profilepicture/${item.image}`}
                                     alt={`${item.firstname} ${item.lastname}`}
                                     size={120}            
                                     borderRadius="100px"     

@@ -36,8 +36,8 @@ export function DoctorSurgeryImages({id}){
            const surgeriesArray = beforephotos.map(item => {
                 const afterItem = afterphotos.find(x => x.surgeryId === item.surgeryId);
                 return {
-                    before:`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/surgery/beforeandafter/${item.imageUrl}`,
-                    after:`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/surgery/beforeandafter/${afterItem.imageUrl}`,
+                    before:`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=surgery/beforeandafter/${item.imageUrl}`,
+                    after:`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=surgery/beforeandafter/${afterItem.imageUrl}`,
                     surgeryId : item.surgeryId,
                     id:item.id
                 };

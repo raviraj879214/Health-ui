@@ -60,8 +60,8 @@ export function SurgeriesCarouselImages({dataReset,clinicuuid}) {
         console.log("packages",packages.title);
 
         return {
-            before:`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/surgery/beforeandafter/${item.imageUrl}`,
-            after:`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/surgery/beforeandafter/${afterItem.imageUrl}`,
+            before:`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=surgery/beforeandafter/${item.imageUrl}`,
+            after:`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=surgery/beforeandafter/${afterItem.imageUrl}`,
             surgeryId : item.surgeryId,
             id:item.id,
             treatmentname:treatmentname.name,
@@ -192,7 +192,7 @@ if (surgeries.length === 0) {
          
           <div className="flex items-center gap-2">
             <img
-              src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/doctors/profilepicture/${surgery.doctorimage}`}
+              src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=doctors/profilepicture/${surgery.doctorimage}`}
               alt={surgery.doctorName || "Doctor"}
               className="w-8 h-8 rounded-full object-cover border"
               onError={(e) => {

@@ -139,7 +139,7 @@ export function ClinicDetail({id}){
       name: `Dr ${doctor.firstname} ${doctor.lastname}`,
       speciality: specs.join(", "), // show all
       image: doctor.image
-        ? `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/doctors/profilepicture/${doctor.image}`
+        ? `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=doctors/profilepicture/${doctor.image}`
         : "/images/doctors/default.png",
       description: doctor.briefDescription
         ? doctor.briefDescription.replace(/<[^>]+>/g, "")
@@ -232,7 +232,7 @@ const groupSurgeryImages = (images = []) => {
                             <div className="swiper-slide">
                               <div className="thumb-wrap w-full relative overflow-hidden pb-[61%]">
                                 <img
-                                  src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/clinic/banner/noimage.jpg`}
+                                  src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=clinic/banner/noimage.jpg`}
                                   alt={clinicdetails.name}
                                   width={770}
                                   height={470}
@@ -245,7 +245,7 @@ const groupSurgeryImages = (images = []) => {
                               <div className="swiper-slide" key={item.id}>
                                 <div className="thumb-wrap w-full relative overflow-hidden pb-[61%]">
                                   <img
-                                    src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/clinic/banner/${item.Images}`}
+                                    src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=clinic/banner/${item.Images}`}
                                     alt={clinicdetails.name}
                                     width={770}
                                     height={470}
@@ -371,7 +371,7 @@ const groupSurgeryImages = (images = []) => {
         <div className="relative w-full pb-[80%] overflow-hidden rounded-thm">
           {item.before ? (
             <img
-              src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/surgery/beforeandafter/${item.before.imageUrl}`}
+              src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=surgery/beforeandafter/${item.before.imageUrl}`}
               alt="Before"
               width={370}
               height={270}
@@ -393,7 +393,7 @@ const groupSurgeryImages = (images = []) => {
         <div className="relative w-full pb-[80%] overflow-hidden rounded-thm">
           {item.after ? (
             <img
-              src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/surgery/beforeandafter/${item.after.imageUrl}`}
+              src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=surgery/beforeandafter/${item.after.imageUrl}`}
               alt="After"
               width={370}
               height={270}

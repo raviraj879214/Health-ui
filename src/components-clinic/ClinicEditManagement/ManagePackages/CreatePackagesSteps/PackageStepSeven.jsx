@@ -173,7 +173,7 @@ export function PackageStepSeven({ clinicuuid, packageid }) {
                                                 {/* Avatar */}
                                                 <img
                                                     className="w-10 h-10 rounded-full object-cover mr-3"
-                                                    src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/doctors/profilepicture/${doctor.image}`}
+                                                    src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=doctors/profilepicture/${doctor.image}`}
                                                     alt={`Dr. ${doctor.firstname} ${doctor.lastname}`}
                                                 />
                                                 {/* Name */}
@@ -193,7 +193,7 @@ export function PackageStepSeven({ clinicuuid, packageid }) {
                                     <a href="#" className="flex flex-col items-center bg-neutral-100 p-6 border border-gray-200 rounded-lg shadow md:flex-row w-full">
                                         <img
                                             className="object-cover w-full rounded-lg h-64 md:h-auto md:w-48 mb-4 md:mb-0"
-                                            src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/doctors/profilepicture/${selectedDoctor.image}`}
+                                            src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=doctors/profilepicture/${selectedDoctor.image}`}
                                             alt=""
                                         />
                                         <div className="flex flex-col justify-between md:p-4 leading-normal">
