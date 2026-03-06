@@ -6,28 +6,10 @@ import Cookies from "js-cookie";
 import { toast, ToastContainer } from "react-toastify";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 
 
 export function PartnerLogin() {
   const router = useRouter();
-
-  const [cookieValue, setCookieValue] = useState("");
-
-  const setTestCookie = () => {
-    Cookies.set("test_cookie", "HelloRaviraj", { expires: 1 });
-    alert("Cookie Set!");
-  };
-
-  
-
-  const getTestCookie = () => {
-    const value = Cookies.get("test_cookie");
-    setCookieValue(value || "No cookie found");
-  };
-
-
-
 
   const {
     register,
@@ -56,7 +38,7 @@ export function PartnerLogin() {
 
       Cookies.set("clinic_access", result.access_token, {
         expires: 1,
-       
+      
         sameSite: "lax",
       });
 
@@ -68,7 +50,7 @@ export function PartnerLogin() {
 
       Cookies.set("clinic_refresh", result.refresh_token, {
         expires: 7,
-        
+      
         sameSite: "lax",
       });
      
@@ -83,8 +65,7 @@ export function PartnerLogin() {
       toast.success("Login successful!");
 
       setTimeout(() => {
-        // router.push("/partner/clinic");
-        window.location.href = "/partner/clinic";
+        router.push("/partner/clinic");
       }, 500);
 
     } catch (error) {
@@ -110,16 +91,6 @@ export function PartnerLogin() {
         <h2 className="text-center text-2xl font-bold text-gray-800 mb-6">
           Partner Login
         </h2>
-
-        <h2>Cookie Test</h2>
-
-      <button onClick={setTestCookie}>Set Cookie</button>
-
-      <button onClick={getTestCookie} style={{ marginLeft: "10px" }}>
-        Get Cookie
-      </button>
-
-      <p>Cookie Value: {cookieValue}</p>
 
         <form className="space-y-5" onSubmit={handleSubmit(onLogin)}>
           {/* Email */}
