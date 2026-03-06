@@ -89,15 +89,15 @@ export default function SignInForm({ returl }) {
            if(returl != "")
             {
               
-               router.push(returl);
+              // router.push(returl);
 
-              // window.location.href = returl;
+               window.location.href = returl;
 
               
             }
            else{
-               router.push('/admin');
-              //  window.location.href = "/admin";
+               //router.push('/admin');
+                window.location.href = "/admin";
            }
   
         }
