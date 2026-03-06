@@ -6,7 +6,7 @@ const PermissionContext = createContext(undefined);
 export const PermissionProvider = ({ children }) => {
   const [permissions, setPermissions] = useState([]);
 
-  // load from localStorage or backend once on client
+ 
   useEffect(() => {
     try {
       const fromStorage = localStorage.getItem("permissions");

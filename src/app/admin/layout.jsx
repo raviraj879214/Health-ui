@@ -25,6 +25,7 @@ export default function AdminLayout({ children }) {
       try {
         const res = await fetch(`/api/auth/get-token`, { cache: "no-store" });
         const data = await res.json();
+        console.log("admin login data",data);
 
         const currentUrl = window.location.pathname + window.location.search;
 
