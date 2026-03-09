@@ -98,7 +98,7 @@ export function RaiseFunds({patientqueryid, requestedFund ,totalFundsReceived ,t
 
                 <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm flex flex-col h-[480px]">
                     <h2 className="text-lg font-semibold text-gray-800 mb-6">
-                        Raise Fund Request {remainF} {totalfundrequested}
+                        Raise Fund Request 
                     </h2>
                     <form onSubmit={handleSubmit(raiseFunds)}>
                         <div className="flex flex-col gap-4 flex-1">

@@ -15,6 +15,7 @@ import { PatientQueryStatus } from "../../lib/enums/patientQueryStatus";
 import { clinicHeaders } from "../utils/clinicHeaders";
 import { useRouter } from "next/navigation";
 import  PatientQueryStatusBadge  from "../../reusable/StatusBadge";
+import { PackageQueryFinalPriceStatus } from "@/lib/enums/patientQueryFinalPriceStatus";
 
 
 
@@ -199,7 +200,9 @@ const statusLabel = (status) => {
       <TableCell isHeader className="px-5 py-3 font-semibold">Procedure Time</TableCell>
       <TableCell isHeader className="px-5 py-3 font-semibold text-center">Status</TableCell>
       <TableCell isHeader className="px-5 py-3 font-semibold text-right">Created</TableCell>
+      <TableCell isHeader className="px-5 py-3 text-center w-20">Final Price</TableCell>
       <TableCell isHeader className="px-5 py-3 font-semibold text-center w-20">Action</TableCell>
+
     </TableRow>
   </TableHeader>
 
@@ -252,15 +255,53 @@ const statusLabel = (status) => {
           {formatBrazilDate(q.createdAt)}
         </TableCell>
 
-        
+
         <TableCell className="px-5 py-4 text-center">
-          <button
-            onClick={() => onView(q.id)}
-            className="inline-flex items-center justify-center text-gray-600 hover:text-primary"
-          >
-            <EyeIcon />
-          </button>
+          <span className="inline-flex items-center">
+
+            {q.PatientQueryFinalPrice?.length > 0 ? (
+              <>
+                {q.PatientQueryFinalPrice?.[0]?.status === PackageQueryFinalPriceStatus.PENDING && (
+                  <span className="inline-flex items-center gap-1 whitespace-nowrap rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-700 ring-1 ring-yellow-600/20">
+                    🟡 New Price Suggested : {brazilianCurrency(q.PatientQueryFinalPrice?.[0]?.finalPrice)}
+                  </span>
+                )}
+
+                {q.PatientQueryFinalPrice?.[0]?.status === PackageQueryFinalPriceStatus.ACCEPT && (
+                  <span className="inline-flex items-center gap-1 whitespace-nowrap rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-green-600/20">
+                    🟢 Accepted : {brazilianCurrency(q.PatientQueryFinalPrice?.[0]?.finalPrice)}
+                  </span>
+                )}
+
+                {q.PatientQueryFinalPrice?.[0]?.status === PackageQueryFinalPriceStatus.REJECT && (
+                  <span className="inline-flex items-center gap-1 whitespace-nowrap rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-red-600/20">
+                    🔴 Rejected : {brazilianCurrency(q.PatientQueryFinalPrice?.[0]?.finalPrice)}
+                  </span>
+                )}
+              </>
+            ) : (
+              <span className="inline-flex items-center gap-1 whitespace-nowrap rounded-md bg-gray-100 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-gray-400/20">
+                ⚪ No Suggestion
+              </span>
+            )}
+
+          </span>
         </TableCell>
+        
+        <TableCell className="px-5 py-4 text-center cursor-pointer">
+          <a onClick={() => onView(q.id)} className="inline-flex items-center gap-2">
+            <EyeIcon />
+
+            {q.PatientQueryFinalPrice?.[0]?.status === PackageQueryFinalPriceStatus.PENDING && (<>
+              /
+              <span className="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-red-600/20">
+                ⚠ Action Required
+              </span>
+            </>)}
+          </a>
+        </TableCell>
+
+
       </TableRow>
     ))}
   </TableBody>

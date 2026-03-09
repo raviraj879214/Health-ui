@@ -36,7 +36,7 @@ export default function PatientQueryStatusBadge({
     },
 
     [PatientQueryStatus.REJECT]: {
-      label: "Sent Back to Coordinator",
+      label: "Rejected",
       style:
         "bg-red-50 text-red-700 border-red-200 dark:bg-red-900/30 dark:text-red-300 dark:border-red-700",
       icon: "M6 18L18 6M6 6l12 12",

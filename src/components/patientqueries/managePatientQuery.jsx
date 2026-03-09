@@ -18,6 +18,8 @@ import {PatientQueryDetails} from "../patientqueries/patientQueryDetails";
 import { PatientQueryStatus } from "../../lib/enums/patientQueryStatus";
 import { toast } from "react-toastify";
 import PatientQueryStatusBadge from "@/reusable/StatusBadge";
+import { patientQueryPaymentStatus } from "@/lib/enums/patientQueryPaymentStatus";
+import { PackageQueryFinalPriceStatus } from "@/lib/enums/patientQueryFinalPriceStatus";
 
 export function ManagePatientQueries() {
   const [queries, setQueries] = useState([]);
@@ -149,20 +151,25 @@ export function ManagePatientQueries() {
 <>
 <div className={`overflow-hidden rounded-xl border border-gray-200 bg-white ${queryid !== "" ? "hidden" : ""}`}>
   <div className="w-full overflow-x-auto">
-    <Table className="min-w-[1300px] table-auto border-collapse">
+    <Table className=" table-auto border-collapse overflow-x-auto">
       <TableHeader className="border-b">
         <TableRow>
           <TableCell isHeader className="px-5 py-3">Requested No.</TableCell>
 
           <TableCell isHeader className="px-5 py-3">Patient</TableCell>
-          
-          {/* <TableCell isHeader className="px-5 py-3">Medical Reports Value</TableCell> */}
+        
           <TableCell isHeader className="px-5 py-3">Treatment</TableCell>
           <TableCell isHeader className="px-5 py-3">Assigned Status</TableCell>
-          <TableCell isHeader className="px-5 py-3">Procedure Time</TableCell>
+         
           <TableCell isHeader className="px-5 py-3 text-center">Status</TableCell>
           <TableCell isHeader className="px-5 py-3 text-right">Created</TableCell>
+           <TableCell isHeader className="px-5 py-3 text-center w-20">Final Price</TableCell>
           <TableCell isHeader className="px-5 py-3 text-center w-20">Action</TableCell>
+          
+
+          
+         
+          
         </TableRow>
       </TableHeader>
 
@@ -335,21 +342,18 @@ export function ManagePatientQueries() {
               <div>{q.treatmentName || "--"}</div>
             </TableCell>
 
-                  <TableCell className="px-5 py-4 text-sm">
-                    {q.clinic?.name ? (
-                      <div className="font-semibold text-green-600">
-                        {q.clinic.name}
-                      </div>
-                    ) : (
-                      <div className="font-semibold text-blue-600">
-                       Open Inquiry
-                      </div>
-                    )}
-                  </TableCell>
-
-            <TableCell className="px-5 py-4 text-sm text-gray-600">
-              <div>{q.procedureTimeValue || "--"}</div>
+            <TableCell className="px-5 py-4 text-sm">
+              {q.clinic?.name ? (
+                <div className="font-semibold text-green-600">
+                  {q.clinic.name}
+                </div>
+              ) : (
+                <div className="font-semibold text-blue-600">
+                  Open Inquiry
+                </div>
+              )}
             </TableCell>
+
 
             <TableCell className="px-5 py-4 text-center">
                <PatientQueryStatusBadge status={q.status} />
@@ -357,11 +361,56 @@ export function ManagePatientQueries() {
 
             <TableCell className="px-5 py-4 text-right text-sm">{formatBrazilDate(q.createdAt)}</TableCell>
 
+           
+                  <TableCell className="px-5 py-4 text-center">
+                    <span className="inline-flex items-center">
+
+                      {q.PatientQueryFinalPrice?.length > 0 ? (
+                        <>
+                          {q.PatientQueryFinalPrice?.[0]?.status === PackageQueryFinalPriceStatus.PENDING && (
+                            <span className="inline-flex items-center gap-1 whitespace-nowrap rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-700 ring-1 ring-yellow-600/20">
+                              🟡 Pending : {brazilianCurrency(q.PatientQueryFinalPrice?.[0]?.finalPrice)}
+                            </span>
+                          )}
+
+                          {q.PatientQueryFinalPrice?.[0]?.status === PackageQueryFinalPriceStatus.ACCEPT && (
+                            <span className="inline-flex items-center gap-1 whitespace-nowrap rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-green-600/20">
+                              🟢 Accepted : {brazilianCurrency(q.PatientQueryFinalPrice?.[0]?.finalPrice)}
+                            </span>
+                          )}
+
+                          {q.PatientQueryFinalPrice?.[0]?.status === PackageQueryFinalPriceStatus.REJECT && (
+                            <span className="inline-flex items-center gap-1 whitespace-nowrap rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-red-600/20">
+                              🔴 Rejected : {brazilianCurrency(q.PatientQueryFinalPrice?.[0]?.finalPrice)}
+                            </span>
+                          )}
+                        </>
+                      ) : (
+                        <span className="inline-flex items-center gap-1 whitespace-nowrap rounded-md bg-gray-100 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-gray-400/20">
+                          ⚪ No Suggestion
+                        </span>
+                      )}
+
+                    </span>
+                  </TableCell>
+               
+
             <TableCell className="px-5 py-4 text-center cursor-pointer">
-              <a onClick={() => onView(q.id)}>
+              <a onClick={() => onView(q.id)} className="inline-flex items-center gap-2">
                 <EyeIcon />
+
+                {q.PatientQueryFinalPrice?.[0]?.status === PackageQueryFinalPriceStatus.REJECT && (<>
+                  /
+                  <span className="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-red-600/20">
+                    ⚠ Action Required
+                  </span>
+                </>)}
               </a>
             </TableCell>
+                  
+            
+
+
           </TableRow>
         ))}
       </TableBody>

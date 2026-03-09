@@ -16,7 +16,7 @@ export function QueryStatus({querydetails , onData}) {
     const [button,setButton] = useState(false);
     const tabs = [
         { id: "overview", label: "Update Request Status" },
-        { id: "paymentstatus", label: "Payment Status" },
+        // { id: "paymentstatus", label: "Payment Status" },
     ];
 
 
@@ -140,7 +140,7 @@ export function QueryStatus({querydetails , onData}) {
                                                 <option value="9">Treatment Ongoing</option>
                                                 <option value="10">Treatment Completed</option>
                                                 <option value="11">Treatment Unsuccessful</option>
-                                                <option value="3">Send Back To Coordinator</option>
+                                                <option value="3">Reject Query</option>
                                                 <option value="12">Cancelled</option>
                                             </select>
 

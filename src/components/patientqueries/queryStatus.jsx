@@ -285,7 +285,10 @@ export function QueryStatus({status,remarks="",paymentstatus,paymentremark}){
      </div>
 
 
-     <div className="flex items-start gap-4 p-5 border border-gray-200 rounded-2xl 
+    
+
+     {(status !== PatientQueryStatus.PENDING && status !== PatientQueryStatus.REJECT) &&(
+         <div className="flex items-start gap-4 p-5 border border-gray-200 rounded-2xl 
     bg-gradient-to-br from-white to-gray-50 
     shadow-sm hover:shadow-md transition duration-300 mt-4">
 
@@ -346,6 +349,10 @@ export function QueryStatus({status,remarks="",paymentstatus,paymentremark}){
 
 
      </div>
+
+     )}
+
+
 
 
 

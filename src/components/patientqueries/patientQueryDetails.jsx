@@ -61,9 +61,11 @@ export function PatientQueryDetails({ id }) {
     }
 
 
+    const [finalpricebutton,steFinalPriceButton] = useState(false);
 
     const finalPrice = async(data)=>{   
             debugger;
+            steFinalPriceButton(true);
             const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/patient-queries/insert-final-deal-price`,{
                 method : "Post",
                 headers : await adminHeaders(),
@@ -77,6 +79,7 @@ export function PatientQueryDetails({ id }) {
                 const result = await res.json();
                 fetchPackageQueryDetails();
             }
+            steFinalPriceButton(false);
     }
 
 
@@ -528,16 +531,18 @@ export function PatientQueryDetails({ id }) {
              
                    {querydetails.clinic && Number(querydetails.clinic.commission) > 0 ? (
 
-                       <button
-                    type="submit"
-                    className="h-12 px-10 bg-gradient-to-r from-indigo-500 to-purple-500
+                      <button
+                        type="submit"
+                        className="h-12 px-10 bg-gradient-to-r from-indigo-500 to-purple-500
                    hover:from-indigo-600 hover:to-purple-600
                    text-white font-semibold rounded-lg shadow-lg
                    transition-all duration-200
                    focus:outline-none focus:ring-2 focus:ring-indigo-400"
-      >
-        Submit
-                 </button>
+                   disabled={finalpricebutton}
+                      >
+                        
+                        {finalpricebutton ? (<><ButtonSpinner></ButtonSpinner></>):(<>Submit</>)}
+                      </button>
         ):(
           <p className="p-5 border border-red-500 rounded-2xl text-red-400">Please select clinic or commission to submit final deal price</p>
         )}
