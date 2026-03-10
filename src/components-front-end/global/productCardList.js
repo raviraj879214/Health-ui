@@ -29,7 +29,7 @@ export default function ProductCardList({ data }){
                         <img
                         src={
                                 data.clinicbanner
-                                ? `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/clinic/banner/${data.clinicbanner}`
+                                ? `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=clinic/banner/${data.clinicbanner}`
                                 : "/default-banner.jpg" 
                             }
                         alt={data.clinicbanner}
