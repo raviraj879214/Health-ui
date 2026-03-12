@@ -131,6 +131,13 @@ export function ClinicListAdmin(){
       Registered on : {formatBrazilDate(item.createdAt)}
     </p>
 
+
+        {/* {JSON.stringify({item})} */}
+
+
+    {/* <img class="h-35 w-80 object-cover border-2 border-dotted border-gray-300 rounded-lg p-1"  src="http://localhost:8000/v1/uploads?filepath=clinic/banner/230560b021deeb465521c6d20f76f979.jpg" /> */}
+
+
   </div>
 </div>
 

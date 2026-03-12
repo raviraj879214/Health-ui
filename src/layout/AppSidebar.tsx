@@ -180,8 +180,8 @@ const AppSidebar: React.FC = () => {
           <path d="M8 8h8M8 12h6M8 16h5" />
         </svg>
       ),
-      name: "Manage Blogs",
-      path: "/admin/blogs",
+      name: "Manage Faq's",
+      path: "/admin/faqs",
     },
 
     {
