@@ -103,9 +103,9 @@ export function ClinicDetail({id}){
       setReviews(result.data.googleReviews);
       setAccreditation(result.accreditaions);
 
-       dispatch(addmedicalCordinatorID(String(result.data.cordinatorid)));
+      dispatch(addmedicalCordinatorID(String(result.data.cordinatorid)));
       
-      
+
         
     }
   }
@@ -570,6 +570,7 @@ const groupSurgeryImages = (images = []) => {
                              router.push(`/order-create/${clinicdetails.uuid}/${createSlug(clinicdetails.name)}`)
                             
                             }}
+
                              className="btn btn-secondary w-full mb-3 py-4">Get A Free Quote</button>
                         <p className="mb-0">Or Contact Via <Link href="#" className="underline">WhatsApp</Link> or <Link href="#" className="underline">Telegram</Link></p>
                       </div>

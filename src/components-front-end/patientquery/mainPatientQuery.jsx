@@ -16,11 +16,18 @@ import {PatientNonVerifiedSuccessPage} from "./component/patientNonVerifiedSucce
 import {PatientVerifiedSuccessPage} from "./component/patientVerifiedSuccessPage";
 import {PatientTermsCondition} from "./component/patientTermsCondition";
 import { useEffect, useState } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
 
 
 
 
 export function MainPatinetQuery({ id, name }) {
+
+
+            const pathname = usePathname();
+
+            const clinicIdfromurl = pathname.split("/")[2];
+
 
 
             const step = useSelector((state) => state.patientquery.step);
@@ -72,7 +79,25 @@ export function MainPatinetQuery({ id, name }) {
         setContinues(refresh);
     },[]);
 
+
+
+
+
+    const getCordinatorDetails = async()=>{
+       
+        const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/clinic-listing/get-cordinator-details/${clinicIdfromurl}`,{
+          method : "Get"
+        });
+        if(res.ok){
+          const result = await res.json();
+           dispatch(addmedicalCordinatorID(String(result.cordid)));
+
+
+           return result.cordid;
+        }
+    }
     
+
 
     const clearall=()=>{
        
@@ -89,9 +114,12 @@ export function MainPatinetQuery({ id, name }) {
   const skippphonenumber = async () => {
 
     debugger;
-   
+
+    
+  
 
     setLoading(true);
+ 
 
     let payload = {
       patientName: patientName,
@@ -103,7 +131,7 @@ export function MainPatinetQuery({ id, name }) {
       medicalReportsValue: medicalReportstValue,
       procedureTimeValue: procedureTimevalue,
       clinicId: id,
-      cordinatorid: String(id == "demo-id" ? 1 : medicalcordinatorIDdd)
+      cordinatorid: String(id == "demo-id" ? 1 : await getCordinatorDetails())
     };
 
 
@@ -117,16 +145,21 @@ export function MainPatinetQuery({ id, name }) {
     });
 
     if (res.ok) {
+      debugger;
       const result = await res.json();
       setQuerycode(result.data.querycode);
 
+      
 
 
       // dispatch(addStep());
       dispatch(customStep(stepsfinalize));
+      
     }
 
     setLoading(false);
+
+     await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/webhook/patient-request-admin`,{method : "Get"});
   }
 
 
@@ -141,6 +174,7 @@ export function MainPatinetQuery({ id, name }) {
       
         <div className="w-4/5 mx-auto p-4 border border-gray-300 rounded-2xl mb-20 mt-20">
           <div className="bg-white rounded-xl shadow-lg p-6 mt-4 mb-4">
+            
                
           {(PatientQueryQuestion.PATIENTNONVERIFIEDSUCCESSPAGE !== step && PatientQueryQuestion.PATIENTVERIFIEDSUCCESSPAGE !== step) && (<Progressbar step={step} />)}
 

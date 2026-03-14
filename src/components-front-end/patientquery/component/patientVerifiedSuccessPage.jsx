@@ -1,4 +1,5 @@
 import { clearAllPatientQuery } from "@/components-front-end/redux/patinetquery/patientQueryRedux";
+import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
@@ -8,6 +9,7 @@ import { useDispatch } from "react-redux";
 export function PatientVerifiedSuccessPage({clinicid,querycode}){
  const [coordinatorDetails, setCoordinatorDetails] = useState(null);
   const dispatch = useDispatch();
+  const router = useRouter();
 
     const message = `Hello,
             This is my request number: ${querycode}.
@@ -78,7 +80,10 @@ if (!querycode) {
     type="button"
     className="text-gray-400 hover:text-gray-600 transition"
     aria-label="Close"
-    onClick={()=> dispatch(clearAllPatientQuery())}>
+     onClick={() => {
+            dispatch(clearAllPatientQuery());
+            router.push("/");
+        }}>
 
     ✕
   </button>

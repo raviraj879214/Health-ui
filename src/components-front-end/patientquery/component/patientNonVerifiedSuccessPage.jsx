@@ -1,6 +1,7 @@
 "use client"
 
 import { clearAllPatientQuery } from "@/components-front-end/redux/patinetquery/patientQueryRedux";
+import { useRouter } from "next/navigation";
 import { useEffect, useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 
@@ -12,6 +13,7 @@ import { useDispatch } from "react-redux";
 export function PatientNonVerifiedSuccessPage({ clinicid, querycode }) {
   const [coordinatorDetails, setCoordinatorDetails] = useState(null);
   const dispatch = useDispatch();
+  const router = useRouter();
 
     const message = `Hello,
             This is my request number: ${querycode}.
@@ -58,7 +60,10 @@ if (!querycode) {
 
       <button
         type="button"
-        onClick={() => dispatch(clearAllPatientQuery())}
+        onClick={() => {
+            dispatch(clearAllPatientQuery());
+            router.push("/");
+        }}
         className="inline-flex items-center px-4 py-2 text-sm font-medium
                    text-white bg-red-600 rounded-lg
                    hover:bg-red-700 transition

@@ -426,10 +426,23 @@ const releasedPercent = Math.floor(((clinicspaid / clinicstobepaid) * 100));
 
                         
                           <div className="rounded-xl border border-purple-200 bg-purple-50 p-4">
-                              <p className="text-sm text-purple-700">Platform Commission Interest</p>
-                              <p className="text-2xl font-semibold text-purple-900">
-                                  {item.clinic?.commission || ""}  %
-                              </p>
+
+                              <p className="text-sm text-purple-700 mb-2">Platform Commission Received</p>
+
+                              <div className="flex items-end justify-between">
+
+                                
+                                  <span className="text-xs text-purple-600">
+                                      {item.clinic?.commission ?? 0}% of  {brazilianCurrency(totalreceived ?? 0)}
+                                  </span>
+
+                                  
+                                  <span className="text-2xl font-semibold text-purple-900">
+                                      {brazilianCurrency(((totalreceived ?? 0) * (item.clinic?.commission ?? 0)) / 100)}
+                                  </span>
+
+                              </div>
+
                           </div>
 
                         

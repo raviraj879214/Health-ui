@@ -510,7 +510,7 @@ useEffect(() => {
 
            
                     
-            {remainingAmount > 0 ? (
+            {/* {remainingAmount > 0 ? (
                
                 <RaiseFunds
                     patientqueryid={id}
@@ -522,7 +522,19 @@ useEffect(() => {
                     totalfundrequested={totalfundrequested}
 
                 />
-            ) : null}
+            ) : null} */}
+
+
+             <RaiseFunds
+                    patientqueryid={id}
+                    requestedFund={RequestedFunds || 0}
+                    totalFundsReceived={TotalReceivedFunds || 0}
+                    totalF={totalfundreceived}
+                    remainF={remainingAmount || 0}
+                    clinicmaxAmount={(querydetails.finalPrice || 0) - ((querydetails?.clinic?.commission || 0 * querydetails.finalPrice || 0)/100)}
+                    totalfundrequested={totalfundrequested || 0}
+
+                />
 
 
             
