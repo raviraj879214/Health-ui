@@ -1,26 +1,13 @@
+export const dynamic = "force-dynamic";
 
+import { VerifyStripe } from "../../../components/constultationsucces/verifyStripe";
 
-
-
-
-"use client";
-
-import { useSearchParams } from "next/navigation";
-import {VerifyStripe} from "../../../components/constultationsucces/verifyStripe";
-
-export default function Page() {
-  const searchParams = useSearchParams();
-  const url = searchParams.get("url"); 
-
-
+export default function Page({ searchParams }) {
+  const url = searchParams?.url;
 
   return (
     <>
-
-
-
       <VerifyStripe url={url} />
-
     </>
   );
 }
