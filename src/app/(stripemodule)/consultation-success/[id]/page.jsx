@@ -1,4 +1,4 @@
-import {ConsultationSuccess} from "../../../components/constultationsucces/consultationSuccess";
+import {ConsultationSuccess} from "../../../../components/constultationsucces/consultationSuccess";
 
 
 export default async function Page({params}){

@@ -66,7 +66,20 @@ export function ClinicSidebar({ collapsed, mobileOpen, active, setActive, toggle
                 ${isActive ? "bg-[#F8FFE6] border-t-4 border-[#1ABC9C] text-[#689B0D]" : ""}
               `}
             >
-              <Icon size={20} className="opacity-90" />
+              <div className="relative">
+
+                <Icon size={20} className="opacity-90" />
+
+                {/* Notification Badge ONLY for Requests */}
+                {m.name === "Requests" && (
+                  <span className="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] font-semibold px-1.5 py-0.5 rounded-full">
+                    0
+                  </span>
+                )}
+
+              </div>
+
+
               <span className="text-[11px] mt-1">{m.name}</span>
             </li>
           );

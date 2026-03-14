@@ -12,6 +12,8 @@ import {FinalPriceModule} from "./finalPriceModule";
 import { toast } from "react-toastify";
 import { ButtonSpinner } from "@/reusable/buttonSpinner";
 import  PatientQueryStatusBadge  from "../../reusable/StatusBadge";
+import { useRouter } from "next/navigation";
+import { getSocket } from "../../hooks/socket";
 
 
 export function RequestDetails({id}){
@@ -23,11 +25,40 @@ export function RequestDetails({id}){
 
     
 
+
+
     useEffect(() => {
         if(id){
             fetchPatinetQuery();
         }
     }, [id]);
+
+
+
+useEffect(() => {
+    const socket = getSocket();
+
+
+    socket.on("patientrequest_clinic", (data) => {
+          if(id){
+            fetchPatinetQuery();
+        }
+     
+    });
+    return () => {
+      socket.off("patientrequest_clinic");
+    };
+
+
+  }, [id]);
+
+
+
+
+
+
+
+
 
 
     const fetchPatinetQuery = async ()=>{
@@ -85,6 +116,7 @@ export function RequestDetails({id}){
                         autoClose : 3000
                      });
                     setQueryDetails(prev => ({...prev,...result.data}));
+                    await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/webhook/patient-request-admin`,{method : "Get"});
         
                 }
                  setButton(false);
@@ -115,6 +147,7 @@ export function RequestDetails({id}){
                      });
 
                      setQueryDetails(prev => ({...prev,...result.data}));
+                     await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/webhook/patient-request-admin`,{method : "Get"});
                     
         
                 }
@@ -490,6 +523,14 @@ export function RequestDetails({id}){
 
                 />
             ) : null}
+
+
+            
+
+           
+
+
+               
 
 
             <QueryStatus querydetails={querydetails} onData={(updatedData) => setQueryDetails(prev => ({...prev,...updatedData}))}  />

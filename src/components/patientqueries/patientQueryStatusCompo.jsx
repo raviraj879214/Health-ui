@@ -1,15 +1,18 @@
+
 "use client"
+import { clinicHeaders } from "@/components-clinic/utils/clinicHeaders";
 import ComponentCard from "@/components/common/ComponentCard";
 import { PatientQueryStatus } from "@/lib/enums/patientQueryStatus";
 import { ButtonSpinner } from "@/reusable/buttonSpinner";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { clinicHeaders } from "../utils/clinicHeaders";
+
 import { toast } from "react-toastify";
 
 
 
-export function QueryStatus({querydetails , onData}) {
+
+export function PatientQueryStatusCompo({querydetails , onData}) {
 
     const { register, handleSubmit, setValue, getValues, reset, formState: { errors } } = useForm();
     const [activeTab, setActiveTab] = useState("overview");
@@ -24,7 +27,7 @@ export function QueryStatus({querydetails , onData}) {
         debugger;
         setButton(true);
 
-        const res= await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-clinic-request/update-patient-query-status`,{
+        const res= await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/patient-queries/update-patient-query-status`,{
             method : "Put",
             headers : await clinicHeaders(),
             body : JSON.stringify({
@@ -36,12 +39,12 @@ export function QueryStatus({querydetails , onData}) {
         if(res.ok){
             const result= await res.json();
 
-             toast.success("The patient status updated successfully",{
+             toast.success("The admin/coordinator status updated successfully",{
                 position : "bottom-right",
                 autoClose : 3000
              });
             onData(result.data);
-await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/webhook/patient-request-admin`,{method : "Get"});
+                await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/webhook/patient-request`,{method : "Get"});
             reset();
 
         }
@@ -133,20 +136,14 @@ await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/webhook/patient-request-ad
                                                     focus:outline-none focus:ring-2 focus:ring-blue-500 
                                                     focus:border-blue-500 bg-white transition duration-200">
                                                         
-                                                <option value="4">Under Review</option>
-                                                <option value="5">Waiting for Info</option>
-                                                <option value="6">Offer Sent</option>
-                                                <option value="7">Appointment Booked</option>
-                                                <option value="8">Patient Arrived</option>
-                                                <option value="9">Treatment Ongoing</option>
-                                                <option value="10">Treatment Completed</option>
-                                                <option value="11">Treatment Unsuccessful</option>
-                                                <option value="3">Reject Query</option>
-                                                <option value="12">Cancelled</option>
-
-                                                <option value="13">ReOpen Request</option>
+                                                   
+                                                    <option value="14">Reopened</option>
+                                                    <option value="15">Funds Released</option>
+                                                    <option value="16">Completed</option>
+                                                    <option value="17">Closed</option>
+                                                    <option value="18">Payment Pending</option>
                                                 
-
+                                            
                                             </select>
 
                                           

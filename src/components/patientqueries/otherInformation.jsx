@@ -38,8 +38,10 @@ export function OtherInformation({ id }) {
       await fetch(`${API}/v1/other-information/${rowId}`, {
         method: "DELETE",
       });
+      await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/webhook/patient-request`,{method : "Get"});
     }
     setFields(fields.filter((_, i) => i !== index));
+    
   };
 
   /* ================= SAVE (POST + PUT) ================= */
@@ -82,6 +84,7 @@ export function OtherInformation({ id }) {
 
     await fetchAll();
     setLoading(false);
+    await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/webhook/patient-request`,{method : "Get"});
   };
 
   /* ================= UI ================= */

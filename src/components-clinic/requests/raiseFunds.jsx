@@ -7,6 +7,7 @@ import {ButtonSpinner} from "../../reusable/buttonSpinner";
 import { formatBrazilDate } from "@/lib/formatDate";
 import { brazilianCurrency } from "@/lib/brazilianCurrency";
 import { CheckIcon, CrossIcon } from "lucide-react";
+import { getSocket } from "@/hooks/socket";
 
 
 
@@ -23,13 +24,39 @@ export function RaiseFunds({patientqueryid, requestedFund ,totalFundsReceived ,t
 
 
 
-    useEffect(()=>{
-        if(patientqueryid){
-            fetchRequestFunds();
-            
+    // useEffect(()=>{
+    //     if(patientqueryid){
+    //         fetchRequestFunds();
+    //     }
+    // },[patientqueryid]);
 
-        }
-    },[patientqueryid]);
+
+    useEffect(() => {
+
+         if(patientqueryid){
+                    fetchRequestFunds();
+             }
+
+             
+        const socket = getSocket();
+    
+    
+        socket.on("patientrequest_clinic", (data) => {
+             if(patientqueryid){
+                    fetchRequestFunds();
+             }
+         
+        });
+        return () => {
+          socket.off("patientrequest_clinic");
+        };
+    
+    
+      }, [patientqueryid]);
+    
+
+
+
 
 
     const fetchRequestFunds = async ()=>{
@@ -74,6 +101,7 @@ export function RaiseFunds({patientqueryid, requestedFund ,totalFundsReceived ,t
            
 
 
+            await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/webhook/patient-request-admin`,{method : "Get"});
             reset();
             toast.success("Requested Fund to admin/cordinator",{
                 position : "bottom-right",

@@ -104,6 +104,51 @@ export default function PatientQueryStatusBadge({
         "bg-gray-100 text-gray-700 border-gray-300 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600",
       icon: "M6 18L18 6M6 6l12 12",
     },
+  [PatientQueryStatus.REOPENREQUEST]: {
+    label: "Reopen Request Submitted",
+    style:
+      "bg-gray-100 text-gray-700 border-gray-300 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600",
+    icon: "M4 4v5h5M20 20v-5h-5M5 9a7 7 0 0112-3l3 3M19 15a7 7 0 01-12 3l-3-3",
+  },
+
+  [PatientQueryStatus.REOPENED]: {
+    label: "Reopened",
+    style:
+      "bg-blue-100 text-blue-700 border-blue-300 dark:bg-blue-900 dark:text-blue-300 dark:border-blue-700",
+    icon: "M9 14L4 9l5-5M4 9h10a6 6 0 010 12h-3",
+  },
+
+  [PatientQueryStatus.FUNDS_RELEASED]: {
+    label: "Funds Released",
+    style:
+      "bg-green-100 text-green-700 border-green-300 dark:bg-green-900 dark:text-green-300 dark:border-green-700",
+    icon: "M12 8c-3 0-5 1.5-5 3s2 3 5 3 5 1.5 5 3-2 3-5 3m0-12V4m0 16v-2",
+  },
+
+  [PatientQueryStatus.COMPLETED]: {
+    label: "Completed",
+    style:
+      "bg-emerald-100 text-emerald-700 border-emerald-300 dark:bg-emerald-900 dark:text-emerald-300 dark:border-emerald-700",
+    icon: "M5 13l4 4L19 7",
+  },
+
+  [PatientQueryStatus.CLOSED]: {
+    label: "Closed",
+    style:
+      "bg-gray-200 text-gray-800 border-gray-400 dark:bg-gray-900 dark:text-gray-400 dark:border-gray-700",
+    icon: "M6 18L18 6M6 6l12 12",
+  },
+
+  [PatientQueryStatus.PAYMENT_PENDING]: {
+    label: "Payment Pending",
+    style:
+      "bg-yellow-100 text-yellow-700 border-yellow-300 dark:bg-yellow-900 dark:text-yellow-300 dark:border-yellow-700",
+    icon: "M12 8v4l3 3M12 2a10 10 0 100 20 10 10 0 000-20z",
+  },
+
+
+
+
   };
 
   const current = statusConfig[status];

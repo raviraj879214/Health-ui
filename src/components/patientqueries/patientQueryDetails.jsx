@@ -18,6 +18,8 @@ import { useRouter } from "next/navigation";
 import { Table, TableHeader } from "../ui/table";
 import { PackageQueryFinalPriceStatus } from "@/lib/enums/patientQueryFinalPriceStatus";
 import {QueryStatus} from "./queryStatus";
+import { getSocket } from "@/hooks/socket";
+import {PatientQueryStatusCompo} from "./patientQueryStatusCompo";
 
 
 
@@ -39,9 +41,23 @@ export function PatientQueryDetails({ id }) {
     const router = useRouter();
 
 
-    useEffect(() => {
+    // useEffect(() => {
+    //     fetchPackageQueryDetails();
+    // }, [id]);
+
+
+
+    
+      useEffect(() => {
         fetchPackageQueryDetails();
-    }, [id]);
+          const socket = getSocket();
+          socket.on("patientRequestAdmin", (data) => {
+               fetchPackageQueryDetails();
+          });
+          return () => {
+            socket.off("patientRequestAdmin");
+          };
+        }, [id]);
 
 
     const fetchPackageQueryDetails = async () => {
@@ -78,6 +94,8 @@ export function PatientQueryDetails({ id }) {
             if(res.ok){
                 const result = await res.json();
                 fetchPackageQueryDetails();
+
+                await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/webhook/patient-request`,{method : "Get"});
             }
             steFinalPriceButton(false);
     }
@@ -118,10 +136,10 @@ export function PatientQueryDetails({ id }) {
             }),
           });
 
-          const { paymentLink } = await res.json();
+          const { paymentLink , shortLink } = await res.json();
 
-          console.log(paymentLink);
-          setValues(paymentLink);
+          console.log(shortLink);
+          setValues(`${process.env.NEXT_PUBLIC_URL}/verify-stripe?url=${shortLink}`);
           setGeneratedAmount(0);
           setGenerateButton(false);
           setNotes("");
@@ -186,6 +204,7 @@ export function PatientQueryDetails({ id }) {
               position : "bottom-right",
               autoClose : 3000
             });
+            await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/webhook/patient-request`,{method : "Get"});
           }
 
           setButtonSendClinic(false);
@@ -239,21 +258,21 @@ export function PatientQueryDetails({ id }) {
       </div>
 
 
-         <ComponentCard>
-       
+      <ComponentCard>
+
 
 
         <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-4 items-start">
 
 
-          {((PatientQueryStatus.PENDING === querydetails.status || PatientQueryStatus.REJECT === querydetails.status) && querydetails.clinicId !== null) &&    (<>
+          {((PatientQueryStatus.PENDING === querydetails.status || PatientQueryStatus.REJECT === querydetails.status) && querydetails.clinicId !== null) && (<>
 
             <p className="text-sm font-medium text-gray-700">
               On clicking “Send to Clinic”, the patient’s query details will be sent to the selected clinic.
               Please ensure that all required information has been collected from the patient before proceeding.
               Once the query is sent, you will not be able to reselect or change the clinic, doctor, or package.
-              
-              
+
+
             </p>
             <button
               onClick={() => sendClinic()}
@@ -262,7 +281,7 @@ export function PatientQueryDetails({ id }) {
               {buttonsendclinic ? (<>
                 <ButtonSpinner></ButtonSpinner>
               </>) : (<> Send To Clinic</>)}
-              
+
             </button>
 
           </>)}
@@ -271,7 +290,7 @@ export function PatientQueryDetails({ id }) {
 
           <div>
 
-                <QueryStatus  status={querydetails.status} remarks={querydetails.reason}  paymentstatus={querydetails.PaymentStatus} paymentremark={querydetails.paymentreason} / >
+            <QueryStatus status={querydetails.status} remarks={querydetails.reason} paymentstatus={querydetails.PaymentStatus} paymentremark={querydetails.paymentreason} />
           </div>
 
 
@@ -279,23 +298,23 @@ export function PatientQueryDetails({ id }) {
         </div>
 
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <ClinicDetails querydetails={querydetails} onData={()=> fetchPackageQueryDetails()} />
-              <DoctorDetails querydetails={querydetails}  id={querydetails.clinic?.uuid} onData={()=> fetchPackageQueryDetails()}/>
-              <PackageDetails querydetails={querydetails}  id={querydetails.clinic?.uuid} onData={()=> fetchPackageQueryDetails()} />
-            </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <ClinicDetails querydetails={querydetails} onData={() => fetchPackageQueryDetails()} />
+          <DoctorDetails querydetails={querydetails} id={querydetails.clinic?.uuid} onData={() => fetchPackageQueryDetails()} />
+          <PackageDetails querydetails={querydetails} id={querydetails.clinic?.uuid} onData={() => fetchPackageQueryDetails()} />
+        </div>
 
 
-        </ComponentCard>
+      </ComponentCard>
        
 
 
-        <ComponentCard className="p-6 space-y-6">
+      <ComponentCard className="p-6 space-y-6">
 
 
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-6">
 
-           <div>
+          <div>
             <Label>Patient Requested No</Label>
             <div className="text-gray-700"><b>{querydetails?.querycode}</b></div>
           </div>
@@ -352,103 +371,103 @@ export function PatientQueryDetails({ id }) {
         </div>
       </ComponentCard>
 
-            <ComponentCard className="mt-2">
-                <OtherInformation id={id}/>
-          </ComponentCard>
+      <ComponentCard className="mt-2">
+        <OtherInformation id={id} />
+      </ComponentCard>
 
 <ComponentCard>
    
 
-<div className="w-full  bg-white dark:bg-gray-900 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-800">
-  <form onSubmit={handleSubmit(finalPrice)} className="p-6 md:p-8">
+        <div className="w-full  bg-white dark:bg-gray-900 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-800">
+          <form onSubmit={handleSubmit(finalPrice)} className="p-6 md:p-8">
 
-    {/* Header */}
-    <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-6">
-      Final Deal Price
-    </h2>
+            {/* Header */}
+            <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-6">
+              Final Deal Price
+            </h2>
 
-    {/* Price Grid */}
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Price Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-      {/* Package Price */}
-      <div>
-        <label className="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-          Package Price
-        </label>
+              {/* Package Price */}
+              <div>
+                <label className="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
+                  Package Price
+                </label>
 
-        <div className="h-12 flex items-center justify-end px-4 rounded-lg
+                <div className="h-12 flex items-center justify-end px-4 rounded-lg
                         border border-gray-200 bg-gray-100
                         text-gray-800 font-semibold
                         dark:bg-gray-800 dark:border-gray-700 dark:text-white/80">
-          {brazilianCurrency(querydetails.package?.discountedprice || 0)}
-        </div>
+                  {brazilianCurrency(querydetails.package?.discountedprice || 0)}
+                </div>
 
-      </div>
+              </div>
 
-     
-      
-   <div>
-  <label className="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-    Final / Negotiated Price 
-  </label>
 
-  
-  {querydetails?.finalPrice?.trim() ? (
-  /* Read-only Final Price */
-  <div className="h-12 flex items-center justify-end px-4 rounded-lg
+
+              <div>
+                <label className="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
+                  Final / Negotiated Price
+                </label>
+
+
+                {querydetails?.finalPrice?.trim() ? (
+                  /* Read-only Final Price */
+                  <div className="h-12 flex items-center justify-end px-4 rounded-lg
                   border border-green-400 bg-green-50
                   text-lg font-semibold text-green-700
                   dark:bg-green-900/20 dark:border-green-600 dark:text-green-300">
-     {brazilianCurrency(querydetails.finalPrice)}
-  </div>
-) : (
-  /* Editable Input */
-  <>
-    <div
-      className={`flex items-center h-12 px-4 rounded-lg border
+                    {brazilianCurrency(querydetails.finalPrice)}
+                  </div>
+                ) : (
+                  /* Editable Input */
+                  <>
+                    <div
+                      className={`flex items-center h-12 px-4 rounded-lg border
         ${errors.finalprice
-          ? "border-red-400 focus-within:ring-red-400"
-          : "border-gray-300 focus-within:ring-indigo-500"}
+                          ? "border-red-400 focus-within:ring-red-400"
+                          : "border-gray-300 focus-within:ring-indigo-500"}
         shadow-sm dark:border-gray-700 dark:bg-gray-800
         focus-within:ring-2`}
-    >
-      <span className="mr-2 text-gray-500 dark:text-gray-400">R$</span>
+                    >
+                      <span className="mr-2 text-gray-500 dark:text-gray-400">R$</span>
 
-      <input
-        type="number"
-        step="0.01"
-        min="1"
-        placeholder="0.00"
-        className="w-full bg-transparent text-lg text-gray-800
+                      <input
+                        type="number"
+                        step="0.01"
+                        min="1"
+                        placeholder="0.00"
+                        className="w-full bg-transparent text-lg text-gray-800
                    placeholder-gray-400 focus:outline-none
                    dark:text-white/90 text-right"
-        {...register("finalprice", {
-          required: "Please enter final price",
-          min: {
-            value: 1,
-            message: "Price must be greater than 0"
-          }
-        })}
-      />
-    </div>
+                        {...register("finalprice", {
+                          required: "Please enter final price",
+                          min: {
+                            value: 1,
+                            message: "Price must be greater than 0"
+                          }
+                        })}
+                      />
+                    </div>
 
-    {errors.finalprice && (
-      <p className="mt-1 text-sm text-red-400">
-        {errors.finalprice.message}
-      </p>
-    )}
-  </>
-)}
+                    {errors.finalprice && (
+                      <p className="mt-1 text-sm text-red-400">
+                        {errors.finalprice.message}
+                      </p>
+                    )}
+                  </>
+                )}
 
-</div>
+              </div>
 
 
-    </div>
+            </div>
 
-    {/* Helper Text */}
-    <p className="mt-4 text-sm text-gray-500 dark:text-gray-400">
-      Enter the final agreed amount to generate a secure Stripe payment link. 
-    </p>
+            {/* Helper Text */}
+            <p className="mt-4 text-sm text-gray-500 dark:text-gray-400">
+              Enter the final agreed amount to generate a secure Stripe payment link.
+            </p>
 
             <table className="w-full text-sm text-left text-body border border-default rounded-lg overflow-hidden">
               <thead className="bg-neutral-secondary-soft border-b border-default">
@@ -464,244 +483,238 @@ export function PatientQueryDetails({ id }) {
               <tbody>
 
 
-                    {queryfinalPriceDetails.length  > 0 ? (<>
-                          {queryfinalPriceDetails?.map((item) => (
+                {queryfinalPriceDetails.length > 0 ? (<>
+                  {queryfinalPriceDetails?.map((item) => (
 
-                  <tr key={item.id} className="border-b border-default">
-                    <td className="px-6 py-4"><b>{brazilianCurrency(item.finalPrice)}</b></td>
-                    <td className="px-6 py-4">
-                      <div className="flex items-center gap-3">
+                    <tr key={item.id} className="border-b border-default">
+                      <td className="px-6 py-4"><b>{brazilianCurrency(item.finalPrice)}</b></td>
+                      <td className="px-6 py-4">
+                        <div className="flex items-center gap-3">
 
-                        {/* Avatar */}
-                        <div className="w-9 h-9 flex items-center justify-center rounded-full 
+                          {/* Avatar */}
+                          <div className="w-9 h-9 flex items-center justify-center rounded-full 
                     bg-blue-100 text-blue-700 font-semibold text-sm">
-                          {item.Clinic?.name?.charAt(0)?.toUpperCase() || "C"}
+                            {item.Clinic?.name?.charAt(0)?.toUpperCase() || "C"}
+                          </div>
+
+                          {/* Clinic Name */}
+                          <span className="font-medium text-gray-800">
+                            {item.Clinic?.name || "--"}
+                          </span>
+
                         </div>
-
-                        {/* Clinic Name */}
-                        <span className="font-medium text-gray-800">
-                          {item.Clinic?.name || "--"}
-                        </span>
-
-                      </div>
-                    </td>
-                    <td className="px-6 py-4">{item.reason || "--"}</td>
-                    <td className="px-6 py-4">{formatBrazilDate(item.createdAt)}</td>
-                    <td className="px-6 py-4">
+                      </td>
+                      <td className="px-6 py-4">{item.reason || "--"}</td>
+                      <td className="px-6 py-4">{formatBrazilDate(item.createdAt)}</td>
+                      <td className="px-6 py-4">
 
 
-                      {item.status === PackageQueryFinalPriceStatus.PENDING && (<>
-                        <span className="px-3 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-green-700">
-                          Suggested Price
-                        </span>
-                      </>)}
+                        {item.status === PackageQueryFinalPriceStatus.PENDING && (<>
+                          <span className="px-3 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-green-700">
+                            Suggested Price
+                          </span>
+                        </>)}
 
-                      {item.status === PackageQueryFinalPriceStatus.REJECT && (<>
-                        <span className="px-3 py-1 text-xs font-semibold rounded-full bg-red-100 text-green-700">
-                          Rejected
-                        </span>
-                      </>)}
+                        {item.status === PackageQueryFinalPriceStatus.REJECT && (<>
+                          <span className="px-3 py-1 text-xs font-semibold rounded-full bg-red-100 text-green-700">
+                            Rejected
+                          </span>
+                        </>)}
 
-                      {item.status === PackageQueryFinalPriceStatus.ACCEPT && (<>
-                        <span className="px-3 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-700">
-                          Accepted
-                        </span>
-                      </>)}
+                        {item.status === PackageQueryFinalPriceStatus.ACCEPT && (<>
+                          <span className="px-3 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-700">
+                            Accepted
+                          </span>
+                        </>)}
 
 
-                    </td>
-                  </tr>
+                      </td>
+                    </tr>
 
-                ))}
-                    </>):(<>
-                      <p className="text-red-600 m-3">No suggested price found</p>
-                    </>)}
+                  ))}
+                </>) : (<>
+                  <p className="text-red-600 m-3">No suggested price found</p>
+                </>)}
               </tbody>
             </table>
 
 
 
-    {/* Actions */}
-    <div className="mt-8 flex justify-end">
-        {querydetails?.finalPrice?.trim() ?(
+            {/* Actions */}
+            <div className="mt-8 flex justify-end">
+              {querydetails?.finalPrice?.trim() ? (
                 <></>
-        ) :(
-            <>
-                
-             
-                   {querydetails.clinic && Number(querydetails.clinic.commission) > 0 ? (
+              ) : (
+                <>
 
-                      <button
-                        type="submit"
-                        className="h-12 px-10 bg-gradient-to-r from-indigo-500 to-purple-500
+
+                  {querydetails.clinic && Number(querydetails.clinic.commission) > 0 ? (
+
+                    <button
+                      type="submit"
+                      className="h-12 px-10 bg-gradient-to-r from-indigo-500 to-purple-500
                    hover:from-indigo-600 hover:to-purple-600
                    text-white font-semibold rounded-lg shadow-lg
                    transition-all duration-200
                    focus:outline-none focus:ring-2 focus:ring-indigo-400"
-                   disabled={finalpricebutton}
-                      >
-                        
-                        {finalpricebutton ? (<><ButtonSpinner></ButtonSpinner></>):(<>Submit</>)}
-                      </button>
-        ):(
-          <p className="p-5 border border-red-500 rounded-2xl text-red-400">Please select clinic or commission to submit final deal price</p>
-        )}
+                      disabled={finalpricebutton}
+                    >
 
-            
-            </>
-        )}
-     
-       
-      
-    </div>
-
-  </form>
-  
-</div>
+                      {finalpricebutton ? (<><ButtonSpinner></ButtonSpinner></>) : (<>Submit</>)}
+                    </button>
+                  ) : (
+                    <p className="p-5 border border-red-500 rounded-2xl text-red-400">Please select clinic or commission to submit final deal price</p>
+                  )}
 
 
-<div className="relative w-full p-6 bg-white dark:bg-gray-900 rounded-2xl shadow-lg">
- 
-    <div>
+                </>
+              )}
 
 
-      <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-6">
-        Generate Payment Link
-        <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-          The amount will not be credited to the destination account immediately.
-          You need to initiate the transfer manually.
-        </p>
-      </h2>
 
- 
-      <div className="flex flex-col md:flex-row gap-4 md:gap-3 items-start">
+            </div>
 
-   
-        <div className="flex flex-col gap-1 flex-1">
-          <label className="text-sm font-medium text-gray-600 dark:text-gray-300">
-            Amount
-          </label>
-          <div className="flex items-center border border-gray-300 rounded-lg h-12 px-3 shadow-sm dark:border-gray-700 dark:bg-gray-800">
-            <img
-              src="../images/stripe.png"
-              alt="Stripe"
-              className="h-6 w-auto mr-2"
-            />
-            <input
-              value={generatedamount}
-              type="number"
-              placeholder="0.00"
-              className="w-full bg-transparent text-lg text-gray-800 placeholder-gray-400 focus:outline-none dark:text-white/90 dark:placeholder-gray-500 text-right"
-              onChange={(e) => setGeneratedAmount(e.target.value)}
-            />
-          </div>
+          </form>
+
         </div>
 
-        {/* Source Account */}
-        <div className="flex flex-col gap-1 flex-1">
-          <label className="text-sm font-medium text-gray-600 dark:text-gray-300">
-            Source Account
-          </label>
-          <div className="flex items-center border border-gray-300 rounded-lg h-16 px-3 shadow-sm dark:border-gray-700 dark:bg-gray-800">
-            <span className="text-gray-800 dark:text-white/90">
-              Admin Account (hidden)
-            </span>
+
+        <div className="relative w-full p-6 bg-white dark:bg-gray-900 rounded-2xl shadow-lg">
+
+          <div>
+
+
+            <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-6">
+              Generate Payment Link
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                The amount will not be credited to the destination account immediately.
+                You need to initiate the transfer manually.
+              </p>
+            </h2>
+
+
+            <div className="flex flex-col md:flex-row gap-4 md:gap-3 items-start">
+
+
+              <div className="flex flex-col gap-1 flex-1">
+                <label className="text-sm font-medium text-gray-600 dark:text-gray-300">
+                  Amount
+                </label>
+                <div className="flex items-center border border-gray-300 rounded-lg h-12 px-3 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+                  <img
+                    src="../images/stripe.png"
+                    alt="Stripe"
+                    className="h-6 w-auto mr-2"
+                  />
+                  <input
+                    value={generatedamount}
+                    type="number"
+                    placeholder="0.00"
+                    className="w-full bg-transparent text-lg text-gray-800 placeholder-gray-400 focus:outline-none dark:text-white/90 dark:placeholder-gray-500 text-right"
+                    onChange={(e) => setGeneratedAmount(e.target.value)}
+                  />
+                </div>
+              </div>
+
+              {/* Source Account */}
+              <div className="flex flex-col gap-1 flex-1">
+                <label className="text-sm font-medium text-gray-600 dark:text-gray-300">
+                  Source Account
+                </label>
+                <div className="flex items-center border border-gray-300 rounded-lg h-16 px-3 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+                  <span className="text-gray-800 dark:text-white/90">
+                    Admin Account (hidden)
+                  </span>
+                </div>
+              </div>
+
+              {/* Destination Account */}
+              <div className="flex flex-col gap-1 flex-1">
+                <label className="text-sm font-medium text-gray-600 dark:text-gray-300">
+                  Destination Account
+                </label>
+                <div className="flex items-center border border-gray-300 rounded-lg h-16 px-3 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+                  <span className="text-gray-800 dark:text-white/90">
+                    {querydetails?.clinic?.name}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Generated Link */}
+            <div className="flex items-center gap-2 mt-4 border border-gray-300 rounded-lg h-12 px-3 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+              <input
+                type="text"
+                value={value}
+                readOnly
+                placeholder="Generated Link"
+                className="flex-1 bg-transparent text-lg text-gray-800 placeholder-gray-400 focus:outline-none dark:text-white/90 dark:placeholder-gray-500 text-right"
+              />
+              <button
+                onClick={handleCopy}
+                className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition"
+              >
+                {copied ? (
+                  <Check className="h-5 w-5 text-green-600" />
+                ) : (
+                  <Clipboard className="h-5 w-5 text-gray-500 dark:text-gray-300" />
+                )}
+              </button>
+              {copied && (
+                <span className="ml-2 text-sm text-green-600 font-medium">
+                  Copied!
+                </span>
+              )}
+            </div>
+
+            {/* Message */}
+            <div className="mt-4">
+              <label className="text-sm font-medium text-gray-600 dark:text-gray-300 mb-1 block">
+                <b>Message for Payment Page</b> (optional)
+              </label>
+              <textarea
+                value={notes}
+                maxLength={200}
+                onChange={(e) => setNotes(e.target.value)}
+                placeholder="Add a note or message for the patient (200 characters)..."
+                className="w-full h-24 px-3 py-2 border border-gray-300 rounded-lg shadow-sm resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-800 dark:text-white/90 dark:placeholder-gray-500"
+              />
+            </div>
+
+            {/* Generate Button */}
+
+
+            {(querydetails.clinic && Number(querydetails.clinic.commission) > 0 && parseInt(querydetails.finalPrice) > 0) ? (
+              <button
+                onClick={generatelink}
+                disabled={generatebutton}
+                className="mt-4 h-12 px-6 bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white font-semibold rounded-lg shadow-md transition-all duration-200 flex items-center justify-center"
+              >
+                {generatebutton ? (
+                  <svg
+                    className="w-6 h-6 text-white animate-spin mr-2"
+                    viewBox="0 0 100 101"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                ) : (
+                  "Generate Link"
+                )}
+              </button>
+            ) : (
+              <p className="p-5 border border-red-500 rounded-2xl text-red-400">Please fill clinic and final deal price to generate payment link</p>
+            )}
+
+
+
+
           </div>
         </div>
-
-        {/* Destination Account */}
-        <div className="flex flex-col gap-1 flex-1">
-          <label className="text-sm font-medium text-gray-600 dark:text-gray-300">
-            Destination Account
-          </label>
-          <div className="flex items-center border border-gray-300 rounded-lg h-16 px-3 shadow-sm dark:border-gray-700 dark:bg-gray-800">
-            <span className="text-gray-800 dark:text-white/90">
-              {querydetails?.clinic?.name}
-            </span>
-          </div>
-        </div>
-      </div>
-
-      {/* Generated Link */}
-      <div className="flex items-center gap-2 mt-4 border border-gray-300 rounded-lg h-12 px-3 shadow-sm dark:border-gray-700 dark:bg-gray-800">
-        <input
-          type="text"
-          value={value}
-          readOnly
-          placeholder="Generated Link"
-          className="flex-1 bg-transparent text-lg text-gray-800 placeholder-gray-400 focus:outline-none dark:text-white/90 dark:placeholder-gray-500 text-right"
-        />
-        <button
-          onClick={handleCopy}
-          className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition"
-        >
-          {copied ? (
-            <Check className="h-5 w-5 text-green-600" />
-          ) : (
-            <Clipboard className="h-5 w-5 text-gray-500 dark:text-gray-300" />
-          )}
-        </button>
-        {copied && (
-          <span className="ml-2 text-sm text-green-600 font-medium">
-            Copied!
-          </span>
-        )}
-      </div>
-
-      {/* Message */}
-      <div className="mt-4">
-        <label className="text-sm font-medium text-gray-600 dark:text-gray-300 mb-1 block">
-          <b>Message for Payment Page</b> (optional)
-        </label>
-        <textarea
-          value={notes}
-          maxLength={200}
-          onChange={(e) => setNotes(e.target.value)}
-          placeholder="Add a note or message for the patient (200 characters)..."
-          className="w-full h-24 px-3 py-2 border border-gray-300 rounded-lg shadow-sm resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-800 dark:text-white/90 dark:placeholder-gray-500"
-        />
-      </div>
-
-      {/* Generate Button */}
-       
-      
-        {(querydetails.clinic && Number(querydetails.clinic.commission) > 0 && parseInt(querydetails.finalPrice) > 0) ? (
-           <button
-        onClick={generatelink}
-        disabled={generatebutton}
-        className="mt-4 h-12 px-6 bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white font-semibold rounded-lg shadow-md transition-all duration-200 flex items-center justify-center"
-      >
-        {generatebutton ? (
-          <svg
-            className="w-6 h-6 text-white animate-spin mr-2"
-            viewBox="0 0 100 101"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908Z"
-              fill="currentColor"
-            />
-          </svg>
-        ) : (
-          "Generate Link"
-        )}
-      </button>
-        ):(
-          <p className="p-5 border border-red-500 rounded-2xl text-red-400">Please fill clinic and final deal price to generate payment link</p>
-        )}
-
-
-     
-
-    </div>
-</div>
-
-
-
-
-
-
 
         <div className="w-full p-6 bg-white dark:bg-gray-900 rounded-2xl shadow-lg">
           <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">
@@ -725,6 +738,11 @@ export function PatientQueryDetails({ id }) {
                     Final Price
                   </th>
                   <th scope="col" className="px-6 py-3 font-medium">
+                    Message
+                  </th>
+
+
+                  <th scope="col" className="px-6 py-3 font-medium">
                     Generated Link
                   </th>
                   <th scope="col" className="px-6 py-3 font-medium">
@@ -737,10 +755,10 @@ export function PatientQueryDetails({ id }) {
                     Health Tech Commision fee
                   </th>
                   <th scope="col" className="px-6 py-3 font-medium">
-                     Clinic Fee
+                    Clinic Fee
                   </th>
 
-                  
+
 
                   <th scope="col" className="px-6 py-3 font-medium">
                     Status
@@ -764,22 +782,42 @@ export function PatientQueryDetails({ id }) {
                     <td className="px-6 py-4">
                       {brazilianCurrency(item.finalprice || 0)}
                     </td>
+                    <td className="px-6 py-4 break-words whitespace-normal relative">
+                      <input
+                        type="checkbox"
+                        id={`toggle-note-${item.id}`}  // unique per row
+                        className="hidden peer"
+                        disabled={!item.note}           // optional: disable if no text
+                      />
+                      <span className="line-clamp-3 peer-checked:line-clamp-none">
+                        {item.note || "--"}
+                      </span>
+                      {item.note && (
+                        <label
+                          htmlFor={`toggle-note-${item.id}`} // matches the input id
+                          className="text-blue-500 text-sm cursor-pointer ml-1"
+                        >
+                          show more
+                        </label>
+                      )}
+                    </td>
                     <td className="px-1 py-1 max-w-[150px] overflow-hidden">
-                      
+
 
                       {item.status === 1 ? (
-                        <span className="px-2 py-1 text-sm font-semibold rounded-full bg-red-400 text-black-800">
-                          Expired
+                        <span className="px-2 py-1 text-sm font-semibold rounded-full bg-green-400 text-black-800">
+                          Paid
                         </span>
-                      ):(
-                          <a
-                        className="text-blue-600 underline truncate block text-sm"
-                        target="_blank"
-                        href={item.generatedlink}
-                        title={item.generatedlink} // Shows full link on hover
-                      >
-                        {item.generatedlink}
-                      </a>
+                      ) : (
+                        <a
+                          className="text-blue-600 underline truncate block text-sm"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          href={`${process.env.NEXT_PUBLIC_URL}/verify-stripe?url=${item.generatedlink}`}
+                          title={`${process.env.NEXT_PUBLIC_URL}/verify-stripe?url=${item.generatedlink}`}
+                        >
+                          {`${process.env.NEXT_PUBLIC_URL}/verify-stripe?url=${item.generatedlink}`}
+                        </a>
                       )}
 
 
@@ -790,18 +828,18 @@ export function PatientQueryDetails({ id }) {
                       {brazilianCurrency(item.generatedamount)}
                     </td>
 
-                   <td className="px-2 py-2 flex align-content-center">
+                    <td className="px-2 py-2 flex align-content-center">
                       <span className="text-xs px-2 py-1 rounded border border-orange-400 text-orange-600">
                         {item.commission}%
-                     </span>
-                  </td>
+                      </span>
+                    </td>
 
-                  <td className="px-6 py-4">
-                       {brazilianCurrency(item.platformfee)}
-                  </td>
-                  <td className="px-6 py-4">
-                         {brazilianCurrency(item.vendorfee)}
-                  </td>
+                    <td className="px-6 py-4">
+                      {brazilianCurrency(item.platformfee)}
+                    </td>
+                    <td className="px-6 py-4">
+                      {brazilianCurrency(item.vendorfee)}
+                    </td>
 
                     <td className="px-6 py-4">
                       {item.status === 0 && (
@@ -809,26 +847,26 @@ export function PatientQueryDetails({ id }) {
                           Pending
                         </span>
                       )}
-                     
+
                       {item.status === 1 && (
                         <span className="px-2 py-1 text-sm font-semibold rounded-full bg-green-200 text-green-800">
                           Received
                         </span>
                       )}
-                      
-                     
+
+
                     </td>
 
                     <td className="px-6 py-4">
                       <button
-                        onClick={()=>
-                            deleteGeneratedAmount(item.id)
+                        onClick={() =>
+                          deleteGeneratedAmount(item.id)
                         }
                         disabled={item.status === 1}
                         className={`p-1 rounded-md transition 
                           ${item.status === 1
-                                                ? "text-gray-400 cursor-not-allowed opacity-50"
-                                                : "text-red-600 hover:text-red-800 hover:bg-red-50"}
+                            ? "text-gray-400 cursor-not-allowed opacity-50"
+                            : "text-red-600 hover:text-red-800 hover:bg-red-50"}
                         `}
                       >
                         <svg
@@ -856,14 +894,14 @@ export function PatientQueryDetails({ id }) {
                   <td className="px-6 py-4"></td>
                   <td className="px-6 py-4"></td>
                   <td className="px-6 py-4"></td>
-                 <td className="px-6 py-4">Total {brazilianCurrency(totalGeneratedAmount)}</td>
-                  
+                  <td className="px-6 py-4">Total {brazilianCurrency(totalGeneratedAmount)}</td>
+
                   <td className="px-6 py-4"></td>
                   <td className="px-6 py-4">Total {brazilianCurrency(totalPlatformFee)}</td>
                   <td className="px-6 py-4">Total {brazilianCurrency(totalVendorFee)}</td>
                   <td className="px-6 py-4"></td>
                   <td></td>
-                  
+
                 </tr>
 
 
@@ -873,6 +911,11 @@ export function PatientQueryDetails({ id }) {
 
 
         </div>
+
+      <PatientQueryStatusCompo querydetails={querydetails} onData={(updatedData) => setQueryDetails(prev => ({...prev,...updatedData}))}  />
+
+        
+
 
 </ComponentCard>
 

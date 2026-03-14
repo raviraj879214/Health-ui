@@ -16,6 +16,7 @@ import { clinicHeaders } from "../utils/clinicHeaders";
 import { useRouter } from "next/navigation";
 import  PatientQueryStatusBadge  from "../../reusable/StatusBadge";
 import { PackageQueryFinalPriceStatus } from "@/lib/enums/patientQueryFinalPriceStatus";
+import { getSocket } from "@/hooks/socket";
 
 
 
@@ -53,9 +54,22 @@ export function RequestList() {
   };
 
   useEffect(() => {
-    fetchQueries(currentPage);
+      fetchQueries(currentPage);
+    const socket = getSocket();
+    socket.on("patientrequest_clinic", (data) => {
+
+      fetchQueries(currentPage);
+
+    });
+    return () => {
+      socket.off("patientrequest_clinic");
+    };
+
     fetchRoles();
   }, [currentPage]);
+
+
+  
 
 
   const fetchRoles = async()=>{

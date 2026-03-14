@@ -1,6 +1,7 @@
 import ComponentCard from "@/components/common/ComponentCard";
 import Label from "@/components/form/Label";
 import { adminHeaders } from "@/components/utils/adminHeader";
+import { getSocket } from "@/hooks/socket";
 import { brazilianCurrency } from "@/lib/brazilianCurrency";
 import { PatientQueryStatus } from "@/lib/enums/patientQueryStatus";
 import { formatBrazilDate } from "@/lib/formatDate";
@@ -20,18 +21,66 @@ export function PayoutModal({OnTriggerStripeBalance}) {
   const [openItem, setOpenItem] = useState(null);
   const bodyRefs = useRef({}); // Store refs for each body
 
+    const [currentaccordianopen,setAccordianOpen] = useState({
+        patientqueryid : "",
+        commission : ""
+    });
+   const currentAccordionRef = useRef(currentaccordianopen);
+
+   useEffect(() => {
+  currentAccordionRef.current = currentaccordianopen;
+}, [currentaccordianopen]);
+
+
+
   const toggleAccordion = (id) => {
     setOpenItem(openItem === id ? null : id);
   };
 
 
 
-  useEffect(()=>{
-        fetchPatientQuery();
-  },[]);
+    // useEffect(() => {
+    //     fetchPatientQuery();
+    // }, []);
+
+
+useEffect(() => {
+
+  fetchPatientQuery();
+
+  const socket = getSocket();
+
+  socket.on("patientRequestAdmin", async (data) => {
+
+    debugger;
+
+    // Wait for patient queries to refresh first
+    await fetchPatientQuery();
+
+    const current = currentAccordionRef.current;
+
+    if (current?.patientqueryid && current?.commission) {
+      fetchTrransaction(current.patientqueryid, current.commission);
+    }
+
+  });
+
+  return () => {
+    socket.off("patientRequestAdmin");
+  };
+
+}, []);
+
+
+
+
+
+
+
 
 
   const fetchPatientQuery=async ()=>{
+    debugger;
     const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-payout/payout-patient-query`,{
         method : "Get",
         headers : await adminHeaders()
@@ -61,6 +110,7 @@ export function PayoutModal({OnTriggerStripeBalance}) {
 
 
 
+
   const fetchTrransaction = async (patientqueryid,commission)=>{
 
     debugger;
@@ -72,10 +122,9 @@ export function PayoutModal({OnTriggerStripeBalance}) {
             const result = await res.json();
 
             const totalamount = (result.data.reduce((sum, x) => sum + x.amount, 0)/100);
-
             const clinicspaid = (result.transfer.reduce((sum, x) => sum + x.amount, 0)/100);
-
             const clinicstobepaid = ((totalamount * commission)/100);
+
             setTotalReceived((totalamount));
             setClinicsToBePaid(totalamount - clinicstobepaid - clinicspaid);
             setTransferTransaction(result.transfer);
@@ -87,13 +136,17 @@ export function PayoutModal({OnTriggerStripeBalance}) {
 
 
             //patient query details
-            const somedetails = sampleData.find(x => x.id === patientqueryid);
-            setPatientQueryInformation(somedetails);
-            if (somedetails) {
-                setClinic(somedetails.clinic);
-                setDoctor(somedetails.doctor);
-                setPackage(somedetails.package);
+            debugger;
+            if(sampleData.length > 0){
+                const somedetails = sampleData.find(x => x.id === patientqueryid);
+                setPatientQueryInformation(somedetails);
+                if (somedetails) {
+                    setClinic(somedetails.clinic);
+                    setDoctor(somedetails.doctor);
+                    setPackage(somedetails.package);
+                }
             }
+            
 
 
 
@@ -199,18 +252,28 @@ const markasPaid= async(id)=>{
     });
     if(res.ok){
         const result = await res.json();
-        console.log("result dat a",result);
-         setRequestedFunds(prev => {
-  const exists = prev.some(item => item.id === result.data.id);
+        await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/webhook/patient-request`,{method : "Get"});
 
-  if (exists) {
-    return prev.map(item =>
-      item.id === result.data.id ? result.data : item
-    );
-  } else {
-    return [...prev, result.data];
-  }
-});
+        console.log("result data",result);
+        setRequestedFunds(prev => {
+                    const exists = prev.some(item => item.id === result.data.id);
+                if (exists) {
+                    return prev.map(item =>item.id === result.data.id ? result.data : item);
+                } else {
+                    return [...prev, result.data];
+                }
+        });
+
+        
+        setSampleData(prev =>
+            prev.map(query => ({
+                ...query,
+                RequestFunds: query.RequestFunds.map(fund =>
+                    fund.id === id ? { ...fund, collected: 1 } : fund
+          )})));
+
+        
+
 
 
     }
@@ -218,10 +281,15 @@ const markasPaid= async(id)=>{
 
 
 
+const releasedPercent = Math.floor(((clinicspaid / clinicstobepaid) * 100));
+
+
+
 
   return (
 
     <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 mb-5">
+       
       <h2 className="text-2xl font-bold mb-6">Payout Details</h2>
 
       {sampleData.map((item) => (<>
@@ -229,34 +297,72 @@ const markasPaid= async(id)=>{
           <ComponentCard
           key={item.id}
           className="mb-4 transition-all hover:shadow-lg ">
-          
-         
-
               <div
-                  className={`flex justify-between items-center 
+                  className={`flex items-center justify-between w-full
                      ${item.status !== PatientQueryStatus.PENDING
                           ? "cursor-pointer"
                           : "cursor-not-allowed opacity-50"}`}
-
                   onClick={() => {
                       if (item.status !== PatientQueryStatus.PENDING) {
                           toggleAccordion(item.id);
+
+                          setAccordianOpen({
+                            patientqueryid : item.id,
+                            commission : item.clinic?.commission
+                          });
+
                           fetchTrransaction(item.id, item.clinic?.commission);
                       }
-                  }}>
-                  <h3 className="text-lg font-semibold">
-                      # {item.querycode}
-                      <PatientQueryStatusBadge className="ml-3"  status={item.status} />
-                  </h3>
+                  }}
+              >
 
-                  <span className="text-gray-400 text-xl">
+                  {/* Left Section */}
+                  <div className="flex items-center gap-3">
+                      <h3 className="text-lg font-semibold">
+                          # {item.querycode}
+                          </h3>
+
+                      <PatientQueryStatusBadge
+                          className="ml-2"
+                          status={item.status}
+                      />
+                  </div>
+
+
+                  <div className="flex items-center gap-6">
+
+                    
+                      
+                      {item.RequestFunds.filter(x=>x.collected === 0).length > 0 &&(<>
+                         <div className="flex items-center gap-3 text-xs font-medium">
+                            <span className="px-3 py-1 rounded-full bg-yellow-100 text-yellow-800 flex items-center gap-2 font-semibold shadow-sm">
+                                <span className="relative flex h-3 w-3">
+                                    <span className="absolute inline-flex h-full w-full rounded-full bg-red-400 animate-ping opacity-75"></span>
+                                    <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500 animate-pulse"></span>
+                                </span>
+                                Fund Requested
+                            </span>
+                        </div>
+                      </>)}
+
+
+                    
+
+                  </div>
+
+
+                  <span className="text-gray-400 text-xl font-bold">
                       {openItem === item.id ? "−" : "+"}
                   </span>
+
               </div>
 
 
+
+
+
          
-                 <div
+            <div
                         ref={(el) => (bodyRefs.current[item.id] = el)}
                         className={`overflow-auto transition-all duration-300 ease-in-out`}
                         style={{
@@ -269,18 +375,49 @@ const markasPaid= async(id)=>{
 
 
                 <div className="mt-3 text-gray-700 text-sm border-t pt-3">
+                   <p>This section displays the payment details for the final price declared by the patient after discussion with the coordinator for this query.</p>
 
                       <div className="grid grid-cols-4 gap-4">
-                        
                           <div className="rounded-xl border border-indigo-200 bg-indigo-50 p-4">
                               <p className="text-sm text-indigo-700">Final Deal Price</p>
                               <p className="text-2xl font-semibold text-indigo-900">
                                   {brazilianCurrency(item.finalPrice)}
-                                  
                               </p>
                           </div>
+
+                          <div className="rounded-xl border border-purple-200 bg-purple-50 p-4">
+                              <p className="text-sm text-purple-700">Platform Commission Interest</p>
+                              <p className="text-2xl font-semibold text-purple-900">
+                                  {item.clinic?.commission || ""}  %
+                              </p>
+                          </div>
+
+                           <div className="rounded-xl border border-amber-200 bg-amber-50 p-4">
+                              <p className="text-sm text-amber-700">Total Platform Fees</p>
+                              <p className="text-2xl font-semibold text-amber-900">
+                                  {brazilianCurrency((item.finalPrice * item.clinic?.commission)/100)}
+                              </p>
+                          </div>
+
+                          <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-4">
+                              <p className="text-sm text-emerald-700">Total Clinic Fees</p>
+                              <p className="text-2xl font-semibold text-emerald-900">
+                                 
+                                 {brazilianCurrency(item.finalPrice - ((item.finalPrice * item.clinic?.commission)/100))}
+
+                              </p>
+                          </div>
+
+
+                      </div>
+
+                    <p className="mt-2">This section displays the payment details received from the patient, whether as installments or a one-time payment.</p>
+
+                      <div className="grid grid-cols-4 gap-4 mt-2">
+                        
+                          
                           <div className="rounded-xl border border-indigo-200 bg-indigo-50 p-4">
-                              <p className="text-sm text-indigo-700">Total Received</p>
+                              <p className="text-sm text-indigo-700">Total Received From Patient</p>
                               <p className="text-2xl font-semibold text-indigo-900">
                                   {brazilianCurrency(totalreceived)}
                                   

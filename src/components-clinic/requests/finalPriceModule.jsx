@@ -35,7 +35,7 @@ export function FinalPriceModule({ patientqueryfinalprice ,onData }) {
             const result = await res.json();
             setReason("");
             onData(result.data);
-
+            await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/webhook/patient-request-admin`,{method : "Get"});
             toast.success(`The final deal price  ${action}ed has successfully sent to coordinator,coordinator will get back to you soon`,{
                 position : "bottom-right",
                 autoClose : 3000

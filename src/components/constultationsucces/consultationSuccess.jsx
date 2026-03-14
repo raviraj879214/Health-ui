@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 
 export function ConsultationSuccess({ id }) {
-  const [success, setSuccess] = useState(false); // null = loading
+  const [success, setSuccess] = useState(null); 
 
   useEffect(() => {
     if (id) {
@@ -28,9 +28,11 @@ export function ConsultationSuccess({ id }) {
         const result =await res.json();
 
         if(result.success == false){
+            await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/webhook/patient-request-admin`,{method : "Get"});
             setSuccess(false);
         }
         else{
+          await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/webhook/patient-request-admin`,{method : "Get"});
                 setSuccess(true);
         }
 
