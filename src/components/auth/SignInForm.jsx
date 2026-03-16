@@ -81,7 +81,7 @@ export default function SignInForm({ returl }) {
            localStorage.setItem("permissions", JSON.stringify(result.permissions));
 
            const fromStorage = localStorage.getItem("permissions");
-           console.log("fromStorage",fromStorage);
+          //  console.log("fromStorage",fromStorage);
 
 
 

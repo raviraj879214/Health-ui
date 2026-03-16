@@ -12,34 +12,74 @@ import SignInForm from "@/components/auth/SignInForm";
 import  Providers  from "../admin/provider/providers";
 import { ToastContainer } from "react-toastify";
 import "../admin/admin-global.css";
+import { usePathname } from "next/navigation";
+import {isTokenExpired} from "../../components/utils/isTokenExpired";
+import { jwtDecode } from "jwt-decode";
+
 
 const outfit = Outfit({ subsets: ["latin"] });
+
+
+function getTokenRemainingTime(token) {
+  const decoded = jwtDecode(token);
+  const currentTime = Date.now() / 1000;
+  return decoded.exp - currentTime;
+}
+
 
 export default function AdminLayout({ children }) {
   const [loading, setLoading] = useState(true);
   const [isAuth, setIsAuth] = useState(false);
   const [returl, setReturl] = useState("");
+  const pathname = usePathname();
 
-  useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const res = await fetch(`/api/auth/get-token`, { cache: "no-store" });
-        const data = await res.json();
-        console.log("admin login data",data);
+useEffect(() => {
+  let logoutTimer;
 
-        const currentUrl = window.location.pathname + window.location.search;
+  const checkAuth = async () => {
+    try {
+      const res = await fetch(`/api/auth/get-token`, { cache: "no-store" });
+      const data = await res.json();
 
-        setReturl(currentUrl);
+      const currentUrl = window.location.pathname + window.location.search;
+      setReturl(currentUrl);
 
-        if (data?.token) {
-          setIsAuth(true);
+      if (data?.token) {
+
+        const decoded = jwtDecode(data.token);
+        const currentTime = Date.now() / 1000;
+
+        if (decoded.exp < currentTime) {
+          setIsAuth(false);
+          setLoading(false);
+          return;
         }
-      } catch { }
-      setLoading(false);
-    };
 
-    checkAuth();
-  }, []);
+        setIsAuth(true);
+
+        // remaining time until expiration
+        const remainingTime = (decoded.exp - currentTime) * 1000;
+
+        logoutTimer = setTimeout(() => {
+          alert("Session expired. Please login again.");
+          setIsAuth(false);
+          setLoading(false);
+          window.location.href = "/admin";
+        }, remainingTime);
+      }
+
+    } catch {}
+
+    setLoading(false);
+  };
+
+  checkAuth();
+
+  return () => {
+    if (logoutTimer) clearTimeout(logoutTimer);
+  };
+
+}, [pathname]);
 
   if (loading) {
     return <p className="p-6 text-center">Checking authentication...</p>;
@@ -48,11 +88,11 @@ export default function AdminLayout({ children }) {
   return (
     <ThemeProvider>
       <SidebarProvider>
-        {/* ✅ PermissionProvider wraps both SignIn and children */}
+       
         <PermissionProvider>
 
           {!isAuth ? (
-            // ✅ Now SignInForm gets access to setPermissions
+            
             <div className="min-h-screen flex items-center justify-center dark:bg-gray-900">
               <SignInForm returl={returl} />
             </div>
