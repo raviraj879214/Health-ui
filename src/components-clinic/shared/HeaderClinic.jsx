@@ -4,6 +4,7 @@ import { FaBars } from "react-icons/fa";
 import { clinicLogout } from "../utils/clinicLogout";
 import NotificationUI from "@/components/NotificationListener/notificationListener";
 import Cookies from "js-cookie";
+import { useState } from "react";
 
 export function ClinicHeader({ onToggleSidebar = () => {} }) {
 

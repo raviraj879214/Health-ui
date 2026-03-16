@@ -17,6 +17,9 @@ import { useRouter } from "next/navigation";
 import  PatientQueryStatusBadge  from "../../reusable/StatusBadge";
 import { PackageQueryFinalPriceStatus } from "@/lib/enums/patientQueryFinalPriceStatus";
 import { getSocket } from "@/hooks/socket";
+import Cookies from "js-cookie";
+import { useDispatch } from "react-redux";
+import { addRequestCount } from "../redux/counterSlice";
 
 
 
@@ -29,12 +32,14 @@ export function RequestList() {
   const [rolename,setRoleName] = useState("");
 
   const router = useRouter();
+   const dispatch = useDispatch();
 
 
   const itemsPerPage = 10;
 
   const fetchQueries = async (page) => {
     debugger;
+    
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-clinic-request/clinic-request/00?page=${page}&limit=${itemsPerPage}`,
@@ -48,6 +53,8 @@ export function RequestList() {
       console.log("aptient query",data.data);
       setQueries(data.data || []);
       setTotalPages(Math.ceil((data.totalCount || 0) / itemsPerPage));
+      dispatch(addRequestCount(data.totalCount));
+
     } catch (err) {
       console.error("Failed to fetch patient queries", err);
     }
@@ -57,7 +64,8 @@ export function RequestList() {
       fetchQueries(currentPage);
     const socket = getSocket();
     socket.on("patientrequest_clinic", (data) => {
-
+     
+      console.log("Request count console");
       fetchQueries(currentPage);
 
     });
@@ -201,7 +209,7 @@ const statusLabel = (status) => {
 <>
 <div className={`overflow-hidden rounded-xl border theme-border bg-white ${queryid !== "" ? "hidden" : ""}`}>
   <div className="w-full overflow-x-auto">
-   
+  
    <Table className="min-w-[1300px] table-auto border-collapse">
 
   <TableHeader className="border-b bg-gray-50">

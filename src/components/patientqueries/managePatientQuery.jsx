@@ -94,6 +94,7 @@ export function ManagePatientQueries() {
 
 
     socket.on("patientRequestAdmin", (data) => {
+      
       fetchQueries(currentPage);
       fetchRoles();
       fetchCordinator();

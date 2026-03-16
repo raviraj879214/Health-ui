@@ -1,6 +1,8 @@
 "use client";
 
 import { useRouter, usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { io } from "socket.io-client";
 import {
   FaHospital,
   FaChartLine,
@@ -9,10 +11,24 @@ import {
   FaRegSquare
 } from "react-icons/fa";
 import { HiOutlineSupport } from "react-icons/hi";
+import Cookies from "js-cookie";
+import { clinicHeaders } from "../utils/clinicHeaders";
+import { useSelector } from "react-redux";
 
+
+let socket;
 export function ClinicSidebar({ collapsed, mobileOpen, active, setActive, toggleMobile }) {
+
   const router = useRouter();
   const pathname = usePathname(); // current URL
+  
+
+  // const requestcount = useSelector((state) => state.counter.value);
+  const [requestcount,setrequestcount] = useState(0);
+
+
+  const clinic_id = Cookies.get("clinic_id");
+
 
   const menu = [
     { name: "Clinic", icon: FaHospital, url: "/partner/clinic" },
@@ -22,6 +38,49 @@ export function ClinicSidebar({ collapsed, mobileOpen, active, setActive, toggle
     { name: "Clinic Boost", icon: FaChartLine, url: "/partner/clinic-boost-package" },
     { name: "Profile", icon: FaUserCircle, url: "/partner/profile" },
   ];
+
+
+
+  useEffect(() => {
+      requestCount();
+    socket = io(`${process.env.NEXT_PUBLIC_NODEJS_URL}`);
+
+    socket.on("connect", () => {
+      console.log("Connected to notification socket");
+    });
+
+    socket.on("patientrequest_clinic", (data) => {
+    
+      requestCount();
+
+    });
+
+
+    return () => {
+      socket.disconnect();
+    };
+
+  }, []);
+
+
+
+
+  const requestCount = async()=>{
+    const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-clinic-request/get-clinic-request-count`,{
+      method : "Get",
+      headers : await clinicHeaders(),
+    });
+    if(res.ok){
+      const result= await res.json();
+      setrequestcount(result.count);
+      
+    }
+
+  }
+
+
+
+
 
   return (
     <aside
@@ -73,7 +132,7 @@ export function ClinicSidebar({ collapsed, mobileOpen, active, setActive, toggle
                 {/* Notification Badge ONLY for Requests */}
                 {m.name === "Requests" && (
                   <span className="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] font-semibold px-1.5 py-0.5 rounded-full">
-                    0
+                    {requestcount} 
                   </span>
                 )}
 

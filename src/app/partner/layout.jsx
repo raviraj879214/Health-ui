@@ -6,6 +6,8 @@ import { ClinicSidebar } from "../../components-clinic/shared/SidebarClinic";
 import AuthClinic from "../../components-clinic/middleware/AuthClinic";
 import "../partner/partner-global.css";
 import { ToastContainer } from "react-toastify";
+import  {ReduxPartnerProvider} from "../../components-clinic/redux/provider";
+
 
 
 
@@ -19,20 +21,33 @@ export default function ClinicLayout({ children }) {
     <AuthClinic>
       
       <div className="flex h-screen w-full bg-[#F5F6FA] overflow-hidden">
+        <ReduxPartnerProvider>
+
+
+
+       
         <ClinicSidebar
           collapsed={collapsed}
           mobileOpen={mobileOpen}
           active={active}
           setActive={setActive}
-          toggleMobile={setMobileOpen}
-        />
+          toggleMobile={setMobileOpen}/>
 
         <div className="flex-1 flex flex-col">
           <ClinicHeader onToggleSidebar={() => setMobileOpen(!mobileOpen)} />
             
              <ToastContainer></ToastContainer>
-          <main className="p-6 overflow-y-auto">{children}</main>
+          <main className="p-6 overflow-y-auto">
+             
+                    {children}
+             
+
+
+
+          </main>
         </div>
+
+         </ReduxPartnerProvider>
 
         {mobileOpen && (
           <div
