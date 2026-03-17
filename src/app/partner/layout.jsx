@@ -20,12 +20,9 @@ export default function ClinicLayout({ children }) {
     
     <AuthClinic>
       
-      <div className="flex h-screen w-full bg-[#F5F6FA] overflow-hidden">
+      <div className="flex h-screen w-full bg-[#F5F6FA] ">
+        
         <ReduxPartnerProvider>
-
-
-
-       
         <ClinicSidebar
           collapsed={collapsed}
           mobileOpen={mobileOpen}
@@ -33,19 +30,14 @@ export default function ClinicLayout({ children }) {
           setActive={setActive}
           toggleMobile={setMobileOpen}/>
 
-        <div className="flex-1 flex flex-col">
-          <ClinicHeader onToggleSidebar={() => setMobileOpen(!mobileOpen)} />
-            
-             <ToastContainer></ToastContainer>
-          <main className="p-6 overflow-y-auto">
-             
-                    {children}
-             
+          <div className="flex-1 flex flex-col">
+            <ClinicHeader onToggleSidebar={() => setMobileOpen(!mobileOpen)} />
 
-
-
-          </main>
-        </div>
+            <ToastContainer></ToastContainer>
+            <main className="p-6 overflow-x-auto">
+              {children}
+            </main>
+          </div>
 
          </ReduxPartnerProvider>
 

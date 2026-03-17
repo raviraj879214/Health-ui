@@ -20,6 +20,7 @@ import { getSocket } from "@/hooks/socket";
 import Cookies from "js-cookie";
 import { useDispatch } from "react-redux";
 import { addRequestCount } from "../redux/counterSlice";
+import ComponentCard from "@/components/common/ComponentCard";
 
 
 
@@ -206,167 +207,128 @@ const statusLabel = (status) => {
 
 
   return (
-<>
-<div className={`overflow-hidden rounded-xl border theme-border bg-white ${queryid !== "" ? "hidden" : ""}`}>
-  <div className="w-full overflow-x-auto">
+    <>
+
+       
+
+<div className="grid grid-cols-12 gap-4">
   
-   <Table className="min-w-[1300px] table-auto border-collapse">
+  <div className="col-span-12 rounded-xl border theme-border bg-white w-full overflow-x-auto">
+    <Table className="min-w-full table-auto border-collapse">
+      <TableHeader className="border-b bg-gray-50">
+        <TableRow className="text-left">
+          <TableCell isHeader className="px-5 py-3 font-semibold">Requested No.</TableCell>
+          <TableCell isHeader className="px-5 py-3 font-semibold">Patient</TableCell>
+          <TableCell isHeader className="px-5 py-3 font-semibold">Medical Reports</TableCell>
+          <TableCell isHeader className="px-5 py-3 font-semibold">Treatment</TableCell>
+          <TableCell isHeader className="px-5 py-3 font-semibold">What Matters Most</TableCell>
+          <TableCell isHeader className="px-5 py-3 font-semibold">Procedure Time</TableCell>
+          <TableCell isHeader className="px-5 py-3 text-center font-semibold">Status</TableCell>
+          <TableCell isHeader className="px-5 py-3 text-right font-semibold">Created</TableCell>
+          <TableCell isHeader className="px-5 py-3 text-center w-28 font-semibold">Final Price</TableCell>
+          <TableCell isHeader className="px-5 py-3 text-center w-28 font-semibold">Action</TableCell>
+        </TableRow>
+      </TableHeader>
 
-  <TableHeader className="border-b bg-gray-50">
-    <TableRow className="text-left">
-      <TableCell isHeader className="px-5 py-3 font-semibold">Requested No.</TableCell>
-      <TableCell isHeader className="px-5 py-3 font-semibold">Patient</TableCell>
-      <TableCell isHeader className="px-5 py-3 font-semibold">Medical Reports</TableCell>
-      <TableCell isHeader className="px-5 py-3 font-semibold">Treatment</TableCell>
-      <TableCell isHeader className="px-5 py-3 font-semibold">What Matters Most</TableCell>
-      <TableCell isHeader className="px-5 py-3 font-semibold">Procedure Time</TableCell>
-      <TableCell isHeader className="px-5 py-3 font-semibold text-center">Status</TableCell>
-      <TableCell isHeader className="px-5 py-3 font-semibold text-right">Created</TableCell>
-      <TableCell isHeader className="px-5 py-3 text-center w-20">Final Price</TableCell>
-      <TableCell isHeader className="px-5 py-3 font-semibold text-center w-20">Action</TableCell>
+      <TableBody className="divide-y">
+        {queries.map((q) => (
+          <TableRow key={q.id} className="align-middle">
+            <TableCell className="px-5 py-4 font-medium">
+              {q.querycode}
+              <div className="mt-1 text-xs text-gray-500">
+                <span className="font-semibold">Coordinator:</span> {q?.clinic.clinicUser.firstname} {q?.clinic.clinicUser.lastname} <br />
+                <span>{q.clinic.clinicUser.email}</span>
+              </div>
+            </TableCell>
 
-    </TableRow>
-  </TableHeader>
+            <TableCell className="px-5 py-4 font-medium">{q.patientName}</TableCell>
+            <TableCell className="px-5 py-4 text-sm text-gray-600">{q.medicalReportsValue || "--"}</TableCell>
+            <TableCell className="px-5 py-4 text-sm text-gray-600">{q.treatmentName || "--"}</TableCell>
+            <TableCell className="px-5 py-4 text-sm text-gray-600">{q.whatMatterMostName || "--"}</TableCell>
+            <TableCell className="px-5 py-4 text-sm text-gray-600">{q.procedureTimeValue || "--"}</TableCell>
 
+            <TableCell className="px-5 py-4 text-center">
+              <PatientQueryStatusBadge status={q.status} />
+            </TableCell>
 
-  <TableBody className="divide-y">
-    {queries.map((q) => (
-      <TableRow key={q.id} className="align-middle">
-      
-        <TableCell className="px-5 py-4 font-medium">
-            
-                {q.querycode}
-             <div className="mt-1 text-xs text-gray-500">
-                        <span className="font-semibold"><b>Coordinator:</b></span> {q?.clinic.clinicUser.firstname} {q?.clinic.clinicUser.lastname} <br />
-                        <span>{q.clinic.clinicUser.email}</span>
-            </div>
-        </TableCell>
+            <TableCell className="px-5 py-4 text-right text-sm text-gray-600">{formatBrazilDate(q.createdAt)}</TableCell>
 
-      
-        <TableCell className="px-5 py-4">
-          <div className="font-medium">{q.patientName}</div>
-        </TableCell>
+            <TableCell className="px-5 py-4 text-center">
+              <span className="inline-flex items-center">
+                {q.PatientQueryFinalPrice?.length > 0 ? (
+                  <>
+                    {q.PatientQueryFinalPrice?.[0]?.status === PackageQueryFinalPriceStatus.PENDING && (
+                      <span className="inline-flex items-center gap-1 whitespace-nowrap rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-700 ring-1 ring-yellow-600/20">
+                        🟡 New Price Suggested: {brazilianCurrency(q.PatientQueryFinalPrice?.[0]?.finalPrice)}
+                      </span>
+                    )}
+                    {q.PatientQueryFinalPrice?.[0]?.status === PackageQueryFinalPriceStatus.ACCEPT && (
+                      <span className="inline-flex items-center gap-1 whitespace-nowrap rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-green-600/20">
+                        🟢 Accepted By Clinic
+                      </span>
+                    )}
+                    {q.PatientQueryFinalPrice?.[0]?.status === PackageQueryFinalPriceStatus.ACCEPTEDBYADMIN && (
+                      <span className="inline-flex items-center gap-1 whitespace-nowrap rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-green-600/20">
+                        🟢 Accepted: {brazilianCurrency(q.PatientQueryFinalPrice?.[0]?.finalPrice)}
+                      </span>
+                    )}
+                    {q.PatientQueryFinalPrice?.[0]?.status === PackageQueryFinalPriceStatus.REJECT && (
+                      <span className="inline-flex items-center gap-1 whitespace-nowrap rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-red-600/20">
+                        🔴 Rejected: {brazilianCurrency(q.PatientQueryFinalPrice?.[0]?.finalPrice)}
+                      </span>
+                    )}
+                  </>
+                ) : (
+                  <span className="inline-flex items-center gap-1 whitespace-nowrap rounded-md bg-gray-100 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-gray-400/20">
+                    ⚪ No Suggestion
+                  </span>
+                )}
+              </span>
+            </TableCell>
 
-       
-        <TableCell className="px-5 py-4 text-sm text-gray-600">
-          {q.medicalReportsValue || "--"}
-        </TableCell>
-
-      
-        <TableCell className="px-5 py-4 text-sm text-gray-600">
-          {q.treatmentName || "--"}
-        </TableCell>
-
-       
-        <TableCell className="px-5 py-4 text-sm text-gray-600">
-          {q.whatMatterMostName || "--"}
-        </TableCell>
-
-      
-        <TableCell className="px-5 py-4 text-sm text-gray-600">
-          {q.procedureTimeValue || "--"}
-        </TableCell>
-
-      
-        <TableCell className="px-5 py-4 text-center">
-          <PatientQueryStatusBadge status={q.status} />
-        </TableCell>
-
-        
-        <TableCell className="px-5 py-4 text-right text-sm text-gray-600">
-          {formatBrazilDate(q.createdAt)}
-        </TableCell>
-
-
-        <TableCell className="px-5 py-4 text-center">
-          <span className="inline-flex items-center">
-
-            {q.PatientQueryFinalPrice?.length > 0 ? (
-              <>
+            <TableCell className="px-5 py-4 text-center cursor-pointer">
+              <a onClick={() => onView(q.id)} className="inline-flex items-center gap-2">
+                <EyeIcon />
                 {q.PatientQueryFinalPrice?.[0]?.status === PackageQueryFinalPriceStatus.PENDING && (
-                  <span className="inline-flex items-center gap-1 whitespace-nowrap rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-700 ring-1 ring-yellow-600/20">
-                    🟡 New Price Suggested : {brazilianCurrency(q.PatientQueryFinalPrice?.[0]?.finalPrice)}
+                  <span className="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-red-600/20">
+                    ⚠ Action Required
                   </span>
                 )}
+              </a>
+            </TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
 
-                {q.PatientQueryFinalPrice?.[0]?.status === PackageQueryFinalPriceStatus.ACCEPT && (
-                  <span className="inline-flex items-center gap-1 whitespace-nowrap rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-green-600/20">
-                    🟢 Accepted By Clinic
-                  </span>
-                )}
-                {q.PatientQueryFinalPrice?.[0]?.status === PackageQueryFinalPriceStatus.ACCEPTEDBYADMIN && (
-                  <span className="inline-flex items-center gap-1 whitespace-nowrap rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-green-600/20">
-                    🟢 Accepted  : {brazilianCurrency(q.PatientQueryFinalPrice?.[0]?.finalPrice)}
-                  </span>
-                )}
+    <div className="flex justify-end items-center gap-3 px-5 py-3 border-t">
+      <button
+        onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
+        disabled={currentPage === 1}
+        className="px-3 py-1 border rounded disabled:opacity-50"
+      >
+        Prev
+      </button>
 
-                {q.PatientQueryFinalPrice?.[0]?.status === PackageQueryFinalPriceStatus.REJECT && (
-                  <span className="inline-flex items-center gap-1 whitespace-nowrap rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-red-600/20">
-                    🔴 Rejected : {brazilianCurrency(q.PatientQueryFinalPrice?.[0]?.finalPrice)}
-                  </span>
-                )}
+      <span className="text-sm text-gray-500">
+        Page {currentPage} of {totalPages}
+      </span>
 
-
-              </>
-            ) : (
-              <span className="inline-flex items-center gap-1 whitespace-nowrap rounded-md bg-gray-100 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-gray-400/20">
-                ⚪ No Suggestion
-              </span>
-            )}
-
-          </span>
-        </TableCell>
-        
-        <TableCell className="px-5 py-4 text-center cursor-pointer">
-          <a onClick={() => onView(q.id)} className="inline-flex items-center gap-2">
-            <EyeIcon />
-
-            {q.PatientQueryFinalPrice?.[0]?.status === PackageQueryFinalPriceStatus.PENDING && (<>
-              /
-              <span className="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-red-600/20">
-                ⚠ Action Required
-              </span>
-            </>)}
-          </a>
-        </TableCell>
-
-
-      </TableRow>
-    ))}
-  </TableBody>
-</Table>
-
+      <button
+        onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
+        disabled={currentPage === totalPages}
+        className="px-3 py-1 border rounded disabled:opacity-50"
+      >
+        Next
+      </button>
+    </div>
   </div>
 
-  {/* Pagination */}
-  <div className="flex justify-end items-center gap-3 px-5 py-3 border-t">
-    <button
-      onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
-      disabled={currentPage === 1}
-      className="px-3 py-1 border rounded disabled:opacity-50"
-    >
-      Prev
-    </button>
-
-    <span className="text-sm text-gray-500">
-      Page {currentPage} of {totalPages}
-    </span>
-
-    <button
-      onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
-      disabled={currentPage === totalPages}
-      className="px-3 py-1 border rounded disabled:opacity-50"
-    >
-      Next
-    </button>
-  </div>
 </div>
 
+    
+      
 
 
-
-            
-        
-
-  </>);
+    </>);
 }

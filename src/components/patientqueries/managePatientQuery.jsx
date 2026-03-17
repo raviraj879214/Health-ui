@@ -181,9 +181,13 @@ export function ManagePatientQueries() {
 
   return (
     <>
-      <div className={`overflow-hidden rounded-xl border border-gray-200 bg-white ${queryid !== "" ? "hidden" : ""}`}>
-        <div className="w-full overflow-x-auto">
-          <Table className=" table-auto border-collapse overflow-x-auto">
+
+
+      <div className={`grid grid-cols-12 gap-4 ${queryid !== "" ? "hidden" : ""}`}>
+
+        <div className="col-span-12 rounded-xl border theme-border bg-white w-full overflow-x-auto">
+
+          <Table className="min-w-full table-auto border-collapse">
             <TableHeader className="border-b">
               <TableRow>
                 <TableCell isHeader className="px-5 py-3">Requested No.</TableCell>
@@ -472,10 +476,8 @@ export function ManagePatientQueries() {
               ))}
             </TableBody>
           </Table>
-        </div>
 
-        {/* Pagination */}
-        <div className="flex justify-end items-center gap-3 px-5 py-3 border-t">
+ <div className="flex justify-end items-center gap-3 px-5 py-3 border-t">
           <button
             onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
             disabled={currentPage === 1}
@@ -496,7 +498,9 @@ export function ManagePatientQueries() {
             Next
           </button>
         </div>
+        </div>
       </div>
+
 
 
 
