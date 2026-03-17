@@ -401,15 +401,15 @@ useEffect(() => {
          <FinalPriceModule patientqueryfinalprice={querydetails.PatientQueryFinalPrice}
          
                     onData={(updatedata) =>
-            setQueryDetails((prev) => ({
-                ...prev,
-                PatientQueryFinalPrice: prev.PatientQueryFinalPrice.map((item) =>
-                item.id === updatedata.id
-                    ? { ...item, ...updatedata }  
-                    : item                         
-                )
-            }))
-            }/>
+
+                    setQueryDetails((prev) => ({
+                        ...prev,
+                         PatientQueryFinalPrice: updatedata 
+                    }))
+                
+                }
+            
+            />
        
         <ComponentCard className="mt-4 p-5 bg-white rounded-xl shadow-md border theme-border">
 

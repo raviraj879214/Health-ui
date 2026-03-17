@@ -291,7 +291,12 @@ const statusLabel = (status) => {
 
                 {q.PatientQueryFinalPrice?.[0]?.status === PackageQueryFinalPriceStatus.ACCEPT && (
                   <span className="inline-flex items-center gap-1 whitespace-nowrap rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-green-600/20">
-                    🟢 Accepted : {brazilianCurrency(q.PatientQueryFinalPrice?.[0]?.finalPrice)}
+                    🟢 Accepted By Clinic
+                  </span>
+                )}
+                {q.PatientQueryFinalPrice?.[0]?.status === PackageQueryFinalPriceStatus.ACCEPTEDBYADMIN && (
+                  <span className="inline-flex items-center gap-1 whitespace-nowrap rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-green-600/20">
+                    🟢 Accepted  : {brazilianCurrency(q.PatientQueryFinalPrice?.[0]?.finalPrice)}
                   </span>
                 )}
 
@@ -300,6 +305,8 @@ const statusLabel = (status) => {
                     🔴 Rejected : {brazilianCurrency(q.PatientQueryFinalPrice?.[0]?.finalPrice)}
                   </span>
                 )}
+
+
               </>
             ) : (
               <span className="inline-flex items-center gap-1 whitespace-nowrap rounded-md bg-gray-100 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-gray-400/20">

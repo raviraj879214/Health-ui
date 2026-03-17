@@ -3,10 +3,10 @@ import {MainBoostClinicPackages} from "../../../components-clinic/clinicboostpac
 import {ListingSuccess} from "../../../components-clinic/clinicboostpackage/listingSuccess";
 
 
-export default function Page({searchParams}){
+export default async function Page({searchParams}){
 
-    const session_id = searchParams?.session_id;
-
+    const params = await searchParams;   // ✅ await whole object
+    const session_id = params?.session_id;
 
     
     return(<>

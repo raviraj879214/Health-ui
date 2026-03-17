@@ -60,6 +60,7 @@ export function RaiseFunds({patientqueryid, requestedFund ,totalFundsReceived ,t
 
 
     const fetchRequestFunds = async ()=>{
+        debugger;
         const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-clinic-request/get-clinic-request-fund/${patientqueryid}`,{
             method : "Get",
             headers : await clinicHeaders()
@@ -81,7 +82,7 @@ export function RaiseFunds({patientqueryid, requestedFund ,totalFundsReceived ,t
 
 
     const raiseFunds = async(data)=>{
-
+            debugger;
         setRaiseButton(true);
         const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-clinic-request/clinic-request-fund`,{
             method : "Post",

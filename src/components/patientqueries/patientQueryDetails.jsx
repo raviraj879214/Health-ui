@@ -20,6 +20,7 @@ import { PackageQueryFinalPriceStatus } from "@/lib/enums/patientQueryFinalPrice
 import {QueryStatus} from "./queryStatus";
 import { getSocket } from "@/hooks/socket";
 import {PatientQueryStatusCompo} from "./patientQueryStatusCompo";
+import { useConfirm } from "@/hooks/useConfirm";
 
 
 
@@ -37,7 +38,8 @@ export function PatientQueryDetails({ id }) {
     const [generatedamount,setGeneratedAmount] = useState(0);
     const [notes,setNotes] = useState("");
     const [buttonsendclinic,setButtonSendClinic] = useState(false);
-
+    const [acceptpricebutton,steAcceptPriceButtton] = useState(false);
+    const {ConfirmDialog ,confirm} = useConfirm();
     const router = useRouter();
 
 
@@ -94,6 +96,7 @@ export function PatientQueryDetails({ id }) {
             if(res.ok){
                 const result = await res.json();
                 fetchPackageQueryDetails();
+                setValue("finalprice","");
 
                 await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/webhook/patient-request`,{method : "Get"});
             }
@@ -240,13 +243,65 @@ export function PatientQueryDetails({ id }) {
 
 
 
+      const acceptPatietnFinalPrice = async(id)=>{
+          debugger;
+          const result = await confirm("This offer has been accepted by the clinic but is still pending admin confirmation. Once you confirm, no other offers can be submitted. Please ensure the clinic confirms before proceeding. Until you make the final confirmation, you can still submit a new offer by entering a price and clicking the submit button.");
+            if (!result) {
+            console.log("User not confirmed!");
+            return false;
+        }
+
+
+
+
+
+        steAcceptPriceButtton(true);
+        const res= await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/patient-queries/update-patient-query-final-price-status`,{
+          method : "Put",
+          headers : await adminHeaders(),
+          body: JSON.stringify({
+            "id" : id,
+            "status" : PackageQueryFinalPriceStatus.ACCEPTEDBYADMIN
+          })
+        });
+        if(res.ok){
+          const result= await res.json();
+
+          console.log("setqueryfinalDetails",result.data);
+
+          setqueryfinalDetails((prev) =>
+            prev.map((item) =>item.id === result.data.id? { ...item, status: result.data.status }: item)
+        );
+
+          // patientQuery
+        setQueryDetails((prev) =>
+          prev?.id === result?.patientQuery?.id
+            ? { ...prev, ...result.patientQuery }
+            : prev
+        );
+
+
+         toast.success("The Final Price has been updated and notified to clinic also",{
+          position : "bottom-right",
+          autoClose : 3000
+         });
+          
+
+         await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/webhook/patient-request`,{method : "Get"});
+
+        }
+        steAcceptPriceButtton(false);
+      }
+
+      
+
 
 
 
    
 
     return (<>
-
+      <ConfirmDialog></ConfirmDialog>
       <div className="p-3 flex justify-end">
         <button
           onClick={() => window.location.href = '/admin/patient-queries'}
@@ -384,6 +439,8 @@ export function PatientQueryDetails({ id }) {
             {/* Header */}
             <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-6">
               Final Deal Price
+
+             
             </h2>
 
             {/* Price Grid */}
@@ -493,7 +550,7 @@ export function PatientQueryDetails({ id }) {
 
                           {/* Avatar */}
                           <div className="w-9 h-9 flex items-center justify-center rounded-full 
-                    bg-blue-100 text-blue-700 font-semibold text-sm">
+                            bg-blue-100 text-blue-700 font-semibold text-sm">
                             {item.Clinic?.name?.charAt(0)?.toUpperCase() || "C"}
                           </div>
 
@@ -523,9 +580,43 @@ export function PatientQueryDetails({ id }) {
 
                         {item.status === PackageQueryFinalPriceStatus.ACCEPT && (<>
                           <span className="px-3 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-700">
-                            Accepted
+                            Accepted By Clinic
                           </span>
                         </>)}
+
+
+                        {item.status === PackageQueryFinalPriceStatus.ACCEPTEDBYADMIN && (<>
+                          <span className="px-3 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-700">
+                            Accepted By | {process.env.NEXT_PUBLIC_PROJECT_NAME}
+                          </span>
+                        </>)}
+
+
+                        {item.status === PackageQueryFinalPriceStatus.ACCEPT && (<>
+                          <div className="border p-2 mt-2 rounded-xl bg-yellow-50 text-yellow-800 text-sm break-words whitespace-normal max-w-full">
+                            This offer has been accepted by the clinic but is still pending admin confirmation.
+                            Once you confirm, no other offers can be submitted. Please ensure the clinic confirms before proceeding.
+                            Until you make the final confirmation, you can still submit a new offer by entering a price and clicking the submit button.
+
+                            <button
+                             type="button"
+                                onClick={()=>{
+                                  acceptPatietnFinalPrice(item.id);
+                                }}
+                                disabled={acceptpricebutton}
+                              className="flex items-center gap-2 px-4 py-2 text-sm font-semibold 
+                                                    text-white bg-green-600 rounded-lg 
+                                                    hover:bg-green-700 transition mt-2">
+                              
+
+                              {acceptpricebutton ? (<><ButtonSpinner></ButtonSpinner></>): (<>
+                                  ✓ Accept Price
+                              </>)}
+                            </button>
+                          </div>
+                        </>)}
+
+
 
 
                       </td>
@@ -546,8 +637,6 @@ export function PatientQueryDetails({ id }) {
                 <></>
               ) : (
                 <>
-
-
                   {querydetails.clinic && Number(querydetails.clinic.commission) > 0 ? (
 
                     <button

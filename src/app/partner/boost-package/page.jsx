@@ -4,10 +4,12 @@ import {PackageSuccess} from "../../../components-clinic/boostpackages/PackageSu
 
 
 
-export default function Page({searchParams }){
+export default async function Page({searchParams }){
 
 
-    const session_id = searchParams?.session_id;
+    const params = await searchParams;  // ✅ await here
+
+    const session_id = params?.session_id; // ✅ then access
     
 
     return(<>

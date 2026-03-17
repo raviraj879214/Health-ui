@@ -9,8 +9,8 @@ export const metadata = {
 
 
 
-export default function Page({params}){
-    const {id} = params;
+export default async function Page({params}){
+    const {id} = await params;
 
     return(<>
         

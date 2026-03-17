@@ -427,6 +427,11 @@ export function ManagePatientQueries() {
 
                           {q.PatientQueryFinalPrice?.[0]?.status === PackageQueryFinalPriceStatus.ACCEPT && (
                             <span className="inline-flex items-center gap-1 whitespace-nowrap rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-green-600/20">
+                              🟢 Accepted by Clinic
+                            </span>
+                          )}
+                          {q.PatientQueryFinalPrice?.[0]?.status === PackageQueryFinalPriceStatus.ACCEPTEDBYADMIN && (
+                            <span className="inline-flex items-center gap-1 whitespace-nowrap rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-green-600/20">
                               🟢 Accepted : {brazilianCurrency(q.PatientQueryFinalPrice?.[0]?.finalPrice)}
                             </span>
                           )}

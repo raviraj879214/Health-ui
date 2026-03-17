@@ -5,6 +5,7 @@ import { formatBrazilDate } from "@/lib/formatDate";
 import { useState } from "react";
 import { clinicHeaders } from "../utils/clinicHeaders";
 import { toast } from "react-toastify";
+import {useConfirm} from "../../hooks/useConfirm";
 
 
 
@@ -14,12 +15,29 @@ export function FinalPriceModule({ patientqueryfinalprice ,onData }) {
 
 
     const [reason,setReason] = useState("");
-    
+    const {ConfirmDialog ,confirm} = useConfirm();
 
 
 
     const makeAction = async(action,id)=>{
         debugger;
+
+        let confirmText= "";
+
+        if(action === "accept"){
+            confirmText = "Are you sure you want to approve this offer? Approving it will automatically reject all other offers.";
+        }
+        else if(action === "reject"){
+            confirmText = "Are you sure you want to proceed with reject?";
+        }
+
+        const result = await confirm(confirmText);
+            if (!result) {
+            console.log("User not confirmed!");
+            return false;
+        }
+
+
             
         const  res= await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-clinic-request/update-final-price-from-clinic`,{
             method : "Put",
@@ -49,6 +67,7 @@ export function FinalPriceModule({ patientqueryfinalprice ,onData }) {
     return (<>
 
         <ComponentCard className="mt-4 p-5 bg-white rounded-xl shadow-md border theme-border">
+        <ConfirmDialog></ConfirmDialog>
             <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
                     Final Price Conclusion
@@ -148,6 +167,31 @@ export function FinalPriceModule({ patientqueryfinalprice ,onData }) {
                                         </span>
                                     </>)}
 
+                                    {item.status === PackageQueryFinalPriceStatus.ACCEPTEDBYADMIN && (<>
+                                        <span className="px-3 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-700">
+                                            Accepted By | {process.env.NEXT_PUBLIC_PROJECT_NAME}
+                                        </span>
+                                        </>)}
+
+                                    {item.status === PackageQueryFinalPriceStatus.ACCEPT && (<>
+
+                                        <div className="border p-2 mt-2 rounded-xl bg-yellow-50 text-yellow-800 text-sm break-words whitespace-normal max-w-full">
+                                            This offer has been accepted by the clinic but is still pending admin confirmation.
+                                            You can reject this offer until the admin confirms it. Once confirmed, the price will be locked and no further actions can be taken.
+
+                                            <button
+                                                className="flex items-center gap-2 px-4 py-2 text-sm font-semibold mt-2 
+                                                text-white bg-red-600 rounded-lg 
+                                                hover:bg-red-700 transition"
+                                                onClick={() => {
+                                                    makeAction("reject", item.id)
+                                                }}
+                                            >
+                                                ✕ Reject
+                                            </button>
+                                        </div>
+
+                                    </>)}
 
                                 </td>
                             </tr>
