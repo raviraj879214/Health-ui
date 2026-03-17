@@ -21,6 +21,7 @@ import PatientQueryStatusBadge from "@/reusable/StatusBadge";
 import { patientQueryPaymentStatus } from "@/lib/enums/patientQueryPaymentStatus";
 import { PackageQueryFinalPriceStatus } from "@/lib/enums/patientQueryFinalPriceStatus";
 import { getSocket } from "@/hooks/socket";
+import { useRouter } from "next/navigation";
 
 export function ManagePatientQueries() {
   const [queries, setQueries] = useState([]);
@@ -35,6 +36,8 @@ export function ManagePatientQueries() {
 
   const [open, setOpen] = useState(false);
   const [openId, setOpenId] = useState(null);
+
+  const router= useRouter();
 
 
 
@@ -132,6 +135,8 @@ export function ManagePatientQueries() {
 
   const onView = async (data) => {
     setQueryid(data);
+
+    router.push(`/admin/patient-queries/${data}`);
   }
 
 
@@ -505,9 +510,9 @@ export function ManagePatientQueries() {
 
 
 
-      {queryid !== "" && (
+      {/* {queryid !== "" && (
         <PatientQueryDetails id={queryid}></PatientQueryDetails>
-      )}
+      )} */}
 
 
     </>);

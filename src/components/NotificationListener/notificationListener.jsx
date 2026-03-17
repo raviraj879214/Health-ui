@@ -120,7 +120,7 @@ export default function NotificationUI({id}) {
             <span className="text-xs text-gray-500">{notifications.filter(x=>x.globaluserid === id).length}</span>
           </div>
 
-         <div className="max-h-[360px] overflow-y-auto">
+     <div className="max-h-[360px] overflow-y-auto">
   {notifications.filter(x => x.globaluserid === id).length === 0 ? (
     <div className="px-4 py-6 text-center text-sm text-gray-500">
       No notifications yet
@@ -131,32 +131,59 @@ export default function NotificationUI({id}) {
         key={n.id}
         className={`relative border-b px-4 py-3 transition ${
           !n.isRead ? "bg-blue-50/40" : "bg-white"
-        }`}>
-
+        }`}
+      >
         <div className="flex items-start gap-3">
-        
+          {/* Read/unread indicator */}
           <span
             className={`mt-2 h-2 w-2 rounded-full ${
               n.isRead ? "bg-gray-400" : "bg-blue-600"
-            }`}></span>
+            }`}
+          ></span>
 
+          {/* Notification content */}
           <div className="flex-1 pr-20">
-            <p className="text-sm font-semibold text-gray-900">{n.type}</p>
+            <p className="text-sm font-semibold text-gray-900 flex items-center gap-2">
+              {n.type}
+              {/* URL indicator */}
+              {n.page && (
+                <span
+                  title="This notification has a link"
+                  className="inline-block h-4 w-4 text-blue-600"
+                >
+                  🔗
+                </span>
+              )}
+            </p>
+
             <p className="mt-1 text-sm text-gray-600">{n.message}</p>
             <p className="mt-2 text-xs text-gray-400">
-              {formatBrazilDate(n.createdAt,true)} <br></br>
+              {formatBrazilDate(n.createdAt,true)} <br />
               {formatBrazilDate(n.createdAt,false)}
             </p>
           </div>
         </div>
 
-      
+        {/* Mark as read button */}
         {!n.isRead && (
           <button
             onClick={()=> markAsRead(n.id)}
-            className="absolute bottom-3 right-3 rounded-md border border-blue-200 bg-white px-2 py-1 text-xs font-medium text-blue-600 shadow-sm hover:bg-blue-50 hover:text-blue-800 transition">
+            className="absolute bottom-3 right-3 rounded-md border border-blue-200 bg-white px-2 py-1 text-xs font-medium text-blue-600 shadow-sm hover:bg-blue-50 hover:text-blue-800 transition"
+          >
             Mark read
           </button>
+        )}
+
+        {/* Optional: make the page URL clickable */}
+        {n.page && (
+          <a
+            href={n.page}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="absolute top-3 right-3 text-blue-600 text-xs hover:underline"
+          >
+            Visit
+          </a>
         )}
       </div>
     ))
