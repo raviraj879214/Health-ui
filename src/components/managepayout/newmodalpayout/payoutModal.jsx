@@ -16,6 +16,7 @@ export function PayoutModal({OnTriggerStripeBalance ,patientqueryidopen}) {
    const {register,formState:{errors},setError,getValues} =useForm();
  
    const [sampleData,setSampleData] = useState([]);
+   const [queryloading,setQueryLoading] = useState(false);
 
 
   const [openItem, setOpenItem] = useState(null);
@@ -40,6 +41,7 @@ export function PayoutModal({OnTriggerStripeBalance ,patientqueryidopen}) {
             commission: 0
         });
         fetchTrransaction(patientqueryidopen, 0);
+        toggleAccordion(patientqueryidopen);
 
     }, [patientqueryidopen]);
 
@@ -93,6 +95,7 @@ useEffect(() => {
 
   const fetchPatientQuery=async ()=>{
     debugger;
+    setQueryLoading(true);
     const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-payout/payout-patient-query`,{
         method : "Get",
         headers : await adminHeaders()
@@ -100,9 +103,12 @@ useEffect(() => {
     if(res.ok){
         const result= await res.json();
         setSampleData(result.data);
-        console.log("result.data.RequestFunds",result.data);
+       
         
+
+
     }
+    setQueryLoading(false);
   }
 
   const [totalreceived,setTotalReceived] = useState(0);
@@ -149,15 +155,16 @@ useEffect(() => {
 
             //patient query details
             debugger;
-            if(sampleData.length > 0){
+            // if(sampleData.length > 0)
+            // {
                 const somedetails = sampleData.find(x => x.id === patientqueryid);
-                setPatientQueryInformation(somedetails);
-                if (somedetails) {
-                    setClinic(somedetails.clinic);
-                    setDoctor(somedetails.doctor);
-                    setPackage(somedetails.package);
-                }
-            }
+                setPatientQueryInformation(result.patientQuery);
+                // if (somedetails) {
+                    setClinic(result.patientQuery.clinic);
+                    setDoctor(result.patientQuery.doctor);
+                    setPackage(result.patientQuery.package);
+                // }
+            // }
             
 
 
@@ -302,7 +309,7 @@ const releasedPercent = Math.floor(((clinicspaid / clinicstobepaid) * 100));
 
     <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 mb-5">
        
-      <h2 className="text-2xl font-bold mb-6">Payout Details </h2>
+      <h2 className="text-2xl font-bold mb-6">Payout Details {queryloading ? "true" : "false"} </h2>
 
       {sampleData.map((item) => (<>
 
