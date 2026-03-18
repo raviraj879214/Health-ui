@@ -11,7 +11,7 @@ import { useState, useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
-export function PayoutModal({OnTriggerStripeBalance}) {
+export function PayoutModal({OnTriggerStripeBalance ,patientqueryidopen}) {
 
    const {register,formState:{errors},setError,getValues} =useForm();
  
@@ -30,6 +30,18 @@ export function PayoutModal({OnTriggerStripeBalance}) {
    useEffect(() => {
   currentAccordionRef.current = currentaccordianopen;
 }, [currentaccordianopen]);
+
+
+
+    useEffect(() => {
+        setOpenItem(openItem === patientqueryidopen ? null : patientqueryidopen);
+        setAccordianOpen({
+            patientqueryid: patientqueryidopen,
+            commission: 0
+        });
+        fetchTrransaction(patientqueryidopen, 0);
+
+    }, [patientqueryidopen]);
 
 
 
@@ -290,33 +302,36 @@ const releasedPercent = Math.floor(((clinicspaid / clinicstobepaid) * 100));
 
     <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 mb-5">
        
-      <h2 className="text-2xl font-bold mb-6">Payout Details</h2>
+      <h2 className="text-2xl font-bold mb-6">Payout Details </h2>
 
       {sampleData.map((item) => (<>
 
           <ComponentCard
           key={item.id}
           className="mb-4 transition-all hover:shadow-lg ">
+            
               <div
                   className={`flex items-center justify-between w-full
                      ${item.status !== PatientQueryStatus.PENDING
                           ? "cursor-pointer"
                           : "cursor-not-allowed opacity-50"}`}
-                  onClick={() => {
-                      if (item.status !== PatientQueryStatus.PENDING) {
-                          toggleAccordion(item.id);
+                    onClick={() => {
+                        if (item.status !== PatientQueryStatus.PENDING) {
+                            toggleAccordion(item.id);
 
-                          setAccordianOpen({
-                            patientqueryid : item.id,
-                            commission : item.clinic?.commission
-                          });
+                            setAccordianOpen({
+                                patientqueryid : item.id,
+                                commission : item.clinic?.commission
+                            });
 
-                          fetchTrransaction(item.id, item.clinic?.commission);
-                      }
-                  }}
-              >
+                            fetchTrransaction(item.id, item.clinic?.commission);
+                        }
+                    }}
+                  
+                  >
 
-                  {/* Left Section */}
+
+                
                   <div className="flex items-center gap-3">
                       <h3 className="text-lg font-semibold">
                           # {item.querycode}

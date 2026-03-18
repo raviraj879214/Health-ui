@@ -7,7 +7,7 @@ import {ClinicpackageDetails} from "./clinicpackageDetails";
 import {PayoutModal} from "./newmodalpayout/payoutModal";
 
 
-export function MainPayout(){
+export function MainPayout({id}){
 
     const [reload,setReload] = useState("");
 
@@ -30,7 +30,7 @@ export function MainPayout(){
 
 
 
-        <PayoutModal OnTriggerStripeBalance={onStripetransfer}/>
+        <PayoutModal OnTriggerStripeBalance={onStripetransfer} patientqueryidopen={id}/>
 
 
     </>);

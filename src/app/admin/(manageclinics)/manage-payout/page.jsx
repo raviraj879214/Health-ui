@@ -4,14 +4,18 @@ import {MainPayout} from "../../../../components/managepayout/mainPayout";
 
 
 
-export default function Page(){
+export default async function Page({ searchParams }) {
+  const id = searchParams.id; 
+  
+    
 
 
     return(<>
+    
         <PageBreadcrumb pageTitle=" Manage Payout" />
+             
 
 
-
-        <MainPayout />
+        <MainPayout id={id} />
     </>);
 }
