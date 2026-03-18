@@ -309,7 +309,7 @@ const releasedPercent = Math.floor(((clinicspaid / clinicstobepaid) * 100));
 
     <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 mb-5">
        
-      <h2 className="text-2xl font-bold mb-6">Payout Details {queryloading ? "true" : "false"} </h2>
+      <h2 className="text-2xl font-bold mb-6">Payout Details  </h2>
 
       {sampleData.map((item) => (<>
 

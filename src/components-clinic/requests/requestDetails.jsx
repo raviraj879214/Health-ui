@@ -14,6 +14,7 @@ import { ButtonSpinner } from "@/reusable/buttonSpinner";
 import  PatientQueryStatusBadge  from "../../reusable/StatusBadge";
 import { useRouter } from "next/navigation";
 import { getSocket } from "../../hooks/socket";
+import {PaymentDetails} from "./paymentDetails";
 
 
 export function RequestDetails({id}){
@@ -525,29 +526,19 @@ useEffect(() => {
             ) : null} */}
 
 
-             <RaiseFunds
-                    patientqueryid={id}
-                    requestedFund={RequestedFunds || 0}
-                    totalFundsReceived={TotalReceivedFunds || 0}
-                    totalF={totalfundreceived}
-                    remainF={remainingAmount || 0}
-                    clinicmaxAmount={(querydetails.finalPrice || 0) - ((querydetails?.clinic?.commission || 0 * querydetails.finalPrice || 0)/100)}
-                    totalfundrequested={totalfundrequested || 0}
-
-                />
+        <RaiseFunds
+            patientqueryid={id}
+            requestedFund={RequestedFunds || 0}
+            totalFundsReceived={TotalReceivedFunds || 0}
+            totalF={totalfundreceived}
+            remainF={remainingAmount || 0}
+            clinicmaxAmount={(querydetails.finalPrice || 0) - ((querydetails?.clinic?.commission || 0 * querydetails.finalPrice || 0) / 100)}
+            totalfundrequested={totalfundrequested || 0} />
 
 
-            
+        <QueryStatus querydetails={querydetails} onData={(updatedData) => setQueryDetails(prev => ({ ...prev, ...updatedData }))} />
 
-           
-
-
-               
-
-
-            <QueryStatus querydetails={querydetails} onData={(updatedData) => setQueryDetails(prev => ({...prev,...updatedData}))}  />
-
-
+        <PaymentDetails querydetails={querydetails} />
     
 
 

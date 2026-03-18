@@ -164,19 +164,18 @@ export function PatientQueryDetails({ id }) {
 
       const paymentDetails = querydetails?.paymentDetails || [];
 
-
-      const totalPlatformFee = paymentDetails.reduce((sum, item) => {
+      const totalPlatformFee = paymentDetails.filter(x=>x.status === 1).reduce((sum, item) => {
         const fee = Number(item.platformfee);
         return sum + (isNaN(fee) ? 0 : fee);
       }, 0);
 
 
-      const totalVendorFee = paymentDetails.reduce((sum, item) => {
+      const totalVendorFee = paymentDetails.filter(x=>x.status === 1).reduce((sum, item) => {
         const fee = Number(item.vendorfee);
         return sum + (isNaN(fee) ? 0 : fee);
       }, 0);
 
-       const totalGeneratedAmount = paymentDetails.reduce((sum, item) => {
+       const totalGeneratedAmount = paymentDetails.filter(x=>x.status === 1).reduce((sum, item) => {
         const fee = Number(item.generatedamount);
         return sum + (isNaN(fee) ? 0 : fee);
       }, 0);
@@ -979,6 +978,7 @@ export function PatientQueryDetails({ id }) {
                 ))}
 
                 <tr>
+                  <td className="px-6 py-4"></td>
                   <td className="px-6 py-4"></td>
                   <td className="px-6 py-4"></td>
                   <td className="px-6 py-4"></td>
