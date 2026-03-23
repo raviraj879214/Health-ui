@@ -21,6 +21,7 @@ import Cookies from "js-cookie";
 import { useDispatch } from "react-redux";
 import { addRequestCount } from "../redux/counterSlice";
 import ComponentCard from "@/components/common/ComponentCard";
+import { FundRelease } from "@/components/managepayout/newmodalpayout/fundRelease";
 
 
 
@@ -29,6 +30,8 @@ export function RequestList() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [queryid,setQueryid] = useState("");
+
+   const [alltransfer,setAllTransfer] = useState([]);
 
   const [rolename,setRoleName] = useState("");
 
@@ -53,6 +56,7 @@ export function RequestList() {
       const data = await res.json();
       console.log("aptient query",data.data);
       setQueries(data.data || []);
+      setAllTransfer(data.transfer);
       setTotalPages(Math.ceil((data.totalCount || 0) / itemsPerPage));
       dispatch(addRequestCount(data.totalCount));
 
@@ -249,6 +253,12 @@ const statusLabel = (status) => {
 
             <TableCell className="px-5 py-4 text-center">
               <PatientQueryStatusBadge status={q.status} />
+
+              {(q.status === PatientQueryStatus.INITIAL_FUND_RELEASED || q.status === PatientQueryStatus.PARTIALL_FUND_RELEASED || q.status === PatientQueryStatus.FULL_FUND_RELEASED)&&(<>
+
+                  <FundRelease id={q.id}  sentamount={alltransfer} totalamount={q.finalPrice - ((q.finalPrice * q.clinic?.commission)/100)} />
+
+              </>)}
             </TableCell>
 
             <TableCell className="px-5 py-4 text-right text-sm text-gray-600">{formatBrazilDate(q.createdAt)}</TableCell>

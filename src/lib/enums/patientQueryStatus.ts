@@ -27,4 +27,8 @@ export enum PatientQueryStatus {
     PAYMENT_PENDING = 18,
 
 
+    INITIAL_FUND_RELEASED = 19,
+    PARTIALL_FUND_RELEASED = 20,
+    FULL_FUND_RELEASED = 21
+
 }

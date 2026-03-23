@@ -10,12 +10,18 @@ import PatientQueryStatusBadge from "@/reusable/StatusBadge";
 import { useState, useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import ProgressBar from "@ramonak/react-progress-bar";
+import {FundRelease} from "./fundRelease";
+
+
 
 export function PayoutModal({OnTriggerStripeBalance ,patientqueryidopen}) {
 
    const {register,formState:{errors},setError,getValues} =useForm();
  
    const [sampleData,setSampleData] = useState([]);
+   const [alltransfer,setAllTransfer] = useState([]);
+
    const [queryloading,setQueryLoading] = useState(false);
 
 
@@ -103,10 +109,7 @@ useEffect(() => {
     if(res.ok){
         const result= await res.json();
         setSampleData(result.data);
-       
-        
-
-
+        setAllTransfer(result.transfer);
     }
     setQueryLoading(false);
   }
@@ -187,7 +190,7 @@ useEffect(() => {
             return false;
         }
 
-         setReleaseButton(true);
+        setReleaseButton(true);
         const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-payout/release-fund`,{
             method : "Post",
             headers : await adminHeaders(),
@@ -209,13 +212,25 @@ useEffect(() => {
             setAmount(0);
             setNote("");
             OnTriggerStripeBalance();
+        
+            fetchTrransaction(patientqueryid,commission);
+            setAllTransfer(result.transfers);
 
-            toast.success("Fund Transfered Successfully",{
+            setSampleData(prev =>
+                prev.map(item =>
+                    item.id === result.patientquery.id
+                        ? { ...item, status: result.patientquery.status }
+                        : item
+                )
+            );
+
+             toast.success("Fund Transfered Successfully",{
                 position : "bottom-right",
                 autoClose : 3000
             });
-            
-            fetchTrransaction(patientqueryid,commission);
+
+            await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/webhook/patient-request`,{method : "Get"});
+
            
         }
         setReleaseButton(false);
@@ -339,38 +354,26 @@ const releasedPercent = Math.floor(((clinicspaid / clinicstobepaid) * 100));
 
 
                 
-                  <div className="flex items-center gap-3">
-                      <h3 className="text-lg font-semibold">
-                          # {item.querycode}
+                  <div className="flex flex-col gap-2 w-full">
+
+                      <div className="flex items-center justify-between w-full gap-3">
+
+                          <h3 className="text-lg font-semibold">
+                              # {item.querycode}
                           </h3>
+                          
+                            <PatientQueryStatusBadge status={item.status} />
 
-                      <PatientQueryStatusBadge
-                          className="ml-2"
-                          status={item.status}
-                      />
+                            <FundRelease id={item.id}  sentamount={alltransfer} totalamount={item.finalPrice - ((item.finalPrice * item.clinic?.commission)/100)} />
+                      </div>
+
+
                   </div>
 
 
-                  <div className="flex items-center gap-6">
-
-                    
-                      
-                      {item.RequestFunds.filter(x=>x.collected === 0).length > 0 &&(<>
-                         <div className="flex items-center gap-3 text-xs font-medium">
-                            <span className="px-3 py-1 rounded-full bg-yellow-100 text-yellow-800 flex items-center gap-2 font-semibold shadow-sm">
-                                <span className="relative flex h-3 w-3">
-                                    <span className="absolute inline-flex h-full w-full rounded-full bg-red-400 animate-ping opacity-75"></span>
-                                    <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500 animate-pulse"></span>
-                                </span>
-                                Fund Requested
-                            </span>
-                        </div>
-                      </>)}
 
 
-                    
 
-                  </div>
 
 
                   <span className="text-gray-400 text-xl font-bold">

@@ -145,6 +145,24 @@ export default function PatientQueryStatusBadge({
       "bg-yellow-100 text-yellow-700 border-yellow-300 dark:bg-yellow-900 dark:text-yellow-300 dark:border-yellow-700",
     icon: "M12 8v4l3 3M12 2a10 10 0 100 20 10 10 0 000-20z",
   },
+  [PatientQueryStatus.INITIAL_FUND_RELEASED]: {
+    label: "Initial Fund Released",
+    style:
+      "bg-yellow-100 text-yellow-700 border-yellow-300 dark:bg-yellow-900 dark:text-yellow-300 dark:border-yellow-700",
+    icon: "M12 8v4l3 3M12 2a10 10 0 100 20 10 10 0 000-20z",
+  },
+  [PatientQueryStatus.PARTIALL_FUND_RELEASED]: {
+    label: "Partial Fund Released",
+    style:
+      "bg-yellow-100 text-yellow-700 border-yellow-300 dark:bg-yellow-900 dark:text-yellow-300 dark:border-yellow-700",
+    icon: "M12 8v4l3 3M12 2a10 10 0 100 20 10 10 0 000-20z",
+  },
+  [PatientQueryStatus.FULL_FUND_RELEASED]: {
+    label: "Full Fund Released",
+    style:
+      "bg-yellow-100 text-yellow-700 border-yellow-300 dark:bg-yellow-900 dark:text-yellow-300 dark:border-yellow-700",
+    icon: "M12 8v4l3 3M12 2a10 10 0 100 20 10 10 0 000-20z",
+  },
 
 
 
