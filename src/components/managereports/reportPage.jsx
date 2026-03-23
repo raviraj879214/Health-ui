@@ -8,6 +8,7 @@ import { ButtonSpinner } from "@/reusable/buttonSpinner";
 import { brazilianCurrency } from "@/lib/brazilianCurrency";
 import { formatBrazilDate } from "@/lib/formatDate";
 import { ArrowDownCircle, ArrowUpCircle } from "lucide-react";
+import RevenueChart from "../ecommerce/revenueChart";
 
 export function Report() {
   const [allTransactions, setAllTransactions] = useState([]);
@@ -88,7 +89,7 @@ export function Report() {
 
   return (
     <>
-      {/* FILTER */}
+     
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-12">
           <ComponentCard title="Filters">
@@ -97,11 +98,15 @@ export function Report() {
         </div>
       </div>
 
-      {/* TABLE */}
+     
+
+      <RevenueChart   transfersprops={transactions} />
+
+
       <div className="grid grid-cols-12 gap-4 mt-2">
         <div className="col-span-12">
 
-                  <ComponentCard title="Transactions Report">
+                  <ComponentCard title="Transactions Report" desc="It currently only shows the last 100 transactions. To view older transactions, click “Load More”, and the chart will update accordingly.">
   {loading && transactions.length === 0 ? (
     <ButtonSpinner />
   ) : (
@@ -192,28 +197,28 @@ export function Report() {
                 </td>
 
               
-                    <td className="px-4 py-2 border-b font-medium">
-  <div className="flex items-center gap-1">
-    {/* Icon: green down for received, red up for deduction */}
-    {item.amount - (item.fee || 0) >= 0 ? (
-      <ArrowDownCircle className="w-4 h-4 text-green-600" />
-    ) : (
-      <ArrowUpCircle className="w-4 h-4 text-red-600" />
-    )}
+                <td className="px-4 py-2 border-b font-medium">
+                  <div className="flex items-center gap-1">
+                    {/* Icon: green down for received, red up for deduction */}
+                    {item.amount - (item.fee || 0) >= 0 ? (
+                      <ArrowDownCircle className="w-4 h-4 text-green-600" />
+                    ) : (
+                      <ArrowUpCircle className="w-4 h-4 text-red-600" />
+                    )}
 
-    {/* Main Amount */}
-    <span className={item.amount - (item.fee || 0) < 0 ? "text-red-500" : "text-green-600"}>
-      {brazilianCurrency((item.amount) / 100)}
-    </span>
+                    {/* Main Amount */}
+                    <span className={item.amount - (item.fee || 0) < 0 ? "text-red-500" : "text-green-600"}>
+                      {brazilianCurrency((item.amount) / 100)}
+                    </span>
 
-    {/* Fee info */}
-    {item.fee > 0 && (
-      <span className="text-xs text-gray-400 ml-1">
-        (Stripe Fee: {brazilianCurrency(item.fee / 100)})
-      </span>
-    )}
-  </div>
-</td>
+                    {/* Fee info */}
+                    {item.fee > 0 && (
+                      <span className="text-xs text-gray-400 ml-1">
+                        (Stripe Fee: {brazilianCurrency(item.fee / 100)})
+                      </span>
+                    )}
+                  </div>
+                </td>
 
 
                 {/* Net */}
@@ -238,7 +243,18 @@ export function Report() {
             ))}
           </tbody>
         </table>
+        
       </div>
+      {hasMore && (
+            <div className="flex justify-center mt-4">
+                <button
+                    onClick={() => fetchTrans(true)}
+                    className="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+                >
+                    {loading ? "Loading..." : "Load More"}
+                </button>
+            </div>
+        )}
 
     
         <div className="flex justify-end mt-6">
@@ -307,16 +323,7 @@ export function Report() {
         </div>
 
 
-        {hasMore && (
-            <div className="flex justify-center mt-4">
-                <button
-                    onClick={() => fetchTrans(true)}
-                    className="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
-                >
-                    {loading ? "Loading..." : "Load More"}
-                </button>
-            </div>
-        )}
+        
     </>
   )}
 </ComponentCard>

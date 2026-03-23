@@ -8,6 +8,7 @@ import StatisticsChart from "@/components/ecommerce/StatisticsChart";
 import RecentOrders from "@/components/ecommerce/RecentOrders";
 import DemographicCard from "@/components/ecommerce/DemographicCard";
 import StripConnectedAccount from "../../components/ecommerce/stripeConnectedAccount";
+import RevenueChart from "../../components/ecommerce/revenueChart";
 
 
 
@@ -27,7 +28,12 @@ export default function Ecommerce() {
       </div>
     </div>
 
+   
+   
+
     <MonthlySalesChart />
+ 
+
 
     <StripConnectedAccount />
 
