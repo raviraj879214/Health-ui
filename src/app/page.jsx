@@ -1,5 +1,6 @@
+"use client";
 export const dynamic = "force-static";
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import {Banner} from "../components-front-end/homepage/banner/banner";
 import TopRated from "../components-front-end/homepage/toprated/topRated";
 import Treatments from "../components-front-end/homepage/treatment/treatMent";
@@ -23,7 +24,11 @@ import {BannerLoader} from "../components-front-end/homepage/loader/bannerLoader
 export default function Pages() {
 
   // --- Dummy Usage Example ---
-  const faqItems = [
+
+  const[faqItems,setfaqItems] = useState([]);
+
+
+  const faqItemsf = [
     {
       id: 1,
       title: "What is Next.js?",
@@ -54,6 +59,8 @@ export default function Pages() {
       ),
     },
   ];
+
+
   const promoteCardone = {
     title: "Do You Running a Clinic?",
     description:
@@ -73,6 +80,33 @@ export default function Pages() {
     imageAlt: "Join Our Affiliate Program",
   };
 
+
+  useEffect(()=>{
+    fetchfaqs();
+  },[]);
+
+
+  const fetchfaqs= async()=>{
+    const res= await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/homepage-banner/get-faqs`,{
+      method : "Get",
+      content : "application/json"
+    });
+
+    if(res.ok){
+      const result= await res.json();
+
+      const formattedFaqs = result.data.map((item) => ({
+        id: item.id,
+        title: item.question,
+        content: <p>{item.answer}</p>,
+      }));
+
+      setfaqItems(formattedFaqs);
+
+    }
+
+
+  }
 
 
 
