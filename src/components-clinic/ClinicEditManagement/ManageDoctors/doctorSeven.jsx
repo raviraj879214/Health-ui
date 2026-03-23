@@ -78,7 +78,7 @@ export function DoctorSeven({ onClose, doctoruuid , clinicuuid }){
                 <button
                   onClick={() => onClear()}
                   className="btn btn-third">
-                  Back
+                  Cancel
                 </button>
 
                 <button

@@ -205,28 +205,25 @@ export function MainPackages({ clinicuuid }) {
                 </p>
               </div>
             
-             <div className="flex flex-col items-start gap-2 mt-5">
-                  {item.packagesDoctor.length > 0 ? (
-                    item.packagesDoctor.map((pd) => (
-                      <div key={pd.id} className="flex items-center gap-3 justify-start">
-                        <img
-                          src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=doctors/profilepicture/${pd.doctors.image}`}
-                          alt="Doctor Avatar"
-                          className="h-10 w-10 rounded-full object-cover"
-                        />
-
-                        <span className="text-sm font-medium text-gray-800">
-                          Dr. {pd.doctors.firstname} {pd.doctors.lastname}
-                        </span>
-                      </div>
-                    ))
-                  ) : (
-                    <span className="text-sm text-gray-500">
-                      Doctor not assigned
-                    </span>
-                  )}
-              </div>
-
+             <div className="flex flex-wrap items-center gap-3 mt-5">
+  {item.packagesDoctor.length > 0 ? (
+    item.packagesDoctor.map((pd) => (
+      <div key={pd.id} className="flex items-center gap-2 bg-gray-100 px-2 py-1 rounded-full">
+        <img
+          src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=doctors/profilepicture/${pd.doctors.image}`}
+          className="h-6 w-6 rounded-full object-cover"
+        />
+        <span className="text-xs font-medium">
+          Dr. {pd.doctors.firstname}
+        </span>
+      </div>
+    ))
+  ) : (
+    <span className="text-sm text-gray-500">
+      Doctor not assigned
+    </span>
+  )}
+</div>
               
 
 

@@ -310,6 +310,7 @@ export function DoctorFour({ onClose, nextStep, prevStep ,clinicuuid , doctoruui
       <div className="space-y-2 max-h-[200px] overflow-auto ">
         {specialty
           .filter(x => x.name.startsWith(item))
+           .sort((a, b) => a.name.localeCompare(b.name))
           .map(data => (
             <label
               key={data.id}

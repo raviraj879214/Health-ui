@@ -252,7 +252,7 @@ const statusLabel = (status) => {
             <TableCell className="px-5 py-4 text-sm text-gray-600">{q.procedureTimeValue || "--"}</TableCell>
 
             <TableCell className="px-5 py-4 text-center">
-              <PatientQueryStatusBadge status={q.status} />
+              <PatientQueryStatusBadge className="mb-2" status={q.status} />
 
               {(q.status === PatientQueryStatus.INITIAL_FUND_RELEASED || q.status === PatientQueryStatus.PARTIALL_FUND_RELEASED || q.status === PatientQueryStatus.FULL_FUND_RELEASED)&&(<>
 

@@ -353,6 +353,7 @@ export function PackageStepTwo({clinicuuid,packageid}){
               <div className="space-y-2 max-h-[200px] overflow-auto ">
                 {specialization
                   .filter(x => x.name.startsWith(item))
+                    .sort((a, b) => a.name.localeCompare(b.name))
                   .map(data => (
                     <label
                       key={data.id}

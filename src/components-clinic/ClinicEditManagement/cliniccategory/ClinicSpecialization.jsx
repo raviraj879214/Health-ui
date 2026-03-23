@@ -366,11 +366,11 @@ export function ClinicSpecializations({clinicuuid}){
       <div className="space-y-2 max-h-[200px] overflow-auto ">
         {specialization
           .filter(x => x.name.startsWith(item))
+          .sort((a, b) => a.name.localeCompare(b.name))
           .map(data => (
             <label
               key={data.id}
-              className="flex items-center gap-2 p-1 hover:bg-gray-50 dark:hover:bg-neutral-800 cursor-pointer rounded"
-            >
+              className="flex items-center gap-2 p-1 hover:bg-gray-50 dark:hover:bg-neutral-800 cursor-pointer rounded">
               <input
                 type="checkbox"
                 className="checkbox-theme w-4 h-4 text-primary-600"
@@ -387,9 +387,12 @@ export function ClinicSpecializations({clinicuuid}){
                  
                  />
               <span className="text-gray-700 dark:text-white">{data.name}</span>
+              
             </label>
           ))
         }
+
+
       </div>
     </div>
   ))}
