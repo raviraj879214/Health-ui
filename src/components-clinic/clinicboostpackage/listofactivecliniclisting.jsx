@@ -104,7 +104,7 @@ export function Listofactivecliniclisting() {
                     </td>
 
                     <td className="p-3 border theme-border ">
-                      {item.isActive ? (
+                      {item.isActive == true ? (
                         <span className="px-2 py-1 text-xs rounded bg-green-100 text-green-700">
                           Active
                         </span>

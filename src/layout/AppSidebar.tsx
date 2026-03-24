@@ -14,6 +14,7 @@ import {
   PlugInIcon,
   EnvelopeIcon
 } from "../icons/index";
+import { Package } from "lucide-react";
 
 
 type NavItem = {
@@ -293,6 +294,14 @@ const AppSidebar: React.FC = () => {
         ),
       name: "Manage Reports",
       path: "/admin/manage-report",
+    },
+    {
+      icon:
+        (
+          <Package className="w-6 h-6" />
+        ),
+      name: "Manage Boost Package",
+      path: "/admin/manage-package",
     },
 
 
