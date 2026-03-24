@@ -7,6 +7,8 @@ import { usePermissions } from "@/context/PermissionContext";
 import { PencilIcon } from "lucide-react";
 import { TrashBinIcon } from "@/icons";
 import { brazilianCurrency } from "@/lib/brazilianCurrency";
+import Switch from "../form/switch/Switch";
+import { adminHeaders } from "../utils/adminHeader";
 
 
 export function ListOfPackage({ sendData ,addData , updateData }) {
@@ -154,6 +156,25 @@ export function ListOfPackage({ sendData ,addData , updateData }) {
     sendData(data);
   };
 
+
+  const onChangeSwitch=async (id,value)=>{
+    const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/boost-package/update-packages-type`,{
+      method : "Put",
+      headers : await adminHeaders(),
+      body : JSON.stringify({
+         "id" : id,
+         "type" : value === true ? 1 : 0
+      })
+    });
+    if(res.ok){
+      const result= await res.json();
+
+
+    }
+  } 
+
+
+
   return (
     <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
       <div className="max-w-full overflow-x-auto">
@@ -182,6 +203,11 @@ export function ListOfPackage({ sendData ,addData , updateData }) {
                 <TableCell className="px-5 py-3 font-medium text-gray-500">
                   Package Duration (Days)
                 </TableCell>
+                <TableCell className="px-5 py-3 font-medium text-gray-500">
+                  Clinic Listing Package
+                </TableCell>
+
+
                 <TableCell className="px-5 py-3 font-medium text-gray-500">
                   Package Description
                 </TableCell>
@@ -235,6 +261,17 @@ export function ListOfPackage({ sendData ,addData , updateData }) {
                     {/* Duration */}
                     <TableCell className="px-5 py-4">
                       {s.durationDays ?? "—"}
+                    </TableCell>
+
+                    <TableCell className="px-5 py-4">
+                      <Switch
+                       defaultChecked = {s.type == 0 ? false : true}
+                       onChange={(e) => {
+                        onChangeSwitch(s.id,e);
+                        
+                       }}
+
+                      />
                     </TableCell>
 
                     {/* Description */}

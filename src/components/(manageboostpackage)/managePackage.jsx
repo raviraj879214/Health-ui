@@ -281,7 +281,8 @@ export function ManageBoostPackage(){
     
     <div className="grid grid-cols-12 gap-4 mt-5">
             <div className="col-span-12 sm:col-span-12 space-y-5 sm:space-y-6">
-                <ComponentCard title="List of Packages " desc="If a package is already in use (i.e., purchased by clinics), it should not be modified or deleted, as it is actively associated with existing data.">
+                <ComponentCard title="List of Packages" 
+                desc="If a package is already in use (i.e., purchased by clinics), it should not be modified or deleted, as it is actively associated with existing data. If the Clinic Listing Package is turned off, it will be listed under the Boost Package. If it is turned on, it will be treated as a Clinic Listing Boost Package.">
                     <p className="text-green-500 text-sm"> </p>
                     {
                         canRead
