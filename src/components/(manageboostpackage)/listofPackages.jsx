@@ -37,9 +37,9 @@ export function ListOfPackage({ sendData ,addData , updateData }) {
       const data = await res.json();
       console.log("data",data);
       setSpecialties(
-        (data?.data || []).sort(
-            (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-        )
+          (data?.data || []).sort(
+              (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+          )
         );
 
 
@@ -51,6 +51,7 @@ export function ListOfPackage({ sendData ,addData , updateData }) {
 
   useEffect(() => {
     fetchSpecialtyTypes(currentPage);
+   
   }, [currentPage]);
 
 
@@ -119,7 +120,7 @@ export function ListOfPackage({ sendData ,addData , updateData }) {
 
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-specialties/delete-specialties/${id}`,
+        `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/boost-package/delete-packages/${id}`,
         {
           method: "DELETE",
           headers: { Authorization: `Bearer ${token}` },
@@ -137,7 +138,14 @@ export function ListOfPackage({ sendData ,addData , updateData }) {
         setTimeout(() => setMessage(""), 3000);
         fetchSpecialtyTypes(currentPage);
         
-        // sendData("", "", "");
+
+        setSpecialties(prev =>
+          prev
+            .filter(x => x.id !== id)
+            .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+        );
+
+
       } else {
         toast.error(result.message ?? "Failed to delete",{
           position: "bottom-right",
@@ -315,7 +323,7 @@ export function ListOfPackage({ sendData ,addData , updateData }) {
                         </button>
 
                         {/* Delete */}
-                        {/* <button
+                        <button
                           onClick={() => onDelete(s.id)}
                           disabled={isInUse || !canDelete}
                           className={`${isInUse || !canDelete
@@ -324,7 +332,7 @@ export function ListOfPackage({ sendData ,addData , updateData }) {
                             }`}
                         >
                           <TrashBinIcon />
-                        </button> */}
+                        </button>
                       </div>
                     </TableCell>
                   </TableRow>

@@ -21,7 +21,6 @@ export default function Page() {
 
         <Suspense fallback={<SpecialtiesLoader />}>
             <ManageBoostPackage />
-
         </Suspense>
     </>);
 }

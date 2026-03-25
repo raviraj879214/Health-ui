@@ -122,6 +122,7 @@ export function Report() {
               <th className="px-4 py-3 border-b">Amount</th>
               <th className="px-4 py-3 border-b">Net</th>
               <th className="px-4 py-3 border-b">Status</th>
+              <th className="px-4 py-3 border-b">Description</th>
               <th className="px-4 py-3 border-b">Date</th>
             </tr>
           </thead>
@@ -238,6 +239,10 @@ export function Report() {
                 </td>
 
                 {/* Date */}
+
+
+                <td className="px-4 py-2 border-b">{item.description || "--"}</td>
+
                 <td className="px-4 py-2 border-b">{formatBrazilDate(item.created * 1000)}</td>
               </tr>
             ))}

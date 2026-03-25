@@ -86,7 +86,8 @@ export function MainPackage() {
             packagename : data.name,
             packageprice: data.price,
             packageduration:data.durationDays,
-            packageid : data.id
+            packageid : data.id,
+            description :  `Name: ${data.name} Price: ${brazilianCurrency(data.price)} Duration: ${data.durationDays} days Details: ${data.description}`
         });
 
         setOpen(true);
@@ -122,6 +123,7 @@ const handleClick = async (selectedpackages) => {
                 boostpackageid: selectedpackages.packageid,
                 clinicpackageid : degree[0].value,
                 clinicuserid: clinicuserid,
+                description: `${selectedboostpackages.description} for clinic ${clinics[0]?.label} and treatment ${degree[0]?.label}`
             };
 
       
@@ -186,6 +188,9 @@ const handleClick = async (selectedpackages) => {
                             <p className="font-semibold">{pkg.name}</p>
                             <p className="text-gray-600">{brazilianCurrency(pkg.price)}</p>
                             <p className="text-gray-500 text-sm">{pkg.durationDays} days</p>
+                                <p>
+                                    {pkg.description}
+                                </p>
                         </div>
 
                         <button 

@@ -24,6 +24,8 @@ export function ManageBoostPackage(){
 
     useEffect(() => {
         setRestriction(status);
+
+        
     }, [status]);
 
 

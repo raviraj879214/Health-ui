@@ -82,7 +82,8 @@ export function MainBoostClinicPackages(){
             packagename : data.name,
             packageprice: data.price,
             packageduration:data.durationDays,
-            packageid : data.id
+            packageid : data.id,
+            description :  `Name: ${data.name} Price: ${brazilianCurrency(data.price)} Duration: ${data.durationDays} days Details: ${data.description}`
         });
 
         setOpen(true);
@@ -114,6 +115,7 @@ export function MainBoostClinicPackages(){
                 boostpackageid: selectedpackages.packageid,
                 clinicpackageid : degree[0].value,
                 clinicuserid: clinicuserid,
+                description : `${selectedpackages.description} for clinic ${degree[0].label}`
             };
 
       
@@ -278,8 +280,9 @@ export function MainBoostClinicPackages(){
                                         className="basic-select"
                                         classNamePrefix="select"
                                         isSearchable
-                                        
-                                        />
+                                      />
+
+                                      
                                     </div>
                                     </div>
 
