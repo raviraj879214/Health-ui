@@ -17,7 +17,7 @@ export default async function Page({params}){
 
 
                 <PageBreadcrumb pageTitle="Requests Details" />
-            <RequestDetails id={id}/>
+                <RequestDetails id={id}/>
 
 
 

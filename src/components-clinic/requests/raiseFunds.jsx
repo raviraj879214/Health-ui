@@ -149,7 +149,8 @@ export function RaiseFunds({patientqueryid, requestedFund ,totalFundsReceived ,t
                                         },
                                         validate: (value) => value > 0 || "Amount must be greater than zero",
                                         validate: (value) => {
-                                            const availableAmount = remainF - totalfundrequested;
+
+                                            const availableAmount = remainF - totalF;
 
                                             if (availableAmount <= 0) {
                                                 return "Already requested almost all amount, go throught in the (Requested Funds Timeline)";

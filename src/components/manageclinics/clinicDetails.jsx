@@ -48,8 +48,16 @@ export function ClinicDetails({id}){
         </button>
       </div>
       <ComponentCard title="Clinic Details">
+
+        {/* <div>
+            <iframe  src={`${process.env.NEXT_PUBLIC_URL}/partner/clinic/${id}`} width="100%" height="1000"  ></iframe>
+        </div> */}
+
         <ToastContainer></ToastContainer>
+
           <div className="grid grid-cols-1  gap-2">
+
+            
              <ClinicStatusDisplay trigger={change} id={id} />
           </div>
 
