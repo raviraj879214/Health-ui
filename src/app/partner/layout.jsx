@@ -7,6 +7,7 @@ import AuthClinic from "../../components-clinic/middleware/AuthClinic";
 import "../partner/partner-global.css";
 import { ToastContainer } from "react-toastify";
 import  {ReduxPartnerProvider} from "../../components-clinic/redux/provider";
+import Cookies from "js-cookie";
 
 
 
@@ -16,6 +17,9 @@ export default function ClinicLayout({ children }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [active, setActive] = useState("Requests");
 
+
+   const admin_login_clinic = Cookies.get("admin_login_clinic");
+
   return (
     
     <AuthClinic>
@@ -23,20 +27,33 @@ export default function ClinicLayout({ children }) {
       <div className="flex h-screen w-full bg-[#F5F6FA] ">
         
         <ReduxPartnerProvider>
-        <ClinicSidebar
-          collapsed={collapsed}
-          mobileOpen={mobileOpen}
-          active={active}
-          setActive={setActive}
-          toggleMobile={setMobileOpen}/>
+        
+
+          {!admin_login_clinic && (<>
+            <ClinicSidebar
+              collapsed={collapsed}
+              mobileOpen={mobileOpen}
+              active={active}
+              setActive={setActive}
+              toggleMobile={setMobileOpen} />
+          </>)}
+
+
 
           <div className="flex-1 flex flex-col">
-            <ClinicHeader onToggleSidebar={() => setMobileOpen(!mobileOpen)} />
+
+            
+
+            {!admin_login_clinic && (<>
+              <ClinicHeader onToggleSidebar={() => setMobileOpen(!mobileOpen)} />
+            </>)}
 
             <ToastContainer></ToastContainer>
+
             <main className="p-6 overflow-x-auto">
               {children}
             </main>
+
           </div>
 
          </ReduxPartnerProvider>
