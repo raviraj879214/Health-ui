@@ -128,7 +128,7 @@ export default function Pages() {
         <Packages />
         
         
-        <Testimonials />
+        {/* <Testimonials /> */}
 
         <FAQ items={faqItems} defaultOpen={1} />
 

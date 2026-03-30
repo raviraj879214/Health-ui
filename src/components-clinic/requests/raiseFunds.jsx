@@ -158,7 +158,7 @@ export function RaiseFunds({patientqueryid, requestedFund ,totalFundsReceived ,t
 
                                             return (
                                                 value <= availableAmount ||
-                                                `You can request upto amount ${brazilianCurrency(availableAmount)}`
+                                                `You can request up to ${brazilianCurrency(availableAmount)}`
                                             );
                                             }
                                     })}

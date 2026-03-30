@@ -128,6 +128,8 @@ useEffect(() => {
 
    const [finalprice,setFinalPrice] = useState(0);
 
+   const [availablebalance,setAvailableBalance] = useState(0);
+
 
 
 
@@ -142,7 +144,8 @@ useEffect(() => {
     if(res.ok){
             const result = await res.json();
 
-            const totalamount = (result.data.reduce((sum, x) => sum + x.amount, 0)/100);
+             const totalamount = (result.data.reduce((sum, x) => sum + x.amount, 0)/100);
+            //  const totalamount = 0;
             const clinicspaid = (result.transfer.reduce((sum, x) => sum + x.amount, 0)/100);
             const clinicstobepaid = ((totalamount * commission)/100);
 
@@ -151,7 +154,8 @@ useEffect(() => {
             setTransferTransaction(result.transfer);
             setClinicsPaid(clinicspaid); 
             setRequestedFunds(result.RequestFunds);
-            setFinalPrice(result.data.finalPrice)
+            setFinalPrice(result.data.finalPrice);
+            setAvailableBalance(result.balance);
             
 
 
@@ -603,87 +607,109 @@ const releasedPercent = Math.floor(((clinicspaid / clinicstobepaid) * 100));
 
                      <div className={`grid grid-cols-2 lg:grid-cols-2 gap-6 mt-5 ${item.status !== PatientQueryStatus.PENDING ? "" : "hidden"}`}>
 
-                        <div className=" bg-white border border-gray-200 rounded-2xl shadow-sm p-5 ">
-                            <h2 className="text-lg font-semibold text-gray-800 mb-4">Release Funds</h2>
+                        
+                          {availablebalance > clinicstobepaid ? (<>
+                              <div
+                                  style={{
+                                      padding: 15,
+                                      borderRadius: 8,
+                                      backgroundColor: "#fff3cd",
+                                      color: "#856404",
+                                      border: "1px solid #ffeeba",
+                                      maxWidth: 500
+                                  }}
+                              >
+                                  <strong>Insufficient Balance</strong>
+                                  <p style={{ margin: "8px 0 0" }}>
+                                      You don’t have enough available balance to release funds. Please check your
+                                      Stripe account for details.
+                                  </p>
+                              </div>
+                          </>) : (<>
+                              <div className=" bg-white border border-gray-200 rounded-2xl shadow-sm p-5 ">
+                                  <h2 className="text-lg font-semibold text-gray-800 mb-4">Release Funds</h2>
 
-                            <div className="space-y-4">
+                                  <div className="space-y-4">
 
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-600 mb-1">
-                                         
-                                        {Number(clinicstobepaid) === 0 ? (
-                                            <p className="text-green-600 font-medium">
-                                                The total amount  <span className="text-purple-600">{brazilianCurrency(clinicspaid)}</span> has been transferred to clinic
-                                            </p>
-                                            ) : (
-                                            <p className="text-blue-600 font-medium">
-                                                You can release up to {brazilianCurrency(Number(clinicstobepaid))}
-                                            </p>
-                                            )}
+                                      <div>
+                                          <label className="block text-sm font-medium text-gray-600 mb-1">
 
-                                    </label>
-                                    {clinicstobepaid > 0 &&(<>
-                                         <input
-                                        value={amount}
-                                        type="number"
-                                        min={1}
-                                       
-                                        placeholder="Enter amount"
-                                        className="w-full rounded-xl border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-                                        onChange={(e) => {
-                                            debugger;
-                                            if(parseInt(clinicstobepaid) >= parseInt(e.target.value || 0)){
-                                                setAmount(e.target.value);
-                                            }
-                                            else{
-                                                alert(`make payout enter amount within ${brazilianCurrency(clinicstobepaid)}`)
-                                            }
-                                        }} 
-                                        />
-                                    </>)}
-                                   
+                                              {Number(clinicstobepaid) === 0 ? (
+                                                  <p className="text-green-600 font-medium">
+                                                      The total amount  <span className="text-purple-600">{brazilianCurrency(clinicspaid)}</span> has been transferred to clinic
+                                                  </p>
+                                              ) : (
+                                                  <p className="text-blue-600 font-medium">
+                                                      You can release up to {brazilianCurrency(Number(clinicstobepaid))}
+                                                  </p>
+                                              )}
 
-                                </div>
+                                          </label>
+                                          {clinicstobepaid > 0 && (<>
+                                              <input
+                                                  value={amount}
+                                                  type="number"
+                                                  min={1}
 
-                                <div className="hidden">
-                                    <label className="block text-sm font-medium text-gray-600 mb-1">
-                                        Note (Optional)
-                                    </label>
-                                    <input
-                                        type="text"
-                                        placeholder="Add a note for this payout"
-                                        className="w-full rounded-xl border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-                                        onChange={(e) => {
-                                            setNote(e.target.value)
-                                        }}
-                                    />
-                                </div>
-
-
-
-                                {releasebutton ? <ButtonSpinner></ButtonSpinner> : (<>
-
-
-                                    
-
-                                    {clinicstobepaid > 0 ? (<>
-                                        <button
-                                            disabled={releasebutton}
-                                            onClick={() => releaseFunds(item.clinic.stripeaccountid || "", item.id,item.clinic?.commission)}
-                                            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-xl transition shadow-sm">
-                                            Release Funds
-                                        </button>
-                                    </>) : (<>
-
-                                    </>)}
-                                </>)}
+                                                  placeholder="Enter amount"
+                                                  className="w-full rounded-xl border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                                                  onChange={(e) => {
+                                                      debugger;
+                                                      if (parseInt(clinicstobepaid) >= parseInt(e.target.value || 0)) {
+                                                          setAmount(e.target.value);
+                                                      }
+                                                      else {
+                                                          alert(`make payout enter amount within ${brazilianCurrency(clinicstobepaid)}`)
+                                                      }
+                                                  }}
+                                              />
+                                          </>)}
 
 
 
 
+                                      </div>
 
-                            </div>
-                        </div>
+                                      <div className="hidden">
+                                          <label className="block text-sm font-medium text-gray-600 mb-1">
+                                              Note (Optional)
+                                          </label>
+                                          <input
+                                              type="text"
+                                              placeholder="Add a note for this payout"
+                                              className="w-full rounded-xl border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                                              onChange={(e) => {
+                                                  setNote(e.target.value)
+                                              }}
+                                          />
+                                      </div>
+
+
+
+                                      {releasebutton ? <ButtonSpinner></ButtonSpinner> : (<>
+
+
+
+
+                                          {clinicstobepaid > 0 ? (<>
+                                              <button
+                                                  disabled={releasebutton}
+                                                  onClick={() => releaseFunds(item.clinic.stripeaccountid || "", item.id, item.clinic?.commission)}
+                                                  className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-xl transition shadow-sm">
+                                                  Release Funds
+                                              </button>
+                                          </>) : (<>
+
+                                          </>)}
+                                      </>)}
+
+
+
+
+
+                                  </div>
+                              </div>
+                          </>)}
 
                     <div className=" bg-white border border-gray-200 rounded-2xl shadow-sm p-5">
                               <h2 className="text-lg font-semibold text-gray-800 mb-4">Transfered Transactions</h2>
