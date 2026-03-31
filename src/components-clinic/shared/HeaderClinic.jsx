@@ -5,6 +5,7 @@ import { clinicLogout } from "../utils/clinicLogout";
 import NotificationUI from "@/components/NotificationListener/notificationListener";
 import Cookies from "js-cookie";
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 export function ClinicHeader({ onToggleSidebar = () => {} }) {
 
@@ -14,10 +15,13 @@ export function ClinicHeader({ onToggleSidebar = () => {} }) {
 
 
 
+    const searchParams = useSearchParams();
+    const hideSidebar = searchParams.get('hideSidebar');
 
 
-  return (
-    <header className="h-14 background-theme text-white flex items-center justify-between px-6 shadow w-full p-8">
+  return (<>
+    {!hideSidebar&& (<>
+        <header className="h-14 background-theme text-white flex items-center justify-between px-6 shadow w-full p-8">
       <button className="sm:hidden" onClick={onToggleSidebar}>
         <FaBars size={20} />
       </button>
@@ -34,5 +38,7 @@ export function ClinicHeader({ onToggleSidebar = () => {} }) {
         </button>
       </div>
     </header>
-  );
+      </>)}
+    
+  </>);
 }

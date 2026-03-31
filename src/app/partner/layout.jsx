@@ -50,9 +50,9 @@ export default function ClinicLayout({ children }) {
 
             
 
-            {!admin_login_clinic && (<>
+           
               <ClinicHeader onToggleSidebar={() => setMobileOpen(!mobileOpen)} />
-            </>)}
+         
 
             <ToastContainer></ToastContainer>
 
