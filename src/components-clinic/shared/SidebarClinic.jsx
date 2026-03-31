@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import {
@@ -80,10 +80,17 @@ export function ClinicSidebar({ collapsed, mobileOpen, active, setActive, toggle
 
 
 
+   const searchParams = useSearchParams();
+  const hideSidebar = searchParams.get('hideSidebar');
 
 
-  return (
-    <aside
+
+
+  return (<>
+   
+
+    {!hideSidebar && (
+         <aside
      id="clinic_sidebar"
       className={`
         bg-white border-r border-gray-200 flex flex-col
@@ -152,5 +159,6 @@ export function ClinicSidebar({ collapsed, mobileOpen, active, setActive, toggle
         <span className="text-[11px] mt-1">Help</span>
       </div>
     </aside>
-  );
+      )}
+  </>);
 }
