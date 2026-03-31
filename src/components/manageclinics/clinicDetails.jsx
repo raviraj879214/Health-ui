@@ -53,14 +53,17 @@ export function ClinicDetails({id}){
 
 
         {clinicswipe ? (<>
+
             <div className="mt-5 border rounded-lg overflow-hidden">
                 <iframe
-                    src={`${process.env.NEXT_PUBLIC_URL}/partner/clinic/${id}`}
+                    src={`${process.env.NEXT_PUBLIC_URL}/partner/clinic/${id}?hideSidebar=true`}
                     width="100%"
                     height="1000"
                     style={{ border: "none" }}
                     title="Clinic Iframe"></iframe>
             </div>
+
+
         </>):(<>
             <diV key={clinicswipe ? "iframe" : "admin"}>
                     <div className="p-3 flex justify-end">

@@ -84,6 +84,7 @@ export function ClinicSidebar({ collapsed, mobileOpen, active, setActive, toggle
 
   return (
     <aside
+     id="clinic_sidebar"
       className={`
         bg-white border-r border-gray-200 flex flex-col
         transition-all duration-300

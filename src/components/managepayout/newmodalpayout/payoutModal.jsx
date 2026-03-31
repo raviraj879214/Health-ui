@@ -609,24 +609,7 @@ const releasedPercent = Math.floor(((clinicspaid / clinicstobepaid) * 100));
 
                         
                           {availablebalance > clinicstobepaid ? (<>
-                              <div
-                                  style={{
-                                      padding: 15,
-                                      borderRadius: 8,
-                                      backgroundColor: "#fff3cd",
-                                      color: "#856404",
-                                      border: "1px solid #ffeeba",
-                                      maxWidth: 500
-                                  }}
-                              >
-                                  <strong>Insufficient Balance</strong>
-                                  <p style={{ margin: "8px 0 0" }}>
-                                      You don’t have enough available balance to release funds. Please check your
-                                      Stripe account for details.
-                                  </p>
-                              </div>
-                          </>) : (<>
-                              <div className=" bg-white border border-gray-200 rounded-2xl shadow-sm p-5 ">
+                           <div className=" bg-white border border-gray-200 rounded-2xl shadow-sm p-5 ">
                                   <h2 className="text-lg font-semibold text-gray-800 mb-4">Release Funds</h2>
 
                                   <div className="space-y-4">
@@ -708,6 +691,23 @@ const releasedPercent = Math.floor(((clinicspaid / clinicstobepaid) * 100));
 
 
                                   </div>
+                              </div>
+                             
+                          </>) : (<>
+                              <div
+                                  style={{
+                                      padding: 15,
+                                      borderRadius: 8,
+                                      backgroundColor: "#fff3cd",
+                                      color: "#856404",
+                                      border: "1px solid #ffeeba",
+                                      maxWidth: 500
+                                  }}>
+                                  <strong>Insufficient Balance </strong>
+                                  <p style={{ margin: "8px 0 0" }}>
+                                      You don’t have enough available balance to release funds. Please check your
+                                      Stripe account for details.
+                                  </p>
                               </div>
                           </>)}
 

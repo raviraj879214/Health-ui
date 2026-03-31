@@ -8,6 +8,7 @@ import "../partner/partner-global.css";
 import { ToastContainer } from "react-toastify";
 import  {ReduxPartnerProvider} from "../../components-clinic/redux/provider";
 import Cookies from "js-cookie";
+import { useSearchParams } from "next/navigation";
 
 
 
@@ -20,6 +21,10 @@ export default function ClinicLayout({ children }) {
 
    const admin_login_clinic = Cookies.get("admin_login_clinic");
 
+   const searchParams = useSearchParams();
+  const hideSidebar = searchParams.get('hideSidebar');
+
+
   return (
     
     <AuthClinic>
@@ -29,16 +34,19 @@ export default function ClinicLayout({ children }) {
         <ReduxPartnerProvider>
         
 
-          {!admin_login_clinic && (<>
-            <ClinicSidebar
+          {!hideSidebar && (<>
+
+            <ClinicSidebar 
               collapsed={collapsed}
               mobileOpen={mobileOpen}
               active={active}
               setActive={setActive}
               toggleMobile={setMobileOpen} />
+
           </>)}
 
 
+          
 
           <div className="flex-1 flex flex-col">
 
