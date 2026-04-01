@@ -12,7 +12,7 @@ export default function FreeQuote(){
                             <p>Get A Free Quote</p>
                         </div>
                     </div>
-                    <Link href="#" className="btn btn-secondary">Get A Free Quote</Link>
+                    <Link href={`${process.env.NEXT_PUBLIC_URL}/order-create/demo-id/demo-clinic`} className="btn btn-secondary">Get A Free Quote</Link>
                 </div>
             </div>
         </div>

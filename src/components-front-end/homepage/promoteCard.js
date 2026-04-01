@@ -8,7 +8,7 @@ export default function PromoteCard({ reverse = false, data = {}}){
         title = "",
         description = "",
         buttonText = "",
-        buttonLink = "#",
+        buttonLink = "/partner-register",
         image = "",
         imageAlt = "",
     } = data;

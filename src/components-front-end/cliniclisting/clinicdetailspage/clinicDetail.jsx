@@ -35,6 +35,7 @@ export function ClinicDetail({id}){
     { label: "Albert Einstein Israelite Hospital", href: null }, 
   ];
 
+
   
 
   const item = [
@@ -305,35 +306,39 @@ const groupSurgeryImages = (images = []) => {
                   <div className="treatment-packages border-b border-border py-7.5">
                     <h3 className="text-2xl mb-2.5 font-bold">Treatment Packages </h3>
                     <div className="grid md:grid-cols-2 grid-cols-1 gap-x-7.5 gap-y-3">
-                      {packages && packages.length > 0 ? (
-  packages.map((item) => (
-    <div
-      key={item.id}
-      className="w-full flex justify-between items-center gap-5"
-    >
-      {/* Package Title */}
-      <div className="mb-0">
-        {item.title}
-      </div>
+                    {packages && packages.length > 0 ? (
+                      packages.map((item) => (
+                        <div
+                          key={item.id}
+                          className="w-full flex justify-between items-center gap-5"
+                          
+                        >
+                          {/* Package Title */}
+                          <div
+                            className="mb-0 cursor-pointer hover:underline"
+                            onClick={() => router.push(`/package-info/${id}?packid=${item.id}`)}
+                          >
+                            {item.title}
+                          </div>
 
-      {/* Price */}
-      <div className="mb-0 font-bold">
-        
-         {brazilianCurrency(item.discountedprice)}
-        {item.actualprice !== item.discountedprice && (
-          <span className="text-gray-400 line-through ml-2 text-sm">
-            {brazilianCurrency(item.actualprice)}
-          </span>
-        )}
-      </div>
-    </div>
-  ))
-) : (
-  <div className="w-full flex justify-between items-center gap-5">
-    <div className="mb-0">No Packages Found</div>
-   
-  </div>
-)}
+                          {/* Price */}
+                          <div className="mb-0 font-bold">
+
+                            {brazilianCurrency(item.discountedprice)}
+                            {item.actualprice !== item.discountedprice && (
+                              <span className="text-gray-400 line-through ml-2 text-sm">
+                                {brazilianCurrency(item.actualprice)}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="w-full flex justify-between items-center gap-5">
+                        <div className="mb-0">No Packages Found</div>
+
+                      </div>
+                    )}
 
 
                      

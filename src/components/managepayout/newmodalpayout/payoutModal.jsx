@@ -854,9 +854,9 @@ const releasedPercent = Math.floor(((clinicspaid / clinicstobepaid) * 100));
 
                                                       {/* Note */}
                                                       <div className="bg-gray-50 border rounded-lg p-3">
-                                                          <p className="text-xs text-gray-500 mb-1">Note</p>
+                                                          <p className="text-xs text-gray-500 mb-1">Note From Clinic</p>
                                                           <p className="break-words text-sm text-gray-700">
-                                                              {item.message}
+                                                              {item.message || "--"}
                                                           </p>
                                                       </div>
 
