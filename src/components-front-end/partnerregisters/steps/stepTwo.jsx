@@ -219,7 +219,7 @@ const getFullOtp = () => { return inputsRef.current .slice(0, OTP_LENGTH) .map(i
 const  onOtpComplete = async (otp) => {
   debugger;
 
-  if(otp === savedotp || "0000"){
+  if(otp === savedotp){
     
         const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/partner-register/verify-otp-phone`,{
             method : "Post",
