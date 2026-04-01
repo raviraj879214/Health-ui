@@ -401,7 +401,7 @@ const groupSurgeryImages = (images = []) => {
                           </p>
                         </div>
 
-                        <a href="#" class="btn btn-secondary md:px-5 md:py-2 px-3 py-1.5">
+                        <a href={`/doctor-info/${doc.doctors.uuid}`} class="btn btn-secondary md:px-5 md:py-2 px-3 py-1.5">
                           View Profile
                         </a>
                       </div>

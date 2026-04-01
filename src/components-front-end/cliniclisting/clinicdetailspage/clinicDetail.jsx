@@ -145,6 +145,7 @@ export function ClinicDetail({id}){
       description: doctor.briefDescription
         ? doctor.briefDescription.replace(/<[^>]+>/g, "")
         : "No description available",
+        uuid:doctor.uuid
     });
   });
 
