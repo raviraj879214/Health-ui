@@ -392,7 +392,7 @@ const groupSurgeryImages = (images = []) => {
                          
                           <h4 class="font-bold mb-1.5 h4">Dr. {doc.doctors.firstname} {doc.doctors.lastname}</h4>
                           <p class="text-primary font-bold mb-2">{doc.doctors.degree}</p>
-                          <p class="">
+                          <p class="line-clamp-2">
                             
                             <div
                               className="text-gray-600 prose prose-sm max-w-none"
@@ -413,8 +413,8 @@ const groupSurgeryImages = (images = []) => {
                 </>)}
                  
     
-                  
-                <div className="before-surgery border-b border-border py-7.5">
+                  {surgeryimages.length > 0 &&(<>
+                    <div className="before-surgery border-b border-border py-7.5">
                   <h3 className="text-2xl mb-2.5 font-bold">Before and After Surgery</h3>
 
                   <div className="swiper before-surgery-slider pagination-secondary">
@@ -526,6 +526,8 @@ const groupSurgeryImages = (images = []) => {
 
 
                 </div>
+                  </>)}
+                
      
                
                  
