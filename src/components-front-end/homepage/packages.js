@@ -58,9 +58,8 @@ export default function Packages(){
                     <div className="swiper-wrapper">
                         {treatmentPackages.map((card) => (
                             <div className="swiper-slide h-auto!" key={card.id}>
-                                <PackageCard 
-                                    data={card}
-                                />
+                                {JSON.stringify(card.homepagefeatures)}
+                                <PackageCard data={card}/>
                             </div>
                         ))}
                     </div>

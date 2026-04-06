@@ -14,7 +14,7 @@ export default function Listing() {
   return (
     <>
 
-    <ClinicListing></ClinicListing>
+        <ClinicListing></ClinicListing>
      
     </>
   );

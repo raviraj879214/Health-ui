@@ -4,7 +4,8 @@ import { brazilianCurrency } from "@/lib/brazilianCurrency";
 
 
 export default function PackageCard({ data }){
-    return (
+    return (<>
+   
         <div className={`border md:pt-10 md:pb-7.5 md:px-7.5 px-5 pt-8 pb-5 rounded-thm h-full relative flex flex-col items-start border-border`}>
             {data.popular && (
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-thm-yellow text-white px-3 py-1 rounded-full">
@@ -27,6 +28,8 @@ export default function PackageCard({ data }){
                 
             </div>
             <Link href="#" className="btn btn-secondary w-full mt-auto">Book Your Appointment</Link>
+            
         </div>
-    )
+        
+   </>)
 }
