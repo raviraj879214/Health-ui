@@ -348,7 +348,7 @@ const queryDetailsSet = (data) => {
                                             </div>
 
                                             {/* Description */}
-                                            <div className="truncate">
+                                            <div className="">
                                                 {item.description || "-"}
                                             </div>
 
