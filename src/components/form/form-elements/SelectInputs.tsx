@@ -44,6 +44,7 @@ export default function SelectInputs() {
             </span>
          </div>
         </div>
+        
         <div className="relative">
           <MultiSelect
             label="Multiple Select Options"

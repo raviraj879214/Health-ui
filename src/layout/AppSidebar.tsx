@@ -286,16 +286,25 @@ const AppSidebar: React.FC = () => {
         (
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
             xmlns="http://www.w3.org/2000/svg">
-            <circle cx="10" cy="12" r="6" stroke="currentColor" stroke-width="2" />
-            <path d="M18 8V4M18 4L15 7M18 4L21 7"
-              stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round" />
+
+
+            <rect x="9" y="4" width="6" height="16" rx="1" fill="currentColor" />
+            <rect x="4" y="9" width="16" height="6" rx="1" fill="currentColor" />
+
+
+            <circle cx="18" cy="18" r="4" stroke="currentColor" stroke-width="2" />
+            <path d="M18 16.5V19.5M16.5 18H19.5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round" />
+
           </svg>
 
         ),
       name: "Additional Services",
       path: "/admin/additional-services",
     },
+    
     {
       icon:
         (
