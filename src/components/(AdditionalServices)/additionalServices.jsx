@@ -89,7 +89,7 @@ export function AdditionalServices(){
                  "patientQueryId": patientQueryId,
                  "name": name,
                  "amount": amount,
-                 "description": `Description : ${descriptiond}`
+                 "description": `${name} Description : ${descriptiond}`
              })
          });
         if(res.ok){
@@ -101,10 +101,27 @@ export function AdditionalServices(){
         }
     }
 
+const queryDetailsSet = (data) => {
+    console.log("queryDetailsSet", data);
+
+    // Only update if the patientQueryId matches the current querydetails.id
+    if (querydetails.id === data.patientQueryId) {
+        setQueryDetails(prev => ({
+            ...prev,
+            AdditionalServices: [
+                ...(prev.AdditionalServices || []),
+                data
+            ]
+        }));
+    }
+};
+
+    
 
     
 
     return(<>
+
         <div className="grid grid-cols-12 gap-4">
             <div className="col-span-12 sm:col-span-12 space-y-5 sm:space-y-6">
                 <ComponentCard title="Patient Queries" desc="" showReload={true}>
@@ -217,12 +234,12 @@ export function AdditionalServices(){
 
                         {Object.keys(querydetails).length > 0 && (<>
                             <hr></hr>
-                            <AddOnServices data={querydetails.AdditionalServices} patientquerid={querydetails.id} additioanpayment={additionalservicespaymetndetails.length || 0} />
-
+                            <AddOnServices data={querydetails.AdditionalServices} patientquerid={querydetails.id} additioanpayment={additionalservicespaymetndetails.length || 0} onReturn={(data)=> queryDetailsSet(data)} />
                         </>)}
 
 
-                        {Object.keys(querydetails).length > 0 && (<>
+                            
+                        {querydetails?.AdditionalServices?.length > 0 && (<>
                             <hr></hr>
                             <div className="bg-white p-6 rounded-2xl shadow-md">
                             <div
@@ -245,7 +262,7 @@ export function AdditionalServices(){
 
                                         <div className="space-y-1">
                                             {querydetails.AdditionalServices.map((item) => (
-                                                <p>{item.label}</p>
+                                                <p key={item.id}>{item.label}</p>
                                             ))}
                                         </div>
 

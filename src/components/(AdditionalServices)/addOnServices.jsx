@@ -10,14 +10,17 @@ import { toast, ToastContainer } from "react-toastify";
 
 
 
-export function AddOnServices({data,patientquerid,additioanpayment}){
+export function AddOnServices({data,patientquerid,additioanpayment,onReturn}){
 const [isOpen, setIsOpen] = useState(false);
 
     const  [services,setServices] = useState([]);
 
 
     useEffect(()=>{
-        setServices(data);
+       
+        if(data){
+             setServices(data);
+        }
     },[data]);
 
 
@@ -42,6 +45,7 @@ const [isOpen, setIsOpen] = useState(false);
                 ...prev,
                 result.data
              ]);
+             onReturn(result.data);
              toast.success("Service created successfully",{
                 position : "bottom-right",
                 autoClose : 3000
