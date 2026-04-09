@@ -118,6 +118,18 @@ const queryDetailsSet = (data) => {
 
     
 
+const [copied, setCopied] = useState(false);
+
+  const handleCopy = async (paymentLink) => {
+    try {
+      await navigator.clipboard.writeText(paymentLink);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error("Copy failed", err);
+    }
+  };
+
     
 
     return(<>
@@ -329,11 +341,27 @@ const queryDetailsSet = (data) => {
                                             className="grid grid-cols-4 items-center text-sm text-gray-700 mb-2"
                                         >
                                             {/* Link */}
-                                            <div className="truncate text-blue-600">
-                                                <a href={item.paymentLink} target="_blank" rel="noopener noreferrer">
-                                                    View Link
-                                                </a>
-                                            </div>
+                                             <div className="flex items-center gap-3 truncate text-blue-600">
+      {/* Open link */}
+      <a
+        href={item.paymentLink}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="hover:underline"
+      >
+        View Link
+      </a>
+
+      {/* Copy button */}
+      <button
+        onClick={()=>handleCopy(item.paymentLink)}
+        className="text-sm text-gray-500 hover:text-black"
+      >
+        {copied ? "Copied!" : "Copy"}
+      </button>
+    </div>
+
+
                                             <div className="truncate text-blue-600">
                                                 {brazilianCurrency(item.amount)}
                                             </div>
