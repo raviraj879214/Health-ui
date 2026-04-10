@@ -27,6 +27,8 @@ export function AdditionalServices(){
 
     const [additionalservicespaymetndetails,setAdditionalServicesPaymetnDetails] = useState([]);
 
+    const [additionalserviceslist,setAdditionalServicesList] = useState([]);
+
 
     useEffect(()=>{
         fetchPatientQuery();
@@ -50,6 +52,10 @@ export function AdditionalServices(){
                 AdditionalServicesPaymetnDetails: item.AdditionalServicesPaymetnDetails
             }));
             setPatinetQueryCode(patientCode);
+
+            setAdditionalServicesList(result.additionalServicesList);
+
+
 
 
             
@@ -246,7 +252,7 @@ const [copied, setCopied] = useState(false);
 
                         {Object.keys(querydetails).length > 0 && (<>
                             <hr></hr>
-                            <AddOnServices data={querydetails.AdditionalServices} patientquerid={querydetails.id} additioanpayment={additionalservicespaymetndetails.length || 0} onReturn={(data)=> queryDetailsSet(data)} />
+                            <AddOnServices data={querydetails.AdditionalServices} patientquerid={querydetails.id} additioanpayment={additionalservicespaymetndetails.length || 0} onReturn={(data)=> queryDetailsSet(data)} additionalserviceslist={additionalserviceslist} />
                         </>)}
 
 

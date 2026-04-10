@@ -10,7 +10,7 @@ import { toast, ToastContainer } from "react-toastify";
 
 
 
-export function AddOnServices({data,patientquerid,additioanpayment,onReturn}){
+export function AddOnServices({data,patientquerid,additioanpayment,onReturn,additionalserviceslist}){
 const [isOpen, setIsOpen] = useState(false);
 
     const  [services,setServices] = useState([]);
@@ -62,7 +62,7 @@ const [isOpen, setIsOpen] = useState(false);
     return(<>
     
         <div className="bg-white p-6 rounded-2xl shadow-md">
-
+                
             <ToastContainer></ToastContainer>
             <div className="flex justify-between items-center mb-6">
                 <h2 className="text-xl font-semibold">Additional Services</h2>
@@ -89,18 +89,53 @@ const [isOpen, setIsOpen] = useState(false);
 
 
                     <form onSubmit={handleSubmit(onCreate)}>
-                                                <div className="mb-4">
-                        <label className="block text-sm font-semibold mb-1">
-                            Service Name
-                        </label>
-                        <input
-                            type="text"
-                            placeholder="Enter service name"
-                            className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            {...register("service",{required :"Please enter service"})}
-                        />
-                        {errors.service &&(<p className="text-red-400">{errors.service.message}</p>)}
-                    </div>
+
+
+                        <div className="mb-4">
+                            <label className="block text-sm font-semibold text-gray-700 mb-1">
+                                Select Services (Optional)
+                            </label>
+                            <select
+                                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm bg-white
+                                focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+
+                                onChange={(data)=>{
+                                   
+                                    const selectedservice = additionalserviceslist.find(x=>x.id === data.target.value);
+                                    console.log("select services",selectedservice);
+
+                                    setValue("service",selectedservice.label);
+                                    setValue("description",selectedservice.value);
+                                    setValue("price",selectedservice.price);
+
+                                }}
+                                
+                                >
+                                <option value="">Select Service</option>
+                               
+                                {additionalserviceslist.map((item)=>(
+                                    <option value={`${item.id}`}>{item.label}</option>
+                                ))}
+                            </select>
+                        </div>
+
+
+
+                        <div className="mb-4">
+
+
+
+                            <label className="block text-sm font-semibold mb-1">
+                                Service Name
+                            </label>
+                            <input
+                                type="text"
+                                placeholder="Enter service name"
+                                className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                {...register("service", { required: "Please enter service" })}
+                            />
+                            {errors.service && (<p className="text-red-400">{errors.service.message}</p>)}
+                        </div>
 
                     <div className="mb-4">
                         <label className="block text-sm font-semibold mb-1">
