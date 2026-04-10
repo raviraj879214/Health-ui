@@ -337,10 +337,9 @@ const releasedPercent = Math.floor(((clinicspaid / clinicstobepaid) * 100));
           className="mb-4 transition-all hover:shadow-lg ">
             
               <div
-                  className={`flex items-center justify-between w-full
-                     ${item.status !== PatientQueryStatus.PENDING
-                          ? "cursor-pointer"
-                          : "cursor-not-allowed opacity-50"}`}
+                // ${item.status !== PatientQueryStatus.PENDING ? "cursor-pointer" : "cursor-not-allowed opacity-50"}
+                  className={`flex items-center justify-between w-full`}
+                          
                     onClick={() => {
                         if (item.status !== PatientQueryStatus.PENDING) {
                             toggleAccordion(item.id);
