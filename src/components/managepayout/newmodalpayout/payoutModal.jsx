@@ -341,8 +341,10 @@ const releasedPercent = Math.floor(((clinicspaid / clinicstobepaid) * 100));
                   className={`flex items-center justify-between w-full`}
                           
                     onClick={() => {
-                        if (item.status !== PatientQueryStatus.PENDING) {
-                            toggleAccordion(item.id);
+                        // if (item.status !== PatientQueryStatus.PENDING) {
+                            
+                        // }
+                        toggleAccordion(item.id);
 
                             setAccordianOpen({
                                 patientqueryid : item.id,
@@ -350,7 +352,6 @@ const releasedPercent = Math.floor(((clinicspaid / clinicstobepaid) * 100));
                             });
 
                             fetchTrransaction(item.id, item.clinic?.commission);
-                        }
                     }}
                   
                   >
