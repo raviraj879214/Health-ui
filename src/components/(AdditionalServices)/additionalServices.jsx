@@ -81,10 +81,10 @@ export function AdditionalServices(){
         0
     );
 
-    const descriptiond = querydetails?.AdditionalServices?.map(item => item.label).join(', ');
+    const descriptiond = querydetails?.AdditionalServices?.filter(x=>x.status === 0).map(item => item.label).join(', ');
 
 
-     const generatePaymentLink = async(name,amount,description,patientQueryId)=>{
+     const generatePaymentLink = async(name,amount,description,patientQueryId,additionids = [])=>{
         debugger;
          const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/payments/create-additional-cost-payemtn-link`, {
              method: "Post",
@@ -95,7 +95,8 @@ export function AdditionalServices(){
                  "patientQueryId": patientQueryId,
                  "name": name,
                  "amount": amount,
-                 "description": `${name} Description : ${descriptiond}`
+                 "description": `${name} Description : ${descriptiond}`,
+                 "additionids" : additionids
              })
          });
         if(res.ok){
@@ -104,6 +105,14 @@ export function AdditionalServices(){
                 ...prev,
                 result.AdditionalServicesPaymetnDetails
             ]);
+            setQueryDetails((prev) => ({
+                ...prev,
+                AdditionalServices: prev.AdditionalServices.map((item) =>
+                    additionids.includes(item.id)
+                        ? { ...item, status: 1 } 
+                        : item
+                ),
+            }));
         }
     }
 
@@ -124,19 +133,54 @@ const queryDetailsSet = (data) => {
 
     
 
-const [copied, setCopied] = useState(false);
+const [copiedId, setCopiedId] = useState(null);
 
-  const handleCopy = async (paymentLink) => {
-    try {
-      await navigator.clipboard.writeText(paymentLink);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error("Copy failed", err);
+const handleCopy = async (paymentLink, id) => {
+  try {
+    await navigator.clipboard.writeText(paymentLink);
+    setCopiedId(id);
+
+    setTimeout(() => setCopiedId(null), 2000);
+  } catch (err) {
+    console.error("Copy failed", err);
+  }
+};
+
+
+
+    const onUpdateAdditionalServices = async (data) => {
+    
+
+        console.log("onUpdateAdditionalServices",data);
+
+        setQueryDetails(prev => ({
+  ...prev,
+  AdditionalServices: prev.AdditionalServices.map(x =>
+    x.id === data.id
+      ? {
+          ...x,
+          label: data.label,
+          value: data.value,
+          price: data.price
+        }
+      : x
+  )
+}));
+ 
+
     }
-  };
 
     
+
+    const deleteServices = async(id)=>{
+
+        setQueryDetails(prev => ({
+    ...prev,
+    AdditionalServices: prev.AdditionalServices.filter(x => x.id !== id)
+  }));
+
+    }
+
 
     return(<>
 
@@ -252,12 +296,12 @@ const [copied, setCopied] = useState(false);
 
                         {Object.keys(querydetails).length > 0 && (<>
                             <hr></hr>
-                            <AddOnServices data={querydetails.AdditionalServices} patientquerid={querydetails.id} additioanpayment={additionalservicespaymetndetails.length || 0} onReturn={(data)=> queryDetailsSet(data)} additionalserviceslist={additionalserviceslist} />
+                            <AddOnServices data={querydetails.AdditionalServices} patientquerid={querydetails.id} additioanpayment={additionalservicespaymetndetails.length || 0} onReturn={(data)=> queryDetailsSet(data)} additionalserviceslist={additionalserviceslist} onUpdateData={(data)=> onUpdateAdditionalServices(data)} onDeleteData={(id)=> deleteServices(id)} />
                         </>)}
 
 
                             
-                        {querydetails?.AdditionalServices?.length > 0 && (<>
+                        {querydetails?.AdditionalServices?.filter(x=>x.status === 0).length > 0 && (<>
                             <hr></hr>
                             <div className="bg-white p-6 rounded-2xl shadow-md">
                             <div
@@ -267,38 +311,34 @@ const [copied, setCopied] = useState(false);
                                 </h3>
 
                                 <div className="border rounded-lg p-4 bg-white shadow-sm">
-
-
                                     <div className="grid grid-cols-3 font-semibold text-gray-600 border-b pb-2 mb-3">
                                         <div>Services</div>
                                         <div>Total Cost</div>
                                         <div className="text-right">Action</div>
                                     </div>
-
-
                                     <div className="grid grid-cols-3 items-center text-sm text-gray-700">
 
                                         <div className="space-y-1">
-                                            {querydetails.AdditionalServices.map((item) => (
+                                            {querydetails?.AdditionalServices?.filter(x=>x.status === 0).map((item) => (
                                                 <p key={item.id}>{item.label}</p>
                                             ))}
                                         </div>
 
                                         <div>
                                             <p className="text-lg font-bold text-green-600">
-                                                {brazilianCurrency(totalAdditionalCost)}
+                                                {brazilianCurrency(querydetails?.AdditionalServices?.filter(x=>x.status === 0).reduce((sum, item) => sum + Number(item.price || 0),0))}
                                             </p>
                                         </div>
 
                                         <div className="text-right">
                                             
 
-                                            {additionalservicespaymetndetails.length === 0 ? (<>
+                                            {/* {additionalservicespaymetndetails.length === 0 ? (<>
                                                 <button
                                             onClick={()=>{
                                                 generatePaymentLink(
                                                 `${querydetails.querycode} - Additional Cost`,
-                                                totalAdditionalCost,
+                                                querydetails?.AdditionalServices?.filter(x=>x.paymentstatus === 0).reduce((sum, item) => sum + Number(item.price || 0),0),
                                                 `Additional services payment for ${querydetails.querycode}`,
                                                 querydetails.id
                                                 );
@@ -306,14 +346,37 @@ const [copied, setCopied] = useState(false);
                                             
                                             className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">
                                                 Generate Link
-                                            </button>
+                                                </button>
                                             </>):(<>
                                                 <span>Link Generated</span>
-                                            </>)}
+                                            </>)} */}
+
+
+                                            <button
+                                                onClick={() => {
+                                                     const pendingServices = querydetails?.AdditionalServices?.filter(x => x.status === 0);
+                                                     const additionIds = pendingServices.map(item => item.id);
+
+                                                    generatePaymentLink(
+                                                        `${querydetails.querycode} - Additional Cost`,
+                                                        querydetails?.AdditionalServices?.filter(x => x.status === 0).reduce((sum, item) => sum + Number(item.price || 0), 0),
+                                                        `Additional services payment for ${querydetails.querycode}`,
+                                                        querydetails.id,
+                                                        additionIds
+                                                    );
+                                                }}
+
+                                                className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">
+                                                Generate Link
+                                                
+                                            </button>
+
+
                                         </div>
                                     </div>
-
                                 </div>
+
+
                             </div>
 
                         </div>
@@ -347,25 +410,25 @@ const [copied, setCopied] = useState(false);
                                             className="grid grid-cols-4 items-center text-sm text-gray-700 mb-2"
                                         >
                                             {/* Link */}
-                                             <div className="flex items-center gap-3 truncate text-blue-600">
-      {/* Open link */}
-      <a
-        href={item.paymentLink}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="hover:underline"
-      >
-        View Link
-      </a>
+                                            <div className="flex items-center gap-3 truncate text-blue-600">
+                                                {/* Open link */}
+                                                <a
+                                                    href={item.paymentLink}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="hover:underline"
+                                                >
+                                                    Open Link
+                                                </a>
 
-      {/* Copy button */}
-      <button
-        onClick={()=>handleCopy(item.paymentLink)}
-        className="text-sm text-gray-500 hover:text-black"
-      >
-        {copied ? "Copied!" : "Copy"}
-      </button>
-    </div>
+                                                {/* Copy button */}
+                                                <button
+                                                    onClick={() => handleCopy(item.paymentLink, item.id)}
+                                                    className="text-sm text-gray-500 hover:text-black"
+                                                >
+                                                    {copiedId === item.id ? "Copied!" : "Copy"}
+                                                </button>
+                                            </div>
 
 
                                             <div className="truncate text-blue-600">
@@ -383,7 +446,7 @@ const [copied, setCopied] = useState(false);
 
                                             {/* Description */}
                                             <div className="">
-                                                {item.description || "-"}
+                                                <b>{item.description || "-"}</b>
                                             </div>
 
                                             {/* Date */}

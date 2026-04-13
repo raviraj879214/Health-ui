@@ -18,7 +18,7 @@ export default function Page(){
      <PageBreadcrumb pageTitle="Additional Services" />
 
     
-    <AdditionalServices />
+     <AdditionalServices />
     
     </>);
 }
