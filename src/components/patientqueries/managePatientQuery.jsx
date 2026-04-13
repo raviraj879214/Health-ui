@@ -356,21 +356,77 @@ export function ManagePatientQueries() {
 
 
 
-                  <TableCell className="px-5 py-4 font-medium">
-                    {q.patientName}
+                  <TableCell className="px-5 py-4">
+                    
+                    <div className="font-medium text-gray-800">
+                      {q.patientName}
+                    </div>
 
-
-                    <p className="text-sm">
+                    {/* Contact Info */}
+                    <div className="mt-1 text-sm text-gray-600">
                       {q.phoneNumber || q.email ? (
                         <>
-                          {q.phoneNumber !== "0" && <div>{q.phoneNumber}</div>}
-                          {q.email && <div className="text-xs">{q.email}</div>}
+                          {q.phoneNumber !== "0" && (
+                            <div className="flex items-center gap-2">
+                              <span className="text-gray-400">📞</span>
+                              <span>{q.phoneNumber}</span>
+                            </div>
+                          )}
+                          {q.email && (
+                            <div className="flex items-center gap-2 text-xs">
+                              <span className="text-gray-400">✉️</span>
+                              <span>{q.email}</span>
+                            </div>
+                          )}
                         </>
                       ) : (
-                        <div className="text-red-500 text-sm">Not Verified</div>
+                        <div className="text-red-500 text-xs font-medium">
+                          Not Verified
+                        </div>
                       )}
+                    </div>
 
-                    </p>
+               
+                    <div className="my-3 border-t"></div>
+
+                
+                    
+
+                 {q.AdditionalServices?.length > 0 && (
+  <details className="bg-gray-50 border rounded-lg p-3 group">
+    
+    {/* Header */}
+    <summary className="flex justify-between items-center cursor-pointer list-none">
+      <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
+        Additional Services ({q.AdditionalServices.length})
+      </span>
+
+      {/* Arrow */}
+      <span className="text-gray-500 text-sm transition-transform duration-300 group-open:rotate-180">
+        ▼
+      </span>
+    </summary>
+
+    {/* Content */}
+    <div className="mt-3 flex flex-wrap gap-2 transition-all duration-300">
+      {q.AdditionalServices.map((service) => (
+        <div
+          key={service.id}
+          className="flex items-center gap-2 bg-white border px-3 py-1.5 rounded-full shadow-sm"
+        >
+          <span className="w-5 h-5 flex items-center justify-center bg-green-100 text-green-600 rounded-full text-xs">
+            ✔
+          </span>
+
+          <span className="text-sm text-gray-700 font-medium">
+            {service.label}
+          </span>
+        </div>
+      ))}
+    </div>
+
+  </details>
+)}
                   </TableCell>
 
 

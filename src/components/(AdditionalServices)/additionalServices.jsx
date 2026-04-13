@@ -10,6 +10,8 @@ import { formatBrazilDate } from "@/lib/formatDate";
 import Button from "../ui/button/Button";
 import {AddOnServices} from "./addOnServices";
 import { brazilianCurrency } from "@/lib/brazilianCurrency";
+import { Trash2 } from "lucide-react";
+import { toast, ToastContainer } from "react-toastify";
 
 
 
@@ -182,8 +184,48 @@ const handleCopy = async (paymentLink, id) => {
     }
 
 
-    return(<>
 
+    const deletePaymentLink = async (id) => {
+        debugger;
+        const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/additonal-services/delete-paymentlink/${id}`, {
+            method: "Delete",
+            headers: await adminHeaders()
+        });
+        if (res.ok) {
+            const result = await res.json();
+
+            setAdditionalServicesPaymetnDetails(prev =>
+                prev.filter(x => x.id !== id)
+            );
+
+            console.log("additionids",result.additionids);
+    
+
+
+             toast.success("Payment link deleted successfully",{
+                            position : "bottom-right",
+                            autoClose : 3000
+                    });
+
+
+            result.additionids.map((item)=>{
+                setQueryDetails(prev => ({
+                    ...prev,
+                    AdditionalServices: prev.AdditionalServices.filter(x => x.id !== item)
+                }));
+            })
+               
+
+        }
+
+
+    }   
+
+
+
+
+    return(<>
+        <ToastContainer />
         <div className="grid grid-cols-12 gap-4">
             <div className="col-span-12 sm:col-span-12 space-y-5 sm:space-y-6">
                 <ComponentCard title="Patient Queries" desc="" showReload={true}>
@@ -395,19 +437,20 @@ const handleCopy = async (paymentLink, id) => {
                                 <div className="border rounded-lg p-4 bg-white shadow-sm">
 
                                     {/* Header */}
-                                    <div className="grid grid-cols-4 font-semibold text-gray-600 border-b pb-2 mb-3">
+                                    <div className="grid grid-cols-6 font-semibold text-gray-600 border-b pb-2 mb-3">
                                         <div>Payment Link</div>
                                         <div>Amount</div>
                                         <div>Status</div>
                                         <div>Description</div>
                                         <div>Date</div>
+                                        <div>Action</div>
                                     </div>
 
                                     {/* Data */}
                                     {additionalservicespaymetndetails?.map((item, index) => (
                                         <div
                                             key={index}
-                                            className="grid grid-cols-4 items-center text-sm text-gray-700 mb-2"
+                                            className="grid grid-cols-6 items-center text-sm text-gray-700 mb-2"
                                         >
                                             {/* Link */}
                                             <div className="flex items-center gap-3 truncate text-blue-600">
@@ -453,6 +496,18 @@ const handleCopy = async (paymentLink, id) => {
                                             <div>
                                                 {formatBrazilDate(item.createdAt)}
                                             </div>
+                                            
+                                            <div className="cursor-pointer">
+                                                
+
+                                                {item.status === 1 ? (
+                                                    <span className="text-green-600 font-medium">--</span>
+                                                ) : (
+                                                    <Trash2 size={18} onClick={() => deletePaymentLink(item.id)} />
+                                                )}
+                                            </div>
+                                            
+
                                         </div>
                                     ))}
 
