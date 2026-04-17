@@ -1,5 +1,5 @@
 "use client"
-import { useDispatch, useSelector } from "react-redux";
+import { Provider, useDispatch, useSelector } from "react-redux";
 import { addmedicalCordinatorID, addStep, addTreatmentID, clearAll, clearAllPatientQuery, clearPrevious, clearStep, clearTreatmentID, customStep, prevStep, setStep } from "../redux/patinetquery/patientQueryRedux";
 import { SelectTreatment } from "./component/selectTreatment";
 import { SelectedTreatment } from "./component/selectedTreatment";
@@ -47,9 +47,16 @@ export function MainPatinetQuery({ id, name }) {
             const procedureTimevalue = useSelector((state) => state.patientquery.procedureTimevalue);
             const medicalcordinatorIDdd = useSelector((state) => state.patientquery.medicalCordinatorID);
             const phoneNumber = useSelector((state) => state.patientquery.phoneNumber);
+            const whatsappNumber = useSelector((state) => state.patientquery.whatsappNumber);
+            const telegramUsername = useSelector((state) => state.patientquery.telegramUsername);
             const termsCondition = useSelector((state) => state.patientquery.termsCondition);
             const phoneNumberVerified = useSelector((state) => state.patientquery.phoneNumberVerified);
+            const telegramUsernameVerified = useSelector((state) => state.patientquery.telegramUsernameVerified);
+            const whatsappNumberVerified = useSelector((state) => state.patientquery.whatsappNumberVerified);
             const whattmattermostid = useSelector((state) => state.patientquery.whattmattermostid);
+            const provider = useSelector((state) => state.patientquery.provider);
+
+            const emailverified = useSelector((state) => state.patientquery.emailverified);
            
 
 
@@ -125,6 +132,9 @@ export function MainPatinetQuery({ id, name }) {
       patientName: patientName,
       email: patientEmail,
       phoneNumber: phoneNumber,
+      telegramUsername: telegramUsername,
+      whatsappNumber: whatsappNumber,
+      provider: provider,
       message: "",
       treatmentName: treatmentName,
       whatMatterMostName: whattmattermostname,
@@ -262,7 +272,7 @@ export function MainPatinetQuery({ id, name }) {
 
 
                 
-                {(PatientQueryQuestion.PATIENTEMAIL === step ) && (<>
+                {(PatientQueryQuestion.PATIENTEMAIL === step && emailverified == 0) && (<>
                   <button
                     className="btn btn-primary rounded-4xl bg-red-400 px-6 py-2"
                     onClick={() => dispatch(addStep()) }
@@ -280,15 +290,16 @@ export function MainPatinetQuery({ id, name }) {
                       </div>
 
 
-                    ) : (
+                    ) : (<>
 
-                      "Skip"
+                      Skip
 
-                    )}
+                   </>)}
                   </button>
                 </>)}
 
-                {(PatientQueryQuestion.PATIENTPHONENUMBER === step) && (<>
+                {(PatientQueryQuestion.PATIENTPHONENUMBER === step && phoneNumberVerified == 0) && (<>
+                  
                   <button
                     className="btn btn-primary rounded-4xl bg-red-400 px-6 py-2"
                     onClick={() => dispatch(addStep())}
@@ -306,15 +317,16 @@ export function MainPatinetQuery({ id, name }) {
                       </div>
 
 
-                    ) : (
+                    ) : (<>
 
-                      "Skip"
+                      Skip
 
-                    )}
+                   </> )}
                   </button>
+                        
                 </>)}
-
-                {(termsCondition === "1" && PatientQueryQuestion.PATIENTNONVERIFIEDSUCCESSPAGE !== step && PatientQueryQuestion.PATIENTVERIFIEDSUCCESSPAGE != step ) &&(<>
+                     
+                {(termsCondition == 1 && PatientQueryQuestion.PATIENTTERMSCONDITION == step) && (<>
 
                     <button
                     className="btn btn-primary"

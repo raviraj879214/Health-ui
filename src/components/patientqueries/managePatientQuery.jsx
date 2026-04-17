@@ -364,14 +364,8 @@ export function ManagePatientQueries() {
 
                     {/* Contact Info */}
                     <div className="mt-1 text-sm text-gray-600">
-                      {q.phoneNumber || q.email ? (
+                      {q.email && (
                         <>
-                          {q.phoneNumber !== "0" && (
-                            <div className="flex items-center gap-2">
-                              <span className="text-gray-400">📞</span>
-                              <span>{q.phoneNumber}</span>
-                            </div>
-                          )}
                           {q.email && (
                             <div className="flex items-center gap-2 text-xs">
                               <span className="text-gray-400">✉️</span>
@@ -379,11 +373,36 @@ export function ManagePatientQueries() {
                             </div>
                           )}
                         </>
-                      ) : (
-                        <div className="text-red-500 text-xs font-medium">
-                          Not Verified
-                        </div>
                       )}
+                      {q.phoneNumber && (<>
+                        {q.phoneNumber !== "0" && (
+                          <div className="flex items-center gap-2">
+
+                            <span>{q.provider === "sms" && (
+                              <span className="text-blue-500">SMS</span>
+                            )}
+
+                              {q.provider === "whatsapp" && (
+                                <span className="text-green-500">WhatsApp</span>
+                              )} : {q.phoneNumber}</span>
+                          </div>
+                        )}
+                      </>)}
+
+                      {q.telegramUsername && (<>
+                        {q.telegramUsername !== "0" && (
+                          <div className="flex items-center gap-2">
+
+                            <span>
+
+                              {q.provider === "telegram" && (
+                                <span className="text-green-500">Telegram</span>
+                              )} : {q.telegramUsername}</span>
+                          </div>
+                        )}
+                      </>)}
+
+
                     </div>
 
                

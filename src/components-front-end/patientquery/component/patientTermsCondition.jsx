@@ -1,7 +1,7 @@
 import { addTermsCondition } from "@/components-front-end/redux/patinetquery/patientQueryRedux";
 import { TermsConditionStatus } from "@/lib/enums/TermsCondition";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 
 
@@ -15,6 +15,7 @@ export function PatientTermsCondition({clinicid}){
   const [terms,setTerms] = useState("");
   const [termsid,setTermsID] = useState("");
   const dispatch = useDispatch();
+  const termsCondition = useSelector((state) => state.patientquery.termsCondition);
 
 
 
@@ -55,7 +56,7 @@ export function PatientTermsCondition({clinicid}){
                     type="checkbox"
                     id="terms"
                     className="w-4 h-4 text-blue-600 border-gray-300 rounded"
-
+                    defaultChecked={termsCondition == 1 ? true : false}
                     onChange={(e) => {
                       const isChecked = e.target.checked; 
 

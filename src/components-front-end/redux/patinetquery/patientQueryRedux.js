@@ -43,6 +43,11 @@ const initialState = {
   phoneOtp: getLS("phoneOtp", "0"),
   phoneNumber: getLS("phoneNumber", "0"),
   phoneNumberVerified:getLS("phoneNumberVerified","0"),
+  telegramUsername: getLS("telegramUsername", "0"),
+  telegramUsernameVerified:getLS("telegramUsernameVerified","0"),
+  whatsappNumber: getLS("whatsappNumber", "0"),
+  whatsappNumberVerified:getLS("whatsappNumberVerified","0"),
+  provider:getLS("provider","0"),
   refresh: getLS("refresh", "false"),
   termsCondition: getLS("termsCondition", "0"),
 
@@ -135,11 +140,7 @@ const patientQuerySlice = createSlice({
        state.emailverified = String(action.payload);
       localStorage.setItem("emailverified", String(action.payload));
     },
-    addphoneNumberVerified :(state ,action)=>{
-      
-      state.phoneNumberVerified = String(action.payload);
-      localStorage.setItem("phoneNumberVerified", String(action.payload));
-    },
+   
     addmedicalCordinatorID: (state, action) => {
     
       state.medicalCordinatorID = String(action.payload);
@@ -150,10 +151,34 @@ const patientQuerySlice = createSlice({
       localStorage.setItem("phoneOtp", String(action.payload));
     },
     addphoneNumber: (state, action) => {
-      
       state.phoneNumber = String(action.payload);
       localStorage.setItem("phoneNumber", String(action.payload));
     },
+     addphoneNumberVerified :(state ,action)=>{
+      state.phoneNumberVerified = String(action.payload);
+      localStorage.setItem("phoneNumberVerified", String(action.payload));
+    },
+    addtelegramUsername: (state, action) => {
+      state.telegramUsername = String(action.payload);
+      localStorage.setItem("telegramUsername", String(action.payload));
+    },
+     addtelegramUsernameVerified :(state ,action)=>{
+      state.telegramUsernameVerified = String(action.payload);
+      localStorage.setItem("telegramUsernameVerified", String(action.payload));
+    },
+    addwhatsappNumber: (state, action) => {
+      state.whatsappNumber = String(action.payload);
+      localStorage.setItem("whatsappNumber", String(action.payload));
+    },
+     addwhatsappNumberVerified :(state ,action)=>{
+      state.whatsappNumberVerified = String(action.payload);
+      localStorage.setItem("whatsappNumberVerified", String(action.payload));
+    },
+     addProvider :(state ,action)=>{
+      state.provider = String(action.payload);
+      localStorage.setItem("provider", String(action.payload));
+    },
+
     addTermsCondition: (state, action) => {
       
       state.termsCondition = String(action.payload);
@@ -181,9 +206,14 @@ const patientQuerySlice = createSlice({
       state.emailotp = "0";
       state.phoneOtp = "0";
       state.phoneNumber = "0";
+      state.telegramUsername = "0";
+      state.whatsappNumber = "0";
       state.refresh = "false";
       state.emailverified = "0";
       state.phoneNumberVerified = "0";
+      state.whatsappNumberVerified = "0";
+      state.telegramUsernameVerified = "0";
+      state.provider = "";
       state.termsCondition = "0";
       state.medicalCordinatorID = "0";
 
@@ -207,6 +237,11 @@ const patientQuerySlice = createSlice({
       localStorage.removeItem("phoneNumberVerified");
       localStorage.removeItem("termsCondition");
       localStorage.removeItem("medicalCordinatorID");
+
+
+      localStorage.removeItem("whatsappNumberVerified");
+      localStorage.removeItem("telegramUsernameVerified");
+      localStorage.removeItem("provider");
 
     },
   },
@@ -235,7 +270,12 @@ export const {
   addEmailVerified,
   addphoneNumberVerified,
   customStep,
-  addTermsCondition
+  addTermsCondition,
+  addtelegramUsername,
+  addtelegramUsernameVerified,
+  addwhatsappNumber,
+  addwhatsappNumberVerified,
+  addProvider
 } = patientQuerySlice.actions;
 
 export default patientQuerySlice.reducer;

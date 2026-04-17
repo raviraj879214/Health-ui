@@ -1,4 +1,4 @@
-import { addphoneNumber, addphoneNumberVerified, addphoneOtp, addStep, customStep } from "@/components-front-end/redux/patinetquery/patientQueryRedux";
+import { addphoneNumber, addphoneNumberVerified, addphoneOtp, addProvider, addStep, addtelegramUsername, addtelegramUsernameVerified, customStep } from "@/components-front-end/redux/patinetquery/patientQueryRedux";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
@@ -83,8 +83,9 @@ export function PatientPhoneNumber(){
     const enteredOtp = newOtp.join("");
     debugger;
     if(enteredOtp == phoneOtp){
-      dispatch(addphoneNumber(getValues("phonenumber")));
+      dispatch(addphoneNumber(selectedCountry.code + getValues("phonenumber")));
       dispatch(addphoneNumberVerified("1"));
+      dispatch(addProvider(provider));
       dispatch(addStep());
       
     }
@@ -102,11 +103,10 @@ export function PatientPhoneNumber(){
     const enteredOtp = newOtp.join("");
     debugger;
     if(enteredOtp == phoneOtp){
-      dispatch(addphoneNumber(getValues("phonenumber")));
+      dispatch(addphoneNumber(selectedCountry.code + getValues("phonenumber")));
       dispatch(addphoneNumberVerified("1"));
+      dispatch(addProvider(provider));
       dispatch(addStep());
-
-
     }
     
     setOtp((prev) =>
@@ -119,10 +119,10 @@ export function PatientPhoneNumber(){
     debugger;
 
       if(provider === "telegram"){
-        dispatch(addphoneNumber(getValues("phonenumber")));
-        dispatch(addphoneNumberVerified("1"));
+        dispatch(addtelegramUsername(getValues("telegramusername")));
+        dispatch(addtelegramUsernameVerified("1"));
+         dispatch(addProvider(provider));
         dispatch(addStep());
-
         return;
       }
 
@@ -182,8 +182,9 @@ export function PatientPhoneNumber(){
 
     return(<>
       <ToastContainer />
+    
        
-      {phoneNumberVerified === "0" ?(<>
+      {phoneNumberVerified == 0 ?(<>
         
         <div className="bg-gray-50 flex flex-col items-center py-10 px-4">
         <h2 className="text-2xl sm:text-3xl font-semibold text-center text-gray-800 mb-2 max-w-3xl">
@@ -202,8 +203,11 @@ export function PatientPhoneNumber(){
             <div className="p-6 flex items-center justify-center text-gray-400" />
 
               <div class="w-full max-w-md ">
-                  <div class="flex justify-center space-x-2 bg-gray-200 rounded-full p-1">
+                  <div class="flex justify-center space-x-2 bg-gray-200 rounded-full p-1 mb-5">
 
+                    <button onClick={()=> setProvider("sms")} className={`px-4 py-2 rounded-full  text-blue-500 hover:bg-white  ${provider === "sms" && "bg-white font-semibold"}`}>
+                      Sms
+                    </button>
                     <button onClick={()=> setProvider("whatsapp")} className={`px-4 py-2 rounded-full  text-blue-500 hover:bg-white  ${provider === "whatsapp" && "bg-white font-semibold"}`}>
                       WhatsApp
                     </button>
@@ -213,22 +217,19 @@ export function PatientPhoneNumber(){
                       Telegram
                     </button>
                   </div>
-                </div>
 
 
-          
-                
-              {provider === "whatsapp" && (<>
-                <form onSubmit={handleSubmit(onCreate)} className="flex flex-col gap-5">
-                  <div className="flex flex-col gap-1">
-                    <div className="flex">
-                      <select
-                        value={selectedCountry.code}
-                        onChange={(e) => {
-                          const country = popularCountries.find(c => c.code === e.target.value);
-                          setSelectedCountry(country);
-                        }}
-                        className="
+                {(provider === "whatsapp" || provider === "sms") && (<>
+                  <form onSubmit={handleSubmit(onCreate)} className="flex flex-col gap-5">
+                    <div className="flex flex-col gap-1">
+                      <div className="flex">
+                        <select
+                          value={selectedCountry.code}
+                          onChange={(e) => {
+                            const country = popularCountries.find(c => c.code === e.target.value);
+                            setSelectedCountry(country);
+                          }}
+                          className="
                         px-3
                         rounded-l-md
                         border
@@ -239,23 +240,23 @@ export function PatientPhoneNumber(){
                         text-gray-700
                         focus:outline-none
                       "
-                      >
-                        {popularCountries.map((c) => (
-                          <option key={c.code} value={c.code}>
-                            ({c.code})
-                          </option>
-                        ))}
-                      </select>
+                        >
+                          {popularCountries.map((c) => (
+                            <option key={c.code} value={c.code}>
+                              ({c.code})
+                            </option>
+                          ))}
+                        </select>
 
-                      <input
-                        disabled={otpmodal}
-                        type="text"
-                        placeholder="Enter phone number"
+                        <input
+                          disabled={otpmodal}
+                          type="text"
+                          placeholder="Enter phone number"
 
-                        maxLength={selectedCountry.length}
-                        inputMode="numeric"
+                          maxLength={selectedCountry.length}
+                          inputMode="numeric"
 
-                        className={`
+                          className={`
                         w-full
                         rounded-r-md
                         border
@@ -265,38 +266,38 @@ export function PatientPhoneNumber(){
                         outline-none
                         transition
                         ${errors.phonenumber
-                            ? "border-red-500 focus:ring-red-200 focus:border-red-500"
-                            : "border-gray-300 focus:border-blue-500 focus:ring-blue-100"}
+                              ? "border-red-500 focus:ring-red-200 focus:border-red-500"
+                              : "border-gray-300 focus:border-blue-500 focus:ring-blue-100"}
                     `}
 
-                        {...register("phonenumber", {
-                          required: "Phone number is required",
-                        })}
+                          {...register("phonenumber", {
+                            required: "Phone number is required",
+                          })}
 
-                      />
+                        />
+                      </div>
+
+
+                      {errors.phonenumber && (
+                        <p className="text-sm text-red-600">
+                          {errors.phonenumber.message}
+                        </p>
+                      )}
                     </div>
+                    {otpmodal && (
+                      <div className="flex flex-col gap-3">
 
-
-                    {errors.phonenumber && (
-                      <p className="text-sm text-red-600">
-                        {errors.phonenumber.message}
-                      </p>
-                    )}
-                  </div>
-                  {otpmodal && (
-                    <div className="flex flex-col gap-3">
-
-                      <div className="flex justify-between gap-2">
-                        {otp.map((digit, index) => (
-                          <input
-                            key={index}
-                            id={`otp-${index}`}
-                            type="text"
-                            value={digit}
-                            maxLength={1}
-                            onChange={(e) => handleOtpChange(e.target.value, index)}
-                            onPaste={handleOtpPaste}
-                            className="
+                        <div className="flex justify-between gap-2">
+                          {otp.map((digit, index) => (
+                            <input
+                              key={index}
+                              id={`otp-${index}`}
+                              type="text"
+                              value={digit}
+                              maxLength={1}
+                              onChange={(e) => handleOtpChange(e.target.value, index)}
+                              onPaste={handleOtpPaste}
+                              className="
                           w-full
                           h-12
                           text-center
@@ -311,45 +312,45 @@ export function PatientPhoneNumber(){
                           outline-none
                           transition
                         "
-                          />
-                        ))}
-                      </div>
+                            />
+                          ))}
+                        </div>
 
 
-                      <div className="flex justify-between items-center text-sm">
-                        <button
-                          type="button"
-                          disabled={seconds === 0 ? false : true}
-                          onClick={() => {
-                            onCreate({ phonenumber: getValues("phonenumber") })
-                          }}
-                          className="
+                        <div className="flex justify-between items-center text-sm">
+                          <button
+                            type="button"
+                            disabled={seconds === 0 ? false : true}
+                            onClick={() => {
+                              onCreate({ phonenumber: getValues("phonenumber") })
+                            }}
+                            className="
                           text-blue-600
                           hover:text-blue-700
                           font-medium
                           transition">
 
-                          {seconds > 0 ? `Resend code in` : <></>}   {seconds > 0 ? `${seconds}s` : <></>}
-                          {seconds === 0 ? `Resend` : <></>}
-                        </button>
+                            {seconds > 0 ? `Resend code in` : <></>}   {seconds > 0 ? `${seconds}s` : <></>}
+                            {seconds === 0 ? `Resend` : <></>}
+                          </button>
 
-                        <button
-                          onClick={() => changenumber()}
-                          type="button"
-                          className="
+                          <button
+                            onClick={() => changenumber()}
+                            type="button"
+                            className="
                           text-gray-500
                           hover:text-gray-700
                           transition">
 
-                          Change Number
-                        </button>
+                            Change Number
+                          </button>
+                        </div>
                       </div>
-                    </div>
-                  )}
-                  {!otpmodal && (<>
-                    <button
-                      type="submit"
-                      className="
+                    )}
+                    {!otpmodal && (<>
+                      <button
+                        type="submit"
+                        className="
                 w-full
                 rounded-md
                 bg-blue-600
@@ -364,31 +365,30 @@ export function PatientPhoneNumber(){
                 transition
                 mt-2
                 "
-                    >
-                      Verify
-                    </button>
+                      >
+                        Verify
+                      </button>
 
-                  </>)}
+                    </>)}
 
-                </form>
-              </>)}
-          
+                  </form>
+                </>)}
 
-              {provider === "telegram" && (<>
-                <form onSubmit={handleSubmit(onCreate)} className="flex flex-col gap-5">
-                  <div className="flex flex-col gap-1">
-                    <div className="flex">
-
-
-                      <input
-
-                        type="text"
-                        placeholder="Enter telegram username"
+                {provider === "telegram" && (<>
+                  <form onSubmit={handleSubmit(onCreate)} className="flex flex-col gap-5">
+                    <div className="flex flex-col gap-1">
+                      <div className="flex">
 
 
-                        inputMode="numeric"
+                        <input
 
-                        className={`
+                          type="text"
+                          placeholder="Enter telegram username"
+
+
+                          inputMode="numeric"
+
+                          className={`
                   w-full
                   rounded-r-md
                   border
@@ -398,28 +398,28 @@ export function PatientPhoneNumber(){
                   outline-none
                   transition
                   ${errors.telegramusername
-                            ? "border-red-500 focus:ring-red-200 focus:border-red-500"
-                            : "border-gray-300 focus:border-blue-500 focus:ring-blue-100"}
+                              ? "border-red-500 focus:ring-red-200 focus:border-red-500"
+                              : "border-gray-300 focus:border-blue-500 focus:ring-blue-100"}
               `}
 
-                        {...register("telegramusername", {
-                          required: "Username is required",
-                        })}
+                          {...register("telegramusername", {
+                            required: "Username is required",
+                          })}
 
-                      />
+                        />
+                      </div>
+
+
+                      {errors.telegramusername && (
+                        <p className="text-sm text-red-600">
+                          {errors.telegramusername.message}
+                        </p>
+                      )}
                     </div>
 
-
-                    {errors.telegramusername && (
-                      <p className="text-sm text-red-600">
-                        {errors.telegramusername.message}
-                      </p>
-                    )}
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="
+                    <button
+                      type="submit"
+                      className="
           w-full
           rounded-md
           bg-blue-600
@@ -434,10 +434,19 @@ export function PatientPhoneNumber(){
           transition
           mt-2
           ">
-                    Save Changes
-                  </button>
-                </form>
-              </>)}
+                      Save Changes
+                    </button>
+                  </form>
+                </>)}
+                </div>
+
+
+          
+                
+             
+          
+
+             
 
 
           </div>
@@ -458,12 +467,19 @@ export function PatientPhoneNumber(){
 
 
   <h3 class="text-lg font-semibold text-gray-800">
-    Phone Number Verified
+    {provider === "sms" && (<>Phone Number </>)} 
+    {provider === "whatsapp" && (<>Phone Number </>)} 
+    {provider === "telergam" && (<>Telegram Username </>)} 
+     Verified
   </h3>
 
 
   <p class="text-sm text-gray-500 text-center mt-1 mb-5">
-    Your Phone Number  has been successfully verified.
+              Your
+              {provider === "sms" && (<> Phone Number </>)}
+              {provider === "whatsapp" && (<> Phone Number </>)}
+              {provider === "telergam" && (<> Telegram Username </>)}
+              has been successfully verified.
   </p>
 
 

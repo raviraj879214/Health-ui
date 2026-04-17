@@ -562,10 +562,40 @@ const releasedPercent = Math.floor(((clinicspaid / clinicstobepaid) * 100));
                                       <div className="text-gray-700">{patientqueryinformation?.email || "Not verified"}</div>
                                   </div>
 
-                                  <div>
-                                      <Label>Phone Number</Label>
-                                      <div className="text-gray-700">{patientqueryinformation?.phoneNumber === "0" ? "Not verified" : patientqueryinformation?.phoneNumber}</div>
-                                  </div>
+                                           <div>
+  <Label>Contact the patient</Label>
+
+  <div className="text-gray-700">
+    {patientqueryinformation?.provider === "sms" && (
+      <>
+        <span className="text-blue-500">SMS</span> :{" "}
+        {patientqueryinformation?.phoneNumber === "0"
+          ? "Not verified"
+          : patientqueryinformation?.phoneNumber}
+      </>
+    )}
+
+    {patientqueryinformation?.provider === "whatsapp" && (
+      <>
+        <span className="text-blue-500">WhatsApp</span> :{" "}
+        {patientqueryinformation?.phoneNumber === "0"
+          ? "Not verified"
+          : patientqueryinformation?.phoneNumber}
+      </>
+    )}
+
+    {patientqueryinformation?.provider === "telegram" && (
+      <>
+        <span className="text-blue-500">Telegram</span> :{" "}
+        {patientqueryinformation?.telegramUsername}
+      </>
+    )}
+
+    {!patientqueryinformation?.provider && (
+      <span className="text-gray-400">Not provided</span>
+    )}
+  </div>
+</div>
 
                                   <div>
                                       <Label>Created At</Label>

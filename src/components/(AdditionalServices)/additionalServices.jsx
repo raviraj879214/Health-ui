@@ -292,10 +292,40 @@ const handleCopy = async (paymentLink, id) => {
                                     <div className="text-gray-700">{querydetails?.email || "Not verified"}</div>
                                 </div>
 
-                                <div>
-                                    <Label>Phone Number</Label>
-                                    <div className="text-gray-700">{querydetails?.phoneNumber === "0" ? "Not verified" : querydetails?.phoneNumber}</div>
-                                </div>
+                                 <div>
+            <Label>Contact the patient</Label>
+
+            <div className="text-gray-700">
+              {querydetails?.provider === "sms" && (
+                <>
+                  <span className="text-blue-500">SMS</span> :{" "}
+                  {querydetails?.phoneNumber === "0"
+                    ? "Not verified"
+                    : querydetails?.phoneNumber}
+                </>
+              )}
+
+              {querydetails?.provider === "whatsapp" && (
+                <>
+                  <span className="text-blue-500">WhatsApp</span> :{" "}
+                  {querydetails?.phoneNumber === "0"
+                    ? "Not verified"
+                    : querydetails?.phoneNumber}
+                </>
+              )}
+
+              {querydetails?.provider === "telegram" && (
+                <>
+                  <span className="text-blue-500">Telegram</span> :{" "}
+                  {querydetails?.telegramUsername}
+                </>
+              )}
+
+              {!querydetails?.provider && (
+                <span className="text-gray-400">Not provided</span>
+              )}
+            </div>
+          </div>
 
                                 <div>
                                     <Label>Created At</Label>
