@@ -208,9 +208,9 @@ export function PatientPhoneNumber(){
                     <button onClick={()=> setProvider("sms")} className={`px-4 py-2 rounded-full  text-blue-500 hover:bg-white  ${provider === "sms" && "bg-white font-semibold"}`}>
                       Sms
                     </button>
-                    <button onClick={()=> setProvider("whatsapp")} className={`px-4 py-2 rounded-full  text-blue-500 hover:bg-white  ${provider === "whatsapp" && "bg-white font-semibold"}`}>
+                    {/* <button onClick={()=> setProvider("whatsapp")} className={`px-4 py-2 rounded-full  text-blue-500 hover:bg-white  ${provider === "whatsapp" && "bg-white font-semibold"}`}>
                       WhatsApp
-                    </button>
+                    </button> */}
 
 
                     <button onClick={()=> setProvider("telegram")} className={`px-4 py-2 rounded-full  text-blue-500 hover:bg-white  ${provider === "telegram" && "bg-white font-semibold"}`}>
