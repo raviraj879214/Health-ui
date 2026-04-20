@@ -18,7 +18,7 @@ export function PatientPhoneNumber(){
   const phoneNumberVerified = useSelector((state) => state.patientquery.phoneNumberVerified);
   const phoneNumber = useSelector((state) => state.patientquery.phoneNumber);
 
-  const [provider,setProvider] = useState("whatsapp");
+  const [provider,setProvider] = useState("sms");
 
 
 
