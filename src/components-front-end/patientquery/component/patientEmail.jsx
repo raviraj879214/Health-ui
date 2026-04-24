@@ -253,6 +253,10 @@ export function PatientEmail() {
     Email Verified
   </h3>
 
+  <span className="inline-flex items-center px-3 py-1 text-sm font-medium text-blue-700 bg-blue-100 rounded-full">
+  {emailValue}
+</span>
+
 
   <p class="text-sm text-gray-500 text-center mt-1 mb-5">
     Your email address has been successfully verified.

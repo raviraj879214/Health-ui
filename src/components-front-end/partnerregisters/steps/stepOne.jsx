@@ -254,15 +254,11 @@ const [otpDigits, setOtpDigits] = useState(["", "", "", ""]);
                     Email Verification
                   </h4>
                   <p className="text-sm text-gray-600 mb-5">
-                    Enter the 4-digit verification code sent to your phone.
+                    Enter the 4-digit verification code sent to your email inbox.
                   </p>
 
 
-                 {process.env.NEXT_PUBLIC_ENV === "development" && (
-                    <div className="mb-5 p-5 mt-3 rounded-md border border-yellow-300 bg-yellow-50 px-4 py-2 text-sm text-yellow-800">
-                      <strong>Test Mode:</strong> Use OTP <span className="font-semibold">0000</span>
-                    </div>
-                  )}
+                
 
                   <div
       className="flex justify-between gap-3 max-w-xs"

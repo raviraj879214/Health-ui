@@ -25,7 +25,7 @@ export function PatientPhoneNumber(){
 
 
   const [phone, setPhone] = useState("");
-  const [otp, setOtp] = useState(["", "", "", "", "", ""]);
+  const [otp, setOtp] = useState(["", "", "", ""]);
 
 
   
@@ -472,7 +472,9 @@ export function PatientPhoneNumber(){
     {provider === "telergam" && (<>Telegram Username </>)} 
      Verified
   </h3>
-
+       <span className="inline-flex items-center px-3 py-1 text-sm font-medium text-blue-700 bg-blue-100 rounded-full">
+  {phoneNumber}
+</span>
 
   <p class="text-sm text-gray-500 text-center mt-1 mb-5">
               Your
