@@ -116,7 +116,9 @@ export default function Pages() {
       <Suspense fallback={<><BannerLoader /></>}>
         
         <Banner></Banner>
+        
         <TopRated></TopRated>
+
         <Treatments></Treatments>
        
         <PopularClinics />
