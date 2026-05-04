@@ -1,0 +1,394 @@
+
+
+
+export function Treatment(){
+const categories = ["PLASTIC SURGERY", "ORTHOPEDICS", "MATERNITY", "IVF", "DENTAL"];
+const procedures = [
+    "Breast augmentation",
+    "Liposuction & HD Lipo",
+    "Tummy tuck",
+    "Facelift & Rhinoplasty",
+  ];
+
+
+  const specialties = [
+    {
+      title: "Hip & Knee Replacement",
+      description: "Advanced prosthetic materials and robotic-assisted precision."
+    },
+    {
+      title: "Sports Injury Recovery",
+      description: "Arthroscopic procedures designed for high-performance athletes."
+    },
+    {
+      title: "Spine Treatments",
+      description: "Microdiscectomy and fusion techniques for long-term relief."
+    }
+  ];
+
+
+  const features = [
+    "Planned C-sections & Natural birth",
+    "VIP Postnatal suites",
+    "Full citizenship guidance",
+  ];
+
+
+  const points = [
+    {
+      id: "01",
+      title: "Advanced Labs",
+      description: "Latest PGT-A/M genetic testing and embryo monitoring with real-time feedback."
+    },
+    {
+      id: "02",
+      title: "Egg Donation",
+      description: "Ethical, anonymous donor programs with highly diverse matching and screening."
+    },
+    {
+      id: "03",
+      title: "Cost Advantage",
+      description: "Full cycles often 60-70% more affordable than US equivalents without compromising quality."
+    }
+  ];
+
+  const treatments = [
+    { label: "IMPLANTS", icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" },
+    { label: "FULL MOUTH REHAB", icon: "M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
+    { label: "VENEERS", icon: "M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" },
+    { label: "ORTHODONTICS", icon: "M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" }
+  ];
+
+  const steps = [
+    {
+      title: "INDIVIDUALLY PLANNED",
+      desc: "Your medical history is reviewed by a board-certified physician before you ever arrive in Brazil."
+    },
+    {
+      title: "MEDICALLY COORDINATED",
+      desc: "We handle all clinical logistics, prescriptions, and follow-ups so you can focus on healing."
+    },
+    {
+      title: "TRAVEL ALIGNED",
+      desc: "We seamlessly integrate recovery periods with curated, low-impact travel experiences."
+    }
+  ];
+
+
+  const featureslaststep = [
+    "Medical expertise",
+    "Advanced hospitals",
+    "Lower costs",
+    "Specialized treatments",
+    "Physician-led support"
+  ];
+
+    return(<>
+        <section className="bg-white pt-24 pb-12 px-6 text-center">
+            <div className="max-w-4xl mx-auto">
+                <span className="inline-block bg-[#26bba4] text-white text-[10px] font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-8">
+                    Medical Excellence
+                </span>
+                <h1 className="text-5xl md:text-6xl font-black text-gray-900 tracking-tight leading-[1.1] mb-8">
+                    Treatments in Brazil — World-Class Care, Tailored to You
+                </h1>
+                <p className="text-gray-600 text-xl leading-relaxed max-w-3xl mx-auto mb-16">
+                    Brazil is internationally recognized for its healthcare innovation. Our physician-led
+                    platform ensures a safe, effective, and personalized treatment journey.
+                </p>
+
+               
+               
+
+                
+            </div>
+        </section>
+
+        <div className="sticky top-0 z-50 bg-white">
+  <div className="flex flex-wrap justify-center gap-8 md:gap-12 border-t border-gray-100 pt-4 pb-4">
+    {categories.map((item) => (
+      <button
+        key={item}
+        className="text-[11px] font-bold tracking-[0.15em] text-gray-500 hover:text-gray-900 transition-colors cursor-pointer"
+      >
+        {item}
+      </button>
+    ))}
+  </div>
+</div>
+
+
+        <section className="bg-gray-50 py-24 px-6 text-center">
+      <div className="max-w-6xl mx-auto">
+        
+        {/* Category Header */}
+        <div className="flex flex-col items-center mb-12">
+          <div className="flex items-center gap-2 mb-6">
+            <div className="bg-white p-1.5 rounded-md shadow-sm border border-gray-100">
+              <svg className="w-5 h-5 text-[#00669b]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <span className="text-[10px] font-bold tracking-[0.2em] text-[#00669b] uppercase">
+              Esthetics & Reconstruction
+            </span>
+          </div>
+          
+          <h2 className="text-4xl font-bold text-gray-900 mb-6">
+            Plastic Surgery
+          </h2>
+          
+          <p className="text-gray-500 text-lg leading-relaxed max-w-3xl mx-auto">
+            Brazil stands as a global leader in both volume and innovation. Our partner surgeons specialize in refined techniques that prioritize natural results and rapid recovery.
+          </p>
+        </div>
+
+        {/* Procedure Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-4 lg:grid-cols-4 gap-4">
+          {procedures.map((item, index) => (
+            <button 
+              key={index}
+              className="group bg-white p-8 rounded-2xl border border-gray-100 shadow-sm flex items-center justify-between hover:shadow-md hover:border-blue-100 transition-all cursor-pointer text-left"
+            >
+              <span className="text-sm font-bold text-gray-900 leading-tight pr-4">
+                {item}
+              </span>
+              <svg 
+                className="w-4 h-4 text-gray-300 group-hover:text-blue-500 transition-colors" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2.5" 
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          ))}
+        </div>
+
+      </div>
+    </section>
+
+
+<section className="bg-white py-24 px-6 text-center font-sans">
+      <div className="max-w-6xl mx-auto">
+        
+        {/* Sub-header Badge */}
+        <div className="flex items-center justify-center gap-2 mb-6">
+          <svg className="w-5 h-5 text-[#00669b]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+          </svg>
+          <span className="text-[10px] font-bold tracking-[0.2em] text-[#00669b] uppercase">
+            Mobility & Longevity
+          </span>
+        </div>
+
+        {/* Main Header */}
+        <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8 tracking-tight">
+          Orthopedic Surgery
+        </h2>
+
+        {/* Description */}
+        <p className="text-gray-500 text-lg leading-relaxed max-w-3xl mx-auto mb-20">
+          Utilizing minimally invasive techniques, our orthopedic specialists focus on restoring mobility with significantly reduced downtime.
+        </p>
+
+        {/* Specialties Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-left">
+          {specialties.map((item, index) => (
+            <div key={index} className="relative pl-6 border-l-2 border-blue-400">
+              <h4 className="text-lg font-bold text-gray-900 mb-3">
+                {item.title}
+              </h4>
+              <p className="text-gray-500 text-sm leading-relaxed">
+                {item.description}
+              </p>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+
+
+<section className="bg-gray-50 py-24 px-6">
+      <div className="max-w-5xl mx-auto bg-white rounded-3xl p-12 md:p-20 shadow-xl shadow-gray-200/50 border border-gray-100 text-center">
+        
+        {/* Badge */}
+        <div className="flex items-center justify-center gap-2 mb-8">
+          <svg className="w-4 h-4 text-red-800" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C10.34 2 9 3.34 9 5s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zm3 7h-6c-1.1 0-2 .9-2 2v6h2v5h2v-5h2v5h2v-6c0-1.1-.9-2-2-2z" />
+          </svg>
+          <span className="text-[10px] font-bold tracking-[0.2em] text-red-800 uppercase">
+            New Beginnings
+          </span>
+        </div>
+
+        {/* Header */}
+        <h2 className="text-4xl font-bold text-gray-900 mb-8 tracking-tight">
+          Maternity & Birth Planning
+        </h2>
+
+        {/* Subtext */}
+        <p className="text-gray-500 text-lg leading-relaxed max-w-2xl mx-auto mb-16">
+          Experience world-class prenatal care and a safe delivery environment. Brazil offers unique benefits including citizenship by birth and premium postnatal support.
+        </p>
+
+        {/* Horizontal Checklist */}
+        <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
+          {features.map((feature, index) => (
+            <div key={index} className="flex items-center gap-3">
+              <div className="flex-shrink-0 w-5 h-5 rounded-full border border-teal-500 flex items-center justify-center">
+                <svg className="w-3 h-3 text-teal-600" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <span className="text-sm font-semibold text-gray-800 whitespace-nowrap">
+                {feature}
+              </span>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+
+
+    <section className="bg-white py-24 px-6 text-center font-sans">
+      <div className="max-w-6xl mx-auto">
+        
+        {/* Reproductive Science Badge */}
+        <div className="flex items-center justify-center gap-2 mb-6">
+          <svg className="w-5 h-5 text-[#00669b]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.628.282a2 2 0 01-1.806 0l-.628-.282a6 6 0 00-3.86-.517l-2.387.477a2 2 0 00-1.022.547l-.34.34a2 2 0 000 2.828l1.245 1.245A2 2 0 006.454 20h11.092a2 2 0 001.414-.586l1.245-1.245a2 2 0 000-2.828l-.34-.34z" />
+          </svg>
+          <span className="text-[10px] font-bold tracking-[0.2em] text-[#00669b] uppercase">
+            Reproductive Science
+          </span>
+        </div>
+
+        {/* Main Heading */}
+        <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8 tracking-tight">
+          In Vitro Fertilization (IVF)
+        </h2>
+
+        {/* Lead Paragraph */}
+        <p className="text-gray-500 text-lg leading-relaxed max-w-4xl mx-auto mb-20">
+          Our partner labs match the rigorous standards of the world's leading fertility clinics at a fraction of the cost found in North America.
+        </p>
+
+        {/* Numbered Feature Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-16 text-left">
+          {points.map((point) => (
+            <div key={point.id} className="relative group">
+              {/* Large Background Number */}
+              <span className="block text-6xl font-bold text-blue-100/60 mb-4 transition-colors group-hover:text-blue-200">
+                {point.id}
+              </span>
+              
+              <h4 className="text-lg font-bold text-gray-900 mb-3">
+                {point.title}
+              </h4>
+              <p className="text-gray-500 text-sm leading-relaxed">
+                {point.description}
+              </p>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+
+
+    <section className="bg-gray-50 py-24 px-6 text-center">
+      <div className="max-w-6xl mx-auto">
+        <div className="flex items-center justify-center gap-2 mb-6">
+          <svg className="w-5 h-5 text-[#00669b]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M7 21h10M12 3v14" />
+          </svg>
+          <span className="text-[10px] font-bold tracking-[0.2em] text-[#00669b] uppercase">Digital Dentistry</span>
+        </div>
+        
+        <h2 className="text-4xl font-bold text-gray-900 mb-16">Advanced Dental Treatments</h2>
+
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          {treatments.map((t, i) => (
+            <div key={i} className="bg-white p-10 rounded-2xl border border-gray-100 shadow-sm flex flex-col items-center gap-6 hover:shadow-md transition-shadow cursor-pointer">
+              <svg className="w-8 h-8 text-[#00669b]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d={t.icon} />
+              </svg>
+              <span className="text-[11px] font-bold tracking-widest text-gray-900">{t.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section className="bg-white py-24 px-6 text-center">
+      <h2 className="text-4xl font-bold text-gray-900 mb-20 tracking-tight">
+        Our Comprehensive Approach
+      </h2>
+      
+      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
+        {steps.map((step, i) => (
+          <div key={i} className="flex flex-col items-center">
+            {/* The signature blue dot indicator from the reference */}
+            <div className="w-3 h-3 bg-[#00669b] rounded-full mb-8 shadow-[0_0_10px_rgba(0,102,155,0.3)]" />
+            <h4 className="text-xs font-black tracking-[0.15em] text-gray-900 mb-6 uppercase">
+              {step.title}
+            </h4>
+            <p className="text-gray-500 text-[15px] leading-relaxed max-w-[280px]">
+              {step.desc}
+            </p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    
+     <section className="flex flex-col items-center justify-center min-h-screen bg-white p-6 font-sans">
+      <div className="w-full max-w-2xl">
+        {/* Header */}
+        <h2 className="text-4xl md:text-5xl font-bold text-center text-gray-900 mb-12 tracking-tight">
+          Why Choose Brazil?
+        </h2>
+
+        {/* Features List */}
+        <div className="space-y-0 mb-16">
+          {featureslaststep.map((feature, index) => (
+            <div 
+              key={index} 
+              className="flex items-center justify-between py-6 border-b border-gray-100 last:border-0"
+            >
+              <span className="text-lg md:text-xl font-medium text-gray-800">
+                {feature}
+              </span>
+              {/* Custom SVG Checkmark */}
+              <svg 
+                className="w-6 h-6 text-teal-600" 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24" 
+                strokeWidth="2"
+              >
+                <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </div>
+          ))}
+        </div>
+
+        {/* Call to Action Button */}
+        <div className="flex flex-col items-center gap-4">
+          <button className="px-10 py-4 bg-linear-to-b from-[#1E88C1] to-[#2DA0E2] text-white font-semibold text-lg rounded-xl shadow-lg hover:shadow-xl transition-all active:scale-95 cursor-pointer">
+            Schedule a Consultation
+          </button>
+          
+          {/* Footer Text */}
+          <span className="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-bold">
+            Confidential Medical Review
+          </span>
+        </div>
+      </div>
+    </section>
+    </>);
+}

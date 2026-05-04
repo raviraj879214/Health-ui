@@ -127,13 +127,13 @@ export  function HeaderFrontend() {
               <Link href="#">Home</Link>
             </li>
             <li>
-              <Link href="/about-us">About Us</Link>
+              <Link href="#">About Us</Link>
             </li>
             <li>
               <Link href="#">Treatments</Link>
             </li>
             <li>
-              <Link href="#">Why Brazil</Link>
+              <Link href="/why-brazil">Why Brazil</Link>
             </li>
             <li>
               <Menu as="div" className="relative inline-block">
@@ -156,6 +156,13 @@ export  function HeaderFrontend() {
                           Insurance
                         </Link>
                       </MenuItem>
+                      <MenuItem>
+                        <Link href="/your-guarantees" className="block px-4 py-1.5 font-medium text-sm text-gray-700">
+                          Your Guarantees 
+                        </Link>
+                      </MenuItem>
+
+
                       <MenuItem>
                         <Link href="#" className="block px-4 py-1.5 font-medium text-sm text-gray-700">
                           Visas
