@@ -152,7 +152,7 @@ export  function HeaderFrontend() {
                   <MenuItems className="absolute right-0 z-50 mt-2 md:w-[180px] w-40 origin-top-right bg-white shadow-[0_0_30px_0_rgba(45,45,45,0.15)] rounded-thm focus:outline-none [&_a]:hover:text-secondary">
                     <div className="py-1 max-h-45 overflow-auto">
                       <MenuItem>
-                        <Link href="#" className="block px-4 py-1.5 font-medium text-sm text-gray-700">
+                        <Link href="/insurance" className="block px-4 py-1.5 font-medium text-sm text-gray-700">
                           Insurance
                         </Link>
                       </MenuItem>
@@ -164,22 +164,22 @@ export  function HeaderFrontend() {
 
 
                       <MenuItem>
-                        <Link href="#" className="block px-4 py-1.5 font-medium text-sm text-gray-700">
+                        <Link href="/visa" className="block px-4 py-1.5 font-medium text-sm text-gray-700">
                           Visas
                         </Link>
                       </MenuItem>
                       <MenuItem>
-                        <Link href="#" className="block px-4 py-1.5 font-medium text-sm text-gray-700">
+                        <Link href="/citizenship" className="block px-4 py-1.5 font-medium text-sm text-gray-700">
                           Citizenship
                         </Link>
                       </MenuItem>
                       <MenuItem>
-                        <Link href="#" className="block px-4 py-1.5 font-medium text-sm text-gray-700">
+                        <Link href="/flights" className="block px-4 py-1.5 font-medium text-sm text-gray-700">
                           Flights
                         </Link>
                       </MenuItem>
                       <MenuItem>
-                        <Link href="#" className="block px-4 py-1.5 font-medium text-sm text-gray-700">
+                        <Link href="/personal-assistance" className="block px-4 py-1.5 font-medium text-sm text-gray-700">
                           Personal Assistance
                         </Link>
                       </MenuItem>
