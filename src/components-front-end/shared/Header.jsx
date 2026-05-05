@@ -124,13 +124,13 @@ export  function HeaderFrontend() {
           {/* Desktop Nav */}
           <ul className="hidden xl:flex flex-wrap justify-center items-center p-0 m-0 list-none gap-5 grow-[0.3] [&_a]:tansition [&_a]:hover:text-black">
             <li>
-              <Link href="#">Home</Link>
+              <Link href="/">Home</Link>
             </li>
             <li>
-              <Link href="#">About Us</Link>
+              <Link href="about-us">About Us</Link>
             </li>
             <li>
-              <Link href="#">Treatments</Link>
+              <Link href="/treatments">Treatments</Link>
             </li>
             <li>
               <Link href="/why-brazil">Why Brazil</Link>

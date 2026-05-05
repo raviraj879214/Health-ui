@@ -19,14 +19,16 @@ export  function AboutUs() {
           About Us
         </h1>
 
-
+        <strong></strong>
         <p class="text-gray-600 text-lg md:text-xl leading-relaxed mb-8">
-          Bridging the gap between world-class Brazilian medical expertise and global
-          healthcare seekers through precision, transparency, and a commitment to excellence.
+          We are a <strong>physician-led medical tourism platform in Brazil </strong>dedicated to connecting international patients—especially from the United States—with <strong>high-quality, affordable medical care in Brazil. </strong>
+            <br></br>
+          Founded by three experienced physicians—Dr. Bruno Clementi, Dr. Erick Okuma, and Dr. Thiago Lima Barreto—our mission is to make <strong>safe, world-class healthcare accessible to patients seeking treatment abroad. </strong>
+
         </p>
 
 
-        <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <div class="flex flex-col sm:flex-row justify-center gap-4 hidden">
 
           <button class="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg font-medium transition">
             Our Approach
@@ -46,12 +48,15 @@ export  function AboutUs() {
 
 
         <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-          Comprehensive Medical Care
+          Comprehensive Medical Care In Brazil
         </h2>
 
 
         <p class="text-gray-600 text-lg md:text-xl max-w-2xl mx-auto mb-14">
-          Brazil is globally recognized for plastic surgery, but our network extends to all premium medical specialties.
+          While Brazil is globally recognized for <strong>plastic and cosmetic surgery,</strong> our network extends far beyond aesthetics. 
+        </p>
+        <p class="text-gray-600 text-lg md:text-xl max-w-2xl mx-auto mb-14">
+          Every partner is vetted to ensure <strong>international standards of safety, technology, and medical expertise. </strong>
         </p>
 
 
@@ -69,7 +74,7 @@ export  function AboutUs() {
               Plastic & Cosmetic Surgery
             </h3>
             <p class="text-gray-500 text-sm">
-              World-renowned aesthetic and reconstructive procedures.
+              
             </p>
           </div>
 
@@ -82,10 +87,10 @@ export  function AboutUs() {
               </svg>
             </div>
             <h3 class="font-semibold text-lg text-gray-900 mb-2">
-              Fertility Treatments
+              Fertility Treatments (IVF and reproductive medicine) 
             </h3>
             <p class="text-gray-500 text-sm">
-              Advanced IVF and reproductive protocols for parenthood.
+              
             </p>
           </div>
 
@@ -99,10 +104,10 @@ export  function AboutUs() {
               </svg>
             </div>
             <h3 class="font-semibold text-lg text-gray-900 mb-2">
-              Orthopedic & Sports Medicine
+              Orthopedic Surgery and Sports Medicine 
             </h3>
             <p class="text-gray-500 text-sm">
-              Joint replacements and elite athlete recovery specialists.
+              
             </p>
           </div>
 
@@ -114,10 +119,10 @@ export  function AboutUs() {
               </svg>
             </div>
             <h3 class="font-semibold text-lg text-gray-900 mb-2">
-              Dental Procedures
+              Dental Procedures and Full Smile Rehabilitation 
             </h3>
             <p class="text-gray-500 text-sm">
-              Full mouth reconstructions and aesthetic dental veneers.
+              
             </p>
           </div>
 
@@ -146,7 +151,7 @@ export  function AboutUs() {
 
 
         <p class="text-gray-600 text-lg md:text-xl max-w-2xl mx-auto mb-14">
-          Global medical tourism leader offering premium care and cost-efficiency.
+          Brazil has become a leading destination for <strong>medical tourism, offering: </strong>
         </p>
 
 
@@ -360,7 +365,7 @@ export  function AboutUs() {
       </div>
     </div>
 
-<div className="font-sans antialiased bg-white">
+<div className="font-sans antialiased bg-white hidden">
       {/* How It Works Section */}
       <section className="py-24">
         <div className="max-w-5xl mx-auto px-4 text-center">
@@ -446,6 +451,8 @@ export  function AboutUs() {
       <section className="bg-[#f8fafc] py-24 border-t border-slate-100">
         <div className="max-w-5xl mx-auto px-4 text-center">
           <h2 className="text-sm font-bold text-slate-900 mb-3 tracking-widest uppercase">Our Commitment</h2>
+
+          <p>As a<strong> doctor-founded platform,</strong> every recommendation is guided by medical expertise and patient safety. </p>
           <div className="w-8 h-[2px] bg-red-400 mx-auto mb-14" />
 
           <div className="grid md:grid-cols-3 gap-6">
@@ -456,7 +463,7 @@ export  function AboutUs() {
               </div>
               <h4 className="text-[13px] font-bold text-slate-900 mb-2">Safe & Ethical Care</h4>
               <p className="text-[11px] text-slate-400 leading-relaxed">
-                Adhering to the highest global safety protocols and medical ethics in every procedure.
+               
               </p>
             </div>
 
@@ -467,7 +474,7 @@ export  function AboutUs() {
               </div>
               <h4 className="text-[13px] font-bold text-slate-900 mb-2">Transparent Pricing</h4>
               <p className="text-[11px] text-slate-400 leading-relaxed">
-                Clear communication and honest pricing models with no hidden medical costs.
+                
               </p>
             </div>
 
@@ -478,10 +485,11 @@ export  function AboutUs() {
               </div>
               <h4 className="text-[13px] font-bold text-slate-900 mb-2">Personalized Support</h4>
               <p className="text-[11px] text-slate-400 leading-relaxed">
-                Concierge-style patient support from initial inquiry to post-operative recovery.
+               
               </p>
             </div>
           </div>
+          
         </div>
       </section>
     </div>

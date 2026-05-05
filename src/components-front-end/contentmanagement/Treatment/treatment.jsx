@@ -2,61 +2,72 @@
 
 
 export function Treatment(){
-const categories = ["PLASTIC SURGERY", "ORTHOPEDICS", "MATERNITY", "IVF", "DENTAL"];
+const categories = ["PLASTIC SURGERY IN BRAZIL", "ORTHOPEDICS", "MATERNITY", "IVF", "DENTAL"];
+
 const procedures = [
-    "Breast augmentation",
-    "Liposuction & HD Lipo",
-    "Tummy tuck",
-    "Facelift & Rhinoplasty",
+    "Breast augmentation and reduction ",
+    "Liposuction and body contouring ",
+    "Tummy tuck (abdominoplasty) ",
+    "Facelift and eyelid surgery ",
+    "Rhinoplasty ",
   ];
 
 
   const specialties = [
     {
-      title: "Hip & Knee Replacement",
-      description: "Advanced prosthetic materials and robotic-assisted precision."
+      title: "Hip replacement (total hip arthroplasty) ",
+      description: ""
     },
     {
-      title: "Sports Injury Recovery",
-      description: "Arthroscopic procedures designed for high-performance athletes."
+      title: "Knee replacement (total knee arthroplasty) ",
+      description: ""
     },
     {
-      title: "Spine Treatments",
-      description: "Microdiscectomy and fusion techniques for long-term relief."
+      title: "Sports injuries and ligament reconstruction ",
+      description: ""
+    },
+    {
+      title: "Spine treatments ",
+      description: ""
     }
   ];
 
 
   const features = [
-    "Planned C-sections & Natural birth",
-    "VIP Postnatal suites",
-    "Full citizenship guidance",
+    "Planned cesarean delivery ",
+    "Natural childbirth ",
+    "Full prenatal and postnatal care ",
   ];
 
 
   const points = [
     {
       id: "01",
-      title: "Advanced Labs",
-      description: "Latest PGT-A/M genetic testing and embryo monitoring with real-time feedback."
+      title: "In vitro fertilization (IVF) ",
+      description: ""
     },
     {
       id: "02",
-      title: "Egg Donation",
-      description: "Ethical, anonymous donor programs with highly diverse matching and screening."
+      title: "Egg donation and fertility preservation ",
+      description: ""
     },
     {
       id: "03",
-      title: "Cost Advantage",
-      description: "Full cycles often 60-70% more affordable than US equivalents without compromising quality."
+      title: "Advanced reproductive diagnostics ",
+      description: ""
+    },
+    {
+      id: "04",
+      title: "Personalized fertility treatment plans ",
+      description: ""
     }
   ];
 
   const treatments = [
-    { label: "IMPLANTS", icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" },
-    { label: "FULL MOUTH REHAB", icon: "M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
-    { label: "VENEERS", icon: "M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" },
-    { label: "ORTHODONTICS", icon: "M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" }
+    { label: "Dental implants ", icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" },
+    { label: "Full mouth rehabilitation ", icon: "M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
+    { label: "Veneers and cosmetic dentistry ", icon: "M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" },
+    { label: "Orthodontics ", icon: "M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" }
   ];
 
   const steps = [
@@ -76,11 +87,11 @@ const procedures = [
 
 
   const featureslaststep = [
-    "Medical expertise",
-    "Advanced hospitals",
-    "Lower costs",
-    "Specialized treatments",
-    "Physician-led support"
+    "Internationally recognized medical expertise",
+    " Advanced hospitals and modern technology",
+    "Significantly lower costs compared to the U.S. ",
+    " Wide range of specialties, including fertility treatments ",
+    "Physician-led coordination and support "
   ];
 
     return(<>
@@ -92,9 +103,11 @@ const procedures = [
                 <h1 className="text-5xl md:text-6xl font-black text-gray-900 tracking-tight leading-[1.1] mb-8">
                     Treatments in Brazil — World-Class Care, Tailored to You
                 </h1>
+                <p className="text-gray-600 text-xl leading-relaxed max-w-3xl mx-auto mb-4">
+                    Brazil is internationally recognized for delivering <strong>high-quality medical treatments across multiple specialties,</strong> combining advanced technology, experienced physicians, and significantly lower costs compared to the United States and other countries. 
+                </p>
                 <p className="text-gray-600 text-xl leading-relaxed max-w-3xl mx-auto mb-16">
-                    Brazil is internationally recognized for its healthcare innovation. Our physician-led
-                    platform ensures a safe, effective, and personalized treatment journey.
+                    Through our physician-led platform, patients gain access to <strong>carefully selected specialists and top-tier medical facilities,</strong> ensuring safe, effective, and personalized treatment. 
                 </p>
 
                
@@ -107,70 +120,75 @@ const procedures = [
         <div className="sticky top-0 z-50 bg-white">
   <div className="flex flex-wrap justify-center gap-8 md:gap-12 border-t border-gray-100 pt-4 pb-4">
     {categories.map((item) => (
-      <button
+      <a
         key={item}
+         href={`#${item}`}
         className="text-[11px] font-bold tracking-[0.15em] text-gray-500 hover:text-gray-900 transition-colors cursor-pointer"
-      >
+        
+        
+        >
         {item}
-      </button>
+      </a>
     ))}
   </div>
 </div>
 
 
-        <section className="bg-gray-50 py-24 px-6 text-center">
-      <div className="max-w-6xl mx-auto">
-        
-        {/* Category Header */}
-        <div className="flex flex-col items-center mb-12">
-          <div className="flex items-center gap-2 mb-6">
-            <div className="bg-white p-1.5 rounded-md shadow-sm border border-gray-100">
-              <svg className="w-5 h-5 text-[#00669b]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
+      <section className="bg-gray-50 py-24 px-6 text-center"  id="PLASTIC SURGERY IN BRAZIL">
+        <div className="max-w-6xl mx-auto">
+
+          {/* Category Header */}
+          <div className="flex flex-col items-center mb-12">
+            <div className="flex items-center gap-2 mb-6">
+              <div className="bg-white p-1.5 rounded-md shadow-sm border border-gray-100">
+                <svg className="w-5 h-5 text-[#00669b]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <span className="text-[10px] font-bold tracking-[0.2em] text-[#00669b] uppercase">
+                Esthetics & Reconstruction
+              </span>
             </div>
-            <span className="text-[10px] font-bold tracking-[0.2em] text-[#00669b] uppercase">
-              Esthetics & Reconstruction
-            </span>
+
+            <h2 className="text-4xl font-bold text-gray-900 mb-6">
+              Plastic Surgery In Brazil
+            </h2>
+
+            <p className="text-gray-500 text-lg leading-relaxed max-w-3xl mx-auto">
+              Brazil is a <strong>global leader in plastic and cosmetic surgery,</strong> with decades of innovation and one of the highest procedure volumes in the world.
+            </p>
           </div>
-          
-          <h2 className="text-4xl font-bold text-gray-900 mb-6">
-            Plastic Surgery
-          </h2>
-          
-          <p className="text-gray-500 text-lg leading-relaxed max-w-3xl mx-auto">
-            Brazil stands as a global leader in both volume and innovation. Our partner surgeons specialize in refined techniques that prioritize natural results and rapid recovery.
+
+          {/* Procedure Cards Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-4">
+            {procedures.map((item, index) => (
+              <button
+                key={index}
+                className="group bg-white p-8 rounded-2xl border border-gray-100 shadow-sm flex items-center justify-between hover:shadow-md hover:border-blue-100 transition-all cursor-pointer text-left"
+              >
+                <span className="text-sm font-bold text-gray-900 leading-tight pr-4">
+                  {item}
+                </span>
+                <svg
+                  className="w-4 h-4 text-gray-300 group-hover:text-blue-500 transition-colors"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            ))}
+          </div>
+          <p className="text-gray-500 text-lg leading-relaxed max-w-3xl mx-auto mt-6">
+            Patients benefit from <strong>exceptional aesthetic results combined with affordability and expertise. </strong>
           </p>
         </div>
-
-        {/* Procedure Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-4 lg:grid-cols-4 gap-4">
-          {procedures.map((item, index) => (
-            <button 
-              key={index}
-              className="group bg-white p-8 rounded-2xl border border-gray-100 shadow-sm flex items-center justify-between hover:shadow-md hover:border-blue-100 transition-all cursor-pointer text-left"
-            >
-              <span className="text-sm font-bold text-gray-900 leading-tight pr-4">
-                {item}
-              </span>
-              <svg 
-                className="w-4 h-4 text-gray-300 group-hover:text-blue-500 transition-colors" 
-                fill="none" 
-                stroke="currentColor" 
-                strokeWidth="2.5" 
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
-          ))}
-        </div>
-
-      </div>
-    </section>
+      </section>
 
 
-<section className="bg-white py-24 px-6 text-center font-sans">
+    <section className="bg-white py-24 px-6 text-center font-sans" id="ORTHOPEDICS">
       <div className="max-w-6xl mx-auto">
         
         {/* Sub-header Badge */}
@@ -190,11 +208,11 @@ const procedures = [
 
         {/* Description */}
         <p className="text-gray-500 text-lg leading-relaxed max-w-3xl mx-auto mb-20">
-          Utilizing minimally invasive techniques, our orthopedic specialists focus on restoring mobility with significantly reduced downtime.
+          Brazil offers excellent care in <strong> orthopedic procedures,</strong> with modern techniques and highly experienced specialists. 
         </p>
 
         {/* Specialties Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-left">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 text-left">
           {specialties.map((item, index) => (
             <div key={index} className="relative pl-6 border-l-2 border-blue-400">
               <h4 className="text-lg font-bold text-gray-900 mb-3">
@@ -207,11 +225,15 @@ const procedures = [
           ))}
         </div>
 
+                <p className="text-gray-500 text-lg leading-relaxed max-w-3xl mx-auto mt-10">
+          All performed in <strong> advanced medical facilities focused on recovery and long-term outcomes. </strong>
+        </p>
+
       </div>
     </section>
 
 
-<section className="bg-gray-50 py-24 px-6">
+<section className="bg-gray-50 py-24 px-6" id="MATERNITY">
       <div className="max-w-5xl mx-auto bg-white rounded-3xl p-12 md:p-20 shadow-xl shadow-gray-200/50 border border-gray-100 text-center">
         
         {/* Badge */}
@@ -226,12 +248,12 @@ const procedures = [
 
         {/* Header */}
         <h2 className="text-4xl font-bold text-gray-900 mb-8 tracking-tight">
-          Maternity & Birth Planning
+          Maternity & Birth Planning in Brazil
         </h2>
 
         {/* Subtext */}
         <p className="text-gray-500 text-lg leading-relaxed max-w-2xl mx-auto mb-16">
-          Experience world-class prenatal care and a safe delivery environment. Brazil offers unique benefits including citizenship by birth and premium postnatal support.
+          For families interested in <strong> citizenship by birth,</strong> Brazil offers a unique opportunity combined with <strong>high-quality obstetric care.</strong> 
         </p>
 
         {/* Horizontal Checklist */}
@@ -254,7 +276,7 @@ const procedures = [
     </section>
 
 
-    <section className="bg-white py-24 px-6 text-center font-sans">
+    <section className="bg-white py-24 px-6 text-center font-sans" id="IVF">
       <div className="max-w-6xl mx-auto">
         
         {/* Reproductive Science Badge */}
@@ -269,16 +291,16 @@ const procedures = [
 
         {/* Main Heading */}
         <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8 tracking-tight">
-          In Vitro Fertilization (IVF)
+          In Vitro Fertilization (IVF) in Brazil 
         </h2>
 
         {/* Lead Paragraph */}
         <p className="text-gray-500 text-lg leading-relaxed max-w-4xl mx-auto mb-20">
-          Our partner labs match the rigorous standards of the world's leading fertility clinics at a fraction of the cost found in North America.
+          Brazil is an increasingly sought-after destination for <strong>fertility treatments,</strong> offering advanced reproductive technologies and highly specialized professionals. 
         </p>
 
         {/* Numbered Feature Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-16 text-left">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-16 text-left">
           {points.map((point) => (
             <div key={point.id} className="relative group">
               {/* Large Background Number */}
@@ -295,12 +317,15 @@ const procedures = [
             </div>
           ))}
         </div>
+        <p className="text-gray-500 text-lg leading-relaxed max-w-4xl mx-auto mt-10">
+          This makes Brazil a strong option for couples and individuals seeking effective and supportive fertility solutions abroad. 
+        </p>
 
       </div>
     </section>
 
 
-    <section className="bg-gray-50 py-24 px-6 text-center">
+    <section className="bg-gray-50 py-24 px-6 text-center" id="DENTAL">
       <div className="max-w-6xl mx-auto">
         <div className="flex items-center justify-center gap-2 mb-6">
           <svg className="w-5 h-5 text-[#00669b]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -310,7 +335,9 @@ const procedures = [
         </div>
         
         <h2 className="text-4xl font-bold text-gray-900 mb-16">Advanced Dental Treatments</h2>
-
+          <p className="text-gray-500 text-lg leading-relaxed max-w-4xl mx-auto mb-20">
+          Brazil is also a leading destination for high-quality dental care, offering advanced procedures at competitive prices. 
+        </p>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {treatments.map((t, i) => (
             <div key={i} className="bg-white p-10 rounded-2xl border border-gray-100 shadow-sm flex flex-col items-center gap-6 hover:shadow-md transition-shadow cursor-pointer">
@@ -321,12 +348,15 @@ const procedures = [
             </div>
           ))}
         </div>
+          <p className="text-gray-500 text-lg leading-relaxed max-w-4xl mx-auto mt-10">
+          With modern clinics and highly trained specialists, patients achieve both functional and aesthetic results. 
+        </p>
       </div>
     </section>
 
     <section className="bg-white py-24 px-6 text-center">
       <h2 className="text-4xl font-bold text-gray-900 mb-20 tracking-tight">
-        Our Comprehensive Approach
+        Our Comprehensive Approach To Care 
       </h2>
       
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
@@ -378,7 +408,7 @@ const procedures = [
         </div>
 
         {/* Call to Action Button */}
-        <div className="flex flex-col items-center gap-4">
+        <div className="flex flex-col items-center gap-4 hidden">
           <button className="px-10 py-4 bg-linear-to-b from-[#1E88C1] to-[#2DA0E2] text-white font-semibold text-lg rounded-xl shadow-lg hover:shadow-xl transition-all active:scale-95 cursor-pointer">
             Schedule a Consultation
           </button>

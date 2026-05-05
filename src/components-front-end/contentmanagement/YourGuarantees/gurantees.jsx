@@ -20,10 +20,9 @@ export function Gurantees(){
           </h2>
           
           <p className="text-gray-600 text-xl leading-relaxed max-w-2xl">
-            A physician-led platform built on the bedrock of safety, 
-            transparency, and accountability. At Azure Clinical, we 
-            operate with a singular standard: <span className="italic text-[#1e6a8e]">No surprises, no 
-            shortcuts, no compromises.</span>
+           We understand that choosing to undergo medical treatment abroad is a major decision. That’s why we’ve built a <strong>physician-led platform focused on safety, transparency, and accountability at every step. </strong>
+
+            Our commitment is simple: no surprises, no shortcuts, and no compromises on quality. 
           </p>
         </div>
 
@@ -70,20 +69,20 @@ export function Gurantees(){
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-10">
               <div>
-                <h4 className="font-bold text-gray-900 mb-2">Carefully selected hospitals</h4>
-                <p className="text-gray-500 text-sm leading-relaxed">Only high-standard facilities that maintain strict clinical protocols and international patient safety metrics are permitted on our network.</p>
+                <h4 className="font-bold text-gray-900 mb-2">Carefully selected hospitals Only</h4>
+                <p className="text-gray-500 text-sm leading-relaxed">We partner exclusively with high-standard hospitals and clinics, selected based on infrastructure, safety protocols, and consistent clinical outcomes. </p>
               </div>
               <div>
                 <h4 className="font-bold text-gray-900 mb-2">Verified medical professionals</h4>
-                <p className="text-gray-500 text-sm leading-relaxed">Vetted docs with rigorous international certifications and proven track records in their specific surgical specialties.</p>
+                <p className="text-gray-500 text-sm leading-relaxed">Every physician in our network is thoroughly vetted and holds the necessary certifications, credentials, and proven experience in their field.</p>
               </div>
               <div>
-                <h4 className="font-bold text-gray-900 mb-2">Patient-centered approach</h4>
-                <p className="text-gray-500 text-sm leading-relaxed">Honest guidance and realistic surgical expectations. We prioritize your long-term health outcomes over procedure volume.</p>
+                <h4 className="font-bold text-gray-900 mb-2">Real patient-centered approach </h4>
+                <p className="text-gray-500 text-sm leading-relaxed">We prioritize transparency and clarity, ensuring patients receive honest medical guidance and realistic expectations before any procedure. </p>
               </div>
               <div>
                 <h4 className="font-bold text-gray-900 mb-2">Physician-led coordination</h4>
-                <p className="text-gray-500 text-sm leading-relaxed">Your journey is handled exclusively by medical professionals, never by sales agents or commission-based brokers.</p>
+                <p className="text-gray-500 text-sm leading-relaxed">Your case is handled by medical professionals, not sales agents—ensuring accuracy, ethics, and clinical responsibility. </p>
               </div>
             </div>
           </div>
@@ -98,11 +97,11 @@ export function Gurantees(){
           <ul className="space-y-6">
             <li className="flex gap-3">
               <span className="text-blue-900 font-bold mt-1">✓</span>
-              <p className="text-blue-900/80 text-sm font-medium">No hidden costs: Full cost transparency established before you commit to travel.</p>
+              <p className="text-blue-900/80 text-sm font-medium">No hidden costs: All treatment plans are clearly presented and discussed in advance. Patients receive full cost transparency before committing. </p>
             </li>
             <li className="flex gap-3">
               <span className="text-blue-900 font-bold mt-1">✓</span>
-              <p className="text-blue-900/80 text-sm font-medium">Pre-approved plans: Any clinical changes occur only with informed patient consent.</p>
+              <p className="text-blue-900/80 text-sm font-medium">Pre-approved treatment plans : Any additional procedures or changes are only performed with patient awareness and consent. </p>
             </li>
           </ul>
         </div>
@@ -115,16 +114,16 @@ export function Gurantees(){
           <h3 className="text-xl font-bold text-gray-900 mb-8">Patient Safety Guarantee</h3>
           <div className="space-y-6 uppercase tracking-wider">
             <div>
-              <h5 className="text-[10px] font-black text-gray-900 mb-1">Strict Oversight</h5>
-              <p className="text-gray-500 text-[11px] normal-case tracking-normal leading-relaxed">Adherence to international best practices for cross-border surgical care.</p>
+              <h5 className="text-[10px] font-black text-gray-900 mb-1">Strict selection and oversight</h5>
+              <p className="text-gray-500 text-[11px] normal-case tracking-normal leading-relaxed">We work only with providers that meet rigorous safety and hygiene standards, aligned with international best practices. </p>
             </div>
             <div>
-              <h5 className="text-[10px] font-black text-gray-900 mb-1">Complication Support</h5>
-              <p className="text-gray-500 text-[11px] normal-case tracking-normal leading-relaxed">Active medical involvement to help coordinate clinical solutions should they be required.</p>
+              <h5 className="text-[10px] font-black text-gray-900 mb-1">Ongoing support in case of complications </h5>
+              <p className="text-gray-500 text-[11px] normal-case tracking-normal leading-relaxed">If any issue arises, our team remains actively involved to facilitate communication and help coordinate solutions with the medical provider. </p>
             </div>
             <div>
-              <h5 className="text-[10px] font-black text-gray-900 mb-1">Clear Communication</h5>
-              <p className="text-gray-500 text-[11px] normal-case tracking-normal leading-relaxed">Ensuring you are fully informed on both the potential risks and the recovery path.</p>
+              <h5 className="text-[10px] font-black text-gray-900 mb-1">Clear medical communication </h5>
+              <p className="text-gray-500 text-[11px] normal-case tracking-normal leading-relaxed">Patients are fully informed about risks, benefits, and recovery expectations before proceeding with any treatment. </p>
             </div>
           </div>
         </div>
@@ -137,16 +136,16 @@ export function Gurantees(){
           <h3 className="text-xl font-bold text-gray-900 mb-8">Medical Support Guarantee</h3>
           <div className="space-y-6 uppercase tracking-wider">
             <div>
-              <h5 className="text-[10px] font-black text-gray-900 mb-1">Dedicated Coordinator</h5>
-              <p className="text-gray-500 text-[11px] normal-case tracking-normal leading-relaxed">Your guide is a qualified healthcare professional, not just an administrative assistant.</p>
+              <h5 className="text-[10px] font-black text-gray-900 mb-1">Dedicated medical coordinator </h5>
+              <p className="text-gray-500 text-[11px] normal-case tracking-normal leading-relaxed">Each patient is assisted by a healthcare professional who guides them through the entire journey—from initial consultation to recovery. </p>
             </div>
             <div>
-              <h5 className="text-[10px] font-black text-gray-900 mb-1">Second Opinion</h5>
-              <p className="text-gray-500 text-[11px] normal-case tracking-normal leading-relaxed">Independent medical reviews are always available to confirm your primary diagnosis.</p>
+              <h5 className="text-[10px] font-black text-gray-900 mb-1">Second medical opinion </h5>
+              <p className="text-gray-500 text-[11px] normal-case tracking-normal leading-relaxed">When needed, patients can request a second opinion to confirm diagnosis and explore the best treatment options. </p>
             </div>
             <div>
-              <h5 className="text-[10px] font-black text-gray-900 mb-1">Follow-up Care</h5>
-              <p className="text-gray-500 text-[11px] normal-case tracking-normal leading-relaxed">Continued professional support throughout your recovery after you return home.</p>
+              <h5 className="text-[10px] font-black text-gray-900 mb-1">Post-treatment follow-up </h5>
+              <p className="text-gray-500 text-[11px] normal-case tracking-normal leading-relaxed">We remain available after the procedure to support recovery and ensure continuity of care. </p>
             </div>
           </div>
         </div>
@@ -159,16 +158,16 @@ export function Gurantees(){
           <h3 className="text-xl font-bold mb-8">Privacy & Security <br/> Guarantee</h3>
           <div className="space-y-6 uppercase tracking-wider">
             <div>
-              <h5 className="text-[10px] font-black text-white mb-1">Confidential Care</h5>
-              <p className="text-gray-400 text-[11px] normal-case tracking-normal leading-relaxed">Strict professional discretion at every stage of your medical journey.</p>
+              <h5 className="text-[10px] font-black text-white mb-1">Confidential medical care </h5>
+              <p className="text-gray-400 text-[11px] normal-case tracking-normal leading-relaxed">All patient information is handled with strict confidentiality and professional discretion.</p>
             </div>
             <div>
-              <h5 className="text-[10px] font-black text-white mb-1">Data Protection</h5>
-              <p className="text-gray-400 text-[11px] normal-case tracking-normal leading-relaxed">Secure handling of medical records meeting international privacy standards.</p>
+              <h5 className="text-[10px] font-black text-white mb-1">Secure data handling </h5>
+              <p className="text-gray-400 text-[11px] normal-case tracking-normal leading-relaxed">We follow international standards for data protection and secure communication, ensuring patient privacy at all times. </p>
             </div>
             <div>
               <h5 className="text-[10px] font-black text-white mb-1">Discreet Experience</h5>
-              <p className="text-gray-400 text-[11px] normal-case tracking-normal leading-relaxed">Optional privacy measures for high-profile patients requiring anonymity.</p>
+              <p className="text-gray-400 text-[11px] normal-case tracking-normal leading-relaxed">Patients may request additional privacy measures throughout their journey. </p>
             </div>
           </div>
         </div>
@@ -182,7 +181,7 @@ export function Gurantees(){
 
 
 
-      <section className="max-w-4xl mx-auto px-6 text-center">
+      <section className="max-w-4xl mx-auto px-6 text-center hidden">
         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 tracking-tight">
           Our commitment is physician-led.
         </h2>
