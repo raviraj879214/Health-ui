@@ -5,22 +5,40 @@
 export  function WhyBrazil(){
 
 const services = [
-    { title: "Post-operative Nursing Care", icon: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" },
-    { title: "Citizenship by Birth Support", icon: "M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
-    { title: "Insurance Navigation", icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" },
-    { title: "Flight & Logistics Planning", icon: "M12 19l9 2-9-18-9 18 9-2zm0 0v-8" },
-    { title: "Visa & Legal Assistance", icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" },
-    { title: "Medical Translation Services", icon: "M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 11.37 9.19 15.624 5 18" },
-  ];
+  {
+    title: "Post-operative care with qualified healthcare professionals ",
+    icon: "M19 8h-1a3 3 0 00-2.83 2H14V9a2 2 0 00-2-2h-1V6a2 2 0 10-4 0v1H6a2 2 0 00-2 2v1H3a1 1 0 000 2h1v1a2 2 0 002 2h1v1a2 2 0 104 0v-1h1a2 2 0 002-2v-1h1a3 3 0 002.83 2H19a1 1 0 100-2z"
+  },
+  {
+    title: "Assistance for patients traveling alone ",
+    icon: "M17 20h5V4H2v16h5m10 0v-6a2 2 0 10-4 0v6m4 0H7"
+  },
+  {
+    title: "Support related to citizenship by birth opportunities in Brazil ",
+    icon: "M12 2a10 10 0 100 20 10 10 0 000-20zm0 0c2.5 2.5 4 6 4 10s-1.5 7.5-4 10c-2.5-2.5-4-6-4-10s1.5-7.5 4-10z"
+  },
+  {
+    title: "Guidance with international health insurance options ",
+    icon: "M12 3l7 4v5c0 5-3.5 9-7 10-3.5-1-7-5-7-10V7l7-4z"
+  },
+  {
+    title: "Assistance with flight planning and logistics ",
+    icon: "M2 16l20-5-20-5v4l15 1-15 1v4z"
+  },
+  {
+    title: "Support with visa requirements and documentation ",
+    icon: "M9 12h6m-6 4h6M7 3h6l4 4v14H7a2 2 0 01-2-2V5a2 2 0 012-2z"
+  }
+];
 
 
   const benefits = [
-    "50% to 80% Cost Savings vs. United States",
-    "JCI-Accredited Hospitals & Clinics",
-    "Physician-Led Clinical Supervision",
-    "Access to World-Renowned Specialists",
-    "State-of-the-art Medical Technology",
-    "Premium Post-Op Recovery Experiences",
+    "Affordable, high-quality medical care",
+    "Internationally recognized physicians",
+    "Modern hospitals and infrastructure ",
+    "Unique recovery and travel opportunities ",
+    "Physician-led coordination and support ",
+    "Access to premium additional services ",
   ];
 
 
@@ -39,13 +57,70 @@ const services = [
                         <span className="text-blue-600">Medical Tourism?</span>
                     </h1>
                     <p className="mt-6 text-gray-600 text-lg leading-relaxed">
-                        Brazil has emerged as a premier global hub for healthcare, combining
-                        rigorous clinical standards with groundbreaking innovation. Through our
-                        physician-guided platform, we bridge the gap between international
-                        patients and Brazil's elite medical infrastructure.
+                       Brazil is one of the world’s leading destinations for medical tourism, attracting international patients—especially from the United States—seeking high-quality, affordable medical care abroad. 
+                       Through our physician-led platform, patients gain access to carefully selected hospitals, experienced specialists, and a fully coordinated medical travel experience in Brazil. 
                     </p>
                 </div>
-                {/* Bottom Section */}
+                
+                <div className="mt-16 grid md:grid-cols-2 gap-10 items-center">
+
+
+  <div  className="">
+    <p className="text-xs tracking-widest uppercase text-blue-500 mb-3">
+      Cost Advantage
+    </p>
+
+    <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+      Affordable Surgery Without Compromising Quality
+    </h2>
+
+    <p className="text-gray-600 mb-6 leading-relaxed">
+      One of the main reasons patients choose Brazil is the{" "}
+      <strong>significant cost advantage.</strong> Medical procedures can cost{" "}
+      <strong>50% to 80% less</strong> than in the United States, while still offering:
+    </p>
+
+    <ul className="space-y-3 text-gray-700">
+      <li className="flex items-start gap-3">
+        <span className="text-blue-500 mt-1">✔</span>
+        Advanced medical technology
+      </li>
+      <li className="flex items-start gap-3">
+        <span className="text-blue-500 mt-1">✔</span>
+        Highly trained physicians
+      </li>
+      <li className="flex items-start gap-3">
+        <span className="text-blue-500 mt-1">✔</span>
+        International standards of care
+      </li>
+    </ul>
+  </div>
+
+
+  <div className="bg-white shadow-lg rounded-2xl p-6 md:p-8">
+    
+    {/* Stats */}
+    <div className="grid grid-cols-2 gap-4 mb-6">
+      <div className="bg-blue-50 text-center p-4 rounded-xl">
+        <h3 className="text-2xl font-bold text-blue-600">50–80%</h3>
+        <p className="text-xs text-gray-500 mt-1">Lower Cost</p>
+      </div>
+
+      <div className="bg-green-50 text-center p-4 rounded-xl">
+        <h3 className="text-2xl font-bold text-green-600">High</h3>
+        <p className="text-xs text-gray-500 mt-1">Quality Care</p>
+      </div>
+    </div>
+
+    {/* Highlight Box */}
+    <div className="bg-gray-50 p-4 rounded-xl text-sm text-gray-600 italic">
+      This makes <strong>affordable surgery in Brazil</strong> a practical and safe alternative. 
+    </div>
+
+  </div>
+
+</div>
+
                 <div className="mt-16 grid md:grid-cols-2 gap-10 items-center">
                     {/* Left Content */}
                     <div>
@@ -56,19 +131,21 @@ const services = [
                             World-Class Hospitals and Specialists
                         </h2>
                         <p className="text-gray-600 mb-6 leading-relaxed">
-                            Brazil is home to some of the most prestigious healthcare institutions
-                            in the world. Many of our partner facilities are{" "}
-                            <strong>JCI-accredited</strong>, maintaining the same safety protocols
-                            and quality benchmarks as top-tier U.S. hospitals.
+                            Brazil is home to <strong> top-tier hospitals and internationally recognized physicians,</strong> with modern infrastructure comparable to leading healthcare systems worldwide. 
+                            Through our network, patients are connected with: 
                         </p>
                         <ul className="space-y-3 text-gray-700">
                             <li className="flex items-start gap-3">
                                 <span className="text-blue-500 mt-1">✔</span>
-                                Board-certified specialists with international fellowships.
+                                Board-certified and highly experienced doctors
                             </li>
                             <li className="flex items-start gap-3">
                                 <span className="text-blue-500 mt-1">✔</span>
-                                State-of-the-art robotic surgery and diagnostic imaging.
+                                Fully equipped, accredited medical facilities 
+                            </li>
+                            <li className="flex items-start gap-3">
+                                <span className="text-blue-500 mt-1">✔</span>
+                                Professionals trained in advanced and up-to-date techniques 
                             </li>
                         </ul>
                     </div>
@@ -85,8 +162,7 @@ const services = [
                             </div>
                         </div>
                         <div className="bg-gray-50 p-4 rounded-xl text-sm text-gray-600 italic">
-                            "The surgical expertise and nursing care I received in São Paulo
-                            rivaled any top clinic in London or New York."
+                           We focus on quality, safety, and consistency, ensuring every patient receives care aligned with international standards. 
                         </div>
                     </div>
                 </div>
@@ -99,49 +175,63 @@ const services = [
                     A Global Leader in Medicine
                 </h2>
 
-                {/* Description Paragraph */}
+                
                 <p className="text-gray-600 text-lg leading-relaxed max-w-4xl mb-12">
-                    Brazil’s reputation for innovation is well-established, particularly in cardiology, oncology, and
-                    aesthetic surgery. The country invests heavily in medical research and biotechnology, ensuring
-                    that specialized professionals remain at the forefront of global clinical trends.
+                   Brazil has a long-standing reputation in the global medical community, particularly in  <strong>high-volume, high-expertise specialties. </strong>
+                </p>
+                <p className="text-gray-600 text-lg leading-relaxed max-w-4xl mb-12">
+                    Today, Brazil is recognized for delivering <strong> comprehensive, high-quality healthcare across multiple disciplines. </strong>
                 </p>
 
-                {/* Feature Grid - Matches the blue/red icon style in image */}
+               
                 <div className="flex flex-col md:flex-row gap-12">
 
-                    {/* Clinical Innovation Item */}
-                    <div className="flex gap-4 items-start max-w-sm">
-                        <div className="bg-blue-50 p-3 rounded-lg flex-shrink-0">
-                            <svg className="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.628.282a2 2 0 01-1.806 0l-.628-.282a6 6 0 00-3.86-.517l-2.387.477a2 2 0 00-1.022.547l-.34.34a2 2 0 000 2.828l1.245 1.245A2 2 0 006.454 20h11.092a2 2 0 001.414-.586l1.245-1.245a2 2 0 000-2.828l-.34-.34z" />
-                            </svg>
-                        </div>
-                        <div>
-                            <h4 className="font-bold text-gray-900 leading-tight">Clinical Innovation</h4>
-                            <p className="text-gray-500 text-sm mt-1">
-                                Pioneers in regenerative medicine and minimally invasive techniques.
-                            </p>
-                        </div>
-                    </div>
+    {/* Item 1 */}
+    <div className="flex gap-4 items-start max-w-sm">
+        <div className="bg-blue-50 p-3 rounded-lg flex-shrink-0">
+            <svg className="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.628.282a2 2 0 01-1.806 0l-.628-.282a6 6 0 00-3.86-.517l-2.387.477a2 2 0 00-1.022.547l-.34.34a2 2 0 000 2.828l1.245 1.245A2 2 0 006.454 20h11.092a2 2 0 001.414-.586l1.245-1.245a2 2 0 000-2.828l-.34-.34z" />
+            </svg>
+        </div>
+        <div>
+            <h4 className="font-bold text-gray-900 leading-tight">
+                Continuous innovation in medical techniques
+            </h4>
+        </div>
+    </div>
 
-                    {/* Specialized Talent Item */}
-                    <div className="flex gap-4 items-start max-w-sm">
-                        <div className="bg-red-50 p-3 rounded-lg flex-shrink-0">
-                            <svg className="w-6 h-6 text-red-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                            </svg>
-                        </div>
-                        <div>
-                            <h4 className="font-bold text-gray-900 leading-tight">Specialized Talent</h4>
-                            <p className="text-gray-500 text-sm mt-1">
-                                A vast network of MDs with global training and multi-lingual capabilities.
-                            </p>
-                        </div>
-                    </div>
+    {/* Item 2 */}
+    <div className="flex gap-4 items-start max-w-sm">
+        <div className="bg-red-50 p-3 rounded-lg flex-shrink-0">
+            <svg className="w-6 h-6 text-red-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+        </div>
+        <div>
+            <h4 className="font-bold text-gray-900 leading-tight">
+                Highly specialized professionals
+            </h4>
+        </div>
+    </div>
 
-                </div>
+    {/* Item 3 */}
+    <div className="flex gap-4 items-start max-w-sm">
+        <div className="bg-green-50 p-3 rounded-lg flex-shrink-0">
+            <svg className="w-6 h-6 text-green-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 17v-6h13M9 11l3-3m0 0l3 3m-3-3v12" />
+            </svg>
+        </div>
+        <div>
+            <h4 className="font-bold text-gray-900 leading-tight">
+                Strong clinical outcomes across multiple fields
+            </h4>
+        </div>
+    </div>
+
+</div>
             </div>
         </div>
+
         <section className="bg-white py-20 px-6 font-sans">
             <div className="max-w-6xl mx-auto">
 
@@ -154,38 +244,56 @@ const services = [
                             World-Class Travel
                         </h2>
                         <p className="text-gray-400 text-lg leading-relaxed mb-8">
-                            Recovery is just as important as the procedure itself. Brazil offers a serene
-                            environment for post-operative healing, allowing patients to rejuvenate
-                            amidst breathtaking landscapes.
+                            Choosing Brazil allows patients to combine medical treatment with a unique recovery experience. 
                         </p>
 
-                        {/* Pill Tags */}
-                        <div className="flex flex-wrap gap-3">
-                            {["TROPICAL BEACHES", "IGUAÇU FALLS", "CULTURAL HUBS"].map((tag) => (
-                                <span key={tag} className="px-4 py-1.5 rounded-full border border-gray-700 text-[10px] font-bold tracking-widest text-gray-300">
-                                    {tag}
-                                </span>
-                            ))}
-                        </div>
+                       
                     </div>
 
-                    {/* Testimonial Box Right */}
-                    <div className="md:w-1/2 w-full z-10">
-                        <div className="bg-blue-900/20 border border-blue-500/30 backdrop-blur-sm rounded-2xl p-8">
-                            <div className="flex items-center gap-3 mb-4 text-blue-400">
-                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                </svg>
-                                <span className="font-semibold text-sm uppercase tracking-wider">Healing Environments</span>
-                            </div>
-                            <p className="text-gray-300 italic text-lg leading-relaxed">
-                                "Being able to recover in a quiet, coastal setting significantly
-                                reduced my stress levels and accelerated my recovery."
-                            </p>
-                        </div>
-                    </div>
+                   
+                   <div className="md:w-1/2 w-full z-10">
+    <div className="bg-blue-900/20 border border-blue-500/30 backdrop-blur-sm rounded-2xl p-8">
 
-                    {/* Decorative Glow */}
+        {/* Header */}
+        <div className="flex items-center gap-3 mb-6 text-blue-400">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+            <span className="font-semibold text-sm uppercase tracking-wider">
+                Patients can recover while enjoying
+            </span>
+        </div>
+
+        {/* List */}
+        <ul className="space-y-4">
+            <li className="flex items-start gap-3 text-gray-300 italic text-lg leading-relaxed">
+                <span className="text-blue-500">✔</span>
+                <span>Beautiful beaches and coastal destinations</span>
+            </li>
+
+            <li className="flex items-start gap-3 text-gray-300 italic text-lg leading-relaxed">
+                <span className="text-blue-500">✔</span>
+                <span>Vibrant urban centers and cultural experiences</span>
+            </li>
+
+            <li className="flex items-start gap-3 text-gray-300 italic text-lg leading-relaxed">
+                <span className="text-blue-500">✔</span>
+                <span>
+                    Natural wonders such as the Iguaçu Falls and the city of Foz do Iguaçu,
+                    known for its excellent tourism infrastructure
+                </span>
+            </li>
+
+            <li className="flex items-start gap-3 text-gray-300 italic text-lg leading-relaxed">
+                <span className="text-blue-500">✔</span>
+                <span>Restful environments ideal for post-operative recovery</span>
+            </li>
+        </ul>
+
+    </div>
+</div>
+
+                    
                     <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-blue-600/20 rounded-full blur-3xl"></div>
                 </div>
 
@@ -195,52 +303,74 @@ const services = [
                         A Structured and Physician-Guided Experience
                     </h2>
                     <p className="text-gray-500">
-                        We don't just book appointments; we manage your entire clinical pathway.
-                        Our platform is led by physicians who vet every hospital and doctor in our network.
+                       Navigating healthcare abroad can be complex—but that’s where we come in. 
+                    </p>
+                    <p className="text-gray-500">
+                       We deliver the organization, clarity, and reliability international patients need. 
                     </p>
                 </div>
 
-                {/* Three Column Features */}
-                <div className="grid md:grid-cols-3 gap-6">
-                    {[
-                        {
-                            title: "Vetted Access",
-                            desc: "Only surgeons with verified outcomes and impeccable safety records are included.",
-                            icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                        },
-                        {
-                            title: "Personalized Planning",
-                            desc: "Customized itineraries that align with your medical timeline and travel preferences.",
-                            icon: "M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                        },
-                        {
-                            title: "Continuity of Care",
-                            desc: "Bridging communication between your home physician and your Brazilian surgical team.",
-                            icon: "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                        }
-                    ].map((item, i) => (
-                        <div key={i} className="bg-white border border-gray-100 rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow">
-                            <div className="bg-blue-50 w-12 h-12 rounded-xl flex items-center justify-center mb-6">
-                                <svg className="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d={item.icon} />
-                                </svg>
-                            </div>
-                            <h4 className="text-xl font-bold text-gray-900 mb-3">{item.title}</h4>
-                            <p className="text-gray-500 text-sm leading-relaxed">
-                                {item.desc}
-                            </p>
-                        </div>
-                    ))}
-                </div>
+                
+               <div className="grid md:grid-cols-3 gap-8">
+  {[
+    {
+      title: "Direct access to vetted doctors and hospitals ",
+      icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+    },
+    {
+      title: "Personalized treatment planning led by experienced physicians ",
+      icon: "M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+    },
+    {
+      title: "Full coordination and continuous support throughout the journey ",
+      icon: "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+    }
+  ].map((item, i) => (
+    <div
+      key={i}
+      className="group bg-white/80 backdrop-blur-sm border border-gray-100 rounded-2xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
+    >
+      
+      {/* Icon */}
+      <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-6 
+        bg-gradient-to-br from-blue-100 to-blue-50 
+        group-hover:from-blue-500 group-hover:to-indigo-500 transition-all duration-300">
+        
+        <svg
+          className="w-6 h-6 text-blue-600 group-hover:text-white transition-colors duration-300"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          viewBox="0 0 24 24"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d={item.icon} />
+        </svg>
+      </div>
+
+      {/* Title */}
+      <h4 className="text-lg md:text-xl font-semibold text-gray-900 leading-snug group-hover:text-blue-600 transition-colors duration-300">
+        {item.title}
+      </h4>
+
+      {/* Optional subtle line */}
+      <div className="mt-4 h-1 w-10 bg-blue-500 rounded-full opacity-70 group-hover:w-16 transition-all duration-300"></div>
+
+    </div>
+  ))}
+</div>
 
             </div>
         </section>
 
         <section className="bg-gray-50 py-20 px-6">
-      <div className="max-w-5xl mx-auto">
+      <div className="text-center max-w-5xl mx-auto">
         <h2 className="text-2xl font-bold text-gray-900 text-center mb-12">
-          Comprehensive Concierge Services
+         Additional Services for International Patients 
         </h2>
+
+         <p className="text-gray-500">
+                      To further enhance your experience, we offer additional services designed for comfort, safety, and convenience from start to finish. 
+        </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {services.map((service, index) => (
@@ -303,11 +433,11 @@ const services = [
           ))}
         </ul>
 
-        <div className="mt-10 flex justify-center">
+        {/* <div className="mt-10 flex justify-center">
           <button className="bg-gradient-to-r from-blue-400 to-blue-500 hover:from-blue-500 hover:to-blue-600 text-white text-xs font-bold py-3 px-8 rounded-xl shadow-md transition-all active:scale-95 cursor-pointer">
             Start Your Medical Journey
           </button>
-        </div>
+        </div> */}
       </div>
     </section>
     </>);
