@@ -108,18 +108,49 @@ export function AccordionItem({ id, title, children, isOpen, onToggle }) {
 
 
 
-export default function FAQ({ items = [], multiple = false, defaultOpen = null }) {
+export default function FAQ({multiple = false, defaultOpen = null }) {
+
+    const [items,setItems] = useState([]);
+
+    
+    useEffect(()=>{
+      fetchfaqs();
+    },[]);
+  
+  
+    const fetchfaqs= async()=>{
+      const res= await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/homepage-banner/get-faqs`,{
+        method : "Get",
+        content : "application/json"
+      });
+  
+      if(res.ok){
+        const result= await res.json();
+  
+        const formattedFaqs = result.data.map((item) => ({
+          id: item.id,
+          title: item.question,
+          content: <p>{item.answer}</p>,
+        }));
+  
+        setItems(formattedFaqs);
+  
+      }
+  
+  
+    }
+
     const [openIds, setOpenIds] = useState(() => {
+
         if (items.length === 0) return [];
 
-        // MULTIPLE MODE
+   
         if (multiple) {
             if (Array.isArray(defaultOpen)) return defaultOpen;
             if (defaultOpen !== null) return [defaultOpen];
             return [items[0].id]; // open first
         }
 
-        // SINGLE MODE
         if (defaultOpen !== null) return [defaultOpen];
         return [items[0].id]; // open first
     });
@@ -134,6 +165,20 @@ export default function FAQ({ items = [], multiple = false, defaultOpen = null }
       return isOpen ? [] : [id];
     });
   };
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
 
   return (
     <div className="md:my-18 my-16">
@@ -155,5 +200,7 @@ export default function FAQ({ items = [], multiple = false, defaultOpen = null }
            
         </div>
     </div>
+
+
   );
 }

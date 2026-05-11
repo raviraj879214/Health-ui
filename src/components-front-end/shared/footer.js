@@ -12,25 +12,21 @@ const Footer = forwardRef(function Footer(props, ref) {
               <h4 className="font-bold">Useful Links</h4>
               <ul className="p-0 m-0 list-none">
                 <li>
-                  <Link href="#">Home</Link>
+                  <Link href="/">Home</Link>
                 </li>
                 <li>
-                  <Link href="#">About us</Link>
+                  <Link href="about-us">About us</Link>
                 </li>
                 <li>
-                  <Link href="#">Why Brazil</Link>
+                  <Link href="why-brazil">Why Brazil</Link>
                 </li>
                 <li>
-                  <Link href="#">Clinics</Link>
+                  <Link href="/clinics">Clinics</Link>
                 </li>
+               
+               
                 <li>
-                  <Link href="#">News</Link>
-                </li>
-                <li>
-                  <Link href="#">Affiliate Program</Link>
-                </li>
-                <li>
-                  <Link href="#">Your Guarantees</Link>
+                  <Link href="/your-guarantees">Your Guarantees</Link>
                 </li>
               </ul>
             </div>
@@ -72,19 +68,19 @@ const Footer = forwardRef(function Footer(props, ref) {
                   <h4 className="font-bold">Additional Services</h4>
                   <ul className="p-0 m-0 list-none">
                     <li>
-                      <Link href="#">Insurance</Link>
+                      <Link href="/insurance">Insurance</Link>
                     </li>
                     <li>
-                      <Link href="#">Visas</Link>
+                      <Link href="/visa">Visas</Link>
                     </li>
                     <li>
-                      <Link href="#">Citizenship</Link>
+                      <Link href="/citizenship">Citizenship</Link>
                     </li>
                     <li>
-                      <Link href="#">Flights</Link>
+                      <Link href="/flights">Flights</Link>
                     </li>
                     <li>
-                      <Link href="#">Personal Assistance</Link>
+                      <Link href="/personal-assistance">Personal Assistance</Link>
                     </li>
                   </ul>
                 </div>
