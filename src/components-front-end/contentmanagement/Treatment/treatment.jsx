@@ -270,8 +270,14 @@ const procedures = [
               </span>
             </div>
           ))}
+          
         </div>
-
+        
+        <div className="mt-6 text-center">
+  <p className="text-lg md:text-xl text-gray-700 leading-relaxed font-light tracking-wide">
+    Providing a safe, comfortable, and well-coordinated birth experience.
+  </p>
+</div>
       </div>
     </section>
 
@@ -323,6 +329,46 @@ const procedures = [
 
       </div>
     </section>
+
+    <div className="max-w-4xl mx-auto py-12 px-6 text-center">
+
+  <div className="inline-flex items-center gap-3 mb-10">
+    <span className="h-px w-12 bg-gray-300"></span>
+    <h3 className="text-sm md:text-base font-semibold tracking-[0.3em] text-gray-700 uppercase">
+      Patients choose Brazil for
+    </h3>
+    <span className="h-px w-12 bg-gray-300"></span>
+  </div>
+
+  <div className="grid md:grid-cols-2 gap-6 text-left">
+
+    <div className="p-6 rounded-3xl bg-white border border-gray-100 shadow-sm hover:shadow-md transition">
+      <p className="text-gray-800 text-lg leading-relaxed">
+        High-quality care with modern laboratory technology
+      </p>
+    </div>
+
+    <div className="p-6 rounded-3xl bg-white border border-gray-100 shadow-sm hover:shadow-md transition">
+      <p className="text-gray-800 text-lg leading-relaxed">
+        Experienced fertility specialists
+      </p>
+    </div>
+
+    <div className="p-6 rounded-3xl bg-white border border-gray-100 shadow-sm hover:shadow-md transition">
+      <p className="text-gray-800 text-lg leading-relaxed">
+        More accessible pricing compared to the U.S.
+      </p>
+    </div>
+
+    <div className="p-6 rounded-3xl bg-white border border-gray-100 shadow-sm hover:shadow-md transition">
+      <p className="text-gray-800 text-lg leading-relaxed">
+        Personalized and discreet treatment experience
+      </p>
+    </div>
+
+  </div>
+
+</div>
 
 
     <section className="bg-gray-50 py-24 px-6 text-center" id="DENTAL">
@@ -376,49 +422,44 @@ const procedures = [
     </section>
 
     
-     <section className="flex flex-col items-center justify-center min-h-screen bg-white p-6 font-sans">
-      <div className="w-full max-w-2xl">
-        {/* Header */}
-        <h2 className="text-4xl md:text-5xl font-bold text-center text-gray-900 mb-12 tracking-tight">
-          Why Choose Brazil?
-        </h2>
+ <section className="bg-gray-50 py-24 px-6 font-sans">
+  <div className="max-w-3xl mx-auto">
 
-        {/* Features List */}
-        <div className="space-y-0 mb-16">
-          {featureslaststep.map((feature, index) => (
-            <div 
-              key={index} 
-              className="flex items-center justify-between py-6 border-b border-gray-100 last:border-0"
-            >
-              <span className="text-lg md:text-xl font-medium text-gray-800">
-                {feature}
-              </span>
-              {/* Custom SVG Checkmark */}
-              <svg 
-                className="w-6 h-6 text-teal-600" 
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24" 
-                strokeWidth="2"
-              >
-                <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
+    {/* Header */}
+    <h2 className="text-4xl md:text-5xl font-bold text-center text-gray-900 mb-14 tracking-tight">
+      Why Choose Brazil?
+    </h2>
+
+    {/* Timeline / Steps Style */}
+    <div className="relative">
+
+      {/* Vertical Line */}
+      <div className="absolute left-4 top-0 bottom-0 w-px bg-gray-200"></div>
+
+      <div className="space-y-10">
+
+        {featureslaststep.map((feature, index) => (
+          <div key={index} className="relative flex items-start gap-6">
+
+            {/* Dot */}
+            <div className="relative z-10 flex items-center justify-center w-8 h-8 rounded-full bg-white border-2 border-teal-600 text-teal-600 font-bold text-sm shadow-sm">
+              {index + 1}
             </div>
-          ))}
-        </div>
 
-        {/* Call to Action Button */}
-        <div className="flex flex-col items-center gap-4 hidden">
-          <button className="px-10 py-4 bg-linear-to-b from-[#1E88C1] to-[#2DA0E2] text-white font-semibold text-lg rounded-xl shadow-lg hover:shadow-xl transition-all active:scale-95 cursor-pointer">
-            Schedule a Consultation
-          </button>
-          
-          {/* Footer Text */}
-          <span className="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-bold">
-            Confidential Medical Review
-          </span>
-        </div>
+            {/* Content */}
+            <div className="flex-1 bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition">
+              <p className="text-lg md:text-xl font-medium text-gray-800 leading-relaxed">
+                {feature}
+              </p>
+            </div>
+
+          </div>
+        ))}
+
       </div>
-    </section>
+    </div>
+
+  </div>
+</section>
     </>);
 }

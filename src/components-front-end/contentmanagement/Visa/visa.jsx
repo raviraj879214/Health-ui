@@ -26,9 +26,13 @@ export function Visa(){
     </h1>
 
 
+  
     <p className="text-xl md:text-2xl text-slate-500 dark:text-slate-400 font-light leading-relaxed max-w-2xl">
       Traveling abroad for medical care should be simple and completely stress-free. 
       Our clinical architects manage the complexity so you can focus on recovery.
+    </p>
+      <p className="text-xl md:text-2xl text-slate-500 dark:text-slate-400 font-light leading-relaxed max-w-2xl">
+    That’s why we take full responsibility for the entire visa process, ensuring your entry into Brazil is smooth, secure, and effortless
     </p>
 
   </div>
@@ -107,60 +111,106 @@ export function Visa(){
       </div>
     </div>
 
-    {/* Section 02: No Cost, No Effort */}
-    <div className="relative">
-      <span className="absolute -top-12 -left-8 text-8xl font-black text-slate-200/60 dark:text-slate-800/40 select-none">02</span>
-      <div className="relative z-10 space-y-8">
-        <h3 className="text-2xl font-bold">No Cost, No Effort</h3>
-        <div className="bg-[#eeebed] dark:bg-slate-900/50 p-8 md:p-12 rounded-sm border-l-2 border-blue-600 max-w-3xl">
-          <blockquote className="text-xl md:text-2xl text-slate-700 dark:text-slate-300 italic font-light leading-snug">
-            "We cover the visa application fees for our patients. You will never have to navigate archaic government systems or worry about hidden visa costs."
-          </blockquote>
-        </div>
-        <p className="text-slate-500 dark:text-slate-500 text-sm max-w-xl font-light">
-          Our goal is to remove every possible barrier between you and your treatment. This service is fully integrated into our standard patient package at no additional surcharge to you.
-        </p>
-      </div>
+  
+<div className="relative">
+  <span className="absolute -top-12 -left-8 text-8xl font-black text-slate-200/60 dark:text-slate-800/40 select-none">
+    02
+  </span>
+
+  <div className="relative z-10 space-y-8">
+    <h3 className="text-2xl font-bold">No Cost, No Effort</h3>
+
+    <div className="bg-[#eeebed] dark:bg-slate-900/50 p-8 md:p-12 rounded-sm border-l-2 border-blue-600 max-w-3xl">
+      <blockquote className="text-xl md:text-2xl text-slate-700 dark:text-slate-300 italic font-light leading-snug">
+        "We cover the visa application fees for our patients. You will never have to navigate archaic government systems or worry about hidden visa costs."
+      </blockquote>
     </div>
+
+    {/* Added Points */}
+    <div className="space-y-4 max-w-2xl">
+      <p className="text-slate-700 font-medium">You will not need to:</p>
+
+      <ul className="space-y-3 text-slate-600 text-base md:text-lg">
+        <li>Pay any visa-related fees</li>
+        <li>Navigate government systems</li>
+        <li>Handle paperwork or submissions</li>
+      </ul>
+    </div>
+
+    <p className="text-slate-500 dark:text-slate-500 text-sm max-w-xl font-light">
+      Our goal is to remove every possible barrier between you and your treatment.
+      This service is fully integrated into our standard patient package at no additional surcharge to you.
+    </p>
+  </div>
+</div>
 
     {/* Section 03: Seamless and Fully Coordinated */}
     <div className="relative">
-      <span className="absolute -top-12 -left-8 text-8xl font-black text-slate-200/60 dark:text-slate-800/40 select-none">03</span>
-      <div className="relative z-10">
-        <h3 className="text-2xl font-bold mb-6">Seamless and Fully Coordinated</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-          <div className="space-y-6">
-            <p className="text-slate-600 dark:text-slate-400 font-light leading-relaxed">
-              Every step of your visa acquisition is aligned with your medical schedule. Precision and efficiency are our core clinical values—extended to your logistics.
-            </p>
-            <ul className="space-y-4">
-              <li className="flex items-center gap-3 text-sm font-medium text-[#0a5a8c] dark:text-blue-400">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-                Synchronized timeline with hospital admission
-              </li>
-              <li className="flex items-center gap-3 text-sm font-medium text-[#0a5a8c] dark:text-blue-400">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-                Direct coordination with consular authorities
-              </li>
-            </ul>
-          </div>
+  <span className="absolute -top-12 -left-8 text-8xl font-black text-slate-200/60 dark:text-slate-800/40 select-none">
+    03
+  </span>
 
-          {/* Efficiency Metric Card */}
-          <div className="bg-[#e4e1e0] dark:bg-slate-900 p-8 rounded-xl border border-slate-200 dark:border-slate-800 space-y-4 max-w-xs md:ml-auto">
-             <div className="w-10 h-10 bg-white dark:bg-slate-800 rounded flex items-center justify-center shadow-sm">
-                <svg className="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 20 20"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/><path fillRule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clipRule="evenodd"/></svg>
-             </div>
-             <div>
-               <h4 className="font-bold text-slate-800 dark:text-white">Efficiency Metric</h4>
-               <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 uppercase tracking-tight leading-relaxed">
-                 99.4% approval rating for all coordinated medical travel visas within the last 24 months.
-               </p>
-             </div>
-          </div>
-        </div>
+  <div className="relative z-10">
+
+    <h3 className="text-2xl font-bold mb-8">
+      Seamless and Fully Coordinated
+    </h3>
+
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+
+      {/* Left Content */}
+      <div className="space-y-8">
+
+        <p className="text-slate-600 dark:text-slate-400 font-light leading-relaxed">
+          Your visa process is:
+        </p>
+
+        <ul className="space-y-4">
+          <li className="flex items-center gap-3 text-sm md:text-base font-medium text-slate-700">
+            <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
+            Fully managed by our team
+          </li>
+
+          <li className="flex items-center gap-3 text-sm md:text-base font-medium text-slate-700">
+            <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
+            Aligned with your travel and treatment schedule
+          </li>
+
+          <li className="flex items-center gap-3 text-sm md:text-base font-medium text-slate-700">
+            <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
+            Handled with precision and efficiency
+          </li>
+        </ul>
+
+        <p className="text-slate-600 dark:text-slate-400 font-light leading-relaxed">
+          You can focus entirely on your medical journey—we handle the rest.
+        </p>
+
       </div>
-    </div>
 
+      {/* Right Highlight Card */}
+      <div className="bg-gradient-to-br from-blue-50 to-white dark:from-slate-900 dark:to-slate-950 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-6">
+
+        <div className="w-10 h-10 bg-white dark:bg-slate-800 rounded flex items-center justify-center shadow-sm">
+          <svg className="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
+            <path fillRule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5z" clipRule="evenodd"/>
+          </svg>
+        </div>
+
+        <h4 className="font-bold text-slate-900 dark:text-white">
+          Fully Coordinated System
+        </h4>
+
+        <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+          Precision and efficiency are our core clinical values—extended to your logistics.
+        </p>
+
+      </div>
+
+    </div>
+  </div>
+</div>
   </div>
 </section>
 

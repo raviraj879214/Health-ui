@@ -5,6 +5,7 @@ export  function AboutUs() {
 
   return (<>
 
+
     <div class="bg-white py-14 md:py-20">
       <div class="max-w-4xl mx-auto px-4 text-center">
 
@@ -227,6 +228,57 @@ export  function AboutUs() {
 
       </div>
     </div>
+    
+    <section className="bg-white py-20 md:py-28">
+  <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    {/* Heading */}
+    <div className="text-center">
+      <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 leading-tight">
+        A Seamless Medical Travel Experience
+      </h2>
+      <p className="mt-6 text-lg md:text-xl leading-8 text-gray-600 max-w-3xl mx-auto">
+        We provide end-to-end coordination for international patients,
+        including:
+      </p>
+    </div>
+    {/* Features */}
+    <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="rounded-3xl border border-gray-200 bg-gray-50 p-8 transition-all duration-300 hover:bg-white hover:shadow-lg">
+        <span className="text-5xl font-bold text-gray-200">01</span>
+        <h3 className="mt-5 text-2xl font-semibold text-gray-900">
+          Personalized treatment planning
+        </h3>
+      </div>
+      <div className="rounded-3xl border border-gray-200 bg-gray-50 p-8 transition-all duration-300 hover:bg-white hover:shadow-lg">
+        <span className="text-5xl font-bold text-gray-200">02</span>
+        <h3 className="mt-5 text-2xl font-semibold text-gray-900">
+          Direct connection with specialists
+        </h3>
+      </div>
+      <div className="rounded-3xl border border-gray-200 bg-gray-50 p-8 transition-all duration-300 hover:bg-white hover:shadow-lg">
+        <span className="text-5xl font-bold text-gray-200">03</span>
+        <h3 className="mt-5 text-2xl font-semibold text-gray-900">
+          Travel and accommodation guidance
+        </h3>
+      </div>
+      <div className="rounded-3xl border border-gray-200 bg-gray-50 p-8 transition-all duration-300 hover:bg-white hover:shadow-lg">
+        <span className="text-5xl font-bold text-gray-200">04</span>
+        <h3 className="mt-5 text-2xl font-semibold text-gray-900">
+          Pre- and post-operative support
+        </h3>
+      </div>
+    </div>
+    {/* Bottom Text */}
+    <div className="mt-16 rounded-3xl bg-gray-900 px-8 py-10 text-center">
+      <p className="text-xl md:text-2xl font-medium leading-9 text-white">
+        Our goal is to make your medical journey to Brazil safe, organized, and
+        stress-free.
+      </p>
+    </div>
+  </div>
+</section>
+
+
 
 
     <div className="relative bg-[#f4f7fb] py-20 overflow-hidden">
@@ -365,7 +417,7 @@ export  function AboutUs() {
       </div>
     </div>
 
-<div className="font-sans antialiased bg-white hidden">
+    <div className="font-sans antialiased bg-white hidden">
       {/* How It Works Section */}
       <section className="py-24">
         <div className="max-w-5xl mx-auto px-4 text-center">
@@ -383,7 +435,7 @@ export  function AboutUs() {
               <div className="flex flex-col items-center">
                 <div className="relative">
                   <div className="w-16 h-16 bg-white border border-slate-100 rounded-2xl flex items-center justify-center shadow-sm">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="8" y="2" width="8" height="4" rx="1" ry="1" /><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" /><path d="M12 11h4" /><path d="M12 16h4" /><path d="M8 11h.01" /><path d="M8 16h.01" /></svg>
                   </div>
                   <div className="absolute -top-2 -right-3 w-7 h-7 bg-[#38bdf8] text-white text-[10px] font-bold rounded-lg flex items-center justify-center border-2 border-white shadow-sm">01</div>
                 </div>
@@ -397,7 +449,7 @@ export  function AboutUs() {
               <div className="flex flex-col items-center">
                 <div className="relative">
                   <div className="w-16 h-16 bg-white border border-slate-100 rounded-2xl flex items-center justify-center shadow-sm">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="m10 8 5 2.5-5 2.5z"/></svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /><path d="m10 8 5 2.5-5 2.5z" /></svg>
                   </div>
                   <div className="absolute -top-2 -right-3 w-7 h-7 bg-[#38bdf8] text-white text-[10px] font-bold rounded-lg flex items-center justify-center border-2 border-white shadow-sm">02</div>
                 </div>
@@ -411,7 +463,7 @@ export  function AboutUs() {
               <div className="flex flex-col items-center">
                 <div className="relative">
                   <div className="w-16 h-16 bg-white border border-slate-100 rounded-2xl flex items-center justify-center shadow-sm">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/><path d="m15 15 3-3-3-3"/></svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /><path d="M2 12h20" /><path d="m15 15 3-3-3-3" /></svg>
                   </div>
                   <div className="absolute -top-2 -right-3 w-7 h-7 bg-[#38bdf8] text-white text-[10px] font-bold rounded-lg flex items-center justify-center border-2 border-white shadow-sm">03</div>
                 </div>
@@ -425,7 +477,7 @@ export  function AboutUs() {
               <div className="flex flex-col items-center">
                 <div className="relative">
                   <div className="w-16 h-16 bg-white border border-slate-100 rounded-2xl flex items-center justify-center shadow-sm">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14 12c0-1.1-.9-2-2-2s-2 .9-2 2 .9 2 2 2 2-.9 2-2Z"/><path d="m15 15 3.5 3.5a2.12 2.12 0 0 1-3 3L12 18l-3.5 3.5a2.12 2.12 0 0 1-3-3L9 15l-3.5-3.5a2.12 2.12 0 0 1 3-3L12 12l3.5-3.5a2.12 2.12 0 0 1 3 3L15 15Z"/></svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14 12c0-1.1-.9-2-2-2s-2 .9-2 2 .9 2 2 2 2-.9 2-2Z" /><path d="m15 15 3.5 3.5a2.12 2.12 0 0 1-3 3L12 18l-3.5 3.5a2.12 2.12 0 0 1-3-3L9 15l-3.5-3.5a2.12 2.12 0 0 1 3-3L12 12l3.5-3.5a2.12 2.12 0 0 1 3 3L15 15Z" /></svg>
                   </div>
                   <div className="absolute -top-2 -right-3 w-7 h-7 bg-[#38bdf8] text-white text-[10px] font-bold rounded-lg flex items-center justify-center border-2 border-white shadow-sm">04</div>
                 </div>
@@ -436,14 +488,14 @@ export  function AboutUs() {
               </div>
             </div>
           </div>
-          
+
           <div className="mt-20 flex justify-center">
-  <div className="relative bg-[#f8fafc] rounded-r-xl py-6 px-12 max-w-2xl border-l-4 border-[#38bdf8]">
-    <p className="text-[#38bdf8] font-medium italic text-base sm:text-lg leading-relaxed text-center">
-      "Our goal is to make your medical journey to Brazil safe, organized, and stress-free."
-    </p>
-  </div>
-</div>
+            <div className="relative bg-[#f8fafc] rounded-r-xl py-6 px-12 max-w-2xl border-l-4 border-[#38bdf8]">
+              <p className="text-[#38bdf8] font-medium italic text-base sm:text-lg leading-relaxed text-center">
+                "Our goal is to make your medical journey to Brazil safe, organized, and stress-free."
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -459,37 +511,37 @@ export  function AboutUs() {
             {/* Card 1 */}
             <div className="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm">
               <div className="w-12 h-12 mx-auto rounded-xl bg-[#ecfdf5] flex items-center justify-center mb-6">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#059669" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#059669" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><path d="M12 8v8" /><path d="M8 12h8" /></svg>
               </div>
               <h4 className="text-[13px] font-bold text-slate-900 mb-2">Safe & Ethical Care</h4>
               <p className="text-[11px] text-slate-400 leading-relaxed">
-               
+
               </p>
             </div>
 
             {/* Card 2 */}
             <div className="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm">
               <div className="w-12 h-12 mx-auto rounded-xl bg-[#eff6ff] flex items-center justify-center mb-6">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><path d="M7 15h.01"/><path d="M11 15h.01"/></svg>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2"><rect x="2" y="5" width="20" height="14" rx="2" /><line x1="2" y1="10" x2="22" y2="10" /><path d="M7 15h.01" /><path d="M11 15h.01" /></svg>
               </div>
               <h4 className="text-[13px] font-bold text-slate-900 mb-2">Transparent Pricing</h4>
               <p className="text-[11px] text-slate-400 leading-relaxed">
-                
+
               </p>
             </div>
 
             {/* Card 3 */}
             <div className="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm">
               <div className="w-12 h-12 mx-auto rounded-xl bg-[#fef2f2] flex items-center justify-center mb-6">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2"><path d="M4 14v-3a8 8 0 1 1 16 0v3"/><path d="M18 19c0 1.1-.9 2-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z"/><path d="M7 14H4a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2Z"/></svg>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2"><path d="M4 14v-3a8 8 0 1 1 16 0v3" /><path d="M18 19c0 1.1-.9 2-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z" /><path d="M7 14H4a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2Z" /></svg>
               </div>
               <h4 className="text-[13px] font-bold text-slate-900 mb-2">Personalized Support</h4>
               <p className="text-[11px] text-slate-400 leading-relaxed">
-               
+
               </p>
             </div>
           </div>
-          
+
         </div>
       </section>
     </div>
@@ -497,47 +549,92 @@ export  function AboutUs() {
 
 
 
-
-   <div className="bg-[#3da0d8] py-24 text-center text-white">
-  <div className="max-w-3xl mx-auto px-6 flex flex-col items-center">
-    
-    {/* SVG Star Container */}
-    <div className="mb-8 flex justify-center">
-      <svg
-        width="64"
-        height="64"
-        viewBox="0 0 100 100"
-        xmlns="http://www.w3.org/2000/svg"
-        className="drop-shadow-sm"
-      >
-        <path
-          d="M50 0L65.45 31.22L100 36.33L75 60.78L80.9 95L50 78.78L19.1 95L25 60.78L0 36.33L34.55 31.22L50 0ZM50 25.1L40.75 43.83L20 46.88L35 61.54L31.46 82.04L50 72.33L68.54 82.04L65 61.54L80 46.88L59.25 43.83L50 25.1Z"
-          fill="#a0e2ff"
-          fillRule="evenodd"
-        />
-      </svg>
+<section className="bg-gray-50 py-20 md:py-28">
+  <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    {/* Heading */}
+    <div className="text-center">
+      <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 leading-tight">
+        🤝 Our Commitment
+      </h2>
+      <p className="mt-6 text-lg md:text-xl leading-8 text-gray-600 max-w-3xl mx-auto">
+        We are committed to delivering:
+      </p>
     </div>
-
-    {/* Typography */}
-    <h2 className="text-2xl font-bold mb-4 tracking-tight">Our Mission</h2>
-    <p className="text-base text-blue-50/90 leading-relaxed mb-10 max-w-2xl">
-      To become a trusted leader in medical tourism in Brazil, helping
-      international patients access affordable, high-quality healthcare abroad
-      with confidence and peace of mind.
-    </p>
-
-    {/* CTA Button */}
-    <button className="bg-[#f87171] hover:bg-[#ef4444] text-white text-[13px] px-8 py-3.5 rounded-full font-bold uppercase tracking-wider transition-all shadow-md active:scale-95">
-      Get Started Today
-    </button>
-
-    {/* Trust Badge */}
-    <div className="mt-8 flex items-center gap-2 text-xs font-medium text-blue-100/80">
-      <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
-      Trusted by international patients
+    {/* Commitment Cards */}
+    <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="rounded-3xl border border-gray-200 bg-white p-8 transition-all duration-300 hover:shadow-lg">
+        <span className="text-5xl font-bold text-gray-200">01</span>
+        <h3 className="mt-5 text-2xl font-semibold text-gray-900">
+          Safe and ethical medical care
+        </h3>
+      </div>
+      <div className="rounded-3xl border border-gray-200 bg-white p-8 transition-all duration-300 hover:shadow-lg">
+        <span className="text-5xl font-bold text-gray-200">02</span>
+        <h3 className="mt-5 text-2xl font-semibold text-gray-900">
+          Transparent communication and pricing
+        </h3>
+      </div>
+      <div className="rounded-3xl border border-gray-200 bg-white p-8 transition-all duration-300 hover:shadow-lg">
+        <span className="text-5xl font-bold text-gray-200">03</span>
+        <h3 className="mt-5 text-2xl font-semibold text-gray-900">
+          Personalized patient support
+        </h3>
+      </div>
+    </div>
+    {/* Bottom Statement */}
+    <div className="mt-16 rounded-3xl bg-gray-900 px-8 py-10 text-center">
+      <p className="text-xl md:text-2xl font-medium leading-9 text-white">
+        As a doctor-founded platform, every recommendation is guided by medical
+        expertise and patient safety.
+      </p>
     </div>
   </div>
-</div>
+</section>
+
+
+
+    <div className="bg-[#3da0d8] py-24 text-center text-white">
+      <div className="max-w-3xl mx-auto px-6 flex flex-col items-center">
+
+        {/* SVG Star Container */}
+        <div className="mb-8 flex justify-center">
+          <svg
+            width="64"
+            height="64"
+            viewBox="0 0 100 100"
+            xmlns="http://www.w3.org/2000/svg"
+            className="drop-shadow-sm"
+          >
+            <path
+              d="M50 0L65.45 31.22L100 36.33L75 60.78L80.9 95L50 78.78L19.1 95L25 60.78L0 36.33L34.55 31.22L50 0ZM50 25.1L40.75 43.83L20 46.88L35 61.54L31.46 82.04L50 72.33L68.54 82.04L65 61.54L80 46.88L59.25 43.83L50 25.1Z"
+              fill="#a0e2ff"
+              fillRule="evenodd"
+            />
+          </svg>
+        </div>
+
+        {/* Typography */}
+        <h2 className="text-2xl font-bold mb-4 tracking-tight">Our Mission</h2>
+        <p className="text-base text-blue-50/90 leading-relaxed mb-10 max-w-2xl">
+          To become a trusted leader in medical tourism in Brazil, helping
+          international patients access affordable, high-quality healthcare abroad
+          with confidence and peace of mind.
+        </p>
+
+        {/* CTA Button */}
+        <button className="bg-[#f87171] hover:bg-[#ef4444] text-white text-[13px] px-8 py-3.5 rounded-full font-bold uppercase tracking-wider transition-all shadow-md active:scale-95">
+          Get Started Today
+        </button>
+
+        {/* Trust Badge */}
+        <div className="mt-8 flex items-center gap-2 text-xs font-medium text-blue-100/80">
+          <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
+          Trusted by international patients
+        </div>
+      </div>
+    </div>
+
+
 
   </>);
 }

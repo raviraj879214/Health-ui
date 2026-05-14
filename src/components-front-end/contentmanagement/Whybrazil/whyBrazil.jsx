@@ -242,9 +242,13 @@ const services = [
                         <h2 className="text-white text-3xl md:text-4xl font-bold leading-tight mb-6">
                             Combine Medical Care with <br />
                             World-Class Travel
+                            
                         </h2>
                         <p className="text-gray-400 text-lg leading-relaxed mb-8">
                             Choosing Brazil allows patients to combine medical treatment with a unique recovery experience. 
+                        </p>
+                        <p className="text-gray-400 text-lg leading-relaxed mb-8">
+                            This combination enhances both recovery and overall experience.
                         </p>
 
                        
@@ -357,9 +361,11 @@ const services = [
 
     </div>
   ))}
+  
 </div>
 
             </div>
+            
         </section>
 
         <section className="bg-gray-50 py-20 px-6">
