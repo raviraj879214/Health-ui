@@ -29,7 +29,7 @@ export function Visa(){
   
     <p className="text-xl md:text-2xl text-slate-500 dark:text-slate-400 font-light leading-relaxed max-w-2xl">
       Traveling abroad for medical care should be simple and completely stress-free. 
-      Our clinical architects manage the complexity so you can focus on recovery.
+     
     </p>
       <p className="text-xl md:text-2xl text-slate-500 dark:text-slate-400 font-light leading-relaxed max-w-2xl">
     That’s why we take full responsibility for the entire visa process, ensuring your entry into Brazil is smooth, secure, and effortless
@@ -95,21 +95,144 @@ export function Visa(){
   <div className="max-w-5xl mx-auto px-6 space-y-32">
 
     {/* Section 01: A Truly Hands-Off Process */}
-    <div className="relative">
-      <span className="absolute -top-12 -left-8 text-8xl font-black text-slate-200/60 dark:text-slate-800/40 select-none">01</span>
-      <div className="relative z-10">
-        <h3 className="text-2xl font-bold mb-6">A Truly Hands-Off Process</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
-          <p className="text-slate-600 dark:text-slate-400 font-light leading-relaxed">
-            We handle 100% of the visa application process on your behalf. There are no forms to fill out, 
-            no bureaucracy to deal with, and no complex steps for you to manage.
-          </p>
-          <p className="text-slate-600 dark:text-slate-400 font-light leading-relaxed">
-            We eliminate the friction of traditional travel. <strong className="text-slate-900 dark:text-white font-semibold">Only your passport and a recent photo are required.</strong> No complex government forms, no waiting lines, and zero bureaucracy.
-          </p>
+   <div className="relative">
+
+  {/* Large Background Number */}
+  <span className="absolute -top-12 -left-8 text-8xl font-black text-slate-200/60 dark:text-slate-800/40 select-none">
+    01
+  </span>
+
+  <div className="relative z-10 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-8 md:p-12 shadow-sm">
+
+    {/* Heading */}
+    <h3 className="text-3xl font-bold text-slate-900 dark:text-white mb-8">
+      A Truly Hands-Off Process
+    </h3>
+
+    {/* Intro Text */}
+    <div className="max-w-4xl space-y-5 mb-10">
+      <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed font-light">
+        We handle 100% of the visa application process on your behalf.
+      </p>
+
+      <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed font-light">
+        There are no forms to fill out, no bureaucracy to deal with, and no complex steps for you to manage.
+      </p>
+    </div>
+
+    {/* Requirements Box */}
+    <div className="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-3xl p-8">
+
+      <div className="flex items-center gap-3 mb-8">
+        <div className="w-12 h-12 rounded-2xl bg-[#00669b]/10 flex items-center justify-center">
+          <svg
+            className="w-6 h-6 text-[#00669b]"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M5 13l4 4L19 7"
+            />
+          </svg>
+        </div>
+
+        <h4 className="text-2xl font-bold text-slate-900 dark:text-white">
+          All we require from you is:
+        </h4>
+      </div>
+
+      {/* Requirement Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        {/* Passport */}
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl p-6 flex items-start gap-4">
+
+          <div className="w-12 h-12 rounded-2xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center shrink-0">
+            <svg
+              className="w-6 h-6 text-[#00669b]"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M16 21H8a2 2 0 01-2-2V5a2 2 0 012-2h8a2 2 0 012 2v14a2 2 0 01-2 2z"
+              />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M9 7h6M9 11h6M9 15h3"
+              />
+            </svg>
+          </div>
+
+          <div>
+            <h5 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
+              A valid passport
+            </h5>
+
+            <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+              (signed, valid through your travel period, with at least 2 blank visa pages)
+            </p>
+          </div>
+        </div>
+
+        {/* Photo */}
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl p-6 flex items-start gap-4">
+
+          <div className="w-12 h-12 rounded-2xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center shrink-0">
+            <svg
+              className="w-6 h-6 text-[#00669b]"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14"
+              />
+              <rect
+                width="12"
+                height="12"
+                x="3"
+                y="6"
+                rx="2"
+                ry="2"
+              />
+            </svg>
+          </div>
+
+          <div>
+            <h5 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
+              A Photo That’s it.
+            </h5>
+          </div>
         </div>
       </div>
+
+      {/* Footer Note */}
+      <div className="mt-8 bg-[#00669b]/5 border border-[#00669b]/10 rounded-2xl p-6">
+        <p className="text-slate-700 dark:text-slate-300 text-lg leading-relaxed">
+          <strong className="text-slate-900 dark:text-white">
+            
+          </strong>
+        </p>
+
+        <p className="mt-3 text-slate-600 dark:text-slate-400 leading-relaxed">
+          We take care of everything else—from application to submission—ensuring accuracy and compliance at every step.
+        </p>
+      </div>
     </div>
+  </div>
+</div>
 
   
 <div className="relative">
@@ -122,7 +245,7 @@ export function Visa(){
 
     <div className="bg-[#eeebed] dark:bg-slate-900/50 p-8 md:p-12 rounded-sm border-l-2 border-blue-600 max-w-3xl">
       <blockquote className="text-xl md:text-2xl text-slate-700 dark:text-slate-300 italic font-light leading-snug">
-        "We cover the visa application fees for our patients. You will never have to navigate archaic government systems or worry about hidden visa costs."
+        "We cover the visa application fees for our patients. 
       </blockquote>
     </div>
 
