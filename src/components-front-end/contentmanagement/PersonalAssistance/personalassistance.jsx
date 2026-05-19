@@ -64,83 +64,47 @@ export function PersonalAssistance(){
 
     {/* --- RIGHT COLUMN: SERVICE CARD --- */}
     <div className="lg:w-1/2 w-full">
-      <div className="bg-slate-50/80 dark:bg-slate-900/50 rounded-3xl p-8 md:p-12 border border-slate-100 dark:border-slate-800 space-y-10">
+     <div className="bg-slate-50/80 dark:bg-slate-900/50 rounded-3xl p-8 md:p-12 border border-slate-100 dark:border-slate-800 space-y-8">
 
-        <p className="text-sm text-slate-500 dark:text-slate-400 font-light">
-          This service includes:
-        </p>
+  <p className="text-sm text-slate-500 dark:text-slate-400 font-light">
+    This service includes:
+  </p>
 
-        {/* Continuous Monitoring */}
-        <div className="flex gap-6 items-start">
-          <div className="text-[#3ca9e2] mt-1">
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12h4l3 8 4-16 3 8h4" />
-            </svg>
-          </div>
-          <div>
-            <h4 className="text-[10px] font-bold uppercase tracking-[0.15em] text-slate-900 dark:text-white mb-3">
-              Continuous monitoring during recovery
-            </h4>
-          </div>
-        </div>
+  <div className="space-y-6">
 
-        {/* Mobility Assistance */}
-        <div className="flex gap-6 items-start">
-          <div className="text-[#3ca9e2] mt-1">
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m4 0a4 4 0 11-8 0 4 4 0 018 0z" />
-            </svg>
-          </div>
-          <div>
-            <h4 className="text-[10px] font-bold uppercase tracking-[0.15em] text-slate-900 dark:text-white mb-3">
-              Assistance with mobility and daily activities
-            </h4>
-          </div>
-        </div>
+    <div>
+      <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-1">
+        Continuous monitoring during recovery
+      </h4>
+    </div>
 
-        {/* Medication */}
-        <div className="flex gap-6 items-start">
-          <div className="text-[#3ca9e2] mt-1">
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-          </div>
-          <div>
-            <h4 className="text-[10px] font-bold uppercase tracking-[0.15em] text-slate-900 dark:text-white mb-3">
-              Medication management and adherence
-            </h4>
-          </div>
-        </div>
+    <div>
+      <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-1">
+        Assistance with mobility and daily activities
+      </h4>
+    </div>
 
-        {/* Immediate Response */}
-        <div className="flex gap-6 items-start">
-          <div className="text-[#3ca9e2] mt-1">
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6l4 2" />
-            </svg>
-          </div>
-          <div>
-            <h4 className="text-[10px] font-bold uppercase tracking-[0.15em] text-slate-900 dark:text-white mb-3">
-              Immediate response to any concerns or discomfort
-            </h4>
-          </div>
-        </div>
+    <div>
+      <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-1">
+        Medication management and adherence
+      </h4>
+    </div>
 
-        {/* Communication */}
-        <div className="flex gap-6 items-start">
-          <div className="text-[#3ca9e2] mt-1">
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16h6" />
-            </svg>
-          </div>
-          <div>
-            <h4 className="text-[10px] font-bold uppercase tracking-[0.15em] text-slate-900 dark:text-white mb-3">
-              Communication support between patient and medical team
-            </h4>
-          </div>
-        </div>
+    <div>
+      <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-1">
+        Immediate response to any concerns or discomfort
+      </h4>
+    </div>
 
-      </div>
+    <div>
+      <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-1">
+        Communication support between patient and medical team
+      </h4>
+    </div>
+
+  </div>
+
+</div>
     </div>
   </div>
 </section>
@@ -167,46 +131,28 @@ export function PersonalAssistance(){
       </div>
     </div>
 
-    {/* --- BOTTOM SECTION: FEATURE CARDS --- */}
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:ml-[33.333%]">
-      
-      {/* Qualified and trained in clinical care */}
-      <div className="bg-slate-50/50 dark:bg-slate-900/50 p-10 rounded-2xl border border-slate-100 dark:border-slate-800">
-        <div className="text-[#3ca9e2] mb-6">
-          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-          </svg>
-        </div>
-        <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-3">
-          Qualified and trained in clinical care
-        </h3>
-      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:ml-[33.333%]">
 
-      {/* Experienced in post-operative recovery support */}
-      <div className="bg-slate-50/50 dark:bg-slate-900/50 p-10 rounded-2xl border border-slate-100 dark:border-slate-800">
-        <div className="text-[#3ca9e2] mb-6">
-          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m4 0a4 4 0 11-8 0 4 4 0 018 0z" />
-          </svg>
-        </div>
-        <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-3">
-          Experienced in post-operative recovery support
-        </h3>
-      </div>
+  <div className="bg-slate-50/60 dark:bg-slate-900/40 p-10 rounded-2xl border border-slate-100 dark:border-slate-800 hover:shadow-sm transition">
+    <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
+      Qualified and trained in clinical care
+    </h3>
+  </div>
 
-      {/* Aligned with our standards */}
-      <div className="bg-slate-50/50 dark:bg-slate-900/50 p-10 rounded-2xl border border-slate-100 dark:border-slate-800 md:col-span-2">
-        <div className="text-[#3ca9e2] mb-6">
-          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-3.866 0-7 1.79-7 4v4h14v-4c0-2.21-3.134-4-7-4zm0 0V6m0 2a4 4 0 110-8 4 4 0 010 8z" />
-          </svg>
-        </div>
-        <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-3">
-          Aligned with our standards of professionalism and discretion
-        </h3>
-      </div>
+  <div className="bg-slate-50/60 dark:bg-slate-900/40 p-10 rounded-2xl border border-slate-100 dark:border-slate-800 hover:shadow-sm transition">
+    <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
+      Experienced in post-operative recovery support
+    </h3>
+  </div>
 
-    </div>
+  <div className="bg-slate-50/60 dark:bg-slate-900/40 p-10 rounded-2xl border border-slate-100 dark:border-slate-800 md:col-span-2 hover:shadow-sm transition">
+    <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
+      Aligned with our standards of professionalism and discretion
+    </h3>
+  </div>
+
+</div>
+    
   </div>
 </section>
 <section className="bg-white dark:bg-slate-950 py-24 px-6 font-sans">
@@ -215,7 +161,7 @@ export function PersonalAssistance(){
     {/* --- HEADER --- */}
     <div className="text-center mb-16">
       <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">
-        Flexible Care: Hospital, Hotel, or Residence
+        Flexible Care: Hospital Hotel or Residence
       </h2>
       <p className="text-slate-500 dark:text-slate-400 font-light max-w-2xl mx-auto">
         Personal Assistance can be provided in different settings, depending on the patient’s needs:
@@ -247,11 +193,13 @@ export function PersonalAssistance(){
       </div>
 
       {/* Flexibility Description */}
-      <div className="md:col-span-3 bg-slate-50/50 dark:bg-slate-900/50 p-10 rounded-2xl border border-slate-100 dark:border-slate-800">
-        <p className="text-sm text-slate-500 dark:text-slate-400 font-light leading-relaxed max-w-2xl">
-          This flexibility allows patients to recover in the environment they feel most comfortable in, without compromising care.
-        </p>
-      </div>
+      <div className="md:col-span-3 bg-slate-50/50 dark:bg-slate-900/50 p-10 rounded-2xl border border-slate-100 dark:border-slate-800 flex items-center justify-center text-center">
+
+  <p className="text-lg md:text-xl font-bold text-slate-800 dark:text-slate-100 leading-relaxed max-w-2xl">
+    This flexibility allows patients to recover in the environment they feel most comfortable in, without compromising care.
+  </p>
+
+</div>
     </div>
 
 

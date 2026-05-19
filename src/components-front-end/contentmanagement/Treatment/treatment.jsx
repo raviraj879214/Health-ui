@@ -95,27 +95,31 @@ const procedures = [
   ];
 
     return(<>
-        <section className="bg-white pt-24 pb-12 px-6 text-center">
-            <div className="max-w-4xl mx-auto">
-                <span className="inline-block bg-[#26bba4] text-white text-[10px] font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-8">
-                    Medical Excellence
-                </span>
-                <h1 className="text-5xl md:text-6xl font-black text-gray-900 tracking-tight leading-[1.1] mb-8">
-                    Treatments in Brazil — World-Class Care, Tailored to You
-                </h1>
-                <p className="text-gray-600 text-xl leading-relaxed max-w-3xl mx-auto mb-4">
-                    Brazil is internationally recognized for delivering <strong>high-quality medical treatments across multiple specialties,</strong> combining advanced technology, experienced physicians, and significantly lower costs compared to the United States and other countries. 
-                </p>
-                <p className="text-gray-600 text-xl leading-relaxed max-w-3xl mx-auto mb-16">
-                    Through our physician-led platform, patients gain access to <strong>carefully selected specialists and top-tier medical facilities,</strong> ensuring safe, effective, and personalized treatment. 
-                </p>
+     <section className="bg-white pt-24 pb-12 px-6 text-center">
+  <div className="max-w-4xl mx-auto">
 
-               
-               
+    <span className="inline-block bg-[#26bba4] text-white text-[10px] font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-8">
+      Medical Excellence
+    </span>
 
-                
-            </div>
-        </section>
+    {/* Split headline */}
+    <h1 className="text-5xl md:text-6xl font-black text-gray-900 tracking-tight leading-[1.05] mb-6">
+      Treatments in Brazil
+      <span className="block text-4xl md:text-5xl font-semibold text-gray-700 mt-3">
+        World-Class Care, Tailored to You
+      </span>
+    </h1>
+
+    <p className="text-gray-600 text-xl leading-relaxed max-w-3xl mx-auto mb-4">
+      Brazil is internationally recognized for delivering <strong>high-quality medical treatments across multiple specialties,</strong> combining advanced technology, experienced physicians, and significantly lower costs compared to the United States and other countries.
+    </p>
+
+    <p className="text-gray-600 text-xl leading-relaxed max-w-3xl mx-auto mb-16">
+      Through our physician-led platform, patients gain access to <strong>carefully selected specialists and top-tier medical facilities,</strong> ensuring safe, effective, and personalized treatment.
+    </p>
+
+  </div>
+</section>
 
         <div className="sticky top-0 z-50 bg-white">
   <div className="flex flex-wrap justify-center gap-8 md:gap-12 border-t border-gray-100 pt-4 pb-4">
@@ -134,58 +138,59 @@ const procedures = [
 </div>
 
 
-      <section className="bg-gray-50 py-24 px-6 text-center"  id="PLASTIC SURGERY IN BRAZIL">
-        <div className="max-w-6xl mx-auto">
+     <section className="bg-gray-50 py-24 px-6 text-center" id="PLASTIC SURGERY IN BRAZIL">
+  <div className="max-w-6xl mx-auto">
 
-          {/* Category Header */}
-          <div className="flex flex-col items-center mb-12">
-            <div className="flex items-center gap-2 mb-6">
-              <div className="bg-white p-1.5 rounded-md shadow-sm border border-gray-100">
-                <svg className="w-5 h-5 text-[#00669b]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <span className="text-[10px] font-bold tracking-[0.2em] text-[#00669b] uppercase">
-                Esthetics & Reconstruction
-              </span>
-            </div>
+    {/* Header */}
+    <div className="flex flex-col items-center mb-12">
+      <div className="flex items-center gap-2 mb-6">
+        <div className="bg-white p-1.5 rounded-md shadow-sm border border-gray-100">
+          <svg className="w-5 h-5 text-[#00669b]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
 
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">
-              Plastic Surgery In Brazil
-            </h2>
+        <span className="text-[10px] font-bold tracking-[0.2em] text-[#00669b] uppercase">
+          Esthetics & Reconstruction
+        </span>
+      </div>
 
-            <p className="text-gray-500 text-lg leading-relaxed max-w-3xl mx-auto">
-              Brazil is a <strong>global leader in plastic and cosmetic surgery,</strong> with decades of innovation and one of the highest procedure volumes in the world.
+      <h2 className="text-4xl font-bold text-gray-900 mb-6">
+        Plastic Surgery In Brazil
+      </h2>
+
+      <p className="text-gray-500 text-lg leading-relaxed max-w-3xl mx-auto">
+        Brazil is a <strong>global leader in plastic and cosmetic surgery,</strong> with decades of innovation and one of the highest procedure volumes in the world.
+      </p>
+    </div>
+
+    {/* Informational Grid (NOT clickable) */}
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-left">
+
+      {procedures.map((item, index) => (
+        <div
+          key={index}
+          className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm"
+        >
+          <div className="flex gap-3 items-start">
+            <div className="w-2 h-2 mt-2 rounded-full bg-[#00669b] flex-shrink-0"></div>
+
+            <p className="text-sm font-semibold text-gray-900 leading-relaxed">
+              {item}
             </p>
           </div>
-
-          {/* Procedure Cards Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-4">
-            {procedures.map((item, index) => (
-              <button
-                key={index}
-                className="group bg-white p-8 rounded-2xl border border-gray-100 shadow-sm flex items-center justify-between hover:shadow-md hover:border-blue-100 transition-all cursor-pointer text-left"
-              >
-                <span className="text-sm font-bold text-gray-900 leading-tight pr-4">
-                  {item}
-                </span>
-                <svg
-                  className="w-4 h-4 text-gray-300 group-hover:text-blue-500 transition-colors"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  viewBox="0 0 24 24"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
-            ))}
-          </div>
-          <p className="text-gray-500 text-lg leading-relaxed max-w-3xl mx-auto mt-6">
-            Patients benefit from <strong>exceptional aesthetic results combined with affordability and expertise. </strong>
-          </p>
         </div>
-      </section>
+      ))}
+
+    </div>
+
+    {/* Footer text */}
+    <p className="text-gray-500 text-lg leading-relaxed max-w-3xl mx-auto mt-10">
+      Patients benefit from <strong>exceptional aesthetic results combined with affordability and expertise.</strong>
+    </p>
+
+  </div>
+</section>
 
 
     <section className="bg-white py-24 px-6 text-center font-sans" id="ORTHOPEDICS">
@@ -282,53 +287,135 @@ const procedures = [
     </section>
 
 
-    <section className="bg-white py-24 px-6 text-center font-sans" id="IVF">
-      <div className="max-w-6xl mx-auto">
-        
-        {/* Reproductive Science Badge */}
-        <div className="flex items-center justify-center gap-2 mb-6">
-          <svg className="w-5 h-5 text-[#00669b]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.628.282a2 2 0 01-1.806 0l-.628-.282a6 6 0 00-3.86-.517l-2.387.477a2 2 0 00-1.022.547l-.34.34a2 2 0 000 2.828l1.245 1.245A2 2 0 006.454 20h11.092a2 2 0 001.414-.586l1.245-1.245a2 2 0 000-2.828l-.34-.34z" />
-          </svg>
-          <span className="text-[10px] font-bold tracking-[0.2em] text-[#00669b] uppercase">
-            Reproductive Science
-          </span>
+<section className="bg-white py-24 px-6 text-center font-sans" id="IVF">
+  <div className="max-w-6xl mx-auto">
+
+    {/* Reproductive Science Badge */}
+    <div className="flex items-center justify-center gap-2 mb-6">
+      <svg
+        className="w-5 h-5 text-[#00669b]"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.628.282a2 2 0 01-1.806 0l-.628-.282a6 6 0 00-3.86-.517l-2.387.477a2 2 0 00-1.022.547l-.34.34a2 2 0 000 2.828l1.245 1.245A2 2 0 006.454 20h11.092a2 2 0 001.414-.586l1.245-1.245a2 2 0 000-2.828l-.34-.34z"
+        />
+      </svg>
+
+      <span className="text-[10px] font-bold tracking-[0.2em] text-[#00669b] uppercase">
+        Reproductive Science
+      </span>
+    </div>
+
+    {/* Main Heading */}
+    <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8 tracking-tight">
+      In Vitro Fertilization (IVF) in Brazil
+    </h2>
+
+    {/* Lead Paragraph */}
+    <p className="text-gray-500 text-lg leading-relaxed max-w-4xl mx-auto mb-20">
+      Brazil is an increasingly sought-after destination for <strong>fertility treatments,</strong> offering advanced reproductive technologies and highly specialized professionals.
+    </p>
+
+    {/* Updated Card Grid */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
+
+      {points.map((point, index) => (
+        <div
+          key={point.id}
+          className="bg-gray-50 border border-gray-100 rounded-2xl p-8 hover:shadow-lg hover:-translate-y-1 transition duration-300"
+        >
+
+          {/* Icon Area */}
+          <div className="w-14 h-14 mb-6 flex items-center justify-center rounded-2xl bg-blue-100">
+            
+            {index === 0 && (
+              <svg
+                className="w-7 h-7 text-[#00669b]"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 21s-6-4.35-9-8.5C.5 8.5 3 4 7.5 4c2.2 0 3.6 1.2 4.5 2.4C12.9 5.2 14.3 4 16.5 4 21 4 23.5 8.5 21 12.5 18 16.65 12 21 12 21z"
+                />
+              </svg>
+            )}
+
+            {index === 1 && (
+              <svg
+                className="w-7 h-7 text-[#00669b]"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 8v8m-4-4h8"
+                />
+                <circle cx="12" cy="12" r="9" />
+              </svg>
+            )}
+
+            {index === 2 && (
+              <svg
+                className="w-7 h-7 text-[#00669b]"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+            )}
+
+            {index === 3 && (
+              <svg
+                className="w-7 h-7 text-[#00669b]"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 6v12m6-6H6"
+                />
+              </svg>
+            )}
+          </div>
+
+          <h4 className="text-lg font-bold text-gray-900 mb-3 leading-snug">
+            {point.title}
+          </h4>
+
+          <p className="text-gray-500 text-sm leading-relaxed">
+            {point.description}
+          </p>
         </div>
+      ))}
+    </div>
 
-        {/* Main Heading */}
-        <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8 tracking-tight">
-          In Vitro Fertilization (IVF) in Brazil 
-        </h2>
+    <p className="text-gray-500 text-lg leading-relaxed max-w-4xl mx-auto mt-10">
+      This makes Brazil a strong option for couples and individuals seeking effective and supportive fertility solutions abroad.
+    </p>
 
-        {/* Lead Paragraph */}
-        <p className="text-gray-500 text-lg leading-relaxed max-w-4xl mx-auto mb-20">
-          Brazil is an increasingly sought-after destination for <strong>fertility treatments,</strong> offering advanced reproductive technologies and highly specialized professionals. 
-        </p>
-
-        {/* Numbered Feature Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-16 text-left">
-          {points.map((point) => (
-            <div key={point.id} className="relative group">
-              {/* Large Background Number */}
-              <span className="block text-6xl font-bold text-blue-100/60 mb-4 transition-colors group-hover:text-blue-200">
-                {point.id}
-              </span>
-              
-              <h4 className="text-lg font-bold text-gray-900 mb-3">
-                {point.title}
-              </h4>
-              <p className="text-gray-500 text-sm leading-relaxed">
-                {point.description}
-              </p>
-            </div>
-          ))}
-        </div>
-        <p className="text-gray-500 text-lg leading-relaxed max-w-4xl mx-auto mt-10">
-          This makes Brazil a strong option for couples and individuals seeking effective and supportive fertility solutions abroad. 
-        </p>
-
-      </div>
-    </section>
+  </div>
+</section>
 
     <div className="max-w-4xl mx-auto py-12 px-6 text-center">
 
@@ -390,7 +477,7 @@ const procedures = [
               <svg className="w-8 h-8 text-[#00669b]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d={t.icon} />
               </svg>
-              <span className="text-[11px] font-bold tracking-widest text-gray-900">{t.label}</span>
+              <span className="text-[14px] font-bold tracking-widest text-gray-900">{t.label}</span>
             </div>
           ))}
         </div>

@@ -199,13 +199,29 @@ export function CitizenShip(){
 
     {/* Right Column: Testimonial Card */}
     <div className="flex-1 w-full max-w-xl self-center md:self-start">
-      <div className="bg-slate-50 rounded-2xl p-8 md:p-12 border-l-[6px] border-sky-700 shadow-sm shadow-slate-200/50">
-        <blockquote className="text-slate-800 text-xl md:text-2xl leading-relaxed italic font-medium relative">
-          <span className="absolute -top-4 -left-4 text-slate-200 text-6xl font-serif select-none">“</span>
-          The standard of care is comparable to leading international systems, with a strong emphasis on patient comfort and safety. 
-        </blockquote>
-      </div>
-    </div>
+  <div className="bg-slate-50 rounded-2xl p-8 md:p-12 border-l-[6px] border-sky-700 shadow-sm shadow-slate-200/50">
+
+    <blockquote className="relative text-slate-800 text-xl md:text-2xl leading-relaxed italic font-medium">
+
+      {/* Opening quote */}
+      <span className="absolute -top-4 -left-4 text-slate-200 text-6xl font-serif select-none">
+        “
+      </span>
+
+      {/* Content */}
+      <p className="relative z-10">
+        The standard of care is comparable to leading international systems, with a strong emphasis on patient comfort and safety.
+      </p>
+
+      {/* Closing quote */}
+      <span className="absolute -bottom-6 right-0 text-slate-200 text-6xl font-serif select-none">
+        ”
+      </span>
+
+    </blockquote>
+
+  </div>
+</div>
 
   </div>
 </section>

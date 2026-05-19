@@ -133,8 +133,12 @@ export  function HeaderFrontend() {
               <Link href="/treatments">Treatments</Link>
             </li>
             <li>
-              <Link href="/why-brazil">Why Brazil</Link>
+              <Link href="/why-brazil">Why Brazil?</Link>
             </li>
+            <li>
+              <Link href="/your-guarantees">Your Guarantees </Link>
+            </li>
+             
             <li>
               <Menu as="div" className="relative inline-block">
                 <MenuButton className="btn btn-none inline-flex items-center justify-center gap-3">
@@ -156,11 +160,7 @@ export  function HeaderFrontend() {
                           Insurance
                         </Link>
                       </MenuItem>
-                      <MenuItem>
-                        <Link href="/your-guarantees" className="block px-4 py-1.5 font-medium text-sm text-gray-700">
-                          Your Guarantees 
-                        </Link>
-                      </MenuItem>
+                     
 
 
                       <MenuItem>
@@ -170,12 +170,12 @@ export  function HeaderFrontend() {
                       </MenuItem>
                       <MenuItem>
                         <Link href="/citizenship" className="block px-4 py-1.5 font-medium text-sm text-gray-700">
-                          Citizenship
+                          Citizenship by Birth
                         </Link>
                       </MenuItem>
                       <MenuItem>
                         <Link href="/flights" className="block px-4 py-1.5 font-medium text-sm text-gray-700">
-                          Flights
+                         Flights, Hotels and Transportation
                         </Link>
                       </MenuItem>
                       <MenuItem>
@@ -220,11 +220,11 @@ export  function HeaderFrontend() {
                           Become Partner
                         </Link>
                     </MenuItem>
-                    <MenuItem>
+                    {/* <MenuItem>
                         <Link href="#" className="block px-4 py-1.5 font-medium text-sm text-gray-700">
                           For Patients
                         </Link>
-                    </MenuItem>
+                    </MenuItem> */}
                   </div>
                 </MenuItems>
               </Transition>

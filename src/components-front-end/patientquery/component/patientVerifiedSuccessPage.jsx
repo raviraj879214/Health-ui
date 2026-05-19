@@ -166,6 +166,22 @@ if (!querycode) {
               Facebook Messenger 
             </span>
           </a>
+
+          <div>
+      <h3 class="text-lg font-semibold text-gray-800 mb-2">
+        Need Assistance?
+      </h3>
+
+      <p class="text-gray-600 leading-relaxed">
+        If you prefer, you can send an email to  &nbsp;
+        <a href="mailto:customer.service@itravelforhealth.com"
+           class="text-blue-600 font-medium hover:underline">
+          customer.service@itravelforhealth.com  &nbsp;
+        </a>
+        with the <span class="font-semibold">Request Number</span> above in the subject line, so we can track your request and assist you promptly.
+      </p>
+    </div>
+
       
       </div>
     </div>

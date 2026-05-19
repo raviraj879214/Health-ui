@@ -135,13 +135,13 @@ export function Flights(){
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
             </div>
             <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">NY to Brazil</h3>
-            <p className="text-xs text-slate-400 mb-6 uppercase tracking-wider font-semibold">Clinical comfort suites</p>
+            <p className="text-xs text-slate-400 mb-6 uppercase tracking-wider font-semibold"></p>
             <span className="text-3xl font-bold text-[#0a5a8c]">9.5 Hours</span>
           </div>
         </div>
 
         {/* Bottom Detailed Box */}
-        <div className="bg-[#e2f1ff] dark:bg-blue-950/40 p-8 md:p-10 rounded-3xl border border-blue-100 dark:border-blue-900/50">
+        <div className="bg-[#e2f1ff] dark:bg-blue-950/40 p-8 md:p-10 rounded-3xl border border-blue-100 dark:border-blue-900/50 hidden">
           <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4">Nationwide Medical Access</h3>
           <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-8">
             Our domestic air-ambulance and executive charters connect you directly to elite centers in Curitiba, São Paulo, and Rio de Janeiro within 60 minutes of landing.
@@ -168,123 +168,173 @@ export function Flights(){
      
 
 
-<section className="bg-white dark:bg-slate-950 py-24 px-6 font-sans">
-  <div className="max-w-6xl mx-auto space-y-20">
+<section className="bg-gradient-to-b from-white to-slate-50 dark:from-slate-950 dark:to-slate-900 py-24 px-6 font-sans">
+  <div className="max-w-6xl mx-auto space-y-24">
 
-    {/* Full Concierge Travel Support */}
-    <div className="max-w-4xl mx-auto text-center">
+    {/* 1. Full Concierge Travel Support */}
+    <div className="max-w-5xl mx-auto text-center">
       <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-6">
         Full Concierge Travel Support
       </h2>
 
-      <p className="text-slate-500 dark:text-slate-400 font-light leading-relaxed mb-8">
+      <p className="text-slate-500 dark:text-slate-400 leading-relaxed mb-10">
         We offer a complete, high-touch travel experience, managing every detail of your journey:
       </p>
 
-      <ul className="text-left max-w-2xl mx-auto space-y-3 text-slate-600 dark:text-slate-400">
-        <li> Personalized flight selection based on comfort and schedule</li>
-        <li> Full assistance with ticket booking and purchasing</li>
-        <li> Route optimization aligned with your medical timeline</li>
-        <li> Coordination of layovers and domestic connections</li>
-        <li> Guidance on baggage, medical travel needs, and special requests</li>
-      </ul>
+      <div className="grid md:grid-cols-2 gap-4 text-left">
 
-      <p className="text-slate-500 dark:text-slate-400 font-light leading-relaxed mt-8 mb-6">
+        {[
+          "Personalized flight selection based on comfort and schedule",
+          "Full assistance with ticket booking and purchasing",
+          "Route optimization aligned with your medical timeline",
+          "Coordination of layovers and domestic connections",
+          "Guidance on baggage, medical travel needs, and special requests"
+        ].map((item, i) => (
+          <div key={i} className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl p-5 shadow-sm hover:shadow-md transition">
+            <div className="flex gap-3">
+              <span className="text-sky-500 font-bold">●</span>
+              <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed">
+                {item}
+              </p>
+            </div>
+          </div>
+        ))}
+
+      </div>
+
+      <p className="text-slate-500 dark:text-slate-400 mt-10 mb-6">
         In addition, we can arrange:
       </p>
 
-      <ul className="text-left max-w-2xl mx-auto space-y-3 text-slate-600 dark:text-slate-400">
-        <li> Private chauffeur services, including transfers between airport, hotel, and clinic</li>
-        <li> Carefully selected hotel partnerships, offering options from high value (cost-benefit) to luxury accommodations</li>
-        <li> Seamless coordination between all stages of your journey</li>
-      </ul>
+      <div className="grid md:grid-cols-2 gap-4 text-left">
 
-      <p className="text-slate-500 dark:text-slate-400 font-light leading-relaxed mt-8">
+        {[
+          "Private chauffeur services, including transfers between airport, hotel, and clinic",
+          "Carefully selected hotel partnerships, offering options from high value (cost-benefit) to luxury accommodations",
+          "Seamless coordination between all stages of your journey"
+        ].map((item, i) => (
+          <div key={i} className="bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl p-5">
+            <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+              {item}
+            </p>
+          </div>
+        ))}
+
+      </div>
+
+      <p className="text-slate-500 dark:text-slate-400 mt-10">
         These services can be included as part of your customized experience, depending on your preferences and selected package.
       </p>
     </div>
 
+    {/* 2. Hotel Selection */}
+    <div className="max-w-5xl mx-auto text-center" id="hotel">
 
-    {/* Curated Hotel Selection */}
-    <div className="max-w-4xl mx-auto text-center" id="hotel">
       <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-6">
         🏨 Curated Hotel Selection — Our Top Picks
       </h2>
 
-      <p className="text-slate-500 dark:text-slate-400 font-light leading-relaxed mb-8">
+      <p className="text-slate-500 dark:text-slate-400 mb-10 leading-relaxed">
         To ensure comfort, safety, and convenience, we work with a curated network of hotels personally vetted by our team.
       </p>
 
-      <p className="text-slate-500 dark:text-slate-400 font-light leading-relaxed mb-6">
-        We provide a Top 5 hotel selection in each destination, tailored to your preferences:
-      </p>
+      <div className="grid md:grid-cols-3 gap-4 text-left">
 
-      <ul className="text-left max-w-2xl mx-auto space-y-3 text-slate-600 dark:text-slate-400">
-        <li> Best value hotels (excellent cost-benefit)</li>
-        <li> Premium comfort options</li>
-        <li> Luxury hotels and high-end recovery stays</li>
-      </ul>
+        {[
+          "Best value hotels (excellent cost-benefit)",
+          "Premium comfort options",
+          "Luxury hotels and high-end recovery stays"
+        ].map((item, i) => (
+          <div key={i} className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-100 dark:border-slate-800 hover:border-sky-200 transition">
+            <p className="text-slate-700 dark:text-slate-300 text-sm font-medium">
+              {item}
+            </p>
+          </div>
+        ))}
 
-      <p className="text-slate-500 dark:text-slate-400 font-light leading-relaxed mt-8 mb-6">
-        Each recommendation is carefully chosen based on:
-      </p>
+      </div>
 
-      <ul className="text-left max-w-2xl mx-auto space-y-3 text-slate-600 dark:text-slate-400">
-        <li> Location relative to medical facilities</li>
-        <li> Comfort and recovery suitability</li>
-        <li> Service quality and reliability</li>
-      </ul>
+      <div className="grid md:grid-cols-3 gap-4 mt-10 text-left">
 
-      <p className="text-slate-500 dark:text-slate-400 font-light leading-relaxed mt-8">
+        {[
+          "Location relative to medical facilities",
+          "Comfort and recovery suitability",
+          "Service quality and reliability"
+        ].map((item, i) => (
+          <div key={i} className="bg-slate-50 dark:bg-slate-900 rounded-xl p-5 border border-slate-100 dark:border-slate-800">
+            <p className="text-slate-600 dark:text-slate-300 text-sm">
+              {item}
+            </p>
+          </div>
+        ))}
+
+      </div>
+
+      <p className="text-slate-500 dark:text-slate-400 mt-10">
         This ensures you stay in an environment that supports both rest and recovery with peace of mind.
       </p>
     </div>
 
+    {/* 3. Travel & Leisure */}
+    <div className="max-w-5xl mx-auto text-center" id="transportation">
 
-    {/* Travel & Leisure */}
-    <div className="max-w-4xl mx-auto text-center" id="transportation">
       <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-6">
         🌴 Travel & Leisure Experiences
       </h2>
 
-      <p className="text-slate-500 dark:text-slate-400 font-light leading-relaxed mb-8">
+      <p className="text-slate-500 dark:text-slate-400 mb-10">
         For patients who wish to enhance their stay, we also offer access to curated tourism experiences through trusted local partners.
       </p>
 
-      <p className="text-slate-500 dark:text-slate-400 font-light mb-6">
-        These may include:
-      </p>
+      <div className="grid md:grid-cols-3 gap-4 text-left">
 
-      <ul className="text-left max-w-2xl mx-auto space-y-3 text-slate-600 dark:text-slate-400">
-        <li> Guided city tours</li>
-        <li> Nature and cultural experiences</li>
-        <li> Private excursions and premium activities</li>
-      </ul>
+        {[
+          "Guided city tours",
+          "Nature and cultural experiences",
+          "Private excursions and premium activities"
+        ].map((item, i) => (
+          <div key={i} className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-100 dark:border-slate-800 hover:shadow-md transition">
+            <p className="text-slate-700 dark:text-slate-300 text-sm">
+              {item}
+            </p>
+          </div>
+        ))}
 
-      <p className="text-slate-500 dark:text-slate-400 font-light leading-relaxed mt-8">
+      </div>
+
+      <p className="text-slate-500 dark:text-slate-400 mt-10">
         This allows patients and their companions to enjoy Brazil beyond the medical experience, in a safe and well-organized way.
       </p>
     </div>
 
+    {/* 4. Seamless Experience */}
+    <div className="bg-gradient-to-br from-slate-900 to-black rounded-3xl p-10 md:p-16 text-white text-center">
 
-    {/* Seamless Experience Block */}
-    <div className="bg-[#111111] rounded-3xl p-10 md:p-16 text-white text-center">
-      <h2 className="text-3xl md:text-4xl font-bold italic mb-12 tracking-tight">
+      <h2 className="text-3xl md:text-4xl font-bold mb-12">
         🌟 A Seamless, Global Experience
       </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left max-w-3xl mx-auto">
-        <div>✔ International patient support (not limited to the U.S.)</div>
-        <div>✔ Access to Brazil’s top medical destinations nationwide</div>
-        <div>✔ Flexible travel planning tailored to each patient</div>
-        <div>✔ Premium flight options and concierge coordination</div>
-        <div>✔ Optional chauffeur, hotel, and full logistics services</div>
-        <div>✔ Curated Top 5 hotel recommendations per destination</div>
-        <div>✔ Optional tourism and leisure experiences</div>
-        <div>✔ End-to-end support from departure to recovery</div>
+      <div className="grid md:grid-cols-2 gap-6 text-left max-w-4xl mx-auto">
+
+        {[
+          "International patient support (not limited to the U.S.)",
+          "Access to Brazil’s top medical destinations nationwide",
+          "Flexible travel planning tailored to each patient",
+          "Premium flight options and concierge coordination",
+          "Optional chauffeur, hotel, and full logistics services",
+          "Curated Top 5 hotel recommendations per destination",
+          "Optional tourism and leisure experiences",
+          "End-to-end support from departure to recovery"
+        ].map((item, i) => (
+          <div key={i} className="bg-white/5 border border-white/10 rounded-xl p-4 hover:bg-white/10 transition">
+            <p className="text-sm text-white/90">
+              ✔ {item}
+            </p>
+          </div>
+        ))}
+
       </div>
 
-      
     </div>
 
   </div>

@@ -168,6 +168,40 @@ if (!querycode) {
               Facebook Messenger 
             </span>
           </a>
+
+          <div class="bg-blue-50 border border-blue-200 rounded-2xl p-6 shadow-sm">
+  <div class="flex items-start gap-4">
+    
+    <div class="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full p-3">
+      <svg xmlns="http://www.w3.org/2000/svg" 
+           class="w-6 h-6" 
+           fill="none" 
+           viewBox="0 0 24 24" 
+           stroke="currentColor">
+        <path stroke-linecap="round" 
+              stroke-linejoin="round" 
+              stroke-width="2" 
+              d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8m-18 8h18V8H3v8z" />
+      </svg>
+    </div>
+
+    <div>
+      <h3 class="text-lg font-semibold text-gray-800 mb-2">
+        Need Assistance?
+      </h3>
+
+      <p class="text-gray-600 leading-relaxed">
+        If you prefer, you can send an email to  &nbsp;
+        <a href="mailto:customer.service@itravelforhealth.com"
+           class="text-blue-600 font-medium hover:underline">
+          customer.service@itravelforhealth.com  &nbsp;
+        </a>
+        with the <span class="font-semibold">Request Number</span> above in the subject line, so we can track your request and assist you promptly.
+      </p>
+    </div>
+
+  </div>
+</div>
       
       </div>
     </div>

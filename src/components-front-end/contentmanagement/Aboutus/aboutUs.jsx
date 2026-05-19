@@ -43,104 +43,111 @@ export  function AboutUs() {
 
       </div>
     </div>
+<div class="bg-gray-100 py-16 md:py-24">
+  <div class="max-w-6xl mx-auto px-4 text-center">
 
-    <div class="bg-gray-100 py-16 md:py-24">
-      <div class="max-w-6xl mx-auto px-4 text-center">
+    <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+      Comprehensive Medical Care In Brazil
+    </h2>
 
+    <p class="text-gray-600 text-lg md:text-xl max-w-2xl mx-auto mb-14">
+      While Brazil is globally recognized for <strong>plastic and cosmetic surgery,</strong> our network extends far beyond aesthetics.
+    </p>
 
-        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-          Comprehensive Medical Care In Brazil
-        </h2>
+    <p class="text-gray-600 text-lg md:text-xl max-w-2xl mx-auto mb-14">
+      Every partner is vetted to ensure <strong>international standards of safety, technology, and medical expertise.</strong>
+    </p>
 
+    <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-6">
 
-        <p class="text-gray-600 text-lg md:text-xl max-w-2xl mx-auto mb-14">
-          While Brazil is globally recognized for <strong>plastic and cosmetic surgery,</strong> our network extends far beyond aesthetics. 
-        </p>
-        <p class="text-gray-600 text-lg md:text-xl max-w-2xl mx-auto mb-14">
-          Every partner is vetted to ensure <strong>international standards of safety, technology, and medical expertise. </strong>
-        </p>
-
-
-        <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-6">
-
-
-          <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition">
-            <div class="w-14 h-14 mx-auto mb-5 flex items-center justify-center rounded-xl bg-blue-50">
-
-              <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path d="M9 3v3m6-3v3M4 7h16M5 7l14 14M19 7L5 21"></path>
-              </svg>
-            </div>
-            <h3 class="font-semibold text-lg text-gray-900 mb-2">
-              Plastic & Cosmetic Surgery
-            </h3>
-            <p class="text-gray-500 text-sm">
-              
-            </p>
-          </div>
-
-
-          <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition">
-            <div class="w-14 h-14 mx-auto mb-5 flex items-center justify-center rounded-xl bg-pink-50">
-              <svg class="w-6 h-6 text-pink-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="9"></circle>
-                <path d="M8 13h.01M16 13h.01M9 9h6"></path>
-              </svg>
-            </div>
-            <h3 class="font-semibold text-lg text-gray-900 mb-2">
-              Fertility Treatments (IVF and reproductive medicine) 
-            </h3>
-            <p class="text-gray-500 text-sm">
-              
-            </p>
-          </div>
-
-
-          <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition">
-            <div class="w-14 h-14 mx-auto mb-5 flex items-center justify-center rounded-xl bg-green-50">
-              <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <ellipse cx="12" cy="5" rx="7" ry="3"></ellipse>
-                <path d="M5 5v6c0 1.7 3.1 3 7 3s7-1.3 7-3V5"></path>
-                <path d="M5 11v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"></path>
-              </svg>
-            </div>
-            <h3 class="font-semibold text-lg text-gray-900 mb-2">
-              Orthopedic Surgery and Sports Medicine 
-            </h3>
-            <p class="text-gray-500 text-sm">
-              
-            </p>
-          </div>
-
-
-          <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition">
-            <div class="w-14 h-14 mx-auto mb-5 flex items-center justify-center rounded-xl bg-orange-50">
-              <svg class="w-6 h-6 text-orange-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path d="M12 3c2.5 0 4 2 4 5v3c0 3-2 5-4 5s-4-2-4-5V8c0-3 1.5-5 4-5z"></path>
-              </svg>
-            </div>
-            <h3 class="font-semibold text-lg text-gray-900 mb-2">
-              Dental Procedures and Full Smile Rehabilitation 
-            </h3>
-            <p class="text-gray-500 text-sm">
-              
-            </p>
-          </div>
-
+     
+      <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg hover:-translate-y-1 transition duration-300 border border-gray-100">
+        <div class="w-16 h-16 mx-auto mb-5 flex items-center justify-center rounded-2xl bg-blue-100">
+          <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M9 12l2 2 4-4m5-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
         </div>
 
+        <h3 class="font-semibold text-lg text-gray-900 leading-snug">
+          Plastic & Cosmetic Surgery
+        </h3>
+      </div>
 
-        <div class="mt-14 flex justify-center">
-          <div class="flex items-center gap-2 bg-white px-6 py-3 rounded-full shadow-sm border text-sm text-gray-600">
-            <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
-              <path d="M5 13l4 4L19 7"></path>
+
+      <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg hover:-translate-y-1 transition duration-300 border border-gray-100">
+        <div class="w-16 h-16 mx-auto mb-5 flex items-center justify-center rounded-2xl bg-pink-100">
+          <svg class="w-8 h-8 text-pink-600" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M12 21s-6-4.35-9-8.5C.5 8.5 3 4 7.5 4c2.2 0 3.6 1.2 4.5 2.4C12.9 5.2 14.3 4 16.5 4 21 4 23.5 8.5 21 12.5 18 16.65 12 21 12 21z" />
+          </svg>
+        </div>
+
+        <h3 class="font-semibold text-lg text-gray-900 leading-snug">
+          Fertility Treatments (IVF and reproductive medicine)
+        </h3>
+      </div>
+
+
+      <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg hover:-translate-y-1 transition duration-300 border border-gray-100">
+        <div class="w-16 h-16 mx-auto mb-5 flex items-center justify-center rounded-2xl bg-green-100">
+          <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M14.121 14.121L9.88 9.88m0 0L7.757 7.757a1.5 1.5 0 010-2.121l.707-.707a1.5 1.5 0 012.121 0l2.122 2.121m-2.828 2.829l4.242 4.242m0 0l2.121 2.121a1.5 1.5 0 002.121 0l.707-.707a1.5 1.5 0 000-2.121l-2.121-2.122" />
+          </svg>
+        </div>
+
+        <h3 class="font-semibold text-lg text-gray-900 leading-snug">
+          Orthopedic Surgery and Sports Medicine
+        </h3>
+      </div>
+
+
+      <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg hover:-translate-y-1 transition duration-300 border border-gray-100">
+        <div class="w-16 h-16 mx-auto mb-5 flex items-center justify-center rounded-2xl bg-orange-100">
+          <svg class="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M12 3c-3 0-5 2-5 5 0 2 1 3.5 2 5l1.5 6a1.5 1.5 0 003 0L15 13c1-1.5 2-3 2-5 0-3-2-5-5-5z" />
+          </svg>
+        </div>
+
+        <h3 class="font-semibold text-lg text-gray-900 leading-snug">
+          Dental Procedures and Full Smile Rehabilitation
+        </h3>
+      </div>
+
+
+      <div class="col-span-2 sm:col-span-4">
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-dashed border-gray-300">
+          <div class="flex items-center justify-center gap-3 text-gray-700">
+            <svg class="w-6 h-6 text-indigo-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M12 6v12m6-6H6" />
             </svg>
-            Vetted for international standards of safety & expertise
+
+            <span class="font-semibold text-lg">
+              And many more Medical Areas of expertise…
+            </span>
           </div>
         </div>
+      </div>
 
+    </div>
+
+    <div class="mt-14 flex justify-center">
+      <div class="flex items-center gap-3 bg-white px-6 py-4 rounded-full shadow-sm border text-sm text-gray-700">
+        <div class="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center">
+          <svg class="w-3.5 h-3.5 text-blue-600" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+          </svg>
+        </div>
+
+        Vetted for international standards of safety & expertise
       </div>
     </div>
+
+  </div>
+</div>
 
     <div class="bg-white-100 py-16 md:py-24">
       <div class="max-w-6xl mx-auto px-4 text-center">
