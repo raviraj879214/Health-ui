@@ -245,7 +245,7 @@ export function Visa(){
 
     <div className="bg-[#eeebed] dark:bg-slate-900/50 p-8 md:p-12 rounded-sm border-l-2 border-blue-600 max-w-3xl">
       <blockquote className="text-xl md:text-2xl text-slate-700 dark:text-slate-300 italic font-light leading-snug">
-        "We cover the visa application fees for our patients. 
+        "We cover the visa application fees for our patients"
       </blockquote>
     </div>
 

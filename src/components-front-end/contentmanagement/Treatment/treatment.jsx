@@ -460,12 +460,7 @@ const procedures = [
 
     <section className="bg-gray-50 py-24 px-6 text-center" id="DENTAL">
       <div className="max-w-6xl mx-auto">
-        <div className="flex items-center justify-center gap-2 mb-6">
-          <svg className="w-5 h-5 text-[#00669b]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M7 21h10M12 3v14" />
-          </svg>
-          <span className="text-[10px] font-bold tracking-[0.2em] text-[#00669b] uppercase">Digital Dentistry</span>
-        </div>
+        
         
         <h2 className="text-4xl font-bold text-gray-900 mb-16">Advanced Dental Treatments</h2>
           <p className="text-gray-500 text-lg leading-relaxed max-w-4xl mx-auto mb-20">

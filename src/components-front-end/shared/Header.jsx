@@ -257,49 +257,67 @@ export  function HeaderFrontend() {
         <div className="flex flex-col h-full items-center max-h-full overflow-auto md:px-7.5 py-5 px-5">
           <ul className="font-bold md:text-lg text-[1rem] w-full p-0 m-0 list-none mb-5">
             <li>
-              <Link href="#" className="flex items-center justify-between gap-2.5">Home</Link>
+              <Link href="/" className="flex items-center justify-between gap-2.5">Home</Link>
             </li>
             <li>
-              <Link href="#" className="flex items-center justify-between gap-2.5">About Us</Link>
+              <Link href="about-us" className="flex items-center justify-between gap-2.5">About Us</Link>
             </li>
             <li>
-              <Link href="#" className="flex items-center justify-between gap-2.5">Treatments</Link>
+              <Link href="/treatments" className="flex items-center justify-between gap-2.5">Treatments</Link>
             </li>
             <li>
-              <Link href="#" className="flex items-center justify-between gap-2.5">Why Brazil</Link>
+              <Link href="/why-brazil" className="flex items-center justify-between gap-2.5">Why Brazil?</Link>
+            </li>
+            <li>
+              <Link href="/your-guarantees" className="flex items-center justify-between gap-2.5">Your Guarantees</Link>
             </li>
             <li className="menu-item-has-children">
               <Link href="#" className="flex items-center justify-between gap-2.5">Additional Services <span className="icon"><svg width="12" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.8735 1L6.48165 6L0.999899 1" stroke="currentcolor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg></span></Link>
               <ul className="hidden p-0 m-0 list-none sub-menu">
                 <li>
-                  <Link href="#" className="flex items-center justify-between gap-2.5">Insurance</Link>
+                <Link href="/insurance" className="flex items-center justify-between gap-2.5">Insurance</Link>
                 </li>
                 <li>
-                  <Link href="#" className="flex items-center justify-between gap-2.5">Visas</Link>
+                  <Link href="/visa" className="flex items-center justify-between gap-2.5">Visas</Link>
                 </li>
                 <li>
-                  <Link href="#" className="flex items-center justify-between gap-2.5">Citizenship</Link>
+                  <Link href="/citizenship" className="flex items-center justify-between gap-2.5">Citizenship</Link>
                 </li>
                 <li>
-                  <Link href="#" className="flex items-center justify-between gap-2.5">Flights</Link>
+                  <Link href="/flights" className="flex items-center justify-between gap-2.5">Flights</Link>
                 </li>
+                
                 <li>
-                  <Link href="#" className="flex items-center justify-between gap-2.5">Visas</Link>
-                </li>
-                <li>
-                  <Link href="#" className="flex items-center justify-between gap-2.5">Personal Assistance</Link>
+                  <Link href="/personal-assistance" className="flex items-center justify-between gap-2.5">Personal Assistance</Link>
                 </li>
               </ul>
             </li>
           </ul>
-          <div className="md:hidden flex flex-col gap-3 w-full">
-            <Link href="#" className="btn btn-primary md:px-4 px-3 py-3 focus:outline-none w-full">
-              Get a Free Quote
-            </Link>
-            <Link href="#" className="btn btn-secondary md:px-4 px-3 py-3 focus:outline-none w-full">
-              Login
-            </Link>
-          </div>
+          {/* MOBILE BUTTONS */}
+<div className="md:hidden flex flex-col gap-3 w-full">
+
+  <Link
+    href="/register"
+    className="btn btn-secondary md:px-4 px-3 py-3 focus:outline-none w-full"
+  >
+    Become a Partner
+  </Link>
+
+  <Link
+    href="/order-create/demo-id/demo-clinic"
+    className="btn btn-primary md:px-4 px-3 py-3 focus:outline-none w-full"
+  >
+    Get a Free Quote
+  </Link>
+
+  <Link
+    href="/partner-login"
+    className="btn btn-secondary md:px-4 px-3 py-3 focus:outline-none w-full"
+  >
+    Login
+  </Link>
+
+</div>
         </div>
       </div>
 

@@ -43,89 +43,113 @@ export  function AboutUs() {
 
       </div>
     </div>
-<div class="bg-gray-100 py-16 md:py-24">
-  <div class="max-w-6xl mx-auto px-4 text-center">
 
-    <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-      Comprehensive Medical Care In Brazil
-    </h2>
+    
+<section className="bg-gray-50 py-16 md:py-24">
+  <div className="max-w-6xl mx-auto px-4">
 
-    <p class="text-gray-600 text-lg md:text-xl max-w-2xl mx-auto mb-14">
-      While Brazil is globally recognized for <strong>plastic and cosmetic surgery,</strong> our network extends far beyond aesthetics.
-    </p>
+    {/* Heading */}
+    <div className="text-center max-w-3xl mx-auto mb-16">
+      <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-5 leading-tight">
+        Comprehensive Medical Care In Brazil
+      </h2>
 
-    <p class="text-gray-600 text-lg md:text-xl max-w-2xl mx-auto mb-14">
-      Every partner is vetted to ensure <strong>international standards of safety, technology, and medical expertise.</strong>
-    </p>
+      <p className="text-gray-600 text-lg md:text-xl leading-relaxed mb-6">
+        While Brazil is globally recognized for{" "}
+        <strong>plastic and cosmetic surgery,</strong> our network extends far
+        beyond aesthetics.
+      </p>
 
-    <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-6">
+      <p className="text-gray-600 text-lg md:text-xl leading-relaxed">
+        Every partner is vetted to ensure{" "}
+        <strong>
+          international standards of safety, technology, and medical expertise.
+        </strong>
+      </p>
+    </div>
 
-     
-      <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg hover:-translate-y-1 transition duration-300 border border-gray-100">
-        <div class="w-16 h-16 mx-auto mb-5 flex items-center justify-center rounded-2xl bg-blue-100">
-          <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round"
-              d="M9 12l2 2 4-4m5-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
+    {/* Medical Areas */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-5">
+
+      {[
+        "Plastic & Cosmetic Surgery",
+        "Fertility Treatments (IVF and reproductive medicine)",
+        "Orthopedic Surgery and Sports Medicine",
+        "Dental Procedures and Full Smile Rehabilitation",
+      ].map((item, index) => (
+        <div
+          key={index}
+          className="
+            group bg-white border border-gray-200
+            rounded-2xl p-6
+            transition-all duration-300
+            hover:shadow-lg hover:-translate-y-1
+          "
+        >
+          <div className="flex items-start gap-4">
+
+            {/* Standard Checkmark Icon */}
+            <div className="
+              w-10 h-10 rounded-full
+              bg-green-100
+              flex items-center justify-center
+              shrink-0
+            ">
+              <svg
+                className="w-5 h-5 text-green-600"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="3"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+            </div>
+
+            {/* Text */}
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900 leading-snug">
+                {item}
+              </h3>
+            </div>
+          </div>
         </div>
+      ))}
 
-        <h3 class="font-semibold text-lg text-gray-900 leading-snug">
-          Plastic & Cosmetic Surgery
-        </h3>
-      </div>
+      {/* More Areas */}
+      <div className="sm:col-span-2 hidden">
+        <div className="
+          bg-white border border-dashed border-gray-300
+          rounded-2xl p-6
+        ">
+          <div className="flex items-center gap-4">
 
+            <div className="
+              w-10 h-10 rounded-full
+              bg-blue-100
+              flex items-center justify-center
+              shrink-0
+            ">
+              <svg
+                className="w-5 h-5 text-blue-600"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 6v12m6-6H6"
+                />
+              </svg>
+            </div>
 
-      <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg hover:-translate-y-1 transition duration-300 border border-gray-100">
-        <div class="w-16 h-16 mx-auto mb-5 flex items-center justify-center rounded-2xl bg-pink-100">
-          <svg class="w-8 h-8 text-pink-600" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round"
-              d="M12 21s-6-4.35-9-8.5C.5 8.5 3 4 7.5 4c2.2 0 3.6 1.2 4.5 2.4C12.9 5.2 14.3 4 16.5 4 21 4 23.5 8.5 21 12.5 18 16.65 12 21 12 21z" />
-          </svg>
-        </div>
-
-        <h3 class="font-semibold text-lg text-gray-900 leading-snug">
-          Fertility Treatments (IVF and reproductive medicine)
-        </h3>
-      </div>
-
-
-      <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg hover:-translate-y-1 transition duration-300 border border-gray-100">
-        <div class="w-16 h-16 mx-auto mb-5 flex items-center justify-center rounded-2xl bg-green-100">
-          <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round"
-              d="M14.121 14.121L9.88 9.88m0 0L7.757 7.757a1.5 1.5 0 010-2.121l.707-.707a1.5 1.5 0 012.121 0l2.122 2.121m-2.828 2.829l4.242 4.242m0 0l2.121 2.121a1.5 1.5 0 002.121 0l.707-.707a1.5 1.5 0 000-2.121l-2.121-2.122" />
-          </svg>
-        </div>
-
-        <h3 class="font-semibold text-lg text-gray-900 leading-snug">
-          Orthopedic Surgery and Sports Medicine
-        </h3>
-      </div>
-
-
-      <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg hover:-translate-y-1 transition duration-300 border border-gray-100">
-        <div class="w-16 h-16 mx-auto mb-5 flex items-center justify-center rounded-2xl bg-orange-100">
-          <svg class="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round"
-              d="M12 3c-3 0-5 2-5 5 0 2 1 3.5 2 5l1.5 6a1.5 1.5 0 003 0L15 13c1-1.5 2-3 2-5 0-3-2-5-5-5z" />
-          </svg>
-        </div>
-
-        <h3 class="font-semibold text-lg text-gray-900 leading-snug">
-          Dental Procedures and Full Smile Rehabilitation
-        </h3>
-      </div>
-
-
-      <div class="col-span-2 sm:col-span-4">
-        <div class="bg-white rounded-2xl p-6 shadow-sm border border-dashed border-gray-300">
-          <div class="flex items-center justify-center gap-3 text-gray-700">
-            <svg class="w-6 h-6 text-indigo-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round"
-                d="M12 6v12m6-6H6" />
-            </svg>
-
-            <span class="font-semibold text-lg">
+            <span className="text-lg font-semibold text-gray-800">
               And many more Medical Areas of expertise…
             </span>
           </div>
@@ -134,20 +158,44 @@ export  function AboutUs() {
 
     </div>
 
-    <div class="mt-14 flex justify-center">
-      <div class="flex items-center gap-3 bg-white px-6 py-4 rounded-full shadow-sm border text-sm text-gray-700">
-        <div class="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center">
-          <svg class="w-3.5 h-3.5 text-blue-600" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+    {/* Bottom Badge */}
+    <div className="mt-14 flex justify-center">
+      <div className="
+        flex items-center gap-3
+        bg-white border border-gray-200
+        rounded-full px-6 py-4
+        shadow-sm
+        text-sm md:text-base text-gray-700
+      ">
+
+        <div className="
+          w-7 h-7 rounded-full
+          bg-green-100
+          flex items-center justify-center
+        ">
+          <svg
+            className="w-4 h-4 text-green-600"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="3"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M5 13l4 4L19 7"
+            />
           </svg>
         </div>
 
-        Vetted for international standards of safety & expertise
+        <span className="font-medium">
+          Vetted for international standards of safety & expertise
+        </span>
       </div>
     </div>
 
   </div>
-</div>
+</section>
 
     <div class="bg-white-100 py-16 md:py-24">
       <div class="max-w-6xl mx-auto px-4 text-center">

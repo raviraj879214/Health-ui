@@ -6,29 +6,42 @@ export  function WhyBrazil(){
 
 const services = [
   {
-    title: "Post-operative care with qualified healthcare professionals ",
-    icon: "M19 8h-1a3 3 0 00-2.83 2H14V9a2 2 0 00-2-2h-1V6a2 2 0 10-4 0v1H6a2 2 0 00-2 2v1H3a1 1 0 000 2h1v1a2 2 0 002 2h1v1a2 2 0 104 0v-1h1a2 2 0 002-2v-1h1a3 3 0 002.83 2H19a1 1 0 100-2z"
+    title: "Post-operative care with qualified healthcare professionals",
+    description:
+      "Dedicated support and recovery assistance after treatment.",
+    href: "/personal-assistance",
   },
   {
-    title: "Assistance for patients traveling alone ",
-    icon: "M17 20h5V4H2v16h5m10 0v-6a2 2 0 10-4 0v6m4 0H7"
+    title: "Assistance for patients traveling alone",
+    description:
+      "Personal guidance and coordination throughout your journey.",
+    href: "/personal-assistance",
   },
   {
-    title: "Support related to citizenship by birth opportunities in Brazil ",
-    icon: "M12 2a10 10 0 100 20 10 10 0 000-20zm0 0c2.5 2.5 4 6 4 10s-1.5 7.5-4 10c-2.5-2.5-4-6-4-10s1.5-7.5 4-10z"
+    title: "Guidance with international health insurance options",
+    description:
+      "Help understanding and navigating insurance coverage.",
+    href: "/insurance",
   },
   {
-    title: "Guidance with international health insurance options ",
-    icon: "M12 3l7 4v5c0 5-3.5 9-7 10-3.5-1-7-5-7-10V7l7-4z"
+    title: "Assistance with flight planning and logistics",
+    description:
+      "Travel coordination including transport and accommodation.",
+    href: "/flights",
   },
   {
-    title: "Assistance with flight planning and logistics ",
-    icon: "M2 16l20-5-20-5v4l15 1-15 1v4z"
+    title:
+      "Support related to citizenship by birth opportunities in Brazil",
+    description:
+      "Information and assistance regarding citizenship pathways.",
+    href: "/citizenship",
   },
   {
-    title: "Support with visa requirements and documentation ",
-    icon: "M9 12h6m-6 4h6M7 3h6l4 4v14H7a2 2 0 01-2-2V5a2 2 0 012-2z"
-  }
+    title: "Support with visa requirements and documentation",
+    description:
+      "Guidance for visa applications and required paperwork.",
+    href: "/visa",
+  },
 ];
 
 
@@ -350,61 +363,89 @@ const services = [
 
       </section>
 
-     <section className="bg-gray-50 py-24 px-6">
+    <section className="bg-gray-50 py-24 px-6">
   <div className="max-w-6xl mx-auto">
 
     {/* Heading */}
     <div className="text-center max-w-3xl mx-auto mb-14">
-      <h2 className="text-3xl font-bold text-gray-900 mb-4">
+      <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
         Additional Services for International Patients
       </h2>
 
       <p className="text-gray-600 text-base leading-relaxed">
-        To enhance your experience, we offer additional services designed for comfort,
-        safety, and convenience from start to finish.
+        We provide complete support services designed to make your medical
+        journey smoother, safer, and more comfortable from arrival to recovery.
       </p>
     </div>
 
-    {/* Grid */}
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    {/* Services Grid */}
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
       {services.map((service, index) => (
         <a
           key={index}
           href={service.href}
-          className="group bg-white border border-gray-100 rounded-2xl p-6 flex items-center gap-4
-                     transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-gray-200"
+          className="
+            group relative overflow-hidden
+            bg-white border border-gray-200
+            rounded-2xl p-6
+            transition-all duration-300
+            hover:shadow-xl hover:-translate-y-1
+            hover:border-blue-200
+          "
         >
 
-          {/* Icon */}
-          <div className="w-11 h-11 rounded-xl bg-gray-50 flex items-center justify-center
-                          group-hover:bg-blue-50 transition">
-            <svg
-              className="w-5 h-5 text-gray-600 group-hover:text-blue-600 transition"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" d={service.icon} />
-            </svg>
-          </div>
+          {/* Top Accent */}
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-cyan-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
 
-          {/* Title */}
-          <div className="flex-1">
-            <h3 className="text-sm font-semibold text-gray-800 group-hover:text-gray-900">
-              {service.title}
-            </h3>
-          </div>
+          <div className="flex items-start gap-4">
 
-          {/* Subtle indicator (NOT link-like) */}
-          <div className="opacity-0 group-hover:opacity-100 transition">
-            <div className="w-2 h-2 rounded-full bg-blue-500"></div>
-          </div>
+            {/* Minimal Icon */}
+            <div className="
+              shrink-0 w-11 h-11 rounded-xl
+              bg-blue-50 flex items-center justify-center
+              transition-all duration-300
+              group-hover:bg-blue-100
+            ">
 
+              {/* Clean Arrow Icon */}
+              <svg
+                className="w-5 h-5 text-blue-600"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </div>
+
+            {/* Content */}
+            <div className="flex-1">
+
+              <h3 className="
+                text-base font-semibold text-gray-900
+                leading-snug mb-2
+                transition-colors duration-300
+                group-hover:text-blue-700
+              ">
+                {service.title}
+              </h3>
+
+              {/* <p className="text-sm text-gray-500 leading-relaxed">
+                {service.description}
+              </p> */}
+
+              
+
+            </div>
+          </div>
         </a>
       ))}
-
     </div>
   </div>
 </section>
