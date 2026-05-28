@@ -30,7 +30,7 @@ const Footer = forwardRef(function Footer(props, ref) {
                 </li>
               </ul>
             </div>
-            <div className="m-0 flex-auto md:w-1/4 w-1/2 a-hover-underline px-2.5 pb-5">
+            <div className="m-0 flex-auto md:w-1/4 w-1/2 a-hover-underline px-2.5 pb-5 hidden">
               <h4 className="font-bold">Treatments</h4>
               <ul className="p-0 m-0 list-none">
                 <li>

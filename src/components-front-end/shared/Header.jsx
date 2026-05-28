@@ -296,26 +296,26 @@ export  function HeaderFrontend() {
           {/* MOBILE BUTTONS */}
 <div className="md:hidden flex flex-col gap-3 w-full">
 
-  <Link
-    href="/register"
-    className="btn btn-secondary md:px-4 px-3 py-3 focus:outline-none w-full"
-  >
-    Become a Partner
-  </Link>
+ <a
+  href="/register"
+  className="btn btn-secondary md:px-4 px-3 py-3 focus:outline-none w-full"
+>
+  Become a Partner
+</a>
 
-  <Link
-    href="/order-create/demo-id/demo-clinic"
-    className="btn btn-primary md:px-4 px-3 py-3 focus:outline-none w-full"
-  >
-    Get a Free Quote
-  </Link>
+<a
+  href="/order-create/demo-id/demo-clinic"
+  className="btn btn-primary md:px-4 px-3 py-3 focus:outline-none w-full"
+>
+  Get a Free Quote
+</a>
 
-  <Link
-    href="/partner-login"
-    className="btn btn-secondary md:px-4 px-3 py-3 focus:outline-none w-full"
-  >
-    Login
-  </Link>
+<a
+  href="/partner-login"
+  className="btn btn-secondary md:px-4 px-3 py-3 focus:outline-none w-full"
+>
+  Login
+</a>
 
 </div>
         </div>
