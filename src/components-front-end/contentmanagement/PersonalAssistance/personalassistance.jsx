@@ -161,7 +161,7 @@ export function PersonalAssistance(){
     {/* --- HEADER --- */}
     <div className="text-center mb-16">
       <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">
-        Flexible Care: Hospital Hotel or Residence
+        Flexible Care: Hospital, Hotel or Residence
       </h2>
       <p className="text-slate-500 dark:text-slate-400 font-light max-w-2xl mx-auto">
         Personal Assistance can be provided in different settings, depending on the patient’s needs:
