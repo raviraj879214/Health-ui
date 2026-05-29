@@ -185,7 +185,7 @@ const onUpdate = async (data) => {
                         <div className="grid grid-cols-6 gap-4 mt-3">
 
                             {/* Blog Title */}
-                            <div className="col-span-6 md:col-span-3">
+                            {/* <div className="col-span-6 md:col-span-3">
                                 <label className="block mb-1 text-sm font-medium">Title</label>
                                 <input
                                     type="text"
@@ -194,19 +194,10 @@ const onUpdate = async (data) => {
                                     {...register("title", { required: "Please enter title" })}
                                 />
                                 {errors.title && <p className="text-red-500 text-sm">{errors.title.message}</p>}
-                            </div>
+                            </div> */}
 
                             {/* Blog Slug */}
-                            <div className="col-span-6 md:col-span-3">
-                                <label className="block mb-1 text-sm font-medium">Slug</label>
-                                <input
-                                    type="text"
-                                    placeholder="how-to-cook-pasta"
-                                    className="h-11 w-full rounded-lg border px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-hidden focus:ring-3 border-gray-300 focus:ring-brand-200 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
-                                    {...register("slug", { required: "Please enter slug" })}
-                                />
-                                {errors.slug && <p className="text-red-500 text-sm">{errors.slug.message}</p>}
-                            </div>
+                           
 
                             {/* Meta Title */}
                             <div className="col-span-6 md:col-span-3">
@@ -215,7 +206,13 @@ const onUpdate = async (data) => {
                                     type="text"
                                     placeholder="Cooking Pasta Tips"
                                     className="h-11 w-full rounded-lg border px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-hidden focus:ring-3 border-gray-300 focus:ring-brand-200 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
-                                    {...register("metaTitle", { required: "Please enter meta title" })}
+                                    {...register("metaTitle", {
+                                      required: "Please enter meta title",
+                                      maxLength: {
+                                        value: 60,
+                                        message: "Meta title cannot exceed 60 characters",
+                                      },
+                                    })}
                                 />
                                   {errors.metaTitle && <p className="text-red-500 text-sm">{errors.metaTitle.message}</p>}
                             </div>
@@ -232,6 +229,20 @@ const onUpdate = async (data) => {
                                 {errors.metaKeywords && <p className="text-red-500 text-sm">{errors.metaKeywords.message}</p>}
                             </div>
 
+                             <div className="col-span-6 md:col-span-3">
+                                <label className="block mb-1 text-sm font-medium">Slug</label>
+                                <input
+                                    type="text"
+                                    placeholder="how-to-cook-pasta"
+                                    className="h-11 w-full rounded-lg border px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-hidden focus:ring-3 border-gray-300 focus:ring-brand-200 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
+                                    {...register("slug", { required: "Please enter slug"
+
+
+                                     })}
+                                />
+                                {errors.slug && <p className="text-red-500 text-sm">{errors.slug.message}</p>}
+                            </div>
+
                             {/* Meta Description */}
                             <div className="col-span-6">
                                 <label className="block mb-1 text-sm font-medium">Meta Description</label>
@@ -239,7 +250,12 @@ const onUpdate = async (data) => {
                                     placeholder="Learn how to cook perfect pasta every time"
                                     className="w-full rounded-lg border px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-hidden focus:ring-3 border-gray-300 focus:ring-brand-200 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
                                     rows={4}
-                                    {...register("metaDescription", { required: "Please enter meta description" })}
+                                    {...register("metaDescription", { required: "Please enter meta description",
+                                      maxLength: {
+                                        value: 150,
+                                        message: "Meta Description cannot exceed 150 characters",
+                                      },
+                                     })}
                                     
                                 />
                                 {errors.metaDescription && <p className="text-red-500 text-sm">{errors.metaDescription.message}</p>}

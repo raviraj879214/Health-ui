@@ -10,7 +10,7 @@ import {
   Transition,
 } from "@headlessui/react";
 
-export  function HeaderFrontend() {
+export function HeaderFrontend() {
   const [menuOpen, setMenuOpen] = useState(false); // mobile menu
 
   // Prevent body scroll when mobile menu open
@@ -29,7 +29,7 @@ export  function HeaderFrontend() {
 
     // console.log(mobileMenuItems, 'mobileMenuItems');
 
-    mobileMenuItems.forEach((item) => item.addEventListener('click', function(){
+    mobileMenuItems.forEach((item) => item.addEventListener('click', function () {
       setMenuOpen(false)
     }));
 
@@ -103,6 +103,35 @@ export  function HeaderFrontend() {
       el.style.display = "block";
     }, duration);
   }
+
+
+  const [slugs,setSlugs] = useState([]);
+  useEffect(() => {
+    fetchSlug();
+  }, []);
+
+
+  const fetchSlug = async()=>{
+    debugger;
+    const res= await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/homepage-banner/get-seo-slug`,{
+      method : "Get",
+      headers :{
+        "Content-Type" : "application/json"
+      }
+    });
+
+    if(res.ok){
+      const result= await res.json();
+      setSlugs(result.data);
+    }
+  }
+
+
+
+
+
+
+
   return (
     <header className="relative z-200 md:px-7.5 px-5 py-5 text-[14px]">
       <div className="flex flex-nowrap items-center justify-between">
@@ -117,6 +146,7 @@ export  function HeaderFrontend() {
               className="md:max-w-[100%] max-w-[200px]"
             />
           </Link>
+       
         </div>
 
         {/* Nav + Actions */}
@@ -127,22 +157,22 @@ export  function HeaderFrontend() {
               <Link href="/">Home</Link>
             </li>
             <li>
-              <Link href="about-us">About Us</Link>
+              <Link href={`${slugs.find(x => x.title === "About Us")?.slug || ""}`}>About Us</Link>
             </li>
             <li>
-              <Link href="/treatments">Treatments</Link>
+              <Link href={`${slugs.find(x => x.title === "Treatments")?.slug || ""}`}>Treatments</Link>
             </li>
             <li>
-              <Link href="/why-brazil">Why Brazil?</Link>
+              <Link href={`${slugs.find(x => x.title === "Why Brazil")?.slug || ""}`}>Why Brazil?</Link>
             </li>
             <li>
-              <Link href="/your-guarantees">Your Guarantees </Link>
+              <Link href={`${slugs.find(x => x.title === "Your Guarantees")?.slug || ""}`}>Your Guarantees </Link>
             </li>
-             
+
             <li>
               <Menu as="div" className="relative inline-block">
                 <MenuButton className="btn btn-none inline-flex items-center justify-center gap-3">
-                    Additional Services <span className="icon"><svg width="12" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.8735 1L6.48165 6L0.999899 1" stroke="currentcolor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg></span>
+                  Additional Services <span className="icon"><svg width="12" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.8735 1L6.48165 6L0.999899 1" stroke="currentcolor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg></span>
                 </MenuButton>
 
                 <Transition
@@ -152,34 +182,34 @@ export  function HeaderFrontend() {
                   leave="transition ease-in duration-150"
                   leaveFrom="opacity-100 translate-y-0"
                   leaveTo="opacity-0 -translate-y-2.5"
-                  >
+                >
                   <MenuItems className="absolute right-0 z-50 mt-2 md:w-[180px] w-40 origin-top-right bg-white shadow-[0_0_30px_0_rgba(45,45,45,0.15)] rounded-thm focus:outline-none [&_a]:hover:text-secondary">
                     <div className="py-1 max-h-45 overflow-auto">
                       <MenuItem>
-                        <Link href="/insurance" className="block px-4 py-1.5 font-medium text-sm text-gray-700">
+                        <Link href={`${slugs.find(x => x.title === "Insurance")?.slug || ""}`} className="block px-4 py-1.5 font-medium text-sm text-gray-700">
                           Insurance
                         </Link>
                       </MenuItem>
-                     
+
 
 
                       <MenuItem>
-                        <Link href="/visa" className="block px-4 py-1.5 font-medium text-sm text-gray-700">
+                        <Link href={`${slugs.find(x => x.title === "Visa")?.slug || ""}`} className="block px-4 py-1.5 font-medium text-sm text-gray-700">
                           Visas
                         </Link>
                       </MenuItem>
                       <MenuItem>
-                        <Link href="/citizenship" className="block px-4 py-1.5 font-medium text-sm text-gray-700">
+                        <Link href={`${slugs.find(x => x.title === "Citizenship")?.slug || ""}`} className="block px-4 py-1.5 font-medium text-sm text-gray-700">
                           Citizenship by Birth
                         </Link>
                       </MenuItem>
                       <MenuItem>
-                        <Link href="/flights" className="block px-4 py-1.5 font-medium text-sm text-gray-700">
-                         Flights, Hotels and Transportation
+                        <Link href={`${slugs.find(x => x.title === "Flights")?.slug || ""}`} className="block px-4 py-1.5 font-medium text-sm text-gray-700">
+                          Flights, Hotels and Transportation
                         </Link>
                       </MenuItem>
                       <MenuItem>
-                        <Link href="/personal-assistance" className="block px-4 py-1.5 font-medium text-sm text-gray-700">
+                        <Link href={`${slugs.find(x => x.title === "Personal Assistance")?.slug || ""}`} className="block px-4 py-1.5 font-medium text-sm text-gray-700">
                           Personal Assistance
                         </Link>
                       </MenuItem>
@@ -197,7 +227,7 @@ export  function HeaderFrontend() {
             </Link>
             <Menu as="div" className="relative inline-block">
               <MenuButton className="inline-flex w-[120px] justify-between items-center gap-x-5 md:px-4 px-3 py-3 focus:outline-none btn btn-secondary active-icon-rotate">
-                  Login <span className="icon inline-block transition-all duration-200 ease-in-out"><svg width="12" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.8735 6L6.48165 1L0.999899 6" stroke="currentcolor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg></span>
+                Login <span className="icon inline-block transition-all duration-200 ease-in-out"><svg width="12" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.8735 6L6.48165 1L0.999899 6" stroke="currentcolor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg></span>
               </MenuButton>
 
               <Transition
@@ -211,14 +241,14 @@ export  function HeaderFrontend() {
                 <MenuItems className="absolute right-0 z-50 mt-2 md:w-full w-40 origin-top-right bg-white shadow-[0_0_30px_0_rgba(45,45,45,0.15)] rounded-thm focus:outline-none [&_a]:hover:text-secondary">
                   <div className="py-1 max-h-38 overflow-auto">
                     <MenuItem>
-                        <Link href="/partner-login" className="block px-4 py-1.5 font-medium text-sm text-gray-700">
-                          For Clinics
-                        </Link>
+                      <Link href="/partner-login" className="block px-4 py-1.5 font-medium text-sm text-gray-700">
+                        For Clinics
+                      </Link>
                     </MenuItem>
-                     <MenuItem>
-                        <Link href="/register" className="block px-4 py-1.5 font-medium text-sm text-gray-700">
-                          Become Partner
-                        </Link>
+                    <MenuItem>
+                      <Link href="/register" className="block px-4 py-1.5 font-medium text-sm text-gray-700">
+                        Become Partner
+                      </Link>
                     </MenuItem>
                     {/* <MenuItem>
                         <Link href="#" className="block px-4 py-1.5 font-medium text-sm text-gray-700">
@@ -251,8 +281,7 @@ export  function HeaderFrontend() {
       </div>
 
       {/* Mobile menu */}
-      <div className={`mobile-menu transition-all duration-300 border-t border-border ${
-          menuOpen ? "opacity-100 visible" : "opacity-0 invisible"
+      <div className={`mobile-menu transition-all duration-300 border-t border-border ${menuOpen ? "opacity-100 visible" : "opacity-0 invisible"
         }`}>
         <div className="flex flex-col h-full items-center max-h-full overflow-auto md:px-7.5 py-5 px-5">
           <ul className="font-bold md:text-lg text-[1rem] w-full p-0 m-0 list-none mb-5">
@@ -260,64 +289,64 @@ export  function HeaderFrontend() {
               <Link href="/" className="flex items-center justify-between gap-2.5">Home</Link>
             </li>
             <li>
-              <Link href="about-us" className="flex items-center justify-between gap-2.5">About Us</Link>
+              <Link href={`${slugs.find(x => x.title === "About Us")?.slug || ""}`} className="flex items-center justify-between gap-2.5">About Us df</Link>
             </li>
             <li>
-              <Link href="/treatments" className="flex items-center justify-between gap-2.5">Treatments</Link>
+              <Link href={`${slugs.find(x => x.title === "Treatments")?.slug || ""}`} className="flex items-center justify-between gap-2.5">Treatments</Link>
             </li>
             <li>
-              <Link href="/why-brazil" className="flex items-center justify-between gap-2.5">Why Brazil?</Link>
+              <Link href={`${slugs.find(x => x.title === "Why Brazil")?.slug || ""}`} className="flex items-center justify-between gap-2.5">Why Brazil?</Link>
             </li>
             <li>
-              <Link href="/your-guarantees" className="flex items-center justify-between gap-2.5">Your Guarantees</Link>
+              <Link href={`${slugs.find(x => x.title === "Your Guarantees")?.slug || ""}`} className="flex items-center justify-between gap-2.5">Your Guarantees</Link>
             </li>
             <li className="menu-item-has-children">
-              <Link href="#" className="flex items-center justify-between gap-2.5">Additional Services <span className="icon"><svg width="12" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.8735 1L6.48165 6L0.999899 1" stroke="currentcolor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg></span></Link>
+              <Link href="#" className="flex items-center justify-between gap-2.5">Additional Services <span className="icon"><svg width="12" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.8735 1L6.48165 6L0.999899 1" stroke="currentcolor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg></span></Link>
               <ul className="hidden p-0 m-0 list-none sub-menu">
                 <li>
-                <Link href="/insurance" className="flex items-center justify-between gap-2.5">Insurance</Link>
+                  <Link href={`${slugs.find(x => x.title === "Insurance")?.slug || ""}`} className="flex items-center justify-between gap-2.5">Insurance</Link>
                 </li>
                 <li>
-                  <Link href="/visa" className="flex items-center justify-between gap-2.5">Visas</Link>
+                  <Link href={`${slugs.find(x => x.title === "Visa")?.slug || ""}`} className="flex items-center justify-between gap-2.5">Visas</Link>
                 </li>
                 <li>
-                  <Link href="/citizenship" className="flex items-center justify-between gap-2.5">Citizenship</Link>
+                  <Link href={`${slugs.find(x => x.title === "Citizenship")?.slug || ""}`} className="flex items-center justify-between gap-2.5">Citizenship</Link>
                 </li>
                 <li>
-                  <Link href="/flights" className="flex items-center justify-between gap-2.5">Flights</Link>
+                  <Link href={`${slugs.find(x => x.title === "Flights")?.slug || ""}`} className="flex items-center justify-between gap-2.5">Flights</Link>
                 </li>
-                
+
                 <li>
-                  <Link href="/personal-assistance" className="flex items-center justify-between gap-2.5">Personal Assistance</Link>
+                  <Link href={`${slugs.find(x => x.title === "Personal Assistance")?.slug || ""}`} className="flex items-center justify-between gap-2.5">Personal Assistance</Link>
                 </li>
               </ul>
             </li>
           </ul>
           {/* MOBILE BUTTONS */}
-<div className="md:hidden flex flex-col gap-3 w-full">
+          <div className="md:hidden flex flex-col gap-3 w-full">
 
- <a
-  href="/register"
-  className="btn btn-secondary md:px-4 px-3 py-3 focus:outline-none w-full"
->
-  Become a Partner
-</a>
+            <a
+              href="/register"
+              className="btn btn-secondary md:px-4 px-3 py-3 focus:outline-none w-full"
+            >
+              Become a Partner
+            </a>
 
-<a
-  href="/order-create/demo-id/demo-clinic"
-  className="btn btn-primary md:px-4 px-3 py-3 focus:outline-none w-full"
->
-  Get a Free Quote
-</a>
+            <a
+              href="/order-create/demo-id/demo-clinic"
+              className="btn btn-primary md:px-4 px-3 py-3 focus:outline-none w-full"
+            >
+              Get a Free Quote
+            </a>
 
-<a
-  href="/partner-login"
-  className="btn btn-secondary md:px-4 px-3 py-3 focus:outline-none w-full"
->
-  Login
-</a>
+            <a
+              href="/partner-login"
+              className="btn btn-secondary md:px-4 px-3 py-3 focus:outline-none w-full"
+            >
+              Login
+            </a>
 
-</div>
+          </div>
         </div>
       </div>
 
