@@ -16,6 +16,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   if (isAdmin) {
     return (
       <html lang="en">
+        <head>
+          <meta name="revisit-after" content="never" />
+          <meta name="yahooseeker" content="noindex, nofollow" />
+          <meta name="msnbot" content="noindex, nofollow" />
+          <meta name="googlebot" content="noindex, nofollow" />
+          <meta name="allow-search" content="no" />
+        </head>
         <body>
           {children}
         </body>
@@ -26,6 +33,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   if (isPartner) {
     return (
       <html lang="en">
+        <head>
+          <meta name="revisit-after" content="never" />
+          <meta name="yahooseeker" content="noindex, nofollow" />
+          <meta name="msnbot" content="noindex, nofollow" />
+          <meta name="googlebot" content="noindex, nofollow" />
+          <meta name="allow-search" content="no" />
+        </head>
         <body>
           
             <>{children}</>
@@ -39,6 +53,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <html lang="en">
+       <head>
+        <meta name="revisit-after" content="never" />
+        <meta name="yahooseeker" content="noindex, nofollow" />
+        <meta name="msnbot" content="noindex, nofollow" />
+        <meta name="googlebot" content="noindex, nofollow" />
+        <meta name="allow-search" content="no" />
+      </head>
       <body className={`${gilroy.variable} antialiased`}>
           <HeaderFrontend></HeaderFrontend>
            <ReduxProvider>{children}</ReduxProvider>
