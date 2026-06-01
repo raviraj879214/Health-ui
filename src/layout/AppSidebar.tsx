@@ -185,15 +185,29 @@ const AppSidebar: React.FC = () => {
       path: "/admin/faqs",
     },
 
-    {
+    // {
+    //   icon: (
+    //     <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2"
+    //       strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+    //       <circle cx="11" cy="11" r="8" />
+    //       <path d="M21 21l-4.35-4.35" />
+    //     </svg>),
+    //   name: "Manage Seo",
+    //   path: "/admin/manage-seo-content",
+    // },
+     {
       icon: (
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2"
-          strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+       <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2"
+           strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
           <circle cx="11" cy="11" r="8" />
-          <path d="M21 21l-4.35-4.35" />
-        </svg>),
+           <path d="M21 21l-4.35-4.35" />
+         </svg>
+      ),
       name: "Manage Seo",
-      path: "/admin/manage-seo-content",
+      subItems: [
+        { name: "Public Pages", path: "/admin/manage-seo-content", pro: false },
+        { name: "Clinic Details Page", path: "/admin/clinic-detail-seo", pro: false },
+      ],
     },
 
     {
@@ -241,6 +255,7 @@ const AppSidebar: React.FC = () => {
         // { name: "Manage Packages", path: "/admin/manage-packages", pro: false },
       ],
     },
+
     {
       icon: (
         <svg width="48" height="48" viewBox="0 0 48 48" fill="none"
