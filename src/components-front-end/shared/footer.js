@@ -28,6 +28,9 @@ const Footer = forwardRef(function Footer(props, ref) {
                 <li>
                   <Link href="/your-guarantees">Your Guarantees</Link>
                 </li>
+                <li>
+                  <Link href="/treatments">Treatments</Link>
+                </li>
               </ul>
             </div>
             <div className="m-0 flex-auto md:w-1/4 w-1/2 a-hover-underline px-2.5 pb-5 hidden">
@@ -120,7 +123,7 @@ const Footer = forwardRef(function Footer(props, ref) {
                   </div>
                   <div className="content">
                     <p className="md:text-xl md:mb-2 mb-1">Get A Free Quote</p>
-                    <p className="lg:text-[1.9rem] md:text-[1.5rem] text-[1.3rem] leading-[1.2] mb-0 font-bold break-word">contact@itravelforhealth.com</p>
+                    <p className="lg:text-[1.9rem] md:text-[1.5rem] text-[1.3rem] leading-[1.2] mb-0 font-bold break-word">customer.service@itravelforhealth.com</p>
                   </div>
                 </Link>
               </div>
