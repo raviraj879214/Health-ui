@@ -17,6 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
       <html lang="en">
         <head>
+          <meta name="google-site-verification" content="uWahxjIdmOwpAs7uYrvuczD78PwhbrWzKRaUh96kc5I" />
           <meta name="revisit-after" content="never" />
           <meta name="yahooseeker" content="noindex, nofollow" />
           <meta name="msnbot" content="noindex, nofollow" />
@@ -34,6 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
       <html lang="en">
         <head>
+          <meta name="google-site-verification" content="uWahxjIdmOwpAs7uYrvuczD78PwhbrWzKRaUh96kc5I" />
           <meta name="revisit-after" content="never" />
           <meta name="yahooseeker" content="noindex, nofollow" />
           <meta name="msnbot" content="noindex, nofollow" />
@@ -54,6 +56,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
        <head>
+        <meta name="google-site-verification" content="uWahxjIdmOwpAs7uYrvuczD78PwhbrWzKRaUh96kc5I" />
         <meta name="revisit-after" content="never" />
         <meta name="yahooseeker" content="noindex, nofollow" />
         <meta name="msnbot" content="noindex, nofollow" />
