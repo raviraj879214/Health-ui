@@ -221,45 +221,53 @@ export function HeaderFrontend() {
           </ul>
 
           {/* Example HeadlessUI Dropdown */}
-          <div className="md:flex hidden gap-4">
-            <Link href="/order-create/demo-id/demo-clinic" className="btn btn-primary md:px-4 px-3 py-3 focus:outline-none">
-              Get a Free Quote
-            </Link>
-            <Menu as="div" className="relative inline-block">
-              <MenuButton className="inline-flex w-[120px] justify-between items-center gap-x-5 md:px-4 px-3 py-3 focus:outline-none btn btn-secondary active-icon-rotate">
-                Login <span className="icon inline-block transition-all duration-200 ease-in-out"><svg width="12" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.8735 6L6.48165 1L0.999899 6" stroke="currentcolor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg></span>
-              </MenuButton>
+         <div className="md:flex hidden gap-4">
+  <Link
+    href="/register"
+    className="btn btn-secondary md:px-4 px-3 py-3 focus:outline-none"
+  >
+    Become a Partner
+  </Link>
 
-              <Transition
-                enter="transition ease-out duration-200"
-                enterFrom="opacity-0 -translate-y-2.5"
-                enterTo="opacity-100 translate-y-0"
-                leave="transition ease-in duration-150"
-                leaveFrom="opacity-100 translate-y-0"
-                leaveTo="opacity-0 -translate-y-2.5"
-              >
-                <MenuItems className="absolute right-0 z-50 mt-2 md:w-full w-40 origin-top-right bg-white shadow-[0_0_30px_0_rgba(45,45,45,0.15)] rounded-thm focus:outline-none [&_a]:hover:text-secondary">
-                  <div className="py-1 max-h-38 overflow-auto">
-                    <MenuItem>
-                      <Link href="/partner-login" className="block px-4 py-1.5 font-medium text-sm text-gray-700">
-                        For Clinics
-                      </Link>
-                    </MenuItem>
-                    <MenuItem>
-                      <Link href="/register" className="block px-4 py-1.5 font-medium text-sm text-gray-700">
-                        Become Partner
-                      </Link>
-                    </MenuItem>
-                    {/* <MenuItem>
-                        <Link href="#" className="block px-4 py-1.5 font-medium text-sm text-gray-700">
-                          For Patients
-                        </Link>
-                    </MenuItem> */}
-                  </div>
-                </MenuItems>
-              </Transition>
-            </Menu>
-          </div>
+  <Link
+    href="/order-create/demo-id/demo-clinic"
+    className="btn btn-primary md:px-4 px-3 py-3 focus:outline-none"
+  >
+    Get a Free Quote
+  </Link>
+
+  <Menu as="div" className="relative inline-block">
+    <MenuButton className="inline-flex w-[120px] justify-between items-center gap-x-5 md:px-4 px-3 py-3 focus:outline-none btn btn-secondary active-icon-rotate">
+      Login
+      <span className="icon inline-block transition-all duration-200 ease-in-out">
+        <svg width="12" height="7" viewBox="0 0 13 7" fill="none">
+          <path
+            d="M11.8735 6L6.48165 1L0.999899 6"
+            stroke="currentcolor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </span>
+    </MenuButton>
+
+    <Transition>
+      <MenuItems className="absolute right-0 z-50 mt-2 md:w-full w-40 origin-top-right bg-white shadow-[0_0_30px_0_rgba(45,45,45,0.15)] rounded-thm focus:outline-none">
+        <div className="py-1">
+          <MenuItem>
+            <Link
+              href="/partner-login"
+              className="block px-4 py-1.5 font-medium text-sm text-gray-700"
+            >
+              For Clinics
+            </Link>
+          </MenuItem>
+        </div>
+      </MenuItems>
+    </Transition>
+  </Menu>
+</div>
 
 
           {/* Mobile menu toggle */}
