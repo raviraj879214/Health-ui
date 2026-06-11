@@ -15,7 +15,7 @@ import { PencilIcon, TrashBinIcon } from "../../icons/index";
 import { toast } from "react-toastify";
 import { usePermissions } from "@/context/PermissionContext";
 
-export function ListOfBlogs({ trigger , sendData ,onRestriction }) {
+export function ListOfBlogs({ trigger , sendData  }) {
   const [users, setUsers] = useState([]);
 
 
@@ -27,9 +27,7 @@ export function ListOfBlogs({ trigger , sendData ,onRestriction }) {
   const [expandedRows, setExpandedRows] = useState({});
    const { canRead, canCreate, canUpdate, canDelete ,status } = usePermissions("Manage Blog");
 
-  useEffect(()=>{
-    onRestriction(status);
-  },[status]);
+
 
   const toggleExpand = (id) => {
     setExpandedRows((prev) => ({

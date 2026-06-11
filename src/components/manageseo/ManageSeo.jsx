@@ -48,6 +48,7 @@ export function ManageSeoPage() {
             setValue("metaTitle",result.data.meta_title);
             setValue("metaKeywords",result.data.meta_keywords);
             setValue("metaDescription",result.data.meta_desc);
+            setValue("og_structure",JSON.stringify(result.data.og_structure));
         }
 
     }
@@ -243,7 +244,7 @@ const onUpdate = async (data) => {
                                 {errors.slug && <p className="text-red-500 text-sm">{errors.slug.message}</p>}
                             </div>
 
-                            {/* Meta Description */}
+                           
                             <div className="col-span-6">
                                 <label className="block mb-1 text-sm font-medium">Meta Description</label>
                                 <textarea
@@ -260,6 +261,43 @@ const onUpdate = async (data) => {
                                 />
                                 {errors.metaDescription && <p className="text-red-500 text-sm">{errors.metaDescription.message}</p>}
                             </div>
+
+
+                          <div className="col-span-6">
+  <label className="block mb-1 text-sm font-medium">
+    Structured Data (JSON-LD)
+  </label>
+
+  <textarea
+    placeholder={`{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "iTravelForHealth",
+  "url": "https://itravelforhealth.com"
+}`}
+    className="w-full rounded-lg border px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-hidden focus:ring-3 border-gray-300 focus:ring-brand-200 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
+    rows={12}
+    {...register("og_structure", {
+      validate: (value) => {
+        if (!value) return true;
+
+        try {
+          JSON.parse(value);
+          return true;
+        } catch {
+          return "Please enter valid JSON";
+        }
+      },
+    })}
+  />
+
+  {errors.og_structure && (
+    <p className="text-red-500 text-sm">
+      {errors.og_structure.message}
+    </p>
+  )}
+</div>
+                           
 
                         </div>
 

@@ -24,22 +24,7 @@ export function CreateBlogs() {
 
     const { register, reset, formState: { errors }, handleSubmit ,setValue } = useForm();
 
-     const [restriction, setRestriction] = useState(false);
      const [button,setbutton] = useState(false);
-
-    debugger;
-    const { canRead, canCreate, canUpdate, canDelete , status } = usePermissions("Manage Blog");
-
-
-     
-
-
-        useEffect(()=>{
-            setRestriction(status);
-        },[status]);
-    
-
-
 
 
     const onCreate = async (data) => {
@@ -51,19 +36,18 @@ export function CreateBlogs() {
         }
 
         try {
-            // Get auth token
+
             const resToken = await fetch("/api/auth/get-token");
             const { token } = await resToken.json();
 
-            // Prepare form data
             const formData = new FormData();
             formData.append("title", data.title);
             formData.append("content", data.content);
-            formData.append("image", selectedImage);
-             formData.append("tagid", tagValue.name);
+            // formData.append("image", selectedImage);
+            formData.append("tagid", tagValue.name);
 
             // Send request
-            const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/blog/create-blog`, {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-blog/create-blog`, {
                 method: "POST",
                 headers: { 
                     
@@ -107,116 +91,8 @@ export function CreateBlogs() {
   
 
 
-    const handleChildEditData=(id,title,content,tags,imageurl)=>{
-       
-        setBlogid(id);
-        setValue("title",title);
-        setValue("content",content);
-        setselectedurl(imageurl);
-        setValue("tagValue",tags);
-
-        setTagValue({ name: tags, code: tags });
-
-        if (id == "") {
-             setBlogid(0);
-            setSelectedImage(null);
-            setClearFile(true);
-            setTimeout(() =>setClearFile(false), 50);
-            setTagValue("");
-        }
-
-    }
-
-    
-    const onUpdate =async (data)=>{
-       setbutton(true);
-         try {
-            // Get auth token
-            const resToken = await fetch("/api/auth/get-token");
-            const { token } = await resToken.json();
-
-            // Prepare form data
-            const formData = new FormData();
-             formData.append("id", blogid);
-            formData.append("title", data.title);
-            formData.append("content", data.content);
-            formData.append("image", selectedImage);
-
-             formData.append("tagid", tagValue.name);
-            // Send request
-            const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/blog/update-blog`, {
-                method: "PUT",
-                headers: { Authorization: `Bearer ${token}` },
-                body: formData,
-            });
-
-            if (res.ok) {
-                const responseData = await res.json();
-                // setMessage(responseData.message);
-                 toast.success(responseData.message, {position: "bottom-right",autoClose: 3000,});
-
-                // Clear form and uploader
-                setSelectedImage(null);
-                setClearFile(true);
-                reset();
-                settriggertable(responseData.data.updated_at);
-
-                
-                setTimeout(() => 
-                    setClearFile(false)
-                , 50);
-
-                // Clear message after 3s
-                setTimeout(() => 
-                    setMessage("")
-                , 3000);
-                setBlogid(0);
-                setTagValue("");
-
-            } else {
-                console.error("Failed to create blog");
-            }
-        } catch (error) {
-            console.error("Error creating blog:", error);
-        }
-
-        setbutton(false);
-    }
 
 
-
-
-        if (restriction) {
-    return (
-      <>
-        <div className="flex items-center justify-center min-h-screen bg-gray-100">
-        <div className="bg-white p-10 rounded-xl shadow-md text-center max-w-md">
-          <svg
-            className="w-16 h-16 mx-auto text-red-500"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M12 9v2m0 4h.01M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"
-            />
-          </svg>
-          <h2 className="text-2xl font-semibold mt-4 text-gray-800">
-            Access Denied
-          </h2>
-          <p className="mt-2 text-gray-500">
-            You do not have permission to view this content.
-          </p>
-          
-        </div>
-      </div>
-      </>
-    );
-  }
 
 
 
@@ -230,49 +106,28 @@ export function CreateBlogs() {
                       
                       
                         <p className="text-green-500 text-sm">{message}</p>
-                           <form onSubmit={handleSubmit(blogid > 0 ? onUpdate : onCreate)}>
+                        <form onSubmit={handleSubmit(onCreate)}>
 
                             <div className="space-y-5 sm:space-y-6">
 
                                 {/* Blog Title */}
-                               <div className="grid grid-cols-12 gap-4">
-                    {/* Blog Title - 8 columns */}
-                            <div className="col-span-12 md:col-span-8">
-                                <label className="block mb-1 text-sm font-medium">Blog Title</label>
-                                <input
-                                    type="text"
-                                    placeholder="Enter blog title"
-                                    className="h-11 w-full rounded-lg border px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-hidden focus:ring-3 border-gray-300 focus:ring-brand-200 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
-                                    {...register("title", { required: "Please enter title" })}
-                                />
-                                {errors.title && <p className="text-red-500 text-sm">{errors.title.message}</p>}
-                            </div>
+                                <div className="grid grid-cols-12 gap-4">
+                                    {/* Blog Title - 8 columns */}
+                                    <div className="col-span-12 md:col-span-8">
+                                        <label className="block mb-1 text-sm font-medium">Blog Title</label>
+                                        <input
+                                            type="text"
+                                            placeholder="Enter blog title"
+                                            className="h-11 w-full rounded-lg border px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-hidden focus:ring-3 border-gray-300 focus:ring-brand-200 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
+                                            {...register("title", { required: "Please enter title" })}
+                                        />
+                                        {errors.title && <p className="text-red-500 text-sm">{errors.title.message}</p>}
+                                    </div>
 
-                          
 
-                           <div className="col-span-12 md:col-span-4">
-                                    {/* Hidden input for react-hook-form */}
-                                    <input
-                                        {...register("tagValue", { required: "Please select tag" })}
-                                        type="hidden"
-                                        value={tagValue ? tagValue.name : ""}
-                                    />
 
-                                    {/* Dropdown component */}
-                                    <DropDownSearches
-                                        value={tagValue}
-                                        onChange={(val) => {
-                                            setTagValue(val);         // Update local state
-                                            setValue("tagValue", val ? val.name : ""); // Update RHF form state
-                                        }}
-                                    />
 
-                                    {errors.tagValue && (
-                                        <p className="text-red-500 text-sm">{errors.tagValue.message}</p>
-                                    )}
-                            </div>
-
-                        </div>
+                                </div>
 
 
 
@@ -299,65 +154,45 @@ export function CreateBlogs() {
 
                                 {/* Submit */}
                                 <div className="w-full px-2.5">
-                                   
-                                </div>
 
+                                </div>
 
                                 <div className="grid grid-cols-10 gap-4 mt-5">
                                     <div className="col-span-8"></div> {/* spacer */}
                                     <div className="col-span-2">
-
-                                        {canCreate ? (
-
-
-  <button
-                                        disabled={button}
-                                         type="submit"
-                                        className="bg-brand-500 hover:bg-brand-600 w-full rounded-lg p-3 text-sm font-medium text-white transition-colors"
-                                    >
-                                        {blogid === 0 ? (
-                                            button ? "Adding" : "Add"
-                                        ) : (
-                                            button ? "Updating" : "Update"
-                                        )}
-                                    </button>
-
-                                        ) :(<></>)}
-                                  
-                    </div>
-                    </div>
-
-
+                                        <button
+                                            type="submit"
+                                            className="bg-brand-500 hover:bg-brand-600 w-full rounded-lg p-3 text-sm font-medium text-white transition-colors">
+                                            Add
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </form>
-
                     </ ComponentCard>
                 </div>
             </div>
 
 
 
-            <div className="grid grid-cols-12 gap-4">
+
+
+
+
+
+            {/* <div className="grid grid-cols-12 gap-4">
                 <div className="col-span-12 sm:col-span-12 space-y-5 sm:space-y-6">
                     <ComponentCard title="Manage Blogs" desc="">
                         <p className="text-green-500 text-sm"> </p>
                                         
-                                         {
-                        canRead ? (
+                   
+                            <ListOfBlogs trigger={triggertable} sendData = {handleChildEditData} ></ListOfBlogs>
 
-                            <ListOfBlogs trigger={triggertable} sendData = {handleChildEditData} onRestriction= {(data)=> setRestriction(data)}></ListOfBlogs>
-
-                            ) :(
-
-                            <p className="text-red-500 text-center">Area restricted</p>
-
-
-                            )
-                        }
+                           
 
                     </ ComponentCard>
                 </div>
-            </div>
+            </div> */}
 
            
 

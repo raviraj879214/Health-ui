@@ -206,7 +206,9 @@ const AppSidebar: React.FC = () => {
       name: "Manage Seo",
       subItems: [
         { name: "Public Pages", path: "/admin/manage-seo-content", pro: false },
-        { name: "Clinic Details Page", path: "/admin/clinic-detail-seo", pro: false },
+        //{ name: "Clinic Details Page", path: "/admin/clinic-detail-seo", pro: false },
+        { name: "301 Redirections", path: "/admin/301-redirection", pro: false },
+        { name: "Seo Master", path: "/admin/seo-master", pro: false },
       ],
     },
 
@@ -341,6 +343,14 @@ const AppSidebar: React.FC = () => {
         ),
       name: "Manage Boost Package",
       path: "/admin/manage-package",
+    },
+    {
+      icon:
+        (
+          <Package className="w-6 h-6" />
+        ),
+      name: "Manage Blogs",
+      path: "/admin/blogs",
     },
 
 
