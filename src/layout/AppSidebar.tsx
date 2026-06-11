@@ -211,6 +211,35 @@ const AppSidebar: React.FC = () => {
         { name: "Seo Master", path: "/admin/seo-master", pro: false },
       ],
     },
+    {
+      icon: (
+        <svg
+          className="w-5 h-5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          {/* Document */}
+          <path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7z" />
+
+          {/* Folded corner */}
+          <path d="M14 2v5h5" />
+
+          {/* Text lines */}
+          <path d="M9 12h6" />
+          <path d="M9 16h6" />
+          <path d="M9 8h2" />
+        </svg>
+      ),
+      name: "Blog Management",
+      subItems: [
+        { name: "Create Blog", path: "/admin/blogs", pro: false },
+        { name: "Blog List", path: "/admin/blog-list", pro: false },
+      ],
+    },
 
     {
       icon: (
@@ -344,14 +373,11 @@ const AppSidebar: React.FC = () => {
       name: "Manage Boost Package",
       path: "/admin/manage-package",
     },
-    {
-      icon:
-        (
-          <Package className="w-6 h-6" />
-        ),
-      name: "Manage Blogs",
-      path: "/admin/blogs",
-    },
+
+   
+
+    
+
 
 
 

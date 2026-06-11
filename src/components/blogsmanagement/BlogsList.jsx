@@ -14,8 +14,9 @@ import {
 import { PencilIcon, TrashBinIcon } from "../../icons/index";
 import { toast } from "react-toastify";
 import { usePermissions } from "@/context/PermissionContext";
+import { formatBrazilDate } from "@/lib/formatDate";
 
-export function ListOfBlogs({ trigger , sendData  }) {
+export function ListOfBlogs({ trigger}) {
   const [users, setUsers] = useState([]);
 
 
@@ -45,7 +46,7 @@ export function ListOfBlogs({ trigger , sendData  }) {
          const resToken = await fetch("/api/auth/get-token");
             const { token } = await resToken.json();
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/blog/get-blogs?page=${page}&limit=${itemsPerPage}`,{
+        `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-blog/get-blogs?page=${page}&limit=${itemsPerPage}`,{
             method : "GET",
              headers: { Authorization: `Bearer ${token}` },
         }
@@ -112,7 +113,6 @@ export function ListOfBlogs({ trigger , sendData  }) {
          toast.success(result.message, {position: "bottom-right",autoClose: 3000,});
         setTimeout(() => setMessage(""), 3000);
 
-        sendData("","","","","");
 
         fetchUsers(currentPage);
       }
@@ -122,11 +122,6 @@ export function ListOfBlogs({ trigger , sendData  }) {
   };
 
 
-  const onEdit =(data)=>{
-   
-    sendData(data.id,data.title,data.content,data.tagId,data.image_url);
-
-  }
 
 
 
@@ -160,12 +155,7 @@ export function ListOfBlogs({ trigger , sendData  }) {
                 >
                   Title
                 </TableCell>
-                <TableCell
-                  isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
-                >
-                  Content
-                </TableCell>
+               
                 <TableCell
                   isHeader
                   className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
@@ -176,7 +166,7 @@ export function ListOfBlogs({ trigger , sendData  }) {
                   isHeader
                   className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
                 >
-                  Tag
+                 Created
                 </TableCell>
                 <TableCell
                   isHeader
@@ -204,56 +194,38 @@ export function ListOfBlogs({ trigger , sendData  }) {
                         : "—"}
                     </span>
                   </TableCell>
-                         <TableCell className="px-5 py-4 sm:px-6 text-start align-top">
-            <div
-              className={`transition-all duration-300 ${
-                expandedRows[user.id] ? "max-h-none" : "max-h-24 overflow-hidden"
-              }`}
-            >
-              <p
-                className={`${
-                  expandedRows[user.id] ? "" : "line-clamp-3"
-                } text-gray-800`}
-              >
-                {user.content}
-              </p>
-            </div>
-
-            {/* Toggle button */}
-            <button
-              onClick={() => toggleExpand(user.id)}
-              className="text-blue-500 text-sm hover:underline mt-1"
-            >
-              {expandedRows[user.id] ? "Show less" : "...read more"}
-            </button>
-          </TableCell>
+                        
+                  <TableCell className="px-5 py-4 sm:px-6 text-start">
+  {user.image_url ? (
+    <img
+      src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=blogs/${user.image_url}`}
+      alt="Blog Banner"
+      className="h-[50px] w-[80px] object-cover rounded"
+    />
+  ) : (
+    <span>No Banner</span>
+  )}
+</TableCell>
                   <TableCell className="px-5 py-4 sm:px-6 text-start">
                     
-                    <img  src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads/blogs/${user.image_url}`}  alt="Profer Logo" style={{ height: "50px" }} />
+                        {formatBrazilDate(user.created_at)}
+                     
 
                   </TableCell>
-                  <TableCell className="px-5 py-4 sm:px-6 text-start">
-                    {user.tagId || "No Tag"}
-                  </TableCell>
+                 
                   <TableCell className="px-5 py-4 sm:px-6 text-start">
                     <div className="flex items-center gap-3">
                       {/* <button onClick={() => edit(user.id, user.firstname)}>
                         <PencilIcon />
                       </button> */}
                       
-                      {canUpdate ? (
-
-                      <button onClick={() => onEdit(user)}>
-                        <PencilIcon />
-                      </button>)
-                      :
-                      (
-                        <button className="opacity-50 cursor-not-allowed">
+                      
+                      <button onClick={()=> {
+                        window.location.href=`/admin/blogs?id=${user.titleurl}`;
+                      }} className="opacity-100">
                         <PencilIcon />
                       </button>
-                      )
-                      
-                    }
+                     
                       /
                      
                     {canDelete ? (
