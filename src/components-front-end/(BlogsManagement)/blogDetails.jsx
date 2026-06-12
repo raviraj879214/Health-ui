@@ -90,7 +90,7 @@ export function BlogDetails(){
 
                                 <div className="flex items-center gap-2 rounded-full bg-cyan-50 px-3 py-2">
                                     <img
-                                        src="http://localhost:8000/v1/uploads?filepath=blogs/7abf004dfcbb0f779b6ca4f1707fa439.png"
+                                        src="https://api.itravelforhealth.com/v1/uploads?filepath=doctors/profilepicture/2132d2b1c81dd99296d0aeefcf3b82f7.jpeg"
                                         className="h-8 w-8 rounded-full object-cover"
                                         alt=""
                                     />
@@ -106,7 +106,7 @@ export function BlogDetails(){
 
                                 <div className="flex items-center gap-2 rounded-full bg-violet-50 px-3 py-2">
                                     <img
-                                        src="http://localhost:8000/v1/uploads?filepath=blogs/7abf004dfcbb0f779b6ca4f1707fa439.png"
+                                        src="https://api.itravelforhealth.com/v1/uploads?filepath=doctors/profilepicture/2132d2b1c81dd99296d0aeefcf3b82f7.jpeg"
                                         className="h-8 w-8 rounded-full object-cover"
                                         alt=""
                                     />
