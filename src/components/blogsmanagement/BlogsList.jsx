@@ -155,6 +155,13 @@ export function ListOfBlogs({ trigger}) {
                 >
                   Title
                 </TableCell>
+                
+                <TableCell
+                  isHeader
+                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                >
+                 Category
+                </TableCell>
                
                 <TableCell
                   isHeader
@@ -162,6 +169,7 @@ export function ListOfBlogs({ trigger}) {
                 >
                   Image
                 </TableCell>
+
                 <TableCell
                   isHeader
                   className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
@@ -194,23 +202,29 @@ export function ListOfBlogs({ trigger}) {
                         : "—"}
                     </span>
                   </TableCell>
+                  <TableCell className="px-5 py-4 sm:px-6 text-start">
+                    <span className="block font-medium text-gray-800 text-theme-sm dark:text-white/90">
+                      {user.category || user.category
+                        ? `${user.category || ""} `
+                        : "—"}
+                    </span>
+                  </TableCell>
                         
                   <TableCell className="px-5 py-4 sm:px-6 text-start">
-  {user.image_url ? (
-    <img
-      src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=blogs/${user.image_url}`}
-      alt="Blog Banner"
-      className="h-[50px] w-[80px] object-cover rounded"
-    />
-  ) : (
-    <span>No Banner</span>
-  )}
-</TableCell>
+                    {user.image_url ? (
+                      <img
+                        src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=blogs/${user.image_url}`}
+                        alt="Blog Banner"
+                        className="h-[50px] w-[80px] object-cover rounded"
+                      />
+                    ) : (
+                      <span>No Banner</span>
+                    )}
+                  </TableCell>
                   <TableCell className="px-5 py-4 sm:px-6 text-start">
                     
                         {formatBrazilDate(user.created_at)}
                      
-
                   </TableCell>
                  
                   <TableCell className="px-5 py-4 sm:px-6 text-start">

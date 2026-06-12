@@ -47,6 +47,7 @@ const fetchBlogDetails = async (id) => {
     setValue("metaTitle",result.data.metatitle);
     setValue("metaKeywords",result.data.metakeywords);
     setValue("metaDescription",result.data.metadescription);
+    setValue("category",result.data.category);
 
    
 
@@ -210,6 +211,7 @@ const fetchBlogDetails = async (id) => {
     formData.append("metaDescription", data.metaDescription);
     //formData.append("se_structure", data.se_structure);
      formData.append("se_structure", data.structuredData);
+     formData.append("category", data.category);
 
       
 
@@ -326,7 +328,7 @@ const removeOgImage = () => {
               
 
                           <div className="grid grid-cols-1 md:grid-cols-10 gap-4">
-                              <div className="md:col-span-7">
+                              <div className="md:col-span-6">
                                   <div>
                                       <label className="text-sm font-medium">Title</label>
                                       <input
@@ -337,7 +339,33 @@ const removeOgImage = () => {
                                   </div>
                               </div>
 
-                              <div className="md:col-span-3">
+                              <div className="md:col-span-2">
+                                <div>
+                                  <label className="text-sm font-medium">Category</label>
+
+                                  <select
+                                    className="h-11 w-full border rounded-lg px-3"
+                                    {...register("category", {
+                                      required: "Category is required",
+                                    })}
+                                  >
+                                    <option value="">Select Category</option>
+                                    <option value="Health">Health</option>
+                                    <option value="Medical Tourism">Medical Tourism</option>
+                                    <option value="Plastic Surgery">Plastic Surgery</option>
+                                    <option value="Dental Care">Dental Care</option>
+                                    <option value="Wellness">Wellness</option>
+                                  </select>
+
+                                  {errors.category && (
+                                    <p className="text-red-500">{errors.category.message}</p>
+                                  )}
+                                </div>
+                              </div>
+
+
+
+                              <div className="md:col-span-2">
                                   <div>
                                       <label className="text-sm font-medium">Reading Minutes</label>
                                       <input
@@ -352,6 +380,8 @@ const removeOgImage = () => {
                                       {errors.readingMinutes && <p className="text-red-500">{errors.readingMinutes.message}</p>}
                                   </div>
                               </div>
+
+
                           </div>
 
               {/* ================= CONTENT ================= */}

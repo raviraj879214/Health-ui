@@ -72,6 +72,7 @@ export default async function Page() {
   return (
     <>
       <Suspense fallback={<BannerLoader />}>
+      
         <Banner />
 
         <TopRated />
