@@ -110,7 +110,7 @@ export function BlogsList() {
           {/* Banner */}
           <div className="group overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-lg">
             <img
-              src="http://localhost:8000/v1/uploads?filepath=blogs/7abf004dfcbb0f779b6ca4f1707fa439.png"
+              src="https://api.itravelforhealth.com/v1/uploads?filepath=blogs/eeaef4a566cffe5c9e98c86a9f77985a.jpg"
               alt="Medical surgery safety guide banner"
               className="
                 h-[220px]
