@@ -46,6 +46,7 @@ export function BlogDetails({blog}){
                             {/* Banner */}
                             <div className="group overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-lg">
                                 <img
+                                
                                     src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=blogs/${blog.image_url}`}
                                     alt="Medical surgery safety guide banner"
                                     className="
