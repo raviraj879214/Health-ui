@@ -1,9 +1,12 @@
 "use client";
 
-import React from "react";
+import { formatBrazilDate } from "@/lib/formatDate";
+import React, { useEffect, useState } from "react";
 
 export function BlogsList() {
-  const latestPosts = [
+  const [latestPosts,setLatestPosts] = useState([]);
+
+  const latestPostsdd = [
     {
       id: 1,
       title: "Average Cost Of Surrogacy In 2026: Complete Breakdown For Intended Parents",
@@ -27,69 +30,75 @@ export function BlogsList() {
     },
   ];
 
-  const posts = [
-  {
-    id: 1,
-    image: "http://localhost:8000/v1/uploads?filepath=blogs/7abf004dfcbb0f779b6ca4f1707fa439.png",
-    date: "2026-06-04",
-    slug: "what-is-surrogacy",
-    title: "What Is Surrogacy and How Much Does Surrogacy Cost in 2026?",
-    description:
-      "Surrogacy is a family-building process in which a woman carries and gives birth to a child for intended parents...",
-  },
-  {
-    id: 2,
-    image: "http://localhost:8000/v1/uploads?filepath=blogs/7abf004dfcbb0f779b6ca4f1707fa439.png",
-    date: "2026-06-01",
-    slug: "frozen-embryo-transfer",
-    title:
-      "Factors That Affect Single Frozen Embryo Transfer Success Rates",
-    description:
-      "Single frozen embryo transfer (sFET) success rates depend on several important factors...",
-  },
-  {
-    id: 3,
-    image: "http://localhost:8000/v1/uploads?filepath=blogs/7abf004dfcbb0f779b6ca4f1707fa439.png",
-    date: "2026-06-01",
-    slug: "frozen-embryo-transfer-timeline",
-    title:
-      "Frozen Embryo Transfer Timeline: Step-by-Step From Preparation to Pregnancy Test",
-    description:
-      "A frozen embryo transfer (FET) is one of the final stages of the IVF process...",
-  },
-  {
-    id: 1,
-    image: "http://localhost:8000/v1/uploads?filepath=blogs/7abf004dfcbb0f779b6ca4f1707fa439.png",
-    date: "2026-06-04",
-    slug: "what-is-surrogacy",
-    title: "What Is Surrogacy and How Much Does Surrogacy Cost in 2026?",
-    description:
-      "Surrogacy is a family-building process in which a woman carries and gives birth to a child for intended parents...",
-  },
-  {
-    id: 2,
-    image: "http://localhost:8000/v1/uploads?filepath=blogs/7abf004dfcbb0f779b6ca4f1707fa439.png",
-    date: "2026-06-01",
-    slug: "frozen-embryo-transfer",
-    title:
-      "Factors That Affect Single Frozen Embryo Transfer Success Rates",
-    description:
-      "Single frozen embryo transfer (sFET) success rates depend on several important factors...",
-  },
-  {
-    id: 3,
-    image: "http://localhost:8000/v1/uploads?filepath=blogs/7abf004dfcbb0f779b6ca4f1707fa439.png",
-    date: "2026-06-01",
-    slug: "frozen-embryo-transfer-timeline",
-    title:
-      "Frozen Embryo Transfer Timeline: Step-by-Step From Preparation to Pregnancy Test",
-    description:
-      "A frozen embryo transfer (FET) is one of the final stages of the IVF process...",
-  },
-];
+  const [posts,setPosts] = useState([]);
+
+  const postsdd = [
+    {
+      id: 1,
+      image: "http://localhost:8000/v1/uploads?filepath=blogs/7abf004dfcbb0f779b6ca4f1707fa439.png",
+      date: "2026-06-04",
+      slug: "what-is-surrogacy",
+      title: "What Is Surrogacy and How Much Does Surrogacy Cost in 2026?",
+      description:
+        "Surrogacy is a family-building process in which a woman carries and gives birth to a child for intended parents...",
+    },
+  ];
+
+
+  const [bloglist,setBlogList] = useState([]);
+
+
+  useEffect(() => {
+    fetchblogs();
+  }, []);
+
+
+  const fetchblogs = async()=>{
+    const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/homepage-banner/get-blogs`,{
+      method : "Get"
+    });
+
+    if(res.ok){
+      const result =await res.json();
+
+      setBlogList(result.data);
+
+      const blogData = result.data.map((item, index) => ({
+        id: item.id,
+        image: `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=blogs/${item.image_url}`,
+        date: item.created_at,
+        slug: `blogs/${item.titleurl}`,
+        title: item.title,
+        description: item.content.replace(/<[^>]+>/g, "").slice(0, 90) + "...",
+        category : item.category,
+        readingminutes : item.readingminutes
+      }));
+
+      const latestData = [...result.data]
+        .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+        .slice(0, 5)
+        .map((item) => ({
+          id: item.id,
+          title: item.title,
+          image: `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=blogs/${item.image_url}`,
+          slug: `blogs/${item.titleurl}`,
+          publishedDate: item.created_at,
+        }));
+
+      setLatestPosts(latestData);
+      setPosts(blogData);
+
+
+
+    }
+  }
+
+
+
   
 
   return (<>
+
   <section className="bg-gray-50 py-10 md:py-14 antialiased">
   <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12">
@@ -186,7 +195,7 @@ export function BlogsList() {
               {latestPosts.map((post) => (
                 <a
                   key={post.id}
-                  href={`/blogs/${post.slug}`}
+                  href={`${post.slug}`}
                   className="group flex gap-4 p-4 transition hover:bg-gray-50"
                 >
                   <div className="h-[72px] w-[72px] overflow-hidden rounded-2xl">
@@ -204,7 +213,7 @@ export function BlogsList() {
 
                     <div className="mt-2 flex items-center justify-between">
                       <span className="text-xs text-gray-400">
-                        {post.publishedDate}
+                        {formatBrazilDate(post.publishedDate)}
                       </span>
 
                       <svg
@@ -227,9 +236,9 @@ export function BlogsList() {
             </div>
 
             {/* Footer */}
-            <div className="p-5">
+            <div className="p-5 scroll-smooth">
               <a
-                href="/blogs"
+                href="#all-articles"
                 className="
                   flex
                   w-full
@@ -262,7 +271,7 @@ export function BlogsList() {
 
 
 
-<section className="bg-white py-16 md:py-20 antialiased">
+<section className="bg-white py-16 md:py-20 antialiased scroll-mt-24" id="all-articles" >
   <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
     <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
@@ -288,7 +297,7 @@ export function BlogsList() {
 
           {/* Image */}
           <a
-            href={`/blogs/${post.slug}`}
+            href={`${post.slug}`}
             className="block overflow-hidden"
           >
             <img
@@ -310,11 +319,11 @@ export function BlogsList() {
 
             {/* Meta */}
             <div className="flex items-center gap-2 text-sm text-gray-500">
-              <span>{post.date}</span>
+              <span>{formatBrazilDate(post.date)}</span>
 
               <span>•</span>
 
-              <span>5 min read</span>
+              <span>{post.readingminutes} min read</span>
             </div>
 
             {/* Title */}
@@ -381,7 +390,7 @@ export function BlogsList() {
                 text-gray-600
               "
             >
-              {post.description}
+              <div dangerouslySetInnerHTML={{ __html: post.description }}/>
             </p>
 
             {/* Footer */}
@@ -428,7 +437,7 @@ export function BlogsList() {
                   text-gray-500
                 "
               >
-                Health Guide
+                {post.category}
               </button>
 
             </div>
