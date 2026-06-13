@@ -397,7 +397,7 @@ export function BlogsList() {
             <div className="mt-6 flex items-center justify-between">
 
               <a
-                href={`/blogs/${post.slug}`}
+                href={`${post.slug}`}
                 className="
                   inline-flex
                   items-center
