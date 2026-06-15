@@ -48,6 +48,7 @@ export function BlogDetails({blog}){
                                 <img
                                 
                                 
+                                
                                     src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=blogs/${blog.image_url}`}
                                     alt="Medical surgery safety guide banner"
                                     className="
