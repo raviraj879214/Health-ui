@@ -1,16 +1,18 @@
 "use client"
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ComponentCard from "../common/ComponentCard";
 import { DropDownSearchesSeo } from "../manageseo/DropDown";
 import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { usePermissions } from "@/context/PermissionContext";
 
 
 
 export function ManageSeoPage() {
 
-    const { register, reset, formState: { errors }, handleSubmit, setValue,watch } = useForm();
+    const { register, reset, formState: { errors }, handleSubmit, setValue,watch } = useForm({
+       defaultValues: { ogType: "website", }
+    });
     const [tagValue, setTagValue] = useState("");
     const [button,setbutton] = useState(false);
     const [buttonprocess,setbuttonprocess] = useState(false);
@@ -50,6 +52,25 @@ export function ManageSeoPage() {
             setValue("metaKeywords",result.data.meta_keywords);
             setValue("metaDescription",result.data.meta_desc);
             setValue("og_structure",JSON.stringify(result.data.og_structure));
+
+
+            setValue("ogUrl",result.data.og_url);
+            
+            if(result.data.og_type){
+              setValue("ogType",result.data.og_type);
+            }
+
+
+            setValue("publisher",result.data.publisher);
+
+            if(result.data.og_image){
+              setOgPreview(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=seocontent/${result.data.og_image}`);
+            }
+            else{
+              setOgPreview(null);
+            }
+             
+
         }
 
     }
@@ -59,6 +80,7 @@ export function ManageSeoPage() {
 
 
 const onUpdate = async (data) => {
+  debugger;
   setbuttonprocess(true);
   try {
     // Get token
@@ -85,6 +107,10 @@ const onUpdate = async (data) => {
           meta_title: data.metaTitle,
           meta_desc: data.metaDescription,
           meta_keywords: data.metaKeywords,
+          og_structure : data.og_structure,
+          og_url:data.ogUrl,
+          og_type:data.ogType,
+          publisher:data.publisher,
         }),
       }
     );
@@ -101,6 +127,7 @@ const onUpdate = async (data) => {
 
     // Success
     setTagValue("");
+    setOgPreview(null);
     reset();
     setbutton(false);
     setmessage(result.message || "SEO updated successfully");
@@ -117,7 +144,86 @@ const onUpdate = async (data) => {
 };
 
 
+  const [ogImage, setOgImage] = useState(null);
+  const [ogPreview, setOgPreview] = useState(null);
+  const [ogError, setOgError] = useState("");
+  const ogInputRef = useRef(null);
 
+
+  const handleOgImage = (e) => {
+    const selectedFile = e.target.files?.[0];
+
+    if (!selectedFile) return;
+
+    const allowedTypes = [
+      "image/jpeg",
+      "image/jpg",
+      "image/png",
+      "image/webp",
+      "image/gif",
+    ];
+
+    if (!allowedTypes.includes(selectedFile.type)) {
+      setOgError(
+        "Only JPG, JPEG, PNG, WEBP and GIF images are allowed."
+      );
+      e.target.value = "";
+      return;
+    }
+
+    setOgError("");
+
+    const url = URL.createObjectURL(selectedFile);
+
+    setOgImage(selectedFile);
+    setOgPreview(url);
+  };
+
+  const removeOgImage = () => {
+    setOgImage(null);
+    setOgPreview(null);
+    setOgError("");
+
+    if (ogInputRef.current) {
+      ogInputRef.current.value = "";
+    }
+  };
+
+
+  useEffect(()=>{
+    putImage();
+  },[ogImage]);
+
+
+  const putImage = async () => {
+    debugger;
+
+    const resToken = await fetch("/api/auth/get-token");
+    const { token } = await resToken.json();
+
+
+    const formData = new FormData();
+
+    formData.append("id", tagValue.code);
+    if (ogImage) {
+      formData.append("ogImage", ogImage);
+    }
+
+     const res = await fetch(
+      `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/seo/update-og-image`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      }
+    );
+
+    if (res.ok) {
+    }
+
+  }
 
 
 
@@ -158,7 +264,7 @@ const onUpdate = async (data) => {
 
 
     return (<>
-
+      <ToastContainer></ToastContainer>
         <div className="grid grid-cols-12 gap-4">
             <div className="col-span-12 sm:col-span-12 space-y-5 sm:space-y-6">
                 <ComponentCard title="Manage Seo Pages" desc="" showReload = {true}>
@@ -300,7 +406,104 @@ const onUpdate = async (data) => {
     </p>
   )}
 </div>
-                           
+
+                          <div className="col-span-12 md:col-span-6 border p-4 rounded-lg space-y-4">
+  <label className="block mb-2 text-sm font-medium">
+    Open Graph (OG) Data
+  </label>
+
+  {/* OG URL */}
+  <div>
+    <label className="block text-sm font-medium mb-1">
+      OG URL
+    </label>
+
+    <input
+      type="url"
+      placeholder="https://www.abc.com/blog-page"
+      className="w-full border px-3 py-2 rounded"
+      {...register("ogUrl")}
+    />
+  </div>
+
+  {/* OG Type */}
+  <div>
+    <label className="block text-sm font-medium mb-1">
+      OG Type
+    </label>
+
+    <select
+      className="w-full border px-3 py-2 rounded"
+      {...register("ogType")}>
+      <option value="website">website</option>
+      <option value="article">article</option>
+      <option value="blog">blog</option>
+    </select>
+  </div>
+
+
+  {/* Publisher */}
+  <div>
+    <label className="block text-sm font-medium mb-1">
+      Publisher
+    </label>
+
+    <input
+      type="text"
+      placeholder="Website Name"
+      className="w-full border px-3 py-2 rounded"
+      {...register("publisher")}
+    />
+  </div>
+
+  {/* OG Image */}
+  <div>
+    <label className="block text-sm font-medium mb-2">
+      OG Image
+    </label>
+
+    {!ogPreview ? (
+      <label className="flex h-40 cursor-pointer items-center justify-center rounded-lg border border-dashed">
+        <input
+          type="file"
+          hidden
+          ref={ogInputRef}
+         accept=".jpg,.jpeg,.png,.webp"
+          onChange={handleOgImage}
+        />
+
+        <span className="text-sm text-gray-500">
+          Upload OG Image
+          <br />
+          (JPG, PNG, WEBP, GIF)
+        </span>
+      </label>
+    ) : (
+      <div className="relative rounded-lg border p-2">
+        <img
+          src={ogPreview}
+          alt="OG Preview"
+          className="h-40 w-full object-contain rounded"
+        />
+
+        <button
+          type="button"
+          onClick={removeOgImage}
+          className="absolute top-2 right-2 rounded bg-black px-3 py-1 text-sm text-white"
+        >
+          Remove
+        </button>
+      </div>
+    )}
+
+    {ogError && (
+      <p className="mt-2 text-sm text-red-500">
+        {ogError}
+      </p>
+    )}
+  </div>
+</div>  
+
 
                         </div>
 

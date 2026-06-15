@@ -65,7 +65,7 @@ export function BlogsList() {
       setBlogList(latestBlog);
 
 
-      const blogData = result.data.map((item, index) => ({
+      const blogData = result.data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at)).map((item, index) => ({
         id: item.id,
         image: `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=blogs/${item.image_url}`,
         date: item.created_at,
@@ -76,16 +76,14 @@ export function BlogsList() {
         readingminutes : item.readingminutes
       }));
 
-      const latestData = [...result.data]
-        .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
-        .slice(0, 5)
-        .map((item) => ({
+      const latestData = [...result.data].sort((a, b) => new Date(b.created_at) - new Date(a.created_at)).slice(0, 5).map((item) => ({
           id: item.id,
           title: item.title,
           image: `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=blogs/${item.image_url}`,
           slug: `blogs/${item.titleurl}`,
-          publishedDate: item.created_at,
-        }));
+          publishedDate: item.created_at,}));
+
+
       setLatestPosts(latestData);
       setPosts(blogData);
     }
