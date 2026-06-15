@@ -159,6 +159,7 @@ export function HeaderFrontend() {
             <li>
               <Link href={`${slugs.find(x => x.title === "About Us")?.slug || ""}`}>About Us</Link>
             </li>
+            
             <li>
               <Link href={`${slugs.find(x => x.title === "Treatments")?.slug || ""}`}>Treatments</Link>
             </li>
