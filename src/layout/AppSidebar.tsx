@@ -34,45 +34,6 @@ type NavItem = {
 
 
 
-// const navItems: NavItem[] = [
-//   {
-//     icon: <GridIcon />,
-//     name: "Dashboard",
-//     // subItems: [{ name: "Ecommerce", path: "/", pro: false }],
-//   },
-//   // {
-//   //   icon: <CalenderIcon />,
-//   //   name: "Calendar",
-//   //   path: "/calendar",
-//   // },
-//   // {
-//   //   icon: <UserCircleIcon />,
-//   //   name: "User Profile",
-//   //   path: "/profile",
-//   // },
-
-//   // {
-//   //   name: "Forms",
-//   //   icon: <ListIcon />,
-//   //   subItems: [{ name: "Form Elements", path: "/form-elements", pro: false }],
-//   // },
-//   // {
-//   //   name: "Tables",
-//   //   icon: <TableIcon />,
-//   //   subItems: [{ name: "Basic Tables", path: "/basic-tables", pro: false }],
-//   // },
-//   // {
-//   //   name: "Pages",
-//   //   icon: <PageIcon />,
-//   //   subItems: [
-//   //     { name: "Blank Page", path: "/blank", pro: false },
-//   //     { name: "404 Error", path: "/error-404", pro: false },
-//   //   ],
-//   // },
-// ];
-
-
-
 const othersItems: NavItem[] = [
   {
     icon: <PieChartIcon />,
@@ -185,16 +146,7 @@ const AppSidebar: React.FC = () => {
       path: "/admin/faqs",
     },
 
-    // {
-    //   icon: (
-    //     <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2"
-    //       strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-    //       <circle cx="11" cy="11" r="8" />
-    //       <path d="M21 21l-4.35-4.35" />
-    //     </svg>),
-    //   name: "Manage Seo",
-    //   path: "/admin/manage-seo-content",
-    // },
+   
      {
       icon: (
        <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2"
@@ -206,7 +158,6 @@ const AppSidebar: React.FC = () => {
       name: "Manage Seo",
       subItems: [
         { name: "Public Pages", path: "/admin/manage-seo-content", pro: false },
-        //{ name: "Clinic Details Page", path: "/admin/clinic-detail-seo", pro: false },
         { name: "301 Redirections", path: "/admin/301-redirection", pro: false },
         { name: "Seo Master", path: "/admin/seo-master", pro: false },
       ],

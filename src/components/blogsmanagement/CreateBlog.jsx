@@ -129,12 +129,12 @@ const fetchBlogDetails = async (id) => {
     const img = new Image();
 
     img.onload = () => {
-    //   if (img.width !== 1080 || img.height !== 608) {
-    //     setImageError("Image must be exactly 1080 × 608 pixels");
-    //     URL.revokeObjectURL(url);
-    //     e.target.value = "";
-    //     return;
-    //   }
+      if (img.width !== 1080 || img.height !== 608) {
+        setImageError("Image must be exactly 1080 × 608 pixels");
+        URL.revokeObjectURL(url);
+        e.target.value = "";
+        return;
+      }
 
       setFile(selectedFile);
       setPreview(url);

@@ -11,21 +11,17 @@ async function getPageData(slug) {
       cache: "no-store",
     }
   );
-
   if (!res.ok) {
     throw new Error("Failed to fetch SEO data");
   }
-
   return res.json();
 }
 
 export async function generateMetadata() {
 
   const page = await getPageData("blogs");
-
+  
   const canonicalUrl = `${process.env.NEXT_PUBLIC_URL}/${page}`;
-
-
   return {
     title: page?.seoPages?.meta_title || "Health Tech",
     description:
@@ -44,12 +40,7 @@ export async function generateMetadata() {
 
 
 export default async function Page(){
-
-
-
-
     return(<>
-
         <BlogsList />
     </>);
 }

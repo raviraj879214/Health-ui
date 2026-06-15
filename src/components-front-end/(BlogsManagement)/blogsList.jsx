@@ -61,7 +61,9 @@ export function BlogsList() {
     if(res.ok){
       const result =await res.json();
 
-      setBlogList(result.data);
+      const latestBlog = result.data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))[0];
+      setBlogList(latestBlog);
+
 
       const blogData = result.data.map((item, index) => ({
         id: item.id,
@@ -84,12 +86,8 @@ export function BlogsList() {
           slug: `blogs/${item.titleurl}`,
           publishedDate: item.created_at,
         }));
-
       setLatestPosts(latestData);
       setPosts(blogData);
-
-
-
     }
   }
 
@@ -102,7 +100,7 @@ export function BlogsList() {
   <section className="bg-gray-50 py-10 md:py-14 antialiased">
   <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12">
-
+      
       {/* Featured Blog */}
       <main className="lg:col-span-8">
         <article className="space-y-6">
@@ -110,7 +108,7 @@ export function BlogsList() {
           {/* Banner */}
           <div className="group overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-lg">
             <img
-              src="https://api.itravelforhealth.com/v1/uploads?filepath=blogs/eeaef4a566cffe5c9e98c86a9f77985a.jpg"
+               src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=blogs/${bloglist.image_url}`}
               alt="Medical surgery safety guide banner"
               className="
                 h-[220px]
@@ -128,18 +126,18 @@ export function BlogsList() {
           {/* Meta */}
           <div className="flex flex-wrap items-center gap-3 text-sm text-gray-500">
             <span className="rounded-full bg-cyan-50 px-3 py-1 font-semibold text-cyan-700">
-              Patient Safety
+              {bloglist.category}
             </span>
 
             <span>•</span>
 
             <time dateTime="2025-07-29">
-              July 29, 2025
+             {formatBrazilDate(bloglist.created_at)}
             </time>
 
             <span>•</span>
 
-            <span>6 min read</span>
+            <span>{bloglist.readingminutes} min read</span>
           </div>
 
           {/* Title */}
@@ -149,27 +147,23 @@ export function BlogsList() {
             font-black
             tracking-tight
             leading-tight
-            text-gray-900
-          ">
-            How to Get Surgery Abroad Without Getting Scammed:{" "}
-            <span className="bg-gradient-to-r from-cyan-600 to-sky-600 bg-clip-text text-transparent">
-              7 Red Flags You Must Know
-            </span>
+            text-gray-900">
+            {bloglist.title}
           </h1>
 
-          {/* Description */}
-          <p className="
-            max-w-3xl
-            text-base
-            lg:text-lg
-            leading-8
-            text-gray-600
-          ">
-            Medical tourism can be life-changing, but it’s not without risks.
-            Here are 7 critical red flags every patient must evaluate before
-            scheduling surgery abroad. Spot the scams, choose safety, and
-            travel smart.
-          </p>
+        
+              <p className="
+                  max-w-3xl
+                  text-base
+                  lg:text-lg
+                  leading-8
+                  text-gray-600
+                  line-clamp-3
+                  ">
+                <div dangerouslySetInnerHTML={{ __html: bloglist.content }} />
+              </p>
+
+
         </article>
       </main>
 
@@ -328,7 +322,7 @@ export function BlogsList() {
 
             {/* Title */}
             <a
-              href={`/blogs/${post.slug}`}
+              href={`/${post.slug}`}
               className="mt-4 flex items-start justify-between gap-4"
             >
               <h3
