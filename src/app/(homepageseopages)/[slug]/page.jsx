@@ -23,6 +23,7 @@ async function getPageData(slug) {
   }
 
   return res.json();
+  
 }
 
 export async function generateMetadata({ params }) {
