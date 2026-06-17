@@ -7,6 +7,7 @@ import {CitizenShip} from "../../../components-front-end/contentmanagement/Citiz
 import {Flights} from "../../../components-front-end/contentmanagement/Flights/flights";
 import {PersonalAssistance} from "../../../components-front-end/contentmanagement/PersonalAssistance/personalassistance";
 import { AboutUs } from "../../../components-front-end/contentmanagement/Aboutus/aboutUs";
+import { PlasticSurgery } from "../../../components-front-end/contentmanagement/PlasticSurgery/plasticSurgery";
 
 
 async function getPageData(slug) {
@@ -78,6 +79,12 @@ export default async function Page({ params }) {
 
     case "About Us":
       return  <AboutUs />;
+
+
+    case "Plastic Surgery":
+      return  <PlasticSurgery />;
+
+
 
 
 

@@ -161,7 +161,85 @@ export function HeaderFrontend() {
             </li>
             
             <li>
-              <Link href={`${slugs.find(x => x.title === "Treatments")?.slug || ""}`}>Treatments</Link>
+              <Menu as="div" className="relative inline-block">
+                <MenuButton className="btn btn-none inline-flex items-center justify-center gap-3">
+                  Treatments
+                  <span className="icon">
+                    <svg
+                      width="12"
+                      height="7"
+                      viewBox="0 0 13 7"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M11.8735 1L6.48165 6L0.999899 1"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </span>
+                </MenuButton>
+
+                <Transition
+                  enter="transition ease-out duration-200"
+                  enterFrom="opacity-0 -translate-y-2.5"
+                  enterTo="opacity-100 translate-y-0"
+                  leave="transition ease-in duration-150"
+                  leaveFrom="opacity-100 translate-y-0"
+                  leaveTo="opacity-0 -translate-y-2.5"
+                >
+                  <MenuItems className="absolute left-0 z-50 mt-2 w-56 origin-top-left bg-white shadow-[0_0_30px_0_rgba(45,45,45,0.15)] rounded-thm focus:outline-none">
+                    <div className="py-1">
+
+                      <MenuItem>
+                        <a href={`${slugs.find(x => x.title === "Plastic Surgery")?.slug || ""}`} className="block px-4 py-2 text-sm font-medium text-gray-700">
+                          Plastic Surgery
+                        </a>
+                      </MenuItem>
+
+                      <MenuItem>
+                        <a href="#" className="block px-4 py-2 text-sm font-medium text-gray-700">
+                          Cosmetic Surgery
+                        </a>
+                      </MenuItem>
+
+                      <MenuItem>
+                        <a href="#" className="block px-4 py-2 text-sm font-medium text-gray-700">
+                          Hair Transplant
+                        </a>
+                      </MenuItem>
+
+                      <MenuItem>
+                        <a href="#" className="block px-4 py-2 text-sm font-medium text-gray-700">
+                          Dental Treatments
+                        </a>
+                      </MenuItem>
+
+                      <MenuItem>
+                        <a href="#" className="block px-4 py-2 text-sm font-medium text-gray-700">
+                          Fertility Treatments
+                        </a>
+                      </MenuItem>
+
+                      <MenuItem>
+                        <a href="#" className="block px-4 py-2 text-sm font-medium text-gray-700">
+                          Orthopedic Treatments
+                        </a>
+                      </MenuItem>
+
+                      <MenuItem>
+                        <a href="#" className="block px-4 py-2 text-sm font-medium text-gray-700">
+                          Cardiac Treatments
+                        </a>
+                      </MenuItem>
+
+                    </div>
+                  </MenuItems>
+                </Transition>
+              </Menu>
             </li>
             <li>
               <Link href={`${slugs.find(x => x.title === "Why Brazil")?.slug || ""}`}>Why Brazil?</Link>
