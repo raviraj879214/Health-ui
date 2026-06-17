@@ -58,9 +58,23 @@ export async function generateMetadata({ params }) {
   };
 }
 
+
 export default async function Page({ params }) {
   const { id } = await params;
   const blog = await getBlog(id);
 
-  return <BlogDetails blog={blog} />;
+  
+  
+  return(<> 
+     {blog?.se_structure && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(blog.se_structure),
+          }}
+        />
+      )}
+  
+  <BlogDetails blog={blog} />
+  </>);
 }

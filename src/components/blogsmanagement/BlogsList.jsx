@@ -11,7 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
-import { PencilIcon, TrashBinIcon } from "../../icons/index";
+import { EyeCloseIcon, EyeIcon, PencilIcon, TrashBinIcon } from "../../icons/index";
 import { toast } from "react-toastify";
 import { usePermissions } from "@/context/PermissionContext";
 import { formatBrazilDate } from "@/lib/formatDate";
@@ -251,6 +251,15 @@ export function ListOfBlogs({ trigger}) {
                           <TrashBinIcon />
                         </button>
                       )}
+
+                      /
+
+                      <button onClick={() =>{
+
+                        window.location.href = `/admin/blog-list/${user.titleurl}`
+                      }}>
+                          <EyeIcon />
+                        </button>
 
                     </div>
                   </TableCell>
