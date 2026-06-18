@@ -3,7 +3,12 @@
 import { formatBrazilDate } from "@/lib/formatDate";
 import React, { useEffect, useState } from "react";
 
-export function BlogsList() {
+
+export function BlogsList() 
+{
+
+
+
   const [latestPosts,setLatestPosts] = useState([]);
 
   const latestPostsdd = [

@@ -3,44 +3,91 @@ import {BlogsList} from "../../../components-front-end/(BlogsManagement)/blogsLi
 
 
 
-async function getPageData(slug) {
-
+async function getPageData() {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/homepage-banner/seo-page-content/${slug}`,
+    `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/homepage-banner/get-blogs`,
     {
       cache: "no-store",
     }
   );
+
   if (!res.ok) {
     throw new Error("Failed to fetch SEO data");
   }
-  return res.json();
+
+  const result = await res.json();
+
+  return result.data.sort(
+    (a, b) => new Date(b.created_at) - new Date(a.created_at)
+  )[0];
 }
 
 export async function generateMetadata() {
+  const blog = await getPageData();
 
-  const page = await getPageData("blogs");
-  
-  const canonicalUrl = `${process.env.NEXT_PUBLIC_URL}/${page}`;
+ 
+
   return {
-    title: page?.seoPages?.meta_title || "Health Tech",
-    description:
-      page?.seoPages?.meta_desc ||
-      "Online healthcare and telemedicine platform",
-    keywords:
-      page?.seoPages?.meta_keywords ||
-      "Health Tech, Telemedicine, Healthcare",
+    title: blog.metatitle || blog.title,
+    description: blog.metadescription,
+    keywords: blog.metakeywords,
+
+    openGraph: {
+      title: blog.metatitle || blog.title,
+      description: blog.metadescription,
+      url: blog.ogurl,
+      type: blog.ogtype || "article",
+      images: [
+        {
+          url: `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=blogs/${blog.ogimageurl}`,
+          width: 1200,
+          height: 630,
+        },
+      ],
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title: blog.metatitle || blog.title,
+      description: blog.metadescription,
+      images: [
+        `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=blogs/${blog.ogimageurl}`,
+      ],
+    },
+
+    authors: [
+      {
+        name: blog.writername,
+      },
+    ],
+
+    publisher: blog.publisher,
+
     alternates: {
-      canonical: canonicalUrl,
+      canonical: `/blogs/${blog.titleurl}`,
     },
   };
+
+
 }
 
 
-
-
 export default async function Page(){
+
+    const blog = await getPageData();
+  
     return(<>
+
+     {blog?.se_structure && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(blog.se_structure),
+          }}
+        />
+      )}
+
+
         <BlogsList />
     </>);
 }
