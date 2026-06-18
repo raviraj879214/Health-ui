@@ -25,6 +25,12 @@ async function getPageData() {
 export async function generateMetadata() {
   const blog = await getPageData();
 
+  if (!blog) {
+    return {
+      title: "Blogs",
+      description: "Blogs",
+    };
+  }
  
 
   return {
