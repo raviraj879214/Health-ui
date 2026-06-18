@@ -94,6 +94,7 @@ export default async function Page(){
       )}
 
 
-        <BlogsList />
+        
+        {blog &&(<><BlogsList /></>)}
     </>);
 }
