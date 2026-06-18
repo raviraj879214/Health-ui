@@ -1,20 +1,55 @@
-import { 
-    ChevronDown,
-    BadgeCheck,
-  Images,
-  Building2,
-  HeartPulse,
-  Wallet, } from "lucide-react";
+"use client";
+import { ChevronDown,BadgeCheck,Images,Building2,HeartPulse,Wallet, } from "lucide-react";
+import { useEffect, useState } from "react";
 export function PlasticSurgery(){
 
 
 
+    const [clinics,setClinics] = useState([]);
+    const [clinicsimage,setClinicsImage] = useState([]);
+    const [visible, setVisible] = useState(4);
+
+
+    useEffect(()=>{
+        fetchClinic();
+    },[]);
+
+    const fetchClinic = async()=>{
+        const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/homepage-banner/search-clinic`,{
+            method :"Post",
+            headers: {
+                "Content-Type" : "application/json"
+            },
+            body: JSON.stringify({
+                "specialization": "Allergy ",
+                "treatments": [
+                    "ACL",
+                    "Facelift",
+                    "Breast Augmentation"
+                ]
+            })
+        });
+        if(res.ok){
+            const result= await res.json();
+            setClinics(result.clinics);
+            setClinicsImage(result.clinicimages);
+        }
+    }
+
+
+
+
+
+
+
+
     return(<>
+
         <main className="relative overflow-hidden">
+
             <section
                 className="relative min-h-screen"
-                style={{ backgroundColor: "rgb(242, 244, 245)" }}
-            >
+                style={{ backgroundColor: "rgb(242, 244, 245)" }}>
 
                 <div className="relative z-10 mx-auto max-w-7xl px-6 py-16 lg:py-10">
                     <div className="max-w-4xl">
@@ -33,7 +68,7 @@ export function PlasticSurgery(){
                             <div className="relative flex-shrink-0">
                                 <div className="h-20 w-20 overflow-hidden rounded-full border-2 border-blue-100 bg-gray-100">
                                     <img
-                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-CU2ih639iTTeQR1rB_7UVUuYPfnLbL-K1Cnq7J33fNiGWXa6SccYaZEclElwA9fq_vHFtjfBUiFAAGxThHOebAiGKA1yZ4AVF0h_0wsuxzplE94ksqcGh8EzIcqf9uloxx5W9Zdd8AaGL4zFpro_rpb40sV6GTq4JGI5zTiPhglvjg1-NnJ2fjKkCkWZ5qw8ihnxmDdBm7csJ_ISkHpMxb4hxLSohp3b3JrFeOPqzBuFz3GPOmCou9N05p1sOyI_9kI2G7PYrgU"
+                                        src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=clinic/banner`}
                                         alt="Dr. Thiago Lima Barreto da Serra e Silva"
                                         className="h-full w-full object-cover"
                                     />
@@ -117,146 +152,80 @@ export function PlasticSurgery(){
             <section className="bg-[#f8fafb] py-16 lg:py-24">
                 <div className="mx-auto max-w-7xl px-6 lg:px-8">
 
+                    {clinics.length > 0 &&(<>
+                        <div className="mb-16">
+                            <h2 className="mb-6 text-4xl font-bold text-slate-900 md:text-5xl">
+                                Top-Rated Plastic Surgery Clinics in Brazil
+                            </h2>
 
-                    <div className="mb-16">
-                        <h2 className="mb-6 text-4xl font-bold text-slate-900 md:text-5xl">
-                            Top-Rated Plastic Surgery Clinics in Brazil
-                        </h2>
-
-                        <p className="max-w-4xl text-lg leading-8 text-slate-600">
-                            Every clinic listed here has been reviewed by our medical team.
-                            We only list facilities with board-certified surgeons,
-                            international patient experience, and verifiable safety
-                            standards.
-                        </p>
-                    </div>
-
-                    <div className="mb-16 grid grid-cols-1 gap-6 md:grid-cols-2">
-                        {/* Card 1 */}
-                        <div className="flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-md">
-                            <div className="mb-4 h-48 overflow-hidden rounded-lg">
-                                <img
-                                    src="https://lh3.googleusercontent.com/aida/AP1WRLuZeLvjSPwCRa7yyBgQvzxdE6IzD4MFRf6q_ajWbvm1HkyyxJp1hAOnigLSm3ok4AqGeweXkA8W35SwbX1ALulEZRikFf2y_0DXLusbjo264FFxyD1t_MAP-QgEp3joyKa_Hv-E2gN4TkW6Nf5hfEOBX5vYvozdq7CLxB1EpKCOJbNggPuFAPvzqm0fOpiywlGza3iPD5QnYOp9T0aoIPnq6BOW6JJQKZx3JC9VAM0x-FZ0WcUDUpMk9A"
-                                    alt="Hospital Israelita Albert Einstein"
-                                    className="h-full w-full object-cover"
-                                />
-                            </div>
-
-                            <h3 className="mb-2 text-xl font-semibold text-slate-900">
-                                Hospital Israelita Albert Einstein
-                            </h3>
-
-                            <p className="mb-4 text-slate-600">
-                                São Paulo • JCI Accredited • Multi-specialty
+                            <p className="max-w-4xl text-lg leading-8 text-slate-600">
+                                Every clinic listed here has been reviewed by our medical team.
+                                We only list facilities with board-certified surgeons,
+                                international patient experience, and verifiable safety
+                                standards.
                             </p>
-
-                            <div className="mt-auto">
-                                <button className="inline-flex items-center gap-2 font-semibold text-teal-700 hover:underline">
-                                    View Details →
-                                </button>
-                            </div>
                         </div>
+                    </>) }                    
+                        
+                         
 
-                        {/* Card 2 */}
-                        <div className="flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-md">
-                            <div className="mb-4 h-48 overflow-hidden rounded-lg">
-                                <img
-                                    src="https://lh3.googleusercontent.com/aida/AP1WRLvRp9DjKL8Tci1YPx4Z2-ewEMwBn8SZZYjq4C_2Vz_kDVPMWkKBvRDP5pdWOHnwiDPRpE3ETHDiymV_jGNop7V1tNr0HbNdqknP5NKBsBqXPpuSGxzqvlZY1a3ZcrfbSTlmXs_6JgYAkDhyVRBkMkbyJaUP3PpNx9G1ikQG2lkwWUrdyPHNaCU15wm-oSP3id7wmLv-gtjEuNVsYcbfGEq7rEWCjcMnspX1FDzHc58PrbGOzcpzZ2-NhuY"
-                                    alt="Ivo Pitanguy Clinic"
-                                    className="h-full w-full object-cover"
-                                />
-                            </div>
+                   {clinics.length > 0 && (
+  <section className="mb-16">
+    <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+      {clinics.slice(0, visible).map((item) => (
+        <div
+          key={item.uuid}
+          className="flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+        >
+          <div className="h-56 overflow-hidden">
+            <img
+              src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=clinic/banner/${
+                clinicsimage.find(
+                  (img) =>
+                    img.clinicuuid === item.uuid &&
+                    img.type === "banner"
+                )?.Images
+              }`}
+              alt={item.name}
+              className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+            />
+          </div>
 
-                            <h3 className="mb-2 text-xl font-semibold text-slate-900">
-                                Ivo Pitanguy Clinic
-                            </h3>
+          <div className="flex flex-1 flex-col p-6">
+            <h3 className="mb-2 text-xl font-semibold text-slate-900">
+              {item.name}
+            </h3>
 
-                            <p className="mb-4 text-slate-600">
-                                Rio de Janeiro • Aesthetic Excellence • World-renowned
-                            </p>
+            <p className="mb-6 text-sm text-slate-600">
+              São Paulo • JCI Accredited • Multi-specialty
+            </p>
 
-                            <div className="mt-auto">
-                                <button className="inline-flex items-center gap-2 font-semibold text-teal-700 hover:underline">
-                                    View Details →
-                                </button>
-                            </div>
-                        </div>
+            <div className="mt-auto">
+              <button className="inline-flex items-center gap-2 font-medium text-teal-600 transition-colors hover:text-teal-700">
+                View Details
+                <span>→</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
 
-                        {/* Card 3 */}
-                        <div className="flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-md">
-                            <div className="mb-4 h-48 overflow-hidden rounded-lg">
-                                <img
-                                    src="https://lh3.googleusercontent.com/aida/AP1WRLv2U59pqgD_ctMyr9bP88sASN-byURGbvVzzEiBx3q3l9wQ5URaHqiRI-pHLXC5sVyZgghXg9iy1tX6f0BmEy-8eCZGZnzncBFr4EuL0DvSAcHvv1vNDNOXdQlZe5V5qpmvnKUy-LDzmFcsEVQv00qe3W_iilkgGSV4x6UH23ccylzJzzryE-gUCMrSLtZYysO16sq2A3ri_Q-9BmIIWnLk_QERwSBy_fXgpz6MofkRC5pIUBAtJZMiHA"
-                                    alt="Perinatal Hospital"
-                                    className="h-full w-full object-cover"
-                                />
-                            </div>
+    {/* Load More Button */}
+    {visible < clinics.length && (
+      <div className="mt-10 flex justify-center">
+        <button
+          onClick={() => setVisible((prev) => prev + 4)}
+          className="rounded-full bg-teal-600 px-8 py-3 font-medium text-white shadow-md transition-all duration-300 hover:bg-teal-700 hover:shadow-lg"
+        >
+          Load More Clinics
+        </button>
+      </div>
+    )}
+  </section>
+)}
 
-                            <h3 className="mb-2 text-xl font-semibold text-slate-900">
-                                Perinatal Hospital
-                            </h3>
-
-                            <p className="mb-4 text-slate-600">
-                                Rio de Janeiro • Specialized Care • Modern Facilities
-                            </p>
-
-                            <div className="mt-auto">
-                                <button className="inline-flex items-center gap-2 font-semibold text-teal-700 hover:underline">
-                                    View Details →
-                                </button>
-                            </div>
-                        </div>
-
-                        {/* Card 4 */}
-                        <div className="flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-md">
-                            <div className="mb-4 h-48 overflow-hidden rounded-lg">
-                                <img
-                                    src="https://lh3.googleusercontent.com/aida/AP1WRLtK_JvGqJlfxMHUucNyzQdr487dCAqVZ6AAPKd3Me5j2ru5HoL7S-Wag-Zi-x0qH4gPGi_JjB4PSrBwub-X4aY6UyUIJWk5_CSbSRVOORGBgkeD3sQWh4mNwZ1_tRadV5-794qr1Q_nHoaiYiAkwQ4tBqVNDyzJkFYbEXqhf_IKVxr2KJUPib8UYSIdAteUr5PbfOCpo_lB06z76zL539KhYlOa_YDQESlIHOxk1iz-rl5IiJyMJqNrvg"
-                                    alt="Hospital Sírio-Libanês"
-                                    className="h-full w-full object-cover"
-                                />
-                            </div>
-
-                            <h3 className="mb-2 text-xl font-semibold text-slate-900">
-                                Hospital Sírio-Libanês
-                            </h3>
-
-                            <p className="mb-4 text-slate-600">
-                                São Paulo • High-Tech Surgery • Premium Service
-                            </p>
-
-                            <div className="mt-auto">
-                                <button className="inline-flex items-center gap-2 font-semibold text-teal-700 hover:underline">
-                                    View Details →
-                                </button>
-                            </div>
-                        </div>
-
-                        {/* Card 5 */}
-                        <div className="flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-md">
-                            <div className="mb-4 h-48 overflow-hidden rounded-lg">
-                                <img
-                                    src="https://lh3.googleusercontent.com/aida/AP1WRLtwF4t4tPuLhBHHoXtBjCWvct0TaCgrkMRSuGiDd3Yvmq7kgJyvaYdgVdqjfNc9Dz-sR8KplzwhdEytX8rau4--cBRlDxG8QMiI8diSuwbYhyRxz4pq87xiMEcEFqcCd1bGVH8fkR1S_Sa-86ZhXNTIMFyENz8Mnx71z4RLQD1TirDVjFb0ML5XDsBWuyKELPqbWtmeuBBkFLFBdOmIcsCYWGF-ZgOml2Nu5XwRIIvO_tEqOTaMBHfOcmw"
-                                    alt="Hospital Samaritano"
-                                    className="h-full w-full object-cover"
-                                />
-                            </div>
-
-                            <h3 className="mb-2 text-xl font-semibold text-slate-900">
-                                Hospital Samaritano
-                            </h3>
-
-                            <p className="mb-4 text-slate-600">
-                                São Paulo • International Standards • Patient-Centric
-                            </p>
-
-                            <div className="mt-auto">
-                                <button className="inline-flex items-center gap-2 font-semibold text-teal-700 hover:underline">
-                                    View Details →
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                   
 
                     <div class="mb-16">
                         <h2 class="font-title-md text-title-md text-on-surface mb-6">Popular plastic surgery procedures in Brazil</h2>
