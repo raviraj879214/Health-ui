@@ -68,7 +68,7 @@ export function PlasticSurgery(){
                             <div className="relative flex-shrink-0">
                                 <div className="h-20 w-20 overflow-hidden rounded-full border-2 border-blue-100 bg-gray-100">
                                     <img
-                                        src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=clinic/banner`}
+                                        src={`/images/thiago.png`}
                                         alt="Dr. Thiago Lima Barreto da Serra e Silva"
                                         className="h-full w-full object-cover"
                                     />
@@ -197,7 +197,7 @@ export function PlasticSurgery(){
             </h3>
 
             <p className="mb-6 text-sm text-slate-600">
-              São Paulo • JCI Accredited • Multi-specialty
+             {item.street} ,{item.complement} {item.neighborhood} {item.citycep}-{item.state},{item.cep}
             </p>
 
             <div className="mt-auto">
