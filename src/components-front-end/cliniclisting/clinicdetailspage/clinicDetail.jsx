@@ -76,9 +76,6 @@ export function ClinicDetail({id}){
 
   useEffect(()=>{
       fetchClinicDetails();
-
-      
-      
   },[]);
 
 
@@ -317,7 +314,7 @@ const groupSurgeryImages = (images = []) => {
                           {/* Package Title */}
                           <div
                             className="mb-0 cursor-pointer hover:underline"
-                            onClick={() => router.push(`/package-info/${id}?packid=${item.id}`)}
+                            onClick={() => router.push(`/package-info/${clinicdetails.uuid}?packid=${item.id}`)}
                           >
                             {item.title}
                           </div>
@@ -597,7 +594,7 @@ const groupSurgeryImages = (images = []) => {
         </>
 
 
-        {freequoteisopen && (<GetFreeQuote onClose={(e)=> setFreeQuoteIsOpen(e)} packages={packages} id={id} />) }
+        {freequoteisopen && (<GetFreeQuote onClose={(e)=> setFreeQuoteIsOpen(e)} packages={packages} id={clinicdetails.uuid} />) }
 
     
     </>);

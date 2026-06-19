@@ -437,7 +437,7 @@ export  function AboutUs() {
           {/* Image */}
           <div className="flex justify-center">
             <img
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHLLao8dUarsHY7SUlphUzoxx25KqHaEzc0q9XzLfp7e-cqskJAyXGQ5go_YIVdWFtQbX4hB9PeoiLZR_DIkvugNptGcHfgHX-ArOsLmfF5VjteviF7SFmlxVLvxQVzCxo7SMc5FYUsnWhPodgfCj0Fxy7cUVJk0Gl5oaUg_80pHtd38mMj2v9nLnFCmjD_XBFvc5ffvV5iq8J8u_ymQEkqOAdENJ-dBVvOpPH-PaxCxSCO-8cHt5ai6graw3BlGCW86uz6elpOlQ"
+              src={`/images/thiago.png`}
               className="w-64 h-80 object-cover rounded-xl shadow-md border border-gray-200"
             />
           </div>

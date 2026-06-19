@@ -78,7 +78,8 @@ export default function PopularClinics(){
               )
             : 0,
     
-          placement: item._placement, // 🔥 useful for UI badges
+          placement: item._placement,
+          slug : item.slug
         };
       });
     
