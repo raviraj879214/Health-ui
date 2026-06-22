@@ -1,4 +1,5 @@
 "use client";
+import HowItWorks from "@/components-front-end/homepage/howItWorks";
 import { ChevronDown,BadgeCheck,Images,Building2,HeartPulse,Wallet, } from "lucide-react";
 import { useEffect, useState } from "react";
 export function PlasticSurgery(){
@@ -323,6 +324,69 @@ export function PlasticSurgery(){
                         </p>
                     </div>                  
 
+                    <div className="mb-16">
+                        <h2 className="mb-6 text-4xl font-bold text-slate-900 md:text-5xl">
+                            What Else to Budget For
+                        </h2>
+
+
+
+                        <div className="mb-6 overflow-hidden rounded-xl border border-slate-200 bg-white">
+                            <div className="grid grid-cols-1">
+
+                                <div className="flex items-center justify-between border-b border-slate-200 p-4">
+                                    <span className="font-semibold text-slate-900">
+                                        Round-trip flights (from US)
+                                    </span>
+                                    <span className="text-lg font-semibold text-teal-700">
+                                        $600 – $1,200
+                                    </span>
+                                </div>
+
+                                <div className="flex items-center justify-between border-b border-slate-200 p-4">
+                                    <span className="font-semibold text-slate-900">
+                                        Recovery accommodation (per week)
+                                    </span>
+                                    <span className="text-lg font-semibold text-teal-700">
+                                        $400 – $900
+                                    </span>
+                                </div>
+
+                                <div className="flex items-center justify-between border-b border-slate-200 p-4">
+                                    <span className="font-semibold text-slate-900">
+                                        Pre-operative tests
+                                    </span>
+                                    <span className="text-lg font-semibold text-teal-700">
+                                        $100 – $300
+                                    </span>
+                                </div>
+
+                                <div className="flex items-center justify-between border-b border-slate-200 p-4">
+                                    <span className="font-semibold text-slate-900">
+                                        Post-op garments & medication
+                                    </span>
+                                    <span className="text-lg font-semibold text-teal-700">
+                                        $100 – $250
+                                    </span>
+                                </div>
+
+                                <div className="flex items-center justify-between p-4">
+                                    <span className="font-semibold text-slate-900">
+                                        Airport transfers
+                                    </span>
+                                    <span className="text-lg font-semibold text-teal-700">
+                                        $30 – $80
+                                    </span>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <p className="text-base italic leading-7 text-slate-500">
+                            Many clinics offer all-inclusive packages that bundle surgery, accommodation, and transfers. Ask us about package options.
+                        </p>
+                    </div>
+
 
                     <div className="mb-16">
                         <h2 className="mb-8 text-4xl font-bold text-slate-900 md:text-5xl">
@@ -429,6 +493,10 @@ export function PlasticSurgery(){
                         </div>
                     </div>
 
+                   <HowItWorks />
+
+
+
                     <div className="mb-16">
                         <h2 className="mb-8 text-4xl font-bold text-slate-900 md:text-5xl">
                             Frequently Asked Questions
@@ -530,17 +598,15 @@ export function PlasticSurgery(){
                     </div>
 
 
-<footer className="border-t border-slate-300 bg-[#f2f4f5] py-6">
-  <div className="mx-auto max-w-7xl px-6">
-    <p className="text-center text-sm leading-7 text-slate-600">
-      Page last updated: June, 2026 | Medically reviewed by Dr. Thiago
-      Lima Barreto da Serra e Silva, Anesthesiologist, CRM-PR 28659 -
-      Curitiba, Brazil. Board-Certified Anesthesiologist
-    </p>
-  </div>
-</footer>
-
-
+                    <footer className="border-t border-slate-300 bg-[#f2f4f5] py-6">
+                        <div className="mx-auto max-w-7xl px-6">
+                            <p className="text-center text-sm leading-7 text-slate-600">
+                                Page last updated: June, 2026 | Medically reviewed by Dr. Thiago
+                                Lima Barreto da Serra e Silva, Anesthesiologist, CRM-PR 28659 -
+                                Curitiba, Brazil. Board-Certified Anesthesiologist
+                            </p>
+                        </div>
+                    </footer>
 
 
                 </div>
