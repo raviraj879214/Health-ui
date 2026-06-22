@@ -25,7 +25,7 @@ export default function ProductCardList({ data }){
         <div className="card overflow-hidden rounded-thm border border-border flex" >
             <div className="md:w-3/10 w-5/10">
                 <div className="relative pb-[70%] me-5 w-full h-full">
-                    <Link href={`/clinics/${data.uuid}`}>
+                    <Link href={`/clinics/${data.slug}`}>
                         <img
                         src={
                                 data.clinicbanner
@@ -63,7 +63,7 @@ export default function ProductCardList({ data }){
                 <div className="md:mb-6 mb-3">
                     <p className="mb-0">Started From: <span className="text-tertairy font-bold">{brazilianCurrency(data.packagestartprice)}</span></p>
                 </div>
-                <Link  href={`/clinics/${data.uuid}`} className="btn btn-secondary md:px-6 md:py-3 px-3 py-1.5 md:text-[1em] text-[0.8em]">View Detail</Link>
+                <Link  href={`/clinics/${data.slug}`} className="btn btn-secondary md:px-6 md:py-3 px-3 py-1.5 md:text-[1em] text-[0.8em]">View Detail</Link>
             </div>
         </div>
     )

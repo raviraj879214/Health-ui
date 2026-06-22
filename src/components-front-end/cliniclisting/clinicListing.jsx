@@ -110,7 +110,8 @@ export function ClinicListing(){
                         state : item.city?.name,
                         country : item.country?.name,
                         googlerating : item.ratingSummary?.averageRating,
-                        packagestartprice : item.packages.length ? Math.min(...item.packages.map(p => p.actualprice)) : 0
+                        packagestartprice : item.packages.length ? Math.min(...item.packages.map(p => p.actualprice)) : 0,
+                        slug:item.slug
                 };
 
                  

@@ -201,7 +201,11 @@ export function PlasticSurgery(){
             </p>
 
             <div className="mt-auto">
-              <button className="inline-flex items-center gap-2 font-medium text-teal-600 transition-colors hover:text-teal-700">
+              <button
+                onClick={()=>{
+                    window.location.href=`/clinics/${item.slug}`;
+                }}
+              className="inline-flex items-center gap-2 font-medium text-teal-600 transition-colors hover:text-teal-700">
                 View Details
                 <span>→</span>
               </button>
