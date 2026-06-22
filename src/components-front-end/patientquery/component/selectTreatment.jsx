@@ -18,25 +18,66 @@ export function SelectTreatment() {
     },[]);
 
 
-    const fetchSpecialties = async()=>{
-        const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/patient-query/Get-specialty`,{
-            method : "Get"
-        });
-        if(res.ok){
-            const result = await res.json();
-            setSpecialties(result.data);
+  const fetchSpecialties = async () => {
+  const [specialtyRes, rankingRes] = await Promise.all([
+    fetch(
+      `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/patient-query/Get-specialty`
+    ),
+    fetch("/api/treatment-click"),
+  ]);
 
+  if (specialtyRes.ok) {
+    const result = await specialtyRes.json();
 
+    let rankings = [];
 
-        }
+    if (rankingRes.ok) {
+      rankings = await rankingRes.json();
     }
 
+    const clickMap = {};
 
-    const selectTreatment = (treatmentid,name)=>{
-        
-        
+    rankings.forEach((item) => {
+      clickMap[item.name] = item.count;
+    });
+
+    const sortedData = result.data.sort((a, b) => {
+      const countA = clickMap[a.name] || 0;
+      const countB = clickMap[b.name] || 0;
+
+      // Most clicked first
+      if (countA !== countB) {
+        return countB - countA;
+      }
+
+      // Alphabetical for same count
+      return a.name.localeCompare(b.name);
+    });
+
+    setSpecialties(sortedData);
+  }
+};
+
+
+
+    const selectTreatment =async (treatmentid,name)=>{
+        debugger;
+
+      await fetch("/api/treatment-click", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+        }),
+      });
+
+      const res = await fetch("/api/treatment-click");
+      const rankings = await res.json();
+      console.log(rankings);
+
         dispatch(addTreatmentID({ id: treatmentid, name: name }));
-
     }
 
 
