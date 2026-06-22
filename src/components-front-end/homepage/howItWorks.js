@@ -2,12 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 
 
-export default function HowItWorks(){
+export default function HowItWorks({title}){
 
     return (
         <div className="md:my-18 my-16">
             <div className="container">
-                <h2 className="h2 text-center mb-7">How It Works</h2>
+                <h2 className="h2 text-center mb-7">{title == null ? "How It Works" :  title} </h2>
                 <div className="grid md:grid-cols-3 grid-cols-1 gap-7.5 md:bg-[url('/images/how-works-bg.svg')] bg-no-repeat bg-size-[100%_auto] bg-position-[0_20%]">
                     <div className="px-7">
                         <div className="w-[100px] h-[100px] relative mx-auto [&]:after:content-[''] [&]:after:absolute [&]:after:top-[10px] [&]:after:left-[5px] [&]:after:w-full [&]:after:h-full [&]:after:bg-gray [&]:after:z-1 [&]:after:transform-[rotate(-15deg)] mb-12 [&]:after:rounded-[1.2rem]">

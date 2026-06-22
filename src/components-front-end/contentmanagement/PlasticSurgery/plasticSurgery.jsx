@@ -493,7 +493,7 @@ export function PlasticSurgery(){
                         </div>
                     </div>
 
-                   <HowItWorks />
+                   <HowItWorks title={"How “I Travel For Health” Helps – Our Process"} />
 
 
 
