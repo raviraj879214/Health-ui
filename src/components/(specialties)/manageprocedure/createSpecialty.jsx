@@ -49,7 +49,7 @@ export function CreateSpecialty(){
             const result= await res.json();
 
             if(result.status === 401){
-                toast.error("Procedure already exist",{
+                toast.error("Adjunctive Items already exist",{
                     position : "bottom-right",
                     autoClose : 3000
                 });
@@ -59,7 +59,7 @@ export function CreateSpecialty(){
             setAddData(result.data);
             
 
-            toast.success("Procedure created successfully",{
+            toast.success("Adjunctive Items created successfully",{
                     position : "bottom-right",
                     autoClose : 3000
             });
@@ -87,7 +87,7 @@ export function CreateSpecialty(){
             const result =await res.json();
 
              if(result.status === 401){
-                toast.error("Procedure already exist",{
+                toast.error("Adjunctive Items already exist",{
                     position : "bottom-right",
                     autoClose : 3000
                 });
@@ -97,7 +97,7 @@ export function CreateSpecialty(){
             setAddData(result.data);
             
 
-            toast.success("Procedure updated successfully",{
+            toast.success("Adjunctive Items updated successfully",{
                     position : "bottom-right",
                     autoClose : 3000
             });
@@ -159,7 +159,7 @@ export function CreateSpecialty(){
 
 
                              <div className="col-span-12 sm:col-span-6">
-                                <Label>Procedure Name</Label>
+                                <Label>Adjunctive Items Name</Label>
                                 <input
                                 type="text"
                                 className={`h-11 w-full rounded-lg border px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-hidden focus:ring-3 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800
@@ -221,7 +221,7 @@ export function CreateSpecialty(){
 
         <div className="grid grid-cols-12 gap-4 mt-5">
             <div className="col-span-12 sm:col-span-12 space-y-5 sm:space-y-6">
-                <ComponentCard title="List of Procedures " desc="">
+                <ComponentCard title="List of Adjunctive Items " desc="">
                     <p className="text-green-500 text-sm"> </p>
                     {
                         canRead

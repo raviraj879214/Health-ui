@@ -261,7 +261,7 @@ export function DoctorOne({ onClose, nextStep, clinicuuid, doctoruuid }) {
                 <Controller
                   name="avatar"
                   control={control}
-                  rules={{ required: "Please upload a profile picture" }}
+                  // rules={{ required: "Please upload a profile picture" }}
                   render={({ field }) => (
                     <label className="cursor-pointer flex flex-col items-center lg:items-start">
 
@@ -291,9 +291,9 @@ export function DoctorOne({ onClose, nextStep, clinicuuid, doctoruuid }) {
                   )}
                 />
 
-                {errors.avatar && (
+                {/* {errors.avatar && (
                   <p className="text-sm text-red-400 mt-1">{errors.avatar.message}</p>
-                )}
+                )} */}
               </div>
 
 
@@ -481,12 +481,12 @@ export function DoctorOne({ onClose, nextStep, clinicuuid, doctoruuid }) {
 
 
               <div className="col-span-12 lg:col-span-6">
-                <Label>Video URL</Label>
+                <Label>Video URL (Optional)</Label>
                 <input
                     type="text"
                     className="w-full border p-2 rounded"
                     {...register("videourl", {
-                      required: "Please enter video URL ",
+                      // required: "Please enter video URL ",
                       pattern: {
                         value:
                           /^(https?:\/\/)?(www\.)?(youtube\.com\/(watch\?v=|shorts\/)|youtu\.be\/)[A-Za-z0-9_-]{11}.*$/,

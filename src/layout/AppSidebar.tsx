@@ -208,7 +208,7 @@ const AppSidebar: React.FC = () => {
         { name: "Manage Specialty", path: "/admin/manage-specialties", pro: false },
         { name: "Manage Sub Specialty", path: "/admin/manage-sub-specialties", pro: false },
         { name: "Manage Treatment", path: "/admin/manage-treatments", pro: false },
-        { name: "Manage Procedure", path: "/admin/manage-procedure", pro: false },
+        { name: "Adjunctive Items", path: "/admin/manage-procedure", pro: false },
       ],
     },
 

@@ -7,7 +7,7 @@ import { Suspense } from "react";
 
 
 export const metadata = {
-  title: "Manage Procedure | "  + `${process.env.NEXT_PUBLIC_PROJECT_NAME}`,
+  title: "Adjunctive Items | "  + `${process.env.NEXT_PUBLIC_PROJECT_NAME}`,
 };
 
 
@@ -18,7 +18,7 @@ export default function Pages(){
 
     return(<>
     
-     <PageBreadcrumb pageTitle="Manage Procedure" />
+     <PageBreadcrumb pageTitle="Adjunctive Items" />
 
 
      
