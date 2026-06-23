@@ -85,6 +85,7 @@ export function ClinicDetail({id,pckid}){
 
 
   const fetchpackages = async()=>{
+    debugger;
     const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/clinic-listing/get-package-details/${pckid}`,{
       method : "Get"
     });
@@ -113,6 +114,7 @@ export function ClinicDetail({id,pckid}){
 
 
   const fetchClinicDetails = async()=>{
+    debugger;
     const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/clinic-listing/get-clinic-details/${id}`,{
       method : "Get"
     });
@@ -121,6 +123,7 @@ export function ClinicDetail({id,pckid}){
       setClinicDetails(result.data);
       setBannerImages(result.bannerimages);
       steDescription(result.description);
+      console.log("result.data.packages",result.data.packages);
       setPackages(result.data.packages.find(x => x.id == pckid));
      
       // const doctorItems = buildDoctorItems(result.data.clinicDoctors);
@@ -219,8 +222,8 @@ const groupSurgeryImages = (images = []) => {
           items={[
             { label: "Home", href: "/" },
             { label: "Clinics", href: "/clinics" },
-            { label: clinicdetails.name, href: `/clinics/${id}` },
-            { label: packages.title, href: null },
+            { label: clinicdetails.name || "", href: `/clinics/${id}` },
+            { label: packages.title || "", href: null },
           ]}
         />
 

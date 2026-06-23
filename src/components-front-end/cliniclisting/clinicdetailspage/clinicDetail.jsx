@@ -314,7 +314,7 @@ const groupSurgeryImages = (images = []) => {
                           {/* Package Title */}
                           <div
                             className="mb-0 cursor-pointer hover:underline"
-                            onClick={() => router.push(`/package-info/${clinicdetails.uuid}?packid=${item.id}`)}
+                            onClick={() => router.push(`/package-info/${clinicdetails.slug}?packid=${item.id}`)}
                           >
                             {item.title}
                           </div>
