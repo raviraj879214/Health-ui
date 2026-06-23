@@ -27,7 +27,7 @@ export default function PackageCard({ data }){
 
                 
             </div>
-            <Link href={`${process.env.NEXT_PUBLIC_URL}/package-info/${data.slug}?packid=${data.id}`} className="btn btn-secondary w-full mt-auto">Book Your Appointment</Link>
+            <Link href={`${process.env.NEXT_PUBLIC_URL}/package-info/${data.clinic.slug}?packid=${data.id}`} className="btn btn-secondary w-full mt-auto">Book Your Appointment</Link>
             
         </div>
         
