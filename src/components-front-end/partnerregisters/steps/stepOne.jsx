@@ -228,7 +228,7 @@ const [otpDigits, setOtpDigits] = useState(["", "", "", ""]);
                   </label>  
                   <input
                     type="email"
-                    placeholder="emal@company.com"
+                    placeholder="Enter your email address"
                     className="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900
                       placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     {...register("email", {
@@ -254,7 +254,10 @@ const [otpDigits, setOtpDigits] = useState(["", "", "", ""]);
                     Email Verification
                   </h4>
                   <p className="text-sm text-gray-600 mb-5">
-                    Enter the 4-digit verification code sent to your email inbox.
+
+                    Enter the 4-digit verification code sent to your email inbox.<br></br>
+                  
+                    
                   </p>
 
 
@@ -280,7 +283,9 @@ const [otpDigits, setOtpDigits] = useState(["", "", "", ""]);
         />
       ))}
     </div>
-
+                 <span className="text-red-900 text-sm">
+                    If the OTP does not arrive in your e-mail inbox, please check your Spam Box
+                   </span>
 
 
 

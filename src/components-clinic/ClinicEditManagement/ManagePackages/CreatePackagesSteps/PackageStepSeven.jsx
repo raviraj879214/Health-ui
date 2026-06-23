@@ -150,8 +150,12 @@ const toggle = (id) => {
                             Choose Doctor
                         </label>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {doctors.map((item) => (
+                        <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
+                           
+
+                            {doctors.length < 0 ? (<>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                {doctors.map((item) => (
                                 <div
                                     key={item.id}
                                     onClick={() => {
@@ -213,6 +217,61 @@ const toggle = (id) => {
                                     </div>
                                 </div>
                             ))}
+                            </div>
+                                 
+                            
+                            
+                            </>):(<>
+                                <div className="rounded-xl border border-amber-200 bg-amber-50 p-5">
+  <div className="flex gap-4">
+    <div className="flex h-10 w-fit shrink-0 items-center justify-center rounded-full bg-amber-100">
+      <svg
+        className="h-5 w-5 text-amber-600"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M12 8v4m0 4h.01M10.29 3.86l-7.5 13A1 1 0 003.67 18h16.66a1 1 0 00.88-1.5l-7.5-13a1 1 0 00-1.76 0z"
+        />
+      </svg>
+    </div>
+
+    <div>
+      <h3 className="text-sm font-semibold text-amber-900">
+        No Doctors Registered
+      </h3>
+
+      <p className="mt-2 text-sm leading-6 text-amber-800">
+        You have not yet registered any doctors in your clinic.
+      </p>
+
+      <p className="mt-3 text-sm leading-6 text-amber-800">
+        To assign specific doctors to this package, please register them first
+        by navigating to:
+      </p>
+
+     <div className="mt-3 inline-flex items-center rounded-lg bg-white px-3 py-2 text-sm font-medium text-slate-700 ring-1 ring-slate-200">
+  Close this package modal, navigate to the Doctors section, add the required doctors, and then return here to continue creating the package.
+</div>
+
+      <p className="mt-3 text-sm leading-6 text-amber-800">
+        Once the doctors are registered, you can return and assign them to this
+        package.
+      </p>
+
+      <p className="mt-3 text-sm leading-6 text-amber-800">
+        If you prefer to create the package without assigning specific doctors,
+        simply click <span className="font-semibold">Next</span>.
+      </p>
+    </div>
+  </div>
+</div>
+                            
+                            </>)}
                         </div>
                     </div>
 

@@ -159,7 +159,7 @@ export function StripeClinic({clinicuuid}){
                   </p>
                 ) : (
                   <p class="text-sm text-gray-600 mb-4">
-                    Please note that this page can be accessed only once. You are allowed a maximum of three requests.
+                    
                   </p>
 
                 )}

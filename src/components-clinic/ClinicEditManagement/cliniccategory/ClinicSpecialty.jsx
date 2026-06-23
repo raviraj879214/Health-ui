@@ -20,6 +20,19 @@ export function ClinicSpeciality({clinicuuid}){
     
     
 
+ const [message,setMessage]  =useState(true);
+
+
+
+  useEffect(() => {
+  if (!message) return;
+
+  const timer = setTimeout(() => {
+    setMessage(false);
+  }, 3000);
+
+  return () => clearTimeout(timer);
+}, [message]);
 
 
 
@@ -76,6 +89,7 @@ export function ClinicSpeciality({clinicuuid}){
       })
     });
     if(res.ok){
+       setMessage(true);
         fetchSelectedClinicSpecialization();
     }
   }
@@ -422,16 +436,52 @@ export function ClinicSpeciality({clinicuuid}){
 
 
 
-                        <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6 gap-2">
-                            
-                            <button
-                                type="button"
-                                onClick={() => setOpen(false)}
-                                className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-4 py-2 text-gray-700 shadow-sm border hover:bg-gray-100 sm:mt-0 sm:w-auto"
-                            >
-                                Cancel
-                            </button>
-                        </div>
+                         <div className={`flex flex-col gap-4 sm:flex-row sm:items-center ${message ? "sm:justify-between" : "sm:justify-end"}`}>
+                  
+
+
+ {message &&(<>
+                                    <div
+  className={`flex items-center gap-2 rounded-lg border border-green-200 bg-green-50 px-3 py-2 shadow-sm transition-all duration-700 ease-in-out ${
+    message
+      ? "opacity-100 translate-y-0 max-w-md"
+      : "opacity-0 -translate-y-2 pointer-events-none max-w-0 overflow-hidden p-0 border-0"
+  }`}
+>
+  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-green-100">
+    <svg
+      className="h-4 w-4 text-green-600"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2.5}
+        d="M5 13l4 4L19 7"
+      />
+    </svg>
+  </div>
+
+  <div className="leading-tight">
+    <p className="text-sm font-semibold text-green-800">
+      Success!
+    </p>
+    <p className="text-xs text-green-700">
+     Sub-Specialty added successfully.
+    </p>
+  </div>
+</div>
+                </>)}
+
+                  <button
+                    type="button"
+                    onClick={() => setOpen(false)}
+                    className="inline-flex items-center justify-center rounded-xl bg-slate-900 px-5 py-2.5 text-sm font-medium text-white transition-all hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2">
+                    Close
+                  </button>
+                </div>
 
                     </DialogPanel>
                 </div>

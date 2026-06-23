@@ -209,11 +209,20 @@ export function PackageStepFour({clinicuuid,packageid}){
                 <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
                     <DialogPanel className="bg-white rounded-lg shadow-xl w-full max-w-3xl p-6">
 
-                        <DialogTitle className="flex justify-between items-center text-lg font-semibold mb-4">
-                            <span>Choose Treatment </span>
-                            <span className="text-green-400 ">4/8</span>
-                        </DialogTitle>
+<DialogTitle className="flex justify-between items-start mb-4">
+  <div className="text-left">
+    <h3 className="text-lg font-semibold">
+      Choose Treatment
+    </h3>
+    <p className="text-sm text-gray-500 mt-1">
+      Here we will concentrate the main Treatments/Procedures that will be offered in the package.
+    </p>
+  </div>
 
+  <span className="text-green-500 font-medium">
+    4/8
+  </span>
+</DialogTitle>
 
                            <div className="border theme-border rounded-lg p-3 w-auto max-h-[180px] overflow-auto flex flex-col gap-3">
 

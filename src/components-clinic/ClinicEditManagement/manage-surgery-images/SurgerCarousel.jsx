@@ -52,25 +52,30 @@ export function SurgeriesCarouselImages({dataReset,clinicuuid}) {
         const afterphotos = result.data.filter(x=>x.imageType == "after");
         
         
-    const surgeriesArray = beforephotos.map(item => {
-         const afterItem = afterphotos.find(x => x.surgeryId === item.surgeryId);
-         const treatmentname = result.treatment.find(x=>x.id ===  item.treatmentid);
-         const doctrdetails = result.doctors.find(x=>x.uuid === item.doctorUuid);
-         const packages = result.packages.find(x=>x.id === item.packageid);
-        console.log("packages",packages.title);
+      const surgeriesArray = beforephotos.map(item => {
+    const afterItem = afterphotos.find(x => x.surgeryId === item.surgeryId);
+    const treatmentname = result.treatment.find(x => x.id === item.treatmentid);
+    const doctrdetails = result.doctors?.find(x => x.uuid === item.doctorUuid);
+    const packageDetails = result.packages?.find(x => x.id === item.packageid);
 
-        return {
-            before:`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=surgery/beforeandafter/${item.imageUrl}`,
-            after:`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=surgery/beforeandafter/${afterItem.imageUrl}`,
-            surgeryId : item.surgeryId,
-            id:item.id,
-            treatmentname:treatmentname.name,
-            doctorname : doctrdetails.firstname + ` ` +  doctrdetails.lastname,
-            doctorimage : doctrdetails.image,
-            packageName: packages.title
+    return {
+        before: `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=surgery/beforeandafter/${item.imageUrl}`,
+        after: afterItem
+            ? `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=surgery/beforeandafter/${afterItem.imageUrl}`
+            : null,
+        surgeryId: item.surgeryId,
+        id: item.id,
+        treatmentname: treatmentname?.name ?? "",
 
-        };
-    }); 
+        doctorname: doctrdetails
+            ? `${doctrdetails.firstname} ${doctrdetails.lastname}`
+            : "N/A",
+
+        doctorimage: doctrdetails?.image ?? null,
+
+        packageName: packageDetails?.title ?? "N/A"
+    };
+});
     
 
     setSurgeries(surgeriesArray);
@@ -191,7 +196,12 @@ if (surgeries.length === 0) {
 
          
           <div className="flex items-center gap-2">
-            <img
+          
+
+           
+            {surgery.doctorname != "N/A" && (<>
+
+              <img
               src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=doctors/profilepicture/${surgery.doctorimage}`}
               alt={surgery.doctorName || "Doctor"}
               className="w-8 h-8 rounded-full object-cover border"
@@ -199,15 +209,19 @@ if (surgeries.length === 0) {
                 e.currentTarget.onerror = null; 
                 e.currentTarget.src = "/images/user.png"; 
               }}/>
-            <span className="text-sm text-gray-700 dark:text-gray-300">
-              Dr. {surgery.doctorname || "Rajesh Sharma"}
-            </span>
+              <span className="text-sm text-gray-700 dark:text-gray-300">
+                Dr. {surgery.doctorname || "Rajesh Sharma"}
+              </span>
+            </>)}
           </div>
 
+          {surgery.packageName != "N/A" && (<>
+            <div className="text-xs text-gray-500 dark:text-gray-400">
+              Package: {surgery.packageName || "Premium Care Package"}
+            </div>
+          </>)}
           
-          <div className="text-xs text-gray-500 dark:text-gray-400">
-            Package: {surgery.packageName || "Premium Care Package"}
-          </div>
+        
         </div>
       </div>
     ))}

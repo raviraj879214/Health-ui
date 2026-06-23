@@ -53,6 +53,7 @@ export function DoctorSix({ onClose, doctoruuid , clinicuuid }) {
       const res = await fetch(`${process.env.NEXT_PUBLIC_VIACEP_URL}/${cep}/json/`);
       if (res.ok) {
         const result = await res.json();
+        console.log("result",result);
         setValue("logradouro", result.logradouro || "");
         setValue("bairro", result.bairro || "");
         setValue("localidade", result.localidade || "");
@@ -104,6 +105,8 @@ export function DoctorSix({ onClose, doctoruuid , clinicuuid }) {
         setValue("bairro",result.data.neighborhood);
         setValue("localidade",result.data.citycep);
         setValue("uf",result.data.state);
+        setValue("addressnumber",result.data.addressnumber);
+
     }
   }
 
@@ -131,6 +134,7 @@ export function DoctorSix({ onClose, doctoruuid , clinicuuid }) {
             gia: data?.gia,
             ddd: data?.ddd,
             siafi: data?.siafi,
+            addressnumber : data.addressnumber
         })
     });
 
@@ -247,6 +251,15 @@ export function DoctorSix({ onClose, doctoruuid , clinicuuid }) {
 
 
 
+                <div className="hidden">
+                  <label className="block text-sm font-medium text-gray-700">Adddress Number</label>
+                  <input
+                    type="text"
+                    {...register("addressnumber")}
+                    placeholder="Floor, suite, etc."
+                    className="mt-1 block w-full border-gray-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Complement</label>
                   <input
@@ -293,7 +306,7 @@ export function DoctorSix({ onClose, doctoruuid , clinicuuid }) {
                 </div>
 
  
-                <div>
+                <div className="hidden">
                   <label className="block text-sm font-medium text-gray-700">Full State Name</label>
                   <input
                     type="text"
@@ -303,7 +316,7 @@ export function DoctorSix({ onClose, doctoruuid , clinicuuid }) {
                 </div>
 
 
-                <div>
+                <div className="hidden">
                   <label className="block text-sm font-medium text-gray-700">Region</label>
                   <input
                     type="text"
@@ -313,7 +326,7 @@ export function DoctorSix({ onClose, doctoruuid , clinicuuid }) {
                 </div>
 
        
-                <div>
+                <div className="hidden">
                   <label className="block text-sm font-medium text-gray-700">IBGE Code</label>
                   <input
                     type="text"
@@ -323,7 +336,7 @@ export function DoctorSix({ onClose, doctoruuid , clinicuuid }) {
                 </div>
 
    
-                <div>
+                <div className="hidden">
                   <label className="block text-sm font-medium text-gray-700">GIA Code</label>
                   <input
                     type="text"
@@ -333,7 +346,7 @@ export function DoctorSix({ onClose, doctoruuid , clinicuuid }) {
                 </div>
 
 
-                <div>
+                <div className="hidden">
                   <label className="block text-sm font-medium text-gray-700">Area Code / DDD</label>
                   <input
                     type="text"
@@ -343,7 +356,7 @@ export function DoctorSix({ onClose, doctoruuid , clinicuuid }) {
                 </div>
 
   
-                <div>
+                <div className="hidden">
                   <label className="block text-sm font-medium text-gray-700">SIAFI Code</label>
                   <input
                     type="text"

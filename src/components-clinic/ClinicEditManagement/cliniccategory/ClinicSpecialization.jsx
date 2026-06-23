@@ -18,9 +18,20 @@ export function ClinicSpecializations({clinicuuid}){
     const [othertext,setOhertext] = useState("");
     const [otherbutton,setOtherButton] = useState(false);
     
-    
+
+    const [message,setMessage]  =useState(true);
 
 
+
+  useEffect(() => {
+  if (!message) return;
+
+  const timer = setTimeout(() => {
+    setMessage(false);
+  }, 3000);
+
+  return () => clearTimeout(timer);
+}, [message]);
 
 
     useEffect(()=>{
@@ -77,6 +88,7 @@ export function ClinicSpecializations({clinicuuid}){
     });
     if(res.ok){
         fetchSelectedClinicSpecialization();
+        setMessage(true);
     }
   }
 
@@ -210,136 +222,136 @@ export function ClinicSpecializations({clinicuuid}){
 
 
 
-        <Dialog open={open} onClose={setOpen} className="relative z-10">
-            <DialogBackdrop className="fixed inset-0 bg-gray-500/75" />
+      <Dialog open={open} onClose={setOpen} className="relative z-10">
+        <DialogBackdrop className="fixed inset-0 bg-gray-500/75" />
 
-            <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
-                <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                    <DialogPanel className="bg-white rounded-lg shadow-xl w-full max-w-3xl p-6">
+        <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+          <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+            <DialogPanel className="bg-white rounded-lg shadow-xl w-full max-w-3xl p-6">
 
-                        <DialogTitle className="flex justify-between items-center text-lg font-semibold mb-4">
-                            <span>Choose Speciality </span>
-                            <span className="text-green-400 "></span>
-                        </DialogTitle>
+              <DialogTitle className="flex justify-between items-center text-lg font-semibold mb-4">
+                <span>Choose Speciality </span>
+                <span className="text-green-400 "></span>
+              </DialogTitle>
 
-<div className="border theme-border rounded-lg p-3 w-auto max-h-[180px] overflow-auto">
-
-
-  {specializationselected.length === 0 && (
-    <p className="text-gray-500 text-sm">No records selected</p>
-  )}
+              <div className="border theme-border rounded-lg p-3 w-auto max-h-[180px] overflow-auto">
 
 
-  {specializationselected.some(item => item.specialization) && (
-    <div className="mb-4">
-     
-       <h4 className="text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
-      
-       Selected Specialty
-      </h4>
-
-      <div className="flex flex-wrap">
-        {specializationselected
-          .filter(item => item.specialization)
-          .map((item, index) => (
-            <div
-              key={`spec-${index}`}
-              className="flex items-center gap-2 bg-gray-100 px-3 py-1 rounded-full m-1 background-theme"
-            >
-              <span className="text-sm font-semibold text-white">
-                {item.specialization.name}
-              </span>
-
-              <button
-                onClick={() => onunChecked(item.id, clinicuuid)}
-                className="text-red-700 hover:text-red-500 transition"
-              >
-                ✕
-              </button>
-            </div>
-          ))}
-      </div>
-    </div>
-  )}
+                {specializationselected.length === 0 && (
+                  <p className="text-gray-500 text-sm">No records selected</p>
+                )}
 
 
-  {specializationselected.some(item => item.suggestedCategory) && (
-    <div>
-      <h4 className="text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
-       
-        Pending Approval
-      </h4>
+                {specializationselected.some(item => item.specialization) && (
+                  <div className="mb-4">
 
-      <div className="flex flex-wrap">
-        {specializationselected
-          .filter(item => item.suggestedCategory)
-          .map((item, index) => (
-            <div
-              key={`suggested-${index}`}
-              className="flex items-center gap-2 bg-yellow-100 px-3 py-1 rounded-full m-1 border border-yellow-300"
-            >
-              <span className="text-sm font-semibold text-yellow-900">
-                {item.suggestedCategory.name}
-              </span>
+                    <h4 className="text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
 
-              {/* <button
+                      Selected Specialty
+                    </h4>
+
+                    <div className="flex flex-wrap">
+                      {specializationselected
+                        .filter(item => item.specialization)
+                        .map((item, index) => (
+                          <div
+                            key={`spec-${index}`}
+                            className="flex items-center gap-2 bg-gray-100 px-3 py-1 rounded-full m-1 background-theme"
+                          >
+                            <span className="text-sm font-semibold text-white">
+                              {item.specialization.name}
+                            </span>
+
+                            <button
+                              onClick={() => onunChecked(item.id, clinicuuid)}
+                              className="text-red-700 hover:text-red-500 transition"
+                            >
+                              ✕
+                            </button>
+                          </div>
+                        ))}
+                    </div>
+                  </div>
+                )}
+
+
+                {specializationselected.some(item => item.suggestedCategory) && (
+                  <div>
+                    <h4 className="text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
+
+                      Pending Approval
+                    </h4>
+
+                    <div className="flex flex-wrap">
+                      {specializationselected
+                        .filter(item => item.suggestedCategory)
+                        .map((item, index) => (
+                          <div
+                            key={`suggested-${index}`}
+                            className="flex items-center gap-2 bg-yellow-100 px-3 py-1 rounded-full m-1 border border-yellow-300"
+                          >
+                            <span className="text-sm font-semibold text-yellow-900">
+                              {item.suggestedCategory.name}
+                            </span>
+
+                            {/* <button
                 onClick={() => onunChecked(item.id, clinicuuid)}
                 className="text-red-700 hover:text-red-500 transition"
               >
                 ✕
               </button> */}
-            </div>
-          ))}
-      </div>
-    </div>
-  )}
+                          </div>
+                        ))}
+                    </div>
+                  </div>
+                )}
 
-</div>
-
-
-
-                                  <div className="border theme-border rounded-lg p-3 w-100% flex flex-wrap mt-2 max-h-[400px] overflow-auto">
-            <div className="flex items-center justify-between mb-2 w-full">
-              <label className="text-sm font-semibold text-gray-800">
-                Choose
-              </label>
-
-              <button
-                type="button"
-                onClick={() => setCantfine(true)}
-                className={`text-sm font-semibold text-primary-600 hover:text-primary-700 hover:underline underline-offset-4 transition ${cantfind ? "hidden" : "block"}`}
-              >
-                Can’t find? Add new
-              </button>
+              </div>
 
 
-               <div className={`flex items-center gap-2 bg-white border border-gray-300 rounded-lg px-3 py-2 shadow-sm ${cantfind ? "block" : "hidden"}`}>
-                   
+
+              <div className="border theme-border rounded-lg p-3 w-100% flex flex-wrap mt-2 max-h-[400px] overflow-auto">
+                <div className="flex items-center justify-between mb-2 w-full">
+                  <label className="text-sm font-semibold text-gray-800">
+                    Choose
+                  </label>
+
+                  <button
+                    type="button"
+                    onClick={() => setCantfine(true)}
+                    className={`text-sm font-semibold text-primary-600 hover:text-primary-700 hover:underline underline-offset-4 transition ${cantfind ? "hidden" : "block"}`}
+                  >
+                    Can’t find? Add new
+                  </button>
+
+
+                  <div className={`flex items-center gap-2 bg-white border border-gray-300 rounded-lg px-3 py-2 shadow-sm ${cantfind ? "block" : "hidden"}`}>
+
                     <input
                       type="text"
                       className="flex-1 outline-none text-sm text-gray-700"
                       placeholder="Enter other value"
                       value={othertext}
-                      onChange={(e)=> setOhertext(e.target.value)}
+                      onChange={(e) => setOhertext(e.target.value)}
                     />
-                  
-                   {othertext.length > 0 ? (
+
+                    {othertext.length > 0 ? (
                       <button
                         type="button"
                         onClick={() => {
-                          
+
                           onCreateOther(clinicuuid)
-                          
+
                         }}
                         className="text-green-600 hover:text-green-500 transition p-1 rounded-md hover:bg-green-50"
                       >
                         {otherbutton ? (<>
-                                                 <ButtonSpinner></ButtonSpinner>
-                                               </>):(
-                                                 <>
-                                                    ✔
-                                                 </>
-                                               )}
+                          <ButtonSpinner></ButtonSpinner>
+                        </>) : (
+                          <>
+                            ✔
+                          </>
+                        )}
                       </button>
                     ) : (
                       <button
@@ -352,91 +364,132 @@ export function ClinicSpecializations({clinicuuid}){
                     )}
 
 
+                  </div>
+
+                </div>
+                <div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 ">
+                    {uppercaseLetters.map((item) => (
+                      <div key={item} className="border theme-border p-3 rounded-md">
+                        {/* Letter header */}
+                        <h3 className="text-lg font-semibold text-gray-800 mb-2">{item}</h3>
+
+                        {/* Specializations starting with this letter */}
+                        <div className="space-y-2 max-h-[200px] overflow-auto ">
+                          {specialization
+                            .filter(x => x.name.startsWith(item))
+                            .sort((a, b) => a.name.localeCompare(b.name))
+                            .map(data => (
+                              <label
+                                key={data.id}
+                                className="flex items-center gap-2 p-1 hover:bg-gray-50 dark:hover:bg-neutral-800 cursor-pointer rounded">
+                                <input
+                                  type="checkbox"
+                                  className="checkbox-theme w-4 h-4 text-primary-600"
+                                  checked={specializationselected.some(x => x.specialization?.id === data.id)}
+                                  onChange={(e) => {
+                                    if (e.target.checked) {
+                                      onCheck(data.id);
+                                    }
+                                    else {
+                                      onunChecked(specializationselected.find(x => x.specialization?.id === data.id)?.id, clinicuuid)
+                                    }
+
+                                  }}
+
+                                />
+                                <span className="text-gray-700 dark:text-white">{data.name}</span>
+
+                              </label>
+                            ))
+                          }
+
+
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                </div>
+
+
+
+
+
               </div>
 
-            </div>
-            <div>
-         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 ">
-  {uppercaseLetters.map((item) => (
-    <div key={item} className="border theme-border p-3 rounded-md">
-      {/* Letter header */}
-      <h3 className="text-lg font-semibold text-gray-800 mb-2">{item}</h3>
-
-      {/* Specializations starting with this letter */}
-      <div className="space-y-2 max-h-[200px] overflow-auto ">
-        {specialization
-          .filter(x => x.name.startsWith(item))
-          .sort((a, b) => a.name.localeCompare(b.name))
-          .map(data => (
-            <label
-              key={data.id}
-              className="flex items-center gap-2 p-1 hover:bg-gray-50 dark:hover:bg-neutral-800 cursor-pointer rounded">
-              <input
-                type="checkbox"
-                className="checkbox-theme w-4 h-4 text-primary-600"
-                 checked={specializationselected.some(x => x.specialization?.id === data.id)}
-                  onChange={(e) => {
-                  if (e.target.checked) {
-                    onCheck(data.id);   
-                  }
-                  else{
-                    onunChecked(specializationselected.find(x => x.specialization?.id === data.id)?.id,clinicuuid)
-                  }
-                
-                }}
-                 
-                 />
-              <span className="text-gray-700 dark:text-white">{data.name}</span>
-              
-            </label>
-          ))
-        }
 
 
-      </div>
-    </div>
-  ))}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              <div className="border-t border-gray-200 bg-white px-6 py-4">
+
+
+                <div className={`flex flex-col gap-4 sm:flex-row sm:items-center ${message ? "sm:justify-between" : "sm:justify-end"}`}>
+                  
+
+
+ {message &&(<>
+                                    <div
+  className={`flex items-center gap-2 rounded-lg border border-green-200 bg-green-50 px-3 py-2 shadow-sm transition-all duration-700 ease-in-out ${
+    message
+      ? "opacity-100 translate-y-0 max-w-md"
+      : "opacity-0 -translate-y-2 pointer-events-none max-w-0 overflow-hidden p-0 border-0"
+  }`}
+>
+  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-green-100">
+    <svg
+      className="h-4 w-4 text-green-600"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2.5}
+        d="M5 13l4 4L19 7"
+      />
+    </svg>
+  </div>
+
+  <div className="leading-tight">
+    <p className="text-sm font-semibold text-green-800">
+      Success!
+    </p>
+    <p className="text-xs text-green-700">
+      Specialty added successfully.
+    </p>
+  </div>
 </div>
+                </>)}
 
-      </div>
-
-            
-
-
-
-        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6 gap-2">
-                            
-                            <button
-                                type="button"
-                                onClick={() => setOpen(false)}
-                                className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-4 py-2 text-gray-700 shadow-sm border hover:bg-gray-100 sm:mt-0 sm:w-auto"
-                            >
-                                Cancel
-                            </button>
-                        </div>
-
-                    </DialogPanel>
+                  <button
+                    type="button"
+                    onClick={() => setOpen(false)}
+                    className="inline-flex items-center justify-center rounded-xl bg-slate-900 px-5 py-2.5 text-sm font-medium text-white transition-all hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2">
+                    Close
+                  </button>
                 </div>
-            </div>
-        </Dialog>
+               
+              </div>
+
+            </DialogPanel>
+          </div>
+        </div>
+      </Dialog>
 
 
 

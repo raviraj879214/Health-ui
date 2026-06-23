@@ -23,6 +23,13 @@ export function PackageStepSix({ clinicuuid, packageid }) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
+  
+
+
+
+
+
+
   /* ---------------- Fetch definitions & saved values ---------------- */
   useEffect(() => {
     const fetchData = async () => {
@@ -67,7 +74,11 @@ export function PackageStepSix({ clinicuuid, packageid }) {
 
   /* ---------------- Helpers ---------------- */
   const handleChange = (field, value) => {
+    const finalValue =field.fieldKey === "heakth_teh_assistance"? field.predefinedvalue: value;
+
+    console.log("finalValue",finalValue);
     setFieldValues((prev) => ({ ...prev, [field.id]: value }));
+
     setErrors((prev) => ({ ...prev, [field.id]: null }));
   };
 
@@ -119,7 +130,7 @@ export function PackageStepSix({ clinicuuid, packageid }) {
 
   /* ---------------- Save ---------------- */
   const handleSave = async () => {
-    if (!validateFields()) return;
+    debugger;
 
     setButton(true);
 
@@ -127,7 +138,7 @@ export function PackageStepSix({ clinicuuid, packageid }) {
       const payload = {
         packageId: packageid,
         fields: definitions.map((d) => {
-          const val = fieldValues[d.id];
+        const val = d.fieldKey === "heakth_teh_assistance" ? d.predefinedvalue : fieldValues[d.id] ?? "No Information";
           return {
             fieldId: d.id,
             valueText: d.fieldType === "text" ? val : undefined,
@@ -171,6 +182,15 @@ export function PackageStepSix({ clinicuuid, packageid }) {
     router.push(`?${params.toString()}`);
   };
 
+
+
+  
+
+
+
+
+
+
   /* ---------------- UI ---------------- */
   return (
     <Dialog open={open} onClose={() => setOpen(false)} className="relative z-10">
@@ -192,34 +212,36 @@ export function PackageStepSix({ clinicuuid, packageid }) {
                 <div key={field.id} className="mb-15">
                   <label className="block text-sm font-bold mb-2">
                     {field.label}
-                    
+
+                    {field.fieldKey === "heakth_teh_assistance" && (
+                      <p className="text-xs font-normal text-gray-500">
+                        Only readable
+                      </p>
+                    )}
                   </label>
 
                   {field.fieldType === "text" && (
                     <>
                       <Editor
-                        className="h-[200px]"
+                        className={`h-[200px] ${ field.fieldKey === "heakth_teh_assistance" ? "pointer-events-none opacity-50" : "" }`}
                         value={
-                          fieldValues[field.id] ??
-                          (field.predefinedvalue
-                            ? field.predefinedvalue.replace(/\n/g, "<br/>")
-                            : "")
+                          fieldValues[field.id] ?? (field.predefinedvalue? field.predefinedvalue.replace(/\n/g, "<br/>"): "")
                         }
+                        
                         onTextChange={(e) =>
                           handleChange(field, e.htmlValue)
                         }
-                        
-                        />
-
-
+                          readOnly={field.fieldKey === "heakth_teh_assistance"}
+                      />
 
                       {errors[field.id] && (
-                        <p className="text-red-500 text-sm mt-1">
-                          {errors[field.id]}
-                        </p>
-                      )}
+                          <p className="text-red-500 text-sm mt-1">
+                            {errors[field.id]}
+                          </p>
+                        )}
                     </>
                   )}
+
 
                   {field.fieldType === "number" && (
                     <>

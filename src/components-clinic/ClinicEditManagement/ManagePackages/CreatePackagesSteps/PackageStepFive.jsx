@@ -176,7 +176,11 @@ export function PackageStepFive({clinicuuid,packageid}){
              <div className="fixed inset-0 z-10 w-screen overflow-y-auto flex items-center justify-center p-4">
                <DialogPanel className="bg-white rounded-lg shadow-xl w-full max-w-3xl p-6">
                 <DialogTitle className="flex justify-between items-center text-lg font-semibold mb-4">
-                   <span>Choose Procedure </span>
+                   <span>Adjunctive Items <br></br>
+                      <span className="text-sm text-red-400">
+                        (Additional items related to the main procedure that will be included in the package such as Physical Therapy Sessions, Laboratory Tests and so on.)
+                      </span>
+                     </span>
                    <span className="text-green-400 ">5/8</span>
                  </DialogTitle>
 <div className="border theme-border rounded-lg p-3 w-auto max-h-[180px] overflow-auto flex flex-col gap-3">

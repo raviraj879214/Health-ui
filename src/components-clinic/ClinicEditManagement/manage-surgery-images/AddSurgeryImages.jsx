@@ -36,8 +36,9 @@ export function AddSurgeryImage({sendData,clinicuuid}) {
 
   useEffect(()=>{
 
-          fetchtreatment();
+         
           if(clinicuuid){
+             fetchtreatment(clinicuuid);
             fetchClinicDoctors();
             fetchClinicPackages();
           }
@@ -86,9 +87,9 @@ export function AddSurgeryImage({sendData,clinicuuid}) {
 
 
 
-  const fetchtreatment =async()=>{
+  const fetchtreatment =async(clinicuuid)=>{
    
-      const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-surgeries/get-treatment`,{
+      const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-surgeries/get-treatment/${clinicuuid}`,{
         method : "Get",
         headers : clinicHeaders(),
       });
@@ -128,13 +129,13 @@ export function AddSurgeryImage({sendData,clinicuuid}) {
   };
 
   const handleUpload = async () => {
-
-     if(doctors == ""){
-      return;
-     }
-     if(degree == ""){
-      return ;
-     }
+    debugger;
+    //  if(doctors == ""){
+    //   return;
+    //  }
+    //  if(degree == ""){
+    //   return ;
+    //  }
 
     const newErrors = { before: !beforeFile, after: !afterFile };
     setErrors(newErrors);
@@ -151,9 +152,16 @@ export function AddSurgeryImage({sendData,clinicuuid}) {
       formData.append("surgeryid", surgeryId);
       formData.append("type", type);
       formData.append("clinicUuid",clinicuuid);
-      formData.append("doctorUuid",doctors.value);
       formData.append("treatmentid",degree.value);
-      formData.append("packageid",packages.value);
+
+
+      if (packages?.value !== undefined) {
+        formData.append("packageid", packages.value);
+      }
+
+      if (doctors?.value !== undefined) {
+        formData.append("doctorUuid", doctors.value);
+      }
       
 
       return await fetch(
@@ -217,6 +225,11 @@ export function AddSurgeryImage({sendData,clinicuuid}) {
 
               <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <h3 className="text-base font-semibold text-gray-900 mb-4">Upload Images</h3>
+                <p className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800 leading-relaxed">
+  You may only add Before/After pictures for Treatments that you previously
+  selected. Please select the Treatment to which the pictures refer to before
+  trying to add them here.
+</p>
                   <div className="grid grid-cols-2 gap-2">
                      <div className="">
                             
@@ -251,9 +264,9 @@ export function AddSurgeryImage({sendData,clinicuuid}) {
                               classNamePrefix="select"
                               isSearchable/>
 
-                            {!doctors && (
+                            {/* {!doctors && (
                               <p className="text-sm text-red-400 mt-1">Please select a doctor</p>
-                            )}
+                            )} */}
                             
                       </div>
 
@@ -270,9 +283,9 @@ export function AddSurgeryImage({sendData,clinicuuid}) {
                               classNamePrefix="select"
                               isSearchable/>
 
-                            {!packages && (
+                            {/* {!packages && (
                               <p className="text-sm text-red-400 mt-1">Please select a package</p>
-                            )}
+                            )} */}
                             
                       </div>
 
@@ -353,7 +366,7 @@ function ImageUploader({ label, preview, onChange, error, clear }) {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
             </svg>
           )}
-          <input type="file" className="sr-only" onChange={onChange} />
+          <input type="file" className="sr-only" onChange={onChange} accept=".jpg,.jpeg,.png,.webp" />
         </label>
       </div>
       {error && <p className="text-red-500 text-sm mt-1">Please upload {label.toLowerCase()}</p>}

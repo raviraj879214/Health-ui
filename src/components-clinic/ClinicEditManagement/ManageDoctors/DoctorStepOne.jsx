@@ -17,6 +17,8 @@ import { type } from "os";
 
 
 export function DoctorOne({ onClose, nextStep, clinicuuid, doctoruuid }) {
+
+
   const {
     register,
     handleSubmit,
@@ -25,7 +27,8 @@ export function DoctorOne({ onClose, nextStep, clinicuuid, doctoruuid }) {
     control,
     watch,
     reset,
-    setError
+    setError,
+    getValues
   } = useForm({
     defaultValues: {
       languages: [],
@@ -33,6 +36,7 @@ export function DoctorOne({ onClose, nextStep, clinicuuid, doctoruuid }) {
       avatar: null,
     },
   });
+    const crmState = watch("crmState");
 
   const [avatar, setAvatar] = useState(null);
   const [files, setFiles] = useState(null);
@@ -104,7 +108,10 @@ export function DoctorOne({ onClose, nextStep, clinicuuid, doctoruuid }) {
     formdata.append("lastname", data.lastname);
     formdata.append("email", data.email);
     formdata.append("dob", data.date);
-    formdata.append("crm", data.crm);
+
+    formdata.append("crm",`CRM-${data.crmState} ${data.crmNumber}`);
+
+
     formdata.append("languages", JSON.stringify(data.languages.map(l => l.value)));
     formdata.append("videourl", data.videourl);
     formdata.append("cpf", data.cpf);
@@ -169,7 +176,22 @@ export function DoctorOne({ onClose, nextStep, clinicuuid, doctoruuid }) {
       setValue("firstname", result.data.firstname);
       setValue("lastname", result.data.lastname);
       setValue("email", result.data.email);
-      setValue("crm", result.data.crm);
+      // setValue("crm", result.data.crm);
+
+      const crm = result.data.crm;
+
+      const match = crm.match(/^CRM-([A-Z]{2})\s*(\d+)$/);
+
+      if (match) {
+        setValue("crmState", match[1]);   // SP
+        setValue("crmNumber", match[2]);  // 123456
+      }
+
+
+      
+
+
+
       setValue("videourl", result.data.videurl);
       setValue("cpf", result.data.cpf);
       setValue("degree", result.data.degree);
@@ -340,8 +362,8 @@ export function DoctorOne({ onClose, nextStep, clinicuuid, doctoruuid }) {
                       <DatePicker
                         className="w-full"
                         id="date-picker"
-                        label={`Select Dob`}
-                        placeholder="Select Dob"
+                        label={`Date Of Birth`}
+                        placeholder="Date Of Birth"
                         value={dob}
                         defaultDate={dob}
                         onChange={(dates, currentDateString) => field.onChange(currentDateString)}
@@ -365,28 +387,74 @@ export function DoctorOne({ onClose, nextStep, clinicuuid, doctoruuid }) {
 
 
 
-              <div className="col-span-12 lg:col-span-6">
-                <Label>CRM / State</Label>
+              <div className="col-span-12 lg:col-span-3">
+                <Label>UF</Label>
+                <select
+                  className="w-full border p-2 rounded"
+                  {...register("crmState", {
+                    required: "Please select a state",
+                  })}
+                >
+                  <option value="">Select State</option>
+                  <option value="AC">AC</option>
+                  <option value="AL">AL</option>
+                  <option value="AP">AP</option>
+                  <option value="AM">AM</option>
+                  <option value="BA">BA</option>
+                  <option value="CE">CE</option>
+                  <option value="DF">DF</option>
+                  <option value="ES">ES</option>
+                  <option value="GO">GO</option>
+                  <option value="MA">MA</option>
+                  <option value="MT">MT</option>
+                  <option value="MS">MS</option>
+                  <option value="MG">MG</option>
+                  <option value="PA">PA</option>
+                  <option value="PB">PB</option>
+                  <option value="PR">PR</option>
+                  <option value="PE">PE</option>
+                  <option value="PI">PI</option>
+                  <option value="RJ">RJ</option>
+                  <option value="RN">RN</option>
+                  <option value="RS">RS</option>
+                  <option value="RO">RO</option>
+                  <option value="RR">RR</option>
+                  <option value="SC">SC</option>
+                  <option value="SP">SP</option>
+                  <option value="SE">SE</option>
+                  <option value="TO">TO</option>
+                </select>
+
+                {errors.crmState && (
+                  <p className="text-sm text-red-400">
+                    {errors.crmState.message}
+                  </p>
+                )}
+              </div>
+
+              <div className="col-span-12 lg:col-span-3">
+                <Label>CRM Number</Label>
                 <input
                   type="text"
                   className="w-full border p-2 rounded"
-                  placeholder="CRM-SP 123456"
-                  {...register("crm", {
-                    required: "Please enter CRM / State",
+                  placeholder="123456"
+                  {...register("crmNumber", {
+                    required: "Please enter CRM number",
                     pattern: {
-                      value: /^CRM[-\s/]?[A-Z]{2}\s?\d{1,6}$/,
-                      message: "Invalid format. Example: CRM-SP 123456"
+                      value: /^\d{1,6}$/,
+                      message: "CRM number must contain up to 6 digits",
                     },
-                    maxLength: {
-                      value: 20,
-                      message: "CRM is too long"
-                    }
                   })}
                 />
-                {errors.crm && (
-                  <p className="text-sm text-red-400">{errors.crm.message}</p>
+                <p className="text-green-400">{getValues("crm")}</p>
+                {errors.crmNumber && (
+                  <p className="text-sm text-red-400">
+                    {errors.crmNumber.message}
+                  </p>
                 )}
               </div>
+
+             
 
 
 
