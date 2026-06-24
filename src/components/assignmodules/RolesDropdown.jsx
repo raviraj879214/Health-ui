@@ -1,5 +1,6 @@
 "use client"
 import { useState, useEffect } from "react";
+import { fixTypos } from "../utils/conversiontext";
 
 
 
@@ -49,7 +50,8 @@ export function RoleDropdown({sendRoleID}) {
         <option value="">-- Choose a role --</option>
         {roles.map((role) => (
           <option key={role.id} value={role.id}>
-            {role.name}
+           
+            {fixTypos(role.name)}
           </option>
         ))}
       </select>

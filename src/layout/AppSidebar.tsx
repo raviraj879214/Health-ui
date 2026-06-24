@@ -105,7 +105,7 @@ const AppSidebar: React.FC = () => {
             { name: "Roles", path: "/admin/manage-roles", pro: false },
             { name: "Assign Modules", path: "/admin/assign-modules", pro: false },
             { name: "Manage User", path: "/admin/manage-user", pro: false },
-            { name: "Manage Cordinator", path: "/admin/manage-cordinator", pro: false },
+            { name: "Manage Coordinator", path: "/admin/manage-cordinator", pro: false },
           ],
         },
       ]

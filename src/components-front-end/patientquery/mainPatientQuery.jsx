@@ -215,7 +215,7 @@ export function MainPatinetQuery({ id, name }) {
               </div>
 
               <p className="text-center text-gray-500 mt-8 max-w-sm">
-                Choosing "No" will discard the current request so you can start a new one.
+                Choosing "Start Over" will discard the current request so you can start a new one.
               </p>
             </div>
 

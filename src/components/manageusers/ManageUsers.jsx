@@ -11,12 +11,25 @@ import { toast } from "react-toastify";
 
 
 
+export const fixTypos = (text) => {
+  if (!text) return text;
+
+  return text.replace(/\bCordinator\b/g, "Coordinator");
+};
+
 export function ManageUser() {
 
     const { register, getValues, setValue, formState: { errors }, reset, handleSubmit } = useForm();
     const [message,setmessage] = useState("");
     const [userbutton,setuserbutton] = useState("");
     const [roleid,setRoleid] = useState(0);
+
+
+    const [userid,setUserID] = useState(0);
+
+
+
+
 
     const onCreate =async (data) => {
         
@@ -61,6 +74,49 @@ export function ManageUser() {
         setuserbutton(false);
     }
 
+    const onUpdate = async(data)=>{
+       
+        setuserbutton(true);
+        debugger;
+        const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/users/${userid}`,{
+            method : "PATCH",
+            headers:{
+                "Content-Type" : "application/json"
+            },
+            body : JSON.stringify({
+                email : data.email,
+                password : data.password,
+                roleId :  data.roleid,
+                firstname : data.firstname,
+                lastname : data.lastname,
+                Bio : data.bio,
+                whatsappNumber: data.whatsappnumber,
+                telegramNumber: data.telegramusername,
+                messengerID: data.messengerid
+
+            })
+        });
+        if(res.ok){
+            const result =await res.json();
+            // setmessage(result.message);
+
+          
+             toast.success(result.message || "User updated successfully", {position: "bottom-right",autoClose: 3000,});
+
+            
+            if(result.status == 409){
+                setValue("email","");
+            }
+            else{
+                reset();
+            }
+            setTimeout(() => {
+                setmessage("");
+            }, 3000);
+        }
+        setuserbutton(false);
+    }
+
 
     const [showPassword, setShowPassword] = useState(false);
     const [options,setoptions] = useState([]);
@@ -78,7 +134,7 @@ export function ManageUser() {
                 const data = await res.json();
                     const optionsd = data.roles.map((item) => ({
                             value: item.id,
-                            label: item.name,
+                            label: fixTypos(item.name),
                         }));
 
                     setoptions(optionsd);
@@ -116,6 +172,24 @@ export function ManageUser() {
     }
   }
 
+  const handleChildEdit= async(data)=>{
+     console.log("Edit user:", data);
+
+     setValue("email",data.email);
+     setValue("firstname",data.firstname);
+     setValue("lastname",data.lastname);
+     setValue("bio",data.Bio);
+     setValue("roleid",data.roleId);
+
+     setValue("whatsappnumber",data.whatsappNumber);
+     setValue("telegramusername",data.telegramNumber);
+     setValue("messengerid",data.messengerID);
+    
+
+     setRoleid(data.role.name);
+     setUserID(data.id);
+  }
+
 
 
 
@@ -124,7 +198,7 @@ export function ManageUser() {
             <div className="col-span-12 sm:col-span-12 space-y-5 sm:space-y-6">
                 <ComponentCard title="" showReload = {true}>
                      <p className="text-green-500 text-sm"> {message}</p>
-                    <form onSubmit={handleSubmit(onCreate)}>
+                    <form onSubmit={handleSubmit(userid >0 ? onUpdate : onCreate)}>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
                             <div>
@@ -188,8 +262,8 @@ export function ManageUser() {
                                     })}
                                     placeholder="Enter email"
                                 />
-                                {errors.lastname && (
-                                    <p className="text-red-500 text-sm">{errors.lastname.message}</p>
+                                {errors.email && (
+                                    <p className="text-red-500 text-sm">{errors.email.message}</p>
                                 )}
                             </div>
 
@@ -198,20 +272,31 @@ export function ManageUser() {
                                 <Label>Password</Label>
                                 <input
                                     type="password"
-                                    className={`h-11 w-full rounded-lg border px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-hidden focus:ring-3 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800
-                                        ${errors.lastname ? "border-red-500 focus:ring-red-300" : "border-gray-300 focus:ring-brand-200"}`}
+                                    className={`h-11 w-full rounded-lg border px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-hidden focus:ring-3 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800 ${errors.password
+                                            ? "border-red-500 focus:ring-red-300"
+                                            : "border-gray-300 focus:ring-brand-200"
+                                        }`}
                                     defaultValue={getValues("password")}
                                     {...register("password", {
-                                        required: "Please enter password",
+                                        required: "Please enter a password",
                                         pattern: {
-                                            value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, // only letters and spaces
-                                            message: "password name should contain only letters"
+                                            value:
+                                                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                                            message:
+                                                "Password must be at least 8 characters long and contain an uppercase letter, a lowercase letter, a number, and a special character."
                                         }
                                     })}
                                     placeholder="Enter password"
                                 />
                                 {errors.password && (
                                     <p className="text-red-500 text-sm">{errors.password.message}</p>
+                                )}
+                                {userid > 0 && (
+                                    <>
+                                        <p className="mt-2 rounded-md border border-red-300 bg-red-50 p-3 text-sm text-red-600">
+                                            To update the user details, you must re-enter the password. For security reasons, we cannot retrieve or display the existing password. You may enter either your current password (if you remember it) or set a new password.
+                                        </p>
+                                    </>
                                 )}
                             </div>
 
@@ -262,59 +347,62 @@ export function ManageUser() {
                                     <p className="text-red-500 text-sm">{errors.bio.message}</p>
                                 )}
                             </div>
+
+
                             {roleid == "Cordinator" && (
                                  
                                  <>
-                                  <div>
-                                <Label>Whats App Number</Label>
-                                <input
-                                    type="text"
-                                    className={`h-11 w-full rounded-lg border px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-hidden focus:ring-3 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800
+                                    <div>
+                                        <Label>Whats App Number</Label>
+                                        <input
+                                            type="text"
+                                            className={`h-11 w-full rounded-lg border px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-hidden focus:ring-3 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800
                                     ${errors.whatsappnumber ? "border-red-500 focus:ring-red-300" : "border-gray-300 focus:ring-brand-200"}`}
-                                    defaultValue={getValues("whatsappnumber")}
-                                    {...register("whatsappnumber", {
-                                        required: "Please enter whats app number"
-                                       
-                                    })}
-                                    placeholder="Enter bio"
-                                />
-                                {errors.whatsappnumber && (
-                                    <p className="text-red-500 text-sm">{errors.whatsappnumber.message}</p>
-                                )}
-                            </div> <div>
-                                <Label>Telegram User ID</Label>
-                                <input
-                                    type="text"
-                                    className={`h-11 w-full rounded-lg border px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-hidden focus:ring-3 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800
+                                            defaultValue={getValues("whatsappnumber")}
+                                            {...register("whatsappnumber", {
+                                                required: "Please enter whats app number"
+
+                                            })}
+                                            placeholder="Enter bio"
+                                        />
+                                        {errors.whatsappnumber && (
+                                            <p className="text-red-500 text-sm">{errors.whatsappnumber.message}</p>
+                                        )}
+                                    </div>
+                                     <div>
+                                        <Label>Telegram User ID</Label>
+                                        <input
+                                            type="text"
+                                            className={`h-11 w-full rounded-lg border px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-hidden focus:ring-3 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800
                                     ${errors.telegramusername ? "border-red-500 focus:ring-red-300" : "border-gray-300 focus:ring-brand-200"}`}
-                                    defaultValue={getValues("telegramusername")}
-                                    {...register("telegramusername", {
-                                        required: "Please enter telegram username"
-                                       
-                                    })}
-                                    placeholder="Enter telegram username"
-                                />
-                                {errors.telegramusername && (
-                                    <p className="text-red-500 text-sm">{errors.telegramusername.message}</p>
-                                )}
-                            </div>
-                             <div>
-                                <Label>Messenger ID</Label>
-                                <input
-                                    type="text"
-                                    className={`h-11 w-full rounded-lg border px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-hidden focus:ring-3 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800
+                                            defaultValue={getValues("telegramusername")}
+                                            {...register("telegramusername", {
+                                                required: "Please enter telegram username"
+
+                                            })}
+                                            placeholder="Enter telegram username"
+                                        />
+                                        {errors.telegramusername && (
+                                            <p className="text-red-500 text-sm">{errors.telegramusername.message}</p>
+                                        )}
+                                    </div>
+                                    <div>
+                                        <Label>Messenger ID</Label>
+                                        <input
+                                            type="text"
+                                            className={`h-11 w-full rounded-lg border px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-hidden focus:ring-3 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800
                                     ${errors.messengerid ? "border-red-500 focus:ring-red-300" : "border-gray-300 focus:ring-brand-200"}`}
-                                    defaultValue={getValues("messengerid")}
-                                    {...register("messengerid", {
-                                        required: "Please enter messenger id"
-                                       
-                                    })}
-                                    placeholder="Enter messenger username"
-                                />
-                                {errors.messengerid && (
-                                    <p className="text-red-500 text-sm">{errors.messengerid.message}</p>
-                                )}
-                            </div>
+                                            defaultValue={getValues("messengerid")}
+                                            {...register("messengerid", {
+                                                required: "Please enter messenger id"
+
+                                            })}
+                                            placeholder="Enter messenger username"
+                                        />
+                                        {errors.messengerid && (
+                                            <p className="text-red-500 text-sm">{errors.messengerid.message}</p>
+                                        )}
+                                    </div>
                                  </>
                             )}
                            
@@ -332,16 +420,18 @@ export function ManageUser() {
 
                         </div>
 
-                                                    <div className="grid grid-cols-10 gap-4 mt-5">
-                                                        <div className="col-span-8"></div> {/* spacer */}
-                                                        <div className="col-span-2">
-                                                    <button
+                        <div className="grid grid-cols-10 gap-4 mt-5">
+                            <div className="col-span-8"></div> 
+                            <div className="col-span-2">
+                                <button
                                     type="submit"
                                     className="bg-brand-500 hover:bg-brand-600 w-full rounded-lg p-3 text-sm font-medium text-white transition-colors">
-                                    Create User
+
+                                    {userid > 0 ? "Update User" : "Create User"}
                                 </button>
-  </div>
-</div>
+                            </div>
+                        </div>
+
                     </form>
 
                 </ComponentCard>
@@ -351,7 +441,7 @@ export function ManageUser() {
   
         <ComponentCard title="Manage Users List" desc="">
 
-                <UserdList trigger={userbutton} sendDelete={handleChildDelete}></UserdList>
+                <UserdList trigger={userbutton} sendDelete={handleChildDelete} sendEdit={handleChildEdit}></UserdList>
 
         </ComponentCard>
 

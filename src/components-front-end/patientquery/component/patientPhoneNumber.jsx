@@ -206,7 +206,7 @@ export function PatientPhoneNumber(){
                   <div class="flex justify-center space-x-2 bg-gray-200 rounded-full p-1 mb-5">
 
                     <button onClick={()=> setProvider("sms")} className={`px-4 py-2 rounded-full  text-blue-500 hover:bg-white  ${provider === "sms" && "bg-white font-semibold"}`}>
-                      Sms
+                      Sms / WhatsApp
                     </button>
                     {/* <button onClick={()=> setProvider("whatsapp")} className={`px-4 py-2 rounded-full  text-blue-500 hover:bg-white  ${provider === "whatsapp" && "bg-white font-semibold"}`}>
                       WhatsApp
@@ -373,6 +373,8 @@ export function PatientPhoneNumber(){
 
                   </form>
                 </>)}
+
+                
 
                 {provider === "telegram" && (<>
                   <form onSubmit={handleSubmit(onCreate)} className="flex flex-col gap-5">

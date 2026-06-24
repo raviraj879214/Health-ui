@@ -18,7 +18,7 @@ export default function Pages(){
 
     return(<>
     
-     <PageBreadcrumb pageTitle="Manage Specialty" />
+     <PageBreadcrumb pageTitle="Manage Sub Specialty" />
 
 
      

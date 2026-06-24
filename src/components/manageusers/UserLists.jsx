@@ -10,7 +10,15 @@ import {
 } from "../ui/table";
 import { PencilIcon, TrashBinIcon } from "../../icons/index";
 
-export function UserdList({ trigger, sendDelete }) {
+export const fixTypos = (text) => {
+  if (!text) return text;
+
+  return text.replace(/\bCordinator\b/g, "Coordinator");
+};
+
+
+
+export function UserdList({ trigger, sendDelete ,sendEdit }) {
   const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedRows, setSelectedRows] = useState([]);
@@ -60,8 +68,9 @@ export function UserdList({ trigger, sendDelete }) {
     setCurrentPage((prev) => Math.min(prev + 1, totalPages));
 
   // Edit (placeholder)
-  const edit = (id, name) => {
-    console.log("Edit user:", id, name);
+  const edit = (data) => {
+  
+    sendEdit(data);
   };
 
   // Delete
@@ -159,13 +168,38 @@ export function UserdList({ trigger, sendDelete }) {
                     {user.Bio || "—"}
                   </TableCell>
                   <TableCell className="px-5 py-4 sm:px-6 text-start">
-                    {user.role?.name || "No Role"}
+                    <div className="space-y-2">
+                      <div>
+                        <span className="inline-flex rounded-full bg-blue-100 px-3 py-1 text-xs font-medium text-blue-700">
+                          
+                          {fixTypos(user.role?.name || "No Role")}
+                        </span>
+                      </div>
+
+                      <div className="text-sm text-gray-600 space-y-1">
+                        <p>
+                          <span className="font-medium text-gray-800">WhatsApp:</span>{" "}
+                          {user.whatsappNumber || "-"}
+                        </p>
+
+                        <p>
+                          <span className="font-medium text-gray-800">Telegram:</span>{" "}
+                          {user.telegramNumber || "-"}
+                        </p>
+
+                        <p>
+                          <span className="font-medium text-gray-800">Messenger:</span>{" "}
+                          {user.messengerID || "-"}
+                        </p>
+                      </div>
+                    </div>
                   </TableCell>
                   <TableCell className="px-5 py-4 sm:px-6 text-start">
                     <div className="flex items-center gap-3">
-                      {/* <button onClick={() => edit(user.id, user.firstname)}>
+                      <button onClick={() => edit(user)}>
                         <PencilIcon />
-                      </button> */}
+                      </button>
+                      /
                       <button onClick={() => onDelete(user.id)}>
                         <TrashBinIcon />
                       </button>

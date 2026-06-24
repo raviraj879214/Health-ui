@@ -224,7 +224,7 @@ export function PatientEmail() {
                   ))}
                 </div>
               )}
-
+                <p className="text-red-600 text-sm">If the OTP does not arrive in your e-mail inbox, please check your Spam Box</p>
               <div className="pt-3">
                 <button
                   disabled={loading}

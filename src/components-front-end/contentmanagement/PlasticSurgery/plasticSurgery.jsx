@@ -22,11 +22,14 @@ export function PlasticSurgery(){
                 "Content-Type" : "application/json"
             },
             body: JSON.stringify({
-                "specialization": "Allergy ",
+                "specialization": "Plastic Surgery ",
                 "treatments": [
-                    "ACL",
-                    "Facelift",
-                    "Breast Augmentation"
+                    "Liposuction",
+                    "Breast augmentation",
+                    "Tummy tuck",
+                    "Rhinoplasty",
+                    "Mommy makeover",
+                    "Facelift"
                 ]
             })
         });

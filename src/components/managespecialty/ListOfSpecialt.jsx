@@ -35,6 +35,7 @@ export function ListOfSpecialtiesType({ trigger, sendData }) {
       const data = await res.json();
       console.log("data",data);
       setSpecialties(data?.data || []);
+      
       setTotalPages(Math.ceil((data?.totalCount || 0) / itemsPerPage));
     } catch (error) {
       console.error("Failed to fetch:", error);
