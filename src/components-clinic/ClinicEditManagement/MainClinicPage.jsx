@@ -40,14 +40,15 @@ export function MainClinic({ clinicuuid }) {
 
 
 
-  const pingAdmin =async ()=>{
+  const pingAdmin =async (clinicuuid)=>{
     setPingButton(true);
     const clinicmessage = `Hi Admin, ${clinicdetail.name} has requested activation. The clinic has completed all required details. Please review and activate the clinic.`;
     const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-clinic/ping-admin`,{
       method : "Post",
       headers : await clinicHeaders(),
       body : JSON.stringify({
-        "clinicmessage" : clinicmessage
+        "clinicmessage" : clinicmessage,
+        "clinicuuid" : clinicuuid
       })
     });
     if(res.ok){
@@ -244,7 +245,7 @@ export function MainClinic({ clinicuuid }) {
 
           <button
            disabled={pingbutton}
-           onClick={()=> pingAdmin()}
+           onClick={()=> pingAdmin(clinicuuid)}
             className="btn btn-primary">
               {pingbutton ? (<><ButtonSpinner></ButtonSpinner></>):(<>Finish Registration</>)}
             
