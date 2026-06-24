@@ -119,7 +119,7 @@ export function SurgeriesCarouselImages({dataReset,clinicuuid}) {
 
   const deleteimages=(id)=>{
     
-
+    console.log(id);
     deleteSurgeryimages(id);
   }
 
@@ -154,7 +154,7 @@ if (surgeries.length === 0) {
         {/* Delete Button */}
         <div className="absolute top-2 right-2 flex gap-1 z-10">
           <button
-            onClick={() => deleteimages(surgery.id)}
+            onClick={() => deleteimages(surgery.surgeryId)}
             className="text-red-500 hover:text-red-700 bg-white/80 rounded px-1"
           >
             🗑

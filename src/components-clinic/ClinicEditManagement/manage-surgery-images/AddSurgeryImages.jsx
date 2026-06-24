@@ -226,73 +226,73 @@ export function AddSurgeryImage({sendData,clinicuuid}) {
               <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <h3 className="text-base font-semibold text-gray-900 mb-4">Upload Images</h3>
                 <p className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800 leading-relaxed">
-  You may only add Before/After pictures for Treatments that you previously
-  selected. Please select the Treatment to which the pictures refer to before
-  trying to add them here.
-</p>
-                  <div className="grid grid-cols-2 gap-2">
-                     <div className="">
-                            
-                            <label className="block mb-1 font-medium">Choose Treatment</label>
+                  You may only add Before/After pictures for Treatments that you previously
+                  selected. Please select the Treatment to which the pictures refer to before
+                  trying to add them here.
+                </p>
+                <div className="grid grid-cols-2 gap-2">
+                  <div className="">
 
-                            <Select
-                              options={degreeOptions}
-                              value={degree}
-                              onChange={(selected) => setDegree(selected)}
-                              placeholder="Search  treatment..."
-                              className="basic-select"
-                              classNamePrefix="select"
-                              isSearchable/>
+                    <label className="block mb-1 font-medium">Choose Treatment</label>
 
-
-                            {!degree && (
-                              <p className="text-sm text-red-400 mt-1">Please select a degree</p>
-                            )}
-
-                      </div>
-                    
-                    <div className="">
-                            
-                            <label className="block mb-1 font-medium">Choose Doctor</label>
-
-                            <Select
-                              options={doctorsOptions}
-                              value={doctors}
-                              onChange={(selected) => setDoctors(selected)}
-                              placeholder="Search  doctors..."
-                              className="basic-select"
-                              classNamePrefix="select"
-                              isSearchable/>
-
-                            {/* {!doctors && (
-                              <p className="text-sm text-red-400 mt-1">Please select a doctor</p>
-                            )} */}
-                            
-                      </div>
-
-                    <div className="">
-                            
-                            <label className="block mb-1 font-medium">Choose Package</label>
-
-                            <Select
-                              options={packageOptions}
-                              value={packages}
-                              onChange={(selected) => setPackages(selected)}
-                              placeholder="Search  packages..."
-                              className="basic-select"
-                              classNamePrefix="select"
-                              isSearchable/>
-
-                            {/* {!packages && (
-                              <p className="text-sm text-red-400 mt-1">Please select a package</p>
-                            )} */}
-                            
-                      </div>
+                    <Select
+                      options={degreeOptions}
+                      value={degree}
+                      onChange={(selected) => setDegree(selected)}
+                      placeholder="Search  treatment..."
+                      className="basic-select"
+                      classNamePrefix="select"
+                      isSearchable />
 
 
-
+                    {!degree && (
+                      <p className="text-sm text-red-400 mt-1">Please select a degree</p>
+                    )}
 
                   </div>
+
+                  <div className="">
+
+                    <label className="block mb-1 font-medium">Choose Doctor</label>
+
+                    <Select
+                      options={doctorsOptions}
+                      value={doctors}
+                      onChange={(selected) => setDoctors(selected)}
+                      placeholder="Search  doctors..."
+                      className="basic-select"
+                      classNamePrefix="select"
+                      isSearchable />
+
+                    {/* {!doctors && (
+                              <p className="text-sm text-red-400 mt-1">Please select a doctor</p>
+                            )} */}
+
+                  </div>
+
+                  <div className="">
+
+                    <label className="block mb-1 font-medium">Choose Package</label>
+
+                    <Select
+                      options={packageOptions}
+                      value={packages}
+                      onChange={(selected) => setPackages(selected)}
+                      placeholder="Search  packages..."
+                      className="basic-select"
+                      classNamePrefix="select"
+                      isSearchable />
+
+                    {/* {!packages && (
+                              <p className="text-sm text-red-400 mt-1">Please select a package</p>
+                            )} */}
+
+                  </div>
+
+
+
+
+                </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-3">
                   <ImageUploader
