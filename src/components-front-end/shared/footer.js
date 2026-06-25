@@ -34,6 +34,9 @@ const Footer = forwardRef(function Footer(props, ref) {
                 <li>
                   <Link href="/blogs">Blogs</Link>
                 </li>
+                <li>
+                  <Link href="/all-packages">Explore Treatment Packages</Link>
+                </li>
               </ul>
             </div>
             <div className="m-0 flex-auto md:w-1/4 w-1/2 a-hover-underline px-2.5 pb-5 hidden">

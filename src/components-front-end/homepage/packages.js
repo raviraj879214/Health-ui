@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import PackageCard from "../../components-front-end/global/packageCard";
 import PackageCardLoader from "../../components-front-end/global/skeleton/packageCardLoader";
+import Link from "next/link";
 
 
 export default function Packages(){
@@ -50,25 +51,35 @@ export default function Packages(){
     return (<>
 
     
-        {treatmentPackages.length > 0 &&(<>
-             <div className="md:my-18 my-16">
-            <div className="container">
-                <h2 className="h2 text-center md:mb-7 mb-5">Treatment Packages </h2>
-                <div className="swiper swiper-packages md:py-7! py-4!">
-                    <div className="swiper-wrapper">
-                        {treatmentPackages.map((card) => (
-                            <div className="swiper-slide h-auto!" key={card.id}>
-                              
-                                <PackageCard data={card}/>
-                            </div>
-                        ))}
+        {treatmentPackages.length > 0 && (<>
+            <div className="md:my-18 my-16">
+                <div className="container">
+                    <h2 className="h2 text-center md:mb-7 mb-5">
+                        Treatment Packages
+                    </h2>
+
+                    <div className="swiper swiper-packages md:py-7! py-4!">
+                        <div className="swiper-wrapper">
+                            {treatmentPackages.map((card) => (
+                                <div className="swiper-slide h-auto!" key={card.id}>
+                                    <PackageCard data={card} />
+                                </div>
+                            ))}
+                        </div>
+                        <div className="swiper-pagination"></div>
                     </div>
-                    <div className="swiper-pagination"></div>
+
+                    <div className="flex justify-center mt-6">
+                        <Link
+                            href="/all-packages"
+                            className="btn btn-secondary text-center"
+                        >
+                            View All Packages
+                        </Link>
+                    </div>
                 </div>
-                
             </div>
-        </div>
-            </>)}
+        </>)}
        
     </>)
 }
