@@ -129,14 +129,21 @@ const handleSearch = () => {
                 Choose a Treatment
               </option>
 
-              {treatments?.map((item) => (
-                <option
-                  key={item?.id}
-                  value={item?.id}
-                >
-                  {item?.name}
-                </option>
-              ))}
+             {treatments
+  ?.filter(
+    (item) => item?.id && item?.name
+  )
+  .sort((a, b) =>
+    a.name.localeCompare(b.name)
+  )
+  .map((item) => (
+    <option
+      key={item.id}
+      value={item.id}
+    >
+      {item.name}
+    </option>
+  ))}
             </select>
 
             <button
