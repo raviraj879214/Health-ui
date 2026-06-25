@@ -61,7 +61,7 @@ export default async function Page() {
   const promoteCardTwo = {
     title: "Join Our Affiliate Program",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      "",
     buttonText: "Register Now",
     buttonLink: "/register",
     image: "/images/promote-2.png",

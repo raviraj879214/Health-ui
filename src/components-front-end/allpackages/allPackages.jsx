@@ -131,10 +131,10 @@ const handleSearch = () => {
 
               {treatments?.map((item) => (
                 <option
-                  key={item?.treatment?.id}
-                  value={item?.treatment?.id}
+                  key={item?.id}
+                  value={item?.id}
                 >
-                  {item?.treatment?.name}
+                  {item?.name}
                 </option>
               ))}
             </select>
