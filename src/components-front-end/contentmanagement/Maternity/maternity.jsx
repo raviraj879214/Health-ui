@@ -69,12 +69,10 @@ export function Maternity(){
                         body: JSON.stringify({
                             "specialization": "Maternity",
                             "treatments": [
-                                "Liposuction",
-                                "Breast augmentation",
-                                "Tummy tuck",
-                                "Rhinoplasty",
-                                "Mommy makeover",
-                                "Facelift"
+                                "Planned Cesarean Delivery",
+                                "Natural Childbirth",
+                                "Full Prenatal & Postnatal Care",
+                                
                             ]
                         })
                     });
@@ -97,7 +95,7 @@ export function Maternity(){
 
                 <div className="relative z-10 mx-auto max-w-7xl px-6 py-16 lg:py-10">
                     <div className="max-w-4xl">
-                        <span className="mb-6 inline-block rounded-full bg-blue-100 px-4 py-1 text-xs font-semibold uppercase tracking-wider text-blue-700">
+                        <span className="mb-6 inline-block rounded-full bg-amber-100 px-4 py-1 text-xs font-semibold uppercase tracking-wider text-amber-700">
                             Medical Tourism Excellence
                         </span>
                         <h1 className="mb-8 text-4xl font-bold leading-tight text-gray-900 md:text-6xl">
@@ -137,7 +135,7 @@ export function Maternity(){
                             </div>
                             <div className="flex-grow">
                                 <div className="mb-2 flex items-center gap-2">
-                                    <span className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-600">
+                                    <span className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-600">
                                         Medical Review
                                     </span>
                                     <div className="h-px flex-grow bg-gray-200" />
@@ -186,7 +184,7 @@ export function Maternity(){
 
                                 </p>
                             </div>
-                            <button className="rounded-xl bg-emerald-600 px-6 py-4 font-semibold text-white transition hover:bg-emerald-700">
+                            <button className="rounded-xl bg-amber-400 px-6 py-4 font-semibold text-white transition hover:bg-amber-400">
                                 Get a free treatment estimate
 
                             </button>
@@ -200,7 +198,7 @@ export function Maternity(){
                     <div className="mx-auto max-w-7xl px-6 lg:px-8">
 
                         <div className="mx-auto max-w-3xl text-center">
-                            <span className="inline-flex items-center rounded-full bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700 ring-1 ring-emerald-200">
+                            <span className="inline-flex items-center rounded-full bg-amber-50 px-4 py-2 text-sm font-semibold text-amber-400 ring-1 ring-amber-200">
                                 Verified Maternity  Clinics
                             </span>
 
@@ -251,7 +249,7 @@ export function Maternity(){
                                                     onClick={() => {
                                                         window.location.href = `/clinics/${item.slug}`;
                                                     }}
-                                                    className="inline-flex items-center gap-2 font-medium text-teal-600 transition-colors hover:text-teal-700">
+                                                    className="inline-flex items-center gap-2 font-medium text-amber-400 transition-colors hover:text-amber-600">
                                                     View Details
                                                     <span>→</span>
                                                 </button>
@@ -266,7 +264,7 @@ export function Maternity(){
                                 <div className="mt-10 flex justify-center">
                                     <button
                                         onClick={() => setVisible((prev) => prev + 4)}
-                                        className="rounded-full bg-teal-600 px-8 py-3 font-medium text-white shadow-md transition-all duration-300 hover:bg-teal-700 hover:shadow-lg"
+                                        className="rounded-full bg-amber-400 px-8 py-3 font-medium text-white shadow-md transition-all duration-300 hover:bg-amber-600 hover:shadow-lg"
                                     >
                                         Load More Clinics
                                     </button>
@@ -277,20 +275,20 @@ export function Maternity(){
 
 
 
-                        <div className="mt-20 overflow-hidden rounded-[32px] bg-gradient-to-r from-emerald-600 to-emerald-700 p-10 text-white lg:p-14">
+                        <div className="mt-20 overflow-hidden rounded-[32px] bg-gradient-to-r from-amber-400 to-amber-600 p-10 text-white lg:p-14">
                             <div className="flex flex-col items-center justify-between gap-8 lg:flex-row">
                                 <div className="max-w-3xl">
                                     <h3 className="text-3xl font-bold">
                                         Not sure which clinic is right for you?
                                     </h3>
 
-                                    <p className="mt-4 text-lg leading-8 text-emerald-50">
+                                    <p className="mt-4 text-lg leading-8 text-amber-50">
                                         Tell us your treatment goal and budget. Our team will match you
                                         with the right clinic, in the right city, at the right price.
                                     </p>
                                 </div>
 
-                                <button className="rounded-2xl bg-white px-8 py-4 text-lg font-semibold text-emerald-700 transition hover:scale-105">
+                                <button className="rounded-2xl bg-white px-8 py-4 text-lg font-semibold text-amber-400 transition hover:scale-105">
                                     Get My Free Match →
                                 </button>
                             </div>
@@ -307,7 +305,7 @@ export function Maternity(){
                         <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
                             {/* Left */}
                             <div className="max-w-xl">
-                                <span className="inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700">
+                                <span className="inline-flex items-center rounded-full border border-amber-200 bg-amber-50 px-4 py-2 text-sm font-semibold text-amber-400">
                                     Maternity Services
                                 </span>
 
@@ -330,12 +328,12 @@ export function Maternity(){
                                 ].map((service) => (
                                     <button
                                         key={service}
-                                        className="group inline-flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-6 py-4 text-left font-medium text-slate-700 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-emerald-500 hover:bg-emerald-50 hover:text-emerald-700 hover:shadow-md"
+                                        className="group inline-flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-6 py-4 text-left font-medium text-slate-700 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-amber-500 hover:bg-amber-50 hover:text-amber-700 hover:shadow-md"
                                     >
-                                        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-100 transition group-hover:bg-emerald-600">
+                                        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-amber-100 transition group-hover:bg-amber-400">
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
-                                                className="h-4 w-4 text-emerald-700 transition group-hover:text-white"
+                                                className="h-4 w-4 text-amber-400 transition group-hover:text-white"
                                                 fill="none"
                                                 viewBox="0 0 24 24"
                                                 stroke="currentColor"
@@ -365,7 +363,7 @@ export function Maternity(){
                     <div className="grid gap-14 lg:grid-cols-[1fr_520px] lg:items-start">
                         {/* Left Content */}
                         <div>
-                            <span className="inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700">
+                            <span className="inline-flex items-center rounded-full border border-amber-200 bg-amber-50 px-4 py-2 text-sm font-semibold text-amber-400">
                                 Service Pricing
                             </span>
 
@@ -387,7 +385,7 @@ export function Maternity(){
                                 <div className="flex gap-4">
                                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-amber-100">
                                         <svg
-                                            className="h-5 w-5 text-amber-600"
+                                            className="h-5 w-5 text-amber-400"
                                             fill="none"
                                             stroke="currentColor"
                                             strokeWidth="2"
@@ -415,12 +413,12 @@ export function Maternity(){
 
                         {/* Pricing Card */}
                         <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl">
-                            <div className="bg-emerald-600 px-8 py-6">
+                            <div className="bg-amber-400 px-8 py-6">
                                 <h3 className="text-2xl font-bold text-white">
                                     Estimated Service Costs
                                 </h3>
 
-                                <p className="mt-2 text-emerald-100">
+                                <p className="mt-2 text-amber-100">
                                     Average private hospital pricing in Brazil
                                 </p>
                             </div>
@@ -454,7 +452,7 @@ export function Maternity(){
                                             </h4>
                                         </div>
 
-                                        <div className="shrink-0 rounded-xl bg-emerald-50 px-4 py-2 text-lg font-bold text-emerald-700">
+                                        <div className="shrink-0 rounded-xl bg-amber-50 px-4 py-2 text-lg font-bold text-amber-400">
                                             {item.cost}
                                         </div>
                                     </div>
@@ -462,7 +460,7 @@ export function Maternity(){
                             </div>
 
                             <div className="border-t border-slate-200 bg-slate-50 p-6">
-                                <button className="w-full rounded-xl bg-emerald-600 px-6 py-4 font-semibold text-white transition hover:bg-emerald-700">
+                                <button className="w-full rounded-xl bg-amber-400 px-6 py-4 font-semibold text-white transition hover:bg-amber-600">
                                     Get a Personalized Cost Estimate →
                                 </button>
                             </div>
@@ -477,7 +475,7 @@ export function Maternity(){
                     <div className="grid gap-12 lg:grid-cols-[420px_1fr]">
                         {/* Left */}
                         <div>
-                            <span className="inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700">
+                            <span className="inline-flex items-center rounded-full border border-amber-200 bg-amber-50 px-4 py-2 text-sm font-semibold text-amber-400">
                                 Travel Budget
                             </span>
 
@@ -490,7 +488,7 @@ export function Maternity(){
                                 accommodation, and additional support during your stay in Brazil.
                             </p>
 
-                            <div className="mt-8 rounded-3xl border border-emerald-200 bg-white p-6 shadow-sm">
+                            <div className="mt-8 rounded-3xl border border-amber-200 bg-white p-6 shadow-sm">
                                 <h3 className="text-xl font-semibold text-slate-900">
                                     Many hospitals offer all-inclusive maternity packages
                                 </h3>
@@ -501,7 +499,7 @@ export function Maternity(){
                                     package options.
                                 </p>
 
-                                <button className="mt-6 rounded-xl bg-emerald-600 px-6 py-3 font-semibold text-white transition hover:bg-emerald-700">
+                                <button className="mt-6 rounded-xl bg-amber-400 px-6 py-3 font-semibold text-white transition hover:bg-amber-600">
                                     Ask About Package Options →
                                 </button>
                             </div>
@@ -548,7 +546,7 @@ export function Maternity(){
                                 >
                                     <div className="flex items-center gap-4">
                                         {/* Number Badge */}
-                                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-emerald-50 text-sm font-bold text-emerald-700">
+                                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-amber-50 text-sm font-bold text-amber-400">
                                             {String(index + 1).padStart(2, "0")}
                                         </div>
 
@@ -557,7 +555,7 @@ export function Maternity(){
                                         </h4>
                                     </div>
 
-                                    <div className="rounded-xl bg-emerald-50 px-4 py-2 font-bold text-emerald-700">
+                                    <div className="rounded-xl bg-amber-50 px-4 py-2 font-bold text-amber-400">
                                         {item.price}
                                     </div>
                                 </div>
@@ -584,7 +582,7 @@ export function Maternity(){
                 <div className="mx-auto max-w-7xl px-6 lg:px-8">
                     {/* Heading */}
                     <div className="mx-auto max-w-4xl text-center">
-                        <span className="inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700">
+                        <span className="inline-flex items-center rounded-full border border-amber-200 bg-amber-50 px-4 py-2 text-sm font-semibold text-amber-400">
                             Expert Guidance
                         </span>
 
@@ -620,15 +618,15 @@ export function Maternity(){
                         ].map((tip, index) => (
                             <div
                                 key={index}
-                                className="relative flex gap-6 border-l-2 border-emerald-200 pl-8 pb-10 last:pb-0"
+                                className="relative flex gap-6 border-l-2 border-amber-200 pl-8 pb-10 last:pb-0"
                             >
                                 {/* Number */}
-                                <div className="absolute -left-5 flex h-10 w-10 items-center justify-center rounded-full border-4 border-white bg-emerald-600 text-sm font-bold text-white shadow">
+                                <div className="absolute -left-5 flex h-10 w-10 items-center justify-center rounded-full border-4 border-white bg-amber-400 text-sm font-bold text-white shadow">
                                     {String(index + 1).padStart(2, "0")}
                                 </div>
 
                                 {/* Content */}
-                                <div className="w-full rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-emerald-300 hover:shadow-md">
+                                <div className="w-full rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-amber-300 hover:shadow-md">
                                     <h3 className="text-xl font-semibold text-slate-900">
                                         {tip.title}
                                     </h3>
@@ -648,7 +646,7 @@ export function Maternity(){
                 <div className="mx-auto max-w-5xl px-6 lg:px-8">
                     {/* Heading */}
                     <div className="text-center">
-                        <span className="inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700">
+                        <span className="inline-flex items-center rounded-full border border-amber-200 bg-amber-50 px-4 py-2 text-sm font-semibold text-amber-400">
                             Frequently Asked Questions
                         </span>
 
@@ -676,7 +674,7 @@ export function Maternity(){
                                         </span>
 
                                         <ChevronDown
-                                            className={`h-5 w-5 shrink-0 text-emerald-600 transition-transform duration-300 ${isOpen ? "rotate-180" : ""
+                                            className={`h-5 w-5 shrink-0 text-amber-400 transition-transform duration-300 ${isOpen ? "rotate-180" : ""
                                                 }`}
                                         />
                                     </button>
@@ -698,21 +696,7 @@ export function Maternity(){
                         })}
                     </div>
 
-                    {/* Bottom CTA */}
-                    <div className="mt-12 rounded-3xl bg-emerald-600 p-8 text-center text-white">
-                        <h4 className="text-2xl font-bold">
-                            Still have questions?
-                        </h4>
-
-                        <p className="mt-3 text-emerald-50">
-                            Speak with our medical travel team for personalized guidance,
-                            hospital recommendations, and maternity care planning.
-                        </p>
-
-                        <button className="mt-6 rounded-xl bg-white px-8 py-3 font-semibold text-emerald-700 transition hover:bg-slate-100">
-                            Get Free Consultation →
-                        </button>
-                    </div>
+                   
                 </div>
             </section>
 

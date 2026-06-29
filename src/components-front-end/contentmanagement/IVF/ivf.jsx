@@ -75,12 +75,10 @@ export function IVF(){
                 body: JSON.stringify({
                     "specialization": "ivf",
                     "treatments": [
-                        "Liposuction",
-                        "Breast augmentation",
-                        "Tummy tuck",
-                        "Rhinoplasty",
-                        "Mommy makeover",
-                        "Facelift"
+                        "In Vitro Fertilization (IVF)",
+                        "Egg Donation & Fertility Preservation",
+                        "Advanced Reproductive Diagnostics",
+                        "Personalized Fertility Treatment Plans"
                     ]
                 })
             });
@@ -108,7 +106,7 @@ export function IVF(){
 
                 <div className="relative z-10 mx-auto max-w-7xl px-6 py-16 lg:py-10">
                     <div className="max-w-4xl">
-                        <span className="mb-6 inline-block rounded-full bg-blue-100 px-4 py-1 text-xs font-semibold uppercase tracking-wider text-blue-700">
+                        <span className="mb-6 inline-block rounded-full bg-emerald-100 px-4 py-1 text-xs font-semibold uppercase tracking-wider text-white-200">
                             Medical Tourism Excellence
                         </span>
                         <h1 className="mb-8 text-4xl font-bold leading-tight text-gray-900 md:text-6xl">
@@ -147,7 +145,7 @@ export function IVF(){
                             </div>
                             <div className="flex-grow">
                                 <div className="mb-2 flex items-center gap-2">
-                                    <span className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-600">
+                                    <span className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-600">
                                         Medical Review
                                     </span>
                                     <div className="h-px flex-grow bg-gray-200" />
