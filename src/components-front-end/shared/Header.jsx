@@ -201,40 +201,23 @@ export function HeaderFrontend() {
                       </MenuItem>
 
                       <MenuItem>
-                        <a href="#" className="block px-4 py-2 text-sm font-medium text-gray-700">
-                          Cosmetic Surgery
+                        <a href={`${slugs.find(x => x.title === "IVF")?.slug || ""}`} className="block px-4 py-2 text-sm font-medium text-gray-700">
+                          IVF
                         </a>
                       </MenuItem>
 
                       <MenuItem>
-                        <a href="#" className="block px-4 py-2 text-sm font-medium text-gray-700">
-                          Hair Transplant
+                        <a href={`${slugs.find(x => x.title === "Orthopedic")?.slug || ""}`} className="block px-4 py-2 text-sm font-medium text-gray-700">
+                          Orthopedic
+                        </a>
+                      </MenuItem>
+                      <MenuItem>
+                        <a href={`${slugs.find(x => x.title === "Maternity")?.slug || ""}`} className="block px-4 py-2 text-sm font-medium text-gray-700">
+                          Maternity
                         </a>
                       </MenuItem>
 
-                      <MenuItem>
-                        <a href="#" className="block px-4 py-2 text-sm font-medium text-gray-700">
-                          Dental Treatments
-                        </a>
-                      </MenuItem>
-
-                      <MenuItem>
-                        <a href="#" className="block px-4 py-2 text-sm font-medium text-gray-700">
-                          Fertility Treatments
-                        </a>
-                      </MenuItem>
-
-                      <MenuItem>
-                        <a href="#" className="block px-4 py-2 text-sm font-medium text-gray-700">
-                          Orthopedic Treatments
-                        </a>
-                      </MenuItem>
-
-                      <MenuItem>
-                        <a href="#" className="block px-4 py-2 text-sm font-medium text-gray-700">
-                          Cardiac Treatments
-                        </a>
-                      </MenuItem>
+                     
 
                     </div>
                   </MenuItems>

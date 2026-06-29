@@ -29,14 +29,22 @@ import ComponentCard from "@/components/common/ComponentCard";
 export function ClinicDetail({id,pckid}){
 
 
-  const [activeIndex, setActiveIndex] = useState(0);
+
 
   const [data,setData] =useState([]);
 
 
-  const toggle = (index) => {
-    setActiveIndex(activeIndex === index ? null : index);
-  };
+const [activeIndexes, setActiveIndexes] = useState(
+  data.map((_, index) => index) 
+);
+
+const toggle = (index) => {
+  setActiveIndexes((prev) =>
+    prev.includes(index)
+      ? prev.filter((i) => i !== index)
+      : [...prev, index]
+  );
+};
 
 
   const dispatch = useDispatch();
@@ -310,7 +318,48 @@ const groupSurgeryImages = (images = []) => {
                 </div>
                     
                 <ComponentCard className="mt-5">
-                  <h1><b>Package Info</b></h1>
+                  <div className="flex items-center justify-between mb-5">
+  <h1 className="text-2xl font-bold text-gray-800">
+    Package Info
+  </h1>
+
+  <button
+    onClick={() => {
+      if (activeIndexes.length === data.length) {
+        setActiveIndexes([]);
+      } else {
+        setActiveIndexes(data.map((_, index) => index));
+      }
+    }}
+    className="group inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50 px-5 py-2.5 text-sm font-semibold text-indigo-700 transition-all duration-300    hover:shadow-lg hover:shadow-indigo-200"
+  >
+    <svg
+      className="w-4 h-4 transition-transform duration-300 group-hover:scale-110"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      strokeWidth="2"
+    >
+      {activeIndexes.length === data.length ? (
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M19 9l-7 7-7-7"
+        />
+      ) : (
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M5 15l7-7 7 7"
+        />
+      )}
+    </svg>
+
+    {activeIndexes.length === data.length
+      ? "Collapse All"
+      : "Expand All"}
+  </button>
+</div>
                   <div className=" mx-auto mt-6">
                     <div className="bg-white rounded-2xl shadow-md border border-gray-200 overflow-hidden">
                       {data.map((item, index) => (
@@ -325,7 +374,7 @@ const groupSurgeryImages = (images = []) => {
                             </span>
 
                             <svg
-                              className={`w-5 h-5 transform transition-transform ${activeIndex === index ? "rotate-180" : ""
+                              className={`w-5 h-5 transform transition-transform ${activeIndexes.includes(index) ? "rotate-180" : ""
                                 }`}
                               fill="none"
                               stroke="currentColor"
@@ -338,7 +387,7 @@ const groupSurgeryImages = (images = []) => {
 
                           {/* Content */}
                           <div
-                            className={`px-5 overflow-hidden transition-all duration-300 ${activeIndex === index ? "max-h-60 pb-5" : "max-h-0"
+                            className={`px-5 overflow-hidden transition-all duration-300 ${activeIndexes.includes(index) ? "max-h-60 pb-5" : "max-h-0"
                               }`}
                           >
                             <div
@@ -366,6 +415,8 @@ const groupSurgeryImages = (images = []) => {
 
                       className="btn btn-secondary w-full mb-3 py-4 mt-2">Get A Free Quote</button>
                   </div>
+
+                 
                 </ComponentCard>
                  
 
