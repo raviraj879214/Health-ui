@@ -111,7 +111,7 @@ const onSearchFeild = (name) => {
     <div className=" bg-gray-50 flex flex-col items-center py-10 px-4">
  
       <h1 className="text-4xl font-bold text-center text-gray-800 mb-8">
-        Choose Your Specialty
+        Select the Desired Specialty
       </h1>
 
     <div className="mx-auto w-full max-w-md mb-10 relative">

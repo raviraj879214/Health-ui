@@ -110,8 +110,8 @@ export function Orthopedic() {
                             <div className="relative flex-shrink-0">
                                 <div className="h-20 w-20 overflow-hidden rounded-full border-2 border-blue-100 bg-gray-100">
                                     <img
-                                        src={`/images/thiago.png`}
-                                        alt="Dr. Thiago Lima Barreto da Serra e Silva"
+                                        src={`/images/erikokuma.png`}
+                                        alt="Dr. Erick Okuma, Anesthesiologist"
                                         className="h-full w-full object-cover"
                                     />
                                 </div>
@@ -141,13 +141,9 @@ export function Orthopedic() {
                                 </div>
                                 <p className="leading-relaxed text-gray-600">
                                     <span className="font-bold text-gray-900">
-                                        Medically reviewed by Dr. Thiago Lima Barreto da Serra e Silva
+                                        Medically reviewed by  Dr. Erick Okuma
                                     </span>
-                                    , Anesthesiologist, CRM-PR 28659 - Curitiba, Brazil. Board-Certified
-                                    Anesthesiologist, TSA Certification (Superior Title in
-                                    Anesthesiology) with the Brazilian Anesthesiology Society, with over
-                                    15 years of experience providing anesthesia services for the
-                                    simplest to the most complex surgical cases.
+                                   , Anesthesiologist, CRM-PR 36384, Curitiba, Brazil. Board-Certified Anesthesiologist with the Brazilian Society of Anesthesiology (SBA), with over 6 years of experience providing anesthesia services for both routine and highly complex surgical procedures, including transplantation, cardiac surgery, neurosurgery, oncologic surgery, and major orthopedic cases.
                                 </p>
                             </div>
                         </div>
