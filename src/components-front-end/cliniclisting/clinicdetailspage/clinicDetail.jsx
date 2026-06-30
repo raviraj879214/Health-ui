@@ -15,7 +15,7 @@ import { useEffect, useState } from "react";
 import { brazilianCurrency } from "@/lib/brazilianCurrency";
 import {formatBrazilDate} from "../../../lib/formatDate";
 import {GetFreeQuote} from "./getFreeQuote";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {createSlug} from "../../global/slug/urlconversion";
 import LocationMap from "@/googlemapscomponents/locationMap";
 import { useDispatch, useSelector } from "react-redux";
@@ -34,8 +34,8 @@ export function ClinicDetail({id}){
     { label: "Clinics", href: '/clinics' },
     { label: "Albert Einstein Israelite Hospital", href: null }, 
   ];
-
-
+  const pathname = usePathname();
+  const canonicalUrl = typeof window !== "undefined"? `${window.location.origin}${pathname}`: "";
   
 
   const item = [
@@ -193,6 +193,9 @@ const groupSurgeryImages = (images = []) => {
           <meta property="og:type" content={`${clinicdetails.ogtype}`} />
           <meta property="og:site_name" content={`${clinicdetails.ogsitename}`} />
           <meta name="publisher" content={`${clinicdetails.ogpublisher}`} />
+
+          <link rel="canonical" href={`${canonicalUrl}`} />
+
 
           <script type="application/ld+json">
             {JSON.stringify(clinicdetails.sestructure)}
