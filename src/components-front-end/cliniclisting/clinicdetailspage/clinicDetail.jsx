@@ -2,7 +2,7 @@
 
 
 import Breadcrumb from "../../global/breadcrumb";
-
+import { Helmet } from "react-helmet";
 import SwiperInit from "../../SwiperInit";
 import DoctorAccordion from "../../detail/DoctorAccordion";
 import ProductCard from "../../global/productCard";
@@ -181,6 +181,30 @@ const groupSurgeryImages = (images = []) => {
 
     return(<>
      <>
+
+       <Helmet>
+          <title>{clinicdetails.metatitle}</title>
+          <meta name="description" content={`${clinicdetails.metadescription}`}/>
+
+          <meta property="og:title" content={`${clinicdetails.ogtitle}`} />
+          <meta property="og:description" content={`${clinicdetails.ogdescription}`} />
+          <meta property="og:url" content={`${clinicdetails.ogurl}`} />
+          <meta property="og:image" content={`${clinicdetails.ogimage}`} />
+          <meta property="og:type" content={`${clinicdetails.ogtype}`} />
+          <meta property="og:site_name" content={`${clinicdetails.ogsitename}`} />
+          <meta name="publisher" content={`${clinicdetails.ogpublisher}`} />
+
+          <script type="application/ld+json">
+            {JSON.stringify(clinicdetails.sestructure)}
+          </script>
+
+      </Helmet>
+
+
+
+
+
+
         <Breadcrumb
           items={[
             { label: "Home", href: "/" },
@@ -597,5 +621,6 @@ const groupSurgeryImages = (images = []) => {
         {freequoteisopen && (<GetFreeQuote onClose={(e)=> setFreeQuoteIsOpen(e)} packages={packages} id={clinicdetails.uuid} />) }
 
     
+
     </>);
 }

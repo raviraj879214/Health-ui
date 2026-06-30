@@ -5,9 +5,6 @@ import { ClinicDetail } from "../../../../components-front-end/cliniclisting/cli
 import { ClinciDetailsSkeleton } from "@/components-front-end/cliniclisting/clinicdetailspage/clinciDetailsSkeleton";
 
 
-export const metadata = {
-  title: "Clinic Details | "  + `${process.env.NEXT_PUBLIC_PROJECT_NAME}`,
-};
 
 
 export default async function Listing({params}) {
