@@ -375,7 +375,7 @@ export function Maternity(){
                                 Costs in Brazil are significantly lower than in the US or Western
                                 Europe, not because of lower standards, but because of lower
                                 operational costs, favorable exchange rates, and a private hospital
-                                system built around personalized obstetric care. Below are average
+                                system built around personalized obstetric care. Alongside  are average
                                 ranges for the most common procedures, including what you might budget
                                 for accommodation and travel.
                             </p>

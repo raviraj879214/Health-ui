@@ -377,12 +377,13 @@ export function IVF(){
 
                             <p className="mt-6 text-lg leading-8 text-slate-600">
                                 Costs in Brazil are significantly lower than in the US or Western
-                                Europe, not because of lower standards, but because of lower
-                                operational and lab costs, favorable exchange rates, and a private
-                                fertility sector built around high patient volume. Below are average
-                                ranges for the most common services, including what you might budget
-                                for accommodation and travel.
-                            </p>
+    Europe, not because of lower standards, but because of lower
+    operational and lab costs, favorable exchange rates, and a private
+    fertility sector built around high patient volume. Alongside are
+    average ranges for the most common services, including what you might
+    budget for accommodation and travel.
+</p>
+                           
 
                             {/* Note */}
                             <div className="mt-8 rounded-2xl border border-amber-200 bg-amber-50 p-6">

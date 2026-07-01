@@ -360,7 +360,7 @@ export function Orthopedic() {
                                 Costs in Brazil are significantly lower than in the US or Western
                                 Europe, not because of lower standards, but because of lower
                                 operational costs, favorable exchange rates, and a highly competitive
-                                market with thousands of qualified surgeons. Below are average ranges
+                                market with thousands of qualified surgeons. Alongside  are average ranges
                                 for the most common procedures, including what you might budget for
                                 accommodation and travel.
                             </p>
