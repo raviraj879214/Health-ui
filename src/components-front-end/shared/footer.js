@@ -1,9 +1,36 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 
-import React, { forwardRef } from "react";
+import React, { forwardRef, useEffect, useState } from "react";
 
 const Footer = forwardRef(function Footer(props, ref) {
+
+
+
+
+    const [slugs,setSlugs] = useState([]);
+    useEffect(() => {
+      fetchSlug();
+    }, []);
+  
+  
+    const fetchSlug = async()=>{
+      debugger;
+      const res= await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/homepage-banner/get-seo-slug`,{
+        method : "Get",
+        headers :{
+          "Content-Type" : "application/json"
+        }
+      });
+  
+      if(res.ok){
+        const result= await res.json();
+        setSlugs(result.data);
+      }
+    }
+  
+
   return (
     <footer ref={ref} className="bg-text text-white">
         <div className="container">
@@ -136,7 +163,7 @@ const Footer = forwardRef(function Footer(props, ref) {
             </div>
           </div>
           <div className="py-6 border-t border-[rgba(255,255,255,0.2)] text-center flex md:flex-nowrap flex-wrap md:justify-between justify-center gap-5">
-            <p className="mb-0"><Link href="terms-condition">Terms & Conditions</Link>  |  <Link href="privacy-policy">Privacy Policy</Link></p>
+            <p className="mb-0"><Link href={`${slugs.find(x => x.title === "Terms and Condition")?.slug || ""}`}>Terms & Conditions</Link>  |  <Link href={`${slugs.find(x => x.title === "Privacy and Policy")?.slug || ""}`}>Privacy Policy</Link></p>
             <p className="mb-0 md:order-none order-last">© 2025 I Travel For Health. All rights reserved.</p>
             <ul className="p-0 m-0 list-none flex gap-2.5">
               <li>

@@ -13,6 +13,8 @@ import {Orthopedic}  from "../../../components-front-end/contentmanagement/Ortho
 import {Maternity}  from "../../../components-front-end/contentmanagement/Maternity/maternity";
 import {DentalTreatment}  from "../../../components-front-end/contentmanagement/DentalTreatment/dentalTreatment";
 import {Liposuction}  from "../../../components-front-end/contentmanagement/Liposuction/liposuction";
+import {TermsAndCondition}  from "../../../components-front-end/contentmanagement/termsprivacy/terms";
+import {PriavcyAndPolicy}  from "../../../components-front-end/contentmanagement/termsprivacy/privacy";
 
 
 
@@ -115,6 +117,16 @@ export default async function Page({ params }) {
     case "Liposuction":
       return  <Liposuction />;
 
+
+    case "Privacy and Policy":
+       return  <PriavcyAndPolicy />;
+
+     
+
+
+    case "Terms and Condition":
+       return  <TermsAndCondition />;
+     
 
 
 
