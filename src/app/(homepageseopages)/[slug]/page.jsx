@@ -14,6 +14,8 @@ import {Maternity}  from "../../../components-front-end/contentmanagement/Matern
 import {DentalTreatment}  from "../../../components-front-end/contentmanagement/DentalTreatment/dentalTreatment";
 import {Liposuction}  from "../../../components-front-end/contentmanagement/Liposuction/liposuction";
 
+
+
 async function getPageData(slug) {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/homepage-banner/seo-page-content/${slug}`,
@@ -48,6 +50,9 @@ export async function generateMetadata({ params }) {
     },
   };
 }
+
+
+
 
 export default async function Page({ params }) {
   const page = await getPageData(params.slug);
