@@ -67,15 +67,13 @@ export function DentalTreatment(){
                                 "Content-Type" : "application/json"
                             },
                             body: JSON.stringify({
-                               "specialization": "Plastic Surgery ",
-                "treatments": [
-                    "Liposuction",
-                    "Breast augmentation",
-                    "Tummy tuck",
-                    "Rhinoplasty",
-                    "Mommy makeover",
-                    "Facelift"
-                ]
+                                "specialization": "Dental Treatment",
+                                "treatments": [
+                                    "Dental Implants",
+                                    "Veneer & Cosmetic Dentistry",
+                                    "Full-Mouth Restoration",
+                                    "Crowns, Bridges & Dentures",
+                                ]
                             })
                         });
                         if(res.ok){

@@ -163,7 +163,12 @@ export function HeaderFrontend() {
             <li>
               <Menu as="div" className="relative inline-block">
                 <MenuButton className="btn btn-none inline-flex items-center justify-center gap-3">
-                  Treatments
+                 <a
+                          href={slugs.find(x => x.title === "Treatments")?.slug || ""}
+                          className="text-gray-700"
+                        >
+                          Treatment
+                        </a>
                   <span className="icon">
                     <svg
                       width="12"
@@ -194,14 +199,7 @@ export function HeaderFrontend() {
                   <MenuItems className="absolute left-0 z-50 mt-2 w-56 origin-top-left bg-white shadow-[0_0_30px_0_rgba(45,45,45,0.15)] rounded-thm focus:outline-none">
                     <div className="py-1">
 
-                      <MenuItem>
-                        <a
-                          href={slugs.find(x => x.title === "Treatments")?.slug || ""}
-                          className="block px-4 py-2 text-sm font-medium text-gray-700"
-                        >
-                          Treatment
-                        </a>
-                      </MenuItem>
+                     
 
                       <div>
                         <a
