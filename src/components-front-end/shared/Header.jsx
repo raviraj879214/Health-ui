@@ -195,10 +195,32 @@ export function HeaderFrontend() {
                     <div className="py-1">
 
                       <MenuItem>
-                        <a href={`${slugs.find(x => x.title === "Plastic Surgery")?.slug || ""}`} className="block px-4 py-2 text-sm font-medium text-gray-700">
-                          Plastic Surgery
+                        <a
+                          href={slugs.find(x => x.title === "Treatments")?.slug || ""}
+                          className="block px-4 py-2 text-sm font-medium text-gray-700"
+                        >
+                          Treatment
                         </a>
                       </MenuItem>
+
+                      <div>
+                        <a
+                          href={slugs.find(x => x.title === "Plastic Surgery")?.slug || ""}
+                          className="block px-4 py-2 text-sm font-medium text-gray-700"
+                        >
+                          Plastic Surgery
+                        </a>
+
+                        {/* Always Visible Sub Menu */}
+                        <div className="ml-4 border-l border-gray-200">
+                          <a
+                            href={slugs.find(x => x.title === "Liposuction")?.slug || ""}
+                            className="block px-4 py-2 text-sm text-gray-600 hover:text-[#2AB3B1]"
+                          >
+                            Liposuction
+                          </a>
+                        </div>
+                      </div>
 
                       <MenuItem>
                         <a href={`${slugs.find(x => x.title === "IVF")?.slug || ""}`} className="block px-4 py-2 text-sm font-medium text-gray-700">
@@ -214,6 +236,11 @@ export function HeaderFrontend() {
                       <MenuItem>
                         <a href={`${slugs.find(x => x.title === "Maternity")?.slug || ""}`} className="block px-4 py-2 text-sm font-medium text-gray-700">
                           Maternity
+                        </a>
+                      </MenuItem>
+                      <MenuItem>
+                        <a href={`${slugs.find(x => x.title === "Dental Treatment")?.slug || ""}`} className="block px-4 py-2 text-sm font-medium text-gray-700">
+                          Dental Treatment
                         </a>
                       </MenuItem>
 

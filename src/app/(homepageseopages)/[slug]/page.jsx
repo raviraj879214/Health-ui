@@ -11,6 +11,7 @@ import { PlasticSurgery } from "../../../components-front-end/contentmanagement/
 import {IVF}  from "../../../components-front-end/contentmanagement/IVF/ivf";
 import {Orthopedic}  from "../../../components-front-end/contentmanagement/Orthopedic/orthopedic";
 import {Maternity}  from "../../../components-front-end/contentmanagement/Maternity/maternity";
+import {DentalTreatment}  from "../../../components-front-end/contentmanagement/DentalTreatment/dentalTreatment";
 
 async function getPageData(slug) {
   const res = await fetch(
@@ -98,6 +99,10 @@ export default async function Page({ params }) {
 
     case "Maternity":
       return  <Maternity />;
+
+
+    case "Dental Treatment":
+      return  <DentalTreatment />;
 
 
 

@@ -6,30 +6,29 @@ import { useEffect, useState } from "react";
 
 const faqs = [
   {
-    question: "Is giving birth in Brazil safe for international patients?",
+    question: "Is dental treatment in Brazil safe for international patients?",
     answer:
-      "Yes, giving birth in Brazil can be safe for international patients when they choose experienced obstetric teams and well-referenced hospitals. One of our key roles is to carefully curate hospitals and physicians that meet the quality, safety, communication, and care standards international patients expect.",
+      "Yes, dental treatment in Brazil can be safe for international patients when they choose experienced dentists and well-referenced clinics. One of our key roles is to carefully curate clinics and specialists that meet the quality, safety, communication, and care standards international patients expect.",
   },
   {
-    question: "How long do I need to stay in Brazil before and after delivery?",
+    question: "How long do I need to stay in Brazil for dental treatment?",
     answer:
-      "Most patients arrive at least 4–6 weeks before their due date to complete final prenatal checks and settle in. After delivery, plan for at least 7–14 days in-country, depending on whether the birth is vaginal or cesarean and whether any follow-up care is needed for mother or baby. Your obstetrician will give you a specific timeline. We factor this into your planning from day one.",
+      "It depends on the procedure. Simple treatments like veneers or crowns can often be completed in 5–7 days. Implant procedures, especially full-arch restorations like All-on-4, may require an initial visit of 5–10 days, followed by a second trip 3–6 months later for final crown placement. Your dentist will give you a specific timeline. We factor this into your planning from day one.",
   },
   {
-    question: "Can I choose between a natural birth and a planned cesarean?",
+    question: "Will I need to return to Brazil for follow-up care?",
     answer:
-      "Yes, your preference matters and should be discussed with your obstetric team well in advance, based on your health, the baby's position, and any medical considerations. That said, birth is unpredictable even with a planned approach, your physician may need to adjust the plan during labor if a complication arises or the situation changes. We'll help you raise this with your hospital during consultation.",
+      "For most implant procedures, yes a second visit is typically required once the implant has fully healed to fit the permanent crown. Some clinics offer remote check-ins between visits. We'll help you understand exactly what's required before you commit.",
   },
   {
     question: "Will I be able to communicate with the clinic in English?",
     answer:
-      "Top clinics that regularly treat international patients will have English-speaking patient coordinators. We specifically work with clinics that have this in place. We also provide coordination support throughout, so you're never trying to navigate language barriers alone.",
+      "Top clinics that regularly treat international patients will have English-speaking patient coordinators. We specifically work with clinics that have this in place. We also provide coordination support throughout, so you're never navigating language barriers alone.",
   },
   {
-    question:
-      "How is “I Travel For Health” different from a regular medical tourism website?",
+    question: "How is \"I Travel For Health\" different from a regular medical tourism website?",
     answer:
-      "We are a physician-led medical tourism platform in Brazil, not just a directory. Clinics and surgeons in our network are reviewed for medical quality and patient-care standards using our own knowledge as physicians in the selection process. Any promoted listings or packages, where applicable, do not replace our clinical review process or determine medical suitability.",
+      "We are a physician-led medical tourism platform in Brazil, not just a directory. Clinics and specialists in our network are reviewed for medical quality and patient-care standards using our own knowledge as physicians in the selection process. Any promoted listings or packages, where applicable, do not replace our clinical review process or determine medical suitability.",
   },
   {
     question: "Is there a cost to use your service?",
@@ -37,57 +36,58 @@ const faqs = [
       "Our initial consultation and matching service is free. We explain any fees clearly before you commit to anything. There are no hidden charges.",
   },
   {
-    question:
-      "What if there's a complication during delivery or after I return home?",
+    question: "What if I have a complication after I return home?",
     answer:
-      "We work with hospitals that have on-site NICU access and offer post-delivery remote consultation. Before you travel, we'll make sure you understand your obstetric team's protocol for complications and what to do if you have concerns after returning. Our team also remains reachable to help you navigate any questions.",
+      "We work with clinics that offer post-treatment remote consultation. Before you travel, we'll make sure you understand your dentist's follow-up protocol and what to do if you have concerns after returning. Our team also remains reachable to help you navigate any questions.",
   },
 ];
 
 
+export function DentalTreatment(){
 
-export function Maternity(){
 
 
-    const [openIndex, setOpenIndex] = useState(0);
-    const [clinics, setClinics] = useState([]);
-    const [clinicsimage, setClinicsImage] = useState([]);
-    const [visible, setVisible] = useState(4);
 
-            
-            
-                useEffect(()=>{
-                    fetchClinic();
-                },[]);
-            
-                const fetchClinic = async()=>{
-                    const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/homepage-banner/search-clinic`,{
-                        method :"Post",
-                        headers: {
-                            "Content-Type" : "application/json"
-                        },
-                        body: JSON.stringify({
-                            "specialization": "Maternity",
-                            "treatments": [
-                                "Planned Cesarean Delivery",
-                                "Natural Childbirth",
-                                "Full Prenatal & Postnatal Care",
-                                
-                            ]
-                        })
-                    });
-                    if(res.ok){
-                        const result= await res.json();
-                        setClinics(result.clinics);
-                        setClinicsImage(result.clinicimages);
+
+      const [openIndex, setOpenIndex] = useState(0);
+        const [clinics, setClinics] = useState([]);
+        const [clinicsimage, setClinicsImage] = useState([]);
+        const [visible, setVisible] = useState(4);
+    
+                
+                
+                    useEffect(()=>{
+                        fetchClinic();
+                    },[]);
+                
+                    const fetchClinic = async()=>{
+                        const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/homepage-banner/search-clinic`,{
+                            method :"Post",
+                            headers: {
+                                "Content-Type" : "application/json"
+                            },
+                            body: JSON.stringify({
+                               "specialization": "Plastic Surgery ",
+                "treatments": [
+                    "Liposuction",
+                    "Breast augmentation",
+                    "Tummy tuck",
+                    "Rhinoplasty",
+                    "Mommy makeover",
+                    "Facelift"
+                ]
+                            })
+                        });
+                        if(res.ok){
+                            const result= await res.json();
+                            setClinics(result.clinics);
+                            setClinicsImage(result.clinicimages);
+                        }
                     }
-                }
 
 
-
-
-    return (<>
-        <main className="relative overflow-hidden">
+    return(<>
+     <main className="relative overflow-hidden">
 
             <section
                 className="relative min-h-screen"
@@ -95,12 +95,11 @@ export function Maternity(){
 
                 <div className="relative z-10 mx-auto max-w-7xl px-6 py-16 lg:py-10">
                     <div className="max-w-4xl">
-                        <span className="mb-6 inline-block rounded-full bg-amber-100 px-4 py-1 text-xs font-semibold uppercase tracking-wider text-amber-700">
-                            Medical Tourism Excellence
+                        <span className="mb-6 inline-block rounded-full bg-blue-100 px-4 py-1 text-xs font-semibold uppercase tracking-wider text-cyan-700">
+                            Dental Treatment in Brazil
                         </span>
                         <h1 className="mb-8 text-4xl font-bold leading-tight text-gray-900 md:text-6xl">
-                            Maternity & Birth Planning in Brazil: Best Clinics, Costs, Procedures and Medical Travel Support
-
+                            Dental Treatment in Brazil: Best Clinics, Costs, Procedures and Medical Travel Support
 
                         </h1>
                     </div>
@@ -111,8 +110,8 @@ export function Maternity(){
                             <div className="relative flex-shrink-0">
                                 <div className="h-20 w-20 overflow-hidden rounded-full border-2 border-blue-100 bg-gray-100">
                                     <img
-                                        src={`/images/thiago.png`}
-                                        alt="Dr. Thiago Lima Barreto da Serra e Silva"
+                                        src={`/images/erikokuma.png`}
+                                        alt="Dr. Erick Okuma, Anesthesiologist"
                                         className="h-full w-full object-cover"
                                     />
                                 </div>
@@ -135,7 +134,7 @@ export function Maternity(){
                             </div>
                             <div className="flex-grow">
                                 <div className="mb-2 flex items-center gap-2">
-                                    <span className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-600">
+                                    <span className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-600">
                                         Medical Review
                                     </span>
                                     <div className="h-px flex-grow bg-gray-200" />
@@ -155,55 +154,40 @@ export function Maternity(){
                         <div className="max-w-4xl">
                             <div className="mb-8 space-y-4">
                                 <p className="text-lg leading-relaxed text-gray-600">
-                                    Planning a birth in another country is a very personal decision. For many families, it is about feeling supported, choosing the right maternity hospital, understanding delivery options clearly, and knowing that both mother and baby will have access to safe, well-coordinated care.
-
-
-
+                                    Brazil is one of the largest dental markets in the world, with over 300,000 registered dental professionals and a regulatory system overseen by the Federal Council of Dentistry (Conselho Federal de Odontologia – CFO), which licenses dentists and sets national standards of practice. That scale, combined with a long-standing culture of cosmetic and restorative dentistry, has made Brazil a fast-growing destination for international patients: the country's dental tourism market generated an estimated $307.7 million in 2025 and is projected to grow at nearly 20% annually through 2033, among the fastest growth rates of any dental tourism market in the world.
                                 </p>
                                 <p className="text-lg leading-relaxed text-gray-600">
-                                    Brazil is considered for maternity and birth planning because of its private hospital network, experienced OB-GYN teams, neonatal care, planned delivery support, and more manageable costs compared to the US. In major cities like São Paulo, Rio de Janeiro, Curitiba, Brasília, and Porto Alegre, private maternity hospitals offer structured pregnancy care, delivery planning, anesthesia support, pediatric care, and postpartum follow-up.
-                                </p>
-                                <p className="text-lg leading-relaxed text-gray-600">
-                                    While in the US, a vaginal delivery with insurance typically runs $13,000–$15,500, and a cesarean delivery $19,000–$26,000 once facility and professional fees are combined. In Brazil's private hospitals, equivalent care is generally available for <b>$5,000–$8,000 for a vaginal birth and $6,500–$10,000 for a cesarean delivery</b>, inclusive of physician, hospital, and pediatrician fees.
+                                    The cost difference is significant. A single dental implant that runs $3,000–$6,000 in the US is typically available for $800–$2,000 in Brazil. Full-arch restorations like All-on-4, which can cost $24,000 or more in the US, are generally available for $5,000–$10,000 per arch in Brazil, often using the same internationally recognized implant brands (Straumann, Nobel Biocare, Neodent).
 
                                 </p>
-                                <p className="text-lg leading-relaxed text-gray-600">
-                                    Some families also consider Brazil because children born in the country are generally Brazilian citizens by birth. This can be part of the decision, but it should not be the only reason to plan childbirth abroad. The first priority should always be safe maternity care, the right hospital, proper newborn support, and a clear travel and recovery plan.
-
-                                </p>
-
-
                                 <p className="italic text-gray-500">
-                                    (Source: FAIR Health Cost of Giving Birth Tracker, Peterson-KFF Health System Tracker)
-
-
+                                    (Source: Grand View Research, Statista, Conselho Federal de Odontologia)
                                 </p>
                                 <p className="text-lg leading-relaxed text-gray-600">
-                                    At I Travel For Health, our physician-led team helps international families compare trusted maternity hospitals in Brazil, understand delivery options, review doctor and hospital credentials, estimate costs, and plan the birth journey with care.
-
+                                    At <b>I Travel For Health</b>, our medical team helps you compare trusted dental clinics in Brazil, review specialist credentials, understand estimated costs, and plan your treatment journey with care.
 
                                 </p>
                             </div>
-                            <button className="rounded-xl bg-amber-400 px-6 py-4 font-semibold text-white transition hover:bg-amber-400">
+                            <button className="rounded-xl bg-cyan-600 px-6 py-4 font-semibold text-white transition hover:bg-cyan-700">
                                 Get a free treatment estimate
-
                             </button>
                         </div>
                     </div>
                 </div>
             </section>
 
+
             {clinics.length > 0 && (
                 <section className="bg-white py-20">
                     <div className="mx-auto max-w-7xl px-6 lg:px-8">
 
                         <div className="mx-auto max-w-3xl text-center">
-                            <span className="inline-flex items-center rounded-full bg-amber-50 px-4 py-2 text-sm font-semibold text-amber-400 ring-1 ring-amber-200">
-                                Verified Maternity  Clinics
+                            <span className="inline-flex items-center rounded-full bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-400 ring-1 ring-blue-200">
+                                Verified Dental  Clinics
                             </span>
 
                             <h2 className="mt-6 text-4xl font-bold tracking-tight text-slate-900 md:text-5xl">
-                                Top-Rated Maternity  Surgery Clinics in Brazil
+                                Top-Rated Dental Clinics in Brazil
 
                             </h2>
 
@@ -249,7 +233,7 @@ export function Maternity(){
                                                     onClick={() => {
                                                         window.location.href = `/clinics/${item.slug}`;
                                                     }}
-                                                    className="inline-flex items-center gap-2 font-medium text-amber-400 transition-colors hover:text-amber-600">
+                                                    className="inline-flex items-center gap-2 font-medium text-blue-400 transition-colors hover:text-blue-600">
                                                     View Details
                                                     <span>→</span>
                                                 </button>
@@ -264,7 +248,7 @@ export function Maternity(){
                                 <div className="mt-10 flex justify-center">
                                     <button
                                         onClick={() => setVisible((prev) => prev + 4)}
-                                        className="rounded-full bg-amber-400 px-8 py-3 font-medium text-white shadow-md transition-all duration-300 hover:bg-amber-600 hover:shadow-lg"
+                                        className="rounded-full bg-blue-400 px-8 py-3 font-medium text-white shadow-md transition-all duration-300 hover:bg-blue-600 hover:shadow-lg"
                                     >
                                         Load More Clinics
                                     </button>
@@ -275,20 +259,20 @@ export function Maternity(){
 
 
 
-                        <div className="mt-20 overflow-hidden rounded-[32px] bg-gradient-to-r from-amber-400 to-amber-600 p-10 text-white lg:p-14">
+                        <div className="mt-20 overflow-hidden rounded-[32px] bg-gradient-to-r from-blue-400 to-blue-600 p-10 text-white lg:p-14">
                             <div className="flex flex-col items-center justify-between gap-8 lg:flex-row">
                                 <div className="max-w-3xl">
                                     <h3 className="text-3xl font-bold">
                                         Not sure which clinic is right for you?
                                     </h3>
 
-                                    <p className="mt-4 text-lg leading-8 text-amber-50">
+                                    <p className="mt-4 text-lg leading-8 text-blue-50">
                                         Tell us your treatment goal and budget. Our team will match you
                                         with the right clinic, in the right city, at the right price.
                                     </p>
                                 </div>
 
-                                <button className="rounded-2xl bg-white px-8 py-4 text-lg font-semibold text-amber-400 transition hover:scale-105">
+                                <button className="rounded-2xl bg-white px-8 py-4 text-lg font-semibold text-blue-400 transition hover:scale-105">
                                     Get My Free Match →
                                 </button>
                             </div>
@@ -299,41 +283,41 @@ export function Maternity(){
 
 
 
-            <section className="bg-slate-50 py-16">
+             <section className="bg-slate-50 py-16">
                 <div className="mx-auto max-w-7xl px-6 lg:px-8">
                     <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
                         <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
                             {/* Left */}
                             <div className="max-w-xl">
-                                <span className="inline-flex items-center rounded-full border border-amber-200 bg-amber-50 px-4 py-2 text-sm font-semibold text-amber-400">
-                                    Maternity Services
+                                <span className="inline-flex items-center rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-400">
+                                    Dental Treatments
                                 </span>
 
                                 <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">
-                                    Maternity & Birth Services in Brazil
+                                   Popular Dental Treatments in Brazil
                                 </h2>
 
                                 <p className="mt-4 text-lg leading-8 text-slate-600">
-                                    Explore maternity care provided by experienced obstetricians and
-                                    hospitals across Brazil.
+                                   
                                 </p>
                             </div>
 
                             {/* Service Buttons */}
                             <div className="flex max-w-3xl flex-wrap gap-4">
                                 {[
-                                    "Planned Cesarean Delivery",
-                                    "Natural Childbirth",
-                                    "Full Prenatal & Postnatal Care",
+                                    "Dental Implants & All-on-4/All-on-6",
+                                    "Veneers & Cosmetic Dentistry",
+                                    "Full-Mouth Restoration",
+                                    "Crowns, Bridges & Dentures",
                                 ].map((service) => (
                                     <button
                                         key={service}
-                                        className="group inline-flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-6 py-4 text-left font-medium text-slate-700 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-amber-500 hover:bg-amber-50 hover:text-amber-700 hover:shadow-md"
+                                        className="group inline-flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-6 py-4 text-left font-medium text-slate-700 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-500 hover:bg-blue-50 hover:text-blue-700 hover:shadow-md"
                                     >
-                                        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-amber-100 transition group-hover:bg-amber-400">
+                                        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-100 transition group-hover:bg-blue-400">
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
-                                                className="h-4 w-4 text-amber-400 transition group-hover:text-white"
+                                                className="h-4 w-4 text-blue-400 transition group-hover:text-white"
                                                 fill="none"
                                                 viewBox="0 0 24 24"
                                                 stroke="currentColor"
@@ -357,35 +341,30 @@ export function Maternity(){
             </section>
 
 
-
             <section className="bg-white py-20">
                 <div className="mx-auto max-w-7xl px-6 lg:px-8">
                     <div className="grid gap-14 lg:grid-cols-[1fr_520px] lg:items-start">
                         {/* Left Content */}
                         <div>
-                            <span className="inline-flex items-center rounded-full border border-amber-200 bg-amber-50 px-4 py-2 text-sm font-semibold text-amber-400">
-                                Service Pricing
+                            <span className="inline-flex items-center rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-400">
+                                Dental Pricing
                             </span>
 
                             <h2 className="mt-5 text-4xl font-bold tracking-tight text-slate-900 md:text-5xl">
-                                Maternity Care Cost in Brazil?
+                                Dental Treatment Cost in Brazil?
                             </h2>
 
                             <p className="mt-6 text-lg leading-8 text-slate-600">
-                                Costs in Brazil are significantly lower than in the US or Western
-                                Europe, not because of lower standards, but because of lower
-                                operational costs, favorable exchange rates, and a private hospital
-                                system built around personalized obstetric care. Alongside  are average
-                                ranges for the most common procedures, including what you might budget
-                                for accommodation and travel.
+                                Costs in Brazil are significantly lower than in the US, not because of lower standards, but because of lower operational costs, favorable exchange rates, and a highly competitive dental market with internationally trained specialists. Alongside are average ranges for the most common procedures, including what you might budget for accommodation and travel.
+
                             </p>
 
                             {/* Note */}
-                            <div className="mt-8 rounded-2xl border border-amber-200 bg-amber-50 p-6">
+                            <div className="mt-8 rounded-2xl border border-blue-200 bg-blue-50 p-6">
                                 <div className="flex gap-4">
-                                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-amber-100">
+                                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-100">
                                         <svg
-                                            className="h-5 w-5 text-amber-400"
+                                            className="h-5 w-5 text-blue-400"
                                             fill="none"
                                             stroke="currentColor"
                                             strokeWidth="2"
@@ -403,9 +382,7 @@ export function Maternity(){
                                         <span className="font-semibold">
                                             All figures are estimates in USD.
                                         </span>{" "}
-                                        Final pricing depends on hospital, physician, length of stay, and
-                                        any additional care required for mother or baby. We'll provide you
-                                        with a personalized quote after your free consultation.
+                                        Final pricing depends on clinic, implant brand, number of teeth involved, and whether bone grafting or a sinus lift is required. We'll provide you with a personalized quote after your free consultation
                                     </p>
                                 </div>
                             </div>
@@ -413,12 +390,12 @@ export function Maternity(){
 
                         {/* Pricing Card */}
                         <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl">
-                            <div className="bg-amber-400 px-8 py-6">
+                            <div className="bg-blue-400 px-8 py-6">
                                 <h3 className="text-2xl font-bold text-white">
                                     Estimated Service Costs
                                 </h3>
 
-                                <p className="mt-2 text-amber-100">
+                                <p className="mt-2 text-blue-100">
                                     Average private hospital pricing in Brazil
                                 </p>
                             </div>
@@ -426,20 +403,24 @@ export function Maternity(){
                             <div className="divide-y divide-slate-200">
                                 {[
                                     {
-                                        service: "Natural Childbirth (Vaginal Delivery)",
-                                        cost: "USD 5,000 – 8,000",
+                                        service: "Single Dental Implant (post + abutment + crown)",
+                                        cost: "USD 800 – 2,000",
                                     },
                                     {
-                                        service: "Planned Cesarean Delivery",
-                                        cost: "USD 6,500 – 10,000",
+                                        service: "All-on-4 Full-Arch Implants (per arch)",
+                                        cost: "USD 5,000 – 10,000",
                                     },
                                     {
-                                        service: "Full Prenatal Care Package (per trimester)",
-                                        cost: "USD 1,500 – 3,000",
+                                        service: "All-on-6 Full-Arch Implants (per arch)",
+                                        cost: "USD 4,500 – 9,750",
                                     },
                                     {
-                                        service: "Postnatal Care & Follow-up (per month)",
-                                        cost: "USD 500 – 1,200",
+                                        service: "Porcelain Veneer (per tooth)",
+                                        cost: "USD 700 – 1,100",
+                                    },
+                                    {
+                                        service: "Dental Crown (porcelain fused to metal)",
+                                        cost: "USD 400 – 700",
                                     },
                                 ].map((item) => (
                                     <div
@@ -452,7 +433,7 @@ export function Maternity(){
                                             </h4>
                                         </div>
 
-                                        <div className="shrink-0 rounded-xl bg-amber-50 px-4 py-2 text-lg font-bold text-amber-400">
+                                        <div className="shrink-0 rounded-xl bg-blue-50 px-4 py-2 text-lg font-bold text-blue-400">
                                             {item.cost}
                                         </div>
                                     </div>
@@ -460,14 +441,14 @@ export function Maternity(){
                             </div>
 
                             <div className="border-t border-slate-200 bg-slate-50 p-6">
-                                <button className="w-full rounded-xl bg-amber-400 px-6 py-4 font-semibold text-white transition hover:bg-amber-600">
+                                <button className="w-full rounded-xl bg-blue-400 px-6 py-4 font-semibold text-white transition hover:bg-blue-600">
                                     Get a Personalized Cost Estimate →
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </section>     
 
 
             <section className="bg-slate-50 py-20">
@@ -475,7 +456,7 @@ export function Maternity(){
                     <div className="grid gap-12 lg:grid-cols-[420px_1fr]">
                         {/* Left */}
                         <div>
-                            <span className="inline-flex items-center rounded-full border border-amber-200 bg-amber-50 px-4 py-2 text-sm font-semibold text-amber-400">
+                            <span className="inline-flex items-center rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-400">
                                 Travel Budget
                             </span>
 
@@ -484,22 +465,20 @@ export function Maternity(){
                             </h2>
 
                             <p className="mt-6 text-lg leading-8 text-slate-600">
-                                Besides your maternity care, it's helpful to plan for travel,
-                                accommodation, and additional support during your stay in Brazil.
+                                {/* Besides your maternity care, it's helpful to plan for travel,
+                                accommodation, and additional support during your stay in Brazil. */}
                             </p>
 
-                            <div className="mt-8 rounded-3xl border border-amber-200 bg-white p-6 shadow-sm">
+                            <div className="mt-8 rounded-3xl border border-blue-200 bg-white p-6 shadow-sm">
                                 <h3 className="text-xl font-semibold text-slate-900">
-                                    Many hospitals offer all-inclusive maternity packages
+                                    Many hospitals offer all-inclusive dental packages
                                 </h3>
 
                                 <p className="mt-3 leading-7 text-slate-600">
-                                    Many hospitals offer all-inclusive maternity packages that bundle
-                                    delivery, hospital stay, and basic newborn care. Ask us about
-                                    package options.
+                                    Many clinics offer all-inclusive dental packages that bundle treatment, accommodation, and transfers.
                                 </p>
 
-                                <button className="mt-6 rounded-xl bg-amber-400 px-6 py-3 font-semibold text-white transition hover:bg-amber-600">
+                                <button className="mt-6 rounded-xl bg-blue-400 px-6 py-3 font-semibold text-white transition hover:bg-blue-600">
                                     Ask About Package Options →
                                 </button>
                             </div>
@@ -524,16 +503,16 @@ export function Maternity(){
                                     price: "$600 – $1,200",
                                 },
                                 {
-                                    item: "Extended-stay accommodation (per week)",
+                                    item: "Accommodation (per week)",
                                     price: "$400 – $900",
                                 },
                                 {
-                                    item: "Doula support (optional)",
-                                    price: "$400 – $800",
+                                    item: "Diagnostic imaging (3D scans, X-rays)",
+                                    price: "$100 – $300",
                                 },
                                 {
-                                    item: "Newborn pediatric check-ups",
-                                    price: "$100 – $300",
+                                    item: "Follow-up visit travel (if required, 3–6 months later)",
+                                    price: "$600 – $1,200",
                                 },
                                 {
                                     item: "Airport transfers",
@@ -546,7 +525,7 @@ export function Maternity(){
                                 >
                                     <div className="flex items-center gap-4">
                                         {/* Number Badge */}
-                                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-amber-50 text-sm font-bold text-amber-400">
+                                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-50 text-sm font-bold text-blue-400">
                                             {String(index + 1).padStart(2, "0")}
                                         </div>
 
@@ -555,7 +534,7 @@ export function Maternity(){
                                         </h4>
                                     </div>
 
-                                    <div className="rounded-xl bg-amber-50 px-4 py-2 font-bold text-amber-400">
+                                    <div className="rounded-xl bg-blue-50 px-4 py-2 font-bold text-blue-400">
                                         {item.price}
                                     </div>
                                 </div>
@@ -572,27 +551,26 @@ export function Maternity(){
                         </div>
                     </div>
                 </div>
-            </section>
+            </section>              
 
 
-            <HowItWorks title={"How “I Travel For Health” Helps – Our Process"} />   
 
 
             <section className="bg-white py-20">
                 <div className="mx-auto max-w-7xl px-6 lg:px-8">
                     {/* Heading */}
                     <div className="mx-auto max-w-4xl text-center">
-                        <span className="inline-flex items-center rounded-full border border-amber-200 bg-amber-50 px-4 py-2 text-sm font-semibold text-amber-400">
+                        <span className="inline-flex items-center rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-400">
                             Expert Guidance
                         </span>
 
                         <h2 className="mt-5 text-4xl font-bold tracking-tight text-slate-900 md:text-5xl">
-                            How to Choose the Right Maternity Hospital in Brazil: Tips by Experts
+                            How to Choose the Right Dental Clinic in Brazil: Tips by Experts
+
                         </h2>
 
                         <p className="mt-6 text-lg leading-8 text-slate-600">
-                            Choosing where to give birth is one of the most important decisions
-                            you'll make. Here's what to look for:
+                            Choosing a dental clinic is an important decision, especially for complex or full-mouth procedures. Here's what to look for:
                         </p>
                     </div>
 
@@ -600,33 +578,37 @@ export function Maternity(){
                     <div className="mx-auto mt-16 max-w-5xl">
                         {[
                             {
-                                title: "Certification of the obstetric team",
-                                body: "Choose a hospital with obstetricians certified by FEBRASGO (Federação Brasileira das Associações de Ginecologia e Obstetrícia), the leading Brazilian board for OB-GYN specialists or by the relevant Brazilian specialty board for the specific procedure",
+                                title: "Certification of the dentist",
+                                body: "Choose a dentist registered with the CFO (Conselho Federal de Odontologia), Brazil's federal regulatory body for dentistry, or the relevant Brazilian specialty board for the specific procedure being treated.",
+                            },
+                            {
+                                title: "Ask about the implant brand and materials used",
+                                body: "Reputable clinics will clearly tell you which implant brand they use (e.g. Straumann, Nobel Biocare, Neodent) and the type of crown or prosthesis material involved. This matters for long-term durability.",
                             },
                             {
                                 title: "Confirm the surgical facility is accredited",
-                                body: "Clinics serving international patients should meet all the Brazilian health authorities standards, including having a certified physician, who is legally responsible for continually enforcing those standards. Accreditation by international bodies (ISO or JCI) is a strong additional signal.",
+                                body: "Clinics serving international patients should meet all Brazilian health authority standards, including having a certified physician who is legally responsible for continually enforcing those standards. Accreditation by international bodies (ISO or JCI) is a strong additional signal.",
                             },
                             {
-                                title: "Understand your birth plan and recovery support",
-                                body: "Ask how the hospital supports your birth preference (natural or cesarean), whether a doula or midwife can be present, and what postnatal follow-up is included for both mother and baby.",
+                                title: "Understand your treatment timeline",
+                                body: "Ask how many trips to Brazil are required. Many implant procedures need a second visit 3–6 months later for final crown placement, so plan your travel accordingly.",
                             },
                             {
                                 title: "Know the complete pricing",
-                                body: "Very low prices may exclude important costs such as anesthesia, NICU access, extended hospital stay, or pediatric consultations. Ask for a complete, itemized quote.",
+                                body: "Very low prices may exclude important costs such as imaging, bone grafting, temporary prosthetics, or follow-up visits. Ask for a complete, itemized quote.",
                             },
                         ].map((tip, index) => (
                             <div
                                 key={index}
-                                className="relative flex gap-6 border-l-2 border-amber-200 pl-8 pb-10 last:pb-0"
+                                className="relative flex gap-6 border-l-2 border-blue-200 pl-8 pb-10 last:pb-0"
                             >
                                 {/* Number */}
-                                <div className="absolute -left-5 flex h-10 w-10 items-center justify-center rounded-full border-4 border-white bg-amber-400 text-sm font-bold text-white shadow">
+                                <div className="absolute -left-5 flex h-10 w-10 items-center justify-center rounded-full border-4 border-white bg-blue-400 text-sm font-bold text-white shadow">
                                     {String(index + 1).padStart(2, "0")}
                                 </div>
 
                                 {/* Content */}
-                                <div className="w-full rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-amber-300 hover:shadow-md">
+                                <div className="w-full rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-blue-300 hover:shadow-md">
                                     <h3 className="text-xl font-semibold text-slate-900">
                                         {tip.title}
                                     </h3>
@@ -642,11 +624,15 @@ export function Maternity(){
             </section>
 
 
-            <section className="bg-slate-50 py-20">
+
+            <HowItWorks title={"How “I Travel For Health” Helps – Our Process"} />   
+
+
+             <section className="bg-slate-50 py-20">
                 <div className="mx-auto max-w-5xl px-6 lg:px-8">
                     {/* Heading */}
                     <div className="text-center">
-                        <span className="inline-flex items-center rounded-full border border-amber-200 bg-amber-50 px-4 py-2 text-sm font-semibold text-amber-400">
+                        <span className="inline-flex items-center rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-400">
                             Frequently Asked Questions
                         </span>
 
@@ -674,7 +660,7 @@ export function Maternity(){
                                         </span>
 
                                         <ChevronDown
-                                            className={`h-5 w-5 shrink-0 text-amber-400 transition-transform duration-300 ${isOpen ? "rotate-180" : ""
+                                            className={`h-5 w-5 shrink-0 text-blue-400 transition-transform duration-300 ${isOpen ? "rotate-180" : ""
                                                 }`}
                                         />
                                     </button>
@@ -706,8 +692,9 @@ export function Maternity(){
                     <footer className="border-t border-slate-300 bg-[#f2f4f5] py-6">
                         <div className="mx-auto max-w-7xl px-6">
                             <p className="text-center text-sm leading-7 text-slate-600">
-                                Page last updated: June,2026 | Medically reviewed by <b> Dr. Thiago Lima Barreto da Serra e Silva,</b> Anesthesiologist, CRM-PR 28659 - Curitiba, Brazil. Board-Certified Anesthesiologist
+                                
 
+                                    Page last updated: June,2026 | Medically reviewed by <b> Dr. Thiago Lima Barreto da Serra e Silva,</b> Anesthesiologist, CRM-PR 28659 - Curitiba, Brazil. Board-Certified Anesthesiologist
 
                             </p>
                         </div>
@@ -715,11 +702,14 @@ export function Maternity(){
                 </div>
 
             </section>
+           
 
 
 
 
-        </main>
 
+
+
+     </main>
     </>);
 }
