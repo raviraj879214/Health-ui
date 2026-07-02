@@ -12,6 +12,7 @@ import {IVF}  from "../../../components-front-end/contentmanagement/IVF/ivf";
 import {Orthopedic}  from "../../../components-front-end/contentmanagement/Orthopedic/orthopedic";
 import {Maternity}  from "../../../components-front-end/contentmanagement/Maternity/maternity";
 import {DentalTreatment}  from "../../../components-front-end/contentmanagement/DentalTreatment/dentalTreatment";
+import {Liposuction}  from "../../../components-front-end/contentmanagement/Liposuction/liposuction";
 
 async function getPageData(slug) {
   const res = await fetch(
@@ -52,6 +53,7 @@ export default async function Page({ params }) {
   const page = await getPageData(params.slug);
 
   const title = page?.seoPages?.title;
+  
 
   switch (title) {
     case "Treatments":
@@ -103,6 +105,10 @@ export default async function Page({ params }) {
 
     case "Dental Treatment":
       return  <DentalTreatment />;
+
+
+    case "Liposuction":
+      return  <Liposuction />;
 
 
 

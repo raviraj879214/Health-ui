@@ -235,348 +235,459 @@ export function PlasticSurgery(){
 
                    
 
-                    <div class="mb-16">
-                        <h2 class="font-title-md text-title-md text-on-surface mb-6">Popular plastic surgery procedures in Brazil</h2>
-                        <div class="flex flex-wrap gap-3">
-                            <a class="px-4 py-2 rounded-full border border-outline-variant text-body-md text-on-surface-variant hover:bg-surface-container-low transition-all" href="#">Breast augmentation and reduction</a>
-                            <a class="px-4 py-2 rounded-full border border-outline-variant text-body-md text-on-surface-variant hover:bg-surface-container-low transition-all" href="#">Liposuction and body contouring</a>
-                            <a class="px-4 py-2 rounded-full border border-outline-variant text-body-md text-on-surface-variant hover:bg-surface-container-low transition-all" href="#">Tummy tuck (abdominoplasty)</a>
-                            <a class="px-4 py-2 rounded-full border border-outline-variant text-body-md text-on-surface-variant hover:bg-surface-container-low transition-all" href="#">Facelift and eyelid surgery</a>
-                            <a class="px-4 py-2 rounded-full border border-outline-variant text-body-md text-on-surface-variant hover:bg-surface-container-low transition-all" href="#">Rhinoplasty</a>
-                        </div>
-                    </div>
-
-                    <div className="mb-16">
-                        <h2 className="mb-6 text-4xl font-bold text-slate-900 md:text-5xl">
-                            Plastic Surgery Cost in Brazil?
-                        </h2>
-
-                        <p className="mb-8 max-w-4xl text-lg leading-8 text-slate-600">
-                            Costs in Brazil are significantly lower than in the US or Western
-                            Europe, not because of lower standards, but because of lower
-                            operational costs, favorable exchange rates, and a highly
-                            competitive market with thousands of qualified surgeons. Below are
-                            average ranges for the most common procedures, including what you
-                            might budget for accommodation and travel.
-                        </p>
-
-                        <div className="mb-6 overflow-hidden rounded-xl border border-slate-200 bg-white">
-                            <div className="grid grid-cols-1">
-
-                                <div className="flex items-center justify-between border-b border-slate-200 p-4">
-                                    <span className="font-semibold text-slate-900">
-                                        Liposuction
-                                    </span>
-                                    <span className="text-lg font-semibold text-teal-700">
-                                        USD 4,250–6,000
-                                    </span>
-                                </div>
-
-                                <div className="flex items-center justify-between border-b border-slate-200 p-4">
-                                    <span className="font-semibold text-slate-900">
-                                        Breast augmentation
-                                    </span>
-                                    <span className="text-lg font-semibold text-teal-700">
-                                        From around USD 4,500
-                                    </span>
-                                </div>
-
-                                <div className="flex items-center justify-between border-b border-slate-200 p-4">
-                                    <span className="font-semibold text-slate-900">
-                                        Tummy tuck
-                                    </span>
-                                    <span className="text-lg font-semibold text-teal-700">
-                                        USD 5,000–10,000+
-                                    </span>
-                                </div>
-
-                                <div className="flex items-center justify-between border-b border-slate-200 p-4">
-                                    <span className="font-semibold text-slate-900">
-                                        Rhinoplasty
-                                    </span>
-                                    <span className="text-lg font-semibold text-teal-700">
-                                        USD 1,500–9,000+
-                                    </span>
-                                </div>
-
-                                <div className="flex items-center justify-between border-b border-slate-200 p-4">
-                                    <span className="font-semibold text-slate-900">
-                                        Mommy makeover
-                                    </span>
-                                    <span className="text-lg font-semibold text-teal-700">
-                                        USD 8,000–15,000+
-                                    </span>
-                                </div>
-
-                                <div className="flex items-center justify-between p-4">
-                                    <span className="font-semibold text-slate-900">
-                                        Facelift
-                                    </span>
-                                    <span className="text-lg font-semibold text-teal-700">
-                                        USD 2,000–12,000+
-                                    </span>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <p className="text-base italic leading-7 text-slate-500">
-                            All figures are estimates in USD. Final pricing depends on surgeon,
-                            clinic, complexity of the procedure, and city. We'll provide you
-                            with a personalized quote after your free consultation.
-                        </p>
-                    </div>                  
-
-                    <div className="mb-16">
-                        <h2 className="mb-6 text-4xl font-bold text-slate-900 md:text-5xl">
-                            What Else to Budget For
-                        </h2>
-
-
-
-                        <div className="mb-6 overflow-hidden rounded-xl border border-slate-200 bg-white">
-                            <div className="grid grid-cols-1">
-
-                                <div className="flex items-center justify-between border-b border-slate-200 p-4">
-                                    <span className="font-semibold text-slate-900">
-                                        Round-trip flights (from US)
-                                    </span>
-                                    <span className="text-lg font-semibold text-teal-700">
-                                        $600 – $1,200
-                                    </span>
-                                </div>
-
-                                <div className="flex items-center justify-between border-b border-slate-200 p-4">
-                                    <span className="font-semibold text-slate-900">
-                                        Recovery accommodation (per week)
-                                    </span>
-                                    <span className="text-lg font-semibold text-teal-700">
-                                        $400 – $900
-                                    </span>
-                                </div>
-
-                                <div className="flex items-center justify-between border-b border-slate-200 p-4">
-                                    <span className="font-semibold text-slate-900">
-                                        Pre-operative tests
-                                    </span>
-                                    <span className="text-lg font-semibold text-teal-700">
-                                        $100 – $300
-                                    </span>
-                                </div>
-
-                                <div className="flex items-center justify-between border-b border-slate-200 p-4">
-                                    <span className="font-semibold text-slate-900">
-                                        Post-op garments & medication
-                                    </span>
-                                    <span className="text-lg font-semibold text-teal-700">
-                                        $100 – $250
-                                    </span>
-                                </div>
-
-                                <div className="flex items-center justify-between p-4">
-                                    <span className="font-semibold text-slate-900">
-                                        Airport transfers
-                                    </span>
-                                    <span className="text-lg font-semibold text-teal-700">
-                                        $30 – $80
-                                    </span>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <p className="text-base italic leading-7 text-slate-500">
-                            Many clinics offer all-inclusive packages that bundle surgery, accommodation, and transfers. Ask us about package options.
-                        </p>
-                    </div>
-
-
-                    <div className="mb-16">
-                        <h2 className="mb-8 text-4xl font-bold text-slate-900 md:text-5xl">
-                            How to Choose the Right Plastic Surgeon in Brazil: Tips by Experts
-                        </h2>
-
-                        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                            {/* Card 1 */}
-                            <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-md">
-                                <div className="flex items-start gap-4">
-                                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-teal-50">
-                                             <BadgeCheck className="h-6 w-6 text-teal-700" />
-                                    </div>
-
+                    <section className="bg-slate-50 py-16">
+                        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+                            <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm lg:p-10">
+                                <div className="grid gap-8 lg:grid-cols-[380px_1fr] lg:items-center">
+                                    {/* Left */}
                                     <div>
-                                        <h4 className="mb-2 text-xl font-semibold text-slate-900">
-                                            Certification of the surgeon
-                                        </h4>
+                                        <span className="inline-flex items-center rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-700">
+                                            Popular Procedures
+                                        </span>
 
-                                        <p className="leading-7 text-slate-600">
-                                            Choose a surgeon who is board-certified by the SBCP (Sociedade Brasileira de Cirurgia Plástica) or by the relevant Brazilian specialty board for the specific procedure and body area being treated.
+                                        <h2 className="mt-5 text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">
+                                            Popular Plastic Surgery Procedures in Brazil
+                                        </h2>
+
+                                        <p className="mt-4 text-lg leading-8 text-slate-600">
+                                            Discover the most requested cosmetic and reconstructive procedures
+                                            performed by experienced plastic surgeons across Brazil.
                                         </p>
                                     </div>
-                                </div>
-                            </div>
 
-                            {/* Card 2 */}
-                            <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-md">
-                                <div className="flex items-start gap-4">
-                                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-teal-50">
-                                        <Images className="h-6 w-6 text-teal-700" />
-                                    </div>
+                                    {/* Right */}
+                                    <div className="flex flex-wrap gap-4">
+                                        {[
+                                            "Breast augmentation and reduction",
+                                            "Liposuction and body contouring",
+                                            "Tummy tuck (abdominoplasty)",
+                                            "Facelift and eyelid surgery",
+                                            "Rhinoplasty",
+                                        ].map((item) => (
+                                            <a
+                                                key={item}
+                                                href="#"
+                                                className="group inline-flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-6 py-4 text-sm font-medium text-slate-700 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-500 hover:bg-blue-50 hover:text-blue-700 hover:shadow-md"
+                                            >
+                                                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-100 transition-colors group-hover:bg-blue-600">
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        className="h-4 w-4 text-blue-700 transition group-hover:text-white"
+                                                        fill="none"
+                                                        viewBox="0 0 24 24"
+                                                        stroke="currentColor"
+                                                        strokeWidth="2"
+                                                    >
+                                                        <path
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                            d="M9 5l7 7-7 7"
+                                                        />
+                                                    </svg>
+                                                </span>
 
-                                    <div>
-                                        <h4 className="mb-2 text-xl font-semibold text-slate-900">
-                                            Ask to see before-and-after photos
-                                        </h4>
-
-                                        <p className="leading-7 text-slate-600">
-                                            A reputable surgeon will always have a portfolio. Look for cases that are similar to your own goals in terms of body type and procedure.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Card 3 */}
-                            <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-md">
-                                <div className="flex items-start gap-4">
-                                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-teal-50">
-                                        <Building2 className="h-6 w-6 text-teal-700" />
-                                    </div>
-
-                                    <div>
-                                        <h4 className="mb-2 text-xl font-semibold text-slate-900">
-                                            Confirm the surgical facility is accredited
-                                        </h4>
-
-                                        <p className="leading-7 text-slate-600">
-                                            Clinics serving international patients should meet the all the Brazilian health authorities standards, including having a certified physician, who is legally responsible for continuously enforcing those standards. Accreditation by international bodies (ISO or JCI) is a strong additional signal.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Card 4 */}
-                            <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-md">
-                                <div className="flex items-start gap-4">
-                                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-teal-50">
-                                        <HeartPulse className="h-6 w-6 text-teal-700" />
-                                    </div>
-
-                                    <div>
-                                        <h4 className="mb-2 text-xl font-semibold text-slate-900">
-                                            Understand your recovery plan
-                                        </h4>
-
-                                        <p className="leading-7 text-slate-600">
-                                            Ask how long you should stay in Brazil, when you can fly back, what follow-up is included, and how complications are handled after you return home.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Card 5 */}
-                            <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-md md:col-span-2">
-                                <div className="flex items-start gap-4">
-                                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-teal-50">
-                                            <Wallet className="h-6 w-6 text-teal-700" />
-                                    </div>
-
-                                    <div>
-                                        <h4 className="mb-2 text-xl font-semibold text-slate-900">
-                                            Know the complete pricing
-                                        </h4>
-
-                                        <p className="leading-7 text-slate-600">
-                                            Very low prices may exclude important costs such as
-                                            tests, anaesthesia, hospital stay, garments,
-                                            medication, or revision support.
-                                        </p>
+                                                <span>{item}</span>
+                                            </a>
+                                        ))}
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </section>
+
+
+
+                    <section className="bg-white py-20">
+                        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+                            <div className="grid gap-14 lg:grid-cols-[1fr_520px] lg:items-start">
+                                {/* Left */}
+                                <div>
+                                    <span className="inline-flex items-center rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-700">
+                                        Procedure Pricing
+                                    </span>
+
+                                    <h2 className="mt-5 text-4xl font-bold tracking-tight text-slate-900 md:text-5xl">
+                                        Plastic Surgery Cost in Brazil?
+                                    </h2>
+
+                                    <p className="mt-6 text-lg leading-8 text-slate-600">
+                                        Costs in Brazil are significantly lower than in the US or Western
+                                        Europe, not because of lower standards, but because of lower
+                                        operational costs, favorable exchange rates, and a highly
+                                        competitive market with thousands of qualified surgeons. Below are
+                                        average ranges for the most common procedures, including what you
+                                        might budget for accommodation and travel.
+                                    </p>
+
+                                    {/* Note */}
+                                    <div className="mt-8 rounded-2xl border border-amber-200 bg-amber-50 p-6">
+                                        <div className="flex gap-4">
+                                            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-amber-100">
+                                                <svg
+                                                    className="h-5 w-5 text-amber-600"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    strokeWidth="2"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        d="M12 9v4m0 4h.01M12 3a9 9 0 100 18 9 9 0 000-18z"
+                                                    />
+                                                </svg>
+                                            </div>
+
+                                            <p className="text-sm leading-7 text-slate-700">
+                                                <span className="font-semibold">
+                                                    All figures are estimates in USD.
+                                                </span>{" "}
+                                                Final pricing depends on surgeon, clinic, complexity of the
+                                                procedure, and city. We'll provide you with a personalized quote
+                                                after your free consultation.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Right */}
+                                <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl">
+                                    <div className="bg-blue-600 px-8 py-6">
+                                        <h3 className="text-2xl font-bold text-white">
+                                            Estimated Procedure Costs
+                                        </h3>
+
+                                        <p className="mt-2 text-blue-100">
+                                            Average private plastic surgery pricing in Brazil
+                                        </p>
+                                    </div>
+
+                                    <div className="divide-y divide-slate-200">
+                                        {[
+                                            {
+                                                procedure: "Liposuction",
+                                                cost: "USD 4,250–6,000",
+                                            },
+                                            {
+                                                procedure: "Breast augmentation",
+                                                cost: "From around USD 4,500",
+                                            },
+                                            {
+                                                procedure: "Tummy tuck",
+                                                cost: "USD 5,000–10,000+",
+                                            },
+                                            {
+                                                procedure: "Rhinoplasty",
+                                                cost: "USD 1,500–9,000+",
+                                            },
+                                            {
+                                                procedure: "Mommy makeover",
+                                                cost: "USD 8,000–15,000+",
+                                            },
+                                            {
+                                                procedure: "Facelift",
+                                                cost: "USD 2,000–12,000+",
+                                            },
+                                        ].map((item) => (
+                                            <div
+                                                key={item.procedure}
+                                                className="flex items-center justify-between gap-6 px-8 py-6 transition hover:bg-slate-50"
+                                            >
+                                                <h3 className="font-semibold text-slate-900">
+                                                    {item.procedure}
+                                                </h3>
+
+                                                <div className="shrink-0 rounded-xl bg-blue-50 px-4 py-2 text-lg font-bold text-blue-700">
+                                                    {item.cost}
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    <div className="border-t border-slate-200 bg-slate-50 p-6">
+                                        <button className="w-full rounded-xl bg-blue-600 px-6 py-4 font-semibold text-white transition hover:bg-blue-700">
+                                            Get a Personalized Cost Estimate →
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>                
+
+
+
+                    <section className="bg-slate-50 py-20">
+                        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+                            <div className="grid gap-14 lg:grid-cols-[1fr_520px] lg:items-start">
+                                {/* Left */}
+                                <div>
+                                    <span className="inline-flex items-center rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-700">
+                                        Travel Budget
+                                    </span>
+
+                                    <h2 className="mt-5 text-4xl font-bold tracking-tight text-slate-900 md:text-5xl">
+                                        What Else to Budget For
+                                    </h2>
+
+                                    <div className="mt-8 rounded-2xl border border-blue-200 bg-white p-6 shadow-sm">
+                                        <h3 className="text-xl font-semibold text-slate-900">
+                                            Planning your trip
+                                        </h3>
+
+                                        <p className="mt-4 leading-7 text-slate-600">
+                                            Many clinics offer all-inclusive packages that bundle surgery,
+                                            accommodation, and transfers. Ask us about package options.
+                                        </p>
+
+                                        <button className="mt-6 rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700">
+                                            Ask About Package Options →
+                                        </button>
+                                    </div>
+                                </div>
+
+                                {/* Right */}
+                                <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl">
+                                    {/* Header */}
+                                    <div className="grid grid-cols-[1fr_auto] items-center bg-blue-600 px-8 py-5">
+                                        <h3 className="font-semibold text-white">Item</h3>
+                                        <h3 className="font-semibold text-white">Estimated Cost</h3>
+                                    </div>
+
+                                    <div className="divide-y divide-slate-200">
+                                        {[
+                                            {
+                                                item: "Round-trip flights (from US)",
+                                                price: "$600 – $1,200",
+                                            },
+                                            {
+                                                item: "Recovery accommodation (per week)",
+                                                price: "$400 – $900",
+                                            },
+                                            {
+                                                item: "Pre-operative tests",
+                                                price: "$100 – $300",
+                                            },
+                                            {
+                                                item: "Post-op garments & medication",
+                                                price: "$100 – $250",
+                                            },
+                                            {
+                                                item: "Airport transfers",
+                                                price: "$30 – $80",
+                                            },
+                                        ].map((item, index) => (
+                                            <div
+                                                key={item.item}
+                                                className="grid grid-cols-[1fr_auto] items-center gap-6 px-8 py-6 transition hover:bg-slate-50"
+                                            >
+                                                <div className="flex items-center gap-4">
+                                                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-50 text-sm font-bold text-blue-700">
+                                                        {String(index + 1).padStart(2, "0")}
+                                                    </div>
+
+                                                    <h4 className="font-semibold text-slate-900">
+                                                        {item.item}
+                                                    </h4>
+                                                </div>
+
+                                                <div className="rounded-xl bg-blue-50 px-4 py-2 font-bold text-blue-700">
+                                                    {item.price}
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    {/* Footer */}
+                                    <div className="border-t border-slate-200 bg-slate-50 px-8 py-5">
+                                        <p className="text-sm leading-7 text-slate-600">
+                                            Many clinics offer all-inclusive packages that bundle surgery,
+                                            accommodation, and transfers. Ask us about package options.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+
+
+
+                    <section className="bg-white py-20">
+                        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+                            {/* Heading */}
+                            <div className="mx-auto max-w-4xl text-center">
+                                <span className="inline-flex items-center rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-700">
+                                    Expert Guidance
+                                </span>
+
+                                <h2 className="mt-5 text-4xl font-bold tracking-tight text-slate-900 md:text-5xl">
+                                    How to Choose the Right Plastic Surgeon in Brazil: Tips by Experts
+                                </h2>
+                            </div>
+
+                            {/* Timeline */}
+                            <div className="mx-auto mt-16 max-w-5xl">
+                                {[
+                                    {
+                                        title: "Certification of the surgeon",
+                                        body: "Choose a surgeon who is board-certified by the SBCP (Sociedade Brasileira de Cirurgia Plástica) or by the relevant Brazilian specialty board for the specific procedure and body area being treated.",
+                                    },
+                                    {
+                                        title: "Ask to see before-and-after photos",
+                                        body: "A reputable surgeon will always have a portfolio. Look for cases that are similar to your own goals in terms of body type and procedure.",
+                                    },
+                                    {
+                                        title: "Confirm the surgical facility is accredited",
+                                        body: "Clinics serving international patients should meet the all the Brazilian health authorities standards, including having a certified physician, who is legally responsible for continuously enforcing those standards. Accreditation by international bodies (ISO or JCI) is a strong additional signal.",
+                                    },
+                                    {
+                                        title: "Understand your recovery plan",
+                                        body: "Ask how long you should stay in Brazil, when you can fly back, what follow-up is included, and how complications are handled after you return home.",
+                                    },
+                                    {
+                                        title: "Know the complete pricing",
+                                        body: "Very low prices may exclude important costs such as tests, anaesthesia, hospital stay, garments, medication, or revision support.",
+                                    },
+                                ].map((item, index) => (
+                                    <div
+                                        key={index}
+                                        className="relative flex gap-6 border-l-2 border-blue-200 pl-8 pb-10 last:pb-0"
+                                    >
+                                        {/* Number */}
+                                        <div className="absolute -left-5 flex h-10 w-10 items-center justify-center rounded-full border-4 border-white bg-blue-600 text-sm font-bold text-white shadow">
+                                            {String(index + 1).padStart(2, "0")}
+                                        </div>
+
+                                        {/* Card */}
+                                        <div className="w-full rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-300 hover:shadow-lg">
+                                            <h3 className="text-xl font-semibold text-slate-900">
+                                                {item.title}
+                                            </h3>
+
+                                            <p className="mt-4 leading-8 text-slate-600">
+                                                {item.body}
+                                            </p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+
+
 
                    <HowItWorks title={"How “I Travel For Health” Helps – Our Process"} />
 
 
 
-                    <div className="mb-16">
-                        <h2 className="mb-8 text-4xl font-bold text-slate-900 md:text-5xl">
-                            Frequently Asked Questions
-                        </h2>
+                    <section className="bg-slate-50 py-20">
+                        <div className="mx-auto max-w-5xl px-6 lg:px-8">
+                            {/* Heading */}
+                            <div className="text-center">
+                                <span className="inline-flex items-center rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-700">
+                                    Frequently Asked Questions
+                                </span>
 
-                        <div className="space-y-4">
-                            <details className="group overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
-                                <summary className="flex cursor-pointer list-none items-center justify-between p-6 text-lg font-semibold text-slate-900">
-                                    Is plastic surgery in Brazil safe for international patients?
-                                    <ChevronDown className="h-5 w-5 text-slate-500 transition-transform duration-300 group-open:rotate-180" />
-                                </summary>
-                                <div className="border-t border-slate-200 p-6 text-slate-600">
-                                    Yes, it can be safe when choosing experienced doctors and accredited facilities. Brazil has some of the world's strictest medical regulations for plastic surgery.
-                                </div>
-                            </details>
+                                <h2 className="mt-5 text-4xl font-bold tracking-tight text-slate-900 md:text-5xl">
+                                    Frequently Asked Questions
+                                </h2>
 
-                            <details className="group overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
-                                <summary className="flex cursor-pointer list-none items-center justify-between p-6 text-lg font-semibold text-slate-900">
-                                    How long do I need to stay in Brazil after surgery?
-                                    <ChevronDown className="h-5 w-5 text-slate-500 transition-transform duration-300 group-open:rotate-180" />
-                                </summary>
-                                <div className="border-t border-slate-200 p-6 text-slate-600">
-                                    Depends on procedure, typically 7-10 days for minor surgeries and 14-21 days for major procedures to ensure proper initial healing before flying.
-                                </div>
-                            </details>
+                                <p className="mt-5 text-lg leading-8 text-slate-600">
+                                    Find answers to the most common questions about plastic surgery in Brazil.
+                                </p>
+                            </div>
 
-                            <details className="group overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
-                                <summary className="flex cursor-pointer list-none items-center justify-between p-6 text-lg font-semibold text-slate-900">
-                                    Can I combine multiple procedures in one trip?
-                                    <ChevronDown className="h-5 w-5 text-slate-500 transition-transform duration-300 group-open:rotate-180" />
-                                </summary>
-                                <div className="border-t border-slate-200 p-6 text-slate-600">
-                                    Yes, this is often done to reduce total recovery time and overall costs, provided the combined surgery duration and complexity are within safe limits for the patient.
-                                </div>
-                            </details>
+                            {/* FAQs */}
+                            <div className="mt-12 space-y-5">
 
-                            <details className="group overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
-                                <summary className="flex cursor-pointer list-none items-center justify-between p-6 text-lg font-semibold text-slate-900">
-                                    Will I be able to communicate with the clinic in English?
-                                    <ChevronDown className="h-5 w-5 text-slate-500 transition-transform duration-300 group-open:rotate-180" />
-                                </summary>
-                                <div className="border-t border-slate-200 p-6 text-slate-600">
-                                    Top clinics catering to international patients always have English coordinators and many surgeons have international training and are fluent in English.
-                                </div>
-                            </details>
+                                <details className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all open:shadow-md">
+                                    <summary className="flex cursor-pointer list-none items-center justify-between px-7 py-6 text-lg font-semibold text-slate-900">
+                                        Is plastic surgery in Brazil safe for international patients?
+                                        <ChevronDown className="h-5 w-5 text-blue-600 transition-transform duration-300 group-open:rotate-180" />
+                                    </summary>
+                                    <div className="border-t border-slate-100 px-7 py-6 leading-8 text-slate-600">
+                                        Yes, it can be safe when choosing experienced doctors and accredited
+                                        facilities. Brazil has some of the world's strictest medical
+                                        regulations for plastic surgery.
+                                    </div>
+                                </details>
 
-                            <details className="group overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
-                                <summary className="flex cursor-pointer list-none items-center justify-between p-6 text-lg font-semibold text-slate-900">
-                                    How is “I Travel For Health” different?
-                                    <ChevronDown className="h-5 w-5 text-slate-500 transition-transform duration-300 group-open:rotate-180" />
-                                </summary>
-                                <div className="border-t border-slate-200 p-6 text-slate-600">
-                                    We are a physician-led platform with a rigorous clinical review process. We don't just list clinics; we vet them based on medical outcomes and safety data.
-                                </div>
-                            </details>
+                                <details className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all open:shadow-md">
+                                    <summary className="flex cursor-pointer list-none items-center justify-between px-7 py-6 text-lg font-semibold text-slate-900">
+                                        How long do I need to stay in Brazil after surgery?
+                                        <ChevronDown className="h-5 w-5 text-blue-600 transition-transform duration-300 group-open:rotate-180" />
+                                    </summary>
+                                    <div className="border-t border-slate-100 px-7 py-6 leading-8 text-slate-600">
+                                        Depends on procedure, typically 7-10 days for minor surgeries and
+                                        14-21 days for major procedures to ensure proper initial healing
+                                        before flying.
+                                    </div>
+                                </details>
 
-                            <details className="group overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
-                                <summary className="flex cursor-pointer list-none items-center justify-between p-6 text-lg font-semibold text-slate-900">
-                                    Is there a cost to use your service?
-                                    <ChevronDown className="h-5 w-5 text-slate-500 transition-transform duration-300 group-open:rotate-180" />
-                                </summary>
-                                <div className="border-t border-slate-200 p-6 text-slate-600">
-                                    Initial consultation and matching with clinics is free of charge for patients. We facilitate the connection to ensure you find the right medical match.
-                                </div>
-                            </details>
+                                <details className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all open:shadow-md">
+                                    <summary className="flex cursor-pointer list-none items-center justify-between px-7 py-6 text-lg font-semibold text-slate-900">
+                                        Can I combine multiple procedures in one trip?
+                                        <ChevronDown className="h-5 w-5 text-blue-600 transition-transform duration-300 group-open:rotate-180" />
+                                    </summary>
+                                    <div className="border-t border-slate-100 px-7 py-6 leading-8 text-slate-600">
+                                        Yes, this is often done to reduce total recovery time and overall
+                                        costs, provided the combined surgery duration and complexity are
+                                        within safe limits for the patient.
+                                    </div>
+                                </details>
 
-                            <details className="group overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
-                                <summary className="flex cursor-pointer list-none items-center justify-between p-6 text-lg font-semibold text-slate-900">
-                                    What if I have a complication?
-                                    <ChevronDown className="h-5 w-5 text-slate-500 transition-transform duration-300 group-open:rotate-180" />
-                                </summary>
-                                <div className="border-t border-slate-200 p-6 text-slate-600">
-                                    Post-op remote consultation is included in our service packages. We coordinate between your local doctor and the Brazilian surgeon to ensure continuity of care.
-                                </div>
-                            </details>
+                                <details className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all open:shadow-md">
+                                    <summary className="flex cursor-pointer list-none items-center justify-between px-7 py-6 text-lg font-semibold text-slate-900">
+                                        Will I be able to communicate with the clinic in English?
+                                        <ChevronDown className="h-5 w-5 text-blue-600 transition-transform duration-300 group-open:rotate-180" />
+                                    </summary>
+                                    <div className="border-t border-slate-100 px-7 py-6 leading-8 text-slate-600">
+                                        Top clinics catering to international patients always have English
+                                        coordinators and many surgeons have international training and are
+                                        fluent in English.
+                                    </div>
+                                </details>
+
+                                <details className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all open:shadow-md">
+                                    <summary className="flex cursor-pointer list-none items-center justify-between px-7 py-6 text-lg font-semibold text-slate-900">
+                                        How is “I Travel For Health” different?
+                                        <ChevronDown className="h-5 w-5 text-blue-600 transition-transform duration-300 group-open:rotate-180" />
+                                    </summary>
+                                    <div className="border-t border-slate-100 px-7 py-6 leading-8 text-slate-600">
+                                        We are a physician-led platform with a rigorous clinical review
+                                        process. We don't just list clinics; we vet them based on medical
+                                        outcomes and safety data.
+                                    </div>
+                                </details>
+
+                                <details className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all open:shadow-md">
+                                    <summary className="flex cursor-pointer list-none items-center justify-between px-7 py-6 text-lg font-semibold text-slate-900">
+                                        Is there a cost to use your service?
+                                        <ChevronDown className="h-5 w-5 text-blue-600 transition-transform duration-300 group-open:rotate-180" />
+                                    </summary>
+                                    <div className="border-t border-slate-100 px-7 py-6 leading-8 text-slate-600">
+                                        Initial consultation and matching with clinics is free of charge for
+                                        patients. We facilitate the connection to ensure you find the right
+                                        medical match.
+                                    </div>
+                                </details>
+
+                                <details className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all open:shadow-md">
+                                    <summary className="flex cursor-pointer list-none items-center justify-between px-7 py-6 text-lg font-semibold text-slate-900">
+                                        What if I have a complication?
+                                        <ChevronDown className="h-5 w-5 text-blue-600 transition-transform duration-300 group-open:rotate-180" />
+                                    </summary>
+                                    <div className="border-t border-slate-100 px-7 py-6 leading-8 text-slate-600">
+                                        Post-op remote consultation is included in our service packages. We
+                                        coordinate between your local doctor and the Brazilian surgeon to
+                                        ensure continuity of care.
+                                    </div>
+                                </details>
+                            </div>
+
+
                         </div>
-                    </div>
+                    </section>
 
 
                      <div className="mb-16 rounded-2xl bg-[#36b2ab] px-8 py-10 md:px-16 md:py-14">
