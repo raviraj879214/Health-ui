@@ -134,7 +134,7 @@ export function BlogDetails({blog}){
                                         lg:text-lg
                                         leading-8
                                         text-gray-600
-                                        line-clamp-3
+                                        
                                     ">
                                         
                                 <div dangerouslySetInnerHTML={{ __html: blog.content }} />
