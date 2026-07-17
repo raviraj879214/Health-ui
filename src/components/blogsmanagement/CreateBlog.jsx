@@ -559,11 +559,11 @@ const removeOgImage = () => {
 
     <select
       className="w-full border px-3 py-2 rounded"
-      {...register("ogType")}
-    >
+      {...register("ogType")}>
       <option value="website">website</option>
       <option value="article">article</option>
-      <option value="blog">blog</option>
+    
+
     </select>
   </div>
 

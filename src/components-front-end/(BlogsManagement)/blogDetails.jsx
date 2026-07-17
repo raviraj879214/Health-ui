@@ -125,14 +125,20 @@ export function BlogDetails({blog}){
                                {blog.title}
                             </h1>
 
-                            <p className="
-                                max-w-3xl
-                                text-base
-                                lg:text-lg
-                                leading-8
-                                text-gray-600">
-                               <div dangerouslySetInnerHTML={{ __html: blog.content }}/>
-                            </p>
+                            
+                              
+                            <div
+                                className="
+                                        max-w-3xl
+                                        text-base
+                                        lg:text-lg
+                                        leading-8
+                                        text-gray-600
+                                        line-clamp-3
+                                    ">
+                                        
+                                <div dangerouslySetInnerHTML={{ __html: blog.content }} />
+                            </div>
                         </article>
                     </main>
 

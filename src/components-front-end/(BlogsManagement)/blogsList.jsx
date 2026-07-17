@@ -155,7 +155,7 @@ export function BlogsList()
           </h1>
 
         
-              <p className="
+              <div className="
                   max-w-3xl
                   text-base
                   lg:text-lg
@@ -164,7 +164,7 @@ export function BlogsList()
                   line-clamp-3
                   ">
                 <div dangerouslySetInnerHTML={{ __html: bloglist.content }} />
-              </p>
+              </div>
 
 
         </article>
