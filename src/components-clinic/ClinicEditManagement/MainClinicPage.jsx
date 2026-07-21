@@ -197,15 +197,15 @@ export function MainClinic({ clinicuuid }) {
         <br></br>
 
         {/* Accreditation */}
-        <div ref={accreditationRef}>
+        {/* <div ref={accreditationRef}>
           <Accreditation clinicuuid={clinicdetail.uuid} className="mt-2"></Accreditation>
-        </div>
+        </div> */}
 
         <br></br>
 
         {/* License */}
         <div ref={licenseRef}>
-          <License className="mt-2"></License>
+          <License className="mt-2" clinicuuid={clinicdetail.uuid}></License>
         </div>
 
         <br></br>

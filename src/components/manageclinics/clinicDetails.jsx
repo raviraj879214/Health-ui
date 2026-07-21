@@ -24,7 +24,7 @@ import {GoogleLocation} from "./components/googleLocation";
 import {GoogleReviewDetails} from "./components/googleReviewDetails";
 import Switch from "../form/switch/Switch";
 import {ClinicLogin} from "./clinicLogin";
-
+import {ClinicLicense} from "./components/clinciLicense";
 
 export function ClinicDetails({id}){
 
@@ -38,6 +38,8 @@ export function ClinicDetails({id}){
     };
 
     const [clinicswipe,setClinicSwipe] = useState(false);
+
+      
 
 
 
@@ -127,33 +129,15 @@ export function ClinicDetails({id}){
 
 
 
-                    <div className="grid grid-col-1">
+                    {/* <div className="grid grid-col-1">
 
                         <Accreditation id={id} />
                     
-
-
-                    </div>
+                    </div> */}
 
                     <div className="grid grid-col-1">
 
-                        <div className="flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70">
-                            <div className="flex justify-between items-center border-b border-gray-200 rounded-t-xl py-3 px-4 md:px-5 dark:border-neutral-700">
-                                <h3 className="text-lg font-bold text-gray-800 dark:text-white">
-                                    Hospital License
-                                </h3>
-                                <div className="flex items-center gap-x-1">
-
-                                </div>
-                            </div>
-                            <div className="p-4 md:p-5">
-                                <p className="mt-2 text-gray-500 dark:text-neutral-400">
-                                    With supporting text below as a natural lead-in to additional content.
-                                    
-                                </p>
-                                
-                            </div>
-                        </div>
+                        <ClinicLicense id={id} />
 
 
                     </div>

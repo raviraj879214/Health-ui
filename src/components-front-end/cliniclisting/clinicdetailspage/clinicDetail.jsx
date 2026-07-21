@@ -68,6 +68,7 @@ export function ClinicDetail({id}){
 
   const [reviews,setReviews] = useState([]);
   const[accreditation,setAccreditation] = useState([]);
+  const [licenses,setLicenses] = useState([]);
 
   const[freequoteisopen,setFreeQuoteIsOpen] = useState(false);
 
@@ -89,8 +90,7 @@ export function ClinicDetail({id}){
       setBannerImages(result.bannerimages);
       steDescription(result.description);
       setPackages(result.data.packages);
-     
-
+      setLicenses(result.data.HospitalLicense);
 
        const doctorItems = buildDoctorItems(result.data.clinicDoctors);
        setItem(doctorItems);
@@ -384,9 +384,84 @@ const groupSurgeryImages = (images = []) => {
     
                   
                   </div>
-                  {/* Doctors Listing */}
+                    {licenses.length > 0 &&(<>
+                    
+                         <div className="border-b border-border py-7.5">
+                  <div className="mb-6 flex items-center justify-between">
+                    <div>
+                      <h3 className="text-2xl font-bold text-slate-900">
+                        Clinic Licenses
+                      </h3>
+                      <p className="mt-1 text-sm text-slate-500">
+                        Official licenses and certifications for this clinic.
+                      </p>
+                    </div>
+
+                    <span className="rounded-full bg-emerald-50 px-3 py-1 text-sm font-medium text-emerald-700">
+                      {licenses?.length || 0} License{licenses?.length !== 1 ? "s" : ""}
+                    </span>
+                  </div>
+
+                  {licenses?.length > 0 ? (
+                    <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                      {licenses.map((license) => (
+                        <div
+                          key={license.id}
+                          className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-emerald-400 hover:shadow-lg"
+                        >
+                          <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
+                            <img
+                              src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=license/${license.image}`}
+                              alt="Clinic License"
+                              className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                            />
+
+                            <div className="absolute left-3 top-3 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-emerald-700 shadow">
+                              Verified
+                            </div>
+                          </div>
+
+                          <div className="space-y-3 p-5">
+
+                            <a
+                              href={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=license/${license.image}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-emerald-700"
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-4 w-4"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                strokeWidth={2}
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  d="M15 12H9m3-3v6m9-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                                />
+                              </svg>
+
+                              View Full License
+                            </a>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <></>
+                  )}
+                </div>
+
+                    </>)}
+             
     
-                  {/* Before Surgery */}
+                 
+                    
+
+
                   <div className="before-surgery border-b border-border py-7.5">
                     <h3 className="text-2xl mb-2.5 font-bold">Before and After Surgery</h3>
 
@@ -457,7 +532,7 @@ const groupSurgeryImages = (images = []) => {
                   {/* Before Surgery */}
                   
                   
-                  <div className="certifications border-b border-border py-7.5">
+                  <div className="certifications border-b border-border py-7.5 hidden">
                     <h3 className="text-2xl mb-2.5 font-bold">Hospital Accreditation / Quality Certificates</h3>
                     <div className="m-0">
                      
