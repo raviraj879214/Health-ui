@@ -108,7 +108,7 @@ export function DentalTreatment(){
                             <div className="relative flex-shrink-0">
                                 <div className="h-20 w-20 overflow-hidden rounded-full border-2 border-blue-100 bg-gray-100">
                                     <img
-                                        src={`/images/erikokuma.png`}
+                                        src={`/images/Fernanda.jpg`}
                                         alt="Dr. Erick Okuma, Anesthesiologist"
                                         className="h-full w-full object-cover"
                                     />
@@ -139,13 +139,9 @@ export function DentalTreatment(){
                                 </div>
                                 <p className="leading-relaxed text-gray-600">
                                     <span className="font-bold text-gray-900">
-                                        Medically reviewed by Dr. Thiago Lima Barreto da Serra e Silva
+                                        Medically reviewed by Dra. Fernanda Baboni, 
                                     </span>
-                                    , Anesthesiologist, CRM-PR 28659 - Curitiba, Brazil. Board-Certified
-                                    Anesthesiologist, TSA Certification (Superior Title in
-                                    Anesthesiology) with the Brazilian Anesthesiology Society, with over
-                                    15 years of experience providing anesthesia services for the
-                                    simplest to the most complex surgical cases.
+                                    , Cosmetic & Restorative Dentist, CRO-PR 18559 – Curitiba, Brazil. Dentist with a Master's degree and Specialist certification in Orthodontics, with extensive experience in cosmetic and restorative dentistry, including porcelain veneers, clear aligner therapy, and facial aesthetics (facial harmonization). Dra. Baboni is a recognized Invisalign® provider, awarded second-best treated case in Latin America and featured nine times in Invisalign's global gallery of successful cases.
                                 </p>
                             </div>
                         </div>
@@ -692,7 +688,7 @@ export function DentalTreatment(){
                             <p className="text-center text-sm leading-7 text-slate-600">
                                 
 
-                                    Page last updated: June,2026 | Medically reviewed by <b> Dr. Thiago Lima Barreto da Serra e Silva,</b> Anesthesiologist, CRM-PR 28659 - Curitiba, Brazil. Board-Certified Anesthesiologist
+                                    Page last updated: June,2026 | Medically reviewed by <b> Dra. Fernanda Baboni,</b> Cosmetic & Restorative Dentist, CRO-PR 18559 - Curitiba, Brazil. Dentist with a Master's degree and Specialist certification in Orthodontics
 
                             </p>
                         </div>

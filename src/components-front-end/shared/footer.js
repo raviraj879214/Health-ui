@@ -141,7 +141,7 @@ const Footer = forwardRef(function Footer(props, ref) {
                   </div>
                   <div className="content">
                     <p className="md:text-xl md:mb-2 mb-1">Call/What’s App</p>
-                    <p className="lg:text-[1.9rem] md:text-[1.5rem] text-[1.3rem] leading-[1.2] mb-0 font-bold break-word">+12 345 678 9000</p>
+                    <p className="lg:text-[1.9rem] md:text-[1.5rem] text-[1.3rem] leading-[1.2] mb-0 font-bold break-word">+1 (307) 435-9115</p>
                   </div>
                 </Link>
                 <Link href="#" className="flex gap-3">

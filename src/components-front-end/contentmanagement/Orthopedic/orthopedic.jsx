@@ -110,7 +110,7 @@ export function Orthopedic() {
                             <div className="relative flex-shrink-0">
                                 <div className="h-20 w-20 overflow-hidden rounded-full border-2 border-blue-100 bg-gray-100">
                                     <img
-                                        src={`/images/erikokuma.png`}
+                                        src={`/images/andre.jpg`}
                                         alt="Dr. Erick Okuma, Anesthesiologist"
                                         className="h-full w-full object-cover"
                                     />
@@ -141,9 +141,9 @@ export function Orthopedic() {
                                 </div>
                                 <p className="leading-relaxed text-gray-600">
                                     <span className="font-bold text-gray-900">
-                                        Medically reviewed by  Dr. Erick Okuma
+                                        Medically reviewed by  Dr. André Inácio, 
                                     </span>
-                                   , Anesthesiologist, CRM-PR 36384, Curitiba, Brazil. Board-Certified Anesthesiologist with the Brazilian Society of Anesthesiology (SBA), with over 6 years of experience providing anesthesia services for both routine and highly complex surgical procedures, including transplantation, cardiac surgery, neurosurgery, oncologic surgery, and major orthopedic cases.
+                                   Orthopedic Surgeon CRM-PR 24271 – Curitiba, Brazil. Board-Certified Orthopedic Surgeon (TEOT) with the Brazilian Society of Orthopedics and Traumatology (SBOT), specialized in Knee Surgery, with over 14 years of experience treating conditions ranging from ligament and cartilage injuries to advanced osteoarthritis, including robotic-assisted knee replacement surgery. Dr. Inácio also has dedicated expertise in bone metabolism and osteoporosis treatment.
                                 </p>
                             </div>
                         </div>
@@ -697,7 +697,7 @@ export function Orthopedic() {
                     <footer className="border-t border-slate-300 bg-[#f2f4f5] py-6">
                         <div className="mx-auto max-w-7xl px-6">
                             <p className="text-center text-sm leading-7 text-slate-600">
-                                Page last updated: June,2026 | Medically reviewed by<b> Dr. Thiago Lima Barreto da Serra e Silva,</b> Anesthesiologist, CRM-PR 28659 - Curitiba, Brazil. Board-Certified Anesthesiologist
+                                Page last updated: June,2026 | Medically reviewed by<b> Dr. André Inácio, Orthopedic Surgeon,</b> Orthopedic Surgeon, CRM-PR 24271 – Curitiba, Brazil. Board-Certified Orthopedic Surgeon
 
 
                             </p>

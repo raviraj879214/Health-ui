@@ -358,39 +358,23 @@ export  function AboutUs() {
           {/* Image */}
           <div className="flex justify-center">
             <img
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHLLao8dUarsHY7SUlphUzoxx25KqHaEzc0q9XzLfp7e-cqskJAyXGQ5go_YIVdWFtQbX4hB9PeoiLZR_DIkvugNptGcHfgHX-ArOsLmfF5VjteviF7SFmlxVLvxQVzCxo7SMc5FYUsnWhPodgfCj0Fxy7cUVJk0Gl5oaUg_80pHtd38mMj2v9nLnFCmjD_XBFvc5ffvV5iq8J8u_ymQEkqOAdENJ-dBVvOpPH-PaxCxSCO-8cHt5ai6graw3BlGCW86uz6elpOlQ"
+             src={`/images/bruno.jpg`}
               className="w-64 h-80 object-cover rounded-xl shadow-md border border-gray-200"
             />
           </div>
           {/* Content */}
           <div>
             <span className="text-xs bg-sky-100 text-sky-600 px-3 py-1 rounded-full">
-              Plastic Surgeon
+              Physician
             </span>
             <h3 className="text-2xl font-bold text-gray-900 mt-4">
               Dr. Bruno Clementi
             </h3>
             <p className="text-gray-500 mt-4 text-sm leading-relaxed">
-              Distinguished member of the Brazilian Society of Plastic Surgery with
-              over 15 years of surgical excellence. Known for precision and patient
-              safety.
+             Dr. Bruno Clementi, Physician, CRM-PR 27281 – Curitiba, Brazil. Physician with formal training in anesthesiology and over 4 years of dedicated anesthesia practice, covering a wide range of routine and complex surgical procedures. Dr. Clementi brings 15 years of total medical experience, including a decade in family medicine and emergency care, giving him a comprehensive perspective on perioperative patient safety. Fluent in English, with working proficiency in German and Italian, he serves as a primary point of contact for international patients.
             </p>
-            <div className="flex gap-8 mt-6 text-sm text-gray-600">
-              <div>
-                <p className="font-semibold text-gray-800">
-                  Surgical Reconstruction
-                </p>
-              </div>
-              <div>
-                <p className="font-semibold text-gray-800">Member of BSPS</p>
-              </div>
-            </div>
-            <a
-              href="#"
-              className="inline-flex items-center gap-2 text-sky-600 mt-6 text-sm font-medium"
-            >
-              Explore Full Profile →
-            </a>
+           
+           
           </div>
         </div>
         {/* Doctor 2 (reverse) */}
@@ -398,31 +382,19 @@ export  function AboutUs() {
           {/* Content */}
           <div className="md:order-1 order-2">
             <span className="text-xs bg-pink-100 text-pink-600 px-3 py-1 rounded-full">
-              Fertility Specialist
+              Anesthesiologist
             </span>
             <h3 className="text-2xl font-bold text-gray-900 mt-4">
               Dr. Erick Okuma
             </h3>
             <p className="text-gray-500 mt-4 text-sm leading-relaxed">
-              A pioneer in advanced IVF protocols and reproductive genetics,
-              delivering innovative fertility treatments worldwide.
+             Dr. Erick Okuma, Anesthesiologist, CRM-PR 36384, Curitiba, Brazil. Board-Certified Anesthesiologist with the Brazilian Society of Anesthesiology (SBA), with over 6 years of experience providing anesthesia services for both routine and highly complex surgical procedures, including transplantation, cardiac surgery, neurosurgery, oncologic surgery, and major orthopedic cases.
             </p>
             <div className="flex gap-8 mt-6 text-sm text-gray-600">
-              <div>
-                <p className="font-semibold text-gray-800">
-                  Advanced IVF Protocols
-                </p>
-              </div>
-              <div>
-                <p className="font-semibold text-gray-800">Genetic Screening</p>
-              </div>
+              
+
             </div>
-            <a
-              href="#"
-              className="inline-flex items-center gap-2 text-sky-600 mt-6 text-sm font-medium"
-            >
-              Explore Full Profile →
-            </a>
+           
           </div>
           {/* Image */}
           <div className="flex justify-center md:order-2 order-1">
@@ -444,29 +416,16 @@ export  function AboutUs() {
           {/* Content */}
           <div>
             <span className="text-xs bg-emerald-100 text-emerald-600 px-3 py-1 rounded-full">
-              Orthopedic Surgeon
+             Anesthesiologist
             </span>
             <h3 className="text-2xl font-bold text-gray-900 mt-4">
               Dr. Thiago Lima
             </h3>
             <p className="text-gray-500 mt-4 text-sm leading-relaxed">
-              Globally recognized for minimally invasive orthopedic surgery and
-              sports medicine, helping elite athletes recover faster.
+             Thiago Lima Barreto da Serra e Silva, Anesthesiologist, CRM-PR 28659 - Curitiba, Brazil. Board-Certified Anesthesiologist, TSA Certification(Superior Title in Anesthesiology) with the Brazilian Anesthesiology Society, with over 15 years of experience providing anesthesia services for the simplest to the most complex surgical cases.
             </p>
-            <div className="flex gap-8 mt-6 text-sm text-gray-600">
-              <div>
-                <p className="font-semibold text-gray-800">5,000+ Surgeries</p>
-              </div>
-              <div>
-                <p className="font-semibold text-gray-800">Sports Medicine</p>
-              </div>
-            </div>
-            <a
-              href="#"
-              className="inline-flex items-center gap-2 text-sky-600 mt-6 text-sm font-medium"
-            >
-              Explore Full Profile →
-            </a>
+            
+            
           </div>
         </div>
       </div>
