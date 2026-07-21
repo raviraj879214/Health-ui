@@ -1,6 +1,6 @@
 
 "use client"
-import { Phone, Mail, Globe, MessageCircle, Send, Router } from "lucide-react";
+import { Phone, Mail, Globe, MessageCircle, Send, Router, Trash2, Eye } from "lucide-react";
 import { useRouter } from "next/navigation";
 import ComponentCard from "@/components/common/ComponentCard";
 import { useEffect, useState } from "react";
@@ -78,7 +78,28 @@ export function ClinicListAdmin(){
 
 
 
+  const handleDelete = async (id) => {
+    debugger;
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this clinic?"
+    );
+    if (!confirmed) return;
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/manage-clinic/delete-clinic/${id}`,{
+        method : "DELETE",
+        headers : await adminHeaders(),
+      });
+      if(res.ok){
+        const result= await res.json();
 
+        window.location.reload();
+
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Failed to delete the clinic.");
+    }
+  };
     
 
 
@@ -232,12 +253,21 @@ export function ClinicListAdmin(){
                   </div>
 
 
-                  <div className="flex justify-end">
+                  <div className="flex justify-end items-center gap-2">
+                    <button
+                      onClick={() => handleDelete(item.uuid)}
+                      className="flex h-9 w-9 items-center justify-center rounded-full border border-red-200 bg-red-50 text-red-600 transition-all hover:bg-red-100 hover:text-red-700"
+                      title="Delete"
+                    >
+                      <Trash2 size={16} />
+                    </button>
+                    /
                     <button
                       onClick={() => router.push(`/admin/clinic-details/${item.uuid}`)}
-                      className="text-xs font-semibold text-heading bg-neutral-secondary-medium hover:bg-neutral-tertiary-medium px-4 py-2 rounded-base"
+                      className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-neutral-secondary-medium text-heading transition-all hover:bg-neutral-tertiary-medium"
+                      title="View Details"
                     >
-                      View Details
+                      <Eye size={16} />
                     </button>
                   </div>
 
