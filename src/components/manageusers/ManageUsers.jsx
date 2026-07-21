@@ -11,11 +11,7 @@ import { toast } from "react-toastify";
 
 
 
-export const fixTypos = (text) => {
-  if (!text) return text;
 
-  return text.replace(/\bCordinator\b/g, "Coordinator");
-};
 
 export function ManageUser() {
 
@@ -134,7 +130,7 @@ export function ManageUser() {
                 const data = await res.json();
                     const optionsd = data.roles.map((item) => ({
                             value: item.id,
-                            label: fixTypos(item.name),
+                            label: item.name,
                         }));
 
                     setoptions(optionsd);
@@ -349,7 +345,7 @@ export function ManageUser() {
                             </div>
 
 
-                            {roleid == "Cordinator" && (
+                            {roleid == "Coordinator" && (
                                  
                                  <>
                                     <div>
