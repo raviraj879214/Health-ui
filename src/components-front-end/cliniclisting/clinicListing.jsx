@@ -9,9 +9,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { setSkipRedux } from "../redux/cliniclisting/store/clinicListing";
 import ProductCardLoader from "../global/skeleton/productCardLoader";
 import {ProductCardLoaderHorizontal} from "../global/skeleton/ProductCardLoaderHorizontal";
+import { useSearchParams } from "next/navigation";
 
 
 export function ClinicListing(){
+
+    const searchParams = useSearchParams();
+    const search = searchParams.get("search");
+
 
 
     const [view, setView] = useState("grid"); // <-- default grid
@@ -77,7 +82,8 @@ export function ClinicListing(){
             treatment : selectedTreatment,
             places : selectedPlaces,
             limit : limit,
-            skip : skip
+            skip : skip,
+            search : search
         }
 
         const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/clinic-listing/get-clinic-list`,{

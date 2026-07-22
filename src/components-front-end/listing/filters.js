@@ -144,14 +144,9 @@ export default function Filters({minPrice,maxPrice}){
 
             
            
-            <div className="md:hidden! flex justify-between pb-5 border-b border-border mb-5">
-                <h4 className="h4">Filters</h4>
-                <button type="button" className="btn btn-none text-secondary!">Clear All</button>
-            </div>
-            <div className="mb-5">
-                <input type="search" name="s" placeholder="Search..." className="border border-border rounded-full px-5 py-2.5 w-full"/>
-            </div>
-            <div className="filter-by-wrap pb-10">
+            
+           
+            <div className="filter-by-wrap pb-10 mt-15">
                 <div className="border border-border rounded-thm p-5 mb-5 last:mb-0 leading-[1.2]">
                     <h5 className="text-[1.4rem] font-bold mb-5 leading-none">Specialty</h5>
                     <div className="max-h-[200px] overflow-auto">
