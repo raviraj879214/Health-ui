@@ -4,9 +4,6 @@ import { DoctorDetails } from "../../../../components-front-end/cliniclisting/do
 
 
 
-export const metadata = {
-  title: "Doctor Details | "  + `${process.env.NEXT_PUBLIC_PROJECT_NAME}`,
-};
 
 
 

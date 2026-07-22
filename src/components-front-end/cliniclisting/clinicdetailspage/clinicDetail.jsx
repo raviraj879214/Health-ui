@@ -136,13 +136,9 @@ export function ClinicDetail({id}){
     map[title].children.push({
       name: `Dr ${doctor.firstname} ${doctor.lastname}`,
       speciality: specs.join(", "), // show all
-      image: doctor.image
-        ? `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=doctors/profilepicture/${doctor.image}`
-        : "/images/doctors/default.png",
-      description: doctor.briefDescription
-        ? doctor.briefDescription.replace(/<[^>]+>/g, "")
-        : "No description available",
-        uuid:doctor.uuid
+      image: doctor.image ? `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=doctors/profilepicture/${doctor.image}` : "/images/doctors/default.png",
+      description: doctor.briefDescription ? doctor.briefDescription.replace(/<[^>]+>/g, "") : "No description available", uuid:doctor.uuid,
+      slug : doctor.slug
     });
   });
 
@@ -185,7 +181,6 @@ const groupSurgeryImages = (images = []) => {
        <Helmet>
           <title>{clinicdetails.metatitle}</title>
           <meta name="description" content={`${clinicdetails.metadescription}`}/>
-
           <meta property="og:title" content={`${clinicdetails.ogtitle}`} />
           <meta property="og:description" content={`${clinicdetails.ogdescription}`} />
           <meta property="og:url" content={`${clinicdetails.ogurl}`} />
@@ -193,14 +188,10 @@ const groupSurgeryImages = (images = []) => {
           <meta property="og:type" content={`${clinicdetails.ogtype}`} />
           <meta property="og:site_name" content={`${clinicdetails.ogsitename}`} />
           <meta name="publisher" content={`${clinicdetails.ogpublisher}`} />
-
           <link rel="canonical" href={`${canonicalUrl}`} />
-
-
           <script type="application/ld+json">
             {JSON.stringify(clinicdetails.sestructure)}
           </script>
-
       </Helmet>
 
 
@@ -379,6 +370,9 @@ const groupSurgeryImages = (images = []) => {
                   {/* Doctors Listing */}
                   <div className="doctors border-b border-border py-7.5">
                     <h3 className="text-2xl mb-2.5 font-bold">Clinic Doctors</h3>
+
+                 
+
 
                     <DoctorAccordion items={items} />
     

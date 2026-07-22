@@ -11,6 +11,7 @@ export default function DoctorAccordionItem({ doc }) {
 
   return (
     <div className="border border-border rounded-thm mb-5">
+      
       {/* HEADER */}
       <button
         type="button"
@@ -72,7 +73,7 @@ export default function DoctorAccordionItem({ doc }) {
               </div>
 
               <Link
-                href={`/doctor-info/${child.uuid}`}
+                href={`/doctor-info/${child.slug}`}
                 className="btn btn-secondary md:px-5 md:py-2 px-3 py-1.5"
               >
                 View Profile
