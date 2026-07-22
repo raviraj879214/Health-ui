@@ -46,13 +46,42 @@ export function DoctorOne({ onClose, nextStep, clinicuuid, doctoruuid }) {
   const router = useRouter();
 
 
-  const colourOptions = [
-    { value: 'Guarani', label: 'Guarani' },
-    { value: 'Ticuna', label: 'Ticuna' },
-    { value: 'Kaingang', label: 'Kaingang' },
-    { value: 'Yanomami', label: 'Yanomami' },
-    { value: 'English', label: 'English' },
-  ];
+const colourOptions = [
+  { value: 'English', label: 'English' },
+  { value: 'Portuguese', label: 'Portuguese' },
+  { value: 'Spanish', label: 'Spanish' },
+  { value: 'French', label: 'French' },
+  { value: 'German', label: 'German' },
+  { value: 'Russian', label: 'Russian' },
+  { value: 'Italian', label: 'Italian' },
+  { value: 'Dutch', label: 'Dutch' },
+  { value: 'Arabic', label: 'Arabic' },
+  { value: 'Chinese (Mandarin)', label: 'Chinese (Mandarin)' },
+  { value: 'Japanese', label: 'Japanese' },
+  { value: 'Korean', label: 'Korean' },
+  { value: 'Hindi', label: 'Hindi' },
+  { value: 'Turkish', label: 'Turkish' },
+  { value: 'Greek', label: 'Greek' },
+  { value: 'Hebrew', label: 'Hebrew' },
+  { value: 'Polish', label: 'Polish' },
+  { value: 'Ukrainian', label: 'Ukrainian' },
+  { value: 'Romanian', label: 'Romanian' },
+  { value: 'Czech', label: 'Czech' },
+  { value: 'Hungarian', label: 'Hungarian' },
+  { value: 'Swedish', label: 'Swedish' },
+  { value: 'Norwegian', label: 'Norwegian' },
+  { value: 'Danish', label: 'Danish' },
+  { value: 'Finnish', label: 'Finnish' },
+  { value: 'Thai', label: 'Thai' },
+  { value: 'Vietnamese', label: 'Vietnamese' },
+  { value: 'Indonesian', label: 'Indonesian' },
+  { value: 'Malay', label: 'Malay' },
+  { value: 'Filipino', label: 'Filipino' },
+  { value: 'Urdu', label: 'Urdu' },
+  { value: 'Persian (Farsi)', label: 'Persian (Farsi)' },
+  { value: 'Bengali', label: 'Bengali' },
+  { value: 'Tamil', label: 'Tamil' },
+];
 
   const degreeOptions = [
     { value: 'Professor', label: 'Professor' },
@@ -109,7 +138,7 @@ export function DoctorOne({ onClose, nextStep, clinicuuid, doctoruuid }) {
     formdata.append("email", data.email);
     formdata.append("dob", data.date);
 
-    formdata.append("crm",`CRM-${data.crmState} ${data.crmNumber}`);
+    formdata.append("crm",`${data.registrationType}-${data.crmState} ${data.crmNumber}`);
 
 
     formdata.append("languages", JSON.stringify(data.languages.map(l => l.value)));
@@ -180,12 +209,13 @@ export function DoctorOne({ onClose, nextStep, clinicuuid, doctoruuid }) {
 
       const crm = result.data.crm;
 
-      const match = crm.match(/^CRM-([A-Z]{2})\s*(\d+)$/);
+      const match = crm.match(/^(CRM|CRO)-([A-Z]{2})\s*(\d+)$/);
 
-      if (match) {
-        setValue("crmState", match[1]);   // SP
-        setValue("crmNumber", match[2]);  // 123456
-      }
+if (match) {
+  setValue("registrationType", match[1]); // CRM or CRO
+  setValue("crmState", match[2]);         // SP, RJ, etc.
+  setValue("crmNumber", match[3]);        // Registration number
+}
 
 
       
@@ -388,71 +418,91 @@ export function DoctorOne({ onClose, nextStep, clinicuuid, doctoruuid }) {
 
 
               <div className="col-span-12 lg:col-span-3">
-                <Label>UF</Label>
-                <select
-                  className="w-full border p-2 rounded"
-                  {...register("crmState", {
-                    required: "Please select a state",
-                  })}
-                >
-                  <option value="">Select State</option>
-                  <option value="AC">AC</option>
-                  <option value="AL">AL</option>
-                  <option value="AP">AP</option>
-                  <option value="AM">AM</option>
-                  <option value="BA">BA</option>
-                  <option value="CE">CE</option>
-                  <option value="DF">DF</option>
-                  <option value="ES">ES</option>
-                  <option value="GO">GO</option>
-                  <option value="MA">MA</option>
-                  <option value="MT">MT</option>
-                  <option value="MS">MS</option>
-                  <option value="MG">MG</option>
-                  <option value="PA">PA</option>
-                  <option value="PB">PB</option>
-                  <option value="PR">PR</option>
-                  <option value="PE">PE</option>
-                  <option value="PI">PI</option>
-                  <option value="RJ">RJ</option>
-                  <option value="RN">RN</option>
-                  <option value="RS">RS</option>
-                  <option value="RO">RO</option>
-                  <option value="RR">RR</option>
-                  <option value="SC">SC</option>
-                  <option value="SP">SP</option>
-                  <option value="SE">SE</option>
-                  <option value="TO">TO</option>
-                </select>
+  <Label>UF</Label>
+  <select
+    className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2.5 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 outline-none"
+    {...register("crmState", {
+      required: "Please select a state",
+    })}
+  >
+    <option value="">Select State</option>
+    <option value="AC">AC</option>
+    <option value="AL">AL</option>
+    <option value="AP">AP</option>
+    <option value="AM">AM</option>
+    <option value="BA">BA</option>
+    <option value="CE">CE</option>
+    <option value="DF">DF</option>
+    <option value="ES">ES</option>
+    <option value="GO">GO</option>
+    <option value="MA">MA</option>
+    <option value="MT">MT</option>
+    <option value="MS">MS</option>
+    <option value="MG">MG</option>
+    <option value="PA">PA</option>
+    <option value="PB">PB</option>
+    <option value="PR">PR</option>
+    <option value="PE">PE</option>
+    <option value="PI">PI</option>
+    <option value="RJ">RJ</option>
+    <option value="RN">RN</option>
+    <option value="RS">RS</option>
+    <option value="RO">RO</option>
+    <option value="RR">RR</option>
+    <option value="SC">SC</option>
+    <option value="SP">SP</option>
+    <option value="SE">SE</option>
+    <option value="TO">TO</option>
+  </select>
 
-                {errors.crmState && (
-                  <p className="text-sm text-red-400">
-                    {errors.crmState.message}
-                  </p>
-                )}
-              </div>
+  {errors.crmState && (
+    <p className="mt-1 text-sm text-red-500">
+      {errors.crmState.message}
+    </p>
+  )}
+</div>
 
-              <div className="col-span-12 lg:col-span-3">
-                <Label>CRM Number</Label>
-                <input
-                  type="text"
-                  className="w-full border p-2 rounded"
-                  placeholder="123456"
-                  {...register("crmNumber", {
-                    required: "Please enter CRM number",
-                    pattern: {
-                      value: /^\d{1,6}$/,
-                      message: "CRM number must contain up to 6 digits",
-                    },
-                  })}
-                />
-                <p className="text-green-400">{getValues("crm")}</p>
-                {errors.crmNumber && (
-                  <p className="text-sm text-red-400">
-                    {errors.crmNumber.message}
-                  </p>
-                )}
-              </div>
+<div className="col-span-12 lg:col-span-3">
+  <Label>CRM or CRO?</Label>
+  <select
+    className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2.5 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 outline-none"
+    {...register("registrationType", {
+      required: "Please select CRM or CRO",
+    })}
+  >
+    <option value="">Select Type</option>
+    <option value="CRM">CRM</option>
+    <option value="CRO">CRO</option>
+  </select>
+
+  {errors.registrationType && (
+    <p className="mt-1 text-sm text-red-500">
+      {errors.registrationType.message}
+    </p>
+  )}
+</div>
+
+<div className="col-span-12 lg:col-span-3">
+  <Label>Number</Label>
+  <input
+    type="text"
+    className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2.5 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 outline-none"
+    placeholder="123456"
+    {...register("crmNumber", {
+      required: "Please enter the registration number",
+      pattern: {
+        value: /^\d{1,6}$/,
+        message: "Number must contain up to 6 digits",
+      },
+    })}
+  />
+
+  {errors.crmNumber && (
+    <p className="mt-1 text-sm text-red-500">
+      {errors.crmNumber.message}
+    </p>
+  )}
+</div>
 
              
 

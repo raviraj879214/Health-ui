@@ -57,11 +57,24 @@ export function AddSurgeryImage({sendData,clinicuuid}) {
        debugger;
        const result = await res.json();
        console.log("fetchClinicDoctors",result);
-        const options = result.data.map(item => ({
-            value: item.uuid,
-            label: 'Dr. ' + item.firstname + ' ' + item.lastname
-          }));
+
+
+       const options = [
+  {
+    value: "",
+    label: "Please select doctor",
+  },
+  ...result.data.map((item) => ({
+    value: item.uuid,
+    label: `Dr. ${item.firstname} ${item.lastname}`,
+  })),
+];
+
+
+
         setDoctorsOptions(options);
+
+        
     }
   }
 
@@ -76,10 +89,16 @@ export function AddSurgeryImage({sendData,clinicuuid}) {
        debugger;
        const result = await res.json();
        
-        const options = result.data.map(item => ({
-            value: item.id,
-            label: item.title
-          }));
+      const options = [
+        {
+          value: "",
+          label: "Please select package",
+        },
+        ...result.data.map((item) => ({
+          value: item.id,
+          label: item.title,
+        })),
+      ];
         setPackageOptions(options);
     }
   }
@@ -246,7 +265,7 @@ export function AddSurgeryImage({sendData,clinicuuid}) {
 
 
                     {!degree && (
-                      <p className="text-sm text-red-400 mt-1">Please select a degree</p>
+                      <p className="text-sm text-red-400 mt-1">Please select a treatment</p>
                     )}
 
                   </div>

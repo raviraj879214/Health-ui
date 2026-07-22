@@ -57,7 +57,13 @@ export  function StepOne() {
         if(res.ok){
           debugger;
             const result = await res.json();
-            
+
+
+            if(result.status == 400){
+
+                setError("email", {type: "manual",message: result.message});
+                setButton(false);
+            }
             if(result.status == 404){
                 setError("email", {type: "manual",message: "Email already exists"});
                 setButton(false);
@@ -233,8 +239,11 @@ const [otpDigits, setOtpDigits] = useState(["", "", "", ""]);
                       placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     {...register("email", {
                       required: "Please enter your email address",
+                      pattern: {
+                        value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                        message: "Please enter a valid email address",
+                      },
                     })}/>
-
 
 
 

@@ -166,17 +166,28 @@ export function ClinicProfile() {
 
 
                 <div className="flex flex-col">
-                <label className="mb-1 font-medium text-gray-700">Telegram User ID or Number (optional)</label>
-                <input
-                    type="text"
-                    placeholder="Enter Telegram"
-                    className=""
-                    
-                   
-                    {...register("telegramnumber")}
-                />
-              
-                </div>
+  <label className="mb-1 font-medium text-gray-700">
+    Telegram Username (optional)
+  </label>
+
+  <input
+    type="text"
+    placeholder="Enter Telegram username"
+    {...register("telegramnumber", {
+      pattern: {
+        value: /^[a-zA-Z][a-zA-Z0-9_]{3,30}[a-zA-Z0-9]$/,
+        message:
+          "Enter a valid Telegram username (5-32 characters, starts with a letter, only letters, numbers, and underscores).",
+      },
+    })}
+  />
+
+  {errors.telegramnumber && (
+    <p className="mt-1 text-sm text-red-500">
+      {errors.telegramnumber.message}
+    </p>
+  )}
+</div>
 
                 <div className="flex flex-col">
                     
