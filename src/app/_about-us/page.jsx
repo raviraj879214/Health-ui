@@ -9,6 +9,7 @@ async function getPageData() {
     {
       cache: "no-store",
     }
+    
   );
 
   if (!res.ok) {
