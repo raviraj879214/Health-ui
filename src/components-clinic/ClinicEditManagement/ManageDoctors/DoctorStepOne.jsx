@@ -90,6 +90,7 @@ const colourOptions = [
     { value: 'Health professional', label: 'Health professional' },
     { value: 'Medical scientist', label: 'Medical scientist' },
     { value: 'Healthcare assistant', label: 'Healthcare assistant' },
+    { value: 'Dentist', label: 'Dentist' },
   ];
 
 

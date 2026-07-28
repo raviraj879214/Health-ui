@@ -63,7 +63,11 @@ export function ClinicDetail({id}){
   const[bannerimages,setBannerImages] = useState([]);
   const[description,steDescription] = useState({});
   const[packages,setPackages] = useState([]);
+
   const[doctors,setDoctors] = useState([]);
+    const [treatments,setTreatments] = useState([]);
+
+
   const[surgeryimages,setSurgeryImages] = useState([]);
 
   const [reviews,setReviews] = useState([]);
@@ -97,6 +101,9 @@ export function ClinicDetail({id}){
 
        const surgeryimagegroup = groupSurgeryImages(result.surgeryimages);
       setSurgeryImages(surgeryimagegroup);
+
+      setDoctors(result.doctor);
+      setTreatments(result.treatments);
 
       setReviews(result.data.googleReviews);
       setAccreditation(result.accreditaions);
@@ -461,57 +468,115 @@ const groupSurgeryImages = (images = []) => {
 
                     <div className="swiper before-surgery-slider pagination-secondary">
                       <div className="swiper-wrapper">
-                        {surgeryimages.map((item) => (
-  <div key={item.surgeryId} className="swiper-slide">
-    <div className="grid grid-cols-2 md:gap-7.5 gap-5">
-      
-      {/* BEFORE IMAGE */}
-      <div>
-        <div className="relative w-full pb-[80%] overflow-hidden rounded-thm">
-          {item.before ? (
-            <img
-              src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=surgery/beforeandafter/${item.before.imageUrl}`}
-              alt="Before"
-              width={370}
-              height={270}
-              className="absolute top-0 left-0 w-full h-full object-cover"
-            />
-          ) : (
-            <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-gray-100 text-gray-500">
-              No Image
-            </div>
-          )}
-          <span className="inline-block absolute bottom-0 left-1/2 -translate-x-1/2 bg-text text-white py-2 px-3 leading-none rounded-t-[4px] font-bold">
-            Before
-          </span>
-        </div>
-      </div>
+                      {surgeryimages.map((item) => {
 
-      {/* AFTER IMAGE */}
-      <div>
-        <div className="relative w-full pb-[80%] overflow-hidden rounded-thm">
-          {item.after ? (
-            <img
-              src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=surgery/beforeandafter/${item.after.imageUrl}`}
-              alt="After"
-              width={370}
-              height={270}
-              className="absolute top-0 left-0 w-full h-full object-cover"
-            />
-          ) : (
-            <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-gray-100 text-gray-500">
-              No Image
-            </div>
-          )}
-          <span className="inline-block absolute bottom-0 left-1/2 -translate-x-1/2 bg-text text-white py-2 px-3 leading-none rounded-t-[4px] font-bold">
-            After
-          </span>
-        </div>
-      </div>
+                       const doctor = doctors.find(x => x.uuid === item.before.doctorUuid);
+                       const treatment = treatments.find(x=>x.id === item.before.treatmentid);
 
-    </div>
+                        return(
+                          <div key={item.surgeryId} className="swiper-slide">
+                           <div className="mb-6 flex justify-center">
+  <div className="inline-flex items-center rounded-full border border-slate-200 bg-white px-5 py-2 shadow-sm">
+    <span className="text-sm font-semibold uppercase tracking-wider text-slate-500">
+      Treatment
+    </span>
+    <span className="mx-3 h-4 w-px bg-slate-300"></span>
+    <h4 className="text-base font-bold text-slate-900">
+      {treatment?.name}
+    </h4>
   </div>
-))}
+</div>
+
+                            <div className="grid grid-cols-2 md:gap-7.5 gap-5">
+                                 
+                              {/* BEFORE IMAGE */}
+                              <div>
+                                <div className="relative w-full pb-[80%] overflow-hidden rounded-thm">
+                                  {item.before ? (
+                                    <img
+                                      src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=surgery/beforeandafter/${item.before.imageUrl}`}
+                                      alt="Before"
+                                      width={370}
+                                      height={270}
+                                      className="absolute top-0 left-0 w-full h-full object-cover"
+                                    />
+                                  ) : (
+                                    <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-gray-100 text-gray-500">
+                                      No Image
+                                    </div>
+                                  )}
+                                  <span className="inline-block absolute bottom-0 left-1/2 -translate-x-1/2 bg-text text-white py-2 px-3 leading-none rounded-t-[4px] font-bold">
+                                    Before 
+                                  </span>
+                                </div>
+                              </div>
+
+                              {/* AFTER IMAGE */}
+                              <div>
+                                <div className="relative w-full pb-[80%] overflow-hidden rounded-thm">
+                                  {item.after ? (
+                                    <img
+                                      src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=surgery/beforeandafter/${item.after.imageUrl}`}
+                                      alt="After"
+                                      width={370}
+                                      height={270}
+                                      className="absolute top-0 left-0 w-full h-full object-cover"
+                                    />
+                                  ) : (
+                                    <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-gray-100 text-gray-500">
+                                      No Image
+                                    </div>
+                                  )}
+                                  <span className="inline-block absolute bottom-0 left-1/2 -translate-x-1/2 bg-text text-white py-2 px-3 leading-none rounded-t-[4px] font-bold">
+                                    After
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+
+                                   
+                            {doctor && (<>
+                              <div className="mt-4 flex justify-center">
+                                <div className="flex items-center gap-3 bg-white/90 backdrop-blur-md px-4 py-2 rounded-full border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300">
+
+                                  {/* Doctor Image */}
+                                  <div className="relative">
+                                    <img
+                                      src={
+                                        doctor?.doctors?.image
+                                          ? `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=doctors/profilepicture/${doctor.doctors.image}`
+                                          : `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=doctors/profilepicture/35f1363338fc4a6ec2350c5780bfed1f.webp`
+                                      }
+                                      alt="Doctor"
+                                      className="w-9 h-9 rounded-full object-cover ring-2 ring-white"
+                                    />
+
+                                  </div>
+
+                                  {/* Doctor Info */}
+                                  <div className="text-sm leading-tight">
+                                    <p className="font-semibold text-gray-800">
+                                      Dr. {doctor?.doctors?.firstname || ""} {doctor?.doctors?.lastname || ""}
+                                    </p>
+                                    <p className="text-gray-500 text-xs">
+                                      {doctor?.doctors?.degree || "Specialist"}
+                                    </p>
+                                  </div>
+
+                                  <div className="h-6 w-px bg-gray-200 mx-1"></div>
+
+                                  <span className="text-xs font-medium text-text whitespace-nowrap">
+                                    Handled by Expert {item.doctorUuid}
+                                  </span>
+                                </div>
+                              </div>
+                            </>)}
+                            
+                          </div>
+                        )
+                        
+                        
+                        })}
 
                         
 
