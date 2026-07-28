@@ -49,9 +49,9 @@ export async function generateMetadata() {
 export default async function Page() {
 
   const promoteCardone = {
-    title: "Do You Running a Clinic?",
+    title: "Do You Run a Clinic?",
     description:
-      "It is a long established fact that a reader will be distracted by the readable content.",
+      " ",
     buttonText: "Become A Partner",
     buttonLink: "/register",
     image: "/images/promote-1.png",
@@ -81,6 +81,7 @@ export default async function Page() {
 
         <PopularClinics />
 
+
         <HowItWorks />
 
         <PromoteCard data={promoteCardone} />
@@ -91,7 +92,7 @@ export default async function Page() {
 
         <FAQ defaultOpen={1} />
 
-        <PromoteCard reverse={true} data={promoteCardTwo} />
+        {/* <PromoteCard reverse={true} data={promoteCardTwo} /> */}
 
         <FreeQuote />
       </Suspense>
