@@ -260,57 +260,23 @@ export function GpsInsurance() {
             border
             border-slate-200
             dark:border-slate-800
-            p-6 md:p-8
+            p-4 md:p-6
             shadow-sm
           ">
 
-            <div className="space-y-6">
-
-              <p className="
-                text-lg
-                leading-8
-                text-slate-700
-                dark:text-slate-300
-              ">
-                Once you have the web-link live on your site, please send us the URL address to the link so we can review the information.
-              </p>
-
-
-              <p className="
-                text-lg
-                leading-8
-                text-slate-700
-                dark:text-slate-300
-              ">
-                Please do not publish any documents online.  We are constantly enhancing and changing benefits, so I would suggest you refer people to our website for the most up to date information. Please feel free to test a few applications to learn how the process works.
-              </p>
-
-
-              <p className="
-                text-lg
-                leading-8
-                text-slate-700
-                dark:text-slate-300
-              ">
-                The FAQ page of our website is also very helpful to publish.
-              </p>
-
-
-              <a
-                href="https://www.medicaltourisminsurance.com/travel-insurance-questions"
-                target="_blank"
-                className="
-                  inline-block
-                  font-semibold
-                  text-blue-700
-                  dark:text-blue-400
-                  underline
-                "
-              >
-                https://www.medicaltourisminsurance.com/travel-insurance-questions
-              </a>
-
-            </div>
+         <div className="space-y-6">
+  <p className="text-lg leading-8 text-slate-700 dark:text-slate-300">
+    <span className="font-semibold">FAQ:</span>{" "}
+    <a
+      href="https://www.medicaltourisminsurance.com/travel-insurance-questions"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-blue-700 dark:text-blue-400 underline hover:text-blue-800"
+    >
+      https://www.medicaltourisminsurance.com/travel-insurance-questions
+    </a>
+  </p>
+</div>
 
           </div>
 
