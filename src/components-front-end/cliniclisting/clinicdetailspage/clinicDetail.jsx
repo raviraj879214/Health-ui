@@ -65,6 +65,7 @@ export function ClinicDetail({id}){
   const[packages,setPackages] = useState([]);
 
   const[doctors,setDoctors] = useState([]);
+
     const [treatments,setTreatments] = useState([]);
 
 
@@ -93,7 +94,7 @@ export function ClinicDetail({id}){
       setClinicDetails(result.data);
       setBannerImages(result.bannerimages);
       steDescription(result.description);
-      setPackages(result.data.packages);
+
       setLicenses(result.data.HospitalLicense);
 
        const doctorItems = buildDoctorItems(result.data.clinicDoctors);
@@ -104,6 +105,8 @@ export function ClinicDetail({id}){
 
       setDoctors(result.doctor);
       setTreatments(result.treatments);
+
+      setPackages(result.data.packages);
 
       setReviews(result.data.googleReviews);
       setAccreditation(result.accreditaions);
@@ -475,17 +478,17 @@ const groupSurgeryImages = (images = []) => {
 
                         return(
                           <div key={item.surgeryId} className="swiper-slide">
-                           <div className="mb-6 flex justify-center">
-  <div className="inline-flex items-center rounded-full border border-slate-200 bg-white px-5 py-2 shadow-sm">
-    <span className="text-sm font-semibold uppercase tracking-wider text-slate-500">
-      Treatment
-    </span>
-    <span className="mx-3 h-4 w-px bg-slate-300"></span>
-    <h4 className="text-base font-bold text-slate-900">
-      {treatment?.name}
-    </h4>
-  </div>
-</div>
+                            <div className="mb-6 flex justify-center">
+                              <div className="inline-flex items-center rounded-full border border-slate-200 bg-white px-5 py-2 shadow-sm">
+                                <span className="text-sm font-semibold uppercase tracking-wider text-slate-500">
+                                  Treatment
+                                </span>
+                                <span className="mx-3 h-4 w-px bg-slate-300"></span>
+                                <h4 className="text-base font-bold text-slate-900">
+                                  {treatment?.name}
+                                </h4>
+                              </div>
+                            </div>
 
                             <div className="grid grid-cols-2 md:gap-7.5 gap-5">
                                  
@@ -512,6 +515,7 @@ const groupSurgeryImages = (images = []) => {
                               </div>
 
                               {/* AFTER IMAGE */}
+                              
                               <div>
                                 <div className="relative w-full pb-[80%] overflow-hidden rounded-thm">
                                   {item.after ? (
@@ -534,7 +538,7 @@ const groupSurgeryImages = (images = []) => {
                               </div>
                             </div>
 
-                                   
+                               
                             {doctor && (<>
                               <div className="mt-4 flex justify-center">
                                 <div className="flex items-center gap-3 bg-white/90 backdrop-blur-md px-4 py-2 rounded-full border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300">
@@ -543,8 +547,8 @@ const groupSurgeryImages = (images = []) => {
                                   <div className="relative">
                                     <img
                                       src={
-                                        doctor?.doctors?.image
-                                          ? `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=doctors/profilepicture/${doctor.doctors.image}`
+                                        doctor?.image
+                                          ? `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=doctors/profilepicture/${doctor.image}`
                                           : `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=doctors/profilepicture/35f1363338fc4a6ec2350c5780bfed1f.webp`
                                       }
                                       alt="Doctor"
@@ -556,12 +560,25 @@ const groupSurgeryImages = (images = []) => {
                                   {/* Doctor Info */}
                                   <div className="text-sm leading-tight">
                                     <p className="font-semibold text-gray-800">
-                                      Dr. {doctor?.doctors?.firstname || ""} {doctor?.doctors?.lastname || ""}
+                                      Dr. {doctor?.firstname || ""} {doctor?.lastname || ""}
                                     </p>
                                     <p className="text-gray-500 text-xs">
-                                      {doctor?.doctors?.degree || "Specialist"}
+                                      {doctor?.degree || "Specialist"}
                                     </p>
                                   </div>
+
+                                  <div className="h-6 w-px bg-gray-200 mx-1"></div>
+
+                                      {packages.find(x => x.id === item.before?.packageid)?.title && (
+  <div className="text-sm leading-tight">
+    <p className="font-semibold text-gray-800">
+      {packages.find(x => x.id === item.before?.packageid)?.title}
+    </p>
+    <p className="text-gray-500 text-xs">
+      Package
+    </p>
+  </div>
+)}
 
                                   <div className="h-6 w-px bg-gray-200 mx-1"></div>
 

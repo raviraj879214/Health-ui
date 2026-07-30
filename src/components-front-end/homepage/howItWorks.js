@@ -15,7 +15,7 @@ export default function HowItWorks({title}){
                             <div className="w-full h-full bg-white flex justify-center items-center relative z-2 rounded-[1.2rem]">
                                 <Image
                                     src="./images/how-works/img-1.svg"
-                                    alt="Search Clinic/Hospital"
+                                    alt="Request a Free Quote"
                                     width={48}
                                     height={48}
                                     className="w-1/2 h-1/2 object-contain"
@@ -23,9 +23,10 @@ export default function HowItWorks({title}){
                             </div>
                         </div>
                         <div className="text-center">
-                            <h4 className="h4 mb-1">Search Clinic/Hospital</h4>
+                            <h4 className="h4 mb-1">Request a Free Quote 
+</h4>
                             <div className="[&_>_*:last-child]:mb-0">
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's.</p>
+                                <p>Submit a few details about yourself and the treatment you are looking for.</p>
                             </div>
                         </div>
                     </div>
@@ -35,7 +36,7 @@ export default function HowItWorks({title}){
                             <div className="w-full h-full bg-white flex justify-center items-center relative z-2 rounded-[1.2rem]">
                                 <Image
                                     src="./images/how-works/img-2.svg"
-                                    alt="Book Your Appointment"
+                                    alt="Talk to a Medical Coordinator "
                                     width={48}
                                     height={48}
                                     className="w-1/2 h-1/2 object-contain"
@@ -43,9 +44,10 @@ export default function HowItWorks({title}){
                             </div>
                         </div>
                         <div className="text-center">
-                            <h4 className="h4 mb-1">Book Your Appointment</h4>
+                            <h4 className="h4 mb-1">Talk to a Medical Coordinator 
+</h4>
                             <div className="[&_>_*:last-child]:mb-0">
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's.</p>
+                                <p>Discuss the best treatment options. </p>
                             </div>
                         </div>
                     </div>
@@ -65,7 +67,7 @@ export default function HowItWorks({title}){
                         <div className="text-center">
                             <h4 className="h4 mb-1">Start Your Treatment</h4>
                             <div className="[&_>_*:last-child]:mb-0">
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's.</p>
+                                <p>Travel with confidence and receive expert care.</p>
                             </div>
                         </div>
                     </div>

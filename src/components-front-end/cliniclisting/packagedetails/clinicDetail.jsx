@@ -556,8 +556,8 @@ const groupSurgeryImages = (images = []) => {
                                   <div className="relative">
                                     <img
                                       src={
-                                        doctor?.doctors?.image
-                                          ? `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=doctors/profilepicture/${doctor.doctors.image}`
+                                        doctor?.image
+                                          ? `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=doctors/profilepicture/${doctor.image}`
                                           : `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=doctors/profilepicture/35f1363338fc4a6ec2350c5780bfed1f.webp`
                                       }
                                       alt="Doctor"
@@ -569,10 +569,10 @@ const groupSurgeryImages = (images = []) => {
                                   {/* Doctor Info */}
                                   <div className="text-sm leading-tight">
                                     <p className="font-semibold text-gray-800">
-                                      Dr. {doctor?.doctors?.firstname || ""} {doctor?.doctors?.lastname || ""}
+                                      Dr. {doctor?.doctors?.firstname || ""} {doctor?.lastname || ""}
                                     </p>
                                     <p className="text-gray-500 text-xs">
-                                      {doctor?.doctors?.degree || "Specialist"}
+                                      {doctor?.degree || "Specialist"}
                                     </p>
                                   </div>
 

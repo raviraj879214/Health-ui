@@ -380,7 +380,19 @@ export function PatientQueryDetails({ id }) {
 
           <div>
             <Label>Email</Label>
-            <div className="text-gray-700">{querydetails?.email || "Not verified"}</div>
+            <div className="text-gray-700">
+              {querydetails?.email ? (
+                <a
+                  target="_blank"
+                  href={`mailto:${querydetails.email}`}
+                  className="text-blue-500 hover:underline"
+                >
+                  {querydetails.email}
+                </a>
+              ) : (
+                "Not verified"
+              )}
+            </div>
           </div>
 
           <div>
@@ -405,12 +417,28 @@ export function PatientQueryDetails({ id }) {
                 </>
               )}
 
-              {querydetails?.provider === "telegram" && (
-                <>
-                  <span className="text-blue-500">Telegram</span> :{" "}
-                  {querydetails?.telegramUsername}
-                </>
-              )}
+           {querydetails?.provider === "telegram" && (
+  <>
+    <span className="text-blue-500">Telegram</span> :{" "}
+    <a
+      href={`https://t.me/${querydetails?.telegramUsername?.replace("@", "")}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex items-center gap-2 text-blue-500 hover:text-blue-700"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        className="w-5 h-5"
+      >
+        <path d="M21.7 3.3c-.3-.3-.8-.4-1.2-.2L2.6 10.2c-.8.3-.8 1.4.1 1.7l4.7 1.8 1.8 5.6c.2.7 1.1.9 1.6.4l2.6-2.6 4.9 3.6c.6.4 1.4.1 1.5-.7L22 4.3c.1-.4 0-.7-.3-1z" />
+      </svg>
+
+      {querydetails?.telegramUsername}
+    </a>
+  </>
+)}
 
               {!querydetails?.provider && (
                 <span className="text-gray-400">Not provided</span>

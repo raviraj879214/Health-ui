@@ -379,37 +379,36 @@ export function PatientPhoneNumber(){
                 {provider === "telegram" && (<>
                   <form onSubmit={handleSubmit(onCreate)} className="flex flex-col gap-5">
                     <div className="flex flex-col gap-1">
-                      <div className="flex">
+                     <input
+  type="text"
+  placeholder="Enter telegram username"
+  className={`
+    w-full
+    rounded-r-md
+    border
+    px-4
+    py-2.5
+    text-sm
+    outline-none
+    transition
+    ${
+      errors.telegramusername
+        ? "border-red-500 focus:ring-red-200 focus:border-red-500"
+        : "border-gray-300 focus:border-blue-500 focus:ring-blue-100"
+    }
+  `}
+  {...register("telegramusername", {
+    required: "Telegram username is required",
 
+    pattern: {
+      value: /^[a-zA-Z0-9_]{5,32}$/,
+      message:
+        "Telegram username must be 5-32 characters and contain only letters, numbers, and underscores",
+    },
 
-                        <input
-
-                          type="text"
-                          placeholder="Enter telegram username"
-
-
-                          inputMode="numeric"
-
-                          className={`
-                  w-full
-                  rounded-r-md
-                  border
-                  px-4
-                  py-2.5
-                  text-sm
-                  outline-none
-                  transition
-                  ${errors.telegramusername
-                              ? "border-red-500 focus:ring-red-200 focus:border-red-500"
-                              : "border-gray-300 focus:border-blue-500 focus:ring-blue-100"}
-              `}
-
-                          {...register("telegramusername", {
-                            required: "Username is required",
-                          })}
-
-                        />
-                      </div>
+    setValueAs: (value) => value.replace("@", ""),
+  })}
+/>
 
 
                       {errors.telegramusername && (
