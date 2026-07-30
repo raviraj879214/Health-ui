@@ -255,55 +255,236 @@ export function HeaderFrontend() {
               <Link href={`${slugs.find(x => x.title === "Your Guarantees")?.slug || ""}`}>Your Guarantees </Link>
             </li>
 
-            <li>
-              <Menu as="div" className="relative inline-block">
-                <MenuButton className="btn btn-none inline-flex items-center justify-center gap-3">
-                  Additional Services <span className="icon"><svg width="12" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.8735 1L6.48165 6L0.999899 1" stroke="currentcolor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg></span>
-                </MenuButton>
+           <li>
+  <Menu as="div" className="relative inline-block">
+    <MenuButton className="btn btn-none inline-flex items-center justify-center gap-3">
+      Additional Services
+      <span className="icon">
+        <svg width="12" height="7" viewBox="0 0 13 7" fill="none">
+          <path
+            d="M11.8735 1L6.48165 6L0.999899 1"
+            stroke="currentcolor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </span>
+    </MenuButton>
 
-                <Transition
-                  enter="transition ease-out duration-200"
-                  enterFrom="opacity-0 -translate-y-2.5"
-                  enterTo="opacity-100 translate-y-0"
-                  leave="transition ease-in duration-150"
-                  leaveFrom="opacity-100 translate-y-0"
-                  leaveTo="opacity-0 -translate-y-2.5"
+    <Transition
+      enter="transition ease-out duration-200"
+      enterFrom="opacity-0 -translate-y-2.5"
+      enterTo="opacity-100 translate-y-0"
+      leave="transition ease-in duration-150"
+      leaveFrom="opacity-100 translate-y-0"
+      leaveTo="opacity-0 -translate-y-2.5"
+    >
+      <MenuItems
+        className="
+          absolute right-0 z-50 mt-2 
+          w-[260px]
+          origin-top-right 
+          bg-white 
+          shadow-[0_0_30px_0_rgba(45,45,45,0.15)] 
+          rounded-thm 
+          focus:outline-none
+        "
+      >
+        <div className="py-2">
+
+
+          {/* Insurance */}
+          <MenuItem>
+            {({ active }) => (
+              <div className="group relative">
+                
+                <button
+                  className={`
+                    w-full flex items-center justify-between
+                    px-4 py-2
+                    text-sm font-medium
+                    text-gray-700
+                    ${active ? "bg-gray-100" : ""}
+                  `}
                 >
-                  <MenuItems className="absolute right-0 z-50 mt-2 md:w-[180px] w-40 origin-top-right bg-white shadow-[0_0_30px_0_rgba(45,45,45,0.15)] rounded-thm focus:outline-none [&_a]:hover:text-secondary">
-                    <div className="py-1 max-h-45 overflow-auto">
-                      <MenuItem>
-                        <Link href={`${slugs.find(x => x.title === "Insurance")?.slug || ""}`} className="block px-4 py-1.5 font-medium text-sm text-gray-700">
-                          Insurance
-                        </Link>
-                      </MenuItem>
+                  Insurance
+
+                  {/* Chevron */}
+                  <svg
+                    width="10"
+                    height="6"
+                    viewBox="0 0 10 6"
+                    fill="none"
+                  >
+                    <path
+                      d="M1 1L5 5L9 1"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+
+                </button>
 
 
+                {/* Insurance submenu */}
+                <div
+                  className="
+                    absolute 
+                    left-full 
+                    top-0
+                    hidden 
+                    group-hover:block
+                    w-[260px]
+                    bg-white
+                    shadow-[0_0_30px_0_rgba(45,45,45,0.15)]
+                    rounded-thm
+                  "
+                >
 
-                      <MenuItem>
-                        <Link href={`${slugs.find(x => x.title === "Visa")?.slug || ""}`} className="block px-4 py-1.5 font-medium text-sm text-gray-700">
-                          Visas
-                        </Link>
-                      </MenuItem>
-                      <MenuItem>
-                        <Link href={`${slugs.find(x => x.title === "Citizenship")?.slug || ""}`} className="block px-4 py-1.5 font-medium text-sm text-gray-700">
-                          Citizenship by Birth
-                        </Link>
-                      </MenuItem>
-                      <MenuItem>
-                        <Link href={`${slugs.find(x => x.title === "Flights")?.slug || ""}`} className="block px-4 py-1.5 font-medium text-sm text-gray-700">
-                          Flights, Hotels and Transportation
-                        </Link>
-                      </MenuItem>
-                      <MenuItem>
-                        <Link href={`${slugs.find(x => x.title === "Personal Assistance")?.slug || ""}`} className="block px-4 py-1.5 font-medium text-sm text-gray-700">
-                          Personal Assistance
-                        </Link>
-                      </MenuItem>
+                  <Link
+                    href={`${slugs.find(x => x.title === "Insurance")?.slug || ""}`}
+                    className="
+                      block px-4 py-2
+                      text-sm text-gray-700
+                      hover:bg-gray-100
+                    "
+                  >
+                    Insurance Services
+                  </Link>
+
+
+                  {/* Medical Travel Insurance */}
+                  <div className="group relative">
+
+                    <div
+                      className="
+                        flex items-center justify-between
+                        px-4 py-2
+                        text-sm text-gray-700
+                        cursor-pointer
+                        hover:bg-gray-100
+                      "
+                    >
+                      Medical Travel Insurance
+
+                      <svg
+                        width="10"
+                        height="6"
+                        viewBox="0 0 10 6"
+                        fill="none"
+                      >
+                        <path
+                          d="M1 1L5 5L9 1"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+
                     </div>
-                  </MenuItems>
-                </Transition>
-              </Menu>
-            </li>
+
+
+                    <div
+                      className="
+                        absolute
+                        left-full
+                        top-0
+                        hidden
+                        group-hover:block
+                        w-[260px]
+                        bg-white
+                        shadow-[0_0_30px_0_rgba(45,45,45,0.15)]
+                        rounded-thm
+                      "
+                    >
+
+                      <Link
+                        href="/gps-insurance-information"
+                        className="
+                          block px-4 py-2
+                          text-sm text-gray-700
+                          hover:bg-gray-100
+                        "
+                      >
+                        GPS Insurance Information Page
+                      </Link>
+
+
+                      <a
+                        href="https://www.globalprotectivesolutions.com/enroll/itfh"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="
+                          block px-4 py-2
+                          text-sm text-gray-700
+                          hover:bg-gray-100
+                        "
+                      >
+                        Get Insurance Quote
+                      </a>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+            )}
+          </MenuItem>
+
+
+
+          {/* Visa */}
+          <MenuItem>
+            <Link
+              href={`${slugs.find(x => x.title === "Visa")?.slug || ""}`}
+              className="block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100"
+            >
+              Visas
+            </Link>
+          </MenuItem>
+
+
+          <MenuItem>
+            <Link
+              href={`${slugs.find(x => x.title === "Citizenship")?.slug || ""}`}
+              className="block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100"
+            >
+              Citizenship by Birth
+            </Link>
+          </MenuItem>
+
+
+          <MenuItem>
+            <Link
+              href={`${slugs.find(x => x.title === "Flights")?.slug || ""}`}
+              className="block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100"
+            >
+              Flights, Hotels and Transportation
+            </Link>
+          </MenuItem>
+
+
+          <MenuItem>
+            <Link
+              href={`${slugs.find(x => x.title === "Personal Assistance")?.slug || ""}`}
+              className="block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100"
+            >
+              Personal Assistance
+            </Link>
+          </MenuItem>
+
+
+        </div>
+      </MenuItems>
+    </Transition>
+  </Menu>
+</li>
           </ul>
 
           {/* Example HeadlessUI Dropdown */}
@@ -482,28 +663,239 @@ export function HeaderFrontend() {
             <li>
               <Link href={`${slugs.find(x => x.title === "Your Guarantees")?.slug || ""}`} className="flex items-center justify-between gap-2.5">Your Guarantees</Link>
             </li>
-            <li className="menu-item-has-children">
-              <Link href="#" className="flex items-center justify-between gap-2.5">Additional Services <span className="icon"><svg width="12" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.8735 1L6.48165 6L0.999899 1" stroke="currentcolor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg></span></Link>
-              <ul className="hidden p-0 m-0 list-none sub-menu">
-                <li>
-                  <Link href={`${slugs.find(x => x.title === "Insurance")?.slug || ""}`} className="flex items-center justify-between gap-2.5">Insurance</Link>
-                </li>
-                <li>
-                  <Link href={`${slugs.find(x => x.title === "Visa")?.slug || ""}`} className="flex items-center justify-between gap-2.5">Visas</Link>
-                </li>
-                <li>
-                  <Link href={`${slugs.find(x => x.title === "Citizenship")?.slug || ""}`} className="flex items-center justify-between gap-2.5">Citizenship</Link>
-                </li>
-                <li>
-                  <Link href={`${slugs.find(x => x.title === "Flights")?.slug || ""}`} className="flex items-center justify-between gap-2.5">Flights</Link>
-                </li>
+           
+           <li>
+  <Menu as="div" className="relative inline-block">
 
-                <li>
-                  <Link href={`${slugs.find(x => x.title === "Personal Assistance")?.slug || ""}`} className="flex items-center justify-between gap-2.5">Personal Assistance</Link>
-                </li>
-              </ul>
-            </li>
+    <MenuButton className="btn btn-none inline-flex items-center justify-center gap-3">
+      <span className="text-gray-700 font-bold">
+        Additional Services
+      </span>
+
+      <span className="icon">
+        <svg width="12" height="7" viewBox="0 0 13 7" fill="none">
+          <path
+            d="M11.8735 1L6.48165 6L0.999899 1"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </span>
+    </MenuButton>
+
+
+    <Transition
+      enter="transition ease-out duration-200"
+      enterFrom="opacity-0 -translate-y-2.5"
+      enterTo="opacity-100 translate-y-0"
+      leave="transition ease-in duration-150"
+      leaveFrom="opacity-100 translate-y-0"
+      leaveTo="opacity-0 -translate-y-2.5"
+    >
+
+      <MenuItems className="absolute left-0 z-50 mt-2 w-[260px] origin-top-left bg-white shadow-[0_0_30px_0_rgba(45,45,45,0.15)] rounded-thm focus:outline-none">
+
+        <div className="py-2">
+
+
+          {/* Insurance */}
+          <MenuItem>
+            {({ active }) => (
+              <div className="group relative">
+
+                <button
+                  className={`
+                    w-full flex items-center justify-between
+                    px-4 py-2
+                    text-sm font-medium
+                    text-gray-700
+                    ${active ? "bg-gray-100" : ""}
+                  `}
+                >
+                  Insurance
+
+                  <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
+                    <path
+                      d="M1 1L5 5L9 1"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+
+                </button>
+
+
+                {/* Insurance submenu */}
+                <div
+                  className="
+                    absolute 
+                    left-full 
+                    top-0
+                    hidden 
+                    group-hover:block
+                    w-[260px]
+                    bg-white
+                    shadow-[0_0_30px_0_rgba(45,45,45,0.15)]
+                    rounded-thm
+                  "
+                >
+
+                  <Link
+                    href={`${slugs.find(x => x.title === "Insurance")?.slug || ""}`}
+                    className="
+                      block px-4 py-2
+                      text-sm text-gray-700
+                      hover:bg-gray-100
+                    "
+                  >
+                    Insurance Services
+                  </Link>
+
+
+                  {/* Medical Travel Insurance */}
+                  <div className="group relative">
+
+                    <div
+                      className="
+                        flex items-center justify-between
+                        px-4 py-2
+                        text-sm text-gray-700
+                        cursor-pointer
+                        hover:bg-gray-100
+                      "
+                    >
+                      Medical Travel Insurance
+
+                      <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
+                        <path
+                          d="M1 1L5 5L9 1"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+
+                    </div>
+
+
+                    {/* Medical Travel submenu */}
+                    <div
+                      className="
+                        absolute
+                        left-full
+                        top-0
+                        hidden
+                        group-hover:block
+                        w-[260px]
+                        bg-white
+                        shadow-[0_0_30px_0_rgba(45,45,45,0.15)]
+                        rounded-thm
+                      "
+                    >
+
+                      <Link
+                        href="/gps-insurance-information"
+                        className="
+                          block px-4 py-2
+                          text-sm text-gray-700
+                          hover:bg-gray-100
+                        "
+                      >
+                        GPS Insurance Information Page
+                      </Link>
+
+
+                      <a
+                        href="https://www.globalprotectivesolutions.com/enroll/itfh"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="
+                          block px-4 py-2
+                          text-sm text-gray-700
+                          hover:bg-gray-100
+                        "
+                      >
+                        Get Insurance Quote
+                      </a>
+
+
+                    </div>
+
+                  </div>
+
+
+                </div>
+
+              </div>
+            )}
+          </MenuItem>
+
+
+
+          {/* Visa */}
+          <MenuItem>
+            <a
+              href={`${slugs.find(x => x.title === "Visa")?.slug || ""}`}
+              className="block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100"
+            >
+              Visa
+            </a>
+          </MenuItem>
+
+
+
+          {/* Citizenship */}
+          <MenuItem>
+            <a
+              href={`${slugs.find(x => x.title === "Citizenship")?.slug || ""}`}
+              className="block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100"
+            >
+              Citizenship
+            </a>
+          </MenuItem>
+
+
+
+          {/* Flights */}
+          <MenuItem>
+            <a
+              href={`${slugs.find(x => x.title === "Flights")?.slug || ""}`}
+              className="block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100"
+            >
+              Flights
+            </a>
+          </MenuItem>
+
+
+
+          {/* Personal Assistance */}
+          <MenuItem>
+            <a
+              href={`${slugs.find(x => x.title === "Personal Assistance")?.slug || ""}`}
+              className="block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100"
+            >
+              Personal Assistance
+            </a>
+          </MenuItem>
+
+
+        </div>
+
+      </MenuItems>
+
+    </Transition>
+
+  </Menu>
+</li>
+
           </ul>
+
+
           {/* MOBILE BUTTONS */}
           <div className="md:hidden flex flex-col gap-3 w-full">
 

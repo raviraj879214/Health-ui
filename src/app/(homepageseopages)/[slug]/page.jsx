@@ -15,6 +15,7 @@ import {DentalTreatment}  from "../../../components-front-end/contentmanagement/
 import {Liposuction}  from "../../../components-front-end/contentmanagement/Liposuction/liposuction";
 import {TermsAndCondition}  from "../../../components-front-end/contentmanagement/termsprivacy/terms";
 import {PriavcyAndPolicy}  from "../../../components-front-end/contentmanagement/termsprivacy/privacy";
+import {GpsInsurance}  from "../../../components-front-end/contentmanagement/gpsInsuranceInformation/gpsInsurance";
 
 
 
@@ -126,6 +127,10 @@ export default async function Page({ params }) {
 
     case "Terms and Condition":
        return  <TermsAndCondition />;
+     
+
+    case "Gps Information":
+       return  <GpsInsurance />;
      
 
 
