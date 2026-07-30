@@ -567,18 +567,19 @@ const groupSurgeryImages = (images = []) => {
                                     </p>
                                   </div>
 
-                                  <div className="h-6 w-px bg-gray-200 mx-1"></div>
+                                
 
-                                      {packages.find(x => x.id === item.before?.packageid)?.title && (
-  <div className="text-sm leading-tight">
-    <p className="font-semibold text-gray-800">
-      {packages.find(x => x.id === item.before?.packageid)?.title}
-    </p>
-    <p className="text-gray-500 text-xs">
-      Package
-    </p>
-  </div>
-)}
+                                  {packages.find(x => x.id === item.before?.packageid)?.title && (<>
+                                    <div className="h-6 w-px bg-gray-200 mx-1"></div>
+                                    <div className="text-sm leading-tight">
+                                      <p className="font-semibold text-gray-800">
+                                        {packages.find(x => x.id === item.before?.packageid)?.title}
+                                      </p>
+                                      <p className="text-gray-500 text-xs">
+                                        Package
+                                      </p>
+                                    </div>
+                                  </>)}
 
                                   <div className="h-6 w-px bg-gray-200 mx-1"></div>
 
