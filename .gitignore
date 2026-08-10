@@ -38,7 +38,3 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# generated public files
-/public/llms.txt
-/public/robots.txt
-/public/sitemap.xml

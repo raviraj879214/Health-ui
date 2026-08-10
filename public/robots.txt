@@ -1,1 +1,53 @@
+# iTravelForHealth
 
+> Medical tourism platform connecting international patients with trusted healthcare providers, hospitals, and treatment planning services.
+
+iTravelForHealth helps patients travel internationally for affordable, high-quality medical treatment by providing treatment guidance, hospital matching, travel assistance, and patient support throughout the healthcare journey.
+
+## About
+
+- https://itravelforhealth.com/about/
+- https://itravelforhealth.com/contact/
+
+## Medical Treatments
+
+- https://itravelforhealth.com/cardiology/
+- https://itravelforhealth.com/orthopedics/
+- https://itravelforhealth.com/oncology/
+- https://itravelforhealth.com/neurology/
+- https://itravelforhealth.com/transplants/
+- https://itravelforhealth.com/fertility/
+
+## Hospitals
+
+- https://itravelforhealth.com/hospitals/
+
+## Doctors
+
+- https://itravelforhealth.com/doctors/
+
+## Destinations
+
+- https://itravelforhealth.com/india/
+- https://itravelforhealth.com/turkey/
+- https://itravelforhealth.com/thailand/
+
+## Patient Services
+
+- Treatment planning
+- Medical visa assistance
+- Airport pickup
+- Accommodation support
+- Interpreter services
+- Follow-up care
+
+## Resources
+
+- Blog
+- Patient Guides
+- FAQs
+- Success Stories
+
+## Contact
+
+- https://itravelforhealth.com/contact/
