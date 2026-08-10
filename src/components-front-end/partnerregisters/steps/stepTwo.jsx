@@ -198,7 +198,7 @@ const phoneRulesByCountry = {
 
                 setError("phoneno", { 
                     type: "manual", 
-                    message: `Unfortunelty something went wrong try after some times or just enter test  OTP : 0000` 
+                    message: `Unfortunelty something went wrong try after some times` 
                 });
 
 
@@ -212,35 +212,11 @@ const phoneRulesByCountry = {
 
 
 const inputsRef = useRef([]);
-const OTP_LENGTH = 4;
+const OTP_LENGTH = 6;
 
 const getFullOtp = () => { return inputsRef.current .slice(0, OTP_LENGTH) .map(input => input?.value || "") .join(""); };
 
-const  onOtpComplete = async (otp) => {
-  debugger;
 
-  if(otp === savedotp){
-    
-        const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/partner-register/verify-otp-phone`,{
-            method : "Post",
-            headers :{
-                "content-type" : "application/json"
-            },
-            body: JSON.stringify({
-                "cliniciduuid" : uuid,
-                 "phoneverify" : 1
-            })
-        });
-        if(res.ok){
-            const result = await res.json();
-        }
-
-        setContinueButton(true);
-
-        setverfiy(false);
-
-  }
-};
 
 
 
@@ -257,8 +233,10 @@ const handleChange = (e, index) => {
 
   const fullOtp = getFullOtp();
 
-  if (fullOtp.length === OTP_LENGTH) {
-    onOtpComplete(fullOtp); // 🔥 SHOW ALERT
+  if (fullOtp.length === OTP_LENGTH)
+  {
+
+    verifyotp(fullOtp, `${countrycode}${getValues("phoneno")}`);
   }
 
 };
@@ -279,10 +257,10 @@ const handlePaste = (e) => {
 
   inputsRef.current[paste.length - 1]?.focus();
 
-  // 🔥 SHOW ALERT AFTER PASTE
-  if (paste.length === OTP_LENGTH) {
-    onOtpComplete(paste);
-  }
+ 
+    if (paste.length === OTP_LENGTH) {
+        verifyotp(paste, `${countrycode}${getValues("phoneno")}`);
+    }
 };
 
 
@@ -293,6 +271,48 @@ const handleKeyDown = (e, index) => {
 };
 
 
+  const verifyotp = async(otp,phone)=>{
+    debugger;
+    const res= await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/patient-query/otp-verification`,{
+      method: "Post",
+      headers :{
+        "Content-Type" : "application/json"
+      },
+      body: JSON.stringify({
+        "phone" : phone,
+        "otp" : otp
+      })
+
+    });
+    if(res.ok){
+      const result= await res.json();
+
+      if(result.success === false){
+         setError("phoneno", {
+              type: "manual",
+              message: `Invalid OTP. Please enter the correct OTP.`
+        });
+      }
+
+      if(result.success === true){
+            const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/partner-register/verify-otp-phone`,{
+            method : "Post",
+            headers :{
+                "content-type" : "application/json"
+            },
+            body: JSON.stringify({
+                "cliniciduuid" : uuid,
+                 "phoneverify" : 1
+            })
+        });
+        if(res.ok){
+            const result = await res.json();
+        }
+        setContinueButton(true);
+        setverfiy(false);
+      }
+    }
+  }
 
 
 
@@ -558,7 +578,7 @@ const handleKeyDown = (e, index) => {
                                                         className="flex justify-center gap-3 mb-4"
                                                         onPaste={handlePaste}
                                                     >
-                                                        {[0, 1, 2, 3].map((_, index) => (
+                                                        {[0, 1, 2, 3 , 4 , 5].map((_, index) => (
                                                             <input
                                                                 key={index}
                                                                 type="text"
