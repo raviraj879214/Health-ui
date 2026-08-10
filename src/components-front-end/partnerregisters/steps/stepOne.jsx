@@ -57,10 +57,7 @@ export  function StepOne() {
         if(res.ok){
           debugger;
             const result = await res.json();
-
-
             if(result.status == 400){
-
                 setError("email", {type: "manual",message: result.message});
                 setButton(false);
             }
@@ -69,33 +66,31 @@ export  function StepOne() {
                 setButton(false);
             }
             
-            if(result.status == 404){
-                    toast.success(result.message, {
-                            className: "bg-blue-600 text-white font-bold",
-                            bodyClassName: "text-white",
-                    });
+          if (result.status == 404) {
+            toast.success(result.message, {
+              className: "bg-blue-600 text-white font-bold",
+              bodyClassName: "text-white",
+            });
+            setButton(false);
+            return;
+          }
 
-              setButton(false);
-             return ;
-            }
-
-             dispatch(setEmail(result.data.email));
-                dispatch(setuuid(result.data.uuid));
-            if(result.data.isOtpVerify){
-                dispatch(nextStep());
-                return;
-            }
+          dispatch(setEmail(result.data.email));
+          dispatch(setuuid(result.data.uuid));
+          if (result.data.isOtpVerify) {
+            dispatch(nextStep());
+            return;
+          }
            
 
 
-
-            setOtpModal(!result.data.isOtpVerify);
-            dispatch(setOtp(result.otp));
-            setCount(30);
-            toast.success("OTP sent!", {
-                    className: "bg-blue-600 text-white font-bold",
-                    bodyClassName: "text-white",
-            });
+          setOtpModal(!result.data.isOtpVerify);
+          dispatch(setOtp(result.otp));
+          setCount(30);
+          toast.success("OTP sent!", {
+            className: "bg-blue-600 text-white font-bold",
+            bodyClassName: "text-white",
+          });
 
         }
         setButton(false);

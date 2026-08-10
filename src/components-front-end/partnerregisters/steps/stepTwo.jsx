@@ -34,10 +34,12 @@ const password = watch("password");
     },[uuid]);
 
     const fetchClinicUserDetails = async()=>{
+
         const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/partner-register/get-clinic-user-details/${uuid}`,{
             method : "get"
         });
         if(res.ok){
+            debugger;
             const result = await res.json();
             setValue("firstname",result.data.firstname);
             setValue("lastname",result.data.lastname);
@@ -302,7 +304,8 @@ const handleKeyDown = (e, index) => {
             },
             body: JSON.stringify({
                 "cliniciduuid" : uuid,
-                 "phoneverify" : 1
+                 "phoneverify" : 1,
+                 "phoneno" : `${countrycode}${getValues("phoneno")}`
             })
         });
         if(res.ok){
@@ -498,7 +501,9 @@ const handleKeyDown = (e, index) => {
 
                                         <div className="relative flex gap-2 items-center">
                                             {/* Country Code Dropdown */}
-                                           <select
+                                         
+                                                {!continuebutton && (<>
+                                                      <select
                                                     onChange={(e) => {
                                                         debugger;
                                                     setCountryCode(e.target.value);
@@ -514,6 +519,8 @@ const handleKeyDown = (e, index) => {
                                                     <option value="+61">🇦🇺 +61</option>
                                                     <option value="+55">🇧🇷 +55</option>
                                                 </select>
+
+                                                </>)}
 
                                             <input
                                                 disabled={continuebutton}
