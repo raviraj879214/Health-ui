@@ -25,7 +25,7 @@ export function PatientPhoneNumber(){
 
 
   const [phone, setPhone] = useState("");
-  const [otp, setOtp] = useState(["", "", "", ""]);
+  const [otp, setOtp] = useState(["", "", "", "", "", ""]);
 
 
   
@@ -36,8 +36,8 @@ export function PatientPhoneNumber(){
 
   
     const popularCountries = [
+       { country: "United States", code: "+1", length: 10 },
       { country: "India", code: "+91", length: 10 },
-      { country: "United States", code: "+1", length: 10 },
       { country: "United Kingdom", code: "+44", length: 10 },
       { country: "Germany", code: "+49", length: 11 },
       { country: "France", code: "+33", length: 9 },
@@ -75,19 +75,16 @@ export function PatientPhoneNumber(){
   };
 
 
-  const handleOtpChange = (value, index) => {
+  const handleOtpChange =async (value, index) => {
     if (!/^\d?$/.test(value)) return;
     const newOtp = [...otp];
     newOtp[index] = value;
     setOtp(newOtp);
     const enteredOtp = newOtp.join("");
     debugger;
-    if(enteredOtp == phoneOtp){
-      dispatch(addphoneNumber(selectedCountry.code + getValues("phonenumber")));
-      dispatch(addphoneNumberVerified("1"));
-      dispatch(addProvider(provider));
-      dispatch(addStep());
-      
+   
+    if(enteredOtp.length == otp.length){
+     await verifyotp(enteredOtp,selectedCountry.code + getValues("phonenumber"))
     }
 
     if (value && index < 5) {
@@ -117,7 +114,7 @@ export function PatientPhoneNumber(){
 
   const onCreate = async (data) => {
     debugger;
-
+      setOtp(["","","","","",""]);
       if(provider === "telegram"){
         dispatch(addtelegramUsername(getValues("telegramusername")));
         dispatch(addtelegramUsernameVerified("1"));
@@ -176,6 +173,41 @@ export function PatientPhoneNumber(){
 
 
 
+
+  const verifyotp = async(otp,phone)=>{
+    debugger;
+    const res= await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/patient-query/otp-verification`,{
+      method: "Post",
+      headers :{
+        "Content-Type" : "application/json"
+      },
+      body: JSON.stringify({
+        "phone" : phone,
+        "otp" : otp
+      })
+
+    });
+    if(res.ok){
+      const result= await res.json();
+
+      if(result.success === false){
+         setError("phonenumber", {
+              type: "manual",
+              message: `Invalid OTP. Please enter the correct OTP.`
+        });
+      }
+
+      if(result.success === true){
+        dispatch(addphoneNumber(selectedCountry.code + getValues("phonenumber")));
+        dispatch(addphoneNumberVerified("1"));
+        dispatch(addProvider(provider));
+        dispatch(addStep());
+      }
+
+
+    }
+
+  }
 
 
 
@@ -278,11 +310,7 @@ export function PatientPhoneNumber(){
                       </div>
 
 
-                      {errors.phonenumber && (
-                        <p className="text-sm text-red-600">
-                          {errors.phonenumber.message}
-                        </p>
-                      )}
+                      
                     </div>
                     {otpmodal && (
                       <div className="flex flex-col gap-3">
@@ -333,7 +361,7 @@ export function PatientPhoneNumber(){
                             {seconds > 0 ? `Resend code in` : <></>}   {seconds > 0 ? `${seconds}s` : <></>}
                             {seconds === 0 ? `Resend` : <></>}
                           </button>
-
+                              
                           <button
                             onClick={() => changenumber()}
                             type="button"
@@ -347,6 +375,11 @@ export function PatientPhoneNumber(){
                         </div>
                       </div>
                     )}
+                    {errors.phonenumber && (
+                        <p className="text-sm text-red-600">
+                          {errors.phonenumber.message}
+                        </p>
+                      )}
                     {!otpmodal && (<>
                       <button
                         type="submit"
@@ -379,10 +412,10 @@ export function PatientPhoneNumber(){
                 {provider === "telegram" && (<>
                   <form onSubmit={handleSubmit(onCreate)} className="flex flex-col gap-5">
                     <div className="flex flex-col gap-1">
-                     <input
-  type="text"
-  placeholder="Enter telegram username"
-  className={`
+                      <input
+                        type="text"
+                        placeholder="Enter telegram username"
+                        className={`
     w-full
     rounded-r-md
     border
@@ -391,24 +424,23 @@ export function PatientPhoneNumber(){
     text-sm
     outline-none
     transition
-    ${
-      errors.telegramusername
-        ? "border-red-500 focus:ring-red-200 focus:border-red-500"
-        : "border-gray-300 focus:border-blue-500 focus:ring-blue-100"
-    }
+    ${errors.telegramusername
+                            ? "border-red-500 focus:ring-red-200 focus:border-red-500"
+                            : "border-gray-300 focus:border-blue-500 focus:ring-blue-100"
+                          }
   `}
-  {...register("telegramusername", {
-    required: "Telegram username is required",
+                        {...register("telegramusername", {
+                          required: "Telegram username is required",
 
-    pattern: {
-      value: /^[a-zA-Z0-9_]{5,32}$/,
-      message:
-        "Telegram username must be 5-32 characters and contain only letters, numbers, and underscores",
-    },
+                          pattern: {
+                            value: /^[a-zA-Z0-9_]{5,32}$/,
+                            message:
+                              "Telegram username must be 5-32 characters and contain only letters, numbers, and underscores",
+                          },
 
-    setValueAs: (value) => value.replace("@", ""),
-  })}
-/>
+                          setValueAs: (value) => value.replace("@", ""),
+                        })}
+                      />
 
 
                       {errors.telegramusername && (
