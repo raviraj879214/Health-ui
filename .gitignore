@@ -42,3 +42,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+
+git rm --cached public/llms.txt
+git rm --cached public/robots.txt
+git rm --cached public/sitemap.xml
