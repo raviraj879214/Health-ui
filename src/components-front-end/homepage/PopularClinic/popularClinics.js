@@ -49,11 +49,12 @@ export default function PopularClinics(){
       console.log("result",result.data);
     
       const clinicList = result.data.map((item) => {
-        const bannerImageObj = result.clinicImages.find(
-          (img) =>
-            img.clinicuuid === item.uuid &&
-            img.type === "banner"
-        );
+       const bannerImageObj = result.clinicImages.find(
+  (img) =>
+    img.clinicuuid === item.uuid &&
+    img.type === "banner" &&
+    Number(img.sort) === 1
+);
     
         return {
           uuid: item.uuid,

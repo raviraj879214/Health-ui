@@ -72,7 +72,7 @@ export function License({ clinicuuid }) {
 
       await fetchLicense();
     } catch (err) {
-      console.error(err);
+      console.log(err);
       alert(err.message);
     } finally {
       setLoading(false);
@@ -139,7 +139,7 @@ export function License({ clinicuuid }) {
           <input
             id="license"
             type="file"
-            accept=".jpg,.jpeg,.png"
+           accept=".jpg,.jpeg,.png,.pdf"
             disabled={loading}
             onChange={handleFileChange}
             className="block w-full rounded-lg border border-slate-300 bg-white text-sm text-slate-600 file:mr-4 file:cursor-pointer file:rounded-md file:border-0 file:bg-emerald-600 file:px-4 file:py-2 file:text-white hover:file:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-60"
@@ -166,11 +166,19 @@ export function License({ clinicuuid }) {
         className="flex items-center justify-between rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition hover:border-emerald-300 hover:shadow-md"
       >
         <div className="flex items-center gap-4">
-          <img
-            src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=license/${license.image}`}
-            alt="Hospital License"
-            className="h-24 w-24 rounded-xl border border-slate-200 object-cover"
-          />
+        {/\.(jpg|jpeg|png|gif|webp)$/i.test(license.image) ? (
+  <img
+    src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=license/${license.image}`}
+    alt="Hospital License"
+    className="h-24 w-24 rounded-xl border border-slate-200 object-cover"
+  />
+) : /\.pdf$/i.test(license.image) ? (
+  <iframe
+    src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=license/${license.image}`}
+    title="Hospital License PDF"
+    className="h-24 w-24 rounded-xl border border-slate-200"
+  />
+) : null}
 
           <div>
             <h4 className="text-base font-semibold text-slate-800">

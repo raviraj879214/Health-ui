@@ -83,12 +83,19 @@ export function ClinicLicense({id}){
           >
             {/* Image */}
             <div className="relative aspect-[4/3] overflow-hidden bg-gray-100">
-              <img
-                src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=license/${license.image}`}
-                alt={`License ${index + 1}`}
-                className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
-              />
-
+             {/\.(jpg|jpeg|png|gif|webp)$/i.test(license.image) ? (
+  <img
+    src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=license/${license.image}`}
+    alt={`License ${index + 1}`}
+    className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
+  />
+) : /\.pdf$/i.test(license.image) ? (
+  <iframe
+    src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=license/${license.image}#toolbar=0&navpanes=0&scrollbar=0`}
+    title={`License ${index + 1}`}
+    className="h-full w-full border-0"
+  />
+) : null}
               <span className="absolute left-3 top-3 rounded-full bg-emerald-600 px-3 py-1 text-xs font-semibold text-white shadow">
                 Verified
               </span>

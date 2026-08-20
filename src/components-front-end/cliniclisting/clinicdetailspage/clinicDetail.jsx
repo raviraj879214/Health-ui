@@ -92,7 +92,9 @@ export function ClinicDetail({id}){
     if(res.ok){
       const result = await res.json();
       setClinicDetails(result.data);
-      setBannerImages(result.bannerimages);
+      setBannerImages(
+  [...result.bannerimages].sort((a, b) => Number(a.sort) - Number(b.sort))
+);
       steDescription(result.description);
 
       setLicenses(result.data.HospitalLicense);
@@ -279,6 +281,7 @@ const groupSurgeryImages = (images = []) => {
                                     className="absolute top-0 left-0 w-full h-full object-cover"
                                   />
                                 </div>
+                               
                               </div>
                             ))
                           )}
@@ -414,11 +417,19 @@ const groupSurgeryImages = (images = []) => {
                           className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-emerald-400 hover:shadow-lg"
                         >
                           <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
-                            <img
-                              src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=license/${license.image}`}
-                              alt="Clinic License"
-                              className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                            />
+                            {/\.(jpg|jpeg|png|gif|webp)$/i.test(license.image) ? (
+                              <img
+                                src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=license/${license.image}`}
+                                alt="Clinic License"
+                                className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                              />
+                            ) : /\.pdf$/i.test(license.image) ? (
+                              <iframe
+                                src={`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=license/${license.image}#toolbar=0&navpanes=0&scrollbar=0`}
+                                title="Clinic License"
+                                className="h-full w-full border-0"
+                              />
+                            ) : null}
 
                             <div className="absolute left-3 top-3 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-emerald-700 shadow">
                               Verified

@@ -3,7 +3,7 @@ import { TermsConditionStatus } from "@/lib/enums/TermsCondition";
 import { ButtonSpinner } from "@/reusable/buttonSpinner";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
+import "quill/dist/quill.snow.css";
 
 
 
@@ -90,9 +90,9 @@ export function StepSix(){
     
             <div className="grid grid-cols-1 md:grid-cols-1 gap-8 mt-8">
               <div className="card p-6 border border-gray-200 rounded-xl shadow-md max-h-[500px] overflow-y-auto">
-                <h2 className="text-xl font-bold mb-4">Terms and Conditions</h2>
+                
                <div
-                      className="terms-content mb-4"
+                       className="cms-content mx-auto my-8 max-w-7xl px-6"
                       dangerouslySetInnerHTML={{ __html: terms }}
                 />
 

@@ -573,3 +573,15 @@ body .swiper-button-prev, body .swiper-button-next {
       visibility: visible;
     }
 }
+
+.cms-content .ql-align-center {
+  text-align: center !important;
+}
+
+.cms-content .ql-align-right {
+  text-align: right !important;
+}
+
+.cms-content .ql-align-justify {
+  text-align: justify !important;
+}
