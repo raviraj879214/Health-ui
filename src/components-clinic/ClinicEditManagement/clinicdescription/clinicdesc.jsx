@@ -100,7 +100,8 @@ export function ClinicDescription({clinicuuid}) {
 
 
 
-
+     const fullDescription = getValues("fulldescription");
+     const briefdescription = getValues("briefdescription");
 
 
 
@@ -116,11 +117,28 @@ export function ClinicDescription({clinicuuid}) {
                 </button>
                
             </div>
+        {briefdescription && (
+  <div className="space-y-2">
+    <h3 className="text-base font-semibold">Brief Description</h3>
 
-            <p className="p-5 border theme-border rounded-2xl" >Provide a clear and concise introduction about your clinic to build trust with patients.</p>
+    <div
+      className="p-5 border theme-border rounded-2xl max-h-40 overflow-y-auto"
+      dangerouslySetInnerHTML={{ __html: briefdescription }}
+    />
+  </div>
+)}
 
+{fullDescription && (
+  <div className="space-y-2 mt-5">
+    <h3 className="text-base font-semibold">Full Description</h3>
 
-
+    <div
+      className="p-5 border theme-border rounded-2xl max-h-40 overflow-y-auto"
+      dangerouslySetInnerHTML={{ __html: fullDescription }}
+    />
+  </div>
+)}
+         
             <div>
                 <Dialog open={open} onClose={setOpen} className="relative z-10">
                     <DialogBackdrop
