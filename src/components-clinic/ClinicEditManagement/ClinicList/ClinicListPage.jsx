@@ -86,7 +86,7 @@ export function ClinicList() {
                             
                             }}
                             className="btn btn-primary rounded-3xl px-6 py-2">
-                            + Add Clinic 
+                            + Register Additional Clinic
                             </button>
                     </div>
 

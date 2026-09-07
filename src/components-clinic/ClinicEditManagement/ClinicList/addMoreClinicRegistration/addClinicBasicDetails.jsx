@@ -36,7 +36,10 @@ export function AddClinicBasicDetails({ uuid, modalpopup ,onFade , onSuccess }) 
   useEffect(()=>{
     setOpen(modalpopup);
 
-    fetchClinicDetails();
+    
+     if(uuid){
+         fetchClinicDetails();
+     }
    
   },[uuid]);
 
@@ -58,17 +61,17 @@ export function AddClinicBasicDetails({ uuid, modalpopup ,onFade , onSuccess }) 
 
    const fetchClinicDetails = async () =>{
           debugger;
-          const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/partner-register/get-clinic-details/${uuid}`,{
+          const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/partner-register/get-clinic-email/${uuid}`,{
               method : "Get"
           });
 
           if(res.ok){
               debugger;
               const result = await res.json();
-              if(result.data == null){
+              if(result == null){
                   return;
               }
-              setValue("clinicemail",result.data.email);
+              setValue("clinicemail",result.email);
           }
        }
 
@@ -85,7 +88,7 @@ export function AddClinicBasicDetails({ uuid, modalpopup ,onFade , onSuccess }) 
 
   const onCreate =async (data)=>{
           debugger;
-          debugger;
+
           const  res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/partner-register/insert-more-clinic-details`,{
               method : "Post",
               headers:{
@@ -176,7 +179,7 @@ export function AddClinicBasicDetails({ uuid, modalpopup ,onFade , onSuccess }) 
           <form onSubmit={handleSubmit(onCreate)}>
            
             <DialogTitle className="flex justify-between items-center text-lg font-semibold mb-4">
-              <span>Add More Clinic</span>
+              <span>Register Additional Clinic</span>
 
               <div className="flex items-center gap-4">
                 <span className="text-green-500 text-sm">1/2</span>
@@ -239,6 +242,7 @@ export function AddClinicBasicDetails({ uuid, modalpopup ,onFade , onSuccess }) 
                                                 {errors.clinicemail.message}
                                             </p>
                                         )}
+                                        
 
 
                                     </div>
