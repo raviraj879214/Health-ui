@@ -14,32 +14,34 @@ import FreeQuote from "../components-front-end/homepage/freeQuote";
 import { BannerLoader } from "../components-front-end/homepage/loader/bannerLoader";
 
 async function getPageData() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/homepage-banner/seo-page-content/homepage`,
-    {
-      cache: "no-store",
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/homepage-banner/seo-page-content/homepage`,
+      {
+        cache: "no-store",
+      }
+    );
+
+    if (!res.ok) {
+      return null;
     }
-  );
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch SEO data");
+    return res.json();
+  } catch (error) {
+    return null;
   }
-
-  return res.json();
 }
 
 export async function generateMetadata() {
   const page = await getPageData();
 
-  console.log(page);
-
   return {
-    title: page?.seoPages.meta_title || "Health Tech",
+    title: page?.seoPages?.meta_title || "Health Tech",
     description:
-      page?.seoPages.meta_desc ||
+      page?.seoPages?.meta_desc ||
       "Online healthcare and telemedicine platform",
     keywords:
-      page?.seoPages.meta_keywords ||
+      page?.seoPages?.meta_keywords ||
       "Health Tech, Telemedicine, Healthcare",
   };
 }

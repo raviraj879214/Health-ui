@@ -157,14 +157,14 @@ export function HeaderFrontend() {
               <Link href="/">Home</Link>
             </li>
             <li>
-              <Link href={`${slugs.find(x => x.title === "About Us")?.slug || ""}`}>About Us</Link>
+              <Link href={slugs.find(x => x.title === "About Us")?.slug || "/about-us"}>About Us</Link>
             </li>
             
             <li>
               <Menu as="div" className="relative inline-block">
                 <MenuButton className="btn btn-none inline-flex items-center justify-center gap-3">
                  <a
-                          href={slugs.find(x => x.title === "Treatments")?.slug || ""}
+                          href={slugs.find(x => x.title === "Treatments")?.slug || "/treatments"}
                           className="text-gray-700">
                           Treatment
                         </a>
@@ -202,7 +202,7 @@ export function HeaderFrontend() {
 
                       <div>
                         <a
-                          href={slugs.find(x => x.title === "Plastic Surgery")?.slug || ""}
+                          href={slugs.find(x => x.title === "Plastic Surgery")?.slug || "/plastic-surgery"}
                           className="block px-4 py-2 text-sm font-medium text-gray-700"
                         >
                           Plastic Surgery
@@ -211,32 +211,44 @@ export function HeaderFrontend() {
                         {/* Always Visible Sub Menu */}
                         <div className="ml-4 border-l border-gray-200">
                           <a
-                            href={slugs.find(x => x.title === "Liposuction")?.slug || ""}
+                            href={slugs.find(x => x.title === "Liposuction")?.slug || "/liposuction"}
                             className="block px-4 py-2 text-sm text-gray-600 hover:text-[#2AB3B1]"
                           >
                             Liposuction
                           </a>
+						  <a
+							  href="/facelift"
+							  className="block px-4 py-2 text-sm text-gray-600 hover:text-[#2AB3B1]"
+							>
+							  Facelift
+							</a>
+							<a
+							  href="/rhinoplasty"
+							  className="block px-4 py-2 text-sm text-gray-600 hover:text-[#2AB3B1]"
+							>
+							  Rhinoplasty
+							</a>
                         </div>
                       </div>
 
                       <MenuItem>
-                        <a href={`${slugs.find(x => x.title === "IVF")?.slug || ""}`} className="block px-4 py-2 text-sm font-medium text-gray-700">
+                        <a href={slugs.find(x => x.title === "IVF")?.slug || "/ivf"} className="block px-4 py-2 text-sm font-medium text-gray-700">
                           IVF
                         </a>
                       </MenuItem>
 
                       <MenuItem>
-                        <a href={`${slugs.find(x => x.title === "Orthopedic")?.slug || ""}`} className="block px-4 py-2 text-sm font-medium text-gray-700">
+                        <a href={slugs.find(x => x.title === "Orthopedic")?.slug || "/orthopedic"} className="block px-4 py-2 text-sm font-medium text-gray-700">
                           Orthopedic
                         </a>
                       </MenuItem>
                       <MenuItem>
-                        <a href={`${slugs.find(x => x.title === "Maternity")?.slug || ""}`} className="block px-4 py-2 text-sm font-medium text-gray-700">
+                        <a href={slugs.find(x => x.title === "Maternity")?.slug || "/maternity"} className="block px-4 py-2 text-sm font-medium text-gray-700">
                           Maternity
                         </a>
                       </MenuItem>
                       <MenuItem>
-                        <a href={`${slugs.find(x => x.title === "Dental Treatment")?.slug || ""}`} className="block px-4 py-2 text-sm font-medium text-gray-700">
+                        <a href={slugs.find(x => x.title === "Dental Treatment")?.slug || "/dental-treatment"} className="block px-4 py-2 text-sm font-medium text-gray-700">
                           Dental Treatment
                         </a>
                       </MenuItem>
@@ -249,10 +261,10 @@ export function HeaderFrontend() {
               </Menu>
             </li>
             <li>
-              <Link href={`${slugs.find(x => x.title === "Why Brazil")?.slug || ""}`}>Why Brazil?</Link>
+              <Link href={slugs.find(x => x.title === "Why Brazil")?.slug || "/why-brazil"}>Why Brazil?</Link>
             </li>
             <li>
-              <Link href={`${slugs.find(x => x.title === "Your Guarantees")?.slug || ""}`}>Your Guarantees </Link>
+              <Link href={slugs.find(x => x.title === "Your Guarantees")?.slug || "/your-guarantees"}>Your Guarantees </Link>
             </li>
 
            <li>
@@ -345,7 +357,7 @@ export function HeaderFrontend() {
                 >
 
                   <Link
-                    href={`${slugs.find(x => x.title === "Insurance")?.slug || ""}`}
+                    href={slugs.find(x => x.title === "Insurance")?.slug || "/insurance"}
                     className="
                       block px-4 py-2
                       text-sm text-gray-700
@@ -442,7 +454,7 @@ export function HeaderFrontend() {
           {/* Visa */}
           <MenuItem>
             <Link
-              href={`${slugs.find(x => x.title === "Visa")?.slug || ""}`}
+              href={slugs.find(x => x.title === "Visa")?.slug || "/visa"}
               className="block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100"
             >
               Visas
@@ -452,7 +464,7 @@ export function HeaderFrontend() {
 
           <MenuItem>
             <Link
-              href={`${slugs.find(x => x.title === "Citizenship")?.slug || ""}`}
+              href={slugs.find(x => x.title === "Citizenship")?.slug || "/citizenship"}
               className="block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100"
             >
               Citizenship by Birth
@@ -462,7 +474,7 @@ export function HeaderFrontend() {
 
           <MenuItem>
             <Link
-              href={`${slugs.find(x => x.title === "Flights")?.slug || ""}`}
+              href={slugs.find(x => x.title === "Flights")?.slug || "/flights"}
               className="block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100"
             >
               Flights, Hotels and Transportation
@@ -472,7 +484,7 @@ export function HeaderFrontend() {
 
           <MenuItem>
             <Link
-              href={`${slugs.find(x => x.title === "Personal Assistance")?.slug || ""}`}
+              href={slugs.find(x => x.title === "Personal Assistance")?.slug || "/personal-assistance"}
               className="block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100"
             >
               Personal Assistance
@@ -564,14 +576,14 @@ export function HeaderFrontend() {
               <Link href="/" className="flex items-center justify-between gap-2.5">Home</Link>
             </li>
             <li>
-              <Link href={`${slugs.find(x => x.title === "About Us")?.slug || ""}`} className="flex items-center justify-between gap-2.5">About Us</Link>
+              <Link href={slugs.find(x => x.title === "About Us")?.slug || "/about-us"} className="flex items-center justify-between gap-2.5">About Us</Link>
             </li>
 
              <li>
               <Menu as="div" className="relative inline-block">
                 <MenuButton className="btn btn-none inline-flex items-center justify-center gap-3">
                  <a
-                          href={slugs.find(x => x.title === "Treatments")?.slug || ""}
+                          href={slugs.find(x => x.title === "Treatments")?.slug || "/treatments"}
                           className="text-gray-700 font-bold"
                         >
                           Treatment
@@ -608,7 +620,7 @@ export function HeaderFrontend() {
                       <div>
 
                         <a
-                          href={slugs.find(x => x.title === "Plastic Surgery")?.slug || ""}
+                          href={slugs.find(x => x.title === "Plastic Surgery")?.slug || "/plastic-surgery"}
                           className="block px-4 py-2 text-sm font-medium text-gray-700">
                           Plastic Surgery
                         </a>
@@ -616,7 +628,7 @@ export function HeaderFrontend() {
        
                         <div className="ml-4 border-l border-gray-200">
                           <a
-                            href={slugs.find(x => x.title === "Liposuction")?.slug || ""}
+                            href={slugs.find(x => x.title === "Liposuction")?.slug || "/liposuction"}
                             className="block px-4 py-2 text-sm text-gray-600 hover:text-[#2AB3B1]"
                           >
                             Liposuction
@@ -625,23 +637,23 @@ export function HeaderFrontend() {
                       </div>
 
                       <MenuItem>
-                        <a href={`${slugs.find(x => x.title === "IVF")?.slug || ""}`} className="block px-4 py-2 text-sm font-medium text-gray-700">
+                        <a href={slugs.find(x => x.title === "IVF")?.slug || "/ivf"} className="block px-4 py-2 text-sm font-medium text-gray-700">
                           IVF
                         </a>
                       </MenuItem>
 
                       <MenuItem>
-                        <a href={`${slugs.find(x => x.title === "Orthopedic")?.slug || ""}`} className="block px-4 py-2 text-sm font-medium text-gray-700">
+                        <a href={slugs.find(x => x.title === "Orthopedic")?.slug || "/orthopedic"} className="block px-4 py-2 text-sm font-medium text-gray-700">
                           Orthopedic
                         </a>
                       </MenuItem>
                       <MenuItem>
-                        <a href={`${slugs.find(x => x.title === "Maternity")?.slug || ""}`} className="block px-4 py-2 text-sm font-medium text-gray-700">
+                        <a href={slugs.find(x => x.title === "Maternity")?.slug || "/maternity"} className="block px-4 py-2 text-sm font-medium text-gray-700">
                           Maternity
                         </a>
                       </MenuItem>
                       <MenuItem>
-                        <a href={`${slugs.find(x => x.title === "Dental Treatment")?.slug || ""}`} className="block px-4 py-2 text-sm font-medium text-gray-700">
+                        <a href={slugs.find(x => x.title === "Dental Treatment")?.slug || "/dental-treatment"} className="block px-4 py-2 text-sm font-medium text-gray-700">
                           Dental Treatment
                         </a>
                       </MenuItem>
@@ -658,10 +670,10 @@ export function HeaderFrontend() {
 
 
             <li>
-              <Link href={`${slugs.find(x => x.title === "Why Brazil")?.slug || ""}`} className="flex items-center justify-between gap-2.5">Why Brazil?</Link>
+              <Link href={slugs.find(x => x.title === "Why Brazil")?.slug || "/why-brazil"} className="flex items-center justify-between gap-2.5">Why Brazil?</Link>
             </li>
             <li>
-              <Link href={`${slugs.find(x => x.title === "Your Guarantees")?.slug || ""}`} className="flex items-center justify-between gap-2.5">Your Guarantees</Link>
+              <Link href={slugs.find(x => x.title === "Your Guarantees")?.slug || "/your-guarantees"} className="flex items-center justify-between gap-2.5">Your Guarantees</Link>
             </li>
            
            <li>
@@ -745,7 +757,7 @@ export function HeaderFrontend() {
                 >
 
                   <Link
-                    href={`${slugs.find(x => x.title === "Insurance")?.slug || ""}`}
+                    href={slugs.find(x => x.title === "Insurance")?.slug || "/insurance"}
                     className="
                       block px-4 py-2
                       text-sm text-gray-700
@@ -840,7 +852,7 @@ export function HeaderFrontend() {
           {/* Visa */}
           <MenuItem>
             <a
-              href={`${slugs.find(x => x.title === "Visa")?.slug || ""}`}
+              href={slugs.find(x => x.title === "Visa")?.slug || "/visa"}
               className="block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100"
             >
               Visa
@@ -852,7 +864,7 @@ export function HeaderFrontend() {
           {/* Citizenship */}
           <MenuItem>
             <a
-              href={`${slugs.find(x => x.title === "Citizenship")?.slug || ""}`}
+              href={slugs.find(x => x.title === "Citizenship")?.slug || "/citizenship"}
               className="block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100"
             >
               Citizenship
@@ -864,7 +876,7 @@ export function HeaderFrontend() {
           {/* Flights */}
           <MenuItem>
             <a
-              href={`${slugs.find(x => x.title === "Flights")?.slug || ""}`}
+              href={slugs.find(x => x.title === "Flights")?.slug || "/flights"}
               className="block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100"
             >
               Flights
@@ -876,7 +888,7 @@ export function HeaderFrontend() {
           {/* Personal Assistance */}
           <MenuItem>
             <a
-              href={`${slugs.find(x => x.title === "Personal Assistance")?.slug || ""}`}
+              href={slugs.find(x => x.title === "Personal Assistance")?.slug || "/personal-assistance"}
               className="block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100"
             >
               Personal Assistance
