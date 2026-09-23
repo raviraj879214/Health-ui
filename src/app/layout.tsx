@@ -18,11 +18,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <html lang="en">
         <head>
           <meta name="google-site-verification" content="uWahxjIdmOwpAs7uYrvuczD78PwhbrWzKRaUh96kc5I" />
-          <meta name="revisit-after" content="never" />
-          <meta name="yahooseeker" content="noindex, nofollow" />
-          <meta name="msnbot" content="noindex, nofollow" />
-          <meta name="googlebot" content="noindex, nofollow" />
-          <meta name="allow-search" content="no" />
+          <meta name="revisit-after" content="always" />
+          <meta name="yahooseeker" content="index, follow" />
+          <meta name="msnbot" content="index, follow" />
+          <meta name="googlebot" content="index, follow" />
+          <meta name="allow-search" content="yes" />
         </head>
         <body>
           {children}
@@ -36,11 +36,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <html lang="en">
         <head>
           <meta name="google-site-verification" content="uWahxjIdmOwpAs7uYrvuczD78PwhbrWzKRaUh96kc5I" />
-          <meta name="revisit-after" content="never" />
-          <meta name="yahooseeker" content="noindex, nofollow" />
-          <meta name="msnbot" content="noindex, nofollow" />
-          <meta name="googlebot" content="noindex, nofollow" />
-          <meta name="allow-search" content="no" />
+          <meta name="revisit-after" content="always" />
+          <meta name="yahooseeker" content="index, follow" />
+          <meta name="msnbot" content="index, follow" />
+          <meta name="googlebot" content="index, follow" />
+          <meta name="allow-search" content="yes" />
         </head>
         <body>
           
@@ -57,11 +57,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
        <head>
         <meta name="google-site-verification" content="uWahxjIdmOwpAs7uYrvuczD78PwhbrWzKRaUh96kc5I" />
-        <meta name="revisit-after" content="never" />
-        <meta name="yahooseeker" content="noindex, nofollow" />
-        <meta name="msnbot" content="noindex, nofollow" />
-        <meta name="googlebot" content="noindex, nofollow" />
-        <meta name="allow-search" content="no" />
+        <meta name="revisit-after" content="always" />
+        <meta name="yahooseeker" content="index, follow" />
+        <meta name="msnbot" content="index, follow" />
+        <meta name="googlebot" content="index, follow" />
+        <meta name="allow-search" content="yes" />
       </head>
       <body className={`${gilroy.variable} antialiased`}>
           <HeaderFrontend></HeaderFrontend>
