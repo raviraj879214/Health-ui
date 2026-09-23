@@ -130,53 +130,63 @@ export function MainPackages({ clinicuuid }) {
             key={index}
             className="relative border theme-border rounded-2xl overflow-hidden shadow-md cursor-pointer p-5 bg-white hover:shadow-xl transition-all">
            
-            <div className="absolute top-3 right-3 flex gap-2">
+           <div className="absolute top-3 right-3 flex items-center gap-2">
 
+  {/* Visibility Toggle */}
+  <button
+    type="button"
+    disabled={item.status !== PackageVerifyStatus.VERIFIED}
+    onClick={() =>
+      onUpdateVisibilty(
+        item.id,
+        item.Visibilty === 0 ? 1 : 0
+      )
+    }
+    className={`relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition ${
+      item.Visibilty === PackageVisibiltyStatus.SHOW
+        ? "bg-green-700"
+        : "bg-gray-300"
+    }`}
+  >
+    <span
+      className={`inline-block h-5 w-5 transform rounded-full bg-white transition ${
+        item.Visibilty === PackageVisibiltyStatus.SHOW
+          ? "translate-x-5"
+          : "translate-x-1"
+      }`}
+    />
+  </button>
 
-              <button
-               disabled={item.status === PackageVerifyStatus.VERIFIED ? false : true}
-                   onClick={() =>
-                   {
-                      onUpdateVisibilty(item.id,item.Visibilty === 0 ? 1 : 0)
+  {/* Edit Button */}
+  {(item.status === PackageVerifyStatus.PENDING ||
+    item.status === PackageVerifyStatus.VERIFIED) && (
+    <button
+      type="button"
+      onClick={() => EditPackageDetails(item.id)}
+      className="background-theme flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gray-100 p-2 hover:bg-gray-200"
+    >
+      <PencilIcon size={16} />
+    </button>
+  )}
 
-                   }
-                    
-                    } className={`relative inline-flex h-6 w-11 items-center rounded-full transition ${item.Visibilty === PackageVisibiltyStatus.SHOW ? "bg-green-700" : "bg-gray-300"}`}>
-                  <span className={`inline-block h-5 w-5 transform rounded-full bg-white transition ${item.Visibilty === PackageVisibiltyStatus.SHOW ?  "translate-x-5" : "translate-x-1"}`} />
-              </button>
+  {/* Status */}
+  <span
+    className={`shrink-0 rounded-full px-2 py-1 text-xs font-semibold ${
+      item.status === PackageVerifyStatus.VERIFIED
+        ? "bg-green-100 text-green-700"
+        : item.status === PackageVerifyStatus.PENDING
+        ? "bg-yellow-100 text-yellow-700"
+        : "bg-gray-100 text-gray-600"
+    }`}
+  >
+    {item.status === PackageVerifyStatus.VERIFIED
+      ? "Active"
+      : item.status === PackageVerifyStatus.PENDING
+      ? "Pending"
+      : "Unknown"}
+  </span>
 
-              
-            
-              
-              {item.status === PackageVerifyStatus.PENDING && (<>
-               <button
-                onClick={() => EditPackageDetails(item.id)}
-                className="background-theme p-2 bg-gray-100 hover:bg-gray-200 rounded-full">
-                <PencilIcon size={16} />
-              </button>
-              
-              </>)}
-
-
-              <span
-                          className={`px-2 py-1 rounded-full text-xs font-semibold
-                            ${item.status === PackageVerifyStatus.VERIFIED
-                                        ? "bg-green-100 text-green-700"
-                                        : item.status === PackageVerifyStatus.PENDING
-                                          ? "bg-yellow-100 text-yellow-700"
-                                          : "bg-gray-100 text-gray-600"
-                                      }`}
-                           >
-                          {item.status === PackageVerifyStatus.VERIFIED
-                            ? "Active"
-                            : item.status === PackageVerifyStatus.PENDING
-                              ? "Pending"
-                              : "Unknown"}
-                        </span>
-              
-
-
-            </div>
+</div>
 
     
             <div className="flex flex-col items-center text-center mt-6">
