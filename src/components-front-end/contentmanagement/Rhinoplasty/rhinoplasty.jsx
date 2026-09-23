@@ -72,7 +72,7 @@ export function Rhinoplasty(){
                         body: JSON.stringify({
                             "specialization": "Plastic Surgery",
                             "treatments": [
-                                "Facelift"
+                                "Rhinoplasty"
                                 
                             ]
                         })
@@ -117,7 +117,7 @@ export function Rhinoplasty(){
                             <li className="text-slate-400">&gt;</li>
 
                             <li className="font-medium text-slate-900">
-                                Facelift
+                                Rhinoplasty
                             </li>
                         </ol>
                     </nav>
@@ -239,7 +239,7 @@ export function Rhinoplasty(){
                         {/* Left */}
                         <div>
                             <span className="inline-flex items-center rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-700">
-                                Facelift Methods
+                                Rhinoplasty Methods
                             </span>
 
                             <h2 className="mt-5 text-4xl font-bold tracking-tight text-slate-900 md:text-5xl">
@@ -362,11 +362,11 @@ export function Rhinoplasty(){
 
                         <div className="mx-auto max-w-3xl text-center">
                             <span className="inline-flex items-center rounded-full bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-400 ring-1 ring-blue-200">
-                                Verified Facelift  Clinics
+                                Verified Rhinoplasty Clinics
                             </span>
 
                             <h2 className="mt-6 text-4xl font-bold tracking-tight text-slate-900 md:text-5xl">
-                                Top-Rated Clinics for Facelift in Brazil
+                                Top-Rated Clinics for Rhinoplasty in Brazil
 
 
                             </h2>
@@ -717,7 +717,7 @@ export function Rhinoplasty(){
                                     </h3>
 
                                     <p className="mt-2 leading-7 text-slate-700">
-                                        Your surgeon will determine whether Facelift is appropriate
+                                        Your surgeon will determine whether Rhinoplasty is appropriate
                                         for your individual goals, overall health, and expected
                                         outcomes during your consultation.
                                     </p>
