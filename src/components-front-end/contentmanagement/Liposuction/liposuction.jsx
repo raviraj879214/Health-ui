@@ -744,7 +744,6 @@ export function Liposuction(){
                             "Certification of the surgeon",
                             "Ask to see before-and-after photos of similar cases",
                             "Confirm which technique they recommend, and why",
-                            "Confirm the surgical facility is accredited",
                             "Know the complete pricing",
                         ].map((item, index) => (
                             <div
