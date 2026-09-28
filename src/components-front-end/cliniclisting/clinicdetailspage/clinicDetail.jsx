@@ -201,6 +201,7 @@ const groupSurgeryImages = (images = []) => {
           <meta property="og:site_name" content={`${clinicdetails.ogsitename}`} />
           <meta name="publisher" content={`${clinicdetails.ogpublisher}`} />
           <link rel="canonical" href={`${canonicalUrl}`} />
+          
           <script type="application/ld+json">
             {JSON.stringify(clinicdetails.sestructure)}
           </script>

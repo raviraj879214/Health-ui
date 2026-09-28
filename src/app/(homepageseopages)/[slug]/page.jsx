@@ -40,22 +40,137 @@ async function getPageData(slug) {
   }
 }
 
+
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
   const page = await getPageData(resolvedParams?.slug);
-  const canonicalUrl = `${process.env.NEXT_PUBLIC_URL}/${resolvedParams?.slug}`;
 
+  const seo = page?.seoPages;
+  const seoStructure = seo?.og_structure?.seo;
+  const openGraph = seoStructure?.openGraph;
+  const twitter = seoStructure?.twitter;
+
+  const canonicalUrl =
+    seoStructure?.canonicalUrl ||
+    `${process.env.NEXT_PUBLIC_URL}/${resolvedParams?.slug}`;
+
+  // SEO image URL
+  const seoImage = seo?.og_image
+    ? `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=seocontent/${seo.og_image}`
+    : null;
+
+  console.log("page seo", page);
+  console.log("seo image", seoImage);
 
   return {
-    title: page?.seoPages?.meta_title || "Health Tech",
+    // Basic SEO
+    title:
+      seo?.meta_title ||
+      seoStructure?.title ||
+      "Health Tech",
+
     description:
-      page?.seoPages?.meta_desc ||
+      seo?.meta_desc ||
+      seoStructure?.description ||
       "Online healthcare and telemedicine platform",
+
     keywords:
-      page?.seoPages?.meta_keywords ||
+      seo?.meta_keywords ||
+      seoStructure?.keywords ||
       "Health Tech, Telemedicine, Healthcare",
+
+    // Canonical
     alternates: {
       canonical: canonicalUrl,
+    },
+
+    // Robots
+    robots:
+      seoStructure?.robots ||
+      "index, follow",
+
+    // Open Graph
+    openGraph: {
+      title:
+        openGraph?.title ||
+        seo?.meta_title ||
+        "Health Tech",
+
+      description:
+        openGraph?.description ||
+        seo?.meta_desc ||
+        "Online healthcare and telemedicine platform",
+
+      url:
+        openGraph?.url ||
+        seo?.og_url ||
+        canonicalUrl,
+
+      type:
+        openGraph?.type ||
+        seo?.og_type ||
+        "website",
+
+      images:
+        openGraph?.image
+          ? [
+              {
+                url: openGraph.image,
+                alt:
+                  openGraph?.imageAlt ||
+                  seo?.title ||
+                  seo?.meta_title ||
+                  "Health Tech",
+              },
+            ]
+          : seoImage
+            ? [
+                {
+                  url: seoImage,
+                  alt:
+                    openGraph?.imageAlt ||
+                    seo?.title ||
+                    seo?.meta_title ||
+                    "Health Tech",
+                },
+              ]
+            : [],
+
+      siteName:
+        openGraph?.site_name ||
+        "Health Tech",
+    },
+
+    // Twitter / X
+    twitter: {
+      card:
+        twitter?.card ||
+        "summary_large_image",
+
+      title:
+        twitter?.title ||
+        seo?.meta_title ||
+        "Health Tech",
+
+      description:
+        twitter?.description ||
+        seo?.meta_desc ||
+        "Online healthcare and telemedicine platform",
+
+      images:
+        twitter?.image
+          ? [twitter.image]
+          : seoImage
+            ? [seoImage]
+            : [],
+    },
+
+    // Other metadata
+    other: {
+      publisher:
+        seo?.publisher ||
+        seo?.og_publisher ||
+        "",
     },
   };
 }
@@ -72,6 +187,8 @@ export default async function Page({ params }) {
   
 
   switch (title || slug)  {
+
+    
     case "treatments":
     case "Treatments":
       return <Treatment />;
