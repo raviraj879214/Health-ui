@@ -633,6 +633,18 @@ export function HeaderFrontend() {
                           >
                             Liposuction
                           </a>
+						  <a
+							  href="/facelift"
+							  className="block px-4 py-2 text-sm text-gray-600 hover:text-[#2AB3B1]"
+							>
+							  Facelift
+							</a>
+							<a
+							  href="/rhinoplasty"
+							  className="block px-4 py-2 text-sm text-gray-600 hover:text-[#2AB3B1]"
+							>
+							  Rhinoplasty
+							</a>
                         </div>
                       </div>
 

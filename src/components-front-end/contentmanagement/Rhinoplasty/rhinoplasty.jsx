@@ -6,25 +6,25 @@ import FreeQuote from "../../homepage/freeQuote";
 
 const faqs = [
   {
-  question: "Is a nose job the same thing as rhinoplasty?",
+  question: "Is a nose job the same thing as rhinoplasty?", 
   answer:
-    'Yes. "Nose job" is the everyday term; rhinoplasty is the medical one. When breathing correction is included, the procedure is usually called a septorhinoplasty.',
-},
+    'Yes. "Nose job" is the everyday term; rhinoplasty is the medical one. When breathing correction is included, the procedure is usually called a septorhinoplasty.', 
+}, 
 {
-  question: "When can I fly after rhinoplasty?",
+  question: "When can I fly after rhinoplasty?", 
   answer:
-    "Your surgeon will normally want to remove your splint and check your healing before clearing you to fly, which is why we recommend a 10 to 14 day stay. Flying too early is uncomfortable and can worsen swelling and congestion.",
-},
+    "Your surgeon will normally want to remove your splint and check your healing before clearing you to fly, which is why we recommend a 10 to 14 day stay. Flying too early is uncomfortable and can worsen swelling and congestion.", 
+}, 
 {
-  question: "Is there a cost to use your service?",
+  question: "Is there a cost to use your service?", 
   answer:
-    "Our initial consultation and matching service is free. We explain any fees clearly before you commit to anything. There are no hidden charges.",
-},
+    "Our initial consultation and matching service is free. We explain any fees clearly before you commit to anything. There are no hidden charges.", 
+}, 
 {
-  question: "What if I have a complication after I return home?",
+  question: "What if I have a complication after I return home?", 
   answer:
-    "We work with clinics that offer post-operative remote consultation. Before you travel, we’ll make sure you understand your surgeon’s follow-up protocol and what to do if you have concerns after returning.",
-},
+    "We work with clinics that offer post-operative remote consultation. Before you travel, we’ll make sure you understand your surgeon’s follow-up protocol and what to do if you have concerns after returning.", 
+}, 
 ];
 
 
@@ -35,7 +35,7 @@ export function Rhinoplasty(){
     const [clinicsimage, setClinicsImage] = useState([]);
     const [visible, setVisible] = useState(4);
 
-      const [slugs,setSlugs] = useState([]);
+      const [slugs, setSlugs] = useState([]);
   useEffect(() => {
     fetchSlug();
   }, []);
@@ -43,8 +43,8 @@ export function Rhinoplasty(){
 
   const fetchSlug = async()=>{
     debugger;
-    const res= await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/homepage-banner/get-seo-slug`,{
-      method : "Get",
+    const res= await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/homepage-banner/get-seo-slug`, {
+      method : "Get", 
       headers :{
         "Content-Type" : "application/json"
       }
@@ -61,16 +61,16 @@ export function Rhinoplasty(){
             
                 useEffect(()=>{
                     fetchClinic();
-                },[]);
+                }, []);
             
                 const fetchClinic = async()=>{
-                    const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/homepage-banner/search-clinic`,{
-                        method :"Post",
+                    const res = await fetch(`${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/api/homepage-banner/search-clinic`, {
+                        method :"Post", 
                         headers: {
                             "Content-Type" : "application/json"
-                        },
+                        }, 
                         body: JSON.stringify({
-                            "specialization": "Plastic Surgery",
+                            "specialization": "Plastic Surgery", 
                             "treatments": [
                                 "Rhinoplasty"
                                 
@@ -184,7 +184,7 @@ export function Rhinoplasty(){
                         <div className="max-w-4xl">
                             <div className="mb-8 space-y-4">
                                 <p className="text-lg leading-relaxed text-gray-600">
-                                    Rhinoplasty,commonly called a nose job,is the most technically demanding operation in aesthetic surgery, and the one where surgeon selection matters most. Brazil is the world’s leading country for rhinoplasty by volume, with 102,653 procedures performed in 2024, ahead of India, Türkiye and the United States. Brazilian clinics offer the full range of approaches, from closed and open primary rhinoplasty to septorhinoplasty and revision work.
+                                    Rhinoplasty, commonly called a nose job, is the most technically demanding operation in aesthetic surgery, and the one where surgeon selection matters most. Brazil is the world’s leading country for rhinoplasty by volume, with 102,653 procedures performed in 2024, ahead of India, Türkiye and the United States. Brazilian clinics offer the full range of approaches, from closed and open primary rhinoplasty to septorhinoplasty and revision work.
                                 </p>
                                 <p className="text-lg leading-relaxed text-gray-600">
                                     Cost in Brazil typically ranges from $2,500–$3,800 for a primary cosmetic rhinoplasty, rising for breathing correction and revision cases. In the US, the average surgeon’s fee alone is $7,637, before anesthesia, facility fees and follow-up.
@@ -225,7 +225,7 @@ export function Rhinoplasty(){
                         {/* Right */}
                         <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm lg:p-10">
                             <p className="text-lg leading-8 text-slate-600">
-                                Rhinoplasty is surgery to reshape the nose,altering the bridge, the tip, the nostrils, or the overall size and angle, so the nose sits in better proportion with the rest of the face. It can be purely cosmetic, purely functional (correcting obstructed breathing), or both at once, which is the most common scenario. Good rhinoplasty is generally the kind people cannot identify as surgery: the aim is balance, not a particular nose shape.
+                                Rhinoplasty is surgery to reshape the nose, altering the bridge, the tip, the nostrils, or the overall size and angle, so the nose sits in better proportion with the rest of the face. It can be purely cosmetic, purely functional (correcting obstructed breathing), or both at once, which is the most common scenario. Good rhinoplasty is generally the kind people cannot identify as surgery: the aim is balance, not a particular nose shape.
                             </p>
                         </div>
                     </div>
@@ -248,7 +248,7 @@ export function Rhinoplasty(){
 
                             <div className="mt-8 rounded-2xl border border-blue-200 bg-white p-6 shadow-sm">
                                 <p className="leading-8 text-slate-600">
-                                    Nasal anatomy varies significantly between ethnic backgrounds, and technique has to vary with it,Brazilian surgeons routinely operate across that full range. Your surgeon will recommend the approach based on your nasal structure, skin thickness, breathing and goals. Skin thickness in particular sets realistic limits on how much definition is achievable.
+                                    Nasal anatomy varies significantly between ethnic backgrounds, and technique has to vary with it, Brazilian surgeons routinely operate across that full range. Your surgeon will recommend the approach based on your nasal structure, skin thickness, breathing and goals. Skin thickness in particular sets realistic limits on how much definition is achievable.
                                 </p>
                             </div>
                         </div>
@@ -405,7 +405,7 @@ export function Rhinoplasty(){
                                             </h3>
 
                                             <p className="mb-6 text-sm text-slate-600">
-                                                {item.street} ,{item.complement} {item.neighborhood} {item.citycep}-{item.state},{item.cep}
+                                                {item.street} , {item.complement} {item.neighborhood} {item.citycep}-{item.state}, {item.cep}
                                             </p>
 
                                             <div className="mt-auto">
@@ -516,21 +516,21 @@ export function Rhinoplasty(){
 
                         {[
                             {
-                                treatment: "Primary cosmetic rhinoplasty (closed)",
-                                price: "USD 2,500 – 3,800",
-                            },
+                                treatment: "Primary cosmetic rhinoplasty (closed)", 
+                                price: "USD 2,500 – 3,800", 
+                            }, 
                             {
-                                treatment: "Primary cosmetic rhinoplasty (open)",
-                                price: "USD 3,000 – 4,500",
-                            },
+                                treatment: "Primary cosmetic rhinoplasty (open)", 
+                                price: "USD 3,000 – 4,500", 
+                            }, 
                             {
-                                treatment: "Septorhinoplasty (cosmetic + breathing)",
-                                price: "USD 3,500 – 5,000",
-                            },
+                                treatment: "Septorhinoplasty (cosmetic + breathing)", 
+                                price: "USD 3,500 – 5,000", 
+                            }, 
 							{
-                                treatment: "Revision rhinoplasty",
-                                price: "USD 4,000 – 6,500",
-                            },
+                                treatment: "Revision rhinoplasty", 
+                                price: "USD 4,000 – 6,500", 
+                            }, 
                         ].map((item) => (
                             <div
                                 key={item.treatment}
@@ -568,7 +568,7 @@ export function Rhinoplasty(){
                         </h2>
 
                         <p className="mt-6 text-lg leading-8 text-slate-600">
-                            Besides your procedure, it's important to budget for travel,
+                            Besides your procedure, it's important to budget for travel, 
                             accommodation, and recovery-related expenses while staying in Brazil.
                         </p>
                     </div>
@@ -588,25 +588,25 @@ export function Rhinoplasty(){
 
                         {[
                             {
-                                item: "Round-trip flights (from US)",
-                                price: "$600 – $1,200",
-                            },
+                                item: "Round-trip flights (from US)", 
+                                price: "$600 – $1,200", 
+                            }, 
                             {
-                                item: "Recovery accommodation (10–14 days)",
-                                price: "$400 – $1,100",
-                            },
+                                item: "Recovery accommodation (10–14 days)", 
+                                price: "$400 – $1,100", 
+                            }, 
                             {
-                                item: "Pre-operative tests",
-                                price: "$100 – $300",
-                            },
+                                item: "Pre-operative tests", 
+                                price: "$100 – $300", 
+                            }, 
                             {
-                                item: "Post-operative supplies (saline spray, taping)",
-                                price: "$30 – $80",
-                            },
+                                item: "Post-operative supplies (saline spray, taping)", 
+                                price: "$30 – $80", 
+                            }, 
                             {
-                                item: "Airport transfers",
-                                price: "$30 – $80",
-                            },
+                                item: "Airport transfers", 
+                                price: "$30 – $80", 
+                            }, 
                         ].map((item) => (
                             <div
                                 key={item.item}
@@ -648,7 +648,7 @@ export function Rhinoplasty(){
                         {/* Main Content */}
                         <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm lg:p-10">
                             <p className="text-lg leading-8 text-slate-600">
-                                An external splint is worn for about 7 days. Bruising around the eyes generally fades within 10–14 days, at which point most patients can return to non-strenuous work. Strenuous exercise and anything risking a knock to the nose should be avoided for 4–6 weeks. Most swelling settles within the first few months, but the nasal tip continues to refine for 12 months or more,longer with thicker skin, and longer still after revision surgery.
+                                An external splint is worn for about 7 days. Bruising around the eyes generally fades within 10–14 days, at which point most patients can return to non-strenuous work. Strenuous exercise and anything risking a knock to the nose should be avoided for 4–6 weeks. Most swelling settles within the first few months, but the nasal tip continues to refine for 12 months or more, longer with thicker skin, and longer still after revision surgery.
                             </p>
 							<p className="text-lg leading-8 text-slate-600">
                                 We generally recommend planning to stay in Brazil for 10–14 days post-procedure. Your splint needs to be removed by your surgeon, and cabin pressure changes are best avoided in the first week.
@@ -700,7 +700,7 @@ export function Rhinoplasty(){
                         {/* Main Content */}
                         <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm lg:p-10">
                             <p className="text-lg leading-8 text-slate-600">
-                                Rhinoplasty tends to work best for people whose facial growth is complete,generally from around 16 to 17 years of age,who are in good general health, non-smokers, and who can describe what bothers them about their nose in specific terms. Realistic expectations matter more here than almost anywhere else: skin thickness, cartilage strength and bone structure all set boundaries on what is achievable. If you have breathing difficulty, nasal trauma in your history, or a previous rhinoplasty, mention it early,all three change the surgical plan.
+                                Rhinoplasty tends to work best for people whose facial growth is complete, generally from around 16 to 17 years of age, who are in good general health, non-smokers, and who can describe what bothers them about their nose in specific terms. Realistic expectations matter more here than almost anywhere else: skin thickness, cartilage strength and bone structure all set boundaries on what is achievable. If you have breathing difficulty, nasal trauma in your history, or a previous rhinoplasty, mention it early, all three change the surgical plan.
                             </p>
                         </div>
 
@@ -745,12 +745,12 @@ export function Rhinoplasty(){
                     {/* Tips */}
                     <div className="mx-auto mt-16 max-w-5xl">
                         {[
-                            "Certification of the surgeon",
-                            "Ask how many rhinoplasties they perform per year,this is a volume-dependent procedure",
-                            "Ask to see before-and-after photos of noses similar to yours, at 12 months",
-                            "Confirm which technique they recommend, and why",
-                            "Ask what their revision policy is",
-							"Confirm the surgical facility is accredited, and know the complete pricing",
+                            "Certification of the surgeon", 
+                            "Ask how many rhinoplasties they perform per year, this is a volume-dependent procedure", 
+                            "Ask to see before-and-after photos of noses similar to yours, at 12 months", 
+                            "Confirm which technique they recommend, and why", 
+                            "Ask what their revision policy is", 
+							"Know the complete pricing", 
                         ].map((item, index) => (
                             <div
                                 key={item}

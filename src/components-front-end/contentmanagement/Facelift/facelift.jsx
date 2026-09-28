@@ -758,7 +758,6 @@ export function Facelift(){
                             "Ask to see before-and-after photos of patients of a similar age and facial structure, at 6–12 months",
                             "Confirm which technique they recommend, and why that one rather than the alternatives",
                             "Ask where the incisions will sit and how the hairline will be handled",
-                            "Confirm the surgical facility is accredited",
 							"Know the complete pricing",
                         ].map((item, index) => (
                             <div
