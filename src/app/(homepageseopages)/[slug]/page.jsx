@@ -184,7 +184,7 @@ export default async function Page({ params }) {
 
   const title = page?.seoPages?.title;
   const slug = resolvedParams?.slug?.toLowerCase();
-  
+    
 
   switch (title || slug)  {
 
