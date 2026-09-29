@@ -32,8 +32,7 @@ async function getPageData() {
   }
 }
 
-export async function generateMetadata() {
-  
+export default async function Page() {
   const page = await getPageData();
 
   const seo = page?.seoPages;
@@ -45,134 +44,89 @@ export async function generateMetadata() {
     seoStructure?.canonicalUrl ||
     `${process.env.NEXT_PUBLIC_URL}`;
 
-  // SEO image URL
   const seoImage = seo?.og_image
     ? `${process.env.NEXT_PUBLIC_NODEJS_URL}/v1/uploads?filepath=seocontent/${seo.og_image}`
     : null;
 
-  console.log("page seo", page);
-  console.log("seo image", seoImage);
+  const title =
+    seo?.meta_title ||
+    seoStructure?.title ||
+    "Health Tech";
 
-  return {
-    // Basic SEO
-    title:
-      seo?.meta_title ||
-      seoStructure?.title ||
-      "Health Tech",
+  const description =
+    seo?.meta_desc ||
+    seoStructure?.description ||
+    "Online healthcare and telemedicine platform";
 
-    description:
-      seo?.meta_desc ||
-      seoStructure?.description ||
-      "Online healthcare and telemedicine platform",
+  const keywords =
+    seo?.meta_keywords ||
+    seoStructure?.keywords ||
+    "Health Tech, Telemedicine, Healthcare";
 
-    keywords:
-      seo?.meta_keywords ||
-      seoStructure?.keywords ||
-      "Health Tech, Telemedicine, Healthcare",
+  const openGraphTitle =
+    openGraph?.title ||
+    seo?.meta_title ||
+    "Health Tech";
 
-    // Canonical
-    alternates: {
-      canonical: canonicalUrl,
-    },
+  const openGraphDescription =
+    openGraph?.description ||
+    seo?.meta_desc ||
+    "Online healthcare and telemedicine platform";
 
-    // Robots
-    robots:
-      seoStructure?.robots ||
-      "index, follow",
+  const openGraphUrl =
+    openGraph?.url ||
+    seo?.og_url ||
+    canonicalUrl;
 
-    // Open Graph
-    openGraph: {
-      title:
-        openGraph?.title ||
-        seo?.meta_title ||
-        "Health Tech",
+  const openGraphType =
+    openGraph?.type ||
+    seo?.og_type ||
+    "website";
 
-      description:
-        openGraph?.description ||
-        seo?.meta_desc ||
-        "Online healthcare and telemedicine platform",
+  const openGraphImage =
+    openGraph?.image ||
+    seoImage;
 
-      url:
-        openGraph?.url ||
-        seo?.og_url ||
-        canonicalUrl,
+  const openGraphImageAlt =
+    openGraph?.imageAlt ||
+    seo?.title ||
+    seo?.meta_title ||
+    "Health Tech";
 
-      type:
-        openGraph?.type ||
-        seo?.og_type ||
-        "website",
+  const siteName =
+    openGraph?.site_name ||
+    "Health Tech";
 
-      images:
-        openGraph?.image
-          ? [
-              {
-                url: openGraph.image,
-                alt:
-                  openGraph?.imageAlt ||
-                  seo?.title ||
-                  seo?.meta_title ||
-                  "Health Tech",
-              },
-            ]
-          : seoImage
-            ? [
-                {
-                  url: seoImage,
-                  alt:
-                    openGraph?.imageAlt ||
-                    seo?.title ||
-                    seo?.meta_title ||
-                    "Health Tech",
-                },
-              ]
-            : [],
+  const twitterCard =
+    twitter?.card ||
+    "summary_large_image";
 
-      siteName:
-        openGraph?.site_name ||
-        "Health Tech",
-    },
+  const twitterTitle =
+    twitter?.title ||
+    seo?.meta_title ||
+    "Health Tech";
 
-    // Twitter / X
-    twitter: {
-      card:
-        twitter?.card ||
-        "summary_large_image",
+  const twitterDescription =
+    twitter?.description ||
+    seo?.meta_desc ||
+    "Online healthcare and telemedicine platform";
 
-      title:
-        twitter?.title ||
-        seo?.meta_title ||
-        "Health Tech",
+  const twitterImage =
+    twitter?.image ||
+    seoImage;
 
-      description:
-        twitter?.description ||
-        seo?.meta_desc ||
-        "Online healthcare and telemedicine platform",
+  const robots =
+    seoStructure?.robots ||
+    "index, follow";
 
-      images:
-        twitter?.image
-          ? [twitter.image]
-          : seoImage
-            ? [seoImage]
-            : [],
-    },
-
-    // Other metadata
-    other: {
-      publisher:
-        seo?.publisher ||
-        seo?.og_publisher ||
-        "",
-    },
-  };
-}
-
-
-export default async function Page() {
+  const publisher =
+    seo?.publisher ||
+    seo?.og_publisher ||
+    "";
 
   const promoteCardone = {
     title: "Do You Run a Clinic?",
-    description:
-      " ",
+    description: " ",
     buttonText: "Become A Partner",
     buttonLink: "/register",
     image: "/images/promote-1.png",
@@ -181,19 +135,114 @@ export default async function Page() {
 
   const promoteCardTwo = {
     title: "Join Our Affiliate Program",
-    description:
-      "",
+    description: "",
     buttonText: "Register Now",
     buttonLink: "/register",
     image: "/images/promote-2.png",
     imageAlt: "Join Our Affiliate Program",
   };
 
-
   return (
     <>
+      <head>
+        {/* Basic SEO */}
+        <title>{title}</title>
+
+        <meta
+          name="description"
+          content={description}
+        />
+
+        <meta
+          name="keywords"
+          content={keywords}
+        />
+
+        {/* Canonical */}
+        <link
+          rel="canonical"
+          href={canonicalUrl}
+        />
+
+        {/* Robots */}
+        <meta
+          name="robots"
+          content={robots}
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content={openGraphTitle}
+        />
+
+        <meta
+          property="og:description"
+          content={openGraphDescription}
+        />
+
+        <meta
+          property="og:url"
+          content={openGraphUrl}
+        />
+
+        <meta
+          property="og:type"
+          content={openGraphType}
+        />
+
+        <meta
+          property="og:site_name"
+          content={siteName}
+        />
+
+        {openGraphImage && (
+          <>
+            <meta
+              property="og:image"
+              content={openGraphImage}
+            />
+
+            <meta
+              property="og:image:alt"
+              content={openGraphImageAlt}
+            />
+          </>
+        )}
+
+        {/* Twitter / X */}
+        <meta
+          name="twitter:card"
+          content={twitterCard}
+        />
+
+        <meta
+          name="twitter:title"
+          content={twitterTitle}
+        />
+
+        <meta
+          name="twitter:description"
+          content={twitterDescription}
+        />
+
+        {twitterImage && (
+          <meta
+            name="twitter:image"
+            content={twitterImage}
+          />
+        )}
+
+        {/* Publisher */}
+        {publisher && (
+          <meta
+            name="publisher"
+            content={publisher}
+          />
+        )}
+      </head>
+
       <Suspense fallback={<BannerLoader />}>
-      
         <Banner />
 
         <TopRated />
@@ -201,7 +250,6 @@ export default async function Page() {
         <Treatments />
 
         <PopularClinics />
-
 
         <HowItWorks />
 
