@@ -5,6 +5,7 @@ import { HeaderFrontend } from "../components-front-end/shared/Header";
 import FooterWrapper from "../components-front-end/shared/footerWrapper";
 import gilroy from "./fonts";
 import ReduxProvider from '@/components-front-end/redux/partnerregister/provider';
+import Script from 'next/script';
 
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -23,6 +24,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <meta name="msnbot" content="index, follow" />
           <meta name="googlebot" content="index, follow" />
           <meta name="allow-search" content="yes" />
+             <Script
+            src="https://www.googletagmanager.com/gtag/js?id=G-JFVSQSRSZ9"
+            strategy="afterInteractive"
+          />
+
+          <Script id="google-analytics" strategy="afterInteractive">
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){window.dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-JFVSQSRSZ9');
+            `}
+          </Script>
+          
         </head>
         <body>
           {children}
@@ -43,6 +58,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <meta name="allow-search" content="yes" />
         </head>
         <body>
+           <Script
+            src="https://www.googletagmanager.com/gtag/js?id=G-JFVSQSRSZ9"
+            strategy="afterInteractive"
+          />
+
+          <Script id="google-analytics" strategy="afterInteractive">
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){window.dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-JFVSQSRSZ9');
+            `}
+          </Script>
           
             <>{children}</>
         </body>
@@ -64,6 +92,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="allow-search" content="yes" />
       </head>
       <body className={`${gilroy.variable} antialiased`}>
+         <Script
+            src="https://www.googletagmanager.com/gtag/js?id=G-JFVSQSRSZ9"
+            strategy="afterInteractive"
+          />
+
+          <Script id="google-analytics" strategy="afterInteractive">
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){window.dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-JFVSQSRSZ9');
+            `}
+          </Script>
           <HeaderFrontend></HeaderFrontend>
            <ReduxProvider>{children}</ReduxProvider>
           <FooterWrapper></FooterWrapper>
