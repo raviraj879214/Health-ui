@@ -337,22 +337,31 @@ const onUpdate = async (data) => {
                                 {errors.metaKeywords && <p className="text-red-500 text-sm">{errors.metaKeywords.message}</p>}
                             </div>
 
-                            <div className="col-span-6 md:col-span-3">
+<div
+    className={`col-span-6 md:col-span-3 ${
+        slugValue === "homepage" || slugValue === "/"
+            ? "opacity-60 cursor-not-allowed"
+            : ""
+    }`}
+>
     <label className="block mb-1 text-sm font-medium">Slug</label>
+
     <input
         type="text"
         placeholder="how-to-cook-pasta"
-        disabled={slugValue === "blogs" || slugValue === "clinics"}
+        disabled={slugValue === "/" || slugValue === "homepage"}
         className="h-11 w-full rounded-lg border px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-hidden focus:ring-3 border-gray-300 focus:ring-brand-200 disabled:bg-gray-100 disabled:cursor-not-allowed dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
         {...register("slug", {
             required: "Please enter slug",
         })}
     />
+
     {errors.slug && (
-        <p className="text-red-500 text-sm">{errors.slug.message}</p>
+        <p className="text-red-500 text-sm">
+            {errors.slug.message}
+        </p>
     )}
 </div>
-
                            
                             <div className="col-span-6">
                                 <label className="block mb-1 text-sm font-medium">Meta Description</label>
