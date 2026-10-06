@@ -228,6 +228,18 @@ export function HeaderFrontend() {
 							>
 							  Rhinoplasty
 							</a>
+							<a
+							  href="/breast-augmentation"
+							  className="block px-4 py-2 text-sm text-gray-600 hover:text-[#2AB3B1]"
+							>
+							  Breast Augmentation
+							</a>
+							<a
+							  href="/breast-reduction"
+							  className="block px-4 py-2 text-sm text-gray-600 hover:text-[#2AB3B1]"
+							>
+							  Breast Reduction
+							</a>
                         </div>
                       </div>
 
@@ -644,6 +656,18 @@ export function HeaderFrontend() {
 							  className="block px-4 py-2 text-sm text-gray-600 hover:text-[#2AB3B1]"
 							>
 							  Rhinoplasty
+							</a>
+							<a
+							  href="/breast-augmentation"
+							  className="block px-4 py-2 text-sm text-gray-600 hover:text-[#2AB3B1]"
+							>
+							  Breast Augmentation
+							</a>
+							<a
+							  href="/breast-reduction"
+							  className="block px-4 py-2 text-sm text-gray-600 hover:text-[#2AB3B1]"
+							>
+							  Breast Reduction
 							</a>
                         </div>
                       </div>

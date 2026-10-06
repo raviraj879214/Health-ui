@@ -18,6 +18,8 @@ import {PriavcyAndPolicy}  from "../../../components-front-end/contentmanagement
 import {GpsInsurance}  from "../../../components-front-end/contentmanagement/gpsInsuranceInformation/gpsInsurance";
 import {Facelift}  from "../../../components-front-end/contentmanagement/Facelift/facelift";
 import { Rhinoplasty } from "../../../components-front-end/contentmanagement/Rhinoplasty/rhinoplasty";
+import { BreastAugmentation } from "../../../components-front-end/contentmanagement/BreastAugmentation/breastAugmentation";
+import { BreastReduction } from "../../../components-front-end/contentmanagement/BreastReduction/breastReduction";
 
 
 
@@ -151,6 +153,14 @@ export default async function Page({ params }) {
 	case "rhinoplasty":
 	case "Rhinoplasty":
 	return <Rhinoplasty />;
+	
+	case "breast-augmentation":
+	case "Breast Augmentation":
+	return <BreastAugmentation />;
+	
+	case "breast-reduction":
+	case "Breast Reduction":
+	return <BreastReduction />;
 
 
     default:
