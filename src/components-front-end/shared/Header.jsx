@@ -240,6 +240,12 @@ export function HeaderFrontend() {
 							>
 							  Breast Reduction
 							</a>
+							<a
+							  href="/tummy-tuck"
+							  className="block px-4 py-2 text-sm text-gray-600 hover:text-[#2AB3B1]"
+							>
+							  Tummy Tuck
+							</a>
                         </div>
                       </div>
 
@@ -668,6 +674,12 @@ export function HeaderFrontend() {
 							  className="block px-4 py-2 text-sm text-gray-600 hover:text-[#2AB3B1]"
 							>
 							  Breast Reduction
+							</a>
+							<a
+							  href="/tummy-tuck"
+							  className="block px-4 py-2 text-sm text-gray-600 hover:text-[#2AB3B1]"
+							>
+							  Tummy Tuck
 							</a>
                         </div>
                       </div>

@@ -20,6 +20,7 @@ import {Facelift}  from "../../../components-front-end/contentmanagement/Facelif
 import { Rhinoplasty } from "../../../components-front-end/contentmanagement/Rhinoplasty/rhinoplasty";
 import { BreastAugmentation } from "../../../components-front-end/contentmanagement/BreastAugmentation/breastAugmentation";
 import { BreastReduction } from "../../../components-front-end/contentmanagement/BreastReduction/breastReduction";
+import { TummyTuck } from "../../../components-front-end/contentmanagement/TummyTuck/tummyTuck";
 
 
 
@@ -278,6 +279,10 @@ export default async function Page({ params }) {
 	case "breast-reduction":
 	case "Breast Reduction":
 	return <BreastReduction />;
+	
+	case "tummy-tuck":
+	case "Tummy Tuck":
+	return <TummyTuck />;
 
 
     default:
