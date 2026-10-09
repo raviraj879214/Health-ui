@@ -21,6 +21,7 @@ import { Rhinoplasty } from "../../../components-front-end/contentmanagement/Rhi
 import { BreastAugmentation } from "../../../components-front-end/contentmanagement/BreastAugmentation/breastAugmentation";
 import { BreastReduction } from "../../../components-front-end/contentmanagement/BreastReduction/breastReduction";
 import { TummyTuck } from "../../../components-front-end/contentmanagement/TummyTuck/tummyTuck";
+import { EyelidSurgery } from "../../../components-front-end/contentmanagement/EyelidSurgery/eyelidSurgery";
 
 
 
@@ -283,6 +284,10 @@ export default async function Page({ params }) {
 	case "tummy-tuck":
 	case "Tummy Tuck":
 	return <TummyTuck />;
+	
+	case "eyelid-surgery":
+	case "Eyelid Surgery":
+	return <EyelidSurgery />;
 
 
     default:
